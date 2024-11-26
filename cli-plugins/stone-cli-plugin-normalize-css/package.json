@@ -1,0 +1,30 @@
+{
+    "name": "@stone/vue-cli-plugin-normalize-css",
+    "version": "4.0.0",
+    "description": "vue-cli 添加 normalize-css",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitee.com:fu-stone/vue-wetalk-front-end-vue.git"
+    },
+    "dependencies": {
+        "postcss-normalize": "^13.0.1"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

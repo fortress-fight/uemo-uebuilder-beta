@@ -1,0 +1,699 @@
+/* stylelint-disable order/order */
+@use "sass:math";
+@use "sass:color";
+
+/* ---------------------------------- */
+/*              function              */
+/* ---------------------------------- */
+
+// 换算百分比
+@function percent($num1, $num2: $design-w) {
+    @return math.div($num1, $num2) * 100%;
+}
+
+// 换算 em
+@function em($num1, $num2: 16px) {
+    @return math.div($num1, $num2) * 1em;
+}
+
+// 换算 vw
+@function vw($num1, $num2: $design-w) {
+    @return math.div($num1, $num2) * 100vw;
+}
+
+/* ---------------------------------- */
+/*                space               */
+/* ---------------------------------- */
+@mixin space-between($space, $dir: "x") {
+    @if ($dir == "x") {
+        margin-right: $space;
+    }
+    @if ($dir == "y") {
+        margin-bottom: $space;
+    }
+    &:last-child {
+        margin: 0;
+    }
+}
+
+/* ---------------------------------- */
+/*             appearance             */
+/* ---------------------------------- */
+
+// 用于隐藏 SEO 文字
+@mixin hide {
+    position: absolute !important;
+
+    display: inline-block;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+
+    width: 1px;
+    height: 1px;
+    padding: 0;
+
+    border: 0;
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    clip-path: inset(0 0 99.9% 99.9%);
+}
+
+// 文字多行省略号
+@mixin ellipse($line: 1, $lineHeight: 1, $fixHeight: 0) {
+    @if ($line==1) {
+        overflow: hidden;
+
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @if ($fixHeight == 1) {
+            height: $line * $lineHeight;
+        }
+    } @else {
+        /* stylelint-disable-next-line value-no-vendor-prefix */
+        display: -webkit-box;
+        overflow: hidden;
+
+        white-space: normal;
+        @if ($fixHeight == 1) {
+            height: $line * $lineHeight;
+        } @else {
+            max-height: $line * $lineHeight;
+        }
+
+        text-overflow: ellipsis;
+
+        /* stylelint-disable-next-line */
+        box-orient: vertical;
+        /* stylelint-disable-next-line */
+        -webkit-line-clamp: $line;
+        /* stylelint-disable-next-line */
+        -webkit-box-orient: vertical;
+    }
+}
+
+/* ---------------------------------- */
+/*                size                */
+/* ---------------------------------- */
+
+// 添加内容区域尺寸
+@mixin wrapper--limit-width {
+    max-width: var(--content-width);
+    padding: 0 $content-space;
+}
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+) !default;
+
+// 设置行高与字号
+@mixin font-size($h, $s: 16px) {
+    font-size: $s;
+    line-height: em($h, $s);
+}
+
+// 全覆盖
+@mixin ab-cover() {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* ---------------------------------- */
+/*               layout               */
+/* ---------------------------------- */
+
+// 用于测试用的 outline
+@mixin test-size() {
+    outline: 2px solid #000;
+}
+
+// 分隔线
+@mixin divide-line($h) {
+    display: inline-block;
+
+    width: 1px;
+    height: $h;
+    margin-right: 1em;
+    margin-left: 1em;
+
+    vertical-align: middle;
+
+    background-color: var(--divide-line-color-deeper);
+}
+
+// 三角形
+@mixin triangle($d, $w, $h, $c) {
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    @if ($d== "l") {
+        border-width: calc(calc($h/2)) $w calc(calc($h/2)) 0;
+        border-color: transparent $c transparent transparent;
+    }
+    @if ($d== "t") {
+        border-width: 0 calc($w/2) $h;
+        border-color: transparent transparent $c;
+    }
+    @if ($d== "r") {
+        border-width: calc($h/2) 0 calc($h/2) $w;
+        border-color: transparent transparent transparent $c;
+    }
+    @if ($d== "b") {
+        border-width: $h calc($w/2) 0 calc($w/2);
+        border-color: $c transparent transparent transparent;
+    }
+}
+
+// 圆形
+@mixin circle($size, $color: 0) {
+    width: $size;
+    height: $size;
+
+    border-radius: 50%;
+    @if ($color != 0) {
+        background-color: $color;
+    }
+}
+
+// 环形
+@mixin ring($size, $width, $color) {
+    width: $size;
+    height: $size;
+
+    border: $width solid $color;
+    border-radius: 50%;
+}
+
+// 方形
+@mixin square($width, $height: 0, $color: 0) {
+    width: $width;
+    @if ($height != 0) {
+        height: $height;
+    } @else {
+        height: $width;
+    }
+    @if ($color != 0) {
+        background-color: $color;
+    }
+}
+
+/* ---------------------------------- */
+/*              position              */
+/* ---------------------------------- */
+
+// 居中
+@mixin move-center($dir: "xy") {
+    position: absolute;
+    @if ($dir == "xy") {
+        top: 50%;
+        left: 50%;
+
+        transform: translate3d(-50%, -50%, 0);
+    }
+    @if ($dir == "x") {
+        left: 50%;
+
+        transform: translate3d(-50%, 0%, 0);
+    }
+    @if ($dir == "y") {
+        top: 50%;
+
+        transform: translate3d(-50%, 0%, 0);
+    }
+}
+
+// 位移
+@mixin xy($x: 0, $y: 0) {
+    transform: translate3D($x, $y, 0);
+}
+
+// flex
+@mixin flex($pos-x: none, $pos-y: none, $dir: x, $type: normal) {
+    @if ($type==inline) {
+        display: inline-flex;
+    } @else {
+        display: flex;
+    }
+    @if $dir== "yr" {
+        flex-direction: column-reverse;
+    }
+    @if $dir== "y" {
+        flex-direction: column;
+    }
+    @if $pos-x== "t" {
+        justify-content: flex-start;
+    }
+    @if $pos-x== "c" {
+        justify-content: center;
+    }
+    @if $pos-x== "b" {
+        justify-content: flex-end;
+    }
+    @if $pos-x== "sb" {
+        justify-content: space-between;
+    }
+    @if $pos-y== "t" {
+        align-items: flex-start;
+    }
+    @if $pos-y== "c" {
+        align-items: center;
+    }
+    @if $pos-y== "b" {
+        align-items: flex-end;
+    }
+}
+
+// 固定图片比例站位
+@mixin image-placeholder($width, $height, $position: relative, $type: 0, $size: 0) {
+    @if ($position !=none) {
+        position: $position;
+    }
+    @if ($size != 0) {
+        width: $size;
+    } @else {
+        width: $width;
+    }
+    overflow: hidden;
+    & > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @if ($type == "fit") {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+        } @else {
+            width: 100%;
+        }
+    }
+    &::after {
+        display: block;
+
+        width: 100%;
+        padding-top: percent($height, $width);
+
+        content: "";
+    }
+}
+@mixin image-placeholder-v4($width, $height, $size: 100%) {
+    --u-width: #{$width};
+    --u-height: #{$height};
+    position: relative;
+
+    overflow: hidden;
+
+    width: $size;
+    & > img {
+        @supports (object-fit: cover) {
+            top: 0;
+            left: 0;
+
+            object-fit: cover;
+            object-position: center;
+        }
+        @supports not (object-fit: cover) {
+            top: 50%;
+            left: 50%;
+
+            transform: translate3d(-50%, 50%);
+        }
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+    }
+    &::after {
+        display: block;
+
+        width: 100%;
+        padding-top: calc(var(--u-height) / var(--u-width) * 100%);
+
+        content: "";
+    }
+}
+
+// 固定比例站位
+@mixin space-placeholder($width, $height, $size: 0) {
+    background-repeat: no-repeat;
+    background-size: contain;
+    @if ($size != 0) {
+        width: $size;
+    } @else {
+        width: $width;
+    }
+    &::after {
+        display: block;
+
+        padding-top: percent($height, $width);
+
+        content: "";
+    }
+}
+
+/* ---------------------------------- */
+/*        bootstrap breakpoint        */
+/* ---------------------------------- */
+
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl))
+//    md
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map.keys($breakpoints)) {
+    $n: list.index($breakpoint-names, $name);
+    @if not $n {
+        @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+    }
+    @return if($n < list.length($breakpoint-names), list.nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+    $min: map.get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width.
+// The maximum value is reduced by 0.02px to work around the limitations of
+// `min-` and `max-` prefixes and viewports with fractional widths.
+// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+// See https://bugs.webkit.org/show_bug.cgi?id=178261
+//
+//    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    767.98px
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+    $max: map.get($breakpoints, $name);
+    @return if($max and $max > 0, $max - 0.02, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+    @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+    $max: breakpoint-max($name, $breakpoints);
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($lower, $breakpoints);
+    $max: breakpoint-max($upper, $breakpoints);
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($lower, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($upper, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+    $next: breakpoint-next($name, $breakpoints);
+    $max: breakpoint-max($next, $breakpoints);
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($name, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($next, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+/* ---------------------------------- */
+/*                local               */
+/* ---------------------------------- */
+// 不具备通用性，指针对当前网站样式的方法
+
+// #region 文字大小统一规范  $size: 1 2 3 4 5 6 7 8 9
+@mixin text($size: 1) {
+    font-size: var(--t-#{$size});
+    line-height: var(--t-lh-#{$size});
+}
+
+// 模块标题
+@mixin module-title($size: 1, $theme: "default") {
+    @include text($size);
+    font-family: var(--t-f-bold);
+    @if ($theme == "white") {
+        color: #fff;
+    } @else {
+        color: var(--t-c-deeper);
+    }
+}
+
+// 模块副标题
+@mixin module-subtitle($size: 4, $theme: "default") {
+    @include text($size);
+    @if ($theme == "white") {
+        color: #fff;
+    } @else {
+        color: var(--t-c-default);
+    }
+}
+
+// 模块描述
+@mixin module-desc($size: 5, $theme: "default") {
+    @include text($size);
+    @if ($theme == "white") {
+        color: #fff;
+    } @else {
+        color: var(--t-c-default);
+    }
+}
+
+// 模块头部
+@mixin module-h($title: ".module-title", $subtitle: ".module-subtitle", $desc: ".module-desc", $theme: "default") {
+    #{$title} {
+        @include module-title($theme: $theme);
+    }
+    #{$subtitle} {
+        @include module-subtitle($theme: $theme);
+        margin-top: em(20px, $t-4);
+    }
+    #{$desc} {
+        @include module-desc($theme: $theme);
+        margin-top: em(20px, $t-5);
+    }
+}
+
+// 组标题
+@mixin group-title($size: 2) {
+    @include text($size);
+    color: var(--t-c-deeper);
+}
+
+// 组描述
+@mixin group-desc($size: 5) {
+    @include text($size);
+    color: var(--t-c-default);
+}
+
+// 组描述
+@mixin group-link($size: 7) {
+    @include link();
+}
+
+// 模块头部
+@mixin group-h($title: ".group-title", $desc: ".group-desc", $link: ".group-link") {
+    #{$title} {
+        @include group-title;
+    }
+    #{$desc} {
+        @include group-desc;
+        margin-top: em(18px, $t-5);
+    }
+    @if ($link != "") {
+        #{$link} {
+            @include group-link;
+            margin-top: var(--y-space-normal);
+        }
+    }
+}
+
+// 项目标题
+@mixin item-title($size: 4) {
+    @include text($size);
+    color: var(--t-c-deeper);
+}
+
+// 项目描述
+@mixin item-subtitle($size: 6) {
+    @include text($size);
+    color: var(--t-c-default);
+}
+
+// 项目头部
+@mixin item-h($title: ".item-title", $subtitle: ".item-desc") {
+    #{$title} {
+        @include item-title;
+    }
+    #{$subtitle} {
+        @include item-subtitle;
+    }
+}
+// #endregion
+@mixin module-button($size: 5, $theme: blue, $layout: "fill") {
+    @include text($size);
+    line-height: em(60px, 20px);
+
+    display: inline-block;
+
+    padding: 0 em(46px, 20px);
+
+    cursor: pointer;
+    transition: color 0.26s ease;
+    white-space: nowrap;
+
+    border-radius: math.div(em(60px, 20px), 2);
+    :global(.ic) {
+        line-height: 1;
+
+        display: inline-block;
+
+        transition: transform 0.26s ease;
+        // 由于思源黑体字体偏上一些，所以手动下移实现居中
+        transform: translateY(em(1px)) translateX(5px);
+        // vertical-align: middle;
+    }
+    :global(.text) {
+        display: inline-block;
+
+        transform: translateY(em(1px));
+    }
+    &:hover {
+        :global(.ic) {
+            transform: translateY(em(1px)) translateX(10px);
+        }
+    }
+    @if ($theme == blue) {
+        @if ($layout == "fill") {
+            color: #fff;
+            background-color: var(--theme-color);
+            &:hover {
+                color: #fff;
+            }
+        }
+        @if ($layout == "stroke") {
+            transition: 0.36s ease;
+
+            box-shadow: inset 0 0 0 2px var(--b-color-default);
+            &:hover {
+                color: #fff;
+                background-color: var(--theme-color);
+                box-shadow: inset 0 0 0 2px transparent;
+            }
+        }
+    }
+    @if ($theme == white) {
+        color: var(--t-c-default);
+        background-color: #fff;
+        &:hover {
+            color: var(--t-c-deeper);
+        }
+    }
+}
+@mixin link($size: 7, $theme: blue) {
+    @include text($size);
+    transition: color 0.26s ease;
+
+    color: var(--t-c-lighter);
+    :global(.ic) {
+        display: inline-block;
+
+        transition: transform 0.26s ease;
+    }
+    &:hover {
+        color: var(--t-c-default);
+        :global(.ic) {
+            transform: translateX(5px);
+        }
+    }
+}
+
+// 颜色
+@function color($color, $op: 1) {
+    @return rgba($color, $op);
+}
+@function var-color($color) {
+    $red: color.channel($color, "red", $space: rgb);
+    $green: color.channel($color, "green", $space: rgb);
+    $blue: color.channel($color, "blue", $space: rgb);
+    @return #{$red}, #{$green}, #{$blue};
+}
+@mixin dragger-cursor() {
+    cursor: grab;
+    &:active {
+        cursor: grabbing;
+    }
+}

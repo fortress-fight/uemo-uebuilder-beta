@@ -1,0 +1,22 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "namedInputs": {
+        "default": ["{projectRoot}/**/*", "sharedGlobals"],
+        "production": ["default"],
+        "sharedGlobals": []
+    },
+    "targetDefaults": {
+        "build-lib": {
+            "inputs": [{ "env": "BUILD_TARGET" }],
+            "cache": false
+        },
+        "build": {
+            "inputs": [{ "env": "BUILD_TARGET" }],
+            "cache": false
+        },
+        "build-page": {
+            "inputs": [{ "env": "BUILD_TARGET" }],
+            "cache": false
+        }
+    }
+}

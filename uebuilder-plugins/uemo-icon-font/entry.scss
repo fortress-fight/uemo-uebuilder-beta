@@ -1,0 +1,38 @@
+
+@forward "@stone/uemo-icon-font/fonts/_var.ueicon.scss";
+
+@mixin icon($content, $name: "ueicon") {
+    width: 1em;
+    height: 1em;
+    font-family: $name;
+    font-style: normal;
+    line-height: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    justify-content: center;
+    &::before {
+        content: $content;
+    }
+}
+@mixin icon-pseudo($content, $name: "ueicon") {
+    width: 1em;
+    height: 1em;
+    font-family: $name;
+    font-style: normal;
+    line-height: 1;
+
+    display: flex;
+
+    content: $content;
+
+    align-items: center;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    justify-content: center;
+}

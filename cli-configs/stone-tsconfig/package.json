@@ -1,0 +1,29 @@
+{
+    "name": "@stone/tsconfig",
+    "version": "4.0.0",
+    "description": "tsconfig 模板",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "./tsconfig.json",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "devDependencies": {
+        "unplugin-vue-macros": "^2.13.4"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

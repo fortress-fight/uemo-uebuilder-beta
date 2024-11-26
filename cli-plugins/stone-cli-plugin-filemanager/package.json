@@ -1,0 +1,30 @@
+{
+    "name": "@stone/vue-cli-plugin-filemanager",
+    "version": "4.0.0",
+    "description": "vue-filemanager 插件",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitee.com:fu-stone/vue-wetalk-front-end-vue.git"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    },
+    "devDependencies": {
+        "filemanager-webpack-plugin": "^8.0.0"
+    }
+}

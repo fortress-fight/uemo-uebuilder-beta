@@ -1,0 +1,38 @@
+{
+    "name": "@stone/uebuilder-vue-config",
+    "version": "4.0.0",
+    "description": "uemo-editor vue config 模板",
+    "author": "ff-stone <stone_fu_work@163.com>",
+    "main": "./vue.config.js",
+    "homepage": "",
+    "license": "MIT",
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@stone/stone-vue-config": "4.0.0",
+        "@stone/stylelint-config-base": "4.0.0",
+        "@stone/tsconfig": "4.0.0",
+        "@stone/vue-cli-plugin-babel": "^4.0.0",
+        "@stone/vue-cli-plugin-dll": "4.0.0",
+        "@stone/vue-cli-plugin-ejs": "4.0.0",
+        "@stone/vue-cli-plugin-jquery": "4.0.0",
+        "@stone/vue-cli-plugin-normalize-css": "4.0.0",
+        "@stone/vue-cli-plugin-sass": "4.0.0",
+        "@stone/vue-cli-plugin-svg-sprite": "4.0.0",
+        "@stone/vue-cli-plugin-tailwindcss": "4.0.0",
+        "@stone/vue-cli-plugin-typescript": "^4.0.0",
+        "@stone/vue-cli-service": "^4.0.0",
+        "@vue-macros/volar": "^0.30.6",
+        "parallelize-webpack-unplugin": "^0.1.2",
+        "typescript": "^5.3.3",
+        "unplugin-auto-import": "^0.18.2",
+        "unplugin-vue-macros": "^2.10.0",
+        "webpack": "^5.89.0"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

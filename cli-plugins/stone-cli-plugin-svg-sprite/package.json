@@ -1,0 +1,38 @@
+{
+    "name": "@stone/vue-cli-plugin-svg-sprite",
+    "version": "4.0.0",
+    "description": "添加 svg-sprite 功能",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitee.com:fu-stone/customer-projects.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    },
+    "devDependencies": {
+        "@stone/stone-cli-utils": "4.0.0",
+        "svg-sprite-loader": "^6.0.11",
+        "svgo-loader": "^4.0.0",
+        "vue-svg-loader": "^0.16.0",
+        "vue-template-compiler": "^2.7.16",
+        "webpack": "^5.96.1"
+    }
+}

@@ -1,0 +1,43 @@
+{
+    "name": "@stone/stylelint-config-base",
+    "version": "4.0.0",
+    "description": "添加 stylelint 支持以及基础配置",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "exports": {
+        "./sass": "./lib/stylelint-config-sass.js",
+        "./vue-sass": "./lib/stylelint-config-vue-sass.js"
+    },
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "postcss": "^8.3.3",
+        "postcss-html": "^1.3.0",
+        "postcss-scss": "4.0.9",
+        "prettier": "^3.4.1",
+        "stylelint": "^16.10.0",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-recommended-vue": "^1.1.0",
+        "stylelint-config-sass-guidelines": "^12.1.0",
+        "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+        "stylelint-no-unsupported-browser-features": "^8.0.2",
+        "stylelint-order": "^6.0.4",
+        "stylelint-prettier": "^5.0.2"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

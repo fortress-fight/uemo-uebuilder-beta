@@ -1,0 +1,33 @@
+{
+    "name": "@stone/vue-cli-plugin-ejs",
+    "version": "4.0.0",
+    "description": "添加 EJS 模板的支持",
+    "author": "ff-stone <stone_fu_work@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitee.com:fu-stone/customer-projects.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    },
+    "dependencies": {
+        "ejs-compiled-loader": "^3.1.0"
+    }
+}

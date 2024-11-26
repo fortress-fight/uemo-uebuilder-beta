@@ -1,0 +1,22 @@
+{
+    "name": "@stone/uemo-editor-assets",
+    "version": "4.0.0",
+    "description": "编辑器所需要的静态资源",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "./index.js",
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore"
+    },
+    "devDependencies": {
+        "@stone/stylelint-config-base": "4.0.0"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "extends": "@stone/tsconfig/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "types": [],
+        "paths": {
+            "@/*": ["src/*"],
+            "~/*": ["./*"]
+        }
+    }
+}

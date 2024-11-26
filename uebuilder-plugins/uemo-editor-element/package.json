@@ -1,0 +1,64 @@
+{
+    "name": "@stone/uemo-editor-element",
+    "version": "4.0.0",
+    "description": "用于建立编辑所需的 UI 组件库",
+    "author": "ff-stone <stone_fu_work@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "./src/index",
+    "types": "./types/main.d.ts",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-element/.husky",
+        "dev": "vue-cli-service serve",
+        "inspect": "vue-cli-service inspect > test.js",
+        "lint:js": "eslint .",
+        "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore",
+        "lint:pretter": "prettier . --check --write",
+        "lint": "yarn lint:js && yarn lint:style && yarn lint:pretter",
+        "lint:fix": "yarn lint:js --fix && yarn lint:style --fix"
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": "eslint --cache",
+        "*.{css,scss,sass,html,vue}": "stylelint --cache",
+        "*.**": "prettier --check --ignore-unknown --write --cache"
+    },
+    "dependencies": {
+        "@vue/cli-service": "^5.0.8",
+        "vue": "^3.5.13",
+        "vue-router": "^4.5.0"
+    },
+    "devDependencies": {
+        "@stone/eslint-plugin-base": "4.0.0",
+        "@stone/stylelint-config-base": "4.0.0",
+        "@stone/tsconfig": "4.0.0",
+        "@stone/uebuilder-vue-config": "^4.0.0",
+        "@stone/vue-cli-plugin-babel": "^4.0.0",
+        "@stone/vue-cli-plugin-dll": "4.0.0",
+        "@stone/vue-cli-plugin-ejs": "4.0.0",
+        "@stone/vue-cli-plugin-jquery": "4.0.0",
+        "@stone/vue-cli-plugin-normalize-css": "4.0.0",
+        "@stone/vue-cli-plugin-sass": "4.0.0",
+        "@stone/vue-cli-plugin-svg-sprite": "4.0.0",
+        "@stone/vue-cli-plugin-tailwindcss": "4.0.0",
+        "@stone/vue-cli-plugin-typescript": "^4.0.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "typescript": "^5.3.3",
+        "unplugin-auto-import": "^0.18.2",
+        "unplugin-vue-macros": "^2.10.0"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

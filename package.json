@@ -1,0 +1,65 @@
+{
+    "name": "uemo-template-editor-v4",
+    "private": true,
+    "version": "4.0.0",
+    "description": "可视化页面编辑器 -- 第四版",
+    "scripts": {
+        "lerna": "lerna",
+        "nx": "nx",
+        "clearCash": "nx reset",
+        "prepare": "lerna run prepare",
+        "lint": "lerna run lint",
+        "lintfix": "lerna run lintfix",
+        "upload": "lerna run dev --scope=test-upload --parallel",
+        "editor": "lerna run dev --scope=@stone/uemo-editor-tiptap --scope=test-upload --parallel",
+        "element-ui": "lerna run dev --scope=@stone/uemo-editor-element --scope=test-upload --parallel",
+        "editor-panel-ui": "lerna run dev --scope=@stone/uemo-editor-panel --scope=test-upload --parallel",
+        "editor-tiptap-ui": "lerna run dev --scope=@stone/uemo-editor-tiptap --scope=test-upload --parallel",
+
+        "dev": "lerna run dev --scope=app-{editor,preview,start} --scope=test-upload --parallel --stream",
+        "dev-test": "cross-env BUILD_TARGET=test yarn dev --scope=app-{creator,main,storehouse}--tools",
+
+        "dev-tools": "cross-env BUILD_TARGET=tools yarn dev --scope=app-{creator,main,storehouse}--tools",
+        "uebuilder-tools": "yarn build-page && yarn build-tools-lib && yarn build-tools",
+        "build-tools-lib": "cross-env BUILD_TARGET=tools-lib lerna run build-lib --scope=app-preview --scope=app-creator--tools --parallel",
+        "build-tools": "cross-env BUILD_TARGET=tools lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--tools --parallel",
+        "build-page": "lerna run build-page --scope=app-preview",
+
+        "dev-uemo": "cross-env BUILD_TARGET=uemo yarn dev --scope=app-{creator,main,storehouse}--uemo",
+        "uebuilder-uemo": "yarn build-uemo-lib && yarn build-uemo",
+        "build-uemo-lib": "cross-env BUILD_TARGET=uemo-lib lerna run build-lib --scope=app-preview --scope=app-creator--uemo --parallel",
+        "build-uemo": "cross-env BUILD_TARGET=uemo lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--uemo --parallel",
+
+        "dev-mo005": "cross-env BUILD_TARGET=mo005 yarn dev --scope=app-{creator,main,storehouse}--mo005",
+        "uebuilder-mo005": "yarn build-mo005-lib && yarn build-mo005",
+        "build-mo005-lib": "cross-env BUILD_TARGET=mo005-lib lerna run build-lib --scope=app-preview --scope=app-creator--mo005 --parallel",
+        "build-mo005": "cross-env BUILD_TARGET=mo005 lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--mo005 --parallel",
+
+        "dev-custom": "cross-env BUILD_TARGET=custom yarn dev --scope=app-{creator,main,storehouse}--custom",
+        "uebuilder-custom": "yarn build-custom-lib && yarn build-custom",
+        "build-custom-lib": "cross-env BUILD_TARGET=custom-lib lerna run build-lib --scope=app-preview --scope=app-creator--custom --parallel",
+        "build-custom": "cross-env BUILD_TARGET=custom lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--custom --parallel",
+
+        "uebuilder-test": "yarn build-test",
+        "build-test": "cross-env BUILD_TARGET=test lerna run build --scope=app-{editor,preview,start} --scope=app-{creator,main,storehouse}--tools --parallel",
+
+        "build-all": "yarn uebuilder-tools && yarn uebuilder-uemo && yarn uebuilder-mo005 && yarn uebuilder-custom",
+        "build-all--force": "yarn clearCash && yarn uebuilder-tools && yarn uebuilder-uemo && yarn uebuilder-mo005 && yarn uebuilder-custom"
+    },
+    "workspaces": [
+        "cli-plugins/*",
+        "cli-configs/*",
+        "uebuilder-cli/*",
+        "uebuilder-plugins/*"
+    ],
+    "author": "fufei",
+    "license": "ISC",
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "lerna": "^8.1.9"
+    }
+}

@@ -1,0 +1,37 @@
+{
+    "name": "@stone/vue-cli-plugin-typescript",
+    "version": "4.0.0",
+    "description": "Vue-cli 插件所需要的工具方法",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "./index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "dependencies": {
+        "@babel/core": "^7.26.0",
+        "babel-loader": "^9.2.1",
+        "fork-ts-checker-webpack-plugin": "^9.0.2",
+        "thread-loader": "^4.0.4",
+        "ts-loader": "^9.2.5",
+        "webpack": "^5.96.1"
+    },
+    "devDependencies": {
+        "typescript": "~5.7.2"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}

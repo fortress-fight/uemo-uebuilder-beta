@@ -1,0 +1,155 @@
+:root {
+    --c-black-20: #333;
+    --c-gray-40: #666;
+    --c-gray-60: #a8a8a8;
+    --c-gray-70: #c3c3c3;
+    --c-gray-80: #dcdcdc;
+    --c-gray-90: #eee;
+    --c-blue-60: #2c48ff;
+    --c-green-40: #17d57e;
+    --c-green-50: #46be8a;
+    --c-red-40: #e00;
+
+    // theme-color
+    --theme-layout-group: #ff740e;
+    --theme-layout-row: #2c48ff;
+    --theme-layout-col: #17d57e;
+    --theme-layout-block: #021556;
+    --theme-layout-component: #22c9fd;
+
+    // z-index
+    --z-index--mini: 50;
+    --z-index--normal: 100;
+    --z-index--max: 2147483647;
+
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    --z-index--tip-outline: 998;
+    --z-index--fixed: 7999;
+    --z-index--loading: 8999;
+    --z-index--dialog-base: 9998;
+    --z-index--add-btn: 999;
+    --z-index--editor-bar: 1000;
+}
+/* stylelint-disable-next-line no-duplicate-selectors */
+:root {
+    --editor-c-gray: #999;
+    --editor-c-gray--deeper: #666;
+    --editor-c-border--lighter: #e6e6e6;
+    --editor-c-select: #f2f2f2;
+    --editor-color-text: #181818;
+    --editor-components-padding: 8px;
+}
+
+/* stylelint-disable-next-line no-duplicate-selectors */
+:root {
+    // NOTE 颜色
+    --ue-color--active: #{var-color(#2c48ff)};
+    --ue-color--hover: #{var-color(#f6f6f6)};
+    --ue-color--blue: #{var-color(#2c48ff)};
+    --ue-color--gray: #{var-color(#f6f6f6)};
+    --ue-color--dark: #{var-color(#333)};
+    --ue-color--yellow: #{var-color(#ff740e)};
+    --ue-color--error: #{var-color(#f00)};
+
+    // NOTE 文字
+    --ue-font-color: #{var-color(#999)};
+    --ue-font-color--deeper: #{var-color(#181818)};
+
+    // NOTE 边框
+    --ue-border-color: #{var-color(#e6e6e6)};
+    --ue-border-color--deeper: #{var-color(#181818)};
+
+    // NOTE 背景
+    --ue-background-color: #{var-color(#f6f6f6)};
+    --ue-background-color--gray: #{var-color(#bfbfbf)};
+    --ue-background-color--lighter: #{var-color(#f2f2f2)};
+    --ue-background-color--deeper: #{var-color(#181818)};
+
+    // NOTE 圆角
+    --ue-border-radius--lv1: 3px;
+    --ue-border-radius--lv2: 5px;
+
+    // 面板圆角
+    --ue-border-radius--panel: 10px;
+
+    // NOTE 投影
+    --ue-shadow--lv1: 0 4px 8px rgb(0 0 0 / 0.2);
+    --ue-shadow--lv2: 0 10px 40px 0 rgb(0 0 0 / 0.2);
+
+    // NOTE space
+    --ue-editor-row-space--lv1: 8px;
+    --ue-editor-row-space--lv2: 10px;
+    --ue-control-row-space: 4px;
+    --ue-control-col-space: 6px;
+
+    // NOTE z-index
+    --ue-z-index--mini: 50;
+    --ue-z-index--normal: 100;
+    --ue-z-index--max: 2147483647;
+
+    --ue-z-index--tip: 998;
+    --ue-z-index--fixed: 7999;
+    --ue-z-index--loading: 8999;
+    --ue-z-index--dialog: 9998;
+
+    // NOTE 尺寸
+    --ue-panel-width--small: 220px;
+    --ue-panel-width: 276px;
+    --ue-library-panel-width: 360px;
+    --ue-library-panel-width--large: 500px;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif, "微软雅黑";
+    font-size: 12px;
+    line-height: 1.5;
+
+    width: 100%;
+    height: 100%;
+
+    user-select: none;
+
+    background-color: #fff;
+}
+::-webkit-scrollbar {
+    width: 3px;
+    height: 10px;
+
+    background: transparent;
+}
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+::-webkit-scrollbar-thumb {
+    background: #d3d1cb;
+}
+.red-font {
+    color: var(--c-red-40);
+}
+.yellow-font {
+    color: var(--theme-layout-group);
+}
+.blue-font {
+    color: var(--theme-layout-row);
+}
+img {
+    -webkit-user-drag: none;
+}
+button {
+    border-width: 0;
+}
+input {
+    &:focus {
+        outline: none;
+    }
+}
+input::placeholder {
+    color: #ccc !important;
+}
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #fff inset;
+
+    -webkit-text-fill-color: #333;
+}
+*:focus-visible {
+    outline: none;
+}
