@@ -6,11 +6,15 @@ process.on("SIGINT", () => {
 });
 
 import ejs from "ejs";
+import path from "path";
+import fg from "fast-glob";
+import { fileURLToPath } from "url";
 import fse from "fs-extra";
 import { input } from "@inquirer/prompts";
-import path from "path";
 import * as changeCase from "change-case";
-import fg from "fast-glob";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * 全局参数对象，包含组件名称和描述。
