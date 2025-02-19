@@ -33,7 +33,6 @@ const publicTsRules = {
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/ban-ts-comment": 0,
-    "@typescript-eslint/no-unused-vars": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
     "@typescript-eslint/no-unsafe-argument": 0,
     "@typescript-eslint/no-unsafe-member-access": 0,
@@ -42,6 +41,19 @@ const publicTsRules = {
     "@typescript-eslint/consistent-type-definitions": 0,
     "@typescript-eslint/no-unsafe-return": 0,
     "@typescript-eslint/prefer-nullish-coalescing": 0,
+    "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+            args: "all",
+            argsIgnorePattern: "^_",
+            caughtErrors: "all",
+            caughtErrorsIgnorePattern: "^_",
+            destructuredArrayIgnorePattern: "^_",
+            varsIgnorePattern: "^_",
+            ignoreRestSiblings: true,
+        },
+    ],
+    "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "with-single-extends" }],
 };
 
 export default [
@@ -89,5 +101,5 @@ export default [
             "vue/singleline-html-element-content-newline": "off",
         },
     },
-    { files: ["**/*.js"], rules: { "@typescript-eslint/no-require-imports": 0 } },
+    { files: ["**/*.js", "**/*.mjs"], rules: { ...publicTsRules, "@typescript-eslint/no-require-imports": 0 } },
 ];
