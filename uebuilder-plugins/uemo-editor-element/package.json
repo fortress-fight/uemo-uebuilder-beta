@@ -19,6 +19,7 @@
     },
     "scripts": {
         "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-element/.husky",
+        "create-element": "node ./cli/create-element.mjs",
         "dev": "vue-cli-service serve",
         "inspect": "vue-cli-service inspect > test.js",
         "lint:js": "eslint .",
@@ -33,9 +34,17 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
-        "@vue/cli-service": "^5.0.8",
+        "@inquirer/prompts": "^3.3.0",
         "vue": "^3.5.13",
-        "vue-router": "^4.5.0"
+        "vue-router": "^4.5.0",
+        "vuedraggable": "^2.24.3",
+        "@vue/cli-service": "^5.0.8",
+        "@types/inquirer": "^9.0.7",
+        "ejs": "^3.1.9",
+        "change-case": "^5.3.0",
+        "commander": "^11.1.0",
+        "fast-glob": "^3.3.2",
+        "fs-extra": "^11.2.0"
     },
     "devDependencies": {
         "@stone/eslint-plugin-base": "4.0.0",
