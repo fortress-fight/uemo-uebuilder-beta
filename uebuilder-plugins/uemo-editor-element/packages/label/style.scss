@@ -1,0 +1,46 @@
+/* ---------------------------------- */
+/*                tippy               */
+/* ---------------------------------- */
+$arrow-size: 6px;
+$arrow-size-size: 5px;
+.tippy-box[data-animation="fade"][data-state="hidden"] {
+    opacity: 0;
+}
+[data-tippy-root] {
+    max-width: calc(100vw - 10px);
+}
+.tippy-box {
+    font-size: 12px;
+
+    border-radius: var(--ue-border-radius--lv1);
+}
+.tippy-box[data-placement^="top"] > .tippy-arrow::before {
+    bottom: -$arrow-size-size;
+
+    border-width: $arrow-size $arrow-size 0;
+}
+.tippy-box[data-placement^="bottom"] > .tippy-arrow::before {
+    top: -$arrow-size-size;
+
+    border-width: 0 $arrow-size $arrow-size;
+}
+.tippy-box[data-placement^="left"] > .tippy-arrow::before {
+    right: -$arrow-size-size;
+
+    border-width: $arrow-size 0 $arrow-size $arrow-size;
+}
+.tippy-box[data-placement^="right"] > .tippy-arrow::before {
+    left: -$arrow-size-size;
+
+    border-width: $arrow-size $arrow-size $arrow-size 0;
+}
+.tippy-arrow {
+    width: 14px;
+    height: 14px;
+}
+.tippy-content {
+    position: relative;
+    z-index: var(--ue-z-index--mini);
+
+    padding: 4px 8px;
+}
