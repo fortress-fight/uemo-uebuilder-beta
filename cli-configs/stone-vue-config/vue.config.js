@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2024-11-27 14:35:07
+ * @LastEditTime: 2025-02-20 16:48:21
  */
 const { defineConfig } = require("@stone/vue-cli-service");
 const path = require("path");
@@ -35,9 +35,6 @@ module.exports = (publicPath = "./", param = {}) => {
                 },
             },
             plugins: [
-                new webpack.ProvidePlugin({
-                    gsap: ["@stone/uemo-editor-utils/lib/gsap", "gsap"],
-                }),
                 // VueMacros(),
                 require("unplugin-auto-import/webpack").default({
                     // targets to transform

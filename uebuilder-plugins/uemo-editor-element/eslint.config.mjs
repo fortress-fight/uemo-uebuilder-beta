@@ -5,7 +5,7 @@ export default [
     ...eslintPlugin,
     {
         languageOptions: {
-            globals: { Generator: "readonly", $: "readonly", gsap: "readonly" },
+            globals: { Generator: "readonly" },
         },
         rules: {
             "@typescript-eslint/no-var-requires": 0,
