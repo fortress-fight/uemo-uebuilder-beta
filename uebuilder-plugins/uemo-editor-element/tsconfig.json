@@ -3,11 +3,9 @@
     "include": [
         "env.d.ts",
         "src/**/*",
-        "src/**/*.vue",
         "demo/**/*",
-        "demo/**/*.vue",
+        "i18n/**/*",
         "packages/**/*",
-        "packages/**/*.vue",
         "./auto-imports.d.ts",
         "./types/*.d.ts"
     ],

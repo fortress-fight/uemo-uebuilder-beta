@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 16:48:21
+ * @LastEditTime: 2025-02-20 19:15:21
  */
 const { defineConfig } = require("@stone/vue-cli-service");
 const path = require("path");
@@ -46,7 +46,7 @@ module.exports = (publicPath = "./", param = {}) => {
                     dts: true,
 
                     // global imports to register
-                    imports: ["vue"],
+                    imports: ["vue", "vue-i18n"],
                 }),
                 require("unplugin-vue-macros/webpack")({
                     // overrides plugin options
