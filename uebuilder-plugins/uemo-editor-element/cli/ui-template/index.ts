@@ -1,19 +1,16 @@
 /*
 * @Description: <%- description %>
 * @Author: F-Stone
-* @LastEditTime: <%= date %>
+ * @LastEditTime: 2025-02-20 10:10:49
 */
-import type { VueConstructor } from "vue";
+import type { App } from "vue";
 
 import UeEl<%- elementName %> from "./Main.vue";
 
-// @ts-ignore
-UeEl<%- elementName %>.install = function (Vue: VueConstructor) {
-    // @ts-ignore
-    Vue.component(UeEl<%- elementName %>.name, UeEl<%- elementName %>);
+UeEl<%- elementName %>.install = (app: App) => {
+    app.component(UeEl<%- elementName %>.name, UeEl<%- elementName %>);
 };
 
-// @ts-ignore
 export type UeEl<%- elementName %>Instance = InstanceType<typeof UeEl<%- elementName %>>;
 
 export default UeEl<%- elementName %>;
