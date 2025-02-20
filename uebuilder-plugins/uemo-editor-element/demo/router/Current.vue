@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestIcon.vue";
+import TestComponent from "~/demo/components/TestTextInput.vue";
 </script>
 <style lang="scss" module>
 .test-group {

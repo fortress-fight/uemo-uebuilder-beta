@@ -1,7 +1,7 @@
 /*
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 15:20:49
+ * @LastEditTime: 2025-02-20 18:56:55
  */
 import type { App } from "vue";
 
@@ -12,6 +12,7 @@ import UeElTextInput from "./Main.vue";
  * 此方法会以组件名称为 key，通过 app.component 进行全局注册。
  */
 UeElTextInput.install = (app: App) => {
+    if (!UeElTextInput.name) return;
     app.component(UeElTextInput.name, UeElTextInput);
 };
 
@@ -22,12 +23,12 @@ export interface UeElTextInputBaseProps {
     required?: boolean;
     type?: "password" | "text" | "textarea";
     theme?: "enterText";
-    paddingSize?: string;
+    paddingSize?: "level1" | "level2" | "level3" | "level4";
     autocomplete?: string;
     disable?: boolean;
     placeholder?: string;
-    trimValue?: boolean;
-    disableNewline?: boolean;
+    autoTrim?: boolean;
+    singleLine?: boolean;
     rules?: UE_EL_UTIL.InputRule[];
 }
 export type UeElTextInputInstance = InstanceType<typeof UeElTextInput>;
