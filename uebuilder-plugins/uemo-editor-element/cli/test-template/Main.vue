@@ -15,7 +15,7 @@
     </TestArea>
 </template>
 <script lang="ts" setup>
-import TestArea from "~/demo/components-utils/TestArea.vue";
+import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValue = ref({
