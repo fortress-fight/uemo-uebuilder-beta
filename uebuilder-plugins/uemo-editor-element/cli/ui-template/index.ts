@@ -8,6 +8,7 @@ import type { App } from "vue";
 import UeEl<%- elementName %> from "./Main.vue";
 
 UeEl<%- elementName %>.install = (app: App) => {
+    if (!UeEl<%- elementName %>.name) return;
     app.component(UeEl<%- elementName %>.name, UeEl<%- elementName %>);
 };
 

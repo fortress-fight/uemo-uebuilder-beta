@@ -8,6 +8,7 @@ import { directive } from "./directive";
 export default {
     install: (app: App, options: { plugin: Record<string, any> }) => {
         components.forEach((component) => {
+            if (!component.name) return;
             app.component(component.name, component);
         });
 
