@@ -29,7 +29,7 @@
         "lint:fix": "yarn lint:js --fix && yarn lint:style --fix"
     },
     "lint-staged": {
-        "*.{js,ts,vue}": "eslint --cache",
+        "*.{js,ts,vue}": "eslint --cache --config ./uebuilder-plugins/uemo-editor-element/eslint.config.mjs",
         "*.{css,scss,sass,html,vue}": "stylelint --cache",
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
@@ -47,6 +47,7 @@
         "fs-extra": "^11.2.0"
     },
     "devDependencies": {
+        "@stone/uemo-editor-utils": "4.0.0",
         "@stone/eslint-plugin-base": "4.0.0",
         "@stone/stylelint-config-base": "4.0.0",
         "@stone/tsconfig": "4.0.0",
