@@ -1,7 +1,7 @@
 /*
  * @Description: tippy 插件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 17:01:58
+ * @LastEditTime: 2025-02-20 17:39:07
  */
 import type { App, DirectiveBinding } from "vue";
 import type { Placement } from "@stone/uemo-editor-utils/lib/tippy";
@@ -24,15 +24,24 @@ const controlMap = new WeakMap<HTMLElement, ReturnType<typeof createLabelControl
  */
 function toArr<T>(val: T | T[]): T[] {
     if (!val) return [];
-    if (Array.isArray(val)) return val;
-    return [val];
+    return Array.isArray(val) ? val : [val];
+}
+
+/**
+ * 创建 tippy 实例
+ * @param el - 目标 DOM 元素
+ * @param config - 标签配置，可为字符串或配置对象
+ * @returns tippy 实例
+ */
+function createTippyInstance(el: HTMLElement, config: UE_EL_UTIL.LabelOption) {
+    return typeof config === "string" ? tippy(el, { offset: [0, 6], content: config }) : tippy(el, config);
 }
 
 /**
  * 创建标签控制器对象
- * @param el - 目标DOM元素
+ * @param el - 目标 DOM 元素
  * @param tippyGroup - tippy 实例数组
- * @returns 标签的控制器对象，包括 update、disable 和 destroy 方法
+ * @returns 控制器对象，含 update、disable 与 destroy 方法
  */
 function createLabelControl(el: HTMLElement, tippyGroup: (ReturnType<typeof tippy>[number] | undefined)[]) {
     return {
@@ -41,34 +50,26 @@ function createLabelControl(el: HTMLElement, tippyGroup: (ReturnType<typeof tipp
          * @param params - 标签配置数组
          */
         update: (params: UE_EL_UTIL.LabelOption[]) => {
-            if (params.length === 0) {
-                tippyGroup.forEach((t) => t?.disable?.());
-                return;
+            // 若新参数数量少于现有实例，禁用多余的实例
+            if (params.length < tippyGroup.length) {
+                tippyGroup.slice(params.length).forEach((t) => t?.disable?.());
             }
             params.forEach((param, index) => {
                 if (typeof param === "undefined") {
                     tippyGroup[index]?.disable?.();
                     return;
                 }
-                if (param && !tippyGroup[index]) {
-                    tippyGroup[index] =
-                        typeof param === "string" ? tippy(el, { offset: [0, 6], content: param }) : tippy(el, param);
+                if (!tippyGroup[index]) {
+                    tippyGroup[index] = createTippyInstance(el, param);
                     return;
                 }
-                if (param && tippyGroup[index]) {
-                    tippyGroup[index]?.enable?.();
-                    if (typeof param === "string") {
-                        tippyGroup[index]?.setContent?.(param);
-                    } else {
-                        tippyGroup[index]?.setProps?.(param);
-                    }
+                tippyGroup[index]?.enable?.();
+                if (typeof param === "string") {
+                    tippyGroup[index]?.setContent?.(param);
+                } else {
+                    tippyGroup[index]?.setProps?.(param);
                 }
             });
-
-            // 禁用多余的 tippy 实例
-            if (params.length < tippyGroup.length) {
-                tippyGroup.slice(params.length).forEach((t) => t?.disable?.());
-            }
         },
         /**
          * 禁用所有 tippy 实例
@@ -87,7 +88,7 @@ function createLabelControl(el: HTMLElement, tippyGroup: (ReturnType<typeof tipp
 
 /**
  * 初始化元素的标签
- * @param el - 被绑定的DOM元素
+ * @param el - 被绑定的 DOM 元素
  * @param options - 标签配置选项数组
  */
 function initUeElLabel(el: HTMLElement, options: UE_EL_UTIL.LabelOption[]) {
@@ -96,7 +97,7 @@ function initUeElLabel(el: HTMLElement, options: UE_EL_UTIL.LabelOption[]) {
     // 构造所有 tippy 实例
     const tippyGroup: (ReturnType<typeof tippy>[number] | undefined)[] = options.map((param) => {
         if (typeof param === "undefined") return undefined;
-        return typeof param === "string" ? tippy(el, { offset: [0, 6], content: param }) : tippy(el, param);
+        return createTippyInstance(el, param);
     });
 
     // 使用 WeakMap 缓存控制对象
