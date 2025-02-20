@@ -1,0 +1,10 @@
+{
+    "extends": "@stone/tsconfig",
+    "include": ["src/**/*"],
+    "exclude": ["src/**/__tests__/*"],
+    "compilerOptions": {
+        "types": ["webpack-env"],
+        "paths": { "~/*": ["./*"], "@/*": ["./src/*"] },
+        "lib": ["ES7", "ESNext", "DOM"]
+    }
+}
