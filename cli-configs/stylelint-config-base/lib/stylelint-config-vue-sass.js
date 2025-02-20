@@ -1,7 +1,7 @@
 /*
  * @Description: sass stylelint config
  * @Author: F-Stone
- * @LastEditTime: 2024-11-27 13:00:59
+ * @LastEditTime: 2025-02-20 18:17:34
  */
 
 module.exports = {
@@ -25,6 +25,9 @@ module.exports = {
                     "css-nesting",
                     "css-when-else",
                     "css-math-functions",
+                    "css-focus-within",
+                    "css-color-function",
+                    "css-overflow",
                 ],
             },
         ],
