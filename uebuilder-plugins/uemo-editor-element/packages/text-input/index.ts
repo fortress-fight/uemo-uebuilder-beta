@@ -1,0 +1,36 @@
+/*
+ * @Description: 文本输入框
+ * @Author: F-Stone
+ * @LastEditTime: 2025-02-20 15:20:49
+ */
+import type { App } from "vue";
+
+import UeElTextInput from "./Main.vue";
+
+/**
+ * 安装函数：将文本输入组件注册到 Vue3 应用中。
+ * 此方法会以组件名称为 key，通过 app.component 进行全局注册。
+ */
+UeElTextInput.install = (app: App) => {
+    app.component(UeElTextInput.name, UeElTextInput);
+};
+
+// 保留类型定义
+export interface UeElTextInputBaseProps {
+    value: string;
+    label?: string;
+    required?: boolean;
+    type?: "password" | "text" | "textarea";
+    theme?: "enterText";
+    paddingSize?: string;
+    autocomplete?: string;
+    disable?: boolean;
+    placeholder?: string;
+    trimValue?: boolean;
+    disableNewline?: boolean;
+    rules?: UE_EL_UTIL.InputRule[];
+}
+export type UeElTextInputInstance = InstanceType<typeof UeElTextInput>;
+
+// 默认导出组件
+export default UeElTextInput;
