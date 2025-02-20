@@ -24,12 +24,13 @@
         "supportedBrowsersWin": "(echo export default && browserslist-useragent-regexp --allowHigherVersions) > supportedBrowsers.js"
     },
     "lint-staged": {
-        "*.{js,ts,vue}": "eslint --cache --config ./uebuilder-plugins/uemo-editor-utils/eslint.config.mjs",
+        "*.{js,ts,vue}": "eslint --cache --config ./eslint.config.mjs",
         "*.{css,scss,sass,html,vue}": "stylelint --cache",
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
         "copy-to-clipboard": "^3.3.3",
+        "tippy.js": "^6.3.7",
         "vue-toastification": "^2.0.0-rc.5"
     },
     "devDependencies": {
