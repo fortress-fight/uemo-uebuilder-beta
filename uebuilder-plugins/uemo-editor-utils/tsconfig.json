@@ -1,0 +1,14 @@
+{
+    "extends": "@stone/tsconfig",
+    "include": ["env.d.ts", "lib/**/*", "./auto-imports.d.ts", "./types/global.d.ts"],
+    "exclude": ["src/**/__tests__/*"],
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "types": [
+            "@stone/tsconfig/lib/shims-tsx.d.ts",
+            "@stone/tsconfig/lib/shims-vue.d.ts",
+            "unplugin-vue-macros/macros-global"
+        ],
+        "paths": { "~/*": ["./*"], "@/*": ["./src/*"] }
+    }
+}

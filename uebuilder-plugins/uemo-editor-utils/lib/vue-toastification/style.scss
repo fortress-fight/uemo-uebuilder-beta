@@ -1,0 +1,78 @@
+/* stylelint-disable */
+
+.Vue-Toastification__toast {
+    font-size: 12px;
+
+    min-width: 88px;
+    min-height: unset;
+    margin-bottom: 22px;
+    padding: 10px 20px;
+
+    border-radius: 5px;
+}
+.Vue-Toastification__toast-body {
+    font-size: 12px;
+    line-height: 15px;
+}
+.Vue-Toastification__toast--default {
+    background: #181818;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 8px rgba(24, 24, 24, 0.4);
+}
+.Vue-Toastification__toast--info {
+    background: #181818;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 8px rgba(24, 24, 24, 0.4);
+}
+.Vue-Toastification__toast--success {
+    border: 1px solid #00b374;
+    background: #19cd8b;
+    box-shadow: 0 4px 8px rgb(25 205 139 / 0.4);
+}
+.Vue-Toastification__toast--error {
+    border: 1px solid #da121d;
+    background: #fe4a54;
+    box-shadow: 0 4px 8px rgb(254 74 84 / 0.4);
+}
+.Vue-Toastification__toast--warning {
+    border: 1px solid #e6a832;
+    background: #ffbb38;
+    box-shadow: 0 4px 8px rgb(255 187 56 / 0.4);
+}
+@keyframes fadeOutBottom {
+    0% {
+        transform: translateY(0);
+
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(10px);
+
+        opacity: 0;
+    }
+}
+@keyframes fadeInBottom {
+    0% {
+        transform: translateY(10px);
+
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+
+        opacity: 1;
+    }
+}
+.Vue-Toastification__custom-enter-active {
+    animation-name: fadeInBottom;
+    animation-duration: 250ms !important;
+}
+.Vue-Toastification__custom-leave-active {
+    animation-name: fadeOutBottom;
+    animation-duration: 250ms !important;
+}
+.Vue-Toastification__custom {
+    transition-timing-function: ease;
+    transition-duration: 200ms;
+    transition-property: all;
+}

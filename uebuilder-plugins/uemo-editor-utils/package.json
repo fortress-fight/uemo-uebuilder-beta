@@ -1,0 +1,42 @@
+{
+    "name": "@stone/uemo-editor-utils",
+    "version": "4.0.0",
+    "description": "编辑器所需要的工具方法",
+    "author": "f-stone <dreamersfly@163.com>",
+    "homepage": "",
+    "license": "MIT",
+    "main": "./index.js",
+    "types": "index.d.ts",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "publishConfig": {
+        "registry": "https://registry.yarnpkg.com"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1",
+        "supportedBrowsers": "echo \"export default $(browserslist-useragent-regexp --allowHigherVersions);\" > ./lib/supported-browsers.js",
+        "supportedBrowsersWin": "(echo export default && browserslist-useragent-regexp --allowHigherVersions) > supportedBrowsers.js"
+    },
+    "dependencies": {
+        "copy-to-clipboard": "^3.3.3",
+        "vue-toastification": "^2.0.0-rc.5"
+    },
+    "devDependencies": {
+        "@stone/eslint-plugin-base": "4.0.0",
+        "@stone/stylelint-config-base": "4.0.0",
+        "@stone/tsconfig": "4.0.0",
+        "browserslist-useragent-regexp": "^4.1.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "typescript": "^5.3.3"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}
