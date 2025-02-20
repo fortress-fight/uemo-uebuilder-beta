@@ -12,9 +12,6 @@ const linkList = ref([
     { path: "/editor-panel", text: "模块面板" },
     { path: "/editor-unit", text: "TipTap 面板" },
 ]);
-const className = useCssModule();
-
-console.log("className", className);
 </script>
 <style lang="scss" module>
 .nav-bar {
