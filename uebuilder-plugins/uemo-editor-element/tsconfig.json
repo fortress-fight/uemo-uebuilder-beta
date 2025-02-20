@@ -6,16 +6,20 @@
         "src/**/*.vue",
         "demo/**/*",
         "demo/**/*.vue",
+        "packages/**/*",
+        "packages/**/*.vue",
         "./auto-imports.d.ts",
-        "./types/component.d.ts"
+        "./types/*.d.ts"
     ],
     "exclude": ["src/**/__tests__/*"],
     "compilerOptions": {
         "types": [
             "@stone/tsconfig/lib/shims-tsx.d.ts",
             "@stone/tsconfig/lib/shims-vue.d.ts",
-            "unplugin-vue-macros/macros-global"
+            "unplugin-vue-macros/macros-global",
+            "webpack-env"
         ],
-        "paths": { "~/*": ["./*"], "@/*": ["./src/*"] }
+        "paths": { "~/*": ["./*"], "@/*": ["./src/*"] },
+        "lib": ["ES7", "ESNext", "DOM"]
     }
 }
