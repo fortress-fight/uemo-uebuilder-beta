@@ -35,9 +35,9 @@ function copyData() {
     const isSuc = copy(componentName.value);
 
     if (isSuc) {
-        instance.proxy.$ueElToast.success("复制成功");
+        instance?.proxy?.$ueElToast.success("复制成功");
     } else {
-        instance.proxy.$ueElToast.error("复制失败");
+        instance?.proxy?.$ueElToast.error("复制失败");
     }
 }
 </script>
