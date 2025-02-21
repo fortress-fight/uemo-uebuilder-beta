@@ -17,7 +17,7 @@ defineOptions({ name: "UeEl<%- elementName %>" });
 const prop = defineProps<Props>();
 </script>
 <style lang="scss" module>
-.<%- className % > {
+.<%- className %> {
     //
 }
 </style>
