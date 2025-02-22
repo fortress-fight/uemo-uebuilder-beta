@@ -29,7 +29,13 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
+        "@floating-ui/dom": "^1.6.13",
+        "@types/jquery": "^3.5.32",
         "copy-to-clipboard": "^3.3.3",
+        "floating-ui": "^5.2.8",
+        "gsap": "^3.12.7",
+        "jquery": "^3.7.1",
+        "mitt": "^3.0.1",
         "tippy.js": "^6.3.7",
         "vue-toastification": "^2.0.0-rc.5"
     },
