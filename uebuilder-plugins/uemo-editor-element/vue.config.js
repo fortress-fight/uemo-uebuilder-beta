@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2024-11-27 14:57:50
+ * @LastEditTime: 2025-02-22 23:25:43
  */
 
 const getBaseConfig = require("@stone/uebuilder-vue-config");
@@ -13,6 +13,7 @@ module.exports = () => {
         defineConfig({
             devServer: {
                 port: 9007,
+                server: { type: "https" },
                 proxy: {
                     "/UeMaterial.Api": { target: "https://card.uemox.com:8081", changeOrigin: true },
                 },
