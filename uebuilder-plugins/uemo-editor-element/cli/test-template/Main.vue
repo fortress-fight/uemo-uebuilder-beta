@@ -19,7 +19,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList = (UE_EL_COMPONENT.UeEl<%- elementName %>Props & {value?: any})[] = [];
+const testValueList:(UE_EL_COMPONENT.UeEl<%- elementName %>Props & {value?: any})[] = [];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
