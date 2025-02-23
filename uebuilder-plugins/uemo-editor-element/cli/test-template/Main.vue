@@ -18,7 +18,7 @@
 import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
-const testValue = ref({
+const testValue = ref<UE_EL_COMPONENT.UeEl<%- elementName %>Props>({
     //
 });
 </script>
