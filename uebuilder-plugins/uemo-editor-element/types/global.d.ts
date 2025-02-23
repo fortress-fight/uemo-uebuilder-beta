@@ -1,4 +1,5 @@
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
+
 declare global {
     namespace UE_EL_UTIL {
         /**
@@ -7,9 +8,20 @@ declare global {
         type InputRule = { pattern?: RegExp; message?: string } | ((value: string) => boolean | string);
 
         /**
-         * 提示框参数
+         * @description 提示框参数
          */
         type LabelOption = Partial<Props> | string | undefined;
+
+        /**
+         * @description 选择器选项
+         */
+        type SelectOption = {
+            icon?: string;
+            label?: string;
+            text: string;
+            value: string;
+            [param: string]: any;
+        };
     }
 }
 

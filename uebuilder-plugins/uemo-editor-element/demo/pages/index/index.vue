@@ -9,8 +9,10 @@
 <script lang="ts" setup>
 const linkList = ref([
     { path: "/", text: "当前编辑" },
-    { path: "/editor-panel", text: "模块面板" },
-    { path: "/editor-unit", text: "TipTap 面板" },
+    { path: "/editor-unit", text: "基础组件" },
+    { path: "/editor-panel", text: "复杂组件" },
+    { path: "/editor-resource/panel", text: "资源组件" },
+    { path: "/editor-lib-panel", text: "库组件" },
 ]);
 </script>
 <style lang="scss" module>

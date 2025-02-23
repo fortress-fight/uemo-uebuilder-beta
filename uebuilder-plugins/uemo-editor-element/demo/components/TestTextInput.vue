@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 19:05:08
+ * @LastEditTime: 2025-02-23 21:57:19
 -->
 <template>
     <TestArea :class="$style['test-area']" :value="testValue" title="测试文本输入框">
@@ -14,7 +14,7 @@
 import TestArea from "./TestArea.vue";
 
 const _testProps1: UE_EL_COMPONENT.UeElTextInputProps = {
-    value: "",
+    value: "测试文本输入框",
     required: true,
     label: "测试文本输入框",
 };

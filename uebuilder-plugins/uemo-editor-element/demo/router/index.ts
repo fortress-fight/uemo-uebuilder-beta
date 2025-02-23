@@ -1,7 +1,7 @@
 /*
  * @Description: 路由入口文件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 16:01:00
+ * @LastEditTime: 2025-02-23 21:47:25
  */
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -13,6 +13,8 @@ export default createRouter({
     routes: [
         { path: "/", component: CurrentView },
         { path: "/editor-unit", component: EditorUnitView },
-        { path: "/editor-panel", component: CurrentView },
+        { path: "/editor-panel", component: EditorUnitView },
+        { path: "/editor-resource/panel", component: EditorUnitView },
+        { path: "/editor-lib-panel", component: EditorUnitView },
     ],
 });

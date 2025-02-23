@@ -3,12 +3,16 @@
         <div :class="$style['test-group']" class="grid grid-cols-2">
             <TestIcon />
             <TestTextInput />
+            <TestSelectOption />
+            <TestSelect />
         </div>
     </div>
 </template>
 <script lang="ts" setup>
 import TestIcon from "~/demo/components/TestIcon.vue";
 import TestTextInput from "~/demo/components/TestTextInput.vue";
+import TestSelectOption from "~/demo/components/TestSelectOption.vue";
+import TestSelect from "~/demo/components/TestSelect.vue";
 </script>
 <style lang="scss" module>
 .test-group {
