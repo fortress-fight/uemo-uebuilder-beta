@@ -3,7 +3,7 @@ import type { ExtendedMiddlewareItem, EnhancedComputePositionConfig, ExtendedMid
 
 import { computePosition, shift, offset, size, flip } from "@floating-ui/dom";
 
-export type * from "@floating-ui/dom";
+export * from "@floating-ui/dom";
 export type { EnhancedComputePositionConfig };
 
 /**
