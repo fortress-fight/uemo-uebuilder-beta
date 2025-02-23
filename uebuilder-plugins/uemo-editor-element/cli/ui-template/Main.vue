@@ -14,7 +14,7 @@ import type { UeEl<%- elementName %>BaseProps } from "./index";
 interface Props extends UeEl<%- elementName %>BaseProps {}
 
 defineOptions({ name: "UeEl<%- elementName %>" });
-const prop = defineProps<Props>();
+const prop = withDefaults(defineProps<Props>(), {});
 </script>
 <style lang="scss" module>
 .<%- className %> {
