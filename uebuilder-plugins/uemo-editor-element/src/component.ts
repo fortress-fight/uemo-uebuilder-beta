@@ -1,12 +1,13 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 02:31:58
+ * @LastEditTime: 2025-02-23 23:56:25
  */
-import UeElPopPanel from "../packages/pop-panel";
+import UeElCheckBox from "../packages/check-box";
 import UeElSelect from "../packages/select";
-import UeElIcon from "../packages/icon";
+import UeElPopPanel from "../packages/pop-panel";
 import UeElSelectOption from "../packages/select-option";
+import UeElIcon from "../packages/icon";
 import UeElTextInput from "../packages/text-input";
 
-export const components = [UeElPopPanel, UeElSelect, UeElIcon, UeElSelectOption, UeElTextInput];
+export const components = [UeElCheckBox, UeElSelect, UeElPopPanel, UeElSelectOption, UeElIcon, UeElTextInput];
