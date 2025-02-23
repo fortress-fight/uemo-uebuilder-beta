@@ -1,11 +1,12 @@
 <!--
  * @Description: 测试字体图标
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 23:33:27
+ * @LastEditTime: 2025-02-24 00:41:15
 -->
 <template>
     <TestArea
         :class="$style['test-area']"
+        :testValue="testValue"
         :testValueList="testValueList"
         v-model:testValueSelect="testValueSelect"
         title="测试字体图标"

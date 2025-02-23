@@ -6,7 +6,9 @@
 <template>
     <TestArea
         :class="$style['test-area']"
-        :value="testValue"
+        :testValue="testValue"
+        :testValueList="testValueList"
+        v-model:testValueSelect="testValueSelect"
         title="测试<%- description %>"
     >
         <UeEl<%- elementName %> v-bind="testValue">

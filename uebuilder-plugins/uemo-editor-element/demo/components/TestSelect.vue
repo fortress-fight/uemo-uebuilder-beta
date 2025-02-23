@@ -1,11 +1,12 @@
 <!--
  * @Description: 测试选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 23:33:22
+ * @LastEditTime: 2025-02-24 00:41:23
 -->
 <template>
     <TestArea
         :class="$style['test-area']"
+        :testValue="testValue"
         :testValueList="testValueList"
         v-model:testValueSelect="testValueSelect"
         title="测试选择器"
