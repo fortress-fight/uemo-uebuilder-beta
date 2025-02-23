@@ -1,32 +1,34 @@
 <!--
  * @Description: 测试文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 21:57:19
+ * @LastEditTime: 2025-02-23 23:27:34
 -->
 <template>
-    <TestArea :class="$style['test-area']" :value="testValue" title="测试文本输入框">
+    <TestArea
+        :class="$style['test-area']"
+        :testValueList="testValueList"
+        v-model:testValueSelect="testValueSelect"
+        title="测试文本输入框"
+    >
         <UeElTextInput v-bind="testValue" @confirm="testValue.value = $event">
             <!--  -->
         </UeElTextInput>
     </TestArea>
 </template>
 <script lang="ts" setup>
-import TestArea from "./TestArea.vue";
-
-const _testProps1: UE_EL_COMPONENT.UeElTextInputProps = {
-    value: "测试文本输入框",
-    required: true,
-    label: "测试文本输入框",
-};
-const _testProps2: UE_EL_COMPONENT.UeElTextInputProps = {
-    value: "",
-    required: true,
-    type: "textarea",
-    label: "测试文本输入框",
-};
+import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
-const testValue = ref<UE_EL_COMPONENT.UeElTextInputProps>(_testProps1);
+const testValueSelect = ref<number>(0);
+const testValueList: UE_EL_COMPONENT.UeElTextInputProps[] = [
+    { value: "测试文本输入框", required: true, label: "测试文本输入框" },
+    { value: "测试文本输入框", required: true, type: "textarea", label: "测试文本输入框" },
+];
+const testValue = ref(testValueList[testValueSelect.value]);
+
+watch(testValueSelect, (newValue) => {
+    testValue.value = testValueList[newValue];
+});
 </script>
 <style lang="scss" module>
 .test-area {

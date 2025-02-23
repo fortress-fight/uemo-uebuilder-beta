@@ -4,7 +4,9 @@
         <div class="flex justify-center items-center relative z-10">
             <slot></slot>
         </div>
-        <TestDataPanel :value="value" />
+        <TestDataPanel :value="showTestValue">
+            <UeElSelect v-model:value="testValueSelect" title="测试数据" :options="testValueOptions" />
+        </TestDataPanel>
     </div>
 </template>
 <script lang="ts" setup>
@@ -14,16 +16,27 @@ import TestDataPanel from "./TestDataPanel.vue";
 type TYPE_TEST_AREA_PROPS = {
     layout?: string;
     title?: string;
-    value?: any;
+    testValueList?: any[];
 };
 
 const instance = getCurrentInstance();
 const rootDom = ref<HTMLElement>();
 const slots = useSlots();
-const _prop = withDefaults(defineProps<TYPE_TEST_AREA_PROPS>(), {
+const prop = withDefaults(defineProps<TYPE_TEST_AREA_PROPS>(), {
     title: "",
     layout: "layout1",
-    value: () => ({ value: "value" }),
+    testValueList: () => [],
+});
+
+// 测试数据
+const testValueSelect = defineModel("testValueSelect", { default: 0 });
+const showTestValue = computed<any>(() => {
+    return prop.testValueList[testValueSelect.value];
+});
+const testValueOptions = computed(() => {
+    return prop.testValueList.map((_item, index) => {
+        return { value: index, text: "选项" + (index + 1) };
+    });
 });
 
 const componentName = computed(() => {

@@ -1,7 +1,10 @@
 <template>
-    <div :class="$style['data-panel']" class="flex items-center justify-center" @click="copyData()">
+    <div :class="$style['data-panel']" class="flex items-center justify-center">
+        <div :class="$style['data-select']">
+            <slot></slot>
+        </div>
         <pre :class="$style['data']" v-html="source"></pre>
-        <button :class="$style['btn--copy']">
+        <button :class="$style['btn--copy']" @click="copyData()">
             <UeElIcon name="icon-editor-copy" />
         </button>
     </div>
@@ -33,6 +36,11 @@ function copyData() {
 
     border: 1px solid #eee;
     border-radius: 6px;
+    .data-select {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
     .data {
         padding: 60px;
     }
