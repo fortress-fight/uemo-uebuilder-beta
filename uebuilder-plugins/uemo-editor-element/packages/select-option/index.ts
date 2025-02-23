@@ -1,7 +1,7 @@
 /*
  * @Description: 选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 01:17:02
+ * @LastEditTime: 2025-02-23 23:00:08
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeElSelectOption.install = (app: App) => {
 };
 
 export interface UeElSelectOptionBaseProps {
-    value?: string;
+    value?: string | number;
     pinValue?: boolean;
     list: UE_EL_UTIL.SelectOption[];
     theme?: "light" | "dark";

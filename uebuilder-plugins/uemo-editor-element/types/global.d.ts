@@ -19,7 +19,7 @@ declare global {
             icon?: string;
             label?: string;
             text: string;
-            value: string;
+            value: string | number;
             [param: string]: any;
         };
     }

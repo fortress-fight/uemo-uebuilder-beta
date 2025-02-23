@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 17:32:35
+ * @LastEditTime: 2025-02-23 22:59:34
 -->
 <template>
     <div
@@ -51,11 +51,11 @@ import type { UeElSelectBaseProps } from "./index";
 
 interface Props extends UeElSelectBaseProps {}
 
-defineOptions({ name: "UeElSelect", inheritAttrs: false });
+defineOptions({ name: "UeElSelect" });
 
 const instance = getCurrentInstance();
 const prop = withDefaults(defineProps<Props>(), { disable: false });
-const valueModel = defineModel("value", { default: "" });
+const valueModel = defineModel<number | string>("value", { default: "" });
 const rootDom = ref<HTMLElement>();
 
 const selectValueInfo = computed(() => {
@@ -101,7 +101,7 @@ function openOptionPanel() {
     };
 }
 
-function changeValue(value: string) {
+function changeValue(value: string | number) {
     valueModel.value = value;
     isOpen.value = false;
 }

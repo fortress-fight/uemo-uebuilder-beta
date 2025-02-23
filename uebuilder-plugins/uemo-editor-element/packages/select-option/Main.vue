@@ -1,7 +1,7 @@
 <!--
  * @Description: 选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 03:15:02
+ * @LastEditTime: 2025-02-23 23:00:22
 -->
 <template>
     <div ref="rootDom" :class="$style['select-option']" :data-theme="theme">
@@ -36,7 +36,7 @@ interface Props extends UeElSelectOptionBaseProps {}
 
 defineOptions({ name: "UeElSelectOption" });
 const prop = defineProps<Props>();
-const emit = defineEmits<{ (e: "change", value: string): void }>();
+const emit = defineEmits<{ (e: "change", value: string | number): void }>();
 
 const rootDom = ref<HTMLElement>();
 const optionDoms = ref<HTMLElement[]>([]);
