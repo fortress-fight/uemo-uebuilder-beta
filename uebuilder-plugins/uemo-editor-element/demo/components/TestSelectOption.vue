@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 23:34:29
+ * @LastEditTime: 2025-02-23 23:42:56
 -->
 <template>
     <TestArea
@@ -22,6 +22,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElSelectOptionProps & { value?: string })[] = [
     {
+        value: "1",
         hideIcon: true,
         list: [
             { value: "1", text: "选项1" },
