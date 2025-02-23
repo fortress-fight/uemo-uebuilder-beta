@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 18:29:39
+ * @LastEditTime: 2025-02-24 01:46:24
 -->
 <template>
     <Teleport to="body">
@@ -14,7 +14,7 @@
             @after-leave="onAfterLeave"
         >
             <div :class="$style['pop-panel']" v-if="openModel" :style="{ zIndex: zIndex }">
-                <div :class="$style['layer-dialog-box']" v-on-click-outside="closeModal" ref="dialogBox">
+                <div :class="$style['layer-dialog-box']" v-on-click-outside="closeModal" ref="dialogBoxRef">
                     <slot></slot>
                 </div>
             </div>
@@ -46,7 +46,7 @@ const emit = defineEmits<{ (e: "onShow" | "onHide"): void }>();
 
 const cssModule = useCssModule();
 const openModel = defineModel("open");
-const dialogBoxRef = useTemplateRef<HTMLElement>("dialogBox");
+const dialogBoxRef = useTemplateRef("dialogBoxRef");
 
 const maskLayerParams = computed(() => {
     const defaultMaskParams = { color: "rgba(0,0,0,0.5)" };

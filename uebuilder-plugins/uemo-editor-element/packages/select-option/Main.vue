@@ -1,15 +1,15 @@
 <!--
  * @Description: 选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 23:00:22
+ * @LastEditTime: 2025-02-24 01:51:37
 -->
 <template>
-    <div ref="rootDom" :class="$style['select-option']" :data-theme="theme">
+    <div ref="rootDomRef" :class="$style['select-option']" :data-theme="theme">
         <div :class="$style['option-group']">
             <div class="h-full" :class="$style['scroll-box']">
                 <div
                     v-for="(item, index) in list"
-                    ref="optionDoms"
+                    ref="optionDomsRef"
                     :key="index"
                     class="flex items-center justify-between"
                     :class="$style['option-item']"
@@ -38,8 +38,8 @@ defineOptions({ name: "UeElSelectOption" });
 const prop = defineProps<Props>();
 const emit = defineEmits<{ (e: "change", value: string | number): void }>();
 
-const rootDom = ref<HTMLElement>();
-const optionDoms = ref<HTMLElement[]>([]);
+const rootDomRef = useTemplateRef("rootDomRef");
+const optionDomsRef = useTemplateRef<HTMLElement[]>("optionDomsRef");
 
 const UeElDialogCalcPosHandler = inject<((fn: DialogUpdatePosHandler) => void) | undefined>(
     "UeElDialogCalcPosHandler",
@@ -61,17 +61,17 @@ function setDialogUpdatePosHandler() {
             {
                 name: "dialogDistance",
                 fn: (param) => {
-                    if (!rootDom.value) return param;
+                    if (!rootDomRef.value) return param;
 
                     const { x, y } = param;
 
-                    const options = optionDoms.value;
-                    const activeOption = options.find((item) => item.dataset.select === "true");
-                    const targetOption = activeOption || options[0];
+                    const options = optionDomsRef.value;
+                    const activeOption = options?.find((item) => item.dataset.select === "true");
+                    const targetOption = activeOption || options?.[0];
 
                     if (!targetOption) return param;
 
-                    const rootRect = rootDom.value.getBoundingClientRect();
+                    const rootRect = rootDomRef.value.getBoundingClientRect();
                     const optionRect = targetOption.getBoundingClientRect();
                     const disY = optionRect.top - rootRect.top + optionRect.height / 2;
 

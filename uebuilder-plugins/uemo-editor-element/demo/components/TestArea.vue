@@ -21,7 +21,6 @@ type TYPE_TEST_AREA_PROPS = {
 };
 
 const instance = getCurrentInstance();
-const rootDom = ref<HTMLElement>();
 const slots = useSlots();
 const prop = withDefaults(defineProps<TYPE_TEST_AREA_PROPS>(), {
     title: "",

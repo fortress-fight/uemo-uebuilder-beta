@@ -1,11 +1,11 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 22:59:34
+ * @LastEditTime: 2025-02-24 01:46:31
 -->
 <template>
     <div
-        ref="rootDom"
+        ref="rootDomRef"
         :class="$style['select-group']"
         class="cursor-pointer inline-block"
         :data-disable="disable"
@@ -56,7 +56,7 @@ defineOptions({ name: "UeElSelect" });
 const instance = getCurrentInstance();
 const prop = withDefaults(defineProps<Props>(), { disable: false });
 const valueModel = defineModel<number | string>("value", { default: "" });
-const rootDom = ref<HTMLElement>();
+const rootDomRef = useTemplateRef("rootDomRef");
 
 const selectValueInfo = computed(() => {
     return prop.options.find((item) => item.value === (valueModel.value ?? prop.defaultValue));
@@ -70,14 +70,14 @@ const optionPanelStyle = ref<{ "--min-width": string; "--icon-size": string } | 
 const isOpen = ref<boolean>(false);
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => ({
     position: {
-        refEl: rootDom.value!,
+        refEl: rootDomRef.value!,
         options: {
             middleware: [
                 ["shift", { crossAxis: true, padding: 17, rootBoundary: "viewport" }],
                 [
                     "offset",
                     () => {
-                        const { height } = rootDom.value!.getBoundingClientRect();
+                        const { height } = rootDomRef.value!.getBoundingClientRect();
                         return -height / 2;
                     },
                 ],
@@ -94,7 +94,9 @@ function openOptionPanel() {
     }
     isOpen.value = true;
 
-    const { width } = rootDom.value!.getBoundingClientRect();
+    console.log("rootDomRef.value", rootDomRef.value);
+
+    const { width } = rootDomRef.value!.getBoundingClientRect();
     optionPanelStyle.value = {
         "--min-width": `${Math.ceil(width)}px`,
         "--icon-size": `${prop.iconSize}`,
