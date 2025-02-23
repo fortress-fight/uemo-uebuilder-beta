@@ -5,6 +5,7 @@
             <TestTextInput />
             <TestSelectOption />
             <TestSelect />
+            <TestTabCard />
         </div>
     </div>
 </template>
@@ -13,6 +14,7 @@ import TestIcon from "~/demo/components/TestIcon.vue";
 import TestTextInput from "~/demo/components/TestTextInput.vue";
 import TestSelectOption from "~/demo/components/TestSelectOption.vue";
 import TestSelect from "~/demo/components/TestSelect.vue";
+import TestTabCard from "~/demo/components/TestTabCard.vue";
 </script>
 <style lang="scss" module>
 .test-group {

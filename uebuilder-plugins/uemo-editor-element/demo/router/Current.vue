@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestCheckBox.vue";
+import TestComponent from "~/demo/components/TestTabCard.vue";
 </script>
 <style lang="scss" module>
 .test-group {
