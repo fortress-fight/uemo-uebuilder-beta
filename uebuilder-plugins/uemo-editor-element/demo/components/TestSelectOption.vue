@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 00:41:29
+ * @LastEditTime: 2025-02-24 00:51:25
 -->
 <template>
     <TestArea
@@ -11,7 +11,7 @@
         v-model:testValueSelect="testValueSelect"
         title="测试选项面板"
     >
-        <UeElSelectOption v-bind="testValue">
+        <UeElSelectOption v-bind="testValue" @change="testValue.value = $event">
             <!--  -->
         </UeElSelectOption>
     </TestArea>
@@ -21,7 +21,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElSelectOptionProps & { value?: string })[] = [
+const testValueList: (UE_EL_COMPONENT.UeElSelectOptionProps & { value?: string | number })[] = [
     {
         value: "1",
         hideIcon: true,
