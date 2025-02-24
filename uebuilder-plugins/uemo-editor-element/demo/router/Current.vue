@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestVideoPanel.vue";
+import TestComponent from "~/demo/components/TestControlGroup.vue";
 </script>
 <style lang="scss" module>
 .test-group {

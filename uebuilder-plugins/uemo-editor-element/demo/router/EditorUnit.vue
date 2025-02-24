@@ -21,12 +21,20 @@ import TestButton from "~/demo/components/TestButton.vue";
 import TestOnOff from "~/demo/components/TestOnOff.vue";
 import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
 import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
+import TestControlGroup from "~/demo/components/TestControlGroup.vue";
 
 const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
 const unitTestComponents = [TestIcon, TestOnOff];
 const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
 const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel];
-const testComponents = [...unitTestComponents, ...helperTestComponents, ...formTestComponents, ...panelTestComponents];
+const mixinTestComponents = [TestControlGroup];
+const testComponents = [
+    ...unitTestComponents,
+    ...helperTestComponents,
+    ...formTestComponents,
+    ...panelTestComponents,
+    ...mixinTestComponents,
+];
 </script>
 <style lang="scss" module>
 .page-head {

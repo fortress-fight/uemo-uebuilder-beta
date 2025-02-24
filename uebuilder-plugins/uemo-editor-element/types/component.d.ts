@@ -6,6 +6,7 @@
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
+import UeElControlGroup, { UeElControlGroupBaseProps } from "../packages/control-group";
 import UeElIcon, { UeElIconBaseProps } from "../packages/icon";
 import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
@@ -22,6 +23,7 @@ declare module "vue" {
         UeElButton: typeof UeElButton;
         UeElCheckBox: typeof UeElCheckBox;
         UeElConfirmPanel: typeof UeElConfirmPanel;
+        UeElControlGroup: typeof UeElControlGroup;
         UeElIcon: typeof UeElIcon;
         UeElLoading: typeof UeElLoading;
         UeElOnOff: typeof UeElOnOff;
@@ -40,6 +42,7 @@ declare global {
         interface UeElButtonProps extends UeElButtonBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
+        interface UeElControlGroupProps extends UeElControlGroupBaseProps {}
         interface UeElIconProps extends UeElIconBaseProps {}
         interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElOnOffProps extends UeElOnOffBaseProps {}
