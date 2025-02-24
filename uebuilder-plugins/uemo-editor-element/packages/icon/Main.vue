@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体图标
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 15:21:28
+ * @LastEditTime: 2025-02-24 18:21:49
 -->
 <template>
     <svg :class="$style['icon-box']" aria-hidden="true" :style="{ '--c-size': sizeCss }" v-bind="$attrs">
@@ -11,10 +11,8 @@
 <script lang="ts" setup>
 import type { UeElIconBaseProps } from "./index";
 
-interface Props extends UeElIconBaseProps {}
-
 defineOptions({ name: "UeElIcon" });
-const prop = defineProps<Props>();
+const prop = defineProps<UeElIconBaseProps>();
 const sizeCss = computed(() => (prop.size ? prop.size + "px" : ""));
 </script>
 <style lang="scss" module>

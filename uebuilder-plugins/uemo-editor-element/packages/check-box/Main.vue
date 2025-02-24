@@ -1,7 +1,7 @@
 <!--
  * @Description: 单选框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 00:23:48
+ * @LastEditTime: 2025-02-24 18:21:44
 -->
 <template>
     <div
@@ -22,11 +22,9 @@
 <script lang="ts" setup>
 import type { UeElCheckBoxBaseProps } from "./index";
 
-interface Props extends UeElCheckBoxBaseProps {}
-
 defineOptions({ name: "UeElCheckBox" });
 
-const prop = defineProps<Props>();
+const prop = defineProps<UeElCheckBoxBaseProps>();
 const valueRef = defineModel("value", { type: Boolean });
 
 const trigger = () => {

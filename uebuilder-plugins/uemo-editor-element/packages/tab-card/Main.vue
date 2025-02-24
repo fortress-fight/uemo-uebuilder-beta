@@ -1,7 +1,7 @@
 <!--
  * @Description: Tab 卡片
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 02:00:59
+ * @LastEditTime: 2025-02-24 18:22:25
 -->
 <template>
     <div
@@ -53,7 +53,6 @@ import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 
 const mittManage = mitt<{ resize: undefined }>();
-interface Props extends UeElTabCardBaseProps {}
 
 defineOptions({ name: "UeElTabCard" });
 
@@ -63,7 +62,7 @@ const navItemsRef = useTemplateRef<HTMLElement[]>("navItemsRef");
 const cardListRef = useTemplateRef("cardListRef");
 const cardItemsRef = useTemplateRef<HTMLElement[]>("cardItemsRef");
 
-const prop = withDefaults(defineProps<Props>(), { theme: "theme-1" });
+const prop = withDefaults(defineProps<UeElTabCardBaseProps>(), { theme: "theme-1" });
 const emit = defineEmits<{
     (ev: "changeStart" | "changeEnd", card: string): void;
     (ev: "changing"): void;

@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:33:34
+ * @LastEditTime: 2025-02-24 18:21:54
 -->
 <template>
     <div :class="$style['loading']">
@@ -19,13 +19,11 @@
 import type { UeElLoadingBaseProps } from "./index";
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 
-interface Props extends UeElLoadingBaseProps {}
-
 defineOptions({ name: "UeElLoading" });
 
 const i18n = useI18n();
 
-const prop = withDefaults(defineProps<Props>(), {
+const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
     fake: true,
     message: "",
     progress: "0",

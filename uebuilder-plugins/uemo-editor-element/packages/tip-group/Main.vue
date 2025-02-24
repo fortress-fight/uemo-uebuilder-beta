@@ -1,7 +1,7 @@
 <!--
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:58:27
+ * @LastEditTime: 2025-02-24 18:22:35
 -->
 <template>
     <div :class="$style['editor-tip-group']" :data-type="type" class="flex">
@@ -13,10 +13,8 @@
 <script lang="ts" setup>
 import type { UeElTipGroupBaseProps } from "./index";
 
-interface Props extends UeElTipGroupBaseProps {}
-
 defineOptions({ name: "UeElTipGroup" });
-withDefaults(defineProps<Props>(), { type: "normal" });
+withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
 </script>
 <style lang="scss" module>
 .editor-tip-group {

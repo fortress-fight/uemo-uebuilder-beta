@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:37:09
+ * @LastEditTime: 2025-02-24 18:22:10
 -->
 <template>
     <div
@@ -49,12 +49,10 @@
 <script lang="ts" setup>
 import type { UeElSelectBaseProps } from "./index";
 
-interface Props extends UeElSelectBaseProps {}
-
 defineOptions({ name: "UeElSelect" });
 
 const instance = getCurrentInstance();
-const props = withDefaults(defineProps<Props>(), { disable: false });
+const props = withDefaults(defineProps<UeElSelectBaseProps>(), { disable: false });
 const valueModel = defineModel<number | string>("value", { default: "" });
 const rootDomRef = useTemplateRef("rootDomRef");
 const isOpen = ref<boolean>(false);

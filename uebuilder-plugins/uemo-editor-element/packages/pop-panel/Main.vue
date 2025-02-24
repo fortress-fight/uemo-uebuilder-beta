@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 01:46:24
+ * @LastEditTime: 2025-02-24 18:22:04
 -->
 <template>
     <Teleport to="body">
@@ -32,12 +32,10 @@ import { computeFloatingPosition, autoUpdate } from "@stone/uemo-editor-utils/li
 
 import { defaultCalcPosParam } from "./index";
 
-interface Props extends UeElPopPanelBaseProps {}
-
 defineOptions({ name: "UeElPopPanel" });
 const mittManage = mitt<{ clearUploadControl: undefined }>();
 
-const prop = withDefaults(defineProps<Props>(), {
+const prop = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
     immediate: true,
     autoClose: true,
     panel: () => ({ position: "center" }),

@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 17:45:49
+ * @LastEditTime: 2025-02-24 18:21:37
 -->
 <template>
     <button
@@ -58,12 +58,10 @@
 <script lang="ts" setup>
 import type { UeElButtonBaseProps } from "./index";
 
-interface Props extends UeElButtonBaseProps {}
-
 defineOptions({ name: "UeElButton" });
 
 const instance = getCurrentInstance();
-const props = withDefaults(defineProps<Props>(), { size: "small" });
+const props = withDefaults(defineProps<UeElButtonBaseProps>(), { size: "small" });
 const emit = defineEmits<{ (e: "trigger", ev: MouseEvent): void }>();
 
 const labelParam = computed<UE_EL_UTIL.LabelOption>(() => {
