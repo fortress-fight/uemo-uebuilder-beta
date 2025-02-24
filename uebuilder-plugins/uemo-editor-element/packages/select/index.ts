@@ -1,7 +1,7 @@
 /*
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:18:26
+ * @LastEditTime: 2025-02-25 02:49:41
  */
 import type { App } from "vue";
 
@@ -11,6 +11,8 @@ UeElSelect.install = (app: App) => {
     if (!UeElSelect.name) return;
     app.component(UeElSelect.name, UeElSelect);
 };
+
+export type SelectValue = UE_EL_UTIL.SelectValue;
 
 export type UeElSelectBaseProps = {
     options: UE_EL_UTIL.SelectOption[];

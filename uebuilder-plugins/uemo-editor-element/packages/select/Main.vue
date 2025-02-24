@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:22:10
+ * @LastEditTime: 2025-02-25 02:49:59
 -->
 <template>
     <div
@@ -47,13 +47,13 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UeElSelectBaseProps } from "./index";
+import type { UeElSelectBaseProps, SelectValue } from "./index";
 
 defineOptions({ name: "UeElSelect" });
 
 const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UeElSelectBaseProps>(), { disable: false });
-const valueModel = defineModel<number | string>("value", { default: "" });
+const valueModel = defineModel<SelectValue>("value", { default: "" });
 const rootDomRef = useTemplateRef("rootDomRef");
 const isOpen = ref<boolean>(false);
 const optionPanelStyle = ref<{ "--min-width": string; "--icon-size": string } | null>(null);

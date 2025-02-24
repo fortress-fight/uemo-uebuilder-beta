@@ -24,6 +24,11 @@ declare global {
         };
 
         /**
+         * @description 选择器参数
+         */
+        type SelectValue = number | string | undefined;
+
+        /**
          * @description 开关参数
          */
         type OnOffValue = boolean | string | number;
