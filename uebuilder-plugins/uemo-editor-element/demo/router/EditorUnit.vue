@@ -7,6 +7,8 @@
             <TestSelect />
             <TestTabCard />
             <TestLoading />
+            <TestTipGroup />
+            <TestCheckBox />
         </div>
     </div>
 </template>
@@ -17,6 +19,8 @@ import TestSelectOption from "~/demo/components/TestSelectOption.vue";
 import TestSelect from "~/demo/components/TestSelect.vue";
 import TestTabCard from "~/demo/components/TestTabCard.vue";
 import TestLoading from "~/demo/components/TestLoading.vue";
+import TestTipGroup from "~/demo/components/TestTipGroup.vue";
+import TestCheckBox from "~/demo/components/TestCheckBox.vue";
 </script>
 <style lang="scss" module>
 .test-group {
