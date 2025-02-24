@@ -1,16 +1,10 @@
 <template>
     <div :class="$style['editor-page']">
+        <h1 :class="$style['page-head']">共有 {{ testComponents.length }} 个组件</h1>
         <div :class="$style['test-group']" class="grid grid-cols-2">
-            <TestIcon />
-            <TestTextInput />
-            <TestSelectOption />
-            <TestSelect />
-            <TestTabCard />
-            <TestLoading />
-            <TestTipGroup />
-            <TestCheckBox />
-            <TestButton />
-            <TestOnOff />
+            <template v-for="(component, index) in testComponents" :key="index">
+                <component :is="component"></component>
+            </template>
         </div>
     </div>
 </template>
@@ -25,8 +19,23 @@ import TestTipGroup from "~/demo/components/TestTipGroup.vue";
 import TestCheckBox from "~/demo/components/TestCheckBox.vue";
 import TestButton from "~/demo/components/TestButton.vue";
 import TestOnOff from "~/demo/components/TestOnOff.vue";
+
+const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
+const unitTestComponents = [TestIcon, TestOnOff];
+const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
+const panelTestComponents = [TestTabCard];
+const testComponents = [...unitTestComponents, ...helperTestComponents, ...formTestComponents, ...panelTestComponents];
 </script>
 <style lang="scss" module>
+.page-head {
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 40px;
+    padding: 50px 0;
+
+    text-align: center;
+}
 .test-group {
     width: 100%;
     padding: 20px;
