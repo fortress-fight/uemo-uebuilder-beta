@@ -1,13 +1,14 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/2/24 17:50:42
+ * @LastEditTime: 2025/2/25 00:15:07
  */
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
+import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElIcon from "../packages/icon";
-import UeElOnOff from "../packages/on-off";
 import UeElLoading from "../packages/loading";
+import UeElOnOff from "../packages/on-off";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
@@ -18,9 +19,10 @@ import UeElTipGroup from "../packages/tip-group";
 export const components = [
     UeElButton,
     UeElCheckBox,
+    UeElConfirmPanel,
     UeElIcon,
-    UeElOnOff,
     UeElLoading,
+    UeElOnOff,
     UeElPopPanel,
     UeElSelect,
     UeElSelectOption,

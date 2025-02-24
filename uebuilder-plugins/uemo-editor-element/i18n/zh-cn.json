@@ -1,5 +1,7 @@
 {
     "INPUT_TIP_NOT_EMPTY": "输入不能为空",
     "INPUT_TIP_FORMAT_ERROR": "输入格式错误",
-    "LOADING_TIP": "加载中..."
+    "LOADING_TIP": "加载中...",
+    "CONFIRM": "确认",
+    "CANCEL": "取消"
 }
