@@ -1,7 +1,7 @@
 /*
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 03:13:46
+ * @LastEditTime: 2025-02-24 16:18:26
  */
 import type { App } from "vue";
 
@@ -12,7 +12,7 @@ UeElSelect.install = (app: App) => {
     app.component(UeElSelect.name, UeElSelect);
 };
 
-export interface UeElSelectBaseProps {
+export type UeElSelectBaseProps = {
     options: UE_EL_UTIL.SelectOption[];
     theme?: "showBorder" | "default";
     defaultValue?: string;
@@ -24,7 +24,7 @@ export interface UeElSelectBaseProps {
     showValueIcon?: boolean;
     placeholder?: string;
     emptyText?: string;
-}
+};
 export type UeElSelectInstance = InstanceType<typeof UeElSelect>;
 
 export default UeElSelect;

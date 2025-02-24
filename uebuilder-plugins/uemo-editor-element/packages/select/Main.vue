@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 01:46:31
+ * @LastEditTime: 2025-02-24 16:37:09
 -->
 <template>
     <div
@@ -54,20 +54,24 @@ interface Props extends UeElSelectBaseProps {}
 defineOptions({ name: "UeElSelect" });
 
 const instance = getCurrentInstance();
-const prop = withDefaults(defineProps<Props>(), { disable: false });
+const props = withDefaults(defineProps<Props>(), { disable: false });
 const valueModel = defineModel<number | string>("value", { default: "" });
 const rootDomRef = useTemplateRef("rootDomRef");
-
-const selectValueInfo = computed(() => {
-    return prop.options.find((item) => item.value === (valueModel.value ?? prop.defaultValue));
-});
-
+const isOpen = ref<boolean>(false);
 const optionPanelStyle = ref<{ "--min-width": string; "--icon-size": string } | null>(null);
 
 /**
- * @description: 打开选项面板
+ * 计算当前选中项的信息
+ * @returns {object|undefined} 当前选中项信息
  */
-const isOpen = ref<boolean>(false);
+const selectValueInfo = computed(() =>
+    props.options.find((item) => item.value === (valueModel.value ?? props.defaultValue))
+);
+
+/**
+ * 计算弹出面板的参数
+ * @returns {UE_EL_COMPONENT.UeElPopPanelProps["panel"]} 弹出面板参数
+ */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => ({
     position: {
         refEl: rootDomRef.value!,
@@ -86,23 +90,30 @@ const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() =
     },
 }));
 
+/**
+ * 打开选项面板，并设置面板样式
+ * @returns {void}
+ */
 function openOptionPanel() {
     if (!instance) return;
-    if (prop.options.length === 0) {
-        instance.proxy?.$ueElToast.error(prop.emptyText || "暂无可选项");
+    if (props.options.length === 0) {
+        instance.proxy?.$ueElToast.error(props.emptyText || "暂无可选项");
         return;
     }
-    isOpen.value = true;
-
-    console.log("rootDomRef.value", rootDomRef.value);
-
+    // 获取 DOM 边界信息，避免重复调用
     const { width } = rootDomRef.value!.getBoundingClientRect();
     optionPanelStyle.value = {
         "--min-width": `${Math.ceil(width)}px`,
-        "--icon-size": `${prop.iconSize}`,
+        "--icon-size": `${props.iconSize}`,
     };
+    isOpen.value = true;
 }
 
+/**
+ * 更新选中值，并关闭选项面板
+ * @param {number|string} value 新的选中值
+ * @returns {void}
+ */
 function changeValue(value: string | number) {
     valueModel.value = value;
     isOpen.value = false;
