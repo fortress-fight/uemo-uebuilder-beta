@@ -31,8 +31,8 @@ const prop = withDefaults(defineProps<TYPE_TEST_AREA_PROPS>(), {
 // 测试数据
 const testValueSelect = defineModel("testValueSelect", { default: 0 });
 const testValueOptions = computed(() => {
-    return prop.testValueList.map((_item, index) => {
-        return { value: index, text: "选项" + (index + 1) };
+    return prop.testValueList.map((item, index) => {
+        return { value: index, text: item.testOptionTitle || "选项" + (index + 1) };
     });
 });
 
