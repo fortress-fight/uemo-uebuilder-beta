@@ -1,4 +1,5 @@
 {
     "INPUT_TIP_NOT_EMPTY": "Input is required",
-    "INPUT_TIP_FORMAT_ERROR": "Invalid Input Format"
+    "INPUT_TIP_FORMAT_ERROR": "Invalid Input Format",
+    "LOADING_TIP": "Loading..."
 }

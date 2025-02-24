@@ -5,6 +5,7 @@
  */
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElIcon, { UeElIconBaseProps } from "../packages/icon";
+import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
@@ -15,6 +16,7 @@ declare module "vue" {
     export interface GlobalComponents {
         UeElCheckBox: typeof UeElCheckBox;
         UeElIcon: typeof UeElIcon;
+        UeElLoading: typeof UeElLoading;
         UeElPopPanel: typeof UeElPopPanel;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
@@ -27,6 +29,7 @@ declare global {
     namespace UE_EL_COMPONENT {
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElIconProps extends UeElIconBaseProps {}
+        interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
