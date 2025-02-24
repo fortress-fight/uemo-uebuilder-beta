@@ -15,6 +15,7 @@ import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-
 import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
 import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
+import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel";
 
 declare module "vue" {
     export interface GlobalComponents {
@@ -30,6 +31,7 @@ declare module "vue" {
         UeElTabCard: typeof UeElTabCard;
         UeElTextInput: typeof UeElTextInput;
         UeElTipGroup: typeof UeElTipGroup;
+        UeElVideoPanel: typeof UeElVideoPanel;
     }
 }
 
@@ -47,6 +49,7 @@ declare global {
         interface UeElTabCardProps extends UeElTabCardBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
         interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
+        interface UeElVideoPanelProps extends UeElVideoPanelBaseProps {}
     }
 }
 

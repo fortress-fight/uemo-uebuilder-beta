@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/2/25 00:15:07
+ * @LastEditTime: 2025/2/25 01:51:17
  */
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
@@ -15,6 +15,7 @@ import UeElSelectOption from "../packages/select-option";
 import UeElTabCard from "../packages/tab-card";
 import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
+import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
     UeElButton,
@@ -29,4 +30,5 @@ export const components = [
     UeElTabCard,
     UeElTextInput,
     UeElTipGroup,
+    UeElVideoPanel,
 ];

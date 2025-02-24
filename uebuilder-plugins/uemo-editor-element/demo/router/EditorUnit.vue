@@ -19,11 +19,13 @@ import TestTipGroup from "~/demo/components/TestTipGroup.vue";
 import TestCheckBox from "~/demo/components/TestCheckBox.vue";
 import TestButton from "~/demo/components/TestButton.vue";
 import TestOnOff from "~/demo/components/TestOnOff.vue";
+import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
+import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 
 const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
 const unitTestComponents = [TestIcon, TestOnOff];
 const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
-const panelTestComponents = [TestTabCard];
+const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel];
 const testComponents = [...unitTestComponents, ...helperTestComponents, ...formTestComponents, ...panelTestComponents];
 </script>
 <style lang="scss" module>
