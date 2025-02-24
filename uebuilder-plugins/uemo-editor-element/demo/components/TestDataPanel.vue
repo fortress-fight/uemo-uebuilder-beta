@@ -3,7 +3,7 @@
         <div :class="$style['data-select']">
             <slot></slot>
         </div>
-        <pre :class="$style['data']" v-html="source"></pre>
+        <pre :class="$style['data']" v-html="escapeHtml(source)"></pre>
         <button :class="$style['btn--copy']" @click="copyData()">
             <UeElIcon name="icon-editor-copy" />
         </button>
@@ -14,6 +14,15 @@ import copy from "@stone/uemo-editor-utils/lib/copy";
 
 const instance = getCurrentInstance();
 const prop = defineProps<{ value: any }>();
+
+function escapeHtml(html: string): string {
+    return html
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 const source = computed(() => {
     return JSON.stringify(prop.value, null, 4);
