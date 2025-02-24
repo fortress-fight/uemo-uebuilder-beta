@@ -1,7 +1,7 @@
 <!--
  * @Description: 开关
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:28:45
+ * @LastEditTime: 2025-02-25 02:20:55
 -->
 <template>
     <UeElButton
@@ -22,7 +22,6 @@ import type { UeElOnOffBaseProps, OnOffValue } from "./index";
 defineOptions({ name: "UeElOnOff" });
 
 const props = withDefaults(defineProps<UeElOnOffBaseProps>(), {
-    value: false,
     icon: "icon-app-lock",
     activeIcon: "icon-app-unlock",
     reverse: false,
@@ -31,7 +30,7 @@ const props = withDefaults(defineProps<UeElOnOffBaseProps>(), {
     inactiveValue: false,
 });
 
-const valueRef = defineModel<OnOffValue>("value", { required: true });
+const valueRef = defineModel<OnOffValue>("value", { default: false, required: true });
 
 // computed: 判断当前值是否为激活状态
 const isOn = computed(() => valueRef.value === props.activeValue);

@@ -22,6 +22,11 @@ declare global {
             value: string | number;
             [param: string]: any;
         };
+
+        /**
+         * @description 开关参数
+         */
+        type OnOffValue = boolean | string | number;
     }
 }
 
