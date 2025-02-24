@@ -1,11 +1,12 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/2/24 17:17:33
+ * @LastEditTime: 2025/2/24 17:50:42
  */
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
 import UeElIcon from "../packages/icon";
+import UeElOnOff from "../packages/on-off";
 import UeElLoading from "../packages/loading";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElSelect from "../packages/select";
@@ -18,6 +19,7 @@ export const components = [
     UeElButton,
     UeElCheckBox,
     UeElIcon,
+    UeElOnOff,
     UeElLoading,
     UeElPopPanel,
     UeElSelect,
