@@ -32,6 +32,13 @@ declare global {
          * @description 开关参数
          */
         type OnOffValue = boolean | string | number;
+
+        /**
+         * @description 对齐参数
+         */
+        type ALIGN_X = `${"left" | "center" | "right"}`;
+        type ALIGN_Y = `${"top" | "center" | "bottom"}`;
+        type ALIGN = `${ALIGN_X} ${ALIGN_Y}` | ALIGN_X | ALIGN_Y;
     }
 }
 

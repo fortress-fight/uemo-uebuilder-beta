@@ -1,8 +1,9 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/2/25 02:14:50
+ * @LastEditTime: 2025/2/27 03:34:50
  */
+import UeElAlignSetting from "../packages/align-setting";
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
 import UeElConfirmPanel from "../packages/confirm-panel";
@@ -19,6 +20,7 @@ import UeElTipGroup from "../packages/tip-group";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
+    UeElAlignSetting,
     UeElButton,
     UeElCheckBox,
     UeElConfirmPanel,

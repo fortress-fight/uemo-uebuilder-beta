@@ -3,6 +3,7 @@
  * @Author: F-Stone
  * @LastEditTime: 2025-02-20 15:32:50
  */
+import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
@@ -20,6 +21,7 @@ import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel
 
 declare module "vue" {
     export interface GlobalComponents {
+        UeElAlignSetting: typeof UeElAlignSetting;
         UeElButton: typeof UeElButton;
         UeElCheckBox: typeof UeElCheckBox;
         UeElConfirmPanel: typeof UeElConfirmPanel;
@@ -39,6 +41,7 @@ declare module "vue" {
 
 declare global {
     namespace UE_EL_COMPONENT {
+        interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
