@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestAlignSetting.vue";
+import TestComponent from "~/demo/components/TestTagInput.vue";
 </script>
 <style lang="scss" module>
 .test-group {
