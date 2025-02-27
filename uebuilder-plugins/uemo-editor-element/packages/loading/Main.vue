@@ -1,13 +1,13 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:21:54
+ * @LastEditTime: 2025-02-27 11:26:20
 -->
 <template>
     <div :class="$style['loading']">
         <div :class="$style['loading-box']">
             <span v-if="message !== false" :class="$style['loading-message']">
-                {{ message || i18n.t("LOADING_TIP") }}
+                {{ message || t("LOADING_TIP") }}
             </span>
             <div :class="$style['loading-inner']">
                 <div ref="progressInner" :style="{ width: progress + '%' }" :class="$style['bar']"></div>
@@ -21,7 +21,7 @@ import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 
 defineOptions({ name: "UeElLoading" });
 
-const i18n = useI18n();
+const { t } = useI18n();
 
 const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
     fake: true,

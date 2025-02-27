@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:22:30
+ * @LastEditTime: 2025-02-27 11:26:44
 -->
 <template>
     <div
@@ -51,7 +51,7 @@ const emit = defineEmits<{
     confirm: [value: string];
 }>();
 
-const i18n = useI18n();
+const { t } = useI18n();
 const slots: any = useSlots();
 const hasSlotComponent = computed<boolean>(() => {
     return !!(slots.before || slots.after);
@@ -130,7 +130,7 @@ function confirm() {
 
     // 必填校验
     if (prop.required && !processedValue) {
-        instance?.proxy?.$ueElToast.error(i18n.t("INPUT_TIP_NOT_EMPTY"));
+        instance?.proxy?.$ueElToast.error(t("INPUT_TIP_NOT_EMPTY"));
         isValid.value = false;
         return;
     }
@@ -145,7 +145,7 @@ function confirm() {
         if (typeof rule === "function") {
             const result = rule(processedValue);
             if (typeof result === "string") {
-                instance?.proxy?.$ueElToast.error(i18n.t("INPUT_TIP_FORMAT_ERROR"));
+                instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
                 isValid.value = false;
                 return;
             }
@@ -154,7 +154,7 @@ function confirm() {
                 return;
             }
         } else if (rule.pattern && !rule.pattern.test(processedValue)) {
-            instance?.proxy?.$ueElToast.error(i18n.t("INPUT_TIP_FORMAT_ERROR"));
+            instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
             isValid.value = false;
             return;
         }
