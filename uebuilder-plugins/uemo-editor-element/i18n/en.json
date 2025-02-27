@@ -3,5 +3,6 @@
     "INPUT_TIP_FORMAT_ERROR": "Invalid Input Format",
     "LOADING_TIP": "Loading...",
     "CANCEL": "Cancel",
-    "CONFIRM": "confirm"
+    "CONFIRM": "Confirm",
+    "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added"
 }
