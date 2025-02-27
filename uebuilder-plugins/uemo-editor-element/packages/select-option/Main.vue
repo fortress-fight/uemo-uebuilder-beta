@@ -1,7 +1,7 @@
 <!--
  * @Description: 选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:22:16
+ * @LastEditTime: 2025-02-27 11:20:48
 -->
 <template>
     <div ref="rootDomRef" :class="$style['select-option']" :data-theme="theme">
@@ -37,7 +37,7 @@ const prop = defineProps<UeElSelectOptionBaseProps>();
 const emit = defineEmits<{ (e: "change", value: string | number): void }>();
 
 const rootDomRef = useTemplateRef("rootDomRef");
-const optionDomsRef = useTemplateRef<HTMLElement[]>("optionDomsRef");
+const optionDomsRef = useTemplateRef("optionDomsRef");
 
 const UeElDialogCalcPosHandler = inject<((fn: DialogUpdatePosHandler) => void) | undefined>(
     "UeElDialogCalcPosHandler",

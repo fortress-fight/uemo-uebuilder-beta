@@ -1,7 +1,7 @@
 <!--
  * @Description: Tab 卡片
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:22:25
+ * @LastEditTime: 2025-02-27 11:21:28
 -->
 <template>
     <div
@@ -58,9 +58,9 @@ defineOptions({ name: "UeElTabCard" });
 
 const rootDomRef = useTemplateRef("rootDomRef");
 const barInnerRef = useTemplateRef("barInnerRef");
-const navItemsRef = useTemplateRef<HTMLElement[]>("navItemsRef");
+const navItemsRef = useTemplateRef("navItemsRef");
 const cardListRef = useTemplateRef("cardListRef");
-const cardItemsRef = useTemplateRef<HTMLElement[]>("cardItemsRef");
+const cardItemsRef = useTemplateRef("cardItemsRef");
 
 const prop = withDefaults(defineProps<UeElTabCardBaseProps>(), { theme: "theme-1" });
 const emit = defineEmits<{
