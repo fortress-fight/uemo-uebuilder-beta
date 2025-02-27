@@ -3,14 +3,15 @@
  * @Author: F-Stone
  * @LastEditTime: 2025-02-20 15:32:50
  */
-import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
+import UeElContextmenu, { UeElContextmenuBaseProps } from "../packages/contextmenu";
 import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
 import UeElControlGroup, { UeElControlGroupBaseProps } from "../packages/control-group";
+import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
 import UeElIcon, { UeElIconBaseProps } from "../packages/icon";
-import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
+import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
@@ -22,14 +23,15 @@ import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel
 
 declare module "vue" {
     export interface GlobalComponents {
-        UeElAlignSetting: typeof UeElAlignSetting;
         UeElButton: typeof UeElButton;
         UeElCheckBox: typeof UeElCheckBox;
+        UeElContextmenu: typeof UeElContextmenu;
         UeElConfirmPanel: typeof UeElConfirmPanel;
         UeElControlGroup: typeof UeElControlGroup;
+        UeElAlignSetting: typeof UeElAlignSetting;
         UeElIcon: typeof UeElIcon;
-        UeElLoading: typeof UeElLoading;
         UeElOnOff: typeof UeElOnOff;
+        UeElLoading: typeof UeElLoading;
         UeElPopPanel: typeof UeElPopPanel;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
@@ -43,14 +45,15 @@ declare module "vue" {
 
 declare global {
     namespace UE_EL_COMPONENT {
-        interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
+        interface UeElContextmenuProps extends UeElContextmenuBaseProps {}
         interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
         interface UeElControlGroupProps extends UeElControlGroupBaseProps {}
+        interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
         interface UeElIconProps extends UeElIconBaseProps {}
-        interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElOnOffProps extends UeElOnOffBaseProps {}
+        interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}

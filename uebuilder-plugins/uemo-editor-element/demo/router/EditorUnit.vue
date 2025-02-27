@@ -24,11 +24,12 @@ import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 import TestControlGroup from "~/demo/components/TestControlGroup.vue";
 import TestAlignSetting from "~/demo/components/TestAlignSetting.vue";
 import TestTagInput from "~/demo/components/TestTagInput.vue";
+import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 
 const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
 const unitTestComponents = [TestIcon, TestOnOff];
 const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
-const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel];
+const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel, TestContextmenu];
 const mixinTestComponents = [TestControlGroup, TestAlignSetting, TestTagInput];
 const testComponents = [
     ...unitTestComponents,

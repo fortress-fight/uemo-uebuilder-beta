@@ -51,6 +51,9 @@ function copyData() {
         left: 10px;
     }
     .data {
+        overflow-y: auto;
+
+        max-height: 600px;
         padding: 60px;
     }
     .btn--copy {

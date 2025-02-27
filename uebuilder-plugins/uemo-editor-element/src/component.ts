@@ -1,16 +1,17 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/2/27 11:11:29
+ * @LastEditTime: 2025-02-27 11:58:27
  */
-import UeElAlignSetting from "../packages/align-setting";
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
+import UeElContextmenu from "../packages/contextmenu";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElControlGroup from "../packages/control-group";
+import UeElAlignSetting from "../packages/align-setting";
 import UeElIcon from "../packages/icon";
-import UeElLoading from "../packages/loading";
 import UeElOnOff from "../packages/on-off";
+import UeElLoading from "../packages/loading";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
@@ -21,14 +22,15 @@ import UeElTipGroup from "../packages/tip-group";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
-    UeElAlignSetting,
     UeElButton,
     UeElCheckBox,
+    UeElContextmenu,
     UeElConfirmPanel,
     UeElControlGroup,
+    UeElAlignSetting,
     UeElIcon,
-    UeElLoading,
     UeElOnOff,
+    UeElLoading,
     UeElPopPanel,
     UeElSelect,
     UeElSelectOption,
