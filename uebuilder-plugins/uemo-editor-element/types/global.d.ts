@@ -39,6 +39,14 @@ declare global {
         type ALIGN_X = `${"left" | "center" | "right"}`;
         type ALIGN_Y = `${"top" | "center" | "bottom"}`;
         type ALIGN = `${ALIGN_X} ${ALIGN_Y}` | ALIGN_X | ALIGN_Y;
+
+        /**
+         * @description 拖拽指令参数
+         */
+        type DraggerDirectiveParam = {
+            onStart?: () => void;
+            onChange: (moveX: number) => void;
+        };
     }
 }
 
