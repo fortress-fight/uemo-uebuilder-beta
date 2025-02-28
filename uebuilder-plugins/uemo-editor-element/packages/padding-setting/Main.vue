@@ -1,59 +1,57 @@
 <!--
  * @Description: 内间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:13:18
+ * @LastEditTime: 2025-03-01 04:38:19
 -->
 <template>
     <div :class="$style['padding-setting']" :data-disable="disable">
-        <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType">
-            <div :class="$style['setting-group']" class="grid" :data-col-2="!isMix || type === 'xy'">
-                <template v-if="isMix">
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="tb"
-                        :title="{ icon: { name: 'icon-shangxiajianju' } }"
-                        :label="i18n.t('PADDING_SETTING_TB')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="lr"
-                        :title="{ icon: { name: 'icon-zuoyoujianju' } }"
-                        :label="i18n.t('PADDING_SETTING_LR')"
-                    />
-                </template>
-                <template v-else>
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="t"
-                        :title="{ icon: { name: 'icon-shangjianju' } }"
-                        :label="i18n.t('PADDING_SETTING_T')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="l"
-                        :title="{ icon: { name: 'icon-zuojianju' } }"
-                        :label="i18n.t('PADDING_SETTING_L')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="b"
-                        :title="{ icon: { name: 'icon-xiajianju' } }"
-                        :label="i18n.t('PADDING_SETTING_B')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="r"
-                        :title="{ icon: { name: 'icon-youjianju' } }"
-                        :label="i18n.t('PADDING_SETTING_R')"
-                    />
-                </template>
-            </div>
+        <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType" :col-count="!isMix || type === 'xy' ? 2 : 1">
+            <template v-if="isMix">
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="tb"
+                    :title="{ icon: { name: 'icon-shangxiajianju' } }"
+                    :label="i18n.t('PADDING_SETTING_TB')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="lr"
+                    :title="{ icon: { name: 'icon-zuoyoujianju' } }"
+                    :label="i18n.t('PADDING_SETTING_LR')"
+                />
+            </template>
+            <template v-else>
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="t"
+                    :title="{ icon: { name: 'icon-shangjianju' } }"
+                    :label="i18n.t('PADDING_SETTING_T')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="l"
+                    :title="{ icon: { name: 'icon-zuojianju' } }"
+                    :label="i18n.t('PADDING_SETTING_L')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="b"
+                    :title="{ icon: { name: 'icon-xiajianju' } }"
+                    :label="i18n.t('PADDING_SETTING_B')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="r"
+                    :title="{ icon: { name: 'icon-youjianju' } }"
+                    :label="i18n.t('PADDING_SETTING_R')"
+                />
+            </template>
         </UeElControlGroup>
     </div>
 </template>
@@ -183,6 +181,7 @@ function toggleMixType(value: any) {
 function changePadding(value: string[]) {
     if (prop.disable) return;
 
+    // 四角相等
     const result = value.map((item) => (item === "0px" ? "0" : item));
     if (result[0] === result[1] && result[1] === result[2] && result[2] === result[3]) {
         valueRef.value = result[0];
@@ -221,13 +220,6 @@ onBeforeMount(() => {
         pointer-events: none;
 
         opacity: 0.5;
-    }
-}
-.setting-group {
-    gap: var(--ue-editor-row-space--lv1);
-    grid-template-columns: minmax(0, 1fr);
-    &[data-col-2="true"] {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 </style>

@@ -1,59 +1,57 @@
 <!--
  * @Description: 外间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:12:07
+ * @LastEditTime: 2025-03-01 04:39:08
 -->
 <template>
     <div :class="$style['margin-setting']" :data-disable="disable">
-        <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType">
-            <div :class="$style['setting-group']" class="grid" :data-col-2="!isMix || type === 'xy'">
-                <template v-if="isMix">
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="tb"
-                        :title="{ icon: { name: 'icon-shangxianbianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_TB')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="lr"
-                        :title="{ icon: { name: 'icon-zuoyoubianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_LR')"
-                    />
-                </template>
-                <template v-else>
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="tb"
-                        :title="{ icon: { name: 'icon-shangbianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_T')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="lr"
-                        :title="{ icon: { name: 'icon-zuobianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_L')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'y' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="b"
-                        :title="{ icon: { name: 'icon-xiabianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_B')"
-                    />
-                    <UeElNumberInput
-                        v-if="type == 'x' || type == 'xy'"
-                        v-bind="inputParam"
-                        v-model:value="r"
-                        :title="{ icon: { name: 'icon-youbianju' } }"
-                        :label="i18n.t('MARGIN_SETTING_R')"
-                    />
-                </template>
-            </div>
+        <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType" :col-count="!isMix || type === 'xy' ? 2 : 1">
+            <template v-if="isMix">
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="tb"
+                    :title="{ icon: { name: 'icon-shangxianbianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_TB')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="lr"
+                    :title="{ icon: { name: 'icon-zuoyoubianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_LR')"
+                />
+            </template>
+            <template v-else>
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="tb"
+                    :title="{ icon: { name: 'icon-shangbianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_T')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="lr"
+                    :title="{ icon: { name: 'icon-zuobianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_L')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'y' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="b"
+                    :title="{ icon: { name: 'icon-xiabianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_B')"
+                />
+                <UeElNumberInput
+                    v-if="type == 'x' || type == 'xy'"
+                    v-bind="inputParam"
+                    v-model:value="r"
+                    :title="{ icon: { name: 'icon-youbianju' } }"
+                    :label="i18n.t('MARGIN_SETTING_R')"
+                />
+            </template>
         </UeElControlGroup>
     </div>
 </template>
@@ -228,15 +226,6 @@ onBeforeMount(() => {
         pointer-events: none;
 
         opacity: 0.5;
-    }
-}
-.setting-group {
-    display: grid;
-
-    gap: var(--ue-editor-row-space--lv1);
-    grid-template-columns: minmax(0, 1fr);
-    &[data-col-2="true"] {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 </style>
