@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestGapSetting.vue";
+import TestComponent from "~/demo/components/TestMarginSetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {

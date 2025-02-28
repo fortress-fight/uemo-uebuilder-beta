@@ -1,20 +1,21 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/1 02:24:34
+ * @LastEditTime: 2025/3/1 03:03:11
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
-import UeElContextmenu from "../packages/contextmenu";
 import UeElConfirmPanel from "../packages/confirm-panel";
+import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
 import UeElGapSetting from "../packages/gap-setting";
 import UeElIcon from "../packages/icon";
 import UeElLoading from "../packages/loading";
-import UeElNumberInput from "../packages/number-input";
+import UeElMarginSetting from "../packages/margin-setting";
 import UeElOnOff from "../packages/on-off";
+import UeElNumberInput from "../packages/number-input";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
@@ -29,14 +30,15 @@ export const components = [
     UeElAlignSetting,
     UeElButton,
     UeElCheckBox,
-    UeElContextmenu,
     UeElConfirmPanel,
+    UeElContextmenu,
     UeElControlGroup,
     UeElGapSetting,
     UeElIcon,
     UeElLoading,
-    UeElNumberInput,
+    UeElMarginSetting,
     UeElOnOff,
+    UeElNumberInput,
     UeElPopPanel,
     UeElSelect,
     UeElSelectOption,

@@ -1,7 +1,7 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-02-25 03:32:40
+ * @LastEditTime: 2025-03-01 03:18:41
 -->
 <template>
     <div :class="$style['control-group']" class="grid">
@@ -82,7 +82,7 @@ function trigger(
             break;
 
         case "onOffChange":
-            void ($event && emit(type, $event as UE_EL_UTIL.OnOffValue));
+            emit(type, $event!);
             break;
 
         case "selectChange":
