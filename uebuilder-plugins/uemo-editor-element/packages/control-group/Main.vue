@@ -1,11 +1,11 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 03:18:41
+ * @LastEditTime: 2025-03-01 04:34:37
 -->
 <template>
     <div :class="$style['control-group']" class="grid">
-        <div :class="$style['control-oper']">
+        <div :class="$style['control-oper']" :data-col="colCount">
             <slot :disable="disable"></slot>
         </div>
         <div v-if="!hideOper" :class="$style['oper-box']">
@@ -57,7 +57,7 @@
 <script lang="ts" setup>
 import type { UeElControlGroupBaseProps } from "./index";
 
-const props = withDefaults(defineProps<UeElControlGroupBaseProps>(), { hideOper: false });
+const props = withDefaults(defineProps<UeElControlGroupBaseProps>(), { hideOper: false, colCount: 1 });
 
 defineOptions({ name: "UeElControlGroup" });
 const emit = defineEmits<{
@@ -98,7 +98,7 @@ function trigger(
 <style lang="scss" module>
 .control-group {
     gap: var(--ue-control-row-space);
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     &:hover {
         .oper-btn[data-oper-type="remove"] {
             opacity: 1;
@@ -112,6 +112,20 @@ function trigger(
     }
     .oper-btn {
         // color: inherit;
+    }
+}
+.control-oper {
+    display: grid;
+
+    gap: var(--ue-control-col-space) var(--ue-control-row-space);
+    &[data-col="1"] {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    &[data-col="2"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    &[data-col="3"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 </style>
