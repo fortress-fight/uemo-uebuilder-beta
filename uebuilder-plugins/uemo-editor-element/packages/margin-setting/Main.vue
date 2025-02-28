@@ -1,7 +1,7 @@
 <!--
  * @Description: 外间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:03:02
+ * @LastEditTime: 2025-03-01 04:12:07
 -->
 <template>
     <div :class="$style['margin-setting']" :data-disable="disable">
@@ -207,9 +207,19 @@ function changeMargin(value: string[]) {
     valueRef.value = isEmpty ? "0" : result.join(" ");
 }
 
-onBeforeMount(() => {
-    // 初始化独立调节状态
+/**
+ * @description 更新独立调节状态
+ */
+function updateMixState() {
     isMix.value = t.value === b.value && r.value === l.value;
+}
+
+defineExpose({
+    updateMixState,
+});
+
+onBeforeMount(() => {
+    updateMixState();
 });
 </script>
 <style lang="scss" module>

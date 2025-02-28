@@ -1,7 +1,7 @@
 <!--
  * @Description: 内间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:06:55
+ * @LastEditTime: 2025-03-01 04:13:18
 -->
 <template>
     <div :class="$style['padding-setting']" :data-disable="disable">
@@ -200,9 +200,19 @@ function changePadding(value: string[]) {
     valueRef.value = isEmpty ? "0" : result.join(" ");
 }
 
-onBeforeMount(() => {
-    // 初始化独立调节状态
+/**
+ * @description 更新独立调节状态
+ */
+function updateMixState() {
     isMix.value = t.value === b.value && r.value === l.value;
+}
+
+defineExpose({
+    updateMixState,
+});
+
+onBeforeMount(() => {
+    updateMixState();
 });
 </script>
 <style lang="scss" module>
