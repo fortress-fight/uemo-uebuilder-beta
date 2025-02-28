@@ -22,7 +22,6 @@ import TestOnOff from "~/demo/components/TestOnOff.vue";
 import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
 import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 import TestControlGroup from "~/demo/components/TestControlGroup.vue";
-import TestAlignSetting from "~/demo/components/TestAlignSetting.vue";
 import TestTagInput from "~/demo/components/TestTagInput.vue";
 import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 import TestNumberInput from "~/demo/components/TestNumberInput.vue";
@@ -31,7 +30,7 @@ const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
 const unitTestComponents = [TestIcon, TestOnOff];
 const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
 const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel, TestContextmenu];
-const mixinTestComponents = [TestControlGroup, TestAlignSetting, TestTagInput, TestNumberInput];
+const mixinTestComponents = [TestControlGroup, TestTagInput, TestNumberInput];
 const testComponents = [
     ...unitTestComponents,
     ...helperTestComponents,

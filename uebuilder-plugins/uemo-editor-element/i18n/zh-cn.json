@@ -4,5 +4,16 @@
     "INPUT_TIP_FORMAT_ERROR": "输入格式错误",
     "LOADING_TIP": "加载中...",
     "CONFIRM": "确认",
-    "CANCEL": "取消"
+    "CANCEL": "取消",
+
+    "ALIGN_ITEM_TITLE": "纵向",
+    "ALIGN_ITEM_DEFAULT": "默认",
+    "ALIGN_ITEM_STRETCH": "拉伸",
+    "ALIGN_ITEM_FILL": "填充",
+    "ALIGN_ITEM_TOP": "居上",
+    "ALIGN_ITEM_CENTER": "居中",
+    "ALIGN_ITEM_BOTTOM": "居下",
+
+    "GAP_SETTING_X": "横向间距",
+    "GAP_SETTING_Y": "纵向间距"
 }

@@ -4,5 +4,16 @@
     "LOADING_TIP": "Loading...",
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
-    "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added"
+    "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
+
+    "ALIGN_ITEM_TITLE": "Vertical",
+    "ALIGN_ITEM_DEFAULT": "Default",
+    "ALIGN_ITEM_STRETCH": "Stretch",
+    "ALIGN_ITEM_FILL": "Fill",
+    "ALIGN_ITEM_TOP": "Top",
+    "ALIGN_ITEM_CENTER": "Center",
+    "ALIGN_ITEM_BOTTOM": "Bottom",
+
+    "GAP_SETTING_X": "Horizontal Gap",
+    "GAP_SETTING_Y": "Vertical Gap"
 }
