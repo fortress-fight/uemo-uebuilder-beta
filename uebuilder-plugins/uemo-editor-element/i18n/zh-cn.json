@@ -17,6 +17,8 @@
     "GAP_SETTING_X": "横向间距",
     "GAP_SETTING_Y": "纵向间距",
 
+    "TOGGLE_INDEPENDENT": "独立调节",
+
     "MARGIN_SETTING_TB": "上下外间距",
     "MARGIN_SETTING_LR": "左右外间距",
     "MARGIN_SETTING_T": "上外间距",
@@ -24,5 +26,10 @@
     "MARGIN_SETTING_B": "下外间距",
     "MARGIN_SETTING_L": "左外间距",
 
-    "TOGGLE_INDEPENDENT": "独立调节"
+    "PADDING_SETTING_TB": "上下内间距",
+    "PADDING_SETTING_LR": "左右内间距",
+    "PADDING_SETTING_T": "上内间距",
+    "PADDING_SETTING_R": "右内间距",
+    "PADDING_SETTING_B": "下内间距",
+    "PADDING_SETTING_L": "左内间距"
 }

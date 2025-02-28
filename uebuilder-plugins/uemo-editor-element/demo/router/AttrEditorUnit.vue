@@ -13,8 +13,9 @@ import TestAlignItem from "~/demo/components/TestAlignItemSetting.vue";
 import TestAlignSetting from "~/demo/components/TestAlignSetting.vue";
 import TestGapSetting from "~/demo/components/TestGapSetting.vue";
 import TestMarginSetting from "~/demo/components/TestMarginSetting.vue";
+import TestPaddingSetting from "~/demo/components/TestPaddingSetting.vue";
 
-const testComponents = [TestAlignItem, TestAlignSetting, TestGapSetting, TestMarginSetting];
+const testComponents = [TestAlignItem, TestAlignSetting, TestGapSetting, TestMarginSetting, TestPaddingSetting];
 </script>
 <style lang="scss" module>
 .page-head {

@@ -15,5 +15,21 @@
     "ALIGN_ITEM_BOTTOM": "Bottom",
 
     "GAP_SETTING_X": "Horizontal Gap",
-    "GAP_SETTING_Y": "Vertical Gap"
+    "GAP_SETTING_Y": "Vertical Gap",
+
+    "TOGGLE_INDEPENDENT": "Independent Adjustment",
+
+    "MARGIN_SETTING_TB": "Top and Bottom Margin",
+    "MARGIN_SETTING_LR": "Left and Right Margin",
+    "MARGIN_SETTING_T": "Top Margin",
+    "MARGIN_SETTING_R": "Right Margin",
+    "MARGIN_SETTING_B": "Bottom Margin",
+    "MARGIN_SETTING_L": "Left Margin",
+
+    "PADDING_SETTING_TB": "Top and Bottom Padding",
+    "PADDING_SETTING_LR": "Left and Right Padding",
+    "PADDING_SETTING_T": "Top Padding",
+    "PADDING_SETTING_R": "Right Padding",
+    "PADDING_SETTING_B": "Bottom Padding",
+    "PADDING_SETTING_L": "Left Padding"
 }
