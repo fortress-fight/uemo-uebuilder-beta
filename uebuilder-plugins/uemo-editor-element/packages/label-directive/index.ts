@@ -1,7 +1,7 @@
 /*
  * @Description: tippy 插件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 17:39:07
+ * @LastEditTime: 2025-02-28 12:38:35
  */
 import type { App, DirectiveBinding } from "vue";
 import type { Placement } from "@stone/uemo-editor-utils/lib/tippy";
@@ -114,14 +114,14 @@ export function install(app: App) {
         /**
          * 挂载时初始化标签
          */
-        mounted(el: HTMLElement, binding: DirectiveBinding) {
+        mounted(el: HTMLElement, binding: DirectiveBinding<UE_EL_UTIL.LabelOption | UE_EL_UTIL.LabelOption[]>) {
             if (!binding.value) return;
             initUeElLabel(el, toArr(binding.value));
         },
         /**
          * 更新时修改标签状态
          */
-        updated(el: HTMLElement, binding: DirectiveBinding) {
+        updated(el: HTMLElement, binding: DirectiveBinding<UE_EL_UTIL.LabelOption | UE_EL_UTIL.LabelOption[]>) {
             const control = controlMap.get(el);
             if (!control) {
                 if (!binding.value) return;
