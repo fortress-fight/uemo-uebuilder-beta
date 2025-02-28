@@ -1,7 +1,7 @@
 <!--
  * @Description: 开关
  * @Author: F-Stone
- * @LastEditTime: 2025-02-25 02:20:55
+ * @LastEditTime: 2025-03-01 03:32:17
 -->
 <template>
     <UeElButton
@@ -22,8 +22,6 @@ import type { UeElOnOffBaseProps, OnOffValue } from "./index";
 defineOptions({ name: "UeElOnOff" });
 
 const props = withDefaults(defineProps<UeElOnOffBaseProps>(), {
-    icon: "icon-app-lock",
-    activeIcon: "icon-app-unlock",
     reverse: false,
     disable: false,
     activeValue: true,

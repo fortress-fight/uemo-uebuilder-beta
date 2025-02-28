@@ -15,5 +15,14 @@
     "ALIGN_ITEM_BOTTOM": "居下",
 
     "GAP_SETTING_X": "横向间距",
-    "GAP_SETTING_Y": "纵向间距"
+    "GAP_SETTING_Y": "纵向间距",
+
+    "MARGIN_SETTING_TB": "上下外间距",
+    "MARGIN_SETTING_LR": "左右外间距",
+    "MARGIN_SETTING_T": "上外间距",
+    "MARGIN_SETTING_R": "右外间距",
+    "MARGIN_SETTING_B": "下外间距",
+    "MARGIN_SETTING_L": "左外间距",
+
+    "TOGGLE_INDEPENDENT": "独立调节"
 }

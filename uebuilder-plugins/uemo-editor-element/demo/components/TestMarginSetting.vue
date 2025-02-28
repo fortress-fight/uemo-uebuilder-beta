@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试外间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 03:23:28
+ * @LastEditTime: 2025-03-01 03:43:07
 -->
 <template>
     <TestArea
@@ -22,9 +22,10 @@ import TestArea from "~/demo/components/TestArea.vue";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElMarginSettingProps & { testOptionTitle?: string; value?: any })[] = [
-    { value: "10px" },
-    { value: "10px 20px" },
-    { value: "10px 20px 30px 40px" },
+    { value: "10px", type: "xy" },
+    { value: "10px 20px 30px 40px", type: "xy" },
+    { value: "10px 0", type: "y" },
+    { value: "0 10px", type: "x" },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
 

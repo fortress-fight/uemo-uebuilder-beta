@@ -1,26 +1,26 @@
 <!--
  * @Description: 外间距控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 03:27:07
+ * @LastEditTime: 2025-03-01 04:03:02
 -->
 <template>
     <div :class="$style['margin-setting']" :data-disable="disable">
         <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType">
-            <div :class="$style['setting-group']" class="grid" :data-col-2="isMix && type !== 'xy'">
+            <div :class="$style['setting-group']" class="grid" :data-col-2="!isMix || type === 'xy'">
                 <template v-if="isMix">
                     <UeElNumberInput
                         v-if="type == 'y' || type == 'xy'"
                         v-bind="inputParam"
                         v-model:value="tb"
                         :title="{ icon: { name: 'icon-shangxianbianju' } }"
-                        label="上下外间距"
+                        :label="i18n.t('MARGIN_SETTING_TB')"
                     />
                     <UeElNumberInput
                         v-if="type == 'x' || type == 'xy'"
                         v-bind="inputParam"
                         v-model:value="lr"
                         :title="{ icon: { name: 'icon-zuoyoubianju' } }"
-                        label="左右外间距"
+                        :label="i18n.t('MARGIN_SETTING_LR')"
                     />
                 </template>
                 <template v-else>
@@ -29,28 +29,28 @@
                         v-bind="inputParam"
                         v-model:value="tb"
                         :title="{ icon: { name: 'icon-shangbianju' } }"
-                        label="上外间距"
+                        :label="i18n.t('MARGIN_SETTING_T')"
                     />
                     <UeElNumberInput
                         v-if="type == 'x' || type == 'xy'"
                         v-bind="inputParam"
                         v-model:value="lr"
                         :title="{ icon: { name: 'icon-zuobianju' } }"
-                        label="左外间距"
+                        :label="i18n.t('MARGIN_SETTING_L')"
                     />
                     <UeElNumberInput
                         v-if="type == 'y' || type == 'xy'"
                         v-bind="inputParam"
                         v-model:value="b"
                         :title="{ icon: { name: 'icon-xiabianju' } }"
-                        label="下外间距"
+                        :label="i18n.t('MARGIN_SETTING_B')"
                     />
                     <UeElNumberInput
                         v-if="type == 'x' || type == 'xy'"
                         v-bind="inputParam"
                         v-model:value="r"
                         :title="{ icon: { name: 'icon-youbianju' } }"
-                        label="右外间距"
+                        :label="i18n.t('MARGIN_SETTING_R')"
                     />
                 </template>
             </div>
@@ -72,6 +72,7 @@ const prop = withDefaults(defineProps<UeElMarginSettingBaseProps>(), {
     ],
 });
 
+const i18n = useI18n();
 const valueRef = defineModel<string>("value", { required: false });
 
 // #region 组件参数
@@ -81,7 +82,7 @@ const onOffParam = computed<UE_EL_COMPONENT.UeElControlGroupProps>(() => ({
     operType: "onOff",
     onOffParam: {
         disable: false,
-        label: "独立调节",
+        label: i18n.t("TOGGLE_INDEPENDENT"),
         reverseStyle: true,
         value: isMix.value,
         icon: "icon-shangxiazuoyoubianju",
@@ -103,6 +104,7 @@ const useValue = computed(() => {
 
 const margin = computed(() => {
     const arr = useValue.value.split(/\s+/);
+
     if (arr.length === 1) {
         return [arr[0], arr[0], arr[0], arr[0]];
     }
@@ -222,9 +224,9 @@ onBeforeMount(() => {
     display: grid;
 
     gap: var(--ue-editor-row-space--lv1);
-    grid-template-columns: repeat(2, 1fr);
-    // &[data-col-2="false"] {
-    //     grid-template-columns: 1fr;
-    // }
+    grid-template-columns: minmax(0, 1fr);
+    &[data-col-2="true"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 </style>
