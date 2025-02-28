@@ -31,5 +31,10 @@
     "PADDING_SETTING_T": "Top Padding",
     "PADDING_SETTING_R": "Right Padding",
     "PADDING_SETTING_B": "Bottom Padding",
-    "PADDING_SETTING_L": "Left Padding"
+    "PADDING_SETTING_L": "Left Padding",
+
+    "JUSTIFY_CONTENT_TITLE": "Horizontal",
+    "JUSTIFY_CONTENT_START": "Left",
+    "JUSTIFY_CONTENT_CENTER": "Center",
+    "JUSTIFY_CONTENT_END": "Right"
 }

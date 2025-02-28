@@ -1,7 +1,7 @@
 <!--
  * @Description: 圆角控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:42:28
+ * @LastEditTime: 2025-03-01 04:54:17
 -->
 <template>
     <div :class="$style['radius-setting']" :data-disable="disable">
@@ -49,6 +49,8 @@ const prop = withDefaults(defineProps<UeElRadiusSettingBaseProps>(), {
 });
 
 const valueRef = defineModel<string>("value", { required: false });
+
+const i18n = useI18n();
 
 const inputParam = computed<Partial<UE_EL_COMPONENT.UeElNumberInputProps>>(() => ({
     limit: prop.limit,
@@ -131,7 +133,7 @@ const onOffParam = computed<UE_EL_COMPONENT.UeElControlGroupProps>(() => ({
     operType: "onOff",
     onOffParam: {
         disable: false,
-        label: "独立调节",
+        label: i18n.t("TOGGLE_INDEPENDENT"),
         reverseStyle: true,
         value: isMix.value,
         icon: "icon-duliyuanjiao",

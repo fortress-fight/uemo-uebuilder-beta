@@ -11,6 +11,7 @@
 <script lang="ts" setup>
 import TestAlignItem from "~/demo/components/TestAlignItemSetting.vue";
 import TestAlignSetting from "~/demo/components/TestAlignSetting.vue";
+import TestJustifyContentSetting from "~/demo/components/TestJustifyContentSetting.vue";
 import TestGapSetting from "~/demo/components/TestGapSetting.vue";
 import TestMarginSetting from "~/demo/components/TestMarginSetting.vue";
 import TestPaddingSetting from "~/demo/components/TestPaddingSetting.vue";
@@ -18,6 +19,7 @@ import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
 
 const testComponents = [
     TestAlignItem,
+    TestJustifyContentSetting,
     TestAlignSetting,
     TestGapSetting,
     TestMarginSetting,

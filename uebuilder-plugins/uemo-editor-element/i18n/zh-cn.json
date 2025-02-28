@@ -31,5 +31,10 @@
     "PADDING_SETTING_T": "上内间距",
     "PADDING_SETTING_R": "右内间距",
     "PADDING_SETTING_B": "下内间距",
-    "PADDING_SETTING_L": "左内间距"
+    "PADDING_SETTING_L": "左内间距",
+
+    "JUSTIFY_CONTENT_TITLE": "横向",
+    "JUSTIFY_CONTENT_START": "居左",
+    "JUSTIFY_CONTENT_CENTER": "居中",
+    "JUSTIFY_CONTENT_END": "居右"
 }
