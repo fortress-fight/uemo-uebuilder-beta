@@ -41,12 +41,23 @@ declare global {
         type ALIGN = `${ALIGN_X} ${ALIGN_Y}` | ALIGN_X | ALIGN_Y;
 
         /**
+         * @description 数字输入框参数
+         */
+        type NumInputLimit = number[] | Record<string, number[]>;
+        type NumInputUnits = { value: string; text: string; default?: number; step?: number }[];
+
+        /**
          * @description 拖拽指令参数
          */
         type DraggerDirectiveParam = {
             onStart?: () => void;
             onChange: (moveX: number) => void;
         };
+
+        /**
+         * @description 输入框内边距大小
+         */
+        type InputPaddingSize = "level1" | "level2" | "level3" | "level4";
     }
 }
 

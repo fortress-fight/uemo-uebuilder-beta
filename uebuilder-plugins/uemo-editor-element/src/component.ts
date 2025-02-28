@@ -1,40 +1,42 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:58:27
+ * @LastEditTime: 2025/2/28 01:34:35
  */
+import UeElAlignSetting from "../packages/align-setting";
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
-import UeElContextmenu from "../packages/contextmenu";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElControlGroup from "../packages/control-group";
-import UeElAlignSetting from "../packages/align-setting";
+import UeElContextmenu from "../packages/contextmenu";
 import UeElIcon from "../packages/icon";
+import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
-import UeElLoading from "../packages/loading";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElSelect from "../packages/select";
-import UeElSelectOption from "../packages/select-option";
+import UeElLoading from "../packages/loading";
 import UeElTabCard from "../packages/tab-card";
+import UeElSelectOption from "../packages/select-option";
 import UeElTagInput from "../packages/tag-input";
 import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
+    UeElAlignSetting,
     UeElButton,
     UeElCheckBox,
-    UeElContextmenu,
     UeElConfirmPanel,
     UeElControlGroup,
-    UeElAlignSetting,
+    UeElContextmenu,
     UeElIcon,
+    UeElNumberInput,
     UeElOnOff,
-    UeElLoading,
     UeElPopPanel,
     UeElSelect,
-    UeElSelectOption,
+    UeElLoading,
     UeElTabCard,
+    UeElSelectOption,
     UeElTagInput,
     UeElTextInput,
     UeElTipGroup,

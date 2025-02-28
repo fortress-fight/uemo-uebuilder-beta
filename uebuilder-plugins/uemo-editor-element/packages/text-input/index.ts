@@ -1,7 +1,7 @@
 /*
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 18:56:55
+ * @LastEditTime: 2025-02-28 16:43:23
  */
 import type { App } from "vue";
 
@@ -23,7 +23,7 @@ export interface UeElTextInputBaseProps {
     required?: boolean;
     type?: "password" | "text" | "textarea";
     theme?: "enterText";
-    paddingSize?: "level1" | "level2" | "level3" | "level4";
+    paddingSize?: UE_EL_UTIL.InputPaddingSize;
     autocomplete?: string;
     disable?: boolean;
     placeholder?: string;
