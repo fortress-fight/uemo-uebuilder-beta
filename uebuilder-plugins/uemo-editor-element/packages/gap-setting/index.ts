@@ -1,7 +1,7 @@
 /*
  * @Description: 间隔设置
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 02:30:07
+ * @LastEditTime: 2025-03-01 03:04:48
  */
 import type { App } from "vue";
 
@@ -17,9 +17,9 @@ export interface UeElGapSettingBaseProps {
     dir?: "x" | "y" | "xy";
     defaultValue?: string;
     xLimit?: UE_EL_UTIL.NumInputLimit;
-    xUnits?: UE_EL_UTIL.NumInputUnits;
+    xUnits?: UE_EL_UTIL.NumInputUnit[];
     yLimit?: UE_EL_UTIL.NumInputLimit;
-    yUnits?: UE_EL_UTIL.NumInputUnits;
+    yUnits?: UE_EL_UTIL.NumInputUnit[];
 }
 export type UeElGapSettingInstance = InstanceType<typeof UeElGapSetting>;
 

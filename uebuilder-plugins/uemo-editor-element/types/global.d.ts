@@ -44,7 +44,7 @@ declare global {
          * @description 数字输入框参数
          */
         type NumInputLimit = number[] | Record<string, number[]>;
-        type NumInputUnits = { value: string; text: string; default?: number; step?: number }[];
+        type NumInputUnit = { value: string; text: string; default?: number; step?: number };
 
         /**
          * @description 拖拽指令参数
