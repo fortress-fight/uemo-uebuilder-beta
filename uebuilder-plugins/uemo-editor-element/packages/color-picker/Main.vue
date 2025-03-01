@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 00:32:08
+ * @LastEditTime: 2025-03-02 01:16:55
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -79,7 +79,6 @@ function updateHSV(color: string | undefined) {
 watch(
     () => valueRef.value,
     (newValue) => {
-        if (newValue === valueRef.value) return;
         updateHSV(newValue);
     }
 );
