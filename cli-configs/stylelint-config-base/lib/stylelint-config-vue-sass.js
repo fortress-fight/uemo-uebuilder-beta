@@ -1,7 +1,7 @@
 /*
  * @Description: sass stylelint config
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 18:17:34
+ * @LastEditTime: 2025-03-02 00:27:44
  */
 
 module.exports = {
@@ -21,6 +21,7 @@ module.exports = {
                     "grid-template-columns",
                     "css-gradients",
                     "css3-cursors",
+                    "css3-cursors-grab",
                     "css-appearance",
                     "css-nesting",
                     "css-when-else",
@@ -34,6 +35,8 @@ module.exports = {
         "plugin/declaration-block-no-ignored-properties": true,
         "scss/selector-no-redundant-nesting-selector": null,
         "scss/dollar-variable-pattern": "^[a-z][a-z0-9\\-_]*[a-z0-9]*$",
+
+        "@stylistic/function-parentheses-space-inside": null,
     },
     overrides: [
         {
