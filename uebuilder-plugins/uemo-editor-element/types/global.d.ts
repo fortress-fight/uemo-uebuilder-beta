@@ -58,6 +58,11 @@ declare global {
          * @description 输入框内边距大小
          */
         type InputPaddingSize = "level1" | "level2" | "level3" | "level4";
+
+        /**
+         * @description 图标参数
+         */
+        type IconParam = string | { name: string; size?: number };
     }
 }
 

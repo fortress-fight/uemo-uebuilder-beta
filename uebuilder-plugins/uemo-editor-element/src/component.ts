@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/1 15:34:01
+ * @LastEditTime: 2025/3/1 16:06:12
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -21,6 +21,7 @@ import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
+import UeElSettingBar from "../packages/setting-bar";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
 import UeElTabCard from "../packages/tab-card";
@@ -48,6 +49,7 @@ export const components = [
     UeElPaddingSetting,
     UeElPopPanel,
     UeElRadiusSetting,
+    UeElSettingBar,
     UeElSelect,
     UeElSelectOption,
     UeElTabCard,

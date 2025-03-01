@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestEnterAnimateSetting.vue";
+import TestComponent from "~/demo/components/TestSettingBar.vue";
 </script>
 <style lang="scss" module>
 .test-group {

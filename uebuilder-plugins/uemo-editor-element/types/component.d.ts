@@ -21,6 +21,7 @@ import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
 import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radius-setting";
+import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
 import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
@@ -49,6 +50,7 @@ declare module "vue" {
         UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElPopPanel: typeof UeElPopPanel;
         UeElRadiusSetting: typeof UeElRadiusSetting;
+        UeElSettingBar: typeof UeElSettingBar;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
         UeElTabCard: typeof UeElTabCard;
@@ -79,6 +81,7 @@ declare global {
         interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElRadiusSettingProps extends UeElRadiusSettingBaseProps {}
+        interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
         interface UeElTabCardProps extends UeElTabCardBaseProps {}
