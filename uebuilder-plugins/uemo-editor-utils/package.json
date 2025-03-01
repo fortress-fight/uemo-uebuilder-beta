@@ -35,6 +35,7 @@
         "@types/lodash": "^4.17.15",
         "@types/nanoid-dictionary": "^4.2.3",
         "big.js": "^6.2.2",
+        "color": "^5.0.0",
         "copy-to-clipboard": "^3.3.3",
         "date-fns": "^4.1.0",
         "floating-ui": "^5.2.8",

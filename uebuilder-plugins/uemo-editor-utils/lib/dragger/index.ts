@@ -2,6 +2,7 @@ import { calcElastic, type Bounce, type DraggerOption } from "./utils/helper";
 
 import { guid } from "../guid";
 import { numRound } from "../number";
+import { gsap } from "../gsap";
 import $ from "../jquery";
 
 interface Position {
@@ -100,6 +101,7 @@ export class Dragger {
     }
 
     /**
+     * NOTE: 用于替换旧版的 update 方法
      * 更新拖拽状态
      * 当元素位置发生外部变化时调用，重新计算边界和位置信息
      */
