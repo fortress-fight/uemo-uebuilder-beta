@@ -9,13 +9,25 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
-import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
-import TestCalenderPicker from "~/demo/components/TestCalenderPicker.vue";
-import TestContextmenu from "~/demo/components/TestContextmenu.vue";
-import TestTabCard from "~/demo/components/TestTabCard.vue";
+import TestTextInput from "~/demo/components/TestTextInput.vue";
+import TestCheckBox from "~/demo/components/TestCheckBox.vue";
+import TestSelect from "~/demo/components/TestSelect.vue";
+import TestCalenderSetting from "~/demo/components/TestCalenderSetting.vue";
+import TestNumberInput from "~/demo/components/TestNumberInput.vue";
+import TestOnOff from "~/demo/components/TestOnOff.vue";
+import TestTagInput from "~/demo/components/TestTagInput.vue";
+import TestButton from "~/demo/components/TestButton.vue";
 
-const testComponents = [TestCalenderPicker, TestConfirmPanel, TestVideoPanel, TestContextmenu, TestTabCard];
+const testComponents = [
+    TestOnOff,
+    TestButton,
+    TestCheckBox,
+    TestSelect,
+    TestCalenderSetting,
+    TestTextInput,
+    TestNumberInput,
+    TestTagInput,
+];
 </script>
 <style lang="scss" module>
 .page-head {

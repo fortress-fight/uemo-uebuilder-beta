@@ -11,6 +11,7 @@
 const linkList = ref([
     { path: "/", text: "当前编辑" },
     { path: "/editor-unit", text: "基础组件" },
+    { path: "/editor-form", text: "表单组件" },
     { path: "/editor-attr", text: "属性组件" },
     { path: "/editor-panel", text: "面板组件" },
     { path: "/editor-resource/panel", text: "资源组件" },

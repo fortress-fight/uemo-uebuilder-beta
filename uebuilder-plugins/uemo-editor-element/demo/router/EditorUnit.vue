@@ -10,36 +10,17 @@
 </template>
 <script lang="ts" setup>
 import TestIcon from "~/demo/components/TestIcon.vue";
-import TestTextInput from "~/demo/components/TestTextInput.vue";
 import TestSelectOption from "~/demo/components/TestSelectOption.vue";
-import TestSelect from "~/demo/components/TestSelect.vue";
-import TestTabCard from "~/demo/components/TestTabCard.vue";
 import TestLoading from "~/demo/components/TestLoading.vue";
 import TestTipGroup from "~/demo/components/TestTipGroup.vue";
-import TestCheckBox from "~/demo/components/TestCheckBox.vue";
-import TestButton from "~/demo/components/TestButton.vue";
-import TestOnOff from "~/demo/components/TestOnOff.vue";
-import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
-import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 import TestControlGroup from "~/demo/components/TestControlGroup.vue";
-import TestTagInput from "~/demo/components/TestTagInput.vue";
-import TestContextmenu from "~/demo/components/TestContextmenu.vue";
-import TestNumberInput from "~/demo/components/TestNumberInput.vue";
 import TestSettingBar from "~/demo/components/TestSettingBar.vue";
-import TestCalenderSetting from "~/demo/components/TestCalenderSetting.vue";
 
-const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
-const unitTestComponents = [TestIcon, TestOnOff, TestSettingBar];
-const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect, TestCalenderSetting];
-const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel, TestContextmenu];
-const mixinTestComponents = [TestControlGroup, TestTagInput, TestNumberInput];
-const testComponents = [
-    ...unitTestComponents,
-    ...helperTestComponents,
-    ...formTestComponents,
-    ...panelTestComponents,
-    ...mixinTestComponents,
-];
+const containerComponents = [TestSettingBar, TestControlGroup];
+const unitTestComponents = [TestIcon, TestSelectOption];
+const helperTestComponents = [TestLoading, TestTipGroup];
+
+const testComponents = [...containerComponents, ...unitTestComponents, ...helperTestComponents];
 </script>
 <style lang="scss" module>
 .page-head {
