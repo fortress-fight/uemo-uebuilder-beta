@@ -15,6 +15,7 @@ import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm
 import UeElContextmenu, { UeElContextmenuBaseProps } from "../packages/contextmenu";
 import UeElControlGroup, { UeElControlGroupBaseProps } from "../packages/control-group";
 import UeElEditorGroup, { UeElEditorGroupBaseProps } from "../packages/editor-group";
+import UeElEditorPanel, { UeElEditorPanelBaseProps } from "../packages/editor-panel";
 import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../packages/enter-animate-setting";
 import UeElGapSetting, { UeElGapSettingBaseProps } from "../packages/gap-setting";
 import UeElIcon, { UeElIconBaseProps } from "../packages/icon";
@@ -22,15 +23,15 @@ import UeElJustifyContentSetting, { UeElJustifyContentSettingBaseProps } from ".
 import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElMarginSetting, { UeElMarginSettingBaseProps } from "../packages/margin-setting";
 import UeElNumberInput, { UeElNumberInputBaseProps } from "../packages/number-input";
-import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
-import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
+import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radius-setting";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
+import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
+import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
 import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
-import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
 import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel";
@@ -49,6 +50,7 @@ declare module "vue" {
         UeElContextmenu: typeof UeElContextmenu;
         UeElControlGroup: typeof UeElControlGroup;
         UeElEditorGroup: typeof UeElEditorGroup;
+        UeElEditorPanel: typeof UeElEditorPanel;
         UeElEnterAnimateSetting: typeof UeElEnterAnimateSetting;
         UeElGapSetting: typeof UeElGapSetting;
         UeElIcon: typeof UeElIcon;
@@ -56,15 +58,15 @@ declare module "vue" {
         UeElLoading: typeof UeElLoading;
         UeElMarginSetting: typeof UeElMarginSetting;
         UeElNumberInput: typeof UeElNumberInput;
-        UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElOnOff: typeof UeElOnOff;
-        UeElPopPanel: typeof UeElPopPanel;
+        UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElRadiusSetting: typeof UeElRadiusSetting;
         UeElSelect: typeof UeElSelect;
+        UeElPopPanel: typeof UeElPopPanel;
         UeElSelectOption: typeof UeElSelectOption;
+        UeElTagInput: typeof UeElTagInput;
         UeElSettingBar: typeof UeElSettingBar;
         UeElTabCard: typeof UeElTabCard;
-        UeElTagInput: typeof UeElTagInput;
         UeElTextInput: typeof UeElTextInput;
         UeElTipGroup: typeof UeElTipGroup;
         UeElVideoPanel: typeof UeElVideoPanel;
@@ -85,6 +87,7 @@ declare global {
         interface UeElContextmenuProps extends UeElContextmenuBaseProps {}
         interface UeElControlGroupProps extends UeElControlGroupBaseProps {}
         interface UeElEditorGroupProps extends UeElEditorGroupBaseProps {}
+        interface UeElEditorPanelProps extends UeElEditorPanelBaseProps {}
         interface UeElEnterAnimateSettingProps extends UeElEnterAnimateSettingBaseProps {}
         interface UeElGapSettingProps extends UeElGapSettingBaseProps {}
         interface UeElIconProps extends UeElIconBaseProps {}
@@ -92,15 +95,15 @@ declare global {
         interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElMarginSettingProps extends UeElMarginSettingBaseProps {}
         interface UeElNumberInputProps extends UeElNumberInputBaseProps {}
-        interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElOnOffProps extends UeElOnOffBaseProps {}
-        interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
+        interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElRadiusSettingProps extends UeElRadiusSettingBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
+        interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
+        interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
         interface UeElTabCardProps extends UeElTabCardBaseProps {}
-        interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
         interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
         interface UeElVideoPanelProps extends UeElVideoPanelBaseProps {}

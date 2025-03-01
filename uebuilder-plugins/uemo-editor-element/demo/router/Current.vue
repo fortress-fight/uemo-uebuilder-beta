@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestColorPicker.vue";
+import TestComponent from "~/demo/components/TestEditorPanel.vue";
 </script>
 <style lang="scss" module>
 .test-group {
