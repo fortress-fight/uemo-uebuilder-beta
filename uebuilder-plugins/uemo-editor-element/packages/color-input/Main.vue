@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 00:37:16
+ * @LastEditTime: 2025-03-02 01:51:37
 -->
 <template>
     <UeElTextInput
@@ -22,7 +22,7 @@
                 <div :class="$style['inner-box']" :style="{ '--background': useColor }"></div>
             </div>
         </template>
-        <template #after v-if="!hideOpacity">
+        <template #after v-if="!disableOpacity">
             <UeElNumberInput
                 v-bind="opacityParam"
                 v-model:value="opacity"
@@ -56,8 +56,7 @@ defineOptions({ name: "UeElColorInput" });
 const { t } = useI18n();
 const prop = withDefaults(defineProps<UeElColorInputBaseProps>(), {
     type: "color",
-    hideOpacity: false,
-    placement: "left-start",
+    disableOpacity: false,
 });
 const emit = defineEmits<{ (ev: "trigger", value: string): void }>();
 
@@ -68,7 +67,11 @@ const useColor = computed({
         return valueRef.value || prop.defaultValue || "#000000";
     },
     set(value) {
-        valueRef.value = value;
+        if (prop.disableOpacity) {
+            valueRef.value = Color(value).alpha(1).rgb().toString();
+        } else {
+            valueRef.value = value;
+        }
     },
 });
 
@@ -117,7 +120,7 @@ const hex = computed<string>({
             .alpha(opacity.value)
             .rgb()
             .toString();
-        valueRef.value = newColor;
+        useColor.value = newColor;
     },
 });
 
@@ -148,7 +151,7 @@ const opacity = computed<number>({
             .alpha(value)
             .rgb();
 
-        valueRef.value = newVal.toString();
+        useColor.value = newVal.toString();
     },
 });
 

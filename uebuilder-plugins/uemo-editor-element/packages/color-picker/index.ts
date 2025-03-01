@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 22:33:39
+ * @LastEditTime: 2025-03-02 01:42:57
  */
 import type { App } from "vue";
 
@@ -12,8 +12,9 @@ UeElColorPicker.install = (app: App) => {
     app.component(UeElColorPicker.name, UeElColorPicker);
 };
 
-// eslint-disable-next-line
-export interface UeElColorPickerBaseProps {}
+export interface UeElColorPickerBaseProps {
+    disableOpacity?: boolean;
+}
 export type UeElColorPickerInstance = InstanceType<typeof UeElColorPicker>;
 
 export default UeElColorPicker;

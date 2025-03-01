@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色选择器面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 00:57:31
+ * @LastEditTime: 2025-03-02 01:41:15
  */
 import type { App } from "vue";
 
@@ -14,6 +14,7 @@ UeElColorPickerPanel.install = (app: App) => {
 
 export interface UeElColorPickerPanelBaseProps {
     defaultValue?: string;
+    disableOpacity?: boolean;
 }
 export type UeElColorPickerPanelInstance = InstanceType<typeof UeElColorPickerPanel>;
 

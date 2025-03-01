@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:16:55
+ * @LastEditTime: 2025-03-02 01:59:53
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -18,7 +18,12 @@
             <div ref="shadowColorBarInner" :class="$style['color-bar--inner']" class="relative opacity-0"></div>
         </div>
         <div :class="$style['color-input']" class="grid items-center">
-            <UeElColorInput :class="$style['new-color-input']" :value="value" @update:value="updateHSV($event)" />
+            <UeElColorInput
+                :class="$style['new-color-input']"
+                :value="value"
+                @update:value="updateHSV($event)"
+                :disable-opacity="disableOpacity"
+            />
             <div
                 v-if="enableColorPicker"
                 :class="$style['btn-box']"
@@ -45,10 +50,10 @@
 <script lang="ts" setup>
 import type { UeElColorPickerBaseProps } from "./index";
 
+import { useEyeDropper } from "@vueuse/core";
 import Color from "@stone/uemo-editor-utils/lib/color";
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { Dragger, DraggerControl } from "@stone/uemo-editor-utils/lib/dragger";
-import { useEyeDropper } from "@vueuse/core";
 
 const { t } = useI18n();
 const { isSupported, open } = useEyeDropper();
@@ -89,10 +94,6 @@ onBeforeMount(() => {
 
 // #region 缓存颜色信息
 
-const localColor = computed(() => {
-    return Color(colorHsv).rgb().toString();
-});
-
 const oldColor = ref<string>("");
 const oldColorOpacity = ref<number>(1);
 
@@ -101,7 +102,7 @@ function useOldVal() {
 }
 
 watch(
-    () => localColor.value,
+    () => Color(colorHsv).rgb().toString(),
     (color) => {
         valueRef.value = color;
     }

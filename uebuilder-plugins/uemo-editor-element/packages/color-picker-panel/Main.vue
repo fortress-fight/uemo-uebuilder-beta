@@ -1,19 +1,19 @@
 <!--
  * @Description: 颜色选择器面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:09:56
+ * @LastEditTime: 2025-03-02 01:54:31
 -->
 <template>
     <UeElEditorPanel title="颜色面板" :class="$style['color-picker-panel']" :with-dragger="true" :with-close="false">
-        <UeElColorPicker v-model:value="useColor" :class="$style['color-picker']" />
-        <ColorGroup v-if="usedColors.length" :colors="usedColors" @submit="useColor = $event" />
-        <ColorGroup :colors="defaultColors" @submit="useColor = $event" />
+        <UeElColorPicker v-model:value="useColor" :class="$style['color-picker']" :disable-opacity="disableOpacity" />
+        <ColorGroup v-if="usedColors.length" :colors="usedColors" @submit="updateColor($event)" />
+        <ColorGroup :colors="defaultColors" @submit="updateColor($event)" />
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
 import type { UeElColorPickerPanelBaseProps } from "./index";
 
-import { isColor } from "@stone/uemo-editor-utils/lib/color";
+import Color, { isColor } from "@stone/uemo-editor-utils/lib/color";
 import ColorGroup from "./sub-components/ColorGroup.vue";
 import { getLocalColorLib, addLocalColorLib } from "./utils/helper";
 
@@ -21,6 +21,7 @@ defineOptions({ name: "UeElColorPickerPanel" });
 
 const prop = withDefaults(defineProps<UeElColorPickerPanelBaseProps>(), {
     defaultValue: "#000000",
+    disableOpacity: false,
 });
 const valueRef = defineModel<string>("value", { required: true });
 
@@ -32,6 +33,14 @@ const useColor = computed({
         valueRef.value = value;
     },
 });
+
+function updateColor(color: string) {
+    if (prop.disableOpacity) {
+        useColor.value = Color(color).alpha(1).rgb().toString();
+    } else {
+        useColor.value = color;
+    }
+}
 
 // 基础颜色组
 const defaultColors = [
