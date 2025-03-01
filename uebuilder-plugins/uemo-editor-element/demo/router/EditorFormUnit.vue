@@ -17,6 +17,7 @@ import TestNumberInput from "~/demo/components/TestNumberInput.vue";
 import TestOnOff from "~/demo/components/TestOnOff.vue";
 import TestTagInput from "~/demo/components/TestTagInput.vue";
 import TestButton from "~/demo/components/TestButton.vue";
+import TestColorInput from "~/demo/components/TestColorInput.vue";
 
 const testComponents = [
     TestOnOff,
@@ -27,6 +28,7 @@ const testComponents = [
     TestTextInput,
     TestNumberInput,
     TestTagInput,
+    TestColorInput,
 ];
 </script>
 <style lang="scss" module>

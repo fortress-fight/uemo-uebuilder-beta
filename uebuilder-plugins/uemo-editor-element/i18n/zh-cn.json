@@ -77,5 +77,10 @@
     "MONTH_DECEMBER": "十二月",
 
     "CALENDER_SETTING_TITLE": "日期",
-    "CALENDER_SETTING_PLACEHOLDER": "请输入日期"
+    "CALENDER_SETTING_PLACEHOLDER": "请输入日期",
+
+    "COLOR_EYE_DROPPER": "拾色器",
+    "COLOR_INPUT_TIP_NOT_CORRECT": "请输入正确的颜色值",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED": "当前浏览器不支持拾色器，目前仅支持 Chrome 或 Edge",
+    "COLOR_PICKER_GRADIENT_TITLE": "渐变色"
 }

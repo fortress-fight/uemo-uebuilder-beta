@@ -75,5 +75,7 @@
     "MONTH_DECEMBER": "Dec",
 
     "CALENDER_SETTING_TITLE": "Date",
-    "CALENDER_SETTING_PLACEHOLDER": "Input Date"
+    "CALENDER_SETTING_PLACEHOLDER": "Input Date",
+
+    "COLOR_INPUT_TIP_NOT_CORRECT": "Please enter a valid color value"
 }
