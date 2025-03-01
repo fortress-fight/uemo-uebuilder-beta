@@ -53,5 +53,26 @@
     "ENTER_ANIMATION_ZOOM_IN_DOWN": "放大入场(上)",
 
     "SELECT_PLACEHOLDER": "请选择",
-    "SELECT_NO_OPTION": "暂无选项"
+    "SELECT_NO_OPTION": "暂无选项",
+
+    "WEEK_DAY": "日",
+    "WEEK_MONDAY": "一",
+    "WEEK_TUESDAY": "二",
+    "WEEK_WEDNESDAY": "三",
+    "WEEK_THURSDAY": "四",
+    "WEEK_FRIDAY": "五",
+    "WEEK_SATURDAY": "六",
+
+    "MONTH_JANUARY": "一月",
+    "MONTH_FEBRUARY": "二月",
+    "MONTH_MARCH": "三月",
+    "MONTH_APRIL": "四月",
+    "MONTH_MAY": "五月",
+    "MONTH_JUNE": "六月",
+    "MONTH_JULY": "七月",
+    "MONTH_AUGUST": "八月",
+    "MONTH_SEPTEMBER": "九月",
+    "MONTH_OCTOBER": "十月",
+    "MONTH_NOVEMBER": "十一月",
+    "MONTH_DECEMBER": "十二月"
 }

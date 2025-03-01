@@ -1,10 +1,11 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/1 16:06:12
+ * @LastEditTime: 2025/3/1 17:20:05
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
+import UeElCalenderPicker from "../packages/calender-picker";
 import UeElButton from "../packages/button";
 import UeElCheckBox from "../packages/check-box";
 import UeElConfirmPanel from "../packages/confirm-panel";
@@ -21,18 +22,19 @@ import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
-import UeElSettingBar from "../packages/setting-bar";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
+import UeElSettingBar from "../packages/setting-bar";
 import UeElTabCard from "../packages/tab-card";
-import UeElTagInput from "../packages/tag-input";
 import UeElTextInput from "../packages/text-input";
-import UeElTipGroup from "../packages/tip-group";
+import UeElTagInput from "../packages/tag-input";
 import UeElVideoPanel from "../packages/video-panel";
+import UeElTipGroup from "../packages/tip-group";
 
 export const components = [
     UeElAlignItemSetting,
     UeElAlignSetting,
+    UeElCalenderPicker,
     UeElButton,
     UeElCheckBox,
     UeElConfirmPanel,
@@ -49,12 +51,12 @@ export const components = [
     UeElPaddingSetting,
     UeElPopPanel,
     UeElRadiusSetting,
-    UeElSettingBar,
     UeElSelect,
     UeElSelectOption,
+    UeElSettingBar,
     UeElTabCard,
-    UeElTagInput,
     UeElTextInput,
-    UeElTipGroup,
+    UeElTagInput,
     UeElVideoPanel,
+    UeElTipGroup,
 ];

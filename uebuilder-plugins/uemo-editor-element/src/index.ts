@@ -14,6 +14,18 @@ export default {
             locale: "zh-cn",
             fallbackLocale: "zh-cn",
             messages: { en: i18nEn, "zh-cn": i18nZhCn },
+            // datetimeFormats: {
+            //     "zh-cn": {
+            //         year: {},
+            //         month: { year: "numeric" },
+            //         day: { year: "numeric", month: "short" },
+            //     },
+            //     en: {
+            //         year: {},
+            //         month: { year: "numeric" },
+            //         day: { year: "numeric", month: "short" },
+            //     },
+            // },
         });
         app.use(i18n);
 

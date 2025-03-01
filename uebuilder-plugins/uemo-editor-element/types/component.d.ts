@@ -5,6 +5,7 @@
  */
 import UeElAlignItemSetting, { UeElAlignItemSettingBaseProps } from "../packages/align-item-setting";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
+import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
@@ -21,19 +22,20 @@ import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
 import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radius-setting";
-import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
+import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
 import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
-import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
-import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
+import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel";
+import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 
 declare module "vue" {
     export interface GlobalComponents {
         UeElAlignItemSetting: typeof UeElAlignItemSetting;
         UeElAlignSetting: typeof UeElAlignSetting;
+        UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElButton: typeof UeElButton;
         UeElCheckBox: typeof UeElCheckBox;
         UeElConfirmPanel: typeof UeElConfirmPanel;
@@ -50,14 +52,14 @@ declare module "vue" {
         UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElPopPanel: typeof UeElPopPanel;
         UeElRadiusSetting: typeof UeElRadiusSetting;
-        UeElSettingBar: typeof UeElSettingBar;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
+        UeElSettingBar: typeof UeElSettingBar;
         UeElTabCard: typeof UeElTabCard;
-        UeElTagInput: typeof UeElTagInput;
         UeElTextInput: typeof UeElTextInput;
-        UeElTipGroup: typeof UeElTipGroup;
+        UeElTagInput: typeof UeElTagInput;
         UeElVideoPanel: typeof UeElVideoPanel;
+        UeElTipGroup: typeof UeElTipGroup;
     }
 }
 
@@ -65,6 +67,7 @@ declare global {
     namespace UE_EL_COMPONENT {
         interface UeElAlignItemSettingProps extends UeElAlignItemSettingBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
+        interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
@@ -81,14 +84,14 @@ declare global {
         interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElRadiusSettingProps extends UeElRadiusSettingBaseProps {}
-        interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
+        interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
         interface UeElTabCardProps extends UeElTabCardBaseProps {}
-        interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
-        interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
+        interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElVideoPanelProps extends UeElVideoPanelBaseProps {}
+        interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
     }
 }
 

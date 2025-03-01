@@ -51,5 +51,26 @@
     "ENTER_ANIMATION_ZOOM_IN_DOWN": "Zoom In Down",
 
     "SELECT_PLACEHOLDER": "Please Select",
-    "SELECT_NO_OPTION": "No Options"
+    "SELECT_NO_OPTION": "No Options",
+
+    "WEEK_DAY": "Day",
+    "WEEK_MONDAY": "Mon",
+    "WEEK_TUESDAY": "Tue",
+    "WEEK_WEDNESDAY": "Wed",
+    "WEEK_THURSDAY": "Thu",
+    "WEEK_FRIDAY": "Fri",
+    "WEEK_SATURDAY": "Sat",
+
+    "MONTH_JANUARY": "Jan",
+    "MONTH_FEBRUARY": "Feb",
+    "MONTH_MARCH": "Mar",
+    "MONTH_APRIL": "Apr",
+    "MONTH_MAY": "May",
+    "MONTH_JUNE": "Jun",
+    "MONTH_JULY": "Jul",
+    "MONTH_AUGUST": "Aug",
+    "MONTH_SEPTEMBER": "Sep",
+    "MONTH_OCTOBER": "Oct",
+    "MONTH_NOVEMBER": "Nov",
+    "MONTH_DECEMBER": "Dec"
 }
