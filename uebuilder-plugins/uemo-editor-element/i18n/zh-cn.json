@@ -1,10 +1,12 @@
 {
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
+
     "INPUT_TIP_NOT_EMPTY": "输入不能为空",
     "INPUT_TIP_FORMAT_ERROR": "输入格式错误",
-    "LOADING_TIP": "加载中...",
+
     "CONFIRM": "确认",
     "CANCEL": "取消",
+    "LOADING_TIP": "加载中...",
 
     "ALIGN_ITEM_TITLE": "纵向",
     "ALIGN_ITEM_DEFAULT": "默认",
@@ -48,5 +50,8 @@
     "ENTER_ANIMATION_ROTATE_IN_UP_RIGHT": "右旋入场",
     "ENTER_ANIMATION_ROTATE_IN_UP_LEFT": "左旋入场",
     "ENTER_ANIMATION_ZOOM_IN_UP": "放大入场(下)",
-    "ENTER_ANIMATION_ZOOM_IN_DOWN": "放大入场(上)"
+    "ENTER_ANIMATION_ZOOM_IN_DOWN": "放大入场(上)",
+
+    "SELECT_PLACEHOLDER": "请选择",
+    "SELECT_NO_OPTION": "暂无选项"
 }

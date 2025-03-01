@@ -48,5 +48,8 @@
     "ENTER_ANIMATION_ROTATE_IN_UP_RIGHT": "Rotate In Up Right",
     "ENTER_ANIMATION_ROTATE_IN_UP_LEFT": "Rotate In Up Left",
     "ENTER_ANIMATION_ZOOM_IN_UP": "Zoom In Up",
-    "ENTER_ANIMATION_ZOOM_IN_DOWN": "Zoom In Down"
+    "ENTER_ANIMATION_ZOOM_IN_DOWN": "Zoom In Down",
+
+    "SELECT_PLACEHOLDER": "Please Select",
+    "SELECT_NO_OPTION": "No Options"
 }

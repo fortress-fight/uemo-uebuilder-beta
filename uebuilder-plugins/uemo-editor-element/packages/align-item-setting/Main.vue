@@ -1,7 +1,7 @@
 <!--
  * @Description: 纵向排版控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 02:26:44
+ * @LastEditTime: 2025-03-01 17:05:58
 -->
 <template>
     <div :class="$style['align-item-setting']" class="w-full" :data-disable="disable">
@@ -11,7 +11,6 @@
             class="w-full"
             :title="t('ALIGN_ITEM_TITLE')"
             :options="axiosYOptions"
-            :show-value-icon="true"
             value-align="right"
         />
     </div>

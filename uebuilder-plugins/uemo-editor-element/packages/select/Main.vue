@@ -1,61 +1,49 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-02-25 02:49:59
+ * @LastEditTime: 2025-03-01 17:05:14
 -->
 <template>
-    <div
-        ref="rootDomRef"
-        :class="$style['select-group']"
-        class="cursor-pointer inline-block"
-        :data-disable="disable"
-        :data-theme="theme"
-        @click="openOptionPanel"
+    <UeElSettingBar
+        ref="settingBarRef"
+        :title="title"
+        :label="label"
+        :disable="disable"
+        :placeholder="placeholder || t('SELECT_PLACEHOLDER')"
+        :infoText="infoText"
+        :infoIcon="infoIcon"
+        :infoAlign="valueAlign"
+        @triggerSetting="openOptionPanel"
     >
-        <slot :value-text="selectValueInfo?.text || ''">
-            <div :class="$style['select-bar']" class="flex-auto flex">
-                <div :class="$style['text-box']" class="flex flex-auto">
-                    <span v-if="title" :class="$style['title']">
-                        {{ title }}
-                    </span>
-                    <div :class="$style['info']" class="flex-auto flex items-center" :data-text-align="valueAlign">
-                        <UeElIcon
-                            v-if="selectValueInfo?.icon && showValueIcon"
-                            :class="$style['ic']"
-                            :name="selectValueInfo.icon"
-                            :size="iconSize"
-                        />
-                        <span v-if="valueModel !== undefined">{{ selectValueInfo?.text || "" }}</span>
-                        <span v-else :class="$style['placeholder']">{{ placeholder || "请选择" }}</span>
-                    </div>
-                </div>
-                <div :class="$style['icon-box']" class="flex items-center justify-center">
-                    <UeElIcon name="icon-xiajiantou" :size="15" />
-                </div>
-            </div>
-        </slot>
-        <UeElPopPanel v-model:open="isOpen" :panel="popPanelParams">
+        <UeElPopPanel v-model:open="optionIsOpen" :panel="popPanelParams">
             <UeElSelectOption
                 :style="optionPanelStyle"
                 :value="valueModel"
                 :list="options"
-                :hide-icon="hideIcon"
+                :hide-icon="hideOptionIcon"
                 :pin-value="true"
                 @change="changeValue"
             />
         </UeElPopPanel>
-    </div>
+    </UeElSettingBar>
 </template>
 <script lang="ts" setup>
 import type { UeElSelectBaseProps, SelectValue } from "./index";
 
+import UeElSettingBar from "../setting-bar/Main.vue";
+
 defineOptions({ name: "UeElSelect" });
 
+const { t } = useI18n();
+
 const instance = getCurrentInstance();
-const props = withDefaults(defineProps<UeElSelectBaseProps>(), { disable: false });
+const props = withDefaults(defineProps<UeElSelectBaseProps>(), { showIcon: true, disable: false });
 const valueModel = defineModel<SelectValue>("value", { default: "" });
-const rootDomRef = useTemplateRef("rootDomRef");
-const isOpen = ref<boolean>(false);
+
+const settingBarRef = useTemplateRef("settingBarRef");
+const rootDomRef = computed(() => settingBarRef.value?.$el);
+
+const optionIsOpen = ref<boolean>(false);
 const optionPanelStyle = ref<{ "--min-width": string; "--icon-size": string } | null>(null);
 
 /**
@@ -72,14 +60,14 @@ const selectValueInfo = computed(() =>
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => ({
     position: {
-        refEl: rootDomRef.value!,
+        refEl: rootDomRef.value,
         options: {
             middleware: [
                 ["shift", { crossAxis: true, padding: 17, rootBoundary: "viewport" }],
                 [
                     "offset",
                     () => {
-                        const { height } = rootDomRef.value!.getBoundingClientRect();
+                        const { height } = rootDomRef.value.getBoundingClientRect();
                         return -height / 2;
                     },
                 ],
@@ -89,13 +77,33 @@ const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() =
 }));
 
 /**
+ * 计算信息文本
+ * @returns {string} 信息文本
+ */
+const infoText = computed(() => {
+    return typeof valueModel.value === "undefined" ? "" : selectValueInfo.value?.text;
+});
+
+/**
+ * 计算信息图标
+ * @returns {UE_EL_UTIL.IconParam} 信息图标
+ */
+const infoIcon = computed(() => {
+    const iconName = props.showIcon ? selectValueInfo.value?.icon : undefined;
+    if (typeof iconName === "string") {
+        return { name: iconName, size: props.iconSize };
+    }
+    return iconName;
+});
+
+/**
  * 打开选项面板，并设置面板样式
  * @returns {void}
  */
 function openOptionPanel() {
     if (!instance) return;
     if (props.options.length === 0) {
-        instance.proxy?.$ueElToast.error(props.emptyText || "暂无可选项");
+        instance.proxy?.$ueElToast.error(props.noOptionTip || t("SELECT_NO_OPTION"));
         return;
     }
     // 获取 DOM 边界信息，避免重复调用
@@ -104,7 +112,7 @@ function openOptionPanel() {
         "--min-width": `${Math.ceil(width)}px`,
         "--icon-size": `${props.iconSize}`,
     };
-    isOpen.value = true;
+    optionIsOpen.value = true;
 }
 
 /**
@@ -114,75 +122,9 @@ function openOptionPanel() {
  */
 function changeValue(value: string | number) {
     valueModel.value = value;
-    isOpen.value = false;
+    optionIsOpen.value = false;
 }
 </script>
 <style lang="scss" module>
-.select-group {
-    --ue-component-select-size: 26px;
-    display: inline-block;
-    &[data-disable="true"] {
-        pointer-events: none;
-        .select-bar {
-            opacity: 0.5;
-        }
-    }
-    &[data-theme="showBorder"] {
-        .select-bar {
-            --border-color: #{color(var(--ue-border-color), 1)};
-            .icon-box {
-                opacity: 1;
-            }
-        }
-    }
-}
-.select-bar {
-    --border-color: #{color(var(--ue-border-color), 0)};
-    font-size: 12px;
-    line-height: var(--ue-component-select-size);
-
-    padding-left: var(--ue-editor-row-space--lv1);
-
-    cursor: pointer;
-
-    border: 1px solid var(--border-color);
-    border-radius: var(--ue-border-radius--lv1);
-    background-color: #fff;
-    // box-shadow: inset 0 0 0 1px var(--border-color);
-    &:hover {
-        --border-color: #{color(var(--ue-border-color))};
-        .icon-box {
-            opacity: 1;
-        }
-    }
-    &:focus-within {
-        --border-color: color(var(--ue-color--active));
-        .icon-box {
-            opacity: 1;
-        }
-    }
-    .title {
-        margin-right: 10px;
-
-        color: color(var(--ue-font-color));
-    }
-    .icon-box {
-        @include square(var(--ue-component-select-size));
-        font-size: 16px;
-
-        opacity: 0;
-        color: color(var(--ue-font-color));
-    }
-    .info {
-        &[data-text-align="right"] {
-            justify-content: flex-end;
-        }
-        .ic {
-            margin-right: var(--ue-editor-row-space--lv1);
-        }
-        .placeholder {
-            color: color(var(--ue-font-color));
-        }
-    }
-}
+//
 </style>

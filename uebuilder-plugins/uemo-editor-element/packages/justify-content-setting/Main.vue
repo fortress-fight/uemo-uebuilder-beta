@@ -1,7 +1,7 @@
 <!--
  * @Description: 横向排版控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:58:31
+ * @LastEditTime: 2025-03-01 17:07:41
 -->
 <template>
     <div :class="$style['justify-content-setting']" class="w-full" :data-disable="disable">
@@ -11,7 +11,6 @@
             class="w-full"
             :title="t('JUSTIFY_CONTENT_TITLE')"
             :options="axiosYOptions"
-            :show-value-icon="true"
             value-align="right"
         />
     </div>

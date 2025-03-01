@@ -19,10 +19,10 @@ import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
 import TestEnterAnimateSetting from "~/demo/components/TestEnterAnimateSetting.vue";
 
 const testComponents = [
-    TestAlignItem,
-    TestEnterAnimateSetting,
-    TestJustifyContentSetting,
     TestAlignSetting,
+    TestEnterAnimateSetting,
+    TestAlignItem,
+    TestJustifyContentSetting,
     TestGapSetting,
     TestMarginSetting,
     TestPaddingSetting,
