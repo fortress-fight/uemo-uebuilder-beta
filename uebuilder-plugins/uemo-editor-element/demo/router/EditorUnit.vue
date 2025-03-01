@@ -26,10 +26,11 @@ import TestTagInput from "~/demo/components/TestTagInput.vue";
 import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 import TestNumberInput from "~/demo/components/TestNumberInput.vue";
 import TestSettingBar from "~/demo/components/TestSettingBar.vue";
+import TestCalenderSetting from "~/demo/components/TestCalenderSetting.vue";
 
 const helperTestComponents = [TestLoading, TestTipGroup, TestButton];
 const unitTestComponents = [TestIcon, TestOnOff, TestSettingBar];
-const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect];
+const formTestComponents = [TestTextInput, TestCheckBox, TestSelectOption, TestSelect, TestCalenderSetting];
 const panelTestComponents = [TestTabCard, TestConfirmPanel, TestVideoPanel, TestContextmenu];
 const mixinTestComponents = [TestControlGroup, TestTagInput, TestNumberInput];
 const testComponents = [

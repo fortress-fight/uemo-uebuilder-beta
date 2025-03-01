@@ -74,5 +74,8 @@
     "MONTH_SEPTEMBER": "九月",
     "MONTH_OCTOBER": "十月",
     "MONTH_NOVEMBER": "十一月",
-    "MONTH_DECEMBER": "十二月"
+    "MONTH_DECEMBER": "十二月",
+
+    "CALENDER_SETTING_TITLE": "日期",
+    "CALENDER_SETTING_PLACEHOLDER": "请输入日期"
 }

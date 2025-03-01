@@ -72,5 +72,8 @@
     "MONTH_SEPTEMBER": "Sep",
     "MONTH_OCTOBER": "Oct",
     "MONTH_NOVEMBER": "Nov",
-    "MONTH_DECEMBER": "Dec"
+    "MONTH_DECEMBER": "Dec",
+
+    "CALENDER_SETTING_TITLE": "Date",
+    "CALENDER_SETTING_PLACEHOLDER": "Input Date"
 }
