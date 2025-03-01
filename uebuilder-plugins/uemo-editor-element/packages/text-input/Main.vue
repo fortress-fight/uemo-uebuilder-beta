@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:26:44
+ * @LastEditTime: 2025-03-01 23:51:44
 -->
 <template>
     <div
@@ -128,39 +128,34 @@ function confirm() {
     // 重置验证状态
     isValid.value = true;
 
-    // 必填校验
-    if (prop.required && !processedValue) {
+    if (!prop.required && !processedValue) {
+        // 非必填且为空时直接返回
+        isValid.value = true;
+    } else if (prop.required && !processedValue) {
+        // 必填校验
         instance?.proxy?.$ueElToast.error(t("INPUT_TIP_NOT_EMPTY"));
         isValid.value = false;
-        return;
-    }
-    // 非必填且为空时直接返回
-    if (!prop.required && !processedValue) {
-        emit("confirm", processedValue);
-        return;
-    }
-
-    // 校验规则
-    prop.rules?.forEach((rule) => {
-        if (typeof rule === "function") {
-            const result = rule(processedValue);
-            if (typeof result === "string") {
+    } else {
+        // 校验规则
+        prop.rules?.forEach((rule) => {
+            if (typeof rule === "function") {
+                const result = rule(processedValue);
+                if (typeof result === "string" || result === false) {
+                    instance?.proxy?.$ueElToast.error(result || t("INPUT_TIP_FORMAT_ERROR"));
+                    isValid.value = false;
+                    return;
+                }
+            } else if (rule.pattern && !rule.pattern.test(processedValue)) {
                 instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
                 isValid.value = false;
                 return;
             }
-            if (!result) {
-                isValid.value = false;
-                return;
-            }
-        } else if (rule.pattern && !rule.pattern.test(processedValue)) {
-            instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
-            isValid.value = false;
-            return;
-        }
-    });
+        });
+    }
 
-    emit("confirm", processedValue);
+    if (isValid.value) {
+        emit("confirm", processedValue);
+    }
 }
 
 defineExpose({
