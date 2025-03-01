@@ -15,6 +15,7 @@ import TestCalenderPicker from "~/demo/components/TestCalenderPicker.vue";
 import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 import TestTabCard from "~/demo/components/TestTabCard.vue";
 import TestEditorPanel from "~/demo/components/TestEditorPanel.vue";
+import TestColorPickerPanel from "~/demo/components/TestColorPickerPanel.vue";
 
 const testComponents = [
     TestCalenderPicker,
@@ -23,6 +24,7 @@ const testComponents = [
     TestContextmenu,
     TestTabCard,
     TestEditorPanel,
+    TestColorPickerPanel,
 ];
 </script>
 <style lang="scss" module>
