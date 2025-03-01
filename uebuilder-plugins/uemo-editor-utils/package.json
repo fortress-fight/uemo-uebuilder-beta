@@ -36,6 +36,7 @@
         "@types/nanoid-dictionary": "^4.2.3",
         "big.js": "^6.2.2",
         "copy-to-clipboard": "^3.3.3",
+        "date-fns": "^4.1.0",
         "floating-ui": "^5.2.8",
         "gsap": "^3.12.7",
         "jquery": "^3.7.1",
