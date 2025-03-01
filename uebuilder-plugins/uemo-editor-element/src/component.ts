@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/1 04:55:48
+ * @LastEditTime: 2025/3/1 15:34:01
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -10,6 +10,7 @@ import UeElCheckBox from "../packages/check-box";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
+import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElGapSetting from "../packages/gap-setting";
 import UeElIcon from "../packages/icon";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
@@ -36,6 +37,7 @@ export const components = [
     UeElConfirmPanel,
     UeElContextmenu,
     UeElControlGroup,
+    UeElEnterAnimateSetting,
     UeElGapSetting,
     UeElIcon,
     UeElJustifyContentSetting,

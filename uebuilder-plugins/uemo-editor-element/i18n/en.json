@@ -36,5 +36,17 @@
     "JUSTIFY_CONTENT_TITLE": "Horizontal",
     "JUSTIFY_CONTENT_START": "Left",
     "JUSTIFY_CONTENT_CENTER": "Center",
-    "JUSTIFY_CONTENT_END": "Right"
+    "JUSTIFY_CONTENT_END": "Right",
+
+    "ENTER_ANIMATION_TITLE": "Effect",
+    "ENTER_ANIMATION_NONE": "None",
+    "ENTER_ANIMATION_FADE_IN_UP": "Fade In Up",
+    "ENTER_ANIMATION_FADE_IN_LEFT": "Fade In Left",
+    "ENTER_ANIMATION_FADE_IN_RIGHT": "Fade In Right",
+    "ENTER_ANIMATION_ZOOM_IN": "Zoom In",
+    "ENTER_ANIMATION_FADE_IN": "Fade In",
+    "ENTER_ANIMATION_ROTATE_IN_UP_RIGHT": "Rotate In Up Right",
+    "ENTER_ANIMATION_ROTATE_IN_UP_LEFT": "Rotate In Up Left",
+    "ENTER_ANIMATION_ZOOM_IN_UP": "Zoom In Up",
+    "ENTER_ANIMATION_ZOOM_IN_DOWN": "Zoom In Down"
 }

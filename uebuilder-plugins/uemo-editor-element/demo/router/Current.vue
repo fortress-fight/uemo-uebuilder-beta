@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestJustifyContentSetting.vue";
+import TestComponent from "~/demo/components/TestEnterAnimateSetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {

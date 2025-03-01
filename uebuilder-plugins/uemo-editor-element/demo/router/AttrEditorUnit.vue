@@ -16,9 +16,11 @@ import TestGapSetting from "~/demo/components/TestGapSetting.vue";
 import TestMarginSetting from "~/demo/components/TestMarginSetting.vue";
 import TestPaddingSetting from "~/demo/components/TestPaddingSetting.vue";
 import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
+import TestEnterAnimateSetting from "~/demo/components/TestEnterAnimateSetting.vue";
 
 const testComponents = [
     TestAlignItem,
+    TestEnterAnimateSetting,
     TestJustifyContentSetting,
     TestAlignSetting,
     TestGapSetting,
