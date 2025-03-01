@@ -14,7 +14,6 @@ import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 import TestCalenderPicker from "~/demo/components/TestCalenderPicker.vue";
 import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 import TestTabCard from "~/demo/components/TestTabCard.vue";
-import TestColorPicker from "~/demo/components/TestColorPicker.vue";
 import TestEditorPanel from "~/demo/components/TestEditorPanel.vue";
 
 const testComponents = [
@@ -23,7 +22,6 @@ const testComponents = [
     TestVideoPanel,
     TestContextmenu,
     TestTabCard,
-    TestColorPicker,
     TestEditorPanel,
 ];
 </script>
