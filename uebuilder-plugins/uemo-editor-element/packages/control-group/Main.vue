@@ -1,7 +1,7 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 04:22:24
+ * @LastEditTime: 2025-03-02 19:07:58
 -->
 <template>
     <div :class="$style['control-group']" class="grid">
@@ -57,7 +57,11 @@
 <script lang="ts" setup>
 import type { UeElControlGroupBaseProps } from "./index";
 
-const props = withDefaults(defineProps<UeElControlGroupBaseProps>(), { hideOper: false, colCount: 1 });
+const props = withDefaults(defineProps<UeElControlGroupBaseProps>(), {
+    hideOper: false,
+    colCount: 1,
+    operType: "none",
+});
 
 defineOptions({ name: "UeElControlGroup" });
 const emit = defineEmits<{

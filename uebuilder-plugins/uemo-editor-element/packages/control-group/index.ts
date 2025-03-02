@@ -1,7 +1,7 @@
 /*
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:31:10
+ * @LastEditTime: 2025-03-02 19:07:47
  */
 import type { App } from "vue";
 
@@ -16,7 +16,7 @@ export interface UeElControlGroupBaseProps {
     colCount?: number;
     disable?: boolean;
     hideOper?: boolean;
-    operType: "none" | "remove" | "onOff" | "button" | "select";
+    operType?: "none" | "remove" | "onOff" | "button" | "select";
     onOffParam?: UE_EL_COMPONENT.UeElOnOffProps & { value: UE_EL_UTIL.OnOffValue };
     buttonParam?: Partial<UE_EL_COMPONENT.UeElButtonProps>;
     selectParam?: UE_EL_COMPONENT.UeElSelectProps;

@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试通用编辑器容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 23:14:44
+ * @LastEditTime: 2025-03-02 19:08:57
 -->
 <template>
     <TestArea
@@ -12,7 +12,9 @@
         title="测试通用编辑器容器"
     >
         <UeElEditorGroup v-bind="testValue">
-            <!--  -->
+            <UeElControlGroup operType="none">
+                <UeElSelect v-model:value="testSelect.value" title="测试选择器" :options="testSelect.options" />
+            </UeElControlGroup>
         </UeElEditorGroup>
     </TestArea>
 </template>
@@ -25,6 +27,15 @@ const testValueList: (UE_EL_COMPONENT.UeElEditorGroupProps & { testOptionTitle?:
     { title: "测试通用编辑器容器" },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
+
+const testSelect = ref({
+    value: "1",
+    options: [
+        { value: "1", text: "选项1" },
+        { value: "2", text: "选项2" },
+        { value: "3", text: "选项3" },
+    ],
+});
 
 watch(testValueSelect, (newValue) => {
     testValue.value = testValueList[newValue];
