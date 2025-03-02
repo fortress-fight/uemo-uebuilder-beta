@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestBoxShadowSettingGroup.vue";
+import TestComponent from "~/demo/components/TestCalenderSettingGroup.vue";
 </script>
 <style lang="scss" module>
 .test-group {

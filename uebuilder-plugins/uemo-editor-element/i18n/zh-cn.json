@@ -13,6 +13,7 @@
     "UNIT_LINEAR_GRADIENT": "线性渐变",
     "UNIT_RADIAL_GRADIENT": "径向渐变",
     "UNIT_BORDER": "描边",
+    "UNIT_CALENDER": "日期",
 
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
