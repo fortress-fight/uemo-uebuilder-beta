@@ -64,21 +64,21 @@ const positionParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
 }));
 const xPosParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: t("COLOR_PICKER_POINT_X_POS") },
+    title: { text: t("UNIT_X") },
     step: 1,
     limit: { "%": [-Infinity, Infinity] },
     units: [{ text: "%", value: "%", default: 50 }],
 }));
 const yPosParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: t("COLOR_PICKER_POINT_Y_POS") },
+    title: { text: t("UNIT_Y") },
     step: 1,
     limit: { "%": [-110, 110] },
     units: [{ text: "%", value: "%", default: 50 }],
 }));
 const widthParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: t("COLOR_PICKER_POINT_WIDTH") },
+    title: { text: t("UNIT_WIDTH") },
     step: 1,
     limit: { px: [0, Infinity], "%": [0, Infinity] },
     units: [
@@ -88,7 +88,7 @@ const widthParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
 }));
 const heightParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: t("COLOR_PICKER_POINT_HEIGHT") },
+    title: { text: t("UNIT_HEIGHT") },
     step: 1,
     limit: { px: [0, Infinity], "%": [0, Infinity] },
     units: [
@@ -102,7 +102,7 @@ const useValue = computed({
     get() {
         try {
             if (!valueRef.value?.includes("radial-gradient")) {
-                throw new Error(t("COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED"));
+                throw new Error(t("COLOR_PICKER_TIP_NOT_SUPPORTED"));
             }
             return valueRef.value;
         } catch (error) {

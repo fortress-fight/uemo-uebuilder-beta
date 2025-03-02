@@ -35,7 +35,7 @@
     <div
         v-else-if="colorType === 'linearGradient' || colorType === 'radialGradient'"
         ref="gradientRootRef"
-        :title="t('COLOR_PICKER_GRADIENT_TITLE')"
+        :title="t('UNIT_LINEAR_GRADIENT')"
         :class="$style['gradient-color-input']"
         @click="triggerColorInput"
     >
@@ -47,7 +47,7 @@
             >
                 <div :class="$style['inner-box']" :style="{ '--background': useColor }"></div>
             </div>
-            <div :class="$style['title']">{{ t("COLOR_PICKER_GRADIENT_TITLE") }}</div>
+            <div :class="$style['title']">{{ t("UNIT_LINEAR_GRADIENT") }}</div>
         </div>
         <UeElNumberInput
             v-if="independentOpacityControlEnabled"

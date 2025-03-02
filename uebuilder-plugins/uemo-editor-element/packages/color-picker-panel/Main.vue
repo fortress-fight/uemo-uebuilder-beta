@@ -73,9 +73,9 @@ function checkValueType(value: string) {
 
 const panelTitle = computed(() => {
     if (colorMode.value === "linearGradient") {
-        return t("COLOR_PICKER_GRADIENT_TITLE");
+        return t("UNIT_LINEAR_GRADIENT");
     } else if (colorMode.value === "radialGradient") {
-        return t("COLOR_PICKER_RADIAL_GRADIENT_TITLE");
+        return t("UNIT_RADIAL_GRADIENT");
     } else {
         return t("COLOR_PICKER_PANEL_TITLE");
     }

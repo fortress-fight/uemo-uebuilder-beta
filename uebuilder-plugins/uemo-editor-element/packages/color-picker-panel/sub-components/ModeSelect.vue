@@ -31,8 +31,8 @@ const emit = defineEmits<{ (ev: "changeColor", color: string): void }>();
 
 const modeOptions = computed(() => [
     { value: "color", text: t("COLOR_PICKER_PANEL_TITLE") },
-    { value: "linearGradient", text: t("COLOR_PICKER_GRADIENT_TITLE") },
-    { value: "radialGradient", text: t("COLOR_PICKER_RADIAL_GRADIENT_TITLE") },
+    { value: "linearGradient", text: t("UNIT_LINEAR_GRADIENT") },
+    { value: "radialGradient", text: t("UNIT_RADIAL_GRADIENT") },
 ]);
 
 function getCurrentFirstColor(value: string) {

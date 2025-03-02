@@ -1,10 +1,26 @@
 {
+    "UNIT_X": "X",
+    "UNIT_Y": "Y",
+    "UNIT_BLUR": "Blur",
+    "UNIT_SPREAD": "Spread",
+    "UNIT_COLOR": "Color",
+    "UNIT_SHADOW": "Shadow",
+    "UNIT_WIDTH": "Width",
+    "UNIT_HEIGHT": "Height",
+    "UNIT_RADIUS": "Radius",
+    "UNIT_OPACITY": "Opacity",
+    "UNIT_ANGLE": "Angle",
+    "UNIT_LINEAR_GRADIENT": "Linear Gradient",
+    "UNIT_RADIAL_GRADIENT": "Radial Gradient",
+
+    "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
+
     "INPUT_TIP_NOT_EMPTY": "Input is required",
     "INPUT_TIP_FORMAT_ERROR": "Invalid Input Format",
-    "LOADING_TIP": "Loading...",
+
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
-    "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
+    "LOADING_TIP": "Loading...",
 
     "ALIGN_ITEM_TITLE": "Vertical",
     "ALIGN_ITEM_DEFAULT": "Default",
@@ -77,22 +93,21 @@
     "CALENDER_SETTING_TITLE": "Date",
     "CALENDER_SETTING_PLACEHOLDER": "Input Date",
 
-    "COLOR_EYE_DROPPER": "Color Picker",
-    "COLOR_PICKER_TIP_NOT_SUPPORTED": "Currently only supports Chrome or Edge",
     "COLOR_INPUT_TIP_NOT_CORRECT": "Please enter a valid color value",
-    "COLOR_PICKER_PANEL_TITLE": "Color Picker",
-    "COLOR_PICKER_GRADIENT_TITLE": "Linear Gradient",
-    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "Radial Gradient",
 
+    "COLOR_PICKER_EYE_DROPPER": "Color Picker",
+    "COLOR_PICKER_PANEL_TITLE": "Color Picker",
     "COLOR_PICKER_ADD_POINT": "Add Gradient Point",
     "COLOR_PICKER_REMOVE_POINT": "Remove Gradient Point",
-    "COLOR_PICKER_ANGLE_TITLE": "Angle",
     "COLOR_PICKER_POINT_POS": "Stop",
-    "COLOR_PICKER_POINT_WIDTH": "W",
-    "COLOR_PICKER_POINT_HEIGHT": "y",
-    "COLOR_PICKER_POINT_X_POS": "X",
-    "COLOR_PICKER_POINT_Y_POS": "Y",
-    "COLOR_PICKER_ERROR_TIP_MIN_POINT": "Linear Gradient requires at least two color points",
-    "COLOR_PICKER_ERROR_TIP_MAX_POINT": "Linear Gradient can only add up to 5 color points",
-    "COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED": "Please use linear or radial gradient"
+    "COLOR_PICKER_TIP_MIN_POINT": "Linear Gradient requires at least two color points",
+    "COLOR_PICKER_TIP_MAX_POINT": "Linear Gradient can only add up to 5 color points",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED": "Please use linear or radial gradient",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED_EYE_DROPPER": "Currently only supports Chrome or Edge",
+
+    "BOX_SHADOW_SETTING_X": "Horizontal Offset",
+    "BOX_SHADOW_SETTING_Y": "Vertical Offset",
+    "BOX_SHADOW_SETTING_BLUR": "Blur Radius",
+    "BOX_SHADOW_SETTING_SPREAD": "Spread Radius",
+    "BOX_SHADOW_SETTING_INDEPENDENT": "Independent Adjustment"
 }

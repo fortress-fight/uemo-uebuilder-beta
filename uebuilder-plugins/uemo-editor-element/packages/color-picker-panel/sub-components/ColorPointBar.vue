@@ -78,7 +78,7 @@ function handleKeyDown(ev: KeyboardEvent) {
  */
 function removePoint() {
     if (prop.points.length <= 2) {
-        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_ERROR_TIP_MIN_POINT"));
+        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_TIP_MIN_POINT"));
         return;
     }
 
@@ -95,7 +95,7 @@ function removePoint() {
  */
 function addPoint(ev: MouseEvent) {
     if (prop.points.length >= 5) {
-        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_ERROR_TIP_MAX_POINT"));
+        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_TIP_MAX_POINT"));
         return;
     }
 

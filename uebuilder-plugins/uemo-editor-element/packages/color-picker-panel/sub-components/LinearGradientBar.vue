@@ -64,7 +64,7 @@ const positionParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
 
 const angleInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: t("COLOR_PICKER_ANGLE_TITLE") },
+    title: { text: t("UNIT_ANGLE") },
     step: 1,
     limit: [0, 365],
     show: { input: (value) => value.num + "°" },
@@ -75,7 +75,7 @@ const useValue = computed({
     get() {
         try {
             if (!valueRef.value?.includes("linear-gradient")) {
-                throw new Error(t("COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED"));
+                throw new Error(t("COLOR_PICKER_TIP_NOT_SUPPORTED"));
             }
             return valueRef.value;
         } catch (error) {

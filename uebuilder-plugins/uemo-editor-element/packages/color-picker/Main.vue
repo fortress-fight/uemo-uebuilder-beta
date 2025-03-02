@@ -26,7 +26,7 @@
                 v-if="enableColorPicker"
                 :class="$style['btn-box']"
                 class="flex items-center justify-center"
-                :title="t('COLOR_EYE_DROPPER')"
+                :title="t('COLOR_PICKER_EYE_DROPPER')"
                 @click="openSystemColorPicker"
             >
                 <UeElIcon name="icon-dropper" :class="$style['ic']" />
@@ -240,7 +240,7 @@ watch(
 const enableColorPicker = window.location.protocol.includes("https");
 function openSystemColorPicker() {
     if (!isSupported) {
-        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_TIP_NOT_SUPPORTED"));
+        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_TIP_NOT_SUPPORTED_EYE_DROPPER"));
         return;
     }
 

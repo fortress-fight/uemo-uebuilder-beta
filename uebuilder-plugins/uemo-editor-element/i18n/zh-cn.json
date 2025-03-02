@@ -1,4 +1,18 @@
 {
+    "UNIT_X": "横向",
+    "UNIT_Y": "纵向",
+    "UNIT_BLUR": "模糊",
+    "UNIT_SPREAD": "扩展",
+    "UNIT_COLOR": "颜色",
+    "UNIT_SHADOW": "投影",
+    "UNIT_WIDTH": "宽度",
+    "UNIT_HEIGHT": "高度",
+    "UNIT_RADIUS": "圆角",
+    "UNIT_OPACITY": "透明度",
+    "UNIT_ANGLE": "角度",
+    "UNIT_LINEAR_GRADIENT": "线性渐变",
+    "UNIT_RADIAL_GRADIENT": "径向渐变",
+
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
     "INPUT_TIP_NOT_EMPTY": "输入不能为空",
@@ -79,22 +93,21 @@
     "CALENDER_SETTING_TITLE": "日期",
     "CALENDER_SETTING_PLACEHOLDER": "请输入日期",
 
-    "COLOR_EYE_DROPPER": "拾色器",
     "COLOR_INPUT_TIP_NOT_CORRECT": "请输入正确的颜色值",
-    "COLOR_PICKER_TIP_NOT_SUPPORTED": "当前浏览器不支持拾色器，目前仅支持 Chrome 或 Edge",
-    "COLOR_PICKER_PANEL_TITLE": "颜色面板",
-    "COLOR_PICKER_GRADIENT_TITLE": "线性渐变色",
-    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "径向渐变色",
 
+    "COLOR_PICKER_EYE_DROPPER": "拾色器",
+    "COLOR_PICKER_PANEL_TITLE": "颜色面板",
     "COLOR_PICKER_ADD_POINT": "添加渐变点",
     "COLOR_PICKER_REMOVE_POINT": "移除渐变点",
-    "COLOR_PICKER_ANGLE_TITLE": "角度",
     "COLOR_PICKER_POINT_POS": "位置",
-    "COLOR_PICKER_POINT_WIDTH": "宽度",
-    "COLOR_PICKER_POINT_HEIGHT": "高度",
-    "COLOR_PICKER_POINT_X_POS": "横向",
-    "COLOR_PICKER_POINT_Y_POS": "纵向",
-    "COLOR_PICKER_ERROR_TIP_MIN_POINT": "渐变色至少需要两个颜色点",
-    "COLOR_PICKER_ERROR_TIP_MAX_POINT": "渐变色最多只能添加5个颜色点",
-    "COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED": "请使用线性或径向渐变"
+    "COLOR_PICKER_TIP_MIN_POINT": "渐变色至少需要两个颜色点",
+    "COLOR_PICKER_TIP_MAX_POINT": "渐变色最多只能添加5个颜色点",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED": "请使用线性或径向渐变",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED_EYE_DROPPER": "当前浏览器不支持拾色器，目前仅支持 Chrome 或 Edge",
+
+    "BOX_SHADOW_SETTING_X": "横向偏移",
+    "BOX_SHADOW_SETTING_Y": "纵向偏移",
+    "BOX_SHADOW_SETTING_BLUR": "模糊范围",
+    "BOX_SHADOW_SETTING_SPREAD": "扩展范围",
+    "BOX_SHADOW_SETTING_INDEPENDENT": "独立调节"
 }
