@@ -68,6 +68,11 @@ declare global {
          * @description 颜色类型
          */
         type ColorType = "color" | "linearGradient" | "radialGradient";
+
+        /**
+         * @description 边框参数
+         */
+        type BorderValue = { width: string; color: string; style: string };
     }
 }
 

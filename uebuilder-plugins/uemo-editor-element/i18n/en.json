@@ -109,5 +109,8 @@
     "BOX_SHADOW_SETTING_Y": "Vertical Offset",
     "BOX_SHADOW_SETTING_BLUR": "Blur Radius",
     "BOX_SHADOW_SETTING_SPREAD": "Spread Radius",
-    "BOX_SHADOW_SETTING_INDEPENDENT": "Independent Adjustment"
+    "BOX_SHADOW_SETTING_INDEPENDENT": "Independent Adjustment",
+
+    "BORDER_STYLE_SOLID": "Solid",
+    "BORDER_STYLE_DASHED": "Dashed"
 }
