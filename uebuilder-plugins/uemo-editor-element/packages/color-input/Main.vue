@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:33:50
+ * @LastEditTime: 2025-03-02 18:56:32
 -->
 <template>
     <UeElTextInput
@@ -11,6 +11,7 @@
         :rules="hexRules"
         :disable="disable"
         padding-size="level2"
+        ref="colorRootRef"
         @confirm="hex = $event"
     >
         <template #before>
@@ -33,6 +34,7 @@
     </UeElTextInput>
     <div
         v-else-if="colorType === 'linearGradient' || colorType === 'radialGradient'"
+        ref="gradientRootRef"
         :title="t('COLOR_PICKER_GRADIENT_TITLE')"
         :class="$style['gradient-color-input']"
         @click="triggerColorInput"
@@ -75,6 +77,12 @@ const valueRef = defineModel<string>("value", { required: false });
 const independentOpacityRef = defineModel<number | string>("opacity", { required: false });
 const independentOpacityControlEnabled = computed(() => {
     return !prop.disableOpacity && typeof independentOpacityRef.value !== "undefined";
+});
+
+const colorRootRef = useTemplateRef("colorRootRef");
+const gradientRootRef = useTemplateRef("gradientRootRef");
+const rootDomRef = computed(() => {
+    return colorRootRef.value?.$el || gradientRootRef.value;
 });
 
 const useColor = computed({
@@ -173,6 +181,8 @@ const opacity = computed<number>({
 function triggerColorInput() {
     emit("trigger", useColor.value);
 }
+
+defineExpose({ rootDomRef });
 </script>
 <style lang="scss" module>
 .color-input {
@@ -182,6 +192,14 @@ function triggerColorInput() {
         .opacity-input {
             border-color: color(var(--ue-border-color));
         }
+    }
+    .opacity-input {
+        --text-border-color: transparent !important;
+        width: 50px;
+
+        border-width: 0;
+        border-left: 1px solid transparent;
+        border-radius: 0;
     }
 }
 .color-box {
@@ -240,13 +258,13 @@ function triggerColorInput() {
             border-color: color(var(--ue-border-color));
         }
     }
-}
-.opacity-input {
-    --text-border-color: transparent !important;
-    width: 50px;
+    .opacity-input {
+        --text-border-color: transparent !important;
+        width: 50px;
 
-    border-width: 0;
-    border-left: 1px solid transparent;
-    border-radius: 0;
+        border-width: 0;
+        border-left: 1px solid transparent;
+        border-radius: 0;
+    }
 }
 </style>

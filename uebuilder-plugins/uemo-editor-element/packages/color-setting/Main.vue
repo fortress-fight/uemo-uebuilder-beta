@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:12:14
+ * @LastEditTime: 2025-03-02 18:51:13
 -->
 <template>
     <UeElColorInput
@@ -9,6 +9,10 @@
         v-model:value="valueRef"
         @trigger="openColorPickerPanel()"
         :disable-opacity="disableOpacity"
+        :type="type"
+        :disable="disable"
+        :default-value="defaultValue"
+        v-bind="$attrs"
     />
     <UeElPopPanel v-model:open="colorPickerPanelOpen" :panel="popPanelParams" :draggable="true">
         <UeElColorPickerPanel v-model:value="valueRef" :disable-opacity="disableOpacity" />
@@ -33,13 +37,13 @@ function openColorPickerPanel() {
 }
 
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const domRef = colorInputRef.value;
+    const domRef = colorInputRef.value?.rootDomRef;
 
     if (!domRef) return;
 
     return {
         position: {
-            refEl: domRef.$el as HTMLElement,
+            refEl: domRef,
             options: {
                 placement: prop.placement,
                 middleware: [

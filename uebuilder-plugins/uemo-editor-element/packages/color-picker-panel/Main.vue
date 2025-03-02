@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 17:43:42
+ * @LastEditTime: 2025-03-02 18:53:21
 -->
 <template>
     <UeElEditorPanel :title="panelTitle" :class="$style['color-picker-panel']" :with-dragger="true" :with-close="false">
@@ -59,7 +59,7 @@ const useValue = computed({
 });
 
 function checkValueType(value: string) {
-    if (prop.type === "mixin") return true;
+    if (prop.type === "mixin" || typeof prop.type === "undefined") return true;
     if (value.includes("linear-gradient")) {
         if (prop.type === "linearGradient") return true;
         return false;
