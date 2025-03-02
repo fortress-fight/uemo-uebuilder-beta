@@ -39,6 +39,5 @@ const usedColors = getLocalColorLib();
 <style lang="scss" module>
 .color-picker {
     padding-top: 0;
-    padding-bottom: 0;
 }
 </style>

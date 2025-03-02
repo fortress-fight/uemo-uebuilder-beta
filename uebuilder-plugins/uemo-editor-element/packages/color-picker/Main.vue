@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 22:48:57
+ * @LastEditTime: 2025-03-03 01:15:26
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
