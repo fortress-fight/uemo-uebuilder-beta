@@ -1,13 +1,14 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 19:07:58
+ * @LastEditTime: 2025-03-03 00:43:25
 -->
 <template>
     <div :class="$style['control-group']" class="grid">
         <div :class="$style['control-oper']" :data-col="colCount">
             <slot :disable="disable"></slot>
         </div>
+
         <div v-if="!hideOper" :class="$style['oper-box']">
             <slot name="oper">
                 <UeElButton
@@ -20,14 +21,14 @@
                     @trigger="trigger('remove')"
                 />
                 <UeElOnOff
-                    v-else-if="operType === 'onOff' && onOffParam"
+                    v-else-if="operType === 'onOff' && !!onOffParam"
                     v-bind="onOffParam"
                     :class="$style['oper-btn']"
                     :disable="disable"
                     @update:value="trigger('onOffChange', $event)"
                 />
                 <UeElButton
-                    v-else-if="operType === 'button' && buttonParam"
+                    v-else-if="operType === 'button' && !!buttonParam"
                     :class="$style['oper-btn']"
                     :disable="disable"
                     v-bind="buttonParam"
@@ -35,16 +36,18 @@
                     @trigger="trigger('trigger')"
                 />
                 <UeElSelect
-                    v-else-if="operType === 'select' && selectParam"
+                    v-else-if="operType === 'select' && !!selectParam"
                     v-bind="selectParam"
                     @update:value="trigger('selectChange', $event)"
                 >
-                    <UeElButton
-                        :class="$style['oper-btn']"
-                        :disable="disable"
-                        v-bind="buttonParam"
-                        theme="squareIcon"
-                    />
+                    <template #info>
+                        <UeElButton
+                            :class="$style['oper-btn']"
+                            :disable="disable"
+                            v-bind="buttonParam"
+                            theme="squareIcon"
+                        />
+                    </template>
                 </UeElSelect>
                 <template v-else>
                     <div :class="$style['placeholder']"></div>
