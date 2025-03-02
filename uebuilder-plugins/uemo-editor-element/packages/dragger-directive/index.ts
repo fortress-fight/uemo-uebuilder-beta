@@ -254,10 +254,10 @@ export function install(app: App): void {
 
     // 拖拽器指令：处理元素的拖拽行为
     app.directive("ue-el-dragger", {
-        mounted(el: HTMLElement, binding: DirectiveBinding<{ value: boolean }>) {
+        mounted(el: HTMLElement, binding: DirectiveBinding<boolean>) {
             if (binding.value) draggerManager.add(el);
         },
-        updated(el: HTMLElement, binding: DirectiveBinding<{ value: boolean }>) {
+        updated(el: HTMLElement, binding: DirectiveBinding<boolean>) {
             draggerManager.toggle(el, Boolean(binding.value));
         },
         unmounted(el: HTMLElement) {

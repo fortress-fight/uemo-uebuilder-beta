@@ -4,6 +4,6 @@ declare module "vue" {
     export interface ComponentCustomProperties {
         vUeElLabel: Directive<HTMLElement, UE_EL_UTIL.LabelOption | UE_EL_UTIL.LabelOption[]>;
         vUeElDragging: Directive<HTMLElement, UE_EL_UTIL.DraggerDirectiveParam>;
-        vUeElDragger: Directive<HTMLElement, { value: boolean }>;
+        vUeElDragger: Directive<HTMLElement, boolean>;
     }
 }
