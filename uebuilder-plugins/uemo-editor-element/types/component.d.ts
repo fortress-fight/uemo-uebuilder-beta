@@ -4,12 +4,13 @@
  * @LastEditTime: 2025-02-20 15:32:50
  */
 import UeElAlignItemSetting, { UeElAlignItemSettingBaseProps } from "../packages/align-item-setting";
+import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
-import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
+import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/calender-setting";
-import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElColorInput, { UeElColorInputBaseProps } from "../packages/color-input";
+import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElColorPicker, { UeElColorPickerBaseProps } from "../packages/color-picker";
 import UeElColorPickerPanel, { UeElColorPickerPanelBaseProps } from "../packages/color-picker-panel";
 import UeElColorSetting, { UeElColorSettingBaseProps } from "../packages/color-setting";
@@ -22,18 +23,18 @@ import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../pa
 import UeElGapSetting, { UeElGapSettingBaseProps } from "../packages/gap-setting";
 import UeElIcon, { UeElIconBaseProps } from "../packages/icon";
 import UeElJustifyContentSetting, { UeElJustifyContentSettingBaseProps } from "../packages/justify-content-setting";
-import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElMarginSetting, { UeElMarginSettingBaseProps } from "../packages/margin-setting";
+import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
 import UeElNumberInput, { UeElNumberInputBaseProps } from "../packages/number-input";
-import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
+import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/padding-setting";
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radius-setting";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
-import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
 import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
 import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
+import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
 import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel";
@@ -41,12 +42,13 @@ import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel
 declare module "vue" {
     export interface GlobalComponents {
         UeElAlignItemSetting: typeof UeElAlignItemSetting;
+        UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
         UeElAlignSetting: typeof UeElAlignSetting;
-        UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElButton: typeof UeElButton;
+        UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElCalenderSetting: typeof UeElCalenderSetting;
-        UeElCheckBox: typeof UeElCheckBox;
         UeElColorInput: typeof UeElColorInput;
+        UeElCheckBox: typeof UeElCheckBox;
         UeElColorPicker: typeof UeElColorPicker;
         UeElColorPickerPanel: typeof UeElColorPickerPanel;
         UeElColorSetting: typeof UeElColorSetting;
@@ -59,18 +61,18 @@ declare module "vue" {
         UeElGapSetting: typeof UeElGapSetting;
         UeElIcon: typeof UeElIcon;
         UeElJustifyContentSetting: typeof UeElJustifyContentSetting;
-        UeElLoading: typeof UeElLoading;
         UeElMarginSetting: typeof UeElMarginSetting;
+        UeElLoading: typeof UeElLoading;
         UeElNumberInput: typeof UeElNumberInput;
-        UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElOnOff: typeof UeElOnOff;
+        UeElPaddingSetting: typeof UeElPaddingSetting;
         UeElPopPanel: typeof UeElPopPanel;
         UeElRadiusSetting: typeof UeElRadiusSetting;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
-        UeElTabCard: typeof UeElTabCard;
         UeElSettingBar: typeof UeElSettingBar;
         UeElTagInput: typeof UeElTagInput;
+        UeElTabCard: typeof UeElTabCard;
         UeElTextInput: typeof UeElTextInput;
         UeElTipGroup: typeof UeElTipGroup;
         UeElVideoPanel: typeof UeElVideoPanel;
@@ -80,12 +82,13 @@ declare module "vue" {
 declare global {
     namespace UE_EL_COMPONENT {
         interface UeElAlignItemSettingProps extends UeElAlignItemSettingBaseProps {}
+        interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
-        interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
+        interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElCalenderSettingProps extends UeElCalenderSettingBaseProps {}
-        interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElColorInputProps extends UeElColorInputBaseProps {}
+        interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElColorPickerProps extends UeElColorPickerBaseProps {}
         interface UeElColorPickerPanelProps extends UeElColorPickerPanelBaseProps {}
         interface UeElColorSettingProps extends UeElColorSettingBaseProps {}
@@ -98,18 +101,18 @@ declare global {
         interface UeElGapSettingProps extends UeElGapSettingBaseProps {}
         interface UeElIconProps extends UeElIconBaseProps {}
         interface UeElJustifyContentSettingProps extends UeElJustifyContentSettingBaseProps {}
-        interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElMarginSettingProps extends UeElMarginSettingBaseProps {}
+        interface UeElLoadingProps extends UeElLoadingBaseProps {}
         interface UeElNumberInputProps extends UeElNumberInputBaseProps {}
-        interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElOnOffProps extends UeElOnOffBaseProps {}
+        interface UeElPaddingSettingProps extends UeElPaddingSettingBaseProps {}
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElRadiusSettingProps extends UeElRadiusSettingBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
-        interface UeElTabCardProps extends UeElTabCardBaseProps {}
         interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
         interface UeElTagInputProps extends UeElTagInputBaseProps {}
+        interface UeElTabCardProps extends UeElTabCardBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
         interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
         interface UeElVideoPanelProps extends UeElVideoPanelBaseProps {}

@@ -17,6 +17,7 @@ import TestMarginSetting from "~/demo/components/TestMarginSetting.vue";
 import TestPaddingSetting from "~/demo/components/TestPaddingSetting.vue";
 import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
 import TestEnterAnimateSetting from "~/demo/components/TestEnterAnimateSetting.vue";
+import TestBoxShadowSetting from "~/demo/components/TestBoxShadowSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -27,6 +28,7 @@ const testComponents = [
     TestMarginSetting,
     TestPaddingSetting,
     TestRadiusSetting,
+    TestBoxShadowSetting,
 ];
 </script>
 <style lang="scss" module>
