@@ -8,7 +8,12 @@
             @update:points="currentColorPoints = $event"
             @update-editor-point-id="editorColorPointId = $event"
         />
-        <UeElControlGroup oper-type="remove" oper-type-tip="移除当前点" :col-count="1" @remove="removeCurrentPoint">
+        <UeElControlGroup
+            oper-type="remove"
+            :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
+            :col-count="1"
+            @remove="removeCurrentPoint"
+        >
             <UeElNumberInput v-bind="positionParam" v-model:value="editorColorPointPosition" :hide-unit="true" />
         </UeElControlGroup>
     </UeElEditorGroup>
@@ -35,6 +40,8 @@ import { parseRadialGradient } from "@stone/uemo-editor-utils/lib/css-gradient-p
 
 import ColorPointBar from "./ColorPointBar.vue";
 
+const { t } = useI18n();
+
 const prop = withDefaults(defineProps<{ defaultValue: string; disableOpacity: boolean }>(), {});
 const valueRef = defineModel<string>("value", { required: true });
 
@@ -48,52 +55,55 @@ const currentYPos = ref<string>();
 const currentWidth = ref<string>();
 const currentHeight = ref<string>();
 
-const positionParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
+const positionParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "位置" },
+    title: { text: t("COLOR_PICKER_POINT_POS") },
     step: 1,
     limit: [0, 100],
     show: { input: (value) => value.num + "%" },
-});
-const xPosParam = ref<Omit<UE_EL_COMPONENT.UeElNumberInputProps, "value">>({
+}));
+const xPosParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "横向" },
+    title: { text: t("COLOR_PICKER_POINT_X_POS") },
     step: 1,
     limit: { "%": [-Infinity, Infinity] },
     units: [{ text: "%", value: "%", default: 50 }],
-});
-const yPosParam = ref<Omit<UE_EL_COMPONENT.UeElNumberInputProps, "value">>({
+}));
+const yPosParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "纵向" },
+    title: { text: t("COLOR_PICKER_POINT_Y_POS") },
     step: 1,
     limit: { "%": [-110, 110] },
     units: [{ text: "%", value: "%", default: 50 }],
-});
-const widthParam = ref<Omit<UE_EL_COMPONENT.UeElNumberInputProps, "value">>({
+}));
+const widthParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "宽度" },
+    title: { text: t("COLOR_PICKER_POINT_WIDTH") },
     step: 1,
     limit: { px: [0, Infinity], "%": [0, Infinity] },
     units: [
         { text: "px", value: "px", default: 500 },
         { text: "%", value: "%", default: 100 },
     ],
-});
-const heightParam = ref<Omit<UE_EL_COMPONENT.UeElNumberInputProps, "value">>({
+}));
+const heightParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "高度" },
+    title: { text: t("COLOR_PICKER_POINT_HEIGHT") },
     step: 1,
     limit: { px: [0, Infinity], "%": [0, Infinity] },
     units: [
         { text: "px", value: "px", default: 500 },
         { text: "%", value: "%", default: 100 },
     ],
-});
+}));
+
 const lastValue = ref<string>("");
 const useValue = computed({
     get() {
         try {
-            if (!valueRef.value?.includes("radial-gradient")) throw new Error("暂不支持非径向渐变");
+            if (!valueRef.value?.includes("radial-gradient")) {
+                throw new Error(t("COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED"));
+            }
             return valueRef.value;
         } catch (error) {
             console.error(error instanceof Error ? error : new Error(String(error)));

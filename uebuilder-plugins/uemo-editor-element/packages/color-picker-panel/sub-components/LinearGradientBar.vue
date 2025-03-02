@@ -8,7 +8,12 @@
             @update:points="currentColorPoints = $event"
             @update-editor-point-id="editorColorPointId = $event"
         />
-        <UeElControlGroup oper-type="remove" oper-type-tip="移除当前点" :col-count="2" @remove="removeCurrentPoint">
+        <UeElControlGroup
+            oper-type="remove"
+            :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
+            :col-count="2"
+            @remove="removeCurrentPoint"
+        >
             <UeElNumberInput
                 v-bind="positionParam"
                 v-model:value="editorColorPointPosition"
@@ -38,6 +43,7 @@ import { parseLinearGradient } from "@stone/uemo-editor-utils/lib/css-gradient-p
 
 import ColorPointBar from "./ColorPointBar.vue";
 
+const { t } = useI18n();
 const prop = withDefaults(defineProps<{ defaultValue: string; disableOpacity: boolean }>(), {});
 const valueRef = defineModel<string>("value", { required: true });
 
@@ -48,27 +54,29 @@ const editorColorPointId = ref<string>();
 const currentColorPoints = ref<GradientPoint[]>([]);
 const currentAngle = ref<string>("");
 
-const positionParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
+const positionParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "位置" },
+    title: { text: t("COLOR_PICKER_POINT_POS") },
     step: 1,
     limit: [0, 100],
     show: { input: (value) => value.num + "%" },
-});
+}));
 
-const angleInputParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
+const angleInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     required: true,
-    title: { text: "角度" },
+    title: { text: t("COLOR_PICKER_ANGLE_TITLE") },
     step: 1,
     limit: [0, 365],
     show: { input: (value) => value.num + "°" },
-});
+}));
 
 const lastValue = ref<string>("");
 const useValue = computed({
     get() {
         try {
-            if (!valueRef.value?.includes("linear-gradient")) throw new Error("暂不支持非线性渐变");
+            if (!valueRef.value?.includes("linear-gradient")) {
+                throw new Error(t("COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED"));
+            }
             return valueRef.value;
         } catch (error) {
             console.error(error instanceof Error ? error : new Error(String(error)));

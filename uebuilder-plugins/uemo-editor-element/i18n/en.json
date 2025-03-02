@@ -77,8 +77,22 @@
     "CALENDER_SETTING_TITLE": "Date",
     "CALENDER_SETTING_PLACEHOLDER": "Input Date",
 
+    "COLOR_EYE_DROPPER": "Color Picker",
+    "COLOR_PICKER_TIP_NOT_SUPPORTED": "Currently only supports Chrome or Edge",
     "COLOR_INPUT_TIP_NOT_CORRECT": "Please enter a valid color value",
     "COLOR_PICKER_PANEL_TITLE": "Color Picker",
     "COLOR_PICKER_GRADIENT_TITLE": "Linear Gradient",
-    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "Radial Gradient"
+    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "Radial Gradient",
+
+    "COLOR_PICKER_ADD_POINT": "Add Gradient Point",
+    "COLOR_PICKER_REMOVE_POINT": "Remove Gradient Point",
+    "COLOR_PICKER_ANGLE_TITLE": "Angle",
+    "COLOR_PICKER_POINT_POS": "Stop",
+    "COLOR_PICKER_POINT_WIDTH": "W",
+    "COLOR_PICKER_POINT_HEIGHT": "y",
+    "COLOR_PICKER_POINT_X_POS": "X",
+    "COLOR_PICKER_POINT_Y_POS": "Y",
+    "COLOR_PICKER_ERROR_TIP_MIN_POINT": "Linear Gradient requires at least two color points",
+    "COLOR_PICKER_ERROR_TIP_MAX_POINT": "Linear Gradient can only add up to 5 color points",
+    "COLOR_PICKER_ERROR_TIP_NOT_SUPPORTED": "Please use linear or radial gradient"
 }

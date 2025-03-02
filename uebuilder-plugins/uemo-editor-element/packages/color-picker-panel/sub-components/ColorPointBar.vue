@@ -4,7 +4,7 @@
             v-ue-el-label="{
                 placement: 'bottom',
                 followCursor: 'horizontal',
-                content: '添加渐变点',
+                content: t('COLOR_PICKER_ADD_POINT'),
             }"
             :class="$style['gradient-bar--inner']"
             @click="addPoint"
@@ -36,6 +36,7 @@ import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { Dragger, DraggerControl } from "@stone/uemo-editor-utils/lib/dragger";
 
 const instance = getCurrentInstance();
+const { t } = useI18n();
 
 const prop = defineProps<{ type: "linear" | "radial"; editorPointId: string; points: GradientPoint[] }>();
 const emit = defineEmits<{
@@ -77,7 +78,7 @@ function handleKeyDown(ev: KeyboardEvent) {
  */
 function removePoint() {
     if (prop.points.length <= 2) {
-        instance?.proxy?.$ueElToast.error("渐变色至少需要两个颜色点");
+        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_ERROR_TIP_MIN_POINT"));
         return;
     }
 
@@ -94,7 +95,7 @@ function removePoint() {
  */
 function addPoint(ev: MouseEvent) {
     if (prop.points.length >= 5) {
-        instance?.proxy?.$ueElToast.error("渐变色最多只能添加5个颜色点");
+        instance?.proxy?.$ueElToast.error(t("COLOR_PICKER_ERROR_TIP_MAX_POINT"));
         return;
     }
 
