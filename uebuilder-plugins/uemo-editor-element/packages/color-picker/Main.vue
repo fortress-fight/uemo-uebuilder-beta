@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 17:01:01
+ * @LastEditTime: 2025-03-02 22:48:57
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -307,6 +307,8 @@ defineExpose({
 
     width: 100%;
     margin-bottom: 12px;
+
+    cursor: grab !important;
     .mask--black {
         @include ab-cover;
         background-image: linear-gradient(to top, #000, rgb(0 0 0 / 0));
@@ -339,6 +341,9 @@ defineExpose({
         border: 2px solid #fff;
         border-radius: 11px;
         box-shadow: 0 0 4px rgb(0 0 0 / 0.3), inset 0 0 4px rgb(0 0 0 / 0.2);
+    }
+    &:active {
+        cursor: none !important;
     }
 }
 .color-bar {
