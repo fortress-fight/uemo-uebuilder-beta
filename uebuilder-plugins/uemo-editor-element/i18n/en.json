@@ -12,6 +12,7 @@
     "UNIT_ANGLE": "Angle",
     "UNIT_LINEAR_GRADIENT": "Linear Gradient",
     "UNIT_RADIAL_GRADIENT": "Radial Gradient",
+    "UNIT_BORDER": "Border",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
