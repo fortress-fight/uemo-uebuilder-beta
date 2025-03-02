@@ -1,15 +1,14 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 00:43:25
+ * @LastEditTime: 2025-03-03 02:34:54
 -->
 <template>
-    <div :class="$style['control-group']" class="grid">
+    <div :class="$style['control-group']" class="grid" :data-with-oper="showOper">
         <div :class="$style['control-oper']" :data-col="colCount">
             <slot :disable="disable"></slot>
         </div>
-
-        <div v-if="!hideOper" :class="$style['oper-box']">
+        <div v-if="showOper" :class="$style['oper-box']">
             <slot name="oper">
                 <UeElButton
                     v-if="operType === 'remove'"
@@ -63,15 +62,19 @@ import type { UeElControlGroupBaseProps } from "./index";
 const props = withDefaults(defineProps<UeElControlGroupBaseProps>(), {
     hideOper: false,
     colCount: 1,
-    operType: "none",
 });
 
-defineOptions({ name: "UeElControlGroup" });
 const emit = defineEmits<{
     (e: "remove" | "trigger"): void;
     (e: "selectChange", value: UE_EL_UTIL.SelectValue): void;
     (e: "onOffChange", value: UE_EL_UTIL.OnOffValue): void;
 }>();
+
+defineOptions({ name: "UeElControlGroup" });
+
+const showOper = computed(() => {
+    return !props.hideOper && typeof props.operType !== "undefined";
+});
 
 function trigger(type: "remove" | "trigger"): void;
 function trigger(type: "onOffChange", $event: UE_EL_UTIL.OnOffValue): void;
@@ -105,7 +108,9 @@ function trigger(
 <style lang="scss" module>
 .control-group {
     gap: var(--ue-control-row-space);
-    grid-template-columns: minmax(0, 1fr) auto;
+    &[data-with-oper="true"] {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
     // &:hover {
     //     .oper-btn[data-oper-type="remove"] {
     //         opacity: 1;
