@@ -21,6 +21,7 @@ import TestBoxShadowSetting from "~/demo/components/TestBoxShadowSetting.vue";
 import TestBorderSetting from "~/demo/components/TestBorderSetting.vue";
 import TestColorSettingGroup from "~/demo/components/TestColorSettingGroup.vue";
 import TestBorderSettingGroup from "~/demo/components/TestBorderSettingGroup.vue";
+import TestRadiusSettingGroup from "~/demo/components/TestRadiusSettingGroup.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -35,6 +36,7 @@ const testComponents = [
     TestBorderSetting,
     TestColorSettingGroup,
     TestBorderSettingGroup,
+    TestRadiusSettingGroup,
 ];
 </script>
 <style lang="scss" module>

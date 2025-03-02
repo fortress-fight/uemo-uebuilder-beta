@@ -1,12 +1,13 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/3 02:23:08
+ * @LastEditTime: 2025/3/3 02:38:43
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
-import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElAlignSetting from "../packages/align-setting";
+import UeElRadiusSettingGroup from "../packages/radius-setting-group";
 import UeElBorderSetting from "../packages/border-setting";
+import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElBoxShadowSetting from "../packages/box-shadow-setting";
 import UeElButton from "../packages/button";
 import UeElCalenderPicker from "../packages/calender-picker";
@@ -26,28 +27,29 @@ import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElGapSetting from "../packages/gap-setting";
 import UeElIcon from "../packages/icon";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
-import UeElLoading from "../packages/loading";
 import UeElMarginSetting from "../packages/margin-setting";
 import UeElNumberInput from "../packages/number-input";
-import UeElOnOff from "../packages/on-off";
-import UeElPopPanel from "../packages/pop-panel";
-import UeElRadiusSetting from "../packages/radius-setting";
+import UeElLoading from "../packages/loading";
 import UeElPaddingSetting from "../packages/padding-setting";
-import UeElSelectOption from "../packages/select-option";
+import UeElPopPanel from "../packages/pop-panel";
+import UeElOnOff from "../packages/on-off";
+import UeElRadiusSetting from "../packages/radius-setting";
 import UeElSelect from "../packages/select";
-import UeElSettingBar from "../packages/setting-bar";
+import UeElSelectOption from "../packages/select-option";
 import UeElSettingGroup from "../packages/setting-group";
+import UeElSettingBar from "../packages/setting-bar";
 import UeElTabCard from "../packages/tab-card";
-import UeElTextInput from "../packages/text-input";
 import UeElTagInput from "../packages/tag-input";
+import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
     UeElAlignItemSetting,
-    UeElBorderSettingGroup,
     UeElAlignSetting,
+    UeElRadiusSettingGroup,
     UeElBorderSetting,
+    UeElBorderSettingGroup,
     UeElBoxShadowSetting,
     UeElButton,
     UeElCalenderPicker,
@@ -67,20 +69,20 @@ export const components = [
     UeElGapSetting,
     UeElIcon,
     UeElJustifyContentSetting,
-    UeElLoading,
     UeElMarginSetting,
     UeElNumberInput,
-    UeElOnOff,
-    UeElPopPanel,
-    UeElRadiusSetting,
+    UeElLoading,
     UeElPaddingSetting,
-    UeElSelectOption,
+    UeElPopPanel,
+    UeElOnOff,
+    UeElRadiusSetting,
     UeElSelect,
-    UeElSettingBar,
+    UeElSelectOption,
     UeElSettingGroup,
+    UeElSettingBar,
     UeElTabCard,
-    UeElTextInput,
     UeElTagInput,
+    UeElTextInput,
     UeElTipGroup,
     UeElVideoPanel,
 ];
