@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:51:37
+ * @LastEditTime: 2025-03-02 18:33:50
 -->
 <template>
     <UeElTextInput
@@ -38,11 +38,22 @@
         @click="triggerColorInput"
     >
         <div :class="$style['setting-bar']" class="flex cursor-pointer items-center">
-            <div :class="$style['color-box']" class="flex items-center justify-center cursor-pointer">
+            <div
+                :class="$style['color-box']"
+                class="flex items-center justify-center cursor-pointer"
+                :style="{ opacity: independentOpacityRef }"
+            >
                 <div :class="$style['inner-box']" :style="{ '--background': useColor }"></div>
             </div>
             <div :class="$style['title']">{{ t("COLOR_PICKER_GRADIENT_TITLE") }}</div>
         </div>
+        <UeElNumberInput
+            v-if="independentOpacityControlEnabled"
+            v-bind="opacityParam"
+            v-model:value="independentOpacityRef"
+            :class="$style['opacity-input']"
+            :hide-unit="true"
+        />
     </div>
 </template>
 <script lang="ts" setup>
@@ -61,6 +72,10 @@ const prop = withDefaults(defineProps<UeElColorInputBaseProps>(), {
 const emit = defineEmits<{ (ev: "trigger", value: string): void }>();
 
 const valueRef = defineModel<string>("value", { required: false });
+const independentOpacityRef = defineModel<number | string>("opacity", { required: false });
+const independentOpacityControlEnabled = computed(() => {
+    return !prop.disableOpacity && typeof independentOpacityRef.value !== "undefined";
+});
 
 const useColor = computed({
     get() {
@@ -168,15 +183,6 @@ function triggerColorInput() {
             border-color: color(var(--ue-border-color));
         }
     }
-    .opacity-input {
-        --text-border-color: transparent !important;
-        width: 50px;
-        // padding-right: var(--ue-editor-row-space--lv1);
-
-        border-width: 0;
-        border-left: 1px solid transparent;
-        border-radius: 0;
-    }
 }
 .color-box {
     min-width: 0;
@@ -203,18 +209,44 @@ function triggerColorInput() {
 }
 .gradient-color-input {
     --text-border-color: transparent;
-    --text-input-padding: 0 var(--ue-editor-row-space--lv1);
-    font-size: 12px;
-    line-height: 26px;
+    --text-input-padding: 0 var(--ue-editor-row-space--lv1) 0 2px;
+    position: relative;
+    z-index: 10;
+
+    display: grid;
+    overflow: hidden;
 
     border: 1px solid var(--text-border-color);
     border-radius: var(--ue-border-radius--lv1);
-    &:hover {
-        --text-border-color: #{color(var(--ue-border-color))};
-    }
-    .title {
+
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    .setting-bar {
+        font-size: 12px;
+        line-height: 26px;
+
+        width: auto;
+        min-width: 0;
         padding: var(--text-input-padding);
+
+        cursor: default;
+
+        color: color(var(--ue-font-color--deeper));
+        border-width: 0;
+    }
+    &:hover,
+    &:focus-within {
+        --text-border-color: #{color(var(--ue-border-color))};
+        .opacity-input {
+            border-color: color(var(--ue-border-color));
+        }
     }
 }
+.opacity-input {
+    --text-border-color: transparent !important;
+    width: 50px;
+
+    border-width: 0;
+    border-left: 1px solid transparent;
+    border-radius: 0;
+}
 </style>
-update(uemo-editor-element): 添加颜色选择器和颜色输入框组件，以及编辑容器组件。更新国际化支持，优化测试组件
