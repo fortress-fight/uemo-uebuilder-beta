@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 16:47:56
+ * @LastEditTime: 2025-03-02 18:10:56
 -->
 <template>
     <Teleport to="body">
@@ -14,7 +14,12 @@
             @after-leave="onAfterLeave"
         >
             <div :class="$style['pop-panel']" v-if="openModel" :style="{ zIndex: zIndex }">
-                <div :class="$style['layer-dialog-box']" v-on-click-outside="closeModal" ref="dialogBoxRef">
+                <div
+                    :class="$style['layer-dialog-box']"
+                    v-on-click-outside="closeModal"
+                    v-ue-el-dragger="draggable"
+                    ref="dialogBoxRef"
+                >
                     <slot></slot>
                 </div>
             </div>
@@ -38,6 +43,7 @@ const mittManage = mitt<{ clearUploadControl: undefined }>();
 const prop = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
     immediate: true,
     autoClose: true,
+    draggable: false,
     panel: () => ({ position: "center" }),
 });
 const emit = defineEmits<{ (e: "onShow" | "onHide"): void }>();

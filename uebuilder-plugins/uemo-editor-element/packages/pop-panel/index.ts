@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 18:23:52
+ * @LastEditTime: 2025-03-02 18:11:11
  */
 import type { App } from "vue";
 import type { ReferenceElement, EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib/floating-ui";
@@ -28,6 +28,7 @@ export interface UeElPopPanelBaseProps {
     zIndex?: number;
     immediate?: boolean;
     autoClose?: boolean;
+    draggable?: boolean;
     mask?: { color?: string } | true;
     panel?: {
         position: "center" | { autoUpdate?: boolean; refEl: ReferenceElement; options?: EnhancedComputePositionConfig };
