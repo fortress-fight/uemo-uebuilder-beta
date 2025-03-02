@@ -1,7 +1,7 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 16:52:41
+ * @LastEditTime: 2025-03-02 23:28:03
 -->
 <template>
     <UeElTextInput
@@ -91,8 +91,8 @@ const startValue = ref(0);
 // 计算属性
 const parsedValue = computed(() => {
     const { num, unit } = parseValueString(valueRef.value);
-    const limits = Array.isArray(props.limit) ? props.limit : props.limit?.[unit];
-    return { num, unit, limit: limits };
+    const limit = Array.isArray(props.limit) ? props.limit : props.limit?.[unit];
+    return { num, unit, limit };
 });
 
 const showValue = computed(() => {
@@ -192,16 +192,16 @@ const changeNumber = (value: string | number): void => {
  */
 const changeUnit = (unit: string): void => {
     const unitOption = props.units?.find((item) => item.value === unit);
-    const limits = Array.isArray(props.limit) ? props.limit : props.limit?.[unit];
+    const limit = parsedValue.value.limit;
 
     if (unitOption?.default !== undefined) {
-        updateValue(unitOption.default, unit, limits);
+        updateValue(unitOption.default, unit, limit);
         return;
     }
 
     const currentNum = parsedValue.value.num;
     if (typeof currentNum !== "number" || isNaN(currentNum)) return;
-    updateValue(currentNum, unit, limits);
+    updateValue(currentNum, unit, limit);
 };
 </script>
 
