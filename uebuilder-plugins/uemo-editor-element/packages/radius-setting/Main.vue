@@ -1,42 +1,46 @@
 <!--
  * @Description: 圆角控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:54:17
+ * @LastEditTime: 2025-03-03 01:12:47
 -->
 <template>
-    <div :class="$style['radius-setting']" :data-disable="disable">
-        <UeElControlGroup v-bind="onOffParam" @onOffChange="toggleMixType" :col-count="!isMix ? 2 : 1">
-            <template v-if="isMix">
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="all"
-                    :title="{ icon: { name: 'icon-tongyiyuanjiao' } }"
-                />
-            </template>
-            <template v-else>
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="tl"
-                    :title="{ icon: { name: 'icon-zuoshangyuanjiao' } }"
-                />
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="tr"
-                    :title="{ icon: { name: 'icon-youshangyuanjiao' } }"
-                />
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="bl"
-                    :title="{ icon: { name: 'icon-zuoxiayuanjiao' } }"
-                />
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="br"
-                    :title="{ icon: { name: 'icon-youxiayuanjiao' } }"
-                />
-            </template>
-        </UeElControlGroup>
-    </div>
+    <UeElControlGroup
+        :class="$style['radius-setting']"
+        :data-disable="disable"
+        v-bind="onOffParam"
+        @onOffChange="toggleMixType"
+        :col-count="!isMix ? 2 : 1"
+    >
+        <template v-if="isMix">
+            <UeElNumberInput
+                v-bind="inputParam"
+                v-model:value="all"
+                :title="{ icon: { name: 'icon-tongyiyuanjiao' } }"
+            />
+        </template>
+        <template v-else>
+            <UeElNumberInput
+                v-bind="inputParam"
+                v-model:value="tl"
+                :title="{ icon: { name: 'icon-zuoshangyuanjiao' } }"
+            />
+            <UeElNumberInput
+                v-bind="inputParam"
+                v-model:value="tr"
+                :title="{ icon: { name: 'icon-youshangyuanjiao' } }"
+            />
+            <UeElNumberInput
+                v-bind="inputParam"
+                v-model:value="bl"
+                :title="{ icon: { name: 'icon-zuoxiayuanjiao' } }"
+            />
+            <UeElNumberInput
+                v-bind="inputParam"
+                v-model:value="br"
+                :title="{ icon: { name: 'icon-youxiayuanjiao' } }"
+            />
+        </template>
+    </UeElControlGroup>
 </template>
 <script lang="ts" setup>
 import type { UeElRadiusSettingBaseProps } from "./index";
