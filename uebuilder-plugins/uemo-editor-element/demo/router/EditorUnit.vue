@@ -17,9 +17,10 @@ import TestControlGroup from "~/demo/components/TestControlGroup.vue";
 import TestEditorGroup from "~/demo/components/TestEditorGroup.vue";
 import TestSettingBar from "~/demo/components/TestSettingBar.vue";
 import TestColorPicker from "~/demo/components/TestColorPicker.vue";
+import TestColorInput from "~/demo/components/TestColorInput.vue";
 
 const containerComponents = [TestSettingBar, TestControlGroup, TestEditorGroup];
-const unitTestComponents = [TestIcon, TestSelectOption, TestColorPicker];
+const unitTestComponents = [TestIcon, TestSelectOption, TestColorInput, TestColorPicker];
 const helperTestComponents = [TestLoading, TestTipGroup];
 
 const testComponents = [...containerComponents, ...unitTestComponents, ...helperTestComponents];
