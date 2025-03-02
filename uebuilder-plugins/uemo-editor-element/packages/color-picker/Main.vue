@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:59:53
+ * @LastEditTime: 2025-03-02 14:48:01
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -11,11 +11,9 @@
             <div ref="colorRing" class="flex items-center justify-center" :class="$style['color-ring']">
                 <div class="flex-grow-0 flex-shrink-0" :class="$style['color-ring--inner']"></div>
             </div>
-            <div ref="shadowColorRing" :class="$style['color-ring']" class="opacity-0"></div>
         </div>
         <div ref="colorBar" :class="$style['color-bar']" class="flex items-center">
             <div ref="colorBarInner" :class="$style['color-bar--inner']" class="relative"></div>
-            <div ref="shadowColorBarInner" :class="$style['color-bar--inner']" class="relative opacity-0"></div>
         </div>
         <div :class="$style['color-input']" class="grid items-center">
             <UeElColorInput
@@ -81,108 +79,54 @@ function updateHSV(color: string | undefined) {
     colorHsv.alpha = newColorHsv.alpha ?? 1;
 }
 
+// 用于记录当前面板控件操作值
+const localColor = computed(() => Color(colorHsv).rgb().toString());
+
+watch(localColor, (color) => (valueRef.value = color));
 watch(
     () => valueRef.value,
     (newValue) => {
+        // 如果颜色值相同，则不更新面板控件位置
+        if (newValue === localColor.value) return;
         updateHSV(newValue);
     }
 );
 
-onBeforeMount(() => {
-    updateHSV(valueRef.value);
-});
-
-// #region 缓存颜色信息
-
-const oldColor = ref<string>("");
-const oldColorOpacity = ref<number>(1);
-
-function useOldVal() {
-    updateHSV(Color(oldColor.value).alpha(oldColorOpacity.value).toString());
-}
-
-watch(
-    () => Color(colorHsv).rgb().toString(),
-    (color) => {
-        valueRef.value = color;
-    }
-);
-
-onBeforeMount(() => {
-    oldColor.value = Color(valueRef.value).hex();
-    oldColorOpacity.value = Color(valueRef.value).alpha();
-});
-
-// #endregion
+onBeforeMount(() => updateHSV(valueRef.value));
 
 // #region 控件管理
 
 // 色板相关元素
 const colorBox = useTemplateRef("colorBox");
 const colorRing = useTemplateRef("colorRing");
-const shadowColorRing = useTemplateRef("shadowColorRing");
 
 // 色相条相关元素
 const colorBar = useTemplateRef("colorBar");
 const colorBarInner = useTemplateRef("colorBarInner");
-const shadowColorBarInner = useTemplateRef("shadowColorBarInner");
 
-/**
- * 更新色相滑块位置
- */
+// #region 颜色色板
 
-function updateColorBoxPicker(h: number) {
-    if (colorBox.value) {
-        gsap.set(colorBox.value, {
-            backgroundColor: "hsla(" + h + ", 100%, 50%, 1)",
-        });
-    }
-    if (colorBar.value && colorBarInner.value) {
-        const { width } = colorBar.value.getBoundingClientRect();
-
-        gsap.set(colorBarInner.value, {
-            x: width * (h / 360),
-        });
-    }
-}
-watch(() => colorHsv.h, updateColorBoxPicker);
-
-/**
- * 更新色板选色环
- */
-
-function updateColorBarSelector([s, v]: [number, number]) {
-    if (colorBox.value && colorRing.value) {
-        const { width, height } = colorBox.value.getBoundingClientRect();
-        gsap.set(colorRing.value, {
-            x: width * (s / 100),
-            y: height * (1 - v / 100),
-        });
-    }
-}
-watch([() => colorHsv.s, () => colorHsv.v], updateColorBarSelector);
-
-onMounted(() => {
-    requestAnimationFrame(() => {
-        updateColorBoxPicker(colorHsv.h);
-        updateColorBarSelector([colorHsv.s, colorHsv.v]);
-    });
-});
+const colorRingIsDragging = ref(false);
 
 /**
  * 初始化颜色面板功能
  */
 function initColorBox() {
-    if (!shadowColorRing.value || !colorBox.value) return;
+    if (!colorRing.value || !colorBox.value) return;
 
     const { width, height } = colorBox.value.getBoundingClientRect();
-    new Dragger(shadowColorRing.value, {
+
+    updateColorRingPos([colorHsv.s, colorHsv.v]);
+    updateColorBoxBg(colorHsv.h);
+
+    new Dragger(colorRing.value, {
         trigger: colorBox.value,
         bounds: colorBox.value,
         onPressInit(ev) {
+            colorRingIsDragging.value = true;
             const x = ev.clientX - colorBox.value!.getBoundingClientRect().left;
             const y = ev.clientY - colorBox.value!.getBoundingClientRect().top;
-            gsap.set(shadowColorRing.value, { x, y });
+            gsap.set(colorRing.value, { x, y });
             colorHsv.s = (x / width) * 100;
             colorHsv.v = (1 - y / height) * 100;
             this.refreshPosition();
@@ -193,22 +137,66 @@ function initColorBox() {
             colorHsv.v = (1 - y / height) * 100;
             return { x: x, y: y };
         },
+        onDragEnd() {
+            colorRingIsDragging.value = false;
+            updateColorRingPos([colorHsv.s, colorHsv.v]);
+        },
     }).init();
 }
+
+function updateColorBoxBg(h: number) {
+    if (colorBox.value) {
+        gsap.set(colorBox.value, {
+            backgroundColor: "hsla(" + h + ", 100%, 50%, 1)",
+        });
+    }
+}
+
+/**
+ * 更新色板选色环
+ */
+function updateColorRingPos([s, v]: [number, number]) {
+    if (colorBox.value && colorRing.value) {
+        const { width, height } = colorBox.value.getBoundingClientRect();
+        gsap.set(colorRing.value, {
+            x: width * (s / 100),
+            y: height * (1 - v / 100),
+        });
+    }
+}
+watch([() => colorHsv.s, () => colorHsv.v], ([s, v]) => {
+    if (colorRingIsDragging.value) return;
+    updateColorRingPos([s, v]);
+});
+
+watch(
+    () => colorHsv.h,
+    (h) => updateColorBoxBg(h)
+);
+
+// #endregion
+
+// #region 色相条
+
+const colorBarIsDragging = ref(false);
 
 /**
  * 初始化色相滑块功能
  */
 function initColorBar() {
-    if (!colorBar.value || !shadowColorBarInner.value) return;
+    if (!colorBar.value || !colorBarInner.value) return;
+
     const { width } = colorBar.value.getBoundingClientRect();
-    new Dragger(shadowColorBarInner.value, {
+    updateColorBoxBarPicker(colorHsv.h);
+
+    new Dragger(colorBarInner.value, {
         type: "x",
         trigger: colorBar.value,
         bounds: colorBar.value,
         onPressInit(ev) {
+            colorBarIsDragging.value = true;
             const x = ev.clientX - colorBar.value!.getBoundingClientRect().left;
-            gsap.set(shadowColorBarInner.value, { x });
+            gsap.set(colorBarInner.value, { x });
             colorHsv.h = (x / width) * 360;
             this.refreshPosition();
         },
@@ -217,23 +205,33 @@ function initColorBar() {
             colorHsv.h = (x / width) * 360;
             return pointers;
         },
+        onDragEnd() {
+            colorBarIsDragging.value = false;
+            updateColorBoxBarPicker(colorHsv.h);
+        },
     }).init();
 }
 
-onMounted(() => {
-    requestAnimationFrame(() => {
-        initColorBar();
-        initColorBox();
-    });
-});
-onBeforeUnmount(() => {
-    if (shadowColorBarInner.value) {
-        DraggerControl.get(shadowColorBarInner.value)?.destroy();
+/**
+ * 更新色相滑块位置
+ */
+
+function updateColorBoxBarPicker(h: number) {
+    if (colorBar.value && colorBarInner.value) {
+        const { width } = colorBar.value.getBoundingClientRect();
+
+        gsap.set(colorBarInner.value, {
+            x: width * (h / 360),
+        });
     }
-    if (shadowColorRing.value) {
-        DraggerControl.get(shadowColorRing.value)?.destroy();
+}
+watch(
+    () => colorHsv.h,
+    (h) => {
+        if (colorBarIsDragging.value) return;
+        updateColorBoxBarPicker(h);
     }
-});
+);
 
 // #endregion
 
@@ -257,11 +255,48 @@ function openSystemColorPicker() {
 
 // #endregion
 
+// #region 控制器创建和销毁
+
+onMounted(() => {
+    requestAnimationFrame(() => {
+        initColorBar();
+        initColorBox();
+    });
+});
+onBeforeUnmount(() => {
+    if (colorBarInner.value) {
+        DraggerControl.get(colorBarInner.value)?.destroy();
+    }
+    if (colorRing.value) {
+        DraggerControl.get(colorRing.value)?.destroy();
+    }
+});
+
+// #endregion
+
+// #endregion
+
+// #region 缓存颜色信息
+
+const oldColor = ref<string>("");
+const oldColorOpacity = ref<number>(1);
+
+function useOldVal() {
+    updateHSV(Color(oldColor.value).alpha(oldColorOpacity.value).toString());
+}
+
+onBeforeMount(() => {
+    oldColor.value = Color(valueRef.value).hex();
+    oldColorOpacity.value = Color(valueRef.value).alpha();
+});
+
 defineExpose({
     changeOldColor(color: string) {
         void (color && (oldColor.value = color));
     },
 });
+
+// #endregion
 </script>
 <style lang="scss" module>
 .color-panel {
