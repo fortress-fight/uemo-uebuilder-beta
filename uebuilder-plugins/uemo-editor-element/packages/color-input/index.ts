@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:46:56
+ * @LastEditTime: 2025-03-02 02:31:34
  */
 import type { App } from "vue";
 
@@ -16,7 +16,7 @@ export interface UeElColorInputBaseProps {
     defaultValue?: string;
     disable?: boolean;
     disableOpacity?: boolean;
-    type?: "mixin" | "color" | "linearGradient" | "radialGradient";
+    type?: UE_EL_UTIL.ColorType | "mixin";
 }
 export type UeElColorInputInstance = InstanceType<typeof UeElColorInput>;
 

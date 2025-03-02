@@ -1,7 +1,7 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 04:34:37
+ * @LastEditTime: 2025-03-02 04:22:24
 -->
 <template>
     <div :class="$style['control-group']" class="grid">
@@ -99,17 +99,17 @@ function trigger(
 .control-group {
     gap: var(--ue-control-row-space);
     grid-template-columns: minmax(0, 1fr) auto;
-    &:hover {
-        .oper-btn[data-oper-type="remove"] {
-            opacity: 1;
-        }
-    }
+    // &:hover {
+    //     .oper-btn[data-oper-type="remove"] {
+    //         opacity: 1;
+    //     }
+    // }
     .placeholder {
         @include square(28px);
     }
-    .oper-btn[data-oper-type="remove"] {
-        opacity: 0;
-    }
+    // .oper-btn[data-oper-type="remove"] {
+    //     opacity: 0;
+    // }
     .oper-btn {
         // color: inherit;
     }

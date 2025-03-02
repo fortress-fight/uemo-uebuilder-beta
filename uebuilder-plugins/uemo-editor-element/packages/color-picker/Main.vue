@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 14:48:01
+ * @LastEditTime: 2025-03-02 17:01:01
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -301,7 +301,6 @@ defineExpose({
 <style lang="scss" module>
 .color-panel {
     width: 100%;
-    padding-bottom: 0;
 }
 .color-box {
     position: relative;
@@ -381,7 +380,7 @@ defineExpose({
     }
 }
 .color-input {
-    margin-bottom: 12px;
+    margin-bottom: 0;
     padding-right: 2px;
 
     gap: 4px;

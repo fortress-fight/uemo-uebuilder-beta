@@ -77,5 +77,8 @@
     "CALENDER_SETTING_TITLE": "Date",
     "CALENDER_SETTING_PLACEHOLDER": "Input Date",
 
-    "COLOR_INPUT_TIP_NOT_CORRECT": "Please enter a valid color value"
+    "COLOR_INPUT_TIP_NOT_CORRECT": "Please enter a valid color value",
+    "COLOR_PICKER_PANEL_TITLE": "Color Picker",
+    "COLOR_PICKER_GRADIENT_TITLE": "Linear Gradient",
+    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "Radial Gradient"
 }

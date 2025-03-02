@@ -37,6 +37,7 @@
         "big.js": "^6.2.2",
         "color": "^5.0.0",
         "copy-to-clipboard": "^3.3.3",
+        "css-gradient-parser": "^0.0.16",
         "date-fns": "^4.1.0",
         "floating-ui": "^5.2.8",
         "gsap": "^3.12.7",

@@ -82,5 +82,7 @@
     "COLOR_EYE_DROPPER": "拾色器",
     "COLOR_INPUT_TIP_NOT_CORRECT": "请输入正确的颜色值",
     "COLOR_PICKER_TIP_NOT_SUPPORTED": "当前浏览器不支持拾色器，目前仅支持 Chrome 或 Edge",
-    "COLOR_PICKER_GRADIENT_TITLE": "渐变色"
+    "COLOR_PICKER_PANEL_TITLE": "颜色面板",
+    "COLOR_PICKER_GRADIENT_TITLE": "线性渐变色",
+    "COLOR_PICKER_RADIAL_GRADIENT_TITLE": "径向渐变色"
 }

@@ -63,6 +63,11 @@ declare global {
          * @description 图标参数
          */
         type IconParam = string | { name: string; size?: number };
+
+        /**
+         * @description 颜色类型
+         */
+        type ColorType = "color" | "linearGradient" | "radialGradient";
     }
 }
 

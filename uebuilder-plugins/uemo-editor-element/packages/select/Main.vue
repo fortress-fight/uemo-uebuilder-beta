@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 17:05:14
+ * @LastEditTime: 2025-03-02 02:16:50
 -->
 <template>
     <UeElSettingBar
@@ -13,8 +13,12 @@
         :infoText="infoText"
         :infoIcon="infoIcon"
         :infoAlign="valueAlign"
+        :theme="theme"
         @triggerSetting="openOptionPanel"
     >
+        <template #info="{ infoText }">
+            <slot name="info" :infoText="infoText"></slot>
+        </template>
         <UeElPopPanel v-model:open="optionIsOpen" :panel="popPanelParams">
             <UeElSelectOption
                 :style="optionPanelStyle"

@@ -1,7 +1,7 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-28 16:40:21
+ * @LastEditTime: 2025-03-02 16:52:41
 -->
 <template>
     <UeElTextInput
@@ -25,10 +25,10 @@
         </template>
         <template v-if="showUnitSelect" #after>
             <UeElSelect :class="$style['unit-select']" v-model:value="unitValue" :options="props.units || []">
-                <template #default="selectValue">
+                <template #info="selectValue">
                     <div :class="$style['select-bar']" class="flex-auto flex items-center">
                         <div :class="$style['text-box']" class="flex flex-auto justify-center">
-                            {{ selectValue.valueText }}
+                            {{ selectValue.infoText }}
                         </div>
                         <div :class="$style['icon-box']" class="flex items-center justify-center">
                             <UeElIcon name="icon-xiajiantou" :size="15" />
