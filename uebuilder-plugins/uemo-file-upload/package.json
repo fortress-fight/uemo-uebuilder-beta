@@ -1,5 +1,5 @@
 {
-    "name": "test-upload",
+    "name": "uemo-file-upload",
     "version": "4.0.0",
     "description": "图片上传服务",
     "main": "app.js",
