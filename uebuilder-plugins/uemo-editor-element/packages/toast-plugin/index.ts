@@ -1,7 +1,7 @@
 /*
  * @Description: toast 插件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 12:44:55
+ * @LastEditTime: 2025-03-03 12:49:15
  */
 import type { App } from "vue";
 import type { PluginOptions } from "@stone/uemo-editor-utils/lib/vue-toastification";
@@ -10,6 +10,7 @@ import { createToastInterface } from "@stone/uemo-editor-utils/lib/vue-toastific
 
 // 更新 TYPE_TOAST 定义
 export type TYPE_TOAST = ReturnType<typeof createToastInterface>;
+export type TOAST_OPTIONS = PluginOptions;
 
 const defaultParam: PluginOptions = {
     position: "bottom-center" as PluginOptions["position"],
