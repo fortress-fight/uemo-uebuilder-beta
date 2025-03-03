@@ -114,5 +114,28 @@
     "BOX_SHADOW_SETTING_INDEPENDENT": "Independent Adjustment",
 
     "BORDER_STYLE_SOLID": "Solid",
-    "BORDER_STYLE_DASHED": "Dashed"
+    "BORDER_STYLE_DASHED": "Dashed",
+
+    "FILE_UPLOADER_TIP_NOT_SELECTED": "No file selected",
+    "FILE_UPLOADER_TIP_NOT_CONFIG": "No upload configuration",
+    "FILE_UPLOADER_TIP_FILE_SIZE_EXCEED": "The file size cannot exceed",
+    "FILE_UPLOADER_TIP_FILE_TYPE_NOT_ALLOWED": "The file type is not allowed to upload",
+    "FILE_UPLOADER_TIP_NOT_ALLOW_IMAGE": "Image upload is not enabled, please contact the customer service for details",
+    "FILE_UPLOADER_TIP_NOT_ALLOW_VIDEO": "Video upload is not enabled, please contact the customer service for details",
+    "FILE_UPLOADER_TIP_UPLOAD_FAILED": "Upload failed",
+    "FILE_UPLOADER_TIP_NETWORK_ERROR": "Please check the network",
+    "FILE_UPLOADER_TIP_UPLOAD_SUCCESS": "Upload successful",
+    "FILE_UPLOADER_TIP_UPLOAD_PROGRESS": "Upload progress",
+    "FILE_UPLOADER_TIP_UPLOAD_CANCEL": "Upload cancel",
+    "FILE_UPLOADER_TIP_UPLOAD_PAUSE": "Upload pause",
+    "FILE_UPLOADER_TIP_UPLOAD_RESUME": "Upload resume",
+    "FILE_UPLOADER_TIP_UPLOAD_RETRY": "Upload retry",
+    "FILE_UPLOADER_TIP_UPLOAD_ABORT": "Upload abort",
+    "FILE_UPLOADER_TIP_UPLOAD_COMPLETE": "Upload complete",
+    "FILE_UPLOADER_TIP_UPLOAD_ERROR": "Upload error, please try again later",
+    "FILE_UPLOADER_TIP_UNKNOWN_ERROR": "An unknown error occurred, upload failed",
+    "FILE_UPLOADER_TIP_NOT_CONFIG_QINIU": "No upload configuration",
+    "FILE_UPLOADER_TIP_GET_QINIU_TOKEN_FAILED": "Get Qiniu upload token failed",
+    "FILE_UPLOADER_TIP_MISSING_EXECUTE_METHOD": "Missing execute method",
+    "FILE_UPLOADER_TIP_UPLOADING": "Uploading, please wait"
 }

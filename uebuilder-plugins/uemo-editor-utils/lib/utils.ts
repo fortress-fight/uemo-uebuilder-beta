@@ -21,14 +21,20 @@ export function getSizeDesc(limitSize: number): string {
     return fixedSize.endsWith(".00") ? `${parseInt(fixedSize)}${units[exponent]}` : `${fixedSize}${units[exponent]}`;
 }
 
+/** 视频类型 */
+export const VIDEO_TYPES = ["video/mp4"];
+
 /**
  * 是否为视频类型
  * @param type 类型
  * @returns 是否为视频类型
  */
 export function isVideoType(type: string) {
-    return ["video/mp4"].includes(type);
+    return VIDEO_TYPES.includes(type);
 }
+
+/** 图片类型 */
+export const IMAGE_TYPES = ["image/webp", "image/jpg", "image/jpeg", "image/png", "image/gif"];
 
 /**
  * 是否为图片类型
@@ -36,5 +42,5 @@ export function isVideoType(type: string) {
  * @returns 是否为图片类型
  */
 export function isImageType(type: string) {
-    return ["image/webp", "image/jpg", "image/jpeg", "image/png", "image/gif"].includes(type);
+    return IMAGE_TYPES.includes(type);
 }

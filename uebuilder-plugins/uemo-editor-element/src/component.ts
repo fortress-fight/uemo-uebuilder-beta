@@ -1,17 +1,17 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/3 02:55:43
+ * @LastEditTime: 2025/3/3 10:46:25
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
-import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElBorderSetting from "../packages/border-setting";
+import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElBoxShadowSetting from "../packages/box-shadow-setting";
 import UeElBoxShadowSettingGroup from "../packages/box-shadow-setting-group";
 import UeElButton from "../packages/button";
-import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSetting from "../packages/calender-setting";
+import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
 import UeElCheckBox from "../packages/check-box";
 import UeElColorInput from "../packages/color-input";
@@ -20,27 +20,28 @@ import UeElColorPickerPanel from "../packages/color-picker-panel";
 import UeElColorSetting from "../packages/color-setting";
 import UeElColorSettingGroup from "../packages/color-setting-group";
 import UeElConfirmPanel from "../packages/confirm-panel";
-import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
+import UeElContextmenu from "../packages/contextmenu";
+import UeElFileUploader from "../packages/file-uploader";
 import UeElEditorGroup from "../packages/editor-group";
 import UeElEditorPanel from "../packages/editor-panel";
+import UeElIcon from "../packages/icon";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElGapSetting from "../packages/gap-setting";
-import UeElIcon from "../packages/icon";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElLoading from "../packages/loading";
 import UeElMarginSetting from "../packages/margin-setting";
 import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
-import UeElRadiusSetting from "../packages/radius-setting";
 import UeElPopPanel from "../packages/pop-panel";
-import UeElSelect from "../packages/select";
+import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
-import UeElSettingBar from "../packages/setting-bar";
+import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
-import UeElTabCard from "../packages/tab-card";
+import UeElSettingBar from "../packages/setting-bar";
 import UeElSettingGroup from "../packages/setting-group";
+import UeElTabCard from "../packages/tab-card";
 import UeElTagInput from "../packages/tag-input";
 import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
@@ -49,13 +50,13 @@ import UeElVideoPanel from "../packages/video-panel";
 export const components = [
     UeElAlignItemSetting,
     UeElAlignSetting,
-    UeElBorderSettingGroup,
     UeElBorderSetting,
+    UeElBorderSettingGroup,
     UeElBoxShadowSetting,
     UeElBoxShadowSettingGroup,
     UeElButton,
-    UeElCalenderPicker,
     UeElCalenderSetting,
+    UeElCalenderPicker,
     UeElCalenderSettingGroup,
     UeElCheckBox,
     UeElColorInput,
@@ -64,27 +65,28 @@ export const components = [
     UeElColorSetting,
     UeElColorSettingGroup,
     UeElConfirmPanel,
-    UeElContextmenu,
     UeElControlGroup,
+    UeElContextmenu,
+    UeElFileUploader,
     UeElEditorGroup,
     UeElEditorPanel,
+    UeElIcon,
     UeElEnterAnimateSetting,
     UeElGapSetting,
-    UeElIcon,
     UeElJustifyContentSetting,
     UeElLoading,
     UeElMarginSetting,
     UeElNumberInput,
     UeElOnOff,
     UeElPaddingSetting,
-    UeElRadiusSetting,
     UeElPopPanel,
-    UeElSelect,
+    UeElRadiusSetting,
     UeElRadiusSettingGroup,
-    UeElSettingBar,
+    UeElSelect,
     UeElSelectOption,
-    UeElTabCard,
+    UeElSettingBar,
     UeElSettingGroup,
+    UeElTabCard,
     UeElTagInput,
     UeElTextInput,
     UeElTipGroup,
