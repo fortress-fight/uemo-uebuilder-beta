@@ -1,0 +1,28 @@
+{
+    "name": "test-upload",
+    "version": "4.0.0",
+    "description": "图片上传服务",
+    "main": "app.js",
+    "repository": {
+        "git": "https://github.com/stahlmanDesign/node-express-multer-image-upload"
+    },
+    "scripts": {
+        "dev": "node ./app.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "ejs": "^2.4.2",
+        "express": "^4.14.0",
+        "fs": "0.0.2",
+        "multer": "^1.1.0",
+        "progress-stream": "^1.2.0",
+        "request": "^2.72.0",
+        "url": "^0.11.0"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}
