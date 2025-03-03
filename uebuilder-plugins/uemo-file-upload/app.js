@@ -22,11 +22,11 @@ function getExtension(file) {
 }
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (_req, _file, cb) => {
         cb(null, uploadsDir);
     },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + getExtension(file));
+    filename: (_req, file, cb) => {
+        cb(null, Date.now() + getExtension(file));
     },
 });
 
@@ -37,7 +37,7 @@ const upload = multer({
         fileSize: 10240 * 1024, // 限制文件大小
     },
     // 修改文件过滤器，允许图片、svg、lottie 和 splinecode 类型
-    fileFilter: (req, file, cb) => {
+    fileFilter: (_req, file, cb) => {
         const ext = getExtension(file).toLowerCase();
         const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif", ".svg", ".lottie", ".splinecode", ".json", ".jsmo"];
         if (allowedExtensions.includes(ext)) {
@@ -56,7 +56,7 @@ app.post("/service", upload.single("Filedata"), (req, res) => {
 });
 
 // 错误处理中间件
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
     console.error(err);
     res.status(500).json({ error: err.message });
 });
