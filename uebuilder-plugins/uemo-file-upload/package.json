@@ -7,10 +7,15 @@
         "git": "https://github.com/stahlmanDesign/node-express-multer-image-upload"
     },
     "scripts": {
+        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-file-upload/.husky",
         "dev": "node ./app.js"
     },
     "author": "",
     "license": "ISC",
+    "lint-staged": {
+        "*.{js}": "eslint --cache --config ./eslint.config.mjs",
+        "*.**": "prettier --check --ignore-unknown --write --cache"
+    },
     "dependencies": {
         "cors": "^2.8.5",
         "ejs": "^2.4.2",
@@ -20,6 +25,11 @@
         "progress-stream": "^1.2.0",
         "request": "^2.72.0",
         "url": "^0.11.0"
+    },
+    "devDependencies": {
+        "@stone/eslint-plugin-base": "4.0.0",
+        "lint-staged": "^15.2.2",
+        "husky": "^9.0.11"
     },
     "volta": {
         "node": "20.14.0",
