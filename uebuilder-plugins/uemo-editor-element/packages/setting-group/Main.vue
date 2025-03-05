@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:19:50
+ * @LastEditTime: 2025-03-04 18:29:15
 -->
 <template>
     <div :class="$style['editor-collapse-group']" class="relative" :data-disable="disable" :data-active="!!$slots.body">
@@ -110,7 +110,7 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
     padding: 0 var(--ue-editor-row-space--lv1);
 }
 .group-body {
-    padding: 0 var(--ue-editor-row-space--lv2) 12px;
+    padding: 0 var(--ue-editor-row-space--lv2) var(--ue-editor-row-space--lv3);
 
     gap: var(--ue-control-col-space);
 }

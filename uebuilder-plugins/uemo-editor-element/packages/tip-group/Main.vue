@@ -1,7 +1,7 @@
 <!--
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:22:35
+ * @LastEditTime: 2025-03-04 18:32:07
 -->
 <template>
     <div :class="$style['editor-tip-group']" :data-type="type" class="flex">
@@ -40,6 +40,14 @@ withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
     }
     [data-ue-tip-color="blue"] {
         color: rgba(var(--ue-color--blue), 1);
+    }
+    a {
+        margin: 0 0.5em;
+
+        text-decoration: underline;
+    }
+    a[data-link-type="tip"] {
+        color: color(var(--ue-color--blue), 1);
     }
 }
 </style>

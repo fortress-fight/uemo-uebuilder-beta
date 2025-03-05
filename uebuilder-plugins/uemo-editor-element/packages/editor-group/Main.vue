@@ -1,7 +1,7 @@
 <!--
  * @Description: 通用编辑器容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 01:21:35
+ * @LastEditTime: 2025-03-04 18:29:57
 -->
 <template>
     <div :class="$style['editor-group']">
@@ -22,7 +22,7 @@ const _prop = withDefaults(defineProps<UeElEditorGroupBaseProps>(), {});
 
     width: 100%;
     min-width: 0;
-    padding: 12px var(--ue-editor-row-space--lv2);
+    padding: var(--ue-editor-row-space--lv3) var(--ue-editor-row-space--lv2);
 
     border-bottom: 1px solid color(var(--ue-border-color));
 }
