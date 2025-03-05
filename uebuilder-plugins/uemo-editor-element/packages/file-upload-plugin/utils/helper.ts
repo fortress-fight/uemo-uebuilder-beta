@@ -36,7 +36,7 @@ export function checkFileSize(file: File, limitSize: number): Promise<void> {
     if (file.size > useLimitSize * 1024) {
         return Promise.reject(
             new UeElError(UeElErrorCode.UPLOAD_FILE_SIZE_EXCEED, {
-                message: t("ERROR_UPLOAD_FILE_SIZE_EXCEED") + getSizeDesc(limitSize * 1024),
+                message: t("ERROR_UPLOAD_FILE_SIZE_EXCEED") + getSizeDesc(limitSize),
             })
         );
     }
@@ -65,18 +65,15 @@ export function transferUploadConfig(
             fileLimitSize: oldConfig.imageUploadSize,
             uploadFileQueryPath: oldConfig.imageDataPath,
 
-            qiniu: oldConfig.qiniu,
-
             image: {
                 // 是否允许上传视频，默认：true
                 allow: true,
                 // 上传文件大小限制，默认：2048
                 limitSize: oldConfig.imageUploadSize,
             },
-
-            video: oldConfig.video,
-
-            history: oldConfig.history,
+            qiniu: oldConfig.qiniu || false,
+            video: oldConfig.video || false,
+            history: oldConfig.history || false,
         };
     } else {
         return oldConfig;

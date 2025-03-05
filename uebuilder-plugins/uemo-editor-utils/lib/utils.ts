@@ -1,12 +1,12 @@
 /**
  * 获取文件大小描述
- * @param limitSize 文件大小
+ * @param limitSize 文件大小 (单位: KB)
  * @returns 文件大小描述
  */
 export function getSizeDesc(limitSize: number): string {
     if (limitSize === 0) return "0Bytes";
 
-    const units = ["Bytes", "KB", "MB", "GB", "TB"];
+    const units = ["KB", "MB", "GB", "TB"];
     const base = 1024;
 
     // 计算指数
