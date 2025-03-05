@@ -1,3 +1,4 @@
+import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
 
@@ -177,13 +178,12 @@ declare global {
         /**
          * 上传处理程序
          */
-        export type UploadHandler = (config: { uploadConfig?: UploadConfig | UploadConfigOld }) => {
-            config?: UploadConfig | UploadConfigOld;
+        export type UploadHandler = (config: { uploadConfig?: UploadConfig }) => {
+            config?: UploadConfig;
             fire: (
                 file: File,
                 param: {
                     uploadProgress?: (progress: string) => void;
-                    onError: (param: { code: string; msg: string }) => void;
                 }
             ) => Promise<string>;
         };
@@ -191,7 +191,13 @@ declare global {
 
     namespace UE_PLUGIN_OPTIONS {
         type Toast = TOAST_OPTIONS;
-        type FileUpload = { uploadHandler: UE_EL_UTIL.UploadHandler };
+        type FileUpload = {
+            uploadConfig: UE_EL_UTIL.UploadConfig | UE_EL_UTIL.UploadConfigOld;
+            uploadHandler?: (
+                axiosInstance?: AxiosInstance,
+                defaultUploadConfig?: UE_EL_UTIL.UploadConfig
+            ) => UE_EL_UTIL.UploadHandler;
+        };
     }
 }
 

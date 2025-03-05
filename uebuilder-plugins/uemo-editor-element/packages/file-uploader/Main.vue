@@ -1,7 +1,7 @@
 <!--
  * @Description: 文件上传
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 13:24:16
+ * @LastEditTime: 2025-03-05 03:29:36
 -->
 <template>
     <div :class="$style['file-uploader']" class="cursor-pointer" @click="fireUpload">
@@ -101,7 +101,7 @@ function triggerUpload() {
 
 const uploading = ref(false);
 const uploadPercent = ref<number>(0);
-const uploadHandler = instance?.proxy?.$ueFileUpload?.({ uploadConfig: prop.uploadConfig });
+const uploadHandler = instance?.proxy?.$ueFileUpload({ uploadConfig: prop.uploadConfig });
 
 function uploadFileHand(file: File) {
     if (prop.interceptFileUpload) {
@@ -129,10 +129,6 @@ function uploadFileHand(file: File) {
                 uploadPercent.value = parseFloat(percent);
                 emit("progress", parseFloat(percent));
             },
-            onError(param: { code: string; msg: string }) {
-                instance?.proxy?.$ueElToast.warning(param.msg);
-                emit("error", param);
-            },
         })
         .then((path: string) => {
             emit("submit", path);
@@ -143,8 +139,8 @@ function uploadFileHand(file: File) {
             emit("progress", 100);
             uploadPercent.value = 0;
         })
-        .catch((error: Error | string) => {
-            console.error(error instanceof Error ? error : new Error(String(error)));
+        .catch((error: UE_EL_UTIL.UeError) => {
+            instance?.proxy?.$ueElError(error);
         });
 }
 
@@ -177,6 +173,9 @@ defineExpose({
 </script>
 <style lang="scss" module>
 .file-uploader {
-    //
+    position: relative;
+}
+.file-input {
+    @include hide;
 }
 </style>

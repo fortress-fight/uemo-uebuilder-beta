@@ -1,7 +1,5 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
-import { i18n } from "@/index";
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import { isVideoType, isImageType } from "@stone/uemo-editor-utils/lib/utils";
 
 import { transferUploadConfig } from "./helper";
@@ -9,6 +7,7 @@ import { videoUpload } from "./video-upload";
 import { imageUpload } from "./image-upload";
 import { assetUpload } from "./asset-upload";
 
+import { i18n } from "@/i18n";
 const { t } = i18n.global;
 
 /**
@@ -19,7 +18,7 @@ const { t } = i18n.global;
  */
 export function createUploadHandler(
     axiosInstance?: AxiosInstance,
-    defaultUploadConfig?: UE_EL_UTIL.UploadConfig | UE_EL_UTIL.UploadConfigOld
+    defaultUploadConfig?: UE_EL_UTIL.UploadConfig
 ): UE_EL_UTIL.UploadHandler {
     return (config) => {
         const uploadConfig = config.uploadConfig || defaultUploadConfig;
@@ -28,41 +27,43 @@ export function createUploadHandler(
             config: uploadConfig,
             fire: (file: File, param) => {
                 if (!file) {
-                    const errorMsg = t("FILE_UPLOADER_TIP_NOT_SELECTED");
-                    param.onError({ code: "0", msg: errorMsg });
-                    return Promise.reject(new UeError("0", { message: errorMsg }));
+                    const errorMsg = t("ERROR_UPLOAD_NOT_SELECTED");
+                    return Promise.reject(new UeElError(UeElErrorCode.UPLOAD_NOT_SELECTED, { message: errorMsg }));
                 }
 
                 if (!uploadConfig) {
-                    const errorMsg = t("FILE_UPLOADER_TIP_NOT_CONFIG");
-                    param.onError({ code: "0", msg: errorMsg });
-                    return Promise.reject(new UeError("0", { message: errorMsg }));
+                    const errorMsg = t("ERROR_UPLOAD_NOT_CONFIG");
+                    return Promise.reject(new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG, { message: errorMsg }));
                 }
 
                 const newConfig = transferUploadConfig(uploadConfig);
 
+                // 成功处理
+                const successHandler = (res: string) => {
+                    return res;
+                };
+
                 // 错误处理
-                const errorHandler = (error: { code: string; msg: string }) => {
-                    param.onError(error);
-                    return Promise.reject(new UeError("0", { message: error.msg }));
+                const errorHandler = (error: typeof UeElError) => {
+                    return Promise.reject(error);
                 };
 
                 if (isVideoType(file.type)) {
                     return videoUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                        (res) => res,
+                        successHandler,
                         errorHandler
                     );
                 }
 
                 if (isImageType(file.type)) {
                     return imageUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                        (res) => res,
+                        successHandler,
                         errorHandler
                     );
                 }
 
                 return assetUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                    (res) => res,
+                    successHandler,
                     errorHandler
                 );
             },

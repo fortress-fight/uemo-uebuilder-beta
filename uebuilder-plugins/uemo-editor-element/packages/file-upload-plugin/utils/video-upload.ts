@@ -1,7 +1,6 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
-import { i18n } from "@/index";
+import { i18n } from "@/i18n";
 
 import { normalUpload } from "./normal-upload";
 import { qiniuUpload } from "./qiniu-upload";
@@ -27,7 +26,11 @@ export function videoUpload(
     const { video, fileLimitSize, qiniu } = uploadConfig;
 
     if (!video || !video.allow) {
-        return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_NOT_ALLOW_VIDEO") }));
+        return Promise.reject(
+            new UeElError(UeElErrorCode.UPLOAD_NOT_ALLOW_VIDEO, {
+                message: t("ERROR_UPLOAD_NOT_ALLOW_VIDEO"),
+            })
+        );
     }
 
     return checkFileSize(file, video.limitSize || fileLimitSize).then(() => {

@@ -1,7 +1,6 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
-import { i18n } from "@/index";
+import { i18n } from "@/i18n";
 
 import { normalUpload } from "./normal-upload";
 import { checkFileSize } from "./helper";
@@ -26,7 +25,11 @@ export function imageUpload(
     const { image, fileLimitSize } = uploadConfig;
 
     if (!image || !image.allow) {
-        return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_NOT_ALLOW_IMAGE") }));
+        return Promise.reject(
+            new UeElError(UeElErrorCode.UPLOAD_NOT_ALLOW_IMAGE, {
+                message: t("ERROR_UPLOAD_NOT_ALLOW_IMAGE"),
+            })
+        );
     }
 
     return checkFileSize(file, image.limitSize || fileLimitSize).then(() => {

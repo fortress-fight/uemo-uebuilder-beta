@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试文件上传
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 13:49:15
+ * @LastEditTime: 2025-03-05 02:05:34
 -->
 <template>
     <TestArea
@@ -11,7 +11,9 @@
         v-model:testValueSelect="testValueSelect"
         title="测试文件上传"
     >
-        <UeElFileUploader v-bind="testValue" @submit="testValue.value = $event"></UeElFileUploader>
+        <UeElFileUploader v-bind="testValue" @submit="testValue.value = $event">
+            <button>测试文件上传</button>
+        </UeElFileUploader>
     </TestArea>
 </template>
 <script lang="ts" setup>

@@ -1,8 +1,7 @@
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
 import { getSizeDesc } from "@stone/uemo-editor-utils/lib/utils";
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import { axios } from "@stone/uemo-editor-utils/lib/axios";
-import { i18n } from "@/index";
+import { i18n } from "@/i18n";
 
 const DEFAULT_LIMIT_SIZE = 2048;
 
@@ -36,7 +35,9 @@ export function checkFileSize(file: File, limitSize: number): Promise<void> {
 
     if (file.size > useLimitSize * 1024) {
         return Promise.reject(
-            new UeError("0", { message: t("FILE_UPLOADER_TIP_FILE_SIZE_EXCEED") + getSizeDesc(limitSize * 1024) })
+            new UeElError(UeElErrorCode.UPLOAD_FILE_SIZE_EXCEED, {
+                message: t("ERROR_UPLOAD_FILE_SIZE_EXCEED") + getSizeDesc(limitSize * 1024),
+            })
         );
     }
 

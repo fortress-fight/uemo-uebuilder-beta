@@ -1,8 +1,7 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
-import { i18n } from "@/index";
+import { i18n } from "@/i18n";
 
 import { createAxios } from "./helper";
 
@@ -20,7 +19,7 @@ export function normalUpload(
     axiosInstance: AxiosInstance | undefined,
     uploadConfig: UE_EL_UTIL.UploadConfig,
     param: { onProgress?: (progress: string) => void }
-) {
+): Promise<string> {
     const { uploadPath, resourceLink, uploadName, uploadFileQueryPath, uploadData, withCredentials } = uploadConfig;
 
     const formData = new FormData();
@@ -52,7 +51,11 @@ export function normalUpload(
     return instance.post(uploadPath, formData).then(
         (response) => {
             if (!response) {
-                return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_NETWORK_ERROR") }));
+                return Promise.reject(
+                    new UeElError(UeElErrorCode.UPLOAD_NETWORK_ERROR, {
+                        message: t("ERROR_UPLOAD_NETWORK_ERROR"),
+                    })
+                );
             }
 
             if (typeof response === "object") {
@@ -63,7 +66,11 @@ export function normalUpload(
             }
         },
         () => {
-            return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_UPLOAD_FAILED") }));
+            return Promise.reject(
+                new UeElError(UeElErrorCode.UPLOAD_FAILED, {
+                    message: t("ERROR_UPLOAD_FAILED"),
+                })
+            );
         }
     );
 }

@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 13:21:51
+ * @LastEditTime: 2025-03-04 18:56:51
  */
 
 // SECTION - 样式文件
@@ -14,15 +14,13 @@ import UeEl from "@/index";
 import App from "./index.vue";
 import router from "../../router/index";
 
-import { createUploadHandler } from "~/packages/file-upload-plugin/utils/upload";
-
 const app = createApp(App);
 
 app.use(router);
 app.use(UeEl, {
     plugin: {
         fileUpload: {
-            uploadHandler: createUploadHandler(undefined, {
+            uploadConfig: {
                 uploadPath: "http://127.0.0.1:9005/service",
                 uploadName: "Filedata",
                 useFullLink: true,
@@ -31,7 +29,7 @@ app.use(UeEl, {
                 uploadFileSize: 2048,
                 imageUploadSize: 10240,
                 imageDataPath: "url",
-            }),
+            },
         },
     },
 });

@@ -1,7 +1,6 @@
-import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
 import { guid } from "@stone/uemo-editor-utils/lib/guid";
-import { i18n } from "@/index";
+import { i18n } from "@/i18n";
 
 import { createAxios } from "./helper";
 
@@ -14,7 +13,11 @@ const { t } = i18n.global;
  */
 function getQiniuToken(config: UE_EL_UTIL.QiniuUploadConfig) {
     if (!config) {
-        return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_NOT_CONFIG_QINIU") }));
+        return Promise.reject(
+            new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG_QINIU, {
+                message: t("ERROR_UPLOAD_NOT_CONFIG_QINIU"),
+            })
+        );
     }
 
     const axiosInstance = createAxios();
@@ -43,7 +46,11 @@ export function qiniuUpload(
     }
 ) {
     if (!qiniuConfig) {
-        return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_NOT_CONFIG_QINIU") }));
+        return Promise.reject(
+            new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG_QINIU, {
+                message: t("ERROR_UPLOAD_NOT_CONFIG_QINIU"),
+            })
+        );
     }
 
     const ext = file.name.slice(file.name.lastIndexOf("."));
@@ -59,7 +66,11 @@ export function qiniuUpload(
 
                         observable.subscribe({
                             error: () => {
-                                reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_UPLOAD_ERROR") }));
+                                reject(
+                                    new UeElError(UeElErrorCode.UPLOAD_ERROR, {
+                                        message: t("ERROR_UPLOAD_ERROR"),
+                                    })
+                                );
                             },
                             next(value) {
                                 if (value.total.percent) {
@@ -81,7 +92,11 @@ export function qiniuUpload(
                 });
             },
             () => {
-                return Promise.reject(new UeError("0", { message: t("FILE_UPLOADER_TIP_GET_QINIU_TOKEN_FAILED") }));
+                return Promise.reject(
+                    new UeElError(UeElErrorCode.UPLOAD_GET_QINIU_TOKEN_FAILED, {
+                        message: t("ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED"),
+                    })
+                );
             }
         )
         .then((imageUrl) => {
