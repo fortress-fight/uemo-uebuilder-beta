@@ -46,36 +46,42 @@ export function checkFileSize(file: File, limitSize: number): Promise<void> {
 
 /**
  * 转换上传配置
- * @param oldConfig 旧配置
+ * @param config 旧配置
  * @returns 新配置
  */
-export function transferUploadConfig(
-    oldConfig: UE_EL_UTIL.UploadConfigOld | UE_EL_UTIL.UploadConfig
-): UE_EL_UTIL.UploadConfig {
-    if ("imageUploadSize" in oldConfig) {
+export function transferUploadConfig(config: UE_EL_UTIL.UploadConfigOld): UE_EL_UTIL.UploadConfig {
+    const baseParam = {
+        uploadPath: config.uploadPath,
+        uploadName: config.uploadName,
+        publicPath: config.publicPath,
+        resourceLink: config.resourceLink,
+        withCredentials: config.withCredentials,
+        useFullLink: config.useFullLink,
+        uploadData: config.uploadData,
+        qiniu: config.qiniu || false,
+        history: config.history || false,
+
+        video: config.video || false,
+        asset: config.asset || false,
+    } as const;
+
+    if ("imageUploadSize" in config) {
         return {
-            uploadPath: oldConfig.uploadPath,
-            uploadName: oldConfig.uploadName,
-            publicPath: oldConfig.publicPath,
-            resourceLink: oldConfig.resourceLink,
-            withCredentials: oldConfig.withCredentials,
-            useFullLink: oldConfig.useFullLink,
-            uploadData: oldConfig.uploadData,
+            ...baseParam,
 
-            fileLimitSize: oldConfig.imageUploadSize,
-            uploadFileQueryPath: oldConfig.imageDataPath,
+            fileLimitSize: config.imageUploadSize,
+            uploadFileQueryPath: config.imageDataPath,
 
-            image: {
-                // 是否允许上传视频，默认：true
-                allow: true,
-                // 上传文件大小限制，默认：2048
-                limitSize: oldConfig.imageUploadSize,
-            },
-            qiniu: oldConfig.qiniu || false,
-            video: oldConfig.video || false,
-            history: oldConfig.history || false,
+            image: { allow: true, limitSize: config.imageUploadSize },
         };
-    } else {
-        return oldConfig;
     }
+
+    return {
+        ...baseParam,
+
+        fileLimitSize: config.fileLimitSize,
+        uploadFileQueryPath: config.uploadFileQueryPath,
+
+        image: config.image || false,
+    };
 }

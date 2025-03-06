@@ -1,6 +1,7 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
+import type { UeElError as UeError } from "~/utils/error";
 
 declare global {
     namespace UE_EL_UTIL {
@@ -79,21 +80,22 @@ declare global {
         /**
          * @description 上传配置旧版
          */
-        type UploadConfigOld = {
+        type UploadConfigOld = (
+            | { imageUploadSize: number; imageDataPath: string }
+            | { fileLimitSize: number; uploadFileQueryPath: string; image?: ImageUploadConfig | false }
+        ) & {
             uploadPath: string;
             uploadName: string;
             publicPath: string;
             resourceLink: string;
-            uploadFileSize: number;
             withCredentials?: boolean;
             useFullLink?: boolean;
             uploadData?: Record<string, string>;
-            imageUploadSize: number;
-            imageDataPath: string;
 
             qiniu?: QiniuUploadConfig | false;
             video?: VideoUploadConfig | false;
             history?: UploadHistoryConfig | false;
+            asset?: AssetUploadConfig | false;
         };
 
         /**
@@ -109,17 +111,41 @@ declare global {
             useFullLink?: boolean;
             uploadData?: Record<string, string>;
             uploadFileQueryPath: string;
+            qiniu: QiniuUploadConfig | false;
+            history: UploadHistoryConfig | false;
 
-            image?: ImageUploadConfig | false;
-            qiniu?: QiniuUploadConfig | false;
-            video?: VideoUploadConfig | false;
-            history?: UploadHistoryConfig | false;
+            image: ImageUploadConfig | false;
+            video: VideoUploadConfig | false;
+            asset: AssetUploadConfig | false;
         };
+
+        /**
+         * @description 文件上传配置
+         */
+        interface FileUploadConfig {
+            // 是否允许上传视频，默认：false
+            allow: boolean;
+            // 上传文件大小限制，默认：2048
+            limitSize?: number;
+            useQiniu?: boolean;
+            errorMsg?: {
+                // 未开通时的提示信息，默认："未开通视频上传功能，请联系客服询问详情",
+                notAllow?: string;
+            };
+        }
+
+        type VideoUploadConfig = FileUploadConfig;
+        type ImageUploadConfig = FileUploadConfig;
+
+        // 大文件上传
+        type AssetUploadConfig = FileUploadConfig;
 
         /**
          * @description 七牛上传配置
          */
         type QiniuUploadConfig = {
+            // 是否允许上传视频，默认：false
+            allow: boolean;
             withCredentials?: boolean;
             // acceptType?: "*" | ("mp4" | "image" | "other")[];
 
@@ -134,35 +160,6 @@ declare global {
             uploadLimitSize?: number;
             UploadConfig?: Record<string, any>;
             uploadCustomVars?: Record<string, string>;
-        };
-
-        /**
-         * @description 视频上传配置
-         */
-        type VideoUploadConfig = {
-            // 是否允许上传视频，默认：false
-            allow: boolean;
-            // 上传文件大小限制，默认：2048
-            limitSize?: number;
-            useQiniu?: boolean;
-            errorMsg?: {
-                // 未开通时的提示信息，默认："未开通视频上传功能，请联系客服询问详情",
-                notAllow?: string;
-            };
-        };
-
-        /**
-         * @description 图片上传配置
-         */
-        type ImageUploadConfig = {
-            // 是否允许上传视频，默认：true
-            allow: boolean;
-            // 上传文件大小限制，默认：2048
-            limitSize?: number;
-            errorMsg?: {
-                // 未开通时的提示信息，默认："未开通图片上传功能，请联系客服询问详情",
-                notAllow?: string;
-            };
         };
 
         /**
@@ -187,6 +184,11 @@ declare global {
                 }
             ) => Promise<string>;
         };
+
+        /**
+         * @description 错误类型
+         */
+        type UeElError = UeError;
     }
 
     namespace UE_PLUGIN_OPTIONS {
