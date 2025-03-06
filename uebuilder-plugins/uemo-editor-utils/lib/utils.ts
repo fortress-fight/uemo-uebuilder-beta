@@ -24,6 +24,9 @@ export function getSizeDesc(limitSize: number): string {
 /** 视频类型 */
 export const VIDEO_TYPES = ["video/mp4"];
 
+/** svg类型 */
+export const SVG_TYPES = ["image/svg+xml"];
+
 /**
  * 是否为视频类型
  * @param type 类型
@@ -35,6 +38,13 @@ export function isVideoType(type: string) {
 
 /** 图片类型 */
 export const IMAGE_TYPES = ["image/webp", "image/jpg", "image/jpeg", "image/png", "image/gif"];
+
+/** 文件类型 */
+export const FILE_TYPES_MAP = {
+    image: IMAGE_TYPES,
+    video: VIDEO_TYPES,
+    svg: SVG_TYPES,
+};
 
 /**
  * 是否为图片类型
