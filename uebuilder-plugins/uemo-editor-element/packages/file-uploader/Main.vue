@@ -1,7 +1,7 @@
 <!--
  * @Description: 文件上传
  * @Author: F-Stone
- * @LastEditTime: 2025-03-05 03:29:36
+ * @LastEditTime: 2025-03-06 19:36:57
 -->
 <template>
     <div :class="$style['file-uploader']" class="cursor-pointer" @click="fireUpload">
@@ -139,14 +139,14 @@ function uploadFileHand(file: File) {
             emit("progress", 100);
             uploadPercent.value = 0;
         })
-        .catch((error: UE_EL_UTIL.UeError) => {
+        .catch((error: UE_EL_UTIL.UeElError) => {
             instance?.proxy?.$ueElError(error);
         });
 }
 
 function uploadFile(file: File) {
     const interceptors = prop.uploadBeforeInterceptors;
-    if (interceptors) {
+    if (interceptors && interceptors.length > 0) {
         interceptors.forEach((interceptor) => {
             interceptor(file).then(
                 (res) => {
