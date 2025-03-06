@@ -1,17 +1,17 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/3 10:46:25
+ * @LastEditTime: 2025/3/4 18:13:57
  */
-import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
-import UeElBorderSetting from "../packages/border-setting";
+import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElBorderSettingGroup from "../packages/border-setting-group";
+import UeElBorderSetting from "../packages/border-setting";
 import UeElBoxShadowSetting from "../packages/box-shadow-setting";
 import UeElBoxShadowSettingGroup from "../packages/box-shadow-setting-group";
 import UeElButton from "../packages/button";
-import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCalenderPicker from "../packages/calender-picker";
+import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
 import UeElCheckBox from "../packages/check-box";
 import UeElColorInput from "../packages/color-input";
@@ -20,43 +20,44 @@ import UeElColorPickerPanel from "../packages/color-picker-panel";
 import UeElColorSetting from "../packages/color-setting";
 import UeElColorSettingGroup from "../packages/color-setting-group";
 import UeElConfirmPanel from "../packages/confirm-panel";
-import UeElControlGroup from "../packages/control-group";
 import UeElContextmenu from "../packages/contextmenu";
-import UeElFileUploader from "../packages/file-uploader";
+import UeElControlGroup from "../packages/control-group";
 import UeElEditorGroup from "../packages/editor-group";
 import UeElEditorPanel from "../packages/editor-panel";
-import UeElIcon from "../packages/icon";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElGapSetting from "../packages/gap-setting";
+import UeElFileUploader from "../packages/file-uploader";
+import UeElIcon from "../packages/icon";
+import UeElFileUploadButton from "../packages/file-upload-button";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
-import UeElLoading from "../packages/loading";
 import UeElMarginSetting from "../packages/margin-setting";
-import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
+import UeElNumberInput from "../packages/number-input";
 import UeElPaddingSetting from "../packages/padding-setting";
-import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
+import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
 import UeElSelect from "../packages/select";
-import UeElSelectOption from "../packages/select-option";
+import UeElLoading from "../packages/loading";
 import UeElSettingBar from "../packages/setting-bar";
-import UeElSettingGroup from "../packages/setting-group";
+import UeElSelectOption from "../packages/select-option";
 import UeElTabCard from "../packages/tab-card";
+import UeElSettingGroup from "../packages/setting-group";
 import UeElTagInput from "../packages/tag-input";
 import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
-    UeElAlignItemSetting,
     UeElAlignSetting,
-    UeElBorderSetting,
+    UeElAlignItemSetting,
     UeElBorderSettingGroup,
+    UeElBorderSetting,
     UeElBoxShadowSetting,
     UeElBoxShadowSettingGroup,
     UeElButton,
-    UeElCalenderSetting,
     UeElCalenderPicker,
+    UeElCalenderSetting,
     UeElCalenderSettingGroup,
     UeElCheckBox,
     UeElColorInput,
@@ -65,28 +66,29 @@ export const components = [
     UeElColorSetting,
     UeElColorSettingGroup,
     UeElConfirmPanel,
-    UeElControlGroup,
     UeElContextmenu,
-    UeElFileUploader,
+    UeElControlGroup,
     UeElEditorGroup,
     UeElEditorPanel,
-    UeElIcon,
     UeElEnterAnimateSetting,
     UeElGapSetting,
+    UeElFileUploader,
+    UeElIcon,
+    UeElFileUploadButton,
     UeElJustifyContentSetting,
-    UeElLoading,
     UeElMarginSetting,
-    UeElNumberInput,
     UeElOnOff,
+    UeElNumberInput,
     UeElPaddingSetting,
-    UeElPopPanel,
     UeElRadiusSetting,
+    UeElPopPanel,
     UeElRadiusSettingGroup,
     UeElSelect,
-    UeElSelectOption,
+    UeElLoading,
     UeElSettingBar,
-    UeElSettingGroup,
+    UeElSelectOption,
     UeElTabCard,
+    UeElSettingGroup,
     UeElTagInput,
     UeElTextInput,
     UeElTipGroup,
