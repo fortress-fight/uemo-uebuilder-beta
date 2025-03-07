@@ -14,7 +14,7 @@ const linkList = ref([
     { path: "/editor-form", text: "表单组件" },
     { path: "/editor-attr", text: "属性组件" },
     { path: "/editor-panel", text: "面板组件" },
-    { path: "/editor-resource/panel", text: "资源组件" },
+    { path: "/editor-resource-panel", text: "资源组件" },
     { path: "/editor-lib-panel", text: "库组件" },
 ]);
 

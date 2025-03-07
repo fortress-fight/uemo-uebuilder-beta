@@ -1,7 +1,7 @@
 /*
  * @Description: 路由入口文件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 19:08:49
+ * @LastEditTime: 2025-03-07 13:50:44
  */
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -10,6 +10,7 @@ import EditorUnitView from "./EditorUnit.vue";
 import AttrEditorUnitView from "./AttrEditorUnit.vue";
 import EditorPanelView from "./EditorPanel.vue";
 import EditorFormUnitView from "./EditorFormUnit.vue";
+import ResourcePanelView from "./ResourcePanel.vue";
 
 export default createRouter({
     history: createMemoryHistory(),
@@ -19,7 +20,6 @@ export default createRouter({
         { path: "/editor-attr", component: AttrEditorUnitView },
         { path: "/editor-panel", component: EditorPanelView },
         { path: "/editor-form", component: EditorFormUnitView },
-        { path: "/editor-resource/panel", component: EditorUnitView },
-        { path: "/editor-lib-panel", component: EditorUnitView },
+        { path: "/editor-resource-panel", component: ResourcePanelView },
     ],
 });
