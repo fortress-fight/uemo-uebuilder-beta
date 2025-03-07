@@ -7,6 +7,7 @@ import { i18n } from "./i18n";
 
 export interface UE_EL_OPTIONS {
     plugin: {
+        resource: UE_PLUGIN_OPTIONS.Resource;
         fileUpload: UE_PLUGIN_OPTIONS.FileUpload;
         toast?: UE_PLUGIN_OPTIONS.Toast;
         [key: string]: any;

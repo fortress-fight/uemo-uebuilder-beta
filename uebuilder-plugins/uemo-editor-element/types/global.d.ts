@@ -189,6 +189,11 @@ declare global {
          * @description 错误类型
          */
         type UeElError = UeError;
+
+        /**
+         * @description 图形资源列表
+         */
+        type ResourceShape = { name: string; thumb: string; value: string };
     }
 
     namespace UE_PLUGIN_OPTIONS {
@@ -199,6 +204,9 @@ declare global {
                 axiosInstance?: AxiosInstance,
                 defaultUploadConfig?: UE_EL_UTIL.UploadConfig
             ) => UE_EL_UTIL.UploadHandler;
+        };
+        type Resource = {
+            getShapeList: () => Promise<UE_EL_UTIL.ResourceShape[]>;
         };
     }
 }

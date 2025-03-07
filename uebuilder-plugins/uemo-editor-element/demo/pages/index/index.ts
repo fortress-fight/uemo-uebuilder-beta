@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-04 18:56:51
+ * @LastEditTime: 2025-03-07 12:27:03
  */
 
 // SECTION - 样式文件
@@ -30,6 +30,9 @@ app.use(UeEl, {
                 imageUploadSize: 10240,
                 imageDataPath: "url",
             },
+        },
+        resource: {
+            getShapeList: () => import("@stone/uemo-editor-assets/resource/shape").then((res) => res.default),
         },
     },
 });
