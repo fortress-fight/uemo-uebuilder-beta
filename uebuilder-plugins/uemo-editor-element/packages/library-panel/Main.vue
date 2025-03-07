@@ -1,0 +1,156 @@
+<!--
+ * @Description: 资源库面板
+ * @Author: F-Stone
+ * @LastEditTime: 2025-03-07 04:01:02
+-->
+<template>
+    <div :class="$style['library-panel']" :data-size="panelSize">
+        <div :class="$style['panel-head']" :data-dragger-target="draggable">
+            <div :class="$style['nav-list']" class="relative flex overflow-hidden">
+                <div
+                    v-for="(item, index) in cards"
+                    :key="index"
+                    ref="navItems"
+                    :class="$style['nav-item']"
+                    class="flex justify-center items-center"
+                    :data-active="item.name === activeCardName"
+                    :data-dragger-disable="draggable"
+                    @click="tabTo(item.name)"
+                >
+                    <slot :name="'BeforeNav' + item.name"></slot>
+                    <UeElIcon v-if="item.icon" :name="item.icon" :class="$style['ic']" :size="item.iconSize" />
+                    <span :class="$style['text']">{{ item.title }}</span>
+                </div>
+            </div>
+            <div :class="$style['nav-state-bar']" class="relative">
+                <div ref="barInner" :class="$style['bar--inner']" class="absolute"></div>
+            </div>
+        </div>
+        <div :class="$style['panel-body']">
+            <div ref="cardList" :class="$style['card-list']" class="relative overflow-hidden">
+                <template v-for="(item, index) in cards" :key="index">
+                    <SubPanel ref="cardItems" v-if="item.name === activeCardName">
+                        <slot :name="item.name"></slot>
+                    </SubPanel>
+                </template>
+            </div>
+        </div>
+        <div v-if="hasPanelFooter" :class="$style['panel-footer']">
+            <slot name="panelFooter"></slot>
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+import type { UeElLibraryPanelBaseProps } from "./index";
+
+import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
+
+import SubPanel from "./sub-components/SubPanel.vue";
+
+defineOptions({ name: "UeElLibraryPanel" });
+const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), { theme: "theme-1", draggable: true });
+
+const barInner = useTemplateRef("barInner");
+const navItems = useTemplateRef("navItems");
+const slotManage = useSlots();
+
+const hasPanelFooter = computed(() => {
+    return slotManage.panelFooter?.().length;
+});
+
+/**
+ * 当前激活的卡片名称
+ */
+const activeCardName = ref<string>(prop.defaultCard || prop.cards[0]?.name);
+watch(activeCardName, () => tabNav(activeCardName.value));
+
+/**
+ * 切换 Nav
+ * @param name panel 名称
+ */
+function tabNav(name: string) {
+    const activeNav = navItems.value?.find((item) => {
+        return item.dataset.name === name;
+    });
+
+    if (!activeNav || !barInner.value) return;
+
+    const { offsetLeft: left, offsetWidth: width } = activeNav;
+    gsap.set(barInner.value, { width, left });
+}
+
+function tabTo(name: string) {
+    activeCardName.value = name;
+}
+
+onMounted(() => {
+    requestAnimationFrame(() => {
+        tabNav(activeCardName.value);
+    });
+});
+</script>
+<style lang="scss" module>
+.library-panel {
+    overflow: hidden;
+
+    width: var(--ue-library-panel-width);
+    min-width: var(--ue-library-panel-width);
+
+    border-radius: var(--ue-border-radius--panel);
+    background-color: #fff;
+    box-shadow: var(--ue-shadow--lv2);
+    &[data-size="large"] {
+        width: var(--ue-library-panel-width--large);
+    }
+}
+.panel-head {
+    padding-top: 26px;
+    .nav-list {
+        padding: 0 26px;
+    }
+    .nav-item {
+        font-size: 14px;
+        line-height: 18px;
+
+        position: relative;
+
+        margin-right: 20px;
+        padding: 0 6px;
+        padding-bottom: 18px;
+
+        cursor: pointer;
+
+        color: color(var(--ue-font-color));
+        .ic {
+            margin-right: 6px;
+            & + .text {
+                padding-right: 4px;
+            }
+        }
+        &[data-active] {
+            color: color(var(--ue-font-color--deeper));
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    .nav-state-bar {
+        width: 100%;
+        height: 1px;
+
+        background: color(var(--ue-border-color));
+        .bar--inner {
+            bottom: 0;
+
+            width: 0;
+            height: 2px;
+
+            background: color(var(--ue-font-color--deeper));
+        }
+    }
+}
+.panel-footer {
+    padding: 20px;
+    padding-top: 0;
+}
+</style>
