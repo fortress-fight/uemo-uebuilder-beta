@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestLibraryPanel.vue";
+import TestComponent from "~/demo/components/TestShapeLibraryPanel.vue";
 </script>
 <style lang="scss" module>
 .test-group {
