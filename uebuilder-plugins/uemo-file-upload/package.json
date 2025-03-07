@@ -13,7 +13,7 @@
     "author": "",
     "license": "ISC",
     "lint-staged": {
-        "*.{js}": "eslint --cache --config ./eslint.config.mjs",
+        "*.js": "eslint --cache --config ./eslint.config.mjs",
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
