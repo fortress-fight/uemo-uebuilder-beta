@@ -1,7 +1,7 @@
 <!--
  * @Description: 图片上传按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-06 19:35:19
+ * @LastEditTime: 2025-03-09 02:50:53
 -->
 <template>
     <div :class="$style['file-upload-button']" class="grid">
@@ -34,7 +34,7 @@ import { uploadBeforeInterceptors } from "./utils/svg-upload";
 defineOptions({ name: "UeElFileUploadButton" });
 
 const prop = withDefaults(defineProps<UeElFileUploadButtonBaseProps>(), {});
-const emit = defineEmits<{ (e: "submit", value: { url: string; data: Record<string, string> }): void }>();
+const emit = defineEmits<{ (e: "submit", value: UE_EL_UTIL.FileUploadInfo): void }>();
 
 const { fileData, isDealing, interceptor } = uploadBeforeInterceptors(toRef(prop, "type"));
 

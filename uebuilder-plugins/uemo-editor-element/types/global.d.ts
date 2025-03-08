@@ -207,6 +207,14 @@ declare global {
          * @description 文字装饰资源列表
          */
         type ResourceTextDecoration = ResourceTextDecorationType;
+
+        /**
+         * @description 文件上传信息
+         */
+        type FileUploadInfo = {
+            url: string;
+            data: Record<string, string>;
+        };
     }
 
     namespace UE_PLUGIN_OPTIONS {
