@@ -22,5 +22,6 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
     app.config.globalProperties.$ueElResource = {
         getShapeLibrary: createCachedFn(param.getShapeLibrary),
         getSplineLibrary: createCachedFn(param.getSplineLibrary),
+        getTextDecorationLibrary: createCachedFn(param.getTextDecorationLibrary),
     };
 }

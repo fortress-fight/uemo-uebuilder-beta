@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 15:11:34
+ * @LastEditTime: 2025-03-09 00:40:20
  */
 
 // SECTION - 样式文件
@@ -34,6 +34,8 @@ app.use(UeEl, {
         resource: {
             getShapeLibrary: () => import("@stone/uemo-editor-assets/resource/shape").then((res) => res.default),
             getSplineLibrary: () => import("@stone/uemo-editor-assets/resource/spline").then((res) => res.default),
+            getTextDecorationLibrary: () =>
+                import("@stone/uemo-editor-assets/resource/text-decoration").then((res) => res.default),
         },
     },
 });

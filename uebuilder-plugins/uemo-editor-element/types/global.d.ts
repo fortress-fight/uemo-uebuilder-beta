@@ -1,5 +1,6 @@
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
+import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
@@ -201,6 +202,11 @@ declare global {
          * @description Spline 资源列表
          */
         type ResourceSpline = ResourceSplineType;
+
+        /**
+         * @description 文字装饰资源列表
+         */
+        type ResourceTextDecoration = ResourceTextDecorationType;
     }
 
     namespace UE_PLUGIN_OPTIONS {
@@ -215,6 +221,7 @@ declare global {
         type Resource = {
             getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
+            getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
         };
     }
 }

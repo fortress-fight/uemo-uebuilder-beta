@@ -156,5 +156,8 @@
 
     "SPLINE_LIBRARY_TIP_EMPTY": "未能获取到 Spline 资源",
     "SPLINE_LIBRARY_TITLE": "Spline库",
-    "SPLINE_LIBRARY_LINK_TIP": "请输入 splinecode 文件链接"
+    "SPLINE_LIBRARY_LINK_TIP": "请输入 splinecode 文件链接",
+
+    "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "未能获取到文字装饰资源",
+    "TEXT_DECORATION_LIBRARY_TITLE": "效果库"
 }

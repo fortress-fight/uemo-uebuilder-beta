@@ -11,8 +11,9 @@
 <script lang="ts" setup>
 import TestShapeLibraryPanel from "~/demo/components/TestShapeLibraryPanel.vue";
 import TestSplineLibraryPanel from "~/demo/components/TestSplineLibraryPanel.vue";
+import TestTextDecorationLibraryPanel from "~/demo/components/TestTextDecorationLibraryPanel.vue";
 
-const testComponents = [TestShapeLibraryPanel, TestSplineLibraryPanel];
+const testComponents = [TestShapeLibraryPanel, TestSplineLibraryPanel, TestTextDecorationLibraryPanel];
 </script>
 <style lang="scss" module>
 .page-head {
