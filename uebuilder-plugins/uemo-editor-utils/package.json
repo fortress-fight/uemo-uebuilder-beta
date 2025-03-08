@@ -40,6 +40,7 @@
         "copy-to-clipboard": "^3.3.3",
         "css-gradient-parser": "^0.0.16",
         "date-fns": "^4.1.0",
+        "dompurify": "^3.2.4",
         "floating-ui": "^5.2.8",
         "gsap": "^3.12.7",
         "jquery": "^3.7.1",
