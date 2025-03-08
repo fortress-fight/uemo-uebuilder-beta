@@ -14,6 +14,7 @@
     "UNIT_RADIAL_GRADIENT": "Radial Gradient",
     "UNIT_BORDER": "Border",
     "UNIT_CALENDER": "Date",
+    "UNIT_LINK": "Link",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
@@ -148,5 +149,12 @@
     "ERROR_UPLOAD_NOT_ALLOW_VIDEO": "Video upload is not enabled, please contact the customer service for details",
     "ERROR_UPLOAD_ERROR": "Upload error, please try again later",
     "ERROR_UPLOAD_NOT_CONFIG_QINIU": "No upload configuration",
-    "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "Get Qiniu upload token failed"
+    "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "Get Qiniu upload token failed",
+
+    "SHAPE_LIBRARY_TIP_EMPTY": "Unable to get Shape resource",
+    "SHAPE_LIBRARY_TITLE": "Shape Library",
+
+    "SPLINE_LIBRARY_TIP_EMPTY": "Unable to get Spline resource",
+    "SPLINE_LIBRARY_TITLE": "Spline Library",
+    "SPLINE_LIBRARY_LINK_TIP": "Please enter the splinecode file link"
 }

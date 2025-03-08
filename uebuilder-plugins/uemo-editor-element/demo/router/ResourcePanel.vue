@@ -10,8 +10,9 @@
 </template>
 <script lang="ts" setup>
 import TestShapeLibraryPanel from "~/demo/components/TestShapeLibraryPanel.vue";
+import TestSplineLibraryPanel from "~/demo/components/TestSplineLibraryPanel.vue";
 
-const testComponents = [TestShapeLibraryPanel];
+const testComponents = [TestShapeLibraryPanel, TestSplineLibraryPanel];
 </script>
 <style lang="scss" module>
 .page-head {

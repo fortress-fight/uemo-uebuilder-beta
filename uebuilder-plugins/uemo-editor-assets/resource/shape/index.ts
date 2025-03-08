@@ -1,4 +1,7 @@
-export default [
+export type ResourceShape = ResourceShapeItem[];
+export type ResourceShapeItem = { name: string; thumb: string; value: string };
+
+const shapeLib: ResourceShape = [
     {
         name: "shape-bg-1",
         thumb: require("./images/1.jpg"),
@@ -93,3 +96,5 @@ export default [
         value: `<svg aria-hidden="true" fill="#ff6b3d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"> <polygon points="104 10, 104 0, 0 0, 0 10"></polygon> </svg>`,
     },
 ];
+
+export default shapeLib;

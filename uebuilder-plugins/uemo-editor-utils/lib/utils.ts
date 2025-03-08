@@ -54,3 +54,5 @@ export const FILE_TYPES_MAP = {
 export function isImageType(type: string) {
     return IMAGE_TYPES.includes(type);
 }
+
+export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;

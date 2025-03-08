@@ -14,6 +14,7 @@
     "UNIT_RADIAL_GRADIENT": "径向渐变",
     "UNIT_BORDER": "描边",
     "UNIT_CALENDER": "日期",
+    "UNIT_LINK": "链接",
 
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
@@ -148,5 +149,12 @@
     "ERROR_UPLOAD_NOT_ALLOW_VIDEO": "未开通视频上传功能，请联系客服询问详情",
     "ERROR_UPLOAD_ERROR": "上传错误，请稍后重试",
     "ERROR_UPLOAD_NOT_CONFIG_QINIU": "未配置七牛云参数",
-    "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "获取七牛云上传凭证失败"
+    "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "获取七牛云上传凭证失败",
+
+    "SHAPE_LIBRARY_TIP_EMPTY": "未能获取到图形资源",
+    "SHAPE_LIBRARY_TITLE": "图形库",
+
+    "SPLINE_LIBRARY_TIP_EMPTY": "未能获取到 Spline 资源",
+    "SPLINE_LIBRARY_TITLE": "Spline库",
+    "SPLINE_LIBRARY_LINK_TIP": "请输入 splinecode 文件链接"
 }

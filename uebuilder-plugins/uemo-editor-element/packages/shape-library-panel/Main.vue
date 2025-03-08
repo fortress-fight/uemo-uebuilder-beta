@@ -1,7 +1,7 @@
 <!--
  * @Description: 图形资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 12:32:05
+ * @LastEditTime: 2025-03-09 00:15:34
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div v-else>
-                <UeElEmptyPanel description="未能获取到图形资源" />
+                <UeElEmptyPanel :description="t('SHAPE_LIBRARY_TIP_EMPTY')" />
             </div>
         </template>
     </UeElLibraryPanel>
@@ -31,22 +31,25 @@
 import type { UeElShapeLibraryPanelBaseProps } from "./index";
 
 defineOptions({ name: "UeElShapeLibraryPanel" });
+
+const { t } = useI18n();
+
 const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElShapeLibraryPanelBaseProps>(), {});
 
 const loading = ref(false);
-const list = ref<UE_EL_UTIL.ResourceShape[] | null>(null);
-const libraryPanelParam: UE_EL_COMPONENT.UeElLibraryPanelProps = {
-    cards: [{ title: "图形库", name: "shapeLibList", icon: "icon-xingzhuang", iconSize: 16 }],
-};
+const list = ref<UE_EL_UTIL.ResourceShape | null>(null);
+const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
+    cards: [{ title: t("SHAPE_LIBRARY_TITLE"), name: "shapeLibList", icon: "icon-xingzhuang", iconSize: 16 }],
+}));
 const select = defineModel<string>("select", { required: true });
 
-const getShapeList = async () => {
+const getShapeLibrary = async () => {
     // 启动1秒定时器：若超过1秒未返回，则显示 loading
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getShapeList();
+        const res = await instance?.proxy?.$ueElResource.getShapeLibrary();
 
         clearTimeout(timer);
 
@@ -59,8 +62,8 @@ const getShapeList = async () => {
     }
 };
 
-onMounted(() => {
-    getShapeList().catch((error) => {
+onBeforeMount(() => {
+    getShapeLibrary().catch((error) => {
         instance?.proxy?.$ueElError(error);
     });
 });

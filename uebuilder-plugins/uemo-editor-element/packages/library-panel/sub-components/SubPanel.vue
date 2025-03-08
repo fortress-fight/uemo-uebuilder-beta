@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 11:08:24
+ * @LastEditTime: 2025-03-07 15:41:43
 -->
 <template>
     <div :class="$style['library-panel-group']">
@@ -43,6 +43,6 @@ defineExpose({
 
     padding: 0 20px;
 
-    gap: 10px;
+    gap: var(--ue-editor-row-space--lv3);
 }
 </style>

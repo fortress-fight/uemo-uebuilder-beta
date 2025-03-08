@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 04:01:02
+ * @LastEditTime: 2025-03-07 15:32:42
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -13,6 +13,7 @@
                     ref="navItems"
                     :class="$style['nav-item']"
                     class="flex justify-center items-center"
+                    :data-name="item.name"
                     :data-active="item.name === activeCardName"
                     :data-dragger-disable="draggable"
                     @click="tabTo(item.name)"
@@ -127,7 +128,7 @@ onMounted(() => {
                 padding-right: 4px;
             }
         }
-        &[data-active] {
+        &[data-active="true"] {
             color: color(var(--ue-font-color--deeper));
         }
         &:last-child {

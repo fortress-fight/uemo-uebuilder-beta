@@ -20,6 +20,7 @@ const createCachedFn = <T>(fn: () => Promise<T>): (() => Promise<T>) => {
  */
 export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
     app.config.globalProperties.$ueElResource = {
-        getShapeList: createCachedFn(param.getShapeList),
+        getShapeLibrary: createCachedFn(param.getShapeLibrary),
+        getSplineLibrary: createCachedFn(param.getSplineLibrary),
     };
 }
