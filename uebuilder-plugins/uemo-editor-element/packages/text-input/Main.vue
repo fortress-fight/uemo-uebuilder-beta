@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 23:51:44
+ * @LastEditTime: 2025-03-07 18:46:11
 -->
 <template>
     <div
@@ -92,7 +92,7 @@ function inputBlurEvent(ev: FocusEvent) {
     emit("blur", ev);
     confirm();
 
-    // TODO: 修复失焦后输入框内容不更新的问题 (vue3 后应该不会出现这个问题，待验证)
+    // NOTE: 当前验证没有通过时，手动更新输入框内容
     requestAnimationFrame(() => {
         const inputEl = inputDom.value;
         if (inputEl && inputEl.value != prop.value) {
