@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-02-23 17:55:56
+ * @LastEditTime: 2025-03-10 00:05:51
  */
 import _get from "lodash/get";
 import _debounce from "lodash/debounce";
@@ -21,6 +21,7 @@ import _omit from "lodash/omit";
 import _omitBy from "lodash/omitBy";
 import _pick from "lodash/pick";
 import _differenceBy from "lodash/differenceBy";
+import _flatMap from "lodash/flatMap";
 
 // 一个深度 pickBy 方法
 function _deepPickBy<T extends object>(obj: T, predicate: (value: any, key: string) => boolean) {
@@ -60,4 +61,5 @@ export {
     _set,
     _differenceBy,
     _pick,
+    _flatMap,
 };
