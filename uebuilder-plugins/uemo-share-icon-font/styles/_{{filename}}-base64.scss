@@ -1,0 +1,15 @@
+@font-face {
+    font-family: "ue-share"; /* Project id 4035235 */
+
+    src: url("data:application/octet-stream;base64,<% base64 %>")
+        format("woff2");
+}
+
+[class^="{{prefix}}-"], [class*=" {{prefix}}-"] {
+  font-family: '{{fontname}}' !important;{{fontSize}}
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+{{cssString}}
