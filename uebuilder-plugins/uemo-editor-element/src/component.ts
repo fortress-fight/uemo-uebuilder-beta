@@ -1,13 +1,13 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/9 02:37:39
+ * @LastEditTime: 2025/3/9 02:57:17
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
-import UeElAlignSetting from "../packages/align-setting";
-import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElBorderSetting from "../packages/border-setting";
+import UeElAlignSetting from "../packages/align-setting";
 import UeElBoxShadowSetting from "../packages/box-shadow-setting";
+import UeElBorderSettingGroup from "../packages/border-setting-group";
 import UeElBoxShadowSettingGroup from "../packages/box-shadow-setting-group";
 import UeElButton from "../packages/button";
 import UeElCalenderPicker from "../packages/calender-picker";
@@ -22,44 +22,45 @@ import UeElColorSettingGroup from "../packages/color-setting-group";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
-import UeElEditorPanel from "../packages/editor-panel";
 import UeElEditorGroup from "../packages/editor-group";
+import UeElEditorPanel from "../packages/editor-panel";
 import UeElEmptyPanel from "../packages/empty-panel";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElFileUploadButton from "../packages/file-upload-button";
 import UeElFileUploader from "../packages/file-uploader";
 import UeElGapSetting from "../packages/gap-setting";
-import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElIcon from "../packages/icon";
-import UeElLoading from "../packages/loading";
+import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElLibraryPanel from "../packages/library-panel";
-import UeElNumberInput from "../packages/number-input";
+import UeElLoading from "../packages/loading";
 import UeElMarginSetting from "../packages/margin-setting";
+import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
-import UeElRadiusSettingGroup from "../packages/radius-setting-group";
 import UeElRadiusSetting from "../packages/radius-setting";
+import UeElRadiusSettingGroup from "../packages/radius-setting-group";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
 import UeElSettingBar from "../packages/setting-bar";
-import UeElSvgLibraryPanel from "../packages/svg-library-panel";
-import UeElSplineLibraryPanel from "../packages/spline-library-panel";
 import UeElSettingGroup from "../packages/setting-group";
 import UeElShapeLibraryPanel from "../packages/shape-library-panel";
+import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
+import UeElSplineLibraryPanel from "../packages/spline-library-panel";
+import UeElSvgLibraryPanel from "../packages/svg-library-panel";
 import UeElTabCard from "../packages/tab-card";
 import UeElTagInput from "../packages/tag-input";
+import UeElTextDecorationLibraryPanel from "../packages/text-decoration-library-panel";
 import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
-import UeElTextDecorationLibraryPanel from "../packages/text-decoration-library-panel";
 import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
     UeElAlignItemSetting,
-    UeElAlignSetting,
-    UeElBorderSettingGroup,
     UeElBorderSetting,
+    UeElAlignSetting,
     UeElBoxShadowSetting,
+    UeElBorderSettingGroup,
     UeElBoxShadowSettingGroup,
     UeElButton,
     UeElCalenderPicker,
@@ -74,35 +75,36 @@ export const components = [
     UeElConfirmPanel,
     UeElContextmenu,
     UeElControlGroup,
-    UeElEditorPanel,
     UeElEditorGroup,
+    UeElEditorPanel,
     UeElEmptyPanel,
     UeElEnterAnimateSetting,
     UeElFileUploadButton,
     UeElFileUploader,
     UeElGapSetting,
-    UeElJustifyContentSetting,
     UeElIcon,
-    UeElLoading,
+    UeElJustifyContentSetting,
     UeElLibraryPanel,
-    UeElNumberInput,
+    UeElLoading,
     UeElMarginSetting,
+    UeElNumberInput,
     UeElOnOff,
     UeElPaddingSetting,
     UeElPopPanel,
-    UeElRadiusSettingGroup,
     UeElRadiusSetting,
+    UeElRadiusSettingGroup,
     UeElSelect,
     UeElSelectOption,
     UeElSettingBar,
-    UeElSvgLibraryPanel,
-    UeElSplineLibraryPanel,
     UeElSettingGroup,
     UeElShapeLibraryPanel,
+    UeElShareIconLibraryPanel,
+    UeElSplineLibraryPanel,
+    UeElSvgLibraryPanel,
     UeElTabCard,
     UeElTagInput,
+    UeElTextDecorationLibraryPanel,
     UeElTextInput,
     UeElTipGroup,
-    UeElTextDecorationLibraryPanel,
     UeElVideoPanel,
 ];

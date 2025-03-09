@@ -160,5 +160,8 @@
     "SPLINE_LIBRARY_LINK_TIP": "Please enter the splinecode file link",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "Unable to get Text Decoration resource",
-    "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library"
+    "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library",
+
+    "SHARE_ICON_LIBRARY_TIP_EMPTY": "Unable to get Share Icon resource",
+    "SHARE_ICON_LIBRARY_TITLE": "Social Library"
 }

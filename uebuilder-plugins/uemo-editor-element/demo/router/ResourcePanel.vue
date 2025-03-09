@@ -12,8 +12,14 @@
 import TestShapeLibraryPanel from "~/demo/components/TestShapeLibraryPanel.vue";
 import TestSplineLibraryPanel from "~/demo/components/TestSplineLibraryPanel.vue";
 import TestTextDecorationLibraryPanel from "~/demo/components/TestTextDecorationLibraryPanel.vue";
+import TestSvgLibraryPanel from "~/demo/components/TestSvgLibraryPanel.vue";
 
-const testComponents = [TestShapeLibraryPanel, TestSplineLibraryPanel, TestTextDecorationLibraryPanel];
+const testComponents = [
+    TestShapeLibraryPanel,
+    TestSplineLibraryPanel,
+    TestTextDecorationLibraryPanel,
+    TestSvgLibraryPanel,
+];
 </script>
 <style lang="scss" module>
 .page-head {

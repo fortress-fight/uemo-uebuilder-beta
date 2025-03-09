@@ -160,5 +160,8 @@
     "SPLINE_LIBRARY_LINK_TIP": "请输入 splinecode 文件链接",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "未能获取到文字装饰资源",
-    "TEXT_DECORATION_LIBRARY_TITLE": "效果库"
+    "TEXT_DECORATION_LIBRARY_TITLE": "效果库",
+
+    "SHARE_ICON_LIBRARY_TIP_EMPTY": "未能获取到社交分享资源",
+    "SHARE_ICON_LIBRARY_TITLE": "社交库"
 }

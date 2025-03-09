@@ -1,6 +1,7 @@
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
 import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
+import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
@@ -209,6 +210,11 @@ declare global {
         type ResourceTextDecoration = ResourceTextDecorationType;
 
         /**
+         * @description 社交分享资源列表
+         */
+        type ResourceShareIcon = ResourceShareIconType;
+
+        /**
          * @description 文件上传信息
          */
         type FileUploadInfo = {
@@ -230,6 +236,7 @@ declare global {
             getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
             getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
+            getShareIconLibrary: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
         };
     }
 }
