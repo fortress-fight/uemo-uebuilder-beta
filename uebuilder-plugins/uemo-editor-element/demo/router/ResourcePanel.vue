@@ -13,12 +13,16 @@ import TestShapeLibraryPanel from "~/demo/components/TestShapeLibraryPanel.vue";
 import TestSplineLibraryPanel from "~/demo/components/TestSplineLibraryPanel.vue";
 import TestTextDecorationLibraryPanel from "~/demo/components/TestTextDecorationLibraryPanel.vue";
 import TestSvgLibraryPanel from "~/demo/components/TestSvgLibraryPanel.vue";
+import TestShareIconLibraryPanel from "~/demo/components/TestShareIconLibraryPanel.vue";
+import TestButtonHoverEffectLibraryPanel from "~/demo/components/TestButtonHoverEffectLibraryPanel.vue";
 
 const testComponents = [
     TestShapeLibraryPanel,
     TestSplineLibraryPanel,
     TestTextDecorationLibraryPanel,
     TestSvgLibraryPanel,
+    TestShareIconLibraryPanel,
+    TestButtonHoverEffectLibraryPanel,
 ];
 </script>
 <style lang="scss" module>

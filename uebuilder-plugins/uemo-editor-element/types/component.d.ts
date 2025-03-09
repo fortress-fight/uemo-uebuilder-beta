@@ -4,12 +4,15 @@
  * @LastEditTime: 2025-02-20 15:32:50
  */
 import UeElAlignItemSetting, { UeElAlignItemSettingBaseProps } from "../packages/align-item-setting";
-import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
-import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
+import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
 import UeElBorderSettingGroup, { UeElBorderSettingGroupBaseProps } from "../packages/border-setting-group";
+import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
 import UeElBoxShadowSettingGroup, { UeElBoxShadowSettingGroupBaseProps } from "../packages/box-shadow-setting-group";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
+import UeElButtonHoverEffectLibraryPanel, {
+    UeElButtonHoverEffectLibraryPanelBaseProps,
+} from "../packages/button-hover-effect-library-panel";
 import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/calender-setting";
 import UeElCalenderSettingGroup, { UeElCalenderSettingGroupBaseProps } from "../packages/calender-setting-group";
@@ -60,12 +63,13 @@ import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel
 declare module "vue" {
     export interface GlobalComponents {
         UeElAlignItemSetting: typeof UeElAlignItemSetting;
-        UeElBorderSetting: typeof UeElBorderSetting;
         UeElAlignSetting: typeof UeElAlignSetting;
-        UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
+        UeElBorderSetting: typeof UeElBorderSetting;
         UeElBorderSettingGroup: typeof UeElBorderSettingGroup;
+        UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
         UeElBoxShadowSettingGroup: typeof UeElBoxShadowSettingGroup;
         UeElButton: typeof UeElButton;
+        UeElButtonHoverEffectLibraryPanel: typeof UeElButtonHoverEffectLibraryPanel;
         UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElCalenderSetting: typeof UeElCalenderSetting;
         UeElCalenderSettingGroup: typeof UeElCalenderSettingGroup;
@@ -116,12 +120,13 @@ declare module "vue" {
 declare global {
     namespace UE_EL_COMPONENT {
         interface UeElAlignItemSettingProps extends UeElAlignItemSettingBaseProps {}
-        interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
-        interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}
+        interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
         interface UeElBorderSettingGroupProps extends UeElBorderSettingGroupBaseProps {}
+        interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}
         interface UeElBoxShadowSettingGroupProps extends UeElBoxShadowSettingGroupBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
+        interface UeElButtonHoverEffectLibraryPanelProps extends UeElButtonHoverEffectLibraryPanelBaseProps {}
         interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElCalenderSettingProps extends UeElCalenderSettingBaseProps {}
         interface UeElCalenderSettingGroupProps extends UeElCalenderSettingGroupBaseProps {}

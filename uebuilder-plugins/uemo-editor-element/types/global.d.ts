@@ -2,6 +2,8 @@ import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-as
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
 import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
+import type { ResourceButtonHoverEffect as ResourceButtonHoverEffectType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
+
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
@@ -213,6 +215,11 @@ declare global {
          * @description 社交分享资源列表
          */
         type ResourceShareIcon = ResourceShareIconType;
+
+        /**
+         * @description 按钮 hover 动效资源列表
+         */
+        type ResourceButtonHoverEffect = ResourceButtonHoverEffectType;
 
         /**
          * @description 文件上传信息
