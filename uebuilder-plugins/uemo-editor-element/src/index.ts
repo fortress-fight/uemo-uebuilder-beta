@@ -1,5 +1,8 @@
 import type { App } from "vue";
 
+// @ts-expect-error
+import InlineSvg from "vue-inline-svg";
+
 import { components } from "./component";
 import { plugins } from "./plugin";
 import { directive } from "./directive";
@@ -17,6 +20,8 @@ export interface UE_EL_OPTIONS {
 export default {
     install: (app: App, options: UE_EL_OPTIONS) => {
         app.use(i18n);
+
+        app.component("InlineSvg", InlineSvg);
 
         components.forEach((component) => {
             if (!component.name) return;

@@ -16,6 +16,7 @@
     "UNIT_CALENDER": "Date",
     "UNIT_LINK": "Link",
     "UNIT_UPLOAD": "Upload",
+    "UNIT_SEARCH_EMPTY": "No found",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 

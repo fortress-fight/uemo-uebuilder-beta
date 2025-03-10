@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:26:20
+ * @LastEditTime: 2025-03-10 10:28:36
 -->
 <template>
     <div :class="$style['loading']">
@@ -86,6 +86,8 @@ defineExpose({
 <style lang="scss" module>
 .loading {
     @include ab-cover;
+    z-index: 100;
+
     display: flex;
 
     background: #fff;
