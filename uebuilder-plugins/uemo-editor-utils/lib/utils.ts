@@ -56,3 +56,12 @@ export function isImageType(type: string) {
 }
 
 export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;
+
+/**
+ * 延迟 Promise
+ * @param ms 延迟时间 (单位: 毫秒)
+ * @returns 延迟后的 Promise
+ */
+export function delayPromise(ms = 2000) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
