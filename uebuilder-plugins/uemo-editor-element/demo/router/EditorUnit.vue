@@ -20,9 +20,17 @@ import TestSettingBar from "~/demo/components/TestSettingBar.vue";
 import TestColorPicker from "~/demo/components/TestColorPicker.vue";
 import TestColorInput from "~/demo/components/TestColorInput.vue";
 import TestFileUploader from "~/demo/components/TestFileUploader.vue";
+import TestGirdLayoutUtil from "~/demo/components/TestGirdLayoutUtil.vue";
 
 const containerComponents = [TestSettingBar, TestControlGroup, TestEditorGroup, TestSettingGroup];
-const unitTestComponents = [TestIcon, TestSelectOption, TestColorInput, TestColorPicker, TestFileUploader];
+const unitTestComponents = [
+    TestIcon,
+    TestSelectOption,
+    TestColorInput,
+    TestColorPicker,
+    TestFileUploader,
+    TestGirdLayoutUtil,
+];
 const helperTestComponents = [TestLoading, TestTipGroup];
 
 const testComponents = [...containerComponents, ...unitTestComponents, ...helperTestComponents];
