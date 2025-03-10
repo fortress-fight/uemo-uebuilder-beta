@@ -1,7 +1,7 @@
 /*
  * @Description: sass stylelint config
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 00:27:44
+ * @LastEditTime: 2025-03-10 10:35:33
  */
 
 module.exports = {
@@ -11,33 +11,6 @@ module.exports = {
         "stylelint-no-unsupported-browser-features",
         "stylelint-declaration-block-no-ignored-properties",
     ],
-    rules: {
-        "plugin/no-unsupported-browser-features": [
-            true,
-            {
-                severity: "warning",
-                browsers: [">=0.2%", "defaults", "not OperaMini all", "not IE 11"],
-                ignore: [
-                    "grid-template-columns",
-                    "css-gradients",
-                    "css3-cursors",
-                    "css3-cursors-grab",
-                    "css-appearance",
-                    "css-nesting",
-                    "css-when-else",
-                    "css-math-functions",
-                    "css-focus-within",
-                    "css-color-function",
-                    "css-overflow",
-                ],
-            },
-        ],
-        "plugin/declaration-block-no-ignored-properties": true,
-        "scss/selector-no-redundant-nesting-selector": null,
-        "scss/dollar-variable-pattern": "^[a-z][a-z0-9\\-_]*[a-z0-9]*$",
-
-        "@stylistic/function-parentheses-space-inside": null,
-    },
     overrides: [
         {
             files: "**/*.ejs",
