@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 15:32:42
+ * @LastEditTime: 2025-03-10 12:27:24
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -64,6 +64,12 @@ const hasPanelFooter = computed(() => {
  */
 const activeCardName = ref<string>(prop.defaultCard || prop.cards[0]?.name);
 watch(activeCardName, () => tabNav(activeCardName.value));
+watch(
+    () => prop.defaultCard,
+    () => {
+        activeCardName.value = prop.defaultCard || prop.cards[0]?.name;
+    }
+);
 
 /**
  * 切换 Nav
@@ -80,6 +86,10 @@ function tabNav(name: string) {
     gsap.set(barInner.value, { width, left });
 }
 
+/**
+ * 切换卡片
+ * @param name 卡片名称
+ */
 function tabTo(name: string) {
     activeCardName.value = name;
 }
@@ -89,6 +99,8 @@ onMounted(() => {
         tabNav(activeCardName.value);
     });
 });
+
+defineExpose({ tabTo });
 </script>
 <style lang="scss" module>
 .library-panel {
