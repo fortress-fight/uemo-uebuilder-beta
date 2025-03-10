@@ -11,6 +11,7 @@
 </template>
 <script lang="ts" setup>
 import copy from "@stone/uemo-editor-utils/lib/copy";
+import { _omit } from "@stone/uemo-editor-utils/lib/lodash";
 
 const instance = getCurrentInstance();
 const prop = defineProps<{ value: any }>();
@@ -25,7 +26,7 @@ function escapeHtml(html: string): string {
 }
 
 const source = computed(() => {
-    return JSON.stringify(prop.value, null, 4);
+    return JSON.stringify(_omit(prop.value, ["testOptionTitle"]), null, 4);
 });
 
 function copyData() {
