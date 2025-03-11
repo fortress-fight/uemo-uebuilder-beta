@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:57:22
+ * @LastEditTime: 2025-03-11 14:17:07
  */
 const { defineConfig } = require("@stone/vue-cli-service");
 const path = require("path");
@@ -82,6 +82,17 @@ module.exports = (publicPath = "./", param = {}) => {
                 });
                 return definitions;
             });
+
+            config.module
+                .rule("vue")
+                .use("vue-loader")
+                .tap((options) => ({
+                    ...options,
+                    compilerOptions: {
+                        // 将所有以 ion- 开头的标签都视为自定义元素
+                        isCustomElement: (tag) => tag.startsWith("ion-") || tag === "dotlottie-player",
+                    },
+                }));
         },
         pluginOptions: {
             dll: { entry: { vendor: ["jquery"] } },
