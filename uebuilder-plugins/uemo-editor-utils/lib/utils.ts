@@ -39,11 +39,15 @@ export function isVideoType(type: string) {
 /** 图片类型 */
 export const IMAGE_TYPES = ["image/webp", "image/jpg", "image/jpeg", "image/png", "image/gif"];
 
+/** lottie类型 */
+export const LOTTIE_TYPES = [".lottie"];
+
 /** 文件类型 */
 export const FILE_TYPES_MAP = {
     image: IMAGE_TYPES,
     video: VIDEO_TYPES,
     svg: SVG_TYPES,
+    lottie: LOTTIE_TYPES,
 };
 
 /**
@@ -55,7 +59,10 @@ export function isImageType(type: string) {
     return IMAGE_TYPES.includes(type);
 }
 
+/** spline类型 */
 export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;
+
+export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
 
 /**
  * 延迟 Promise
