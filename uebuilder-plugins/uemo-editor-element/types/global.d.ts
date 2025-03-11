@@ -1,4 +1,5 @@
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
+import type { ResourceLottie as ResourceLottieType } from "@stone/uemo-editor-assets/resource/lottie";
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
 import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
@@ -207,6 +208,11 @@ declare global {
         type ResourceSpline = ResourceSplineType;
 
         /**
+         * @description Lottie 资源列表
+         */
+        type ResourceLottie = ResourceLottieType;
+
+        /**
          * @description 文字装饰资源列表
          */
         type ResourceTextDecoration = ResourceTextDecorationType;
@@ -242,6 +248,7 @@ declare global {
         type Resource = {
             getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
+            getLottieLibrary: () => Promise<UE_EL_UTIL.ResourceLottie>;
             getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
             getShareIconLibrary: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
         };
