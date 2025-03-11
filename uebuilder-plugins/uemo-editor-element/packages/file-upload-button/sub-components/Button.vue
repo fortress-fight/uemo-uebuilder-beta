@@ -31,6 +31,14 @@ const buttonAttrs = computed<UE_EL_COMPONENT.UeElButtonProps>(() => {
             loading: props.uploading,
             disable: props.disable,
         },
+        lottie: {
+            theme: "fillText",
+            size: "large",
+            icon: "icon-app-lottie",
+            text: t("UPLOAD_LOTTIE_TITLE"),
+            loading: props.uploading,
+            disable: props.disable,
+        },
     };
 
     return buttonInfoMap[props.type];

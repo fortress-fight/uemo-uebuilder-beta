@@ -35,6 +35,10 @@ const tipAttrs = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => {
         const msgArr = [`1. ${t("UPLOAD_SVG_TIP_1")}`, `2. ${t("UPLOAD_SVG_TIP_2")}`];
         return { tips: msgArr };
     }
+    if (props.type === "lottie") {
+        const msgArr = [`1. ${t("UPLOAD_LOTTIE_TIP_1")}`, `2. ${t("UPLOAD_LOTTIE_TIP_2")}`];
+        return { tips: msgArr };
+    }
     return { tips: [] };
 });
 </script>

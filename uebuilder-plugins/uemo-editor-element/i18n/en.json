@@ -17,6 +17,7 @@
     "UNIT_LINK": "Link",
     "UNIT_UPLOAD": "Upload",
     "UNIT_SEARCH_EMPTY": "No found",
+    "UNIT_SUBMIT": "Submit",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
@@ -132,12 +133,17 @@
     "FILE_UPLOADER_TIP_MISSING_EXECUTE_METHOD": "Missing execute method",
     "FILE_UPLOADER_TIP_UPLOADING": "Uploading, please wait",
 
-    "UPLOAD_IMAGE_TITLE": "Upload image",
     "UPLOAD_SVG_TITLE": "Upload .svg file",
     "UPLOAD_SVG_TIP_1": "Please upload SVG file, file size cannot exceed 400kb",
     "UPLOAD_SVG_TIP_2": "If the upload fails, you can try to use the <a data-link-type=\"tip\" href=\"https://iconly.io/tools/svg-cleaner\" target=\"_blank\">SVG Optimizer</a> to process it again",
+
+    "UPLOAD_IMAGE_TITLE": "Upload image",
     "UPLOAD_IMG_TIP_1": "It is recommended to compress it before uploading, recommended to use <a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
     "UPLOAD_IMG_TIP_2": "Please upload image file, file size cannot exceed {size}",
+
+    "UPLOAD_LOTTIE_TITLE": "Upload .lottie file",
+    "UPLOAD_LOTTIE_TIP_1": "For more information about lottie animations, please visit <a data-link-type=\"tip\" href=\"https://lottiefiles.com/\" target=\"_blank\">Lottie Files</a>",
+    "UPLOAD_LOTTIE_TIP_2": "To get better effects, please use the .lottie file. <a data-link-type=\"tip\" href=\"https://lottiefiles.com/svg-to-lottie\" target=\"_blank\">SVG to Lottie</a>",
 
     "ERROR_UPLOAD_SVG_FORMAT_ERROR": "SVG format error",
     "ERROR_UPLOAD_SVG_VIEWBOX_MISSING": "SVG file missing viewBox attribute",
@@ -159,6 +165,10 @@
     "SPLINE_LIBRARY_TIP_EMPTY": "Unable to get Spline resource",
     "SPLINE_LIBRARY_TITLE": "Spline Library",
     "SPLINE_LIBRARY_LINK_TIP": "Please enter the splinecode file link",
+
+    "LOTTIE_LIBRARY_TIP_EMPTY": "Unable to get Lottie resource",
+    "LOTTIE_LIBRARY_TITLE": "Lottie Library",
+    "LOTTIE_LIBRARY_LINK_TIP": "Please enter the Lottie file link",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "Unable to get Text Decoration resource",
     "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library",

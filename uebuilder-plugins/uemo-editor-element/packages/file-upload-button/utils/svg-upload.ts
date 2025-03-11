@@ -1,3 +1,5 @@
+import type { UploadType } from "../index";
+
 import { i18n } from "@/i18n";
 
 function createSvgInterceptor(isDealing: Ref<boolean>, fileData: Ref<Record<string, any>>): UE_EL_UTIL.UploadIntercept {
@@ -82,7 +84,7 @@ function createSvgInterceptor(isDealing: Ref<boolean>, fileData: Ref<Record<stri
     };
 }
 
-export const uploadBeforeInterceptors = function (file: Ref<"image" | "svg">): {
+export const uploadBeforeInterceptors = function (file: Ref<UploadType>): {
     fileData: Ref<Record<string, any>>;
     isDealing: Ref<boolean>;
     interceptor: Ref<UE_EL_UTIL.UploadIntercept[]>;
