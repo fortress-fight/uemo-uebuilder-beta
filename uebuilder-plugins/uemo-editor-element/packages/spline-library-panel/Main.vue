@@ -1,7 +1,7 @@
 <!--
  * @Description: spline资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 00:29:48
+ * @LastEditTime: 2025-03-11 12:21:20
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -34,7 +34,7 @@
                 :rules="splineInputRules"
                 @confirm="changeSelect($event)"
             />
-            <UeElButton theme="fillText" size="large" text="确认" @trigger="useLink" />
+            <UeElButton theme="fillText" size="large" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
         </template>
     </UeElLibraryPanel>
 </template>
@@ -47,12 +47,10 @@ defineOptions({ name: "UeElSplineLibraryPanel" });
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const prop = withDefaults(defineProps<UeElSplineLibraryPanelBaseProps>(), {});
-const emit = defineEmits<{
-    (e: "close"): void;
-}>();
+const select = defineModel<string>("select", { required: false });
+const emit = defineEmits<{ (e: "close"): void }>();
 
-const loading = ref(false);
-const list = ref<UE_EL_UTIL.ResourceSpline["list"] | null>(null);
+const defaultCardName = ref<string>("splineLibList");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
     cards: [
         { title: t("SPLINE_LIBRARY_TITLE"), name: "splineLibList", icon: "icon-app-spline", iconSize: 15 },
@@ -60,9 +58,9 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
     ],
 }));
 
-const select = defineModel<string>("select", { required: false });
+const loading = ref(false);
+const list = ref<UE_EL_UTIL.ResourceSpline["list"] | null>(null);
 
-const defaultCardName = ref<string>("splineLibList");
 function updateCurrentCard() {
     if (select.value && !list.value?.find((item) => item.url === select.value)) {
         defaultCardName.value = "splineLink";
@@ -90,7 +88,7 @@ function useLink() {
 
 // #region 获取spline库
 
-function sortList(libList: UE_EL_UTIL.ResourceSpline) {
+function filterList(libList: UE_EL_UTIL.ResourceSpline) {
     return libList.list.filter((item) => (prop.type ? item.type === prop.type : true));
 }
 
@@ -103,7 +101,7 @@ const getShapeLibrary = async () => {
 
         clearTimeout(timer);
 
-        list.value = res ? sortList(res) : null;
+        list.value = res ? filterList(res) : null;
         loading.value = false;
     } catch (error) {
         clearTimeout(timer);
