@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-10 12:27:24
+ * @LastEditTime: 2025-03-11 19:21:17
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -30,8 +30,16 @@
         <div :class="$style['panel-body']">
             <div ref="cardList" :class="$style['card-list']" class="relative overflow-hidden">
                 <template v-for="(item, index) in cards" :key="index">
-                    <SubPanel ref="cardItems" v-if="item.name === activeCardName">
-                        <slot :name="item.name"></slot>
+                    <SubPanel
+                        v-if="item.name === activeCardName"
+                        ref="cardItems"
+                        :max-height="maxHeight"
+                        :min-height="minHeight"
+                        :category="item.category"
+                    >
+                        <template #default="{ activeCategory }">
+                            <slot :name="item.name" :active-category="activeCategory"></slot>
+                        </template>
                     </SubPanel>
                 </template>
             </div>
@@ -49,10 +57,16 @@ import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import SubPanel from "./sub-components/SubPanel.vue";
 
 defineOptions({ name: "UeElLibraryPanel" });
-const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), { theme: "theme-1", draggable: true });
+const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), {
+    theme: "theme-1",
+    draggable: true,
+    minHeight: "50px",
+    maxHeight: "500px",
+});
 
 const barInner = useTemplateRef("barInner");
 const navItems = useTemplateRef("navItems");
+const cardItems = useTemplateRef<InstanceType<typeof SubPanel>[]>("cardItems");
 const slotManage = useSlots();
 
 const hasPanelFooter = computed(() => {
@@ -63,7 +77,10 @@ const hasPanelFooter = computed(() => {
  * 当前激活的卡片名称
  */
 const activeCardName = ref<string>(prop.defaultCard || prop.cards[0]?.name);
-watch(activeCardName, () => tabNav(activeCardName.value));
+watch(activeCardName, () => {
+    cardItems.value?.forEach((item) => item.scrollToTop());
+    tabNav(activeCardName.value);
+});
 watch(
     () => prop.defaultCard,
     () => {

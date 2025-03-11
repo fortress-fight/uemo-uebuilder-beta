@@ -1,11 +1,19 @@
 /*
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 03:47:39
+ * @LastEditTime: 2025-03-11 19:20:32
  */
 import type { App } from "vue";
 
 import UeElLibraryPanel from "./Main.vue";
+
+export type UeElLibraryPanelCategory = { name: string; value: string; active?: boolean };
+
+export type UeElLibraryPanelCard = {
+    minHeight?: string;
+    maxHeight?: string;
+    category?: UeElLibraryPanelCategory[];
+};
 
 UeElLibraryPanel.install = (app: App) => {
     if (!UeElLibraryPanel.name) return;
@@ -19,7 +27,13 @@ export interface UeElLibraryPanelBaseProps {
     minHeight?: string;
     maxHeight?: string;
     draggable?: boolean;
-    cards: { title: string; icon?: string; iconSize?: number; name: string }[];
+    cards: {
+        name: string;
+        title: string;
+        icon?: string;
+        iconSize?: number;
+        category?: UeElLibraryPanelCategory[];
+    }[];
 }
 export type UeElLibraryPanelInstance = InstanceType<typeof UeElLibraryPanel>;
 
