@@ -1,7 +1,7 @@
 <!--
  * @Description: 社交分享资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 15:13:56
+ * @LastEditTime: 2025-03-11 11:25:28
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -86,14 +86,18 @@ onBeforeMount(() => {
     padding-bottom: 10px;
 
     border-radius: var(--ue-border-radius--lv1);
+    &:hover {
+        background-color: color(var(--ue-background-color));
+    }
     &[data-select="true"] {
+        background-color: transparent;
         &::before {
             box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
         }
     }
     .thumb-box {
         @include space-placeholder(100, 80, 100%);
-        font-size: 30px;
+        font-size: 28px;
 
         position: relative;
 
