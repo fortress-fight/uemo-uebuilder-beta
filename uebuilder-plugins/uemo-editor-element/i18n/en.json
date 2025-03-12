@@ -183,6 +183,13 @@
     "VIDEO_QUALITY_SD": "SD",
     "VIDEO_QUALITY_HD": "HD",
     "VIDEO_QUALITY_HLS": "HLS",
+    "VIDEO_PEXELS_ERROR": "Failed to get video list",
+
+    "IMAGE_LIBRARY_TITLE": "Image",
+    "IMAGE_LIBRARY_LINK_TIP": "Please enter the image link",
+    "IMAGE_LIBRARY_UPLOAD_TITLE": "Upload image",
+    "IMAGE_SEARCH_PLACEHOLDER": "Search Image",
+    "IMAGE_UNSPLASH_ERROR": "Failed to get image list",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "Unable to get Text Decoration resource",
     "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library",

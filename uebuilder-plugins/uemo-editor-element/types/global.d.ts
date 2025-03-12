@@ -5,6 +5,7 @@ import type { ResourceTextDecoration as ResourceTextDecorationType } from "@ston
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
 import type { ResourceButtonHoverEffect as ResourceButtonHoverEffectType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
 import type { ResourceVideo as ResourceVideoType } from "@stone/uemo-editor-assets/resource/video";
+import type { ResourceImage as ResourceImageType } from "@stone/uemo-editor-assets/resource/image";
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
@@ -219,6 +220,11 @@ declare global {
         type ResourceVideo = ResourceVideoType;
 
         /**
+         * @description Image 资源列表
+         */
+        type ResourceImage = ResourceImageType;
+
+        /**
          * @description 文字装饰资源列表
          */
         type ResourceTextDecoration = ResourceTextDecorationType;
@@ -267,6 +273,10 @@ declare global {
             videoLibrary: {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceVideo>;
+            };
+            imageLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceImage>;
             };
             textDecorationLibrary: {
                 enable: boolean;

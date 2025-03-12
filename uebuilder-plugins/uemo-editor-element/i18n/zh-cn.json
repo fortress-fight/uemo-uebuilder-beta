@@ -183,6 +183,13 @@
     "VIDEO_QUALITY_SD": "标清",
     "VIDEO_QUALITY_HD": "高清",
     "VIDEO_QUALITY_HLS": "超清",
+    "VIDEO_PEXELS_ERROR": "获取视频列表失败",
+
+    "IMAGE_LIBRARY_TITLE": "图库",
+    "IMAGE_LIBRARY_LINK_TIP": "请输入图片链接",
+    "IMAGE_LIBRARY_UPLOAD_TITLE": "上传图片",
+    "IMAGE_SEARCH_PLACEHOLDER": "搜索图片",
+    "IMAGE_UNSPLASH_ERROR": "获取图片列表失败",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "未能获取到文字装饰资源",
     "TEXT_DECORATION_LIBRARY_TITLE": "效果库",

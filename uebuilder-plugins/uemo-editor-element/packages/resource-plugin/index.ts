@@ -24,6 +24,7 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         splineLibrary: param.splineLibrary,
         lottieLibrary: param.lottieLibrary,
         videoLibrary: param.videoLibrary,
+        imageLibrary: param.imageLibrary,
         textDecorationLibrary: param.textDecorationLibrary,
         shareIconLibrary: param.shareIconLibrary,
     };
