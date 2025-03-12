@@ -10,9 +10,7 @@
             @ready="domReady"
             @complete="lottieComplete"
         />
-        <div v-if="isLoading" :class="$style['loading-box']" class="flex justify-center items-center">
-            <i :class="$style['ic']"></i>
-        </div>
+        <UeElLoading v-if="isLoading" type="circle" bg="transparent" :circle="{ size: '40%' }" />
     </div>
 </template>
 <script lang="ts" setup>
@@ -73,58 +71,7 @@ onBeforeMount(() => {
 });
 </script>
 <style lang="scss" module>
-@keyframes loaderRotate {
-    100% {
-        transform: rotate(360deg);
-    }
-}
-@keyframes prixClipFix {
-    0% {
-        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
-    }
-    25% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
-    }
-    50% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
-    }
-    75% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
-    }
-    100% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
-    }
-}
 .lottie-box {
     @include ab-cover;
-}
-.loading-box {
-    @include ab-cover;
-
-    cursor: pointer;
-    .ic {
-        position: relative;
-
-        width: 40%;
-        height: 40%;
-        margin: auto;
-
-        animation: loaderRotate 1s linear infinite;
-
-        border-radius: 50%;
-        &::before {
-            position: absolute;
-
-            box-sizing: border-box;
-
-            content: "";
-            animation: prixClipFix 2s linear infinite;
-
-            border: 2px solid rgba(#000, 1);
-            border-radius: 50%;
-
-            inset: 0;
-        }
-    }
 }
 </style>

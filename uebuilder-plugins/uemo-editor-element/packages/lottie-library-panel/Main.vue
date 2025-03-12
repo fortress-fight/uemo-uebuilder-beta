@@ -1,7 +1,7 @@
 <!--
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 19:28:17
+ * @LastEditTime: 2025-03-12 00:30:50
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -56,8 +56,8 @@ defineOptions({ name: "UeElLottieLibraryPanel" });
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElLottieLibraryPanelBaseProps>(), {});
-const select = defineModel<string>("select", { required: false });
 const emit = defineEmits<{ (e: "close"): void }>();
+const select = defineModel<string>("select", { required: false });
 
 const defaultCardName = ref<string>("LottieLibList");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
