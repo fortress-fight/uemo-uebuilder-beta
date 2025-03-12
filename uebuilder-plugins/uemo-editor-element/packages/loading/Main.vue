@@ -1,17 +1,25 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-10 10:28:36
+ * @LastEditTime: 2025-03-12 13:20:23
 -->
 <template>
-    <div :class="$style['loading']">
-        <div :class="$style['loading-box']">
-            <span v-if="message !== false" :class="$style['loading-message']">
-                {{ message || t("LOADING_TIP") }}
+    <div :class="$style['loading']" class="flex justify-center items-center" :style="{ '--bg': bg }">
+        <div v-if="type === 'bar'" :class="$style['loading-box--bar']">
+            <span v-if="barInfo.message !== false" :class="$style['loading-message']">
+                {{ barInfo.message || t("LOADING_TIP") }}
             </span>
             <div :class="$style['loading-inner']">
-                <div ref="progressInner" :style="{ width: progress + '%' }" :class="$style['bar']"></div>
+                <div ref="progressInner" :style="{ width: barInfo.progress + '%' }" :class="$style['bar']"></div>
             </div>
+        </div>
+        <div
+            v-else-if="type === 'circle'"
+            :class="$style['loading-box--circle']"
+            class="flex justify-center items-center"
+            :style="{ '--size': circleInfo.size }"
+        >
+            <i :class="$style['ic']"></i>
         </div>
     </div>
 </template>
@@ -24,13 +32,16 @@ defineOptions({ name: "UeElLoading" });
 const { t } = useI18n();
 
 const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
-    fake: true,
-    message: "",
-    progress: "0",
-    duration: 5,
+    type: "bar",
+    bg: "#fff",
+    bar: () => ({ fake: true, message: "", progress: "0", duration: 5 }),
+    circle: () => ({ size: "100px" }),
 });
 
 const progressInner = useTemplateRef("progressInner");
+
+const barInfo = computed(() => prop.bar);
+const circleInfo = computed(() => prop.circle);
 
 let tweenLoading: GSAPTween | null = null;
 
@@ -40,16 +51,29 @@ let tweenLoading: GSAPTween | null = null;
  * @description 使用 gsap 对 progressInner 元素进行动画处理，从 0% 动画到 98%，持续时间为 prop.duration。
  */
 function animateProgress() {
-    if (progressInner.value && prop.fake) {
+    clearAnimate();
+    if (progressInner.value && barInfo.value.fake) {
         tweenLoading = gsap.fromTo(
             progressInner.value,
             { width: "0%" },
             {
                 width: "98%",
                 ease: "power2.out",
-                duration: prop.duration,
+                duration: barInfo.value.duration,
             }
         );
+    }
+}
+
+/**
+ * 清除动画。
+ * @function clearAnimate
+ * @description 若存在 tweenLoading，则杀掉 progressInner 元素上的所有动画。
+ */
+function clearAnimate() {
+    if (tweenLoading) {
+        void (progressInner.value && gsap.killTweensOf(progressInner.value));
+        tweenLoading = null;
     }
 }
 
@@ -68,34 +92,48 @@ onMounted(() => {
  * @description 在组件卸载前，若存在 gsap 动画，则杀掉 progressInner 元素上的所有动画。
  */
 onBeforeUnmount(() => {
-    if (tweenLoading && progressInner.value && prop.fake) {
-        gsap.killTweensOf(progressInner.value);
-    }
+    clearAnimate();
 });
 
 defineExpose({
     reset: () => {
-        if (tweenLoading && progressInner.value && prop.fake) {
-            gsap.killTweensOf(progressInner.value);
-            tweenLoading = null;
+        clearAnimate();
+        requestAnimationFrame(() => {
             animateProgress();
-        }
+        });
     },
 });
 </script>
 <style lang="scss" module>
+@keyframes loaderRotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+    }
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+    }
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+    }
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+    }
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+    }
+}
 .loading {
     @include ab-cover;
     z-index: 100;
 
-    display: flex;
-
-    background: #fff;
-
-    align-items: center;
-    justify-content: center;
+    background: var(--bg);
 }
-.loading-box {
+.loading-box--bar {
     position: relative;
 
     width: 40%;
@@ -130,6 +168,40 @@ defineExpose({
         height: 100%;
 
         background: #000;
+    }
+}
+.loading-box--circle {
+    @include space-placeholder(100, 100, var(--size, 100px));
+    position: relative;
+
+    flex: 0 0 auto;
+
+    cursor: pointer;
+    .ic {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+        margin: auto;
+
+        animation: loaderRotate 1s linear infinite;
+
+        border-radius: 50%;
+        &::before {
+            position: absolute;
+
+            box-sizing: border-box;
+
+            content: "";
+            animation: prixClipFix 2s linear infinite;
+
+            border: 2px solid rgba(#000, 1);
+            border-radius: 50%;
+
+            inset: 0;
+        }
     }
 }
 </style>

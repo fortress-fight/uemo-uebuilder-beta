@@ -1,7 +1,7 @@
 /*
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:32:54
+ * @LastEditTime: 2025-03-12 13:11:56
  */
 import type { App } from "vue";
 
@@ -13,10 +13,15 @@ UeElLoading.install = (app: App) => {
 };
 
 export type UeElLoadingBaseProps = {
-    fake?: boolean;
-    progress?: string;
-    duration?: number;
-    message?: string | false;
+    type?: "bar" | "circle";
+    bg?: string;
+    bar?: {
+        fake?: boolean;
+        progress?: string;
+        duration?: number;
+        message?: string | false;
+    };
+    circle?: { size: string };
 };
 export type UeElLoadingInstance = InstanceType<typeof UeElLoading>;
 

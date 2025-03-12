@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:34:47
+ * @LastEditTime: 2025-03-12 13:06:25
 -->
 <template>
     <TestArea
@@ -22,8 +22,9 @@ import TestArea from "~/demo/components/TestArea.vue";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: UE_EL_COMPONENT.UeElLoadingProps[] = [
-    { fake: true, progress: "0", duration: 5 },
-    { fake: true, progress: "0", duration: 5, message: false },
+    { type: "bar", bar: { fake: true, progress: "0", duration: 5 } },
+    { type: "bar", bar: { fake: true, progress: "0", duration: 5, message: false } },
+    { type: "circle", circle: { size: "100px" } },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
 
