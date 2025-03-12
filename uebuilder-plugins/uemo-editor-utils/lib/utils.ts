@@ -62,13 +62,17 @@ export function isImageType(type: string) {
 /** spline类型 */
 export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;
 
+/** lottie类型 */
 export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
+
+/** video类型 */
+export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 
 /**
  * 延迟 Promise
  * @param ms 延迟时间 (单位: 毫秒)
  * @returns 延迟后的 Promise
  */
-export function delayPromise(ms = 2000) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+export async function delayPromise(ms = 2000, res?: Promise<any>): Promise<any> {
+    return await new Promise((resolve) => setTimeout(() => resolve(res), ms));
 }
