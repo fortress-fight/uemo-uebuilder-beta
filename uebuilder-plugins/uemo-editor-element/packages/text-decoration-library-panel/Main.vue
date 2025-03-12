@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 00:53:26
+ * @LastEditTime: 2025-03-12 15:55:29
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -57,7 +57,7 @@ const getTextDecorationLibrary = async () => {
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getTextDecorationLibrary();
+        const res = await instance?.proxy?.$ueElResource.textDecorationLibrary.getData();
 
         clearTimeout(timer);
 

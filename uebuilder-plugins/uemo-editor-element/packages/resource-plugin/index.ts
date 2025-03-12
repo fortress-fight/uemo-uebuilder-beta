@@ -1,7 +1,7 @@
 import type { App } from "vue";
 
 // 重构：使用箭头函数实现缓存包装函数
-const createCachedFn = <T>(fn: () => Promise<T>): (() => Promise<T>) => {
+const _createCachedFn = <T>(fn: () => Promise<T>): (() => Promise<T>) => {
     let cache: T;
     let isCached = false;
     return async () => {
@@ -24,7 +24,7 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         splineLibrary: param.splineLibrary,
         lottieLibrary: param.lottieLibrary,
         videoLibrary: param.videoLibrary,
-        getTextDecorationLibrary: createCachedFn(param.getTextDecorationLibrary),
+        textDecorationLibrary: param.textDecorationLibrary,
         shareIconLibrary: param.shareIconLibrary,
     };
 }

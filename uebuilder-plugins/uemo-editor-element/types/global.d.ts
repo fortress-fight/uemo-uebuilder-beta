@@ -268,7 +268,10 @@ declare global {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceVideo>;
             };
-            getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
+            textDecorationLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
+            };
             shareIconLibrary: {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
