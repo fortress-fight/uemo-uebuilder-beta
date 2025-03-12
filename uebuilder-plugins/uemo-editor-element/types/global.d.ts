@@ -252,7 +252,10 @@ declare global {
             ) => UE_EL_UTIL.UploadHandler;
         };
         type Resource = {
-            getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
+            shapeLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceShape>;
+            };
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
             lottieLibrary: {
                 enable: boolean;

@@ -1,7 +1,7 @@
 <!--
  * @Description: 图形资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 00:15:34
+ * @LastEditTime: 2025-03-12 15:42:05
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -49,7 +49,7 @@ const getShapeLibrary = async () => {
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getShapeLibrary();
+        const res = await instance?.proxy?.$ueElResource.shapeLibrary.getData();
 
         clearTimeout(timer);
 
