@@ -254,7 +254,10 @@ declare global {
         type Resource = {
             getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
-            getLottieLibrary: () => Promise<UE_EL_UTIL.ResourceLottie>;
+            lottieLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceLottie>;
+            };
             videoLibrary: {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceVideo>;

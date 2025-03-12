@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 13:42:05
+ * @LastEditTime: 2025-03-12 15:32:05
  */
 
 // SECTION - 样式文件
@@ -34,7 +34,10 @@ app.use(UeEl, {
         resource: {
             getShapeLibrary: () => import("@stone/uemo-editor-assets/resource/shape").then((res) => res.default),
             getSplineLibrary: () => import("@stone/uemo-editor-assets/resource/spline").then((res) => res.default),
-            getLottieLibrary: () => import("@stone/uemo-editor-assets/resource/lottie").then((res) => res.default),
+            lottieLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/lottie").then((res) => res.default),
+            },
             videoLibrary: {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/video").then((res) => res.default),

@@ -1,7 +1,7 @@
 <!--
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 00:30:50
+ * @LastEditTime: 2025-03-12 15:38:58
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -32,7 +32,7 @@
         <template #LottieUpload>
             <UeElFileUploadButton type="lottie" @submit="useUpload" />
         </template>
-        <template #lottieLink>
+        <template #LottieLink>
             <UeElTextInput
                 :value="lottieLink"
                 padding-size="level4"
@@ -59,20 +59,26 @@ const _prop = withDefaults(defineProps<UeElLottieLibraryPanelBaseProps>(), {});
 const emit = defineEmits<{ (e: "close"): void }>();
 const select = defineModel<string>("select", { required: false });
 
-const defaultCardName = ref<string>("LottieLibList");
-const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
-    cards: [
-        {
+const lottieLibrary = ref(instance?.proxy?.$ueElResource.lottieLibrary);
+const defaultCardName = ref<string>(lottieLibrary.value?.enable ? "LottieLibList" : "LottieUpload");
+const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => {
+    const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
+        cards: [
+            { title: t("UNIT_UPLOAD"), name: "LottieUpload" },
+            { title: t("UNIT_LINK"), name: "LottieLink" },
+        ],
+    };
+    if (lottieLibrary.value?.enable) {
+        param.cards.unshift({
             title: t("LOTTIE_LIBRARY_TITLE"),
             name: "LottieLibList",
             icon: "icon-app-lottie",
             iconSize: 15,
             category: categoryList.value,
-        },
-        { title: t("UNIT_UPLOAD"), name: "LottieUpload" },
-        { title: t("UNIT_LINK"), name: "lottieLink" },
-    ],
-}));
+        });
+    }
+    return param;
+});
 
 const loading = ref(false);
 const lottieLib = ref<UE_EL_UTIL.ResourceLottie | null>(null);
@@ -147,8 +153,10 @@ function updateCurrentCard() {
             item.list.find((item) => item.url === select.value)
         );
 
-        if (!isInLib) {
-            defaultCardName.value = "lottieLink";
+        if (isInLib) {
+            defaultCardName.value = "LottieLibList";
+        } else {
+            defaultCardName.value = "LottieUpload";
         }
     }
 }
@@ -158,7 +166,7 @@ const getLottieLibrary = async () => {
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getLottieLibrary();
+        const res = await instance?.proxy?.$ueElResource.lottieLibrary.getData();
 
         lottieLib.value = res || null;
 
@@ -173,6 +181,7 @@ const getLottieLibrary = async () => {
 };
 
 onBeforeMount(() => {
+    if (!lottieLibrary.value?.enable) return;
     getLottieLibrary()
         .then(() => {
             updateCurrentCard();
