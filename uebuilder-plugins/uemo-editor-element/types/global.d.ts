@@ -256,7 +256,10 @@ declare global {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceShape>;
             };
-            getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
+            splineLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceSpline>;
+            };
             lottieLibrary: {
                 enable: boolean;
                 getData: () => Promise<UE_EL_UTIL.ResourceLottie>;

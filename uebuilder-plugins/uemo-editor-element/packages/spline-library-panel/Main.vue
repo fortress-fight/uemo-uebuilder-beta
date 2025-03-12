@@ -1,7 +1,7 @@
 <!--
  * @Description: spline资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 12:21:20
+ * @LastEditTime: 2025-03-12 15:50:37
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -47,16 +47,27 @@ defineOptions({ name: "UeElSplineLibraryPanel" });
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const prop = withDefaults(defineProps<UeElSplineLibraryPanelBaseProps>(), {});
-const select = defineModel<string>("select", { required: false });
 const emit = defineEmits<{ (e: "close"): void }>();
+const select = defineModel<string>("select", { required: false });
 
-const defaultCardName = ref<string>("splineLibList");
-const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
-    cards: [
-        { title: t("SPLINE_LIBRARY_TITLE"), name: "splineLibList", icon: "icon-app-spline", iconSize: 15 },
-        { title: t("UNIT_LINK"), name: "splineLink" },
-    ],
-}));
+const splineLibrary = ref(instance?.proxy?.$ueElResource.lottieLibrary);
+const defaultCardName = ref<string>(splineLibrary.value?.enable ? "splineLibList" : "splineLink");
+const libraryPanelParam = computed(() => {
+    const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
+        cards: [{ title: t("UNIT_LINK"), name: "splineLink" }],
+    };
+
+    if (splineLibrary.value?.enable) {
+        param.cards.unshift({
+            title: t("SPLINE_LIBRARY_TITLE"),
+            name: "splineLibList",
+            icon: "icon-app-spline",
+            iconSize: 15,
+        });
+    }
+
+    return param;
+});
 
 const loading = ref(false);
 const list = ref<UE_EL_UTIL.ResourceSpline["list"] | null>(null);
@@ -64,6 +75,8 @@ const list = ref<UE_EL_UTIL.ResourceSpline["list"] | null>(null);
 function updateCurrentCard() {
     if (select.value && !list.value?.find((item) => item.url === select.value)) {
         defaultCardName.value = "splineLink";
+    } else {
+        defaultCardName.value = "splineLibList";
     }
 }
 
@@ -92,12 +105,12 @@ function filterList(libList: UE_EL_UTIL.ResourceSpline) {
     return libList.list.filter((item) => (prop.type ? item.type === prop.type : true));
 }
 
-const getShapeLibrary = async () => {
+const getSplineLibrary = async () => {
     // 启动1秒定时器：若超过1秒未返回，则显示 loading
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getSplineLibrary();
+        const res = await instance?.proxy?.$ueElResource.splineLibrary.getData();
 
         clearTimeout(timer);
 
@@ -116,7 +129,8 @@ function selectSpline(url: string) {
 }
 
 onBeforeMount(() => {
-    getShapeLibrary()
+    if (!splineLibrary.value?.enable) return;
+    getSplineLibrary()
         .then(() => {
             updateCurrentCard();
         })
