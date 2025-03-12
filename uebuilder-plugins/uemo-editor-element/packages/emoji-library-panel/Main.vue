@@ -1,7 +1,7 @@
 <!--
  * @Description: Emoji 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-10 10:34:00
+ * @LastEditTime: 2025-03-12 15:52:55
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -152,7 +152,7 @@ function selectItem(index: number) {
 
 // #endregion
 
-const getShareIconLibrary = async () => {
+const getEmojiLibrary = async () => {
     // 启动1秒定时器：若超过1秒未返回，则显示 loading
     const timer = setTimeout(() => (loading.value = true), 20);
 
@@ -183,7 +183,7 @@ const getShareIconLibrary = async () => {
 };
 
 onBeforeMount(() => {
-    getShareIconLibrary().catch((error) => {
+    getEmojiLibrary().catch((error) => {
         instance?.proxy?.$ueElError(error);
     });
 });
