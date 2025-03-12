@@ -1,10 +1,11 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 19:21:17
+ * @LastEditTime: 2025-03-12 13:26:53
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
+        <UeElLoading v-if="loading" />
         <div :class="$style['panel-head']" :data-dragger-target="draggable">
             <div :class="$style['nav-list']" class="relative flex overflow-hidden">
                 <div
@@ -58,6 +59,7 @@ import SubPanel from "./sub-components/SubPanel.vue";
 
 defineOptions({ name: "UeElLibraryPanel" });
 const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), {
+    loading: false,
     theme: "theme-1",
     draggable: true,
     minHeight: "50px",
@@ -76,17 +78,25 @@ const hasPanelFooter = computed(() => {
 /**
  * 当前激活的卡片名称
  */
-const activeCardName = ref<string>(prop.defaultCard || prop.cards[0]?.name);
-watch(activeCardName, () => {
+const activeCardName = ref<string>("");
+watch(activeCardName, (newVal) => {
     cardItems.value?.forEach((item) => item.scrollToTop());
-    tabNav(activeCardName.value);
+    tabNav(newVal);
 });
 watch(
     () => prop.defaultCard,
-    () => {
-        activeCardName.value = prop.defaultCard || prop.cards[0]?.name;
+    (newVal) => {
+        activeCardName.value = newVal || prop.cards[0]?.name;
     }
 );
+onBeforeMount(() => {
+    const defaultCardName = prop.defaultCard;
+    if (defaultCardName && prop.cards.find((item) => item.name === defaultCardName)) {
+        activeCardName.value = defaultCardName;
+    } else {
+        activeCardName.value = prop.cards[0]?.name;
+    }
+});
 
 /**
  * 切换 Nav
@@ -107,7 +117,7 @@ function tabNav(name: string) {
  * 切换卡片
  * @param name 卡片名称
  */
-function tabTo(name: string) {
+function tabTo(name = "") {
     activeCardName.value = name;
 }
 
@@ -121,6 +131,8 @@ defineExpose({ tabTo });
 </script>
 <style lang="scss" module>
 .library-panel {
+    position: relative;
+
     overflow: hidden;
 
     width: var(--ue-library-panel-width);

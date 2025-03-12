@@ -1,7 +1,7 @@
 /*
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 19:20:32
+ * @LastEditTime: 2025-03-12 12:49:27
  */
 import type { App } from "vue";
 
@@ -22,6 +22,7 @@ UeElLibraryPanel.install = (app: App) => {
 
 export interface UeElLibraryPanelBaseProps {
     theme?: string;
+    loading?: boolean;
     panelSize?: "small" | "normal" | "large";
     defaultCard?: string;
     minHeight?: string;
