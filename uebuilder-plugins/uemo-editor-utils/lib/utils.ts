@@ -68,6 +68,9 @@ export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
 /** video类型 */
 export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 
+/** image类型 */
+export const isImageReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(jpg|jpeg|png|gif|webp))/;
+
 /**
  * 延迟 Promise
  * @param ms 延迟时间 (单位: 毫秒)
