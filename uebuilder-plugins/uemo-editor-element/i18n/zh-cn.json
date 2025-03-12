@@ -18,6 +18,8 @@
     "UNIT_UPLOAD": "上传",
     "UNIT_SEARCH_EMPTY": "未找到相关资源",
     "UNIT_SUBMIT": "提交",
+    "UNIT_LOAD_MORE": "加载更多",
+    "UNIT_DEFAULT": "默认",
 
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
@@ -169,6 +171,18 @@
     "LOTTIE_LIBRARY_TIP_EMPTY": "未能获取到 Lottie 资源",
     "LOTTIE_LIBRARY_TITLE": "Lottie库",
     "LOTTIE_LIBRARY_LINK_TIP": "请输入 Lottie 文件链接",
+
+    "VIDEO_LIBRARY_TITLE": "视频库",
+    "VIDEO_LIBRARY_LINK_TIP": "请输入视频链接",
+    "VIDEO_LIBRARY_UPLOAD_TITLE": "上传 .mp4 文件",
+    "VIDEO_SEARCH_PLACEHOLDER": "搜索视频",
+    "VIDEO_DIR_TITLE": "视频方向",
+    "VIDEO_DIR_1": "横向",
+    "VIDEO_DIR_2": "纵向",
+    "VIDEO_DIR_3": "方形",
+    "VIDEO_QUALITY_SD": "标清",
+    "VIDEO_QUALITY_HD": "高清",
+    "VIDEO_QUALITY_HLS": "超清",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "未能获取到文字装饰资源",
     "TEXT_DECORATION_LIBRARY_TITLE": "效果库",

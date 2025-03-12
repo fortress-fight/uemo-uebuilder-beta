@@ -18,6 +18,8 @@
     "UNIT_UPLOAD": "Upload",
     "UNIT_SEARCH_EMPTY": "No found",
     "UNIT_SUBMIT": "Submit",
+    "UNIT_LOAD_MORE": "Load More",
+    "UNIT_DEFAULT": "Default",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
@@ -169,6 +171,18 @@
     "LOTTIE_LIBRARY_TIP_EMPTY": "Unable to get Lottie resource",
     "LOTTIE_LIBRARY_TITLE": "Lottie Library",
     "LOTTIE_LIBRARY_LINK_TIP": "Please enter the Lottie file link",
+
+    "VIDEO_LIBRARY_TITLE": "Video",
+    "VIDEO_LIBRARY_LINK_TIP": "Please enter the video link",
+    "VIDEO_LIBRARY_UPLOAD_TITLE": "Upload .mp4 file",
+    "VIDEO_SEARCH_PLACEHOLDER": "Search Video",
+    "VIDEO_DIR_TITLE": "Video Direction",
+    "VIDEO_DIR_1": "Landscape",
+    "VIDEO_DIR_2": "Portrait",
+    "VIDEO_DIR_3": "Square",
+    "VIDEO_QUALITY_SD": "SD",
+    "VIDEO_QUALITY_HD": "HD",
+    "VIDEO_QUALITY_HLS": "HLS",
 
     "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "Unable to get Text Decoration resource",
     "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library",

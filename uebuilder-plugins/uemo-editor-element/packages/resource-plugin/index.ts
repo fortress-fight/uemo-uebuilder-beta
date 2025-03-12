@@ -23,6 +23,7 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         getShapeLibrary: createCachedFn(param.getShapeLibrary),
         getSplineLibrary: createCachedFn(param.getSplineLibrary),
         getLottieLibrary: createCachedFn(param.getLottieLibrary),
+        videoLibrary: param.videoLibrary,
         getTextDecorationLibrary: createCachedFn(param.getTextDecorationLibrary),
         getShareIconLibrary: createCachedFn(param.getShareIconLibrary),
     };

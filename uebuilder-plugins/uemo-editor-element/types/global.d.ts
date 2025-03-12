@@ -4,6 +4,7 @@ import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-asse
 import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
 import type { ResourceButtonHoverEffect as ResourceButtonHoverEffectType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
+import type { ResourceVideo as ResourceVideoType } from "@stone/uemo-editor-assets/resource/video";
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
@@ -213,6 +214,11 @@ declare global {
         type ResourceLottie = ResourceLottieType;
 
         /**
+         * @description Video 资源列表
+         */
+        type ResourceVideo = ResourceVideoType;
+
+        /**
          * @description 文字装饰资源列表
          */
         type ResourceTextDecoration = ResourceTextDecorationType;
@@ -249,6 +255,10 @@ declare global {
             getShapeLibrary: () => Promise<UE_EL_UTIL.ResourceShape>;
             getSplineLibrary: () => Promise<UE_EL_UTIL.ResourceSpline>;
             getLottieLibrary: () => Promise<UE_EL_UTIL.ResourceLottie>;
+            videoLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceVideo>;
+            };
             getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
             getShareIconLibrary: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
         };

@@ -18,6 +18,7 @@ import TestButtonHoverEffectLibraryPanel from "~/demo/components/TestButtonHover
 import TestEmojiLibraryPanel from "~/demo/components/TestEmojiLibraryPanel.vue";
 import TestGridLayoutLibraryPanel from "~/demo/components/TestGridLayoutLibraryPanel.vue";
 import TestLottieLibraryPanel from "~/demo/components/TestLottieLibraryPanel.vue";
+import TestVideoLibraryPanel from "~/demo/components/TestVideoLibraryPanel.vue";
 
 const testComponents = [
     TestShapeLibraryPanel,
@@ -29,6 +30,7 @@ const testComponents = [
     TestEmojiLibraryPanel,
     TestGridLayoutLibraryPanel,
     TestLottieLibraryPanel,
+    TestVideoLibraryPanel,
 ];
 </script>
 <style lang="scss" module>
