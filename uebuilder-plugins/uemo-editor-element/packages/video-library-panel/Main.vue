@@ -1,27 +1,31 @@
 <!--
  * @Description: 视频库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:32:58
+ * @LastEditTime: 2025-03-12 19:35:34
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
-        <template #VideoLibList>
+        <template #VideoLibList="">
             <UeElLoading v-if="loading" />
-            <PexelsPanel v-if="videoLib?.type === 'Pexels'" :accessKey="videoLib.accessKey" v-model:select="select" />
+            <PexelsPanel
+                v-if="videoLib?.type === 'Pexels'"
+                v-model:select="select"
+                :accessKey="videoLib.accessKey"
+            ></PexelsPanel>
         </template>
-        <template #VideoUpload>
+        <template #VideoUpload="">
             <UeElFileUploadButton type="video" @submit="useUpload" />
         </template>
-        <template #VideoLink>
+        <template #VideoLink="">
             <UeElTextInput
-                :value="videoLink"
                 padding-size="level4"
                 theme="enterText"
                 :placeholder="t('VIDEO_LIBRARY_LINK_TIP')"
                 :rules="videoInputRules"
+                :value="videoLink"
                 @confirm="changeSelect($event)"
             />
-            <UeElButton theme="fillText" size="large" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
+            <UeElButton size="large" theme="fillText" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
         </template>
     </UeElLibraryPanel>
 </template>

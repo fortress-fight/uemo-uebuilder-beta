@@ -1,39 +1,39 @@
 <template>
-    <div :class="$style['search-bar']" class="grid">
+    <div class="grid" :class="$style['search-bar']">
         <UeElTextInput
-            ref="videoInput"
-            :value="searchText"
-            theme="enterText"
             padding-size="level4"
-            :placeholder="t('VIDEO_SEARCH_PLACEHOLDER')"
-            @confirm="changeSearchText"
+            ref="videoInput"
             sub-type="search"
+            theme="enterText"
+            :placeholder="t('VIDEO_SEARCH_PLACEHOLDER')"
+            :value="searchText"
+            @confirm="changeSearchText"
         />
         <UeElSelect
-            v-model:value="searchVideoDir"
-            :class="$style['select--dir']"
             class="justify-self-start"
             v-bind="searchVideoDirSelect"
+            v-model:value="searchVideoDir"
+            :class="$style['select--dir']"
         />
     </div>
-    <div :class="$style['search-result']" class="relative">
+    <div class="relative" :class="$style['search-result']">
         <UeElLoading v-if="loading" type="circle" />
         <div v-if="videoList.length" :class="$style['video-list']">
             <div ref="resultListDom" :class="$style['result-list']">
                 <PexelsPreview
                     v-for="(item, index) in videoList"
+                    :data="item"
                     :key="index"
-                    :video="item"
                     :select="select"
                     @select="select = $event"
                 />
                 <UeElButton
                     v-if="!isEnd"
-                    :loading="loadMore"
-                    :class="$style['btn--add-more']"
-                    theme="fillText"
-                    :text="t('UNIT_LOAD_MORE')"
                     size="large"
+                    theme="fillText"
+                    :class="$style['btn--add-more']"
+                    :loading="loadMore"
+                    :text="t('UNIT_LOAD_MORE')"
                     @trigger="addMore"
                 />
             </div>
@@ -47,7 +47,6 @@ import type { Video } from "@stone/uemo-editor-utils/lib/pexels";
 
 import PexelsPreview from "./PexelsPreview.vue";
 import Pexels from "@stone/uemo-editor-utils/lib/pexels";
-import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
 import { MasonryMixin } from "../utils/masonry-mixin";
 
@@ -61,9 +60,9 @@ const select = defineModel<string>("select", { required: false });
 
 const loading = ref<boolean>(false);
 const loadMore = ref<boolean>(false);
-
 const isEnd = ref<boolean>(false);
 const videoList = ref<PEXELS_VIDEO[]>([]);
+
 function sortFile(videos: Video["video_files"]): Video["video_files"] {
     const videoMap: Record<string, Video["video_files"]> = {
         sd: [],
@@ -142,6 +141,8 @@ function getPexelsVideoList(type: "replace" | "add" = "replace") {
                 instance?.proxy?.$ueElToast.error(err);
             } else if (typeof err === "object" && err.msg) {
                 instance?.proxy?.$ueElToast.error(err.msg);
+            } else {
+                instance?.proxy?.$ueElToast.error(t("VIDEO_PEXELS_ERROR"));
             }
         })
         .finally(() => {
@@ -204,21 +205,6 @@ MasonryMixin(resultListDom, videoList);
 // #endregion
 </script>
 <style lang="scss" module>
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    50% {
-        transform: rotate(180deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-.pexels-panel {
-    // init
-    padding-top: 10px;
-}
 .search-bar {
     padding-bottom: 0;
 

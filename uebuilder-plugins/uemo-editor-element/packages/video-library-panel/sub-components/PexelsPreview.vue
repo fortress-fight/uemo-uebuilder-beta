@@ -1,26 +1,26 @@
 <template>
     <div
+        class="cursor-pointer"
         ref="rootDom"
         :class="$style['pexels-preview']"
-        class="cursor-pointer"
-        :data-select="video.links.includes(select || '')"
-        @click="useVideoLink($event, video)"
+        :data-select="data.links.includes(select || '')"
+        @click="useVideoLink($event, data)"
     >
-        <div :class="$style['item-box']" :style="{ '--width': video.width, '--height': video.height }">
+        <div :class="$style['item-box']" :style="{ '--width': data.width, '--height': data.height }">
             <video
-                :src="video.link"
-                :poster="video.thumb"
-                preload="none"
                 loop
                 muted
                 playsinline
-                @pointerover="play"
+                preload="none"
+                :poster="data.thumb"
+                :src="data.link"
                 @pointerout="stop"
-            ></video>
+                @pointerover="play"
+            />
         </div>
         <div :class="$style['author']">
             by
-            <a :href="video.userUrl" target="_blank">{{ video.userName }}</a>
+            <a target="_blank" :href="data.userUrl">{{ data.userName }}</a>
             on Pexels
         </div>
     </div>
@@ -32,8 +32,7 @@
 import type { PEXELS_VIDEO } from "../index";
 
 const { t } = useI18n();
-const instance = getCurrentInstance();
-const _prop = defineProps<{ video: PEXELS_VIDEO; select?: string }>();
+const _prop = defineProps<{ data: PEXELS_VIDEO; select?: string }>();
 const emit = defineEmits<{ (e: "select", url: string): void }>();
 const rootDomRef = useTemplateRef("rootDom");
 
@@ -84,12 +83,7 @@ const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() =
 
 const selectOptions = ref<UE_EL_COMPONENT.UeElSelectOptionProps["list"]>([]);
 
-function useVideoLink(ev: MouseEvent, video: PEXELS_VIDEO) {
-    const selectDom = ev.currentTarget;
-    if (!instance || !(selectDom instanceof HTMLElement)) {
-        return;
-    }
-
+function useVideoLink(_ev: MouseEvent, video: PEXELS_VIDEO) {
     const options = Object.values(video.files).map((v) => {
         const q = qTr.value[v.quality] || v.quality;
         return {
