@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 18:46:11
+ * @LastEditTime: 2025-03-12 15:27:20
 -->
 <template>
     <div
@@ -33,7 +33,21 @@
         ></component>
 
         <div :class="$style['after-group']" class="flex">
-            <slot name="after" :confirm="confirm"></slot>
+            <slot name="after" :confirm="confirm">
+                <button
+                    v-if="type === 'text' && subType === 'search'"
+                    :class="$style['search-btn--submit']"
+                    class="flex justify-center items-center"
+                >
+                    <UeElIcon
+                        :size="15"
+                        :class="$style['ic']"
+                        class="justify-center cursor-pointer"
+                        name="icon-app-search"
+                        @click="confirm"
+                    />
+                </button>
+            </slot>
         </div>
     </div>
 </template>
@@ -232,5 +246,8 @@ defineExpose({
     &[type="textarea"] {
         //
     }
+}
+.search-btn--submit {
+    width: 36px;
 }
 </style>
