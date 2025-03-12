@@ -269,7 +269,10 @@ declare global {
                 getData: () => Promise<UE_EL_UTIL.ResourceVideo>;
             };
             getTextDecorationLibrary: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
-            getShareIconLibrary: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
+            shareIconLibrary: {
+                enable: boolean;
+                getData: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
+            };
         };
     }
 }

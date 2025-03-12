@@ -25,6 +25,6 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         lottieLibrary: param.lottieLibrary,
         videoLibrary: param.videoLibrary,
         getTextDecorationLibrary: createCachedFn(param.getTextDecorationLibrary),
-        getShareIconLibrary: createCachedFn(param.getShareIconLibrary),
+        shareIconLibrary: param.shareIconLibrary,
     };
 }

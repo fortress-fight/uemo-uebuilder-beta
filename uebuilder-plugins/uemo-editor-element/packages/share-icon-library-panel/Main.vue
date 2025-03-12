@@ -1,7 +1,7 @@
 <!--
  * @Description: 社交分享资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 11:25:28
+ * @LastEditTime: 2025-03-12 15:53:03
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -52,7 +52,7 @@ const getShareIconLibrary = async () => {
     const timer = setTimeout(() => (loading.value = true), 20);
 
     try {
-        const res = await instance?.proxy?.$ueElResource.getShareIconLibrary();
+        const res = await instance?.proxy?.$ueElResource.shareIconLibrary.getData();
 
         clearTimeout(timer);
 

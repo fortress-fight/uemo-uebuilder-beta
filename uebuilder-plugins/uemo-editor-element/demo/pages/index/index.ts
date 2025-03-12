@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:46:10
+ * @LastEditTime: 2025-03-12 15:52:04
  */
 
 // SECTION - 样式文件
@@ -50,8 +50,10 @@ app.use(UeEl, {
             },
             getTextDecorationLibrary: () =>
                 import("@stone/uemo-editor-assets/resource/text-decoration").then((res) => res.default),
-            getShareIconLibrary: () =>
-                import("@stone/uemo-editor-assets/resource/share-icon").then((res) => res.default),
+            shareIconLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/share-icon").then((res) => res.default),
+            },
         },
     },
 });
