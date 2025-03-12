@@ -39,6 +39,14 @@ const buttonAttrs = computed<UE_EL_COMPONENT.UeElButtonProps>(() => {
             loading: props.uploading,
             disable: props.disable,
         },
+        video: {
+            theme: "fillText",
+            size: "large",
+            icon: "icon-app-video",
+            text: t("VIDEO_LIBRARY_UPLOAD_TITLE"),
+            loading: props.uploading,
+            disable: props.disable,
+        },
     };
 
     return buttonInfoMap[props.type];
