@@ -143,10 +143,10 @@
 
     "UPLOAD_IMAGE_TITLE": "上传图片",
     "UPLOAD_IMG_TIP_1": "建议压缩后再上传，推荐使用<a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
-    "UPLOAD_IMG_TIP_2": "请上传图片文件，文件大小不超过 {size}",
+    "UPLOAD_IMG_TIP_2": "请上传图片文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
 
     "UPLOAD_VIDEO_TITLE": "上传视频",
-    "UPLOAD_VIDEO_TIP_1": "请上传视频文件，文件大小不超过 {size}",
+    "UPLOAD_VIDEO_TIP_1": "请上传视频文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
     "UPLOAD_VIDEO_TIP_2": "绑定七牛后将可以上传更大的视频文件，请联系客服询问详情",
     "UPLOAD_VIDEO_TIP_3": "由于浏览器对编码格式要求，为保证兼容性。请使用 H264 编码格式的 MP4 视频文件。",
     "UPLOAD_VIDEO_TIP_4": "推荐视频压缩工具：<a data-link-type=\"tip\" href=\"https://maruko.appinn.me/\" target=\"_blank\">小丸工具箱</a>",

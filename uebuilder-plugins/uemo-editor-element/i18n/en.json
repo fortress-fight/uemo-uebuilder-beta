@@ -143,10 +143,10 @@
 
     "UPLOAD_IMAGE_TITLE": "Upload image",
     "UPLOAD_IMG_TIP_1": "It is recommended to compress it before uploading, recommended to use <a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
-    "UPLOAD_IMG_TIP_2": "Please upload image file, file size cannot exceed {size}",
+    "UPLOAD_IMG_TIP_2": "Please upload image file, file size cannot exceed <span data-ue-tip-color=\"red\">{size}</span>",
 
     "UPLOAD_VIDEO_TITLE": "Upload video",
-    "UPLOAD_VIDEO_TIP_1": "Please upload video file, file size cannot exceed {size}",
+    "UPLOAD_VIDEO_TIP_1": "Please upload video file, file size cannot exceed <span data-ue-tip-color=\"red\">{size}</span>",
     "UPLOAD_VIDEO_TIP_2": "Contact customer service to enable larger video uploads via Qiniu",
     "UPLOAD_VIDEO_TIP_3": "Please use H264 encoded MP4 video files for browser compatibility.",
     "UPLOAD_VIDEO_TIP_4": "Recommended video compression tool: <a data-link-type=\"tip\" href=\"https://maruko.appinn.me/\" target=\"_blank\">XiaoWan Toolbox</a>",
