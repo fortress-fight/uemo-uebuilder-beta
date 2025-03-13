@@ -20,6 +20,7 @@
     "UNIT_SUBMIT": "提交",
     "UNIT_LOAD_MORE": "加载更多",
     "UNIT_DEFAULT": "默认",
+    "UNIT_UNKNOWN_ERROR": "出现未知错误",
 
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 

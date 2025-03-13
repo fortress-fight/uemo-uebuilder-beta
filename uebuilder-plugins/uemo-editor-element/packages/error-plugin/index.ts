@@ -2,11 +2,21 @@ import type { App } from "vue";
 import type { ErrorLevel } from "@stone/uemo-editor-utils/lib/error";
 
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
+import { i18n } from "@/i18n";
 
 export function install(app: App) {
     app.config.globalProperties.$ueElError = <T = undefined>(error: Error, callback?: (error: Error) => T): T => {
         if (!(error instanceof UeError)) {
-            console.error(error instanceof Error ? error : new Error(String(error)));
+            if (error instanceof Error) {
+                console.error(error);
+                app.config.globalProperties.$ueElToast.error(error.message);
+            } else if (typeof error === "string") {
+                console.error(new Error(error));
+                app.config.globalProperties.$ueElToast.error(error);
+            } else {
+                console.error(new Error(String(error)));
+                app.config.globalProperties.$ueElToast.error(i18n.global.t("UNIT_UNKNOWN_ERROR"));
+            }
             return callback?.(error) as T;
         }
 

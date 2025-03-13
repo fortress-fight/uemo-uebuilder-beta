@@ -20,6 +20,7 @@
     "UNIT_SUBMIT": "Submit",
     "UNIT_LOAD_MORE": "Load More",
     "UNIT_DEFAULT": "Default",
+    "UNIT_UNKNOWN_ERROR": "Unknown Error",
 
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
