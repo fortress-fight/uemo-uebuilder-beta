@@ -1,7 +1,7 @@
 /*
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 16:50:28
+ * @LastEditTime: 2025-03-13 17:34:13
  */
 import type { App } from "vue";
 
@@ -13,6 +13,7 @@ UeElTipGroup.install = (app: App) => {
 };
 
 export interface UeElTipGroupBaseProps {
+    title?: string;
     tips: string[];
     type?: "normal" | "warn";
 }
