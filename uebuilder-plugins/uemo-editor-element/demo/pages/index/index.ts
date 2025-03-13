@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 16:16:48
+ * @LastEditTime: 2025-03-13 17:41:24
  */
 
 // SECTION - 样式文件
@@ -31,6 +31,11 @@ app.use(UeEl, {
                 uploadFileSize: 2048,
                 imageUploadSize: 10240,
                 imageDataPath: "url",
+                qiniu: { allow: false } as const,
+                video: {
+                    allow: true,
+                    limitSize: 10240,
+                },
             },
         },
         resource: {

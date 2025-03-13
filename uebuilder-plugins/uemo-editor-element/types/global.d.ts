@@ -153,24 +153,26 @@ declare global {
         /**
          * @description 七牛上传配置
          */
-        type QiniuUploadConfig = {
-            // 是否允许上传视频，默认：false
-            allow: boolean;
-            withCredentials?: boolean;
-            // acceptType?: "*" | ("mp4" | "image" | "other")[];
+        type QiniuUploadConfig =
+            | { allow: false }
+            | {
+                  // 是否允许上传视频，默认：false
+                  allow: true;
+                  withCredentials?: boolean;
+                  // acceptType?: "*" | ("mp4" | "image" | "other")[];
 
-            tokenUrl: string;
-            tokenPath: string;
-            tokenRegionPath: string;
-            tokenFolderPath: string;
-            tokenUrlPrefix?: string;
+                  tokenUrl: string;
+                  tokenPath: string;
+                  tokenRegionPath: string;
+                  tokenFolderPath: string;
+                  tokenUrlPrefix?: string;
 
-            uploadRegion: string;
-            uploadFilePath: string;
-            uploadLimitSize?: number;
-            UploadConfig?: Record<string, any>;
-            uploadCustomVars?: Record<string, string>;
-        };
+                  uploadRegion: string;
+                  uploadFilePath: string;
+                  uploadLimitSize?: number;
+                  UploadConfig?: Record<string, any>;
+                  uploadCustomVars?: Record<string, string>;
+              };
 
         /**
          * @description 上传历史记录配置

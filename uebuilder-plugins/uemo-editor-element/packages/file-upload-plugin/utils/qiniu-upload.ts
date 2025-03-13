@@ -12,7 +12,7 @@ const { t } = i18n.global;
  * @returns 七牛云上传凭证
  */
 function getQiniuToken(config: UE_EL_UTIL.QiniuUploadConfig) {
-    if (!config) {
+    if (!config || config.allow === false) {
         return Promise.reject(
             new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG_QINIU, {
                 message: t("ERROR_UPLOAD_NOT_CONFIG_QINIU"),
@@ -45,7 +45,7 @@ export function qiniuUpload(
         onProgress?: (progress: string) => void;
     }
 ) {
-    if (!qiniuConfig) {
+    if (!qiniuConfig || qiniuConfig.allow === false) {
         return Promise.reject(
             new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG_QINIU, {
                 message: t("ERROR_UPLOAD_NOT_CONFIG_QINIU"),
