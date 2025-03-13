@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 16:36:18
+ * @LastEditTime: 2025-03-13 17:02:00
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">

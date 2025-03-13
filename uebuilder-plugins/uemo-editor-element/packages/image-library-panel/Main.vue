@@ -1,7 +1,7 @@
 <!--
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 16:58:04
+ * @LastEditTime: 2025-03-13 17:05:59
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName" @error="handleError">
@@ -54,7 +54,7 @@ const imageLib = ref<UE_EL_UTIL.ResourceImage | null>(null);
 
 const imageLibrary = ref(instance?.proxy?.$ueElResource.imageLibrary);
 const imageAI = ref(instance?.proxy?.$ueElImageAI);
-const defaultCardName = ref<string>("AIImageSearchPanel");
+const defaultCardName = ref<string>("ImageUpload");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => {
     const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
         cards: [

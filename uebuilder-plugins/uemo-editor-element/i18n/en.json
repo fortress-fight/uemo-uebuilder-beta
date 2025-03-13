@@ -22,6 +22,7 @@
     "UNIT_DEFAULT": "Default",
     "UNIT_UNKNOWN_ERROR": "Unknown Error",
 
+    "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
     "INPUT_TIP_NOT_EMPTY": "Input is required",

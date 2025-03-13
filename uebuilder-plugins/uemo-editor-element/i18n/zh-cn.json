@@ -22,6 +22,7 @@
     "UNIT_DEFAULT": "默认",
     "UNIT_UNKNOWN_ERROR": "出现未知错误",
 
+    "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
     "INPUT_TIP_NOT_EMPTY": "输入不能为空",
