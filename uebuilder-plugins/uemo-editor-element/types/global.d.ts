@@ -257,35 +257,16 @@ declare global {
                 defaultUploadConfig?: UE_EL_UTIL.UploadConfig
             ) => UE_EL_UTIL.UploadHandler;
         };
+
+        type ResourceValue<T> = { enable: boolean; getData: () => Promise<T> };
         type Resource = {
-            shapeLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceShape>;
-            };
-            splineLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceSpline>;
-            };
-            lottieLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceLottie>;
-            };
-            videoLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceVideo>;
-            };
-            imageLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceImage>;
-            };
-            textDecorationLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceTextDecoration>;
-            };
-            shareIconLibrary: {
-                enable: boolean;
-                getData: () => Promise<UE_EL_UTIL.ResourceShareIcon>;
-            };
+            shapeLibrary: ResourceValue<UE_EL_UTIL.ResourceShape>;
+            splineLibrary: ResourceValue<UE_EL_UTIL.ResourceSpline>;
+            lottieLibrary: ResourceValue<UE_EL_UTIL.ResourceLottie>;
+            videoLibrary: ResourceValue<UE_EL_UTIL.ResourceVideo>;
+            imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;
+            textDecorationLibrary: ResourceValue<UE_EL_UTIL.ResourceTextDecoration>;
+            shareIconLibrary: ResourceValue<UE_EL_UTIL.ResourceShareIcon>;
         };
     }
 }
