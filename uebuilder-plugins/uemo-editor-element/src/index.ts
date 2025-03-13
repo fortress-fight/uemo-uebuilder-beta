@@ -13,6 +13,7 @@ export interface UE_EL_OPTIONS {
         resource: UE_PLUGIN_OPTIONS.Resource;
         fileUpload: UE_PLUGIN_OPTIONS.FileUpload;
         toast?: UE_PLUGIN_OPTIONS.Toast;
+        ai?: UE_PLUGIN_OPTIONS.AI;
         [key: string]: any;
     };
 }

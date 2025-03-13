@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 18:38:32
+ * @LastEditTime: 2025-03-13 16:16:48
  */
 
 // SECTION - 样式文件
@@ -13,12 +13,14 @@ import { createApp } from "vue";
 import UeEl from "@/index";
 import App from "./index.vue";
 import router from "../../router/index";
+import { AI_CONFIG } from "../../utils/ai-config";
 
 const app = createApp(App);
 
 app.use(router);
 app.use(UeEl, {
     plugin: {
+        ai: AI_CONFIG,
         fileUpload: {
             uploadConfig: {
                 uploadPath: "http://127.0.0.1:9005/service",

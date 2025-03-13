@@ -11,6 +11,7 @@ import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
 import type { UeElError as UeError } from "~/utils/error";
+import type { UE_AI_CONFIG } from "~/packages/ai-plugin";
 
 declare global {
     namespace UE_EL_UTIL {
@@ -257,6 +258,8 @@ declare global {
                 defaultUploadConfig?: UE_EL_UTIL.UploadConfig
             ) => UE_EL_UTIL.UploadHandler;
         };
+
+        type AI = UE_AI_CONFIG;
 
         type ResourceValue<T> = { enable: boolean; getData: () => Promise<T> };
         type Resource = {
