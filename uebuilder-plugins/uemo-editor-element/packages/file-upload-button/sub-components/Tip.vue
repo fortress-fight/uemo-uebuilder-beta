@@ -39,6 +39,26 @@ const tipAttrs = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => {
         const msgArr = [`1. ${t("UPLOAD_LOTTIE_TIP_1")}`, `2. ${t("UPLOAD_LOTTIE_TIP_2")}`];
         return { tips: msgArr };
     }
+    if (props.type === "video") {
+        const videoConfig = uploadConfig.video;
+        if (videoConfig === false || videoConfig.allow === false) {
+            return { tips: [`1. ${t("ERROR_UPLOAD_NOT_ALLOW_VIDEO")}`] };
+        }
+
+        const tips: string[] = [];
+        const limitSize = videoConfig?.limitSize || -1;
+
+        if (limitSize !== -1) {
+            tips.push(`${t("UPLOAD_VIDEO_TIP_1", { size: getSizeDesc(limitSize) })}`);
+        }
+        if (uploadConfig.qiniu !== false) {
+            tips.push(`${t("UPLOAD_VIDEO_TIP_2")}`);
+        }
+        tips.push(`${t("UPLOAD_VIDEO_TIP_3")}`);
+        tips.push(`${t("UPLOAD_VIDEO_TIP_4")}`);
+
+        return { tips: tips.map((tip, index) => index + 1 + ". " + tip) };
+    }
     return { tips: [] };
 });
 </script>

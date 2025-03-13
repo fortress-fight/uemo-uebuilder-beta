@@ -145,6 +145,12 @@
     "UPLOAD_IMG_TIP_1": "建议压缩后再上传，推荐使用<a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
     "UPLOAD_IMG_TIP_2": "请上传图片文件，文件大小不超过 {size}",
 
+    "UPLOAD_VIDEO_TITLE": "上传视频",
+    "UPLOAD_VIDEO_TIP_1": "请上传视频文件，文件大小不超过 {size}",
+    "UPLOAD_VIDEO_TIP_2": "绑定七牛后将可以上传更大的视频文件，请联系客服询问详情",
+    "UPLOAD_VIDEO_TIP_3": "由于浏览器对编码格式要求，为保证兼容性。请使用 H264 编码格式的 MP4 视频文件。",
+    "UPLOAD_VIDEO_TIP_4": "推荐视频压缩工具：<a data-link-type=\"tip\" href=\"https://maruko.appinn.me/\" target=\"_blank\">小丸工具箱</a>",
+
     "UPLOAD_LOTTIE_TITLE": "上传 .lottie 文件",
     "UPLOAD_LOTTIE_TIP_1": "关于 lottie 动画的更多信息，请前往<a data-link-type=\"tip\" href=\"https://lottiefiles.com/\" target=\"_blank\">Lottie Files</a>查看",
     "UPLOAD_LOTTIE_TIP_2": "为获取更好的效果，请使用 .lottie 文件。<a data-link-type=\"tip\" href=\"https://lottiefiles.com/svg-to-lottie\" target=\"_blank\">SVG 转 Lottie</a>",

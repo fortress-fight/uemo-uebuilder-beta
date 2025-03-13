@@ -1,22 +1,23 @@
 <!--
  * @Description: 图片上传按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 02:50:53
+ * @LastEditTime: 2025-03-13 17:19:08
 -->
 <template>
-    <div :class="$style['file-upload-button']" class="grid">
+    <div class="grid" :class="$style['file-upload-button']">
         <UeElFileUploader
             :accept="FILE_TYPES_MAP[type].join(',')"
-            @submit="handleSubmit"
             :upload-before-interceptors="interceptor"
+            ref="fileUploaderRef"
+            @submit="handleSubmit"
         >
             <template #default="{ disable, upload, uploading, uploadProgress }">
                 <Button
+                    :disable="!!disable"
                     :type="type"
                     :upload="upload"
-                    :disable="!!disable"
-                    :uploading="isDealing || uploading"
                     :upload-progress="uploadProgress"
+                    :uploading="isDealing || uploading"
                 />
             </template>
         </UeElFileUploader>
