@@ -6,7 +6,7 @@ declare module "vue" {
         $ueElToast: ToastInterface;
         $ueElResource: UE_PLUGIN_OPTIONS.Resource;
         $ueElAI?: UE_AI_CONFIG;
-        $ueElImageAI?: UE_AI_PLUGIN;
+        $ueElImageAI?: UE_AI_PLUGIN | false | undefined;
         $ueFileUpload: UE_EL_UTIL.UploadHandler;
         $ueElError: <T = undefined>(error: Error, callback?: (error: Error) => T) => T;
     }

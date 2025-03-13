@@ -2,8 +2,10 @@ import type { UE_AI_CONFIG } from "@stone/uemo-editor-element/packages/ai-plugin
 
 export const AI_CONFIG: UE_AI_CONFIG = {
     uid: "",
+    // 是否支持 -- 是否显示 AI 控件
     allow: true,
-    disable: false,
+    // 是否禁用 -- 支持但没有开启
+    disable: true,
     aiHelper: ["general"],
     findImageUse: ["findImage"],
     tiptapTextUse: ["translateText", "beautifyText", "simplifyText", "extendText"],

@@ -25,7 +25,8 @@ export function install(app: App, param?: UE_AI_CONFIG) {
 
     // NOTE 获取 AI 找图的配置
     function getAiFindImageConfig(ueAiConfig?: UE_AI_CONFIG) {
-        if (!ueAiConfig?.plugin) return undefined;
+        if (!param?.allow) return undefined;
+        if (param.disable || !ueAiConfig?.plugin) return false;
         return ueAiConfig.plugin?.find((plugin) => {
             if (plugin.type === "findImage") {
                 return plugin;
