@@ -1,12 +1,13 @@
 <!--
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 16:27:36
+ * @LastEditTime: 2025-03-13 16:58:04
 -->
 <template>
-    <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
+    <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName" @error="handleError">
         <template #AIImageSearchPanel="{ scrollTo }">
             <AIImageSearchPanel v-if="imageAI" :config="imageAI" @scrollTo="scrollTo($event)" />
+            <UeElEmptyPanel v-else :description="t('AI_NOT_SUPPORT_TIP')" />
         </template>
         <template #ImageLibList>
             <UeElLoading v-if="loading" />
@@ -53,7 +54,7 @@ const imageLib = ref<UE_EL_UTIL.ResourceImage | null>(null);
 
 const imageLibrary = ref(instance?.proxy?.$ueElResource.imageLibrary);
 const imageAI = ref(instance?.proxy?.$ueElImageAI);
-const defaultCardName = ref<string>("ImageUpload");
+const defaultCardName = ref<string>("AIImageSearchPanel");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => {
     const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
         cards: [
@@ -71,17 +72,24 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
         });
     }
 
-    if (imageAI.value) {
+    if (imageAI.value !== undefined) {
         param.cards.unshift({
             title: "AI",
             name: "AIImageSearchPanel",
             icon: "icon-editor-ai",
             iconSize: 16,
+            disabled: imageAI.value === false,
         });
     }
 
     return param;
 });
+
+function handleError(param: { type: "tabError"; data: string }) {
+    if (param.type === "tabError" && param.data === "AIImageSearchPanel") {
+        instance?.proxy?.$ueElToast.error(t("AI_NOT_SUPPORT_TIP"));
+    }
+}
 
 function useUpload(url: UE_EL_UTIL.FileUploadInfo) {
     select.value = url.url;

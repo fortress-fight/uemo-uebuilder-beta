@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 15:48:58
+ * @LastEditTime: 2025-03-13 16:36:18
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -17,7 +17,8 @@
                     :data-name="item.name"
                     :data-active="item.name === activeCardName"
                     :data-dragger-disable="draggable"
-                    @click="tabTo(item.name)"
+                    :data-disabled="item.disabled"
+                    @click="tabTo(item)"
                 >
                     <slot :name="'BeforeNav' + item.name"></slot>
                     <UeElIcon v-if="item.icon" :name="item.icon" :class="$style['ic']" :size="item.iconSize" />
@@ -51,7 +52,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UeElLibraryPanelBaseProps } from "./index";
+import type { UeElLibraryPanelBaseProps, UeElLibraryPanelCardParam } from "./index";
 
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 
@@ -65,6 +66,7 @@ const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), {
     minHeight: "50px",
     maxHeight: "500px",
 });
+const emit = defineEmits<{ (e: "error", param: { type: "tabError"; data: string }): void }>();
 
 const barInner = useTemplateRef("barInner");
 const navItems = useTemplateRef("navItems");
@@ -117,8 +119,12 @@ function tabNav(name: string) {
  * 切换卡片
  * @param name 卡片名称
  */
-function tabTo(name = "") {
-    activeCardName.value = name;
+function tabTo(item: UeElLibraryPanelCardParam) {
+    if (item.disabled) {
+        emit("error", { type: "tabError", data: item.name });
+        return;
+    }
+    activeCardName.value = item.name;
 }
 
 onMounted(() => {
@@ -168,6 +174,9 @@ defineExpose({ tabTo });
             & + .text {
                 padding-right: 4px;
             }
+        }
+        &[data-disabled="true"] {
+            opacity: 0.6;
         }
         &[data-active="true"] {
             color: color(var(--ue-font-color--deeper));
