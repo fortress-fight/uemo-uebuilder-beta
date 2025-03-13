@@ -1,10 +1,13 @@
 <!--
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 19:38:01
+ * @LastEditTime: 2025-03-13 16:27:36
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
+        <template #AIImageSearchPanel="{ scrollTo }">
+            <AIImageSearchPanel v-if="imageAI" :config="imageAI" @scrollTo="scrollTo($event)" />
+        </template>
         <template #ImageLibList>
             <UeElLoading v-if="loading" />
             <UnsplashPanel
@@ -33,6 +36,8 @@
 import type { UeElImageLibraryPanelBaseProps } from "./index";
 
 import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
+
+import AIImageSearchPanel from "./sub-components/AIImageSearchPanel.vue";
 import UnsplashPanel from "./sub-components/UnsplashPanel.vue";
 
 defineOptions({ name: "UeElImageLibraryPanel" });
@@ -47,7 +52,8 @@ const loading = ref(false);
 const imageLib = ref<UE_EL_UTIL.ResourceImage | null>(null);
 
 const imageLibrary = ref(instance?.proxy?.$ueElResource.imageLibrary);
-const defaultCardName = ref<string>(imageLibrary.value?.enable ? "ImageLibList" : "ImageUpload");
+const imageAI = ref(instance?.proxy?.$ueElImageAI);
+const defaultCardName = ref<string>("ImageUpload");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => {
     const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
         cards: [
@@ -60,7 +66,16 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
         param.cards.unshift({
             title: t("IMAGE_LIBRARY_TITLE"),
             name: "ImageLibList",
-            icon: "icon-app-image-14",
+            icon: imageAI.value ? "" : "icon-app-image-14",
+            iconSize: 16,
+        });
+    }
+
+    if (imageAI.value) {
+        param.cards.unshift({
+            title: "AI",
+            name: "AIImageSearchPanel",
+            icon: "icon-editor-ai",
             iconSize: 16,
         });
     }
