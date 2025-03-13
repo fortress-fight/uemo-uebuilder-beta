@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 13:26:53
+ * @LastEditTime: 2025-03-13 15:48:58
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -38,8 +38,8 @@
                         :min-height="minHeight"
                         :category="item.category"
                     >
-                        <template #default="{ activeCategory }">
-                            <slot :name="item.name" :active-category="activeCategory"></slot>
+                        <template #default="{ activeCategory, scrollTo }">
+                            <slot :name="item.name" :active-category="activeCategory" :scrollTo="scrollTo"></slot>
                         </template>
                     </SubPanel>
                 </template>
@@ -80,7 +80,7 @@ const hasPanelFooter = computed(() => {
  */
 const activeCardName = ref<string>("");
 watch(activeCardName, (newVal) => {
-    cardItems.value?.forEach((item) => item.scrollToTop());
+    cardItems.value?.forEach((item) => item.scrollTo("top"));
     tabNav(newVal);
 });
 watch(

@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 19:22:25
+ * @LastEditTime: 2025-03-13 15:51:07
 -->
 <template>
     <div :class="$style['library-panel-group']" v-if="!category">
@@ -11,7 +11,7 @@
             :style="{ minHeight: minHeight, maxHeight: maxHeight }"
             class="grid"
         >
-            <slot></slot>
+            <slot :scrollTo="scrollTo"></slot>
         </div>
     </div>
     <div :class="$style['library-panel-group--wrapper']" class="grid min-h-0 items-start" v-else>
@@ -45,7 +45,7 @@
                     :style="{ minHeight: minHeight, maxHeight: maxHeight }"
                     class="grid"
                 >
-                    <slot :active-category="activeCategory"></slot>
+                    <slot :active-category="activeCategory" :scrollTo="scrollTo"></slot>
                 </div>
             </div>
         </div>
@@ -69,22 +69,22 @@ watch(propActiveCategory, (newVal) => {
     activeCategory.value = newVal;
 });
 watch(activeCategory, () => {
-    scrollToTop();
+    scrollTo("top");
 });
 
 onBeforeMount(() => {
     activeCategory.value = propActiveCategory.value;
 });
 
-function scrollToTop() {
-    scrollBox.value?.scrollTo(0, 0);
+function scrollTo(pos: "top" | "bottom") {
+    if (pos === "top") {
+        scrollBox.value?.scrollTo(0, 0);
+    } else {
+        scrollBox.value?.scrollTo(0, scrollBox.value.scrollHeight);
+    }
 }
 
-function scrollToBottom() {
-    scrollBox.value?.scrollTo(0, scrollBox.value.scrollHeight);
-}
-
-defineExpose({ scrollToBottom, scrollToTop });
+defineExpose({ scrollTo });
 </script>
 <style lang="scss" module>
 .library-panel-group--wrapper {
