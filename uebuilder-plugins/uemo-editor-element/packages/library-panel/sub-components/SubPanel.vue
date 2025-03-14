@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 15:51:07
+ * @LastEditTime: 2025-03-14 00:33:37
 -->
 <template>
     <div :class="$style['library-panel-group']" v-if="!category">
@@ -9,7 +9,7 @@
             ref="scrollBox"
             :class="$style['group-inner']"
             :style="{ minHeight: minHeight, maxHeight: maxHeight }"
-            class="grid"
+            class="grid items-start"
         >
             <slot :scrollTo="scrollTo"></slot>
         </div>
@@ -43,7 +43,7 @@
                     ref="scrollBox"
                     :class="$style['group-inner']"
                     :style="{ minHeight: minHeight, maxHeight: maxHeight }"
-                    class="grid"
+                    class="grid items-start"
                 >
                     <slot :active-category="activeCategory" :scrollTo="scrollTo"></slot>
                 </div>
