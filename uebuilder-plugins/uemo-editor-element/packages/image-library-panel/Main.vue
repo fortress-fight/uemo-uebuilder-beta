@@ -1,7 +1,7 @@
 <!--
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 17:05:59
+ * @LastEditTime: 2025-03-14 13:44:15
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName" @error="handleError">
@@ -31,6 +31,9 @@
             />
             <UeElButton size="large" theme="fillText" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
         </template>
+        <template #ImageUploadHistory>
+            <UploadHistoryPanel v-model:select="select" />
+        </template>
     </UeElLibraryPanel>
 </template>
 <script lang="ts" setup>
@@ -40,6 +43,7 @@ import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import AIImageSearchPanel from "./sub-components/AIImageSearchPanel.vue";
 import UnsplashPanel from "./sub-components/UnsplashPanel.vue";
+import UploadHistoryPanel from "./sub-components/UploadHistoryPanel.vue";
 
 defineOptions({ name: "UeElImageLibraryPanel" });
 
@@ -53,6 +57,8 @@ const loading = ref(false);
 const imageLib = ref<UE_EL_UTIL.ResourceImage | null>(null);
 
 const imageLibrary = ref(instance?.proxy?.$ueElResource.imageLibrary);
+const fileUploadHistory = instance?.proxy?.$ueFileUploadHistory;
+
 const imageAI = ref(instance?.proxy?.$ueElImageAI);
 const defaultCardName = ref<string>("ImageUpload");
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => {
@@ -67,7 +73,7 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
         param.cards.unshift({
             title: t("IMAGE_LIBRARY_TITLE"),
             name: "ImageLibList",
-            icon: imageAI.value ? "" : "icon-app-image-14",
+            icon: imageAI.value !== undefined ? "" : "icon-app-image-14",
             iconSize: 16,
         });
     }
@@ -80,6 +86,10 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
             iconSize: 16,
             disabled: imageAI.value === false,
         });
+    }
+
+    if (fileUploadHistory) {
+        param.cards.push({ title: t("UPLOAD_IMG_HISTORY_TITLE"), name: "ImageUploadHistory" });
     }
 
     return param;
