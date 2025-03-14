@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 14:09:40
+ * @LastEditTime: 2025-03-14 01:35:16
 -->
 <template>
     <div :class="$style['loading']" class="flex justify-center items-center" :style="{ '--bg': bg }">
@@ -112,19 +112,43 @@ defineExpose({
 }
 @keyframes prixClipFix {
     0% {
-        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+        clip-path: polygon(50% 50%, 0 0, 50% 0, 50% 0, 50% 0, 50% 0);
     }
     25% {
+        clip-path: polygon(50% 50%, 0 0, 50% 0, 50% 0, 50% 0, 50% 0);
+    }
+    30% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
     }
-    50% {
+    35% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
     }
-    75% {
+    40% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
     }
+    45% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 50%);
+    }
+    70% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 50%);
+    }
+    75% {
+        clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0%);
+    }
+    80% {
+        clip-path: polygon(50% 50%, 100% 0, 100% 0, 100% 100%, 0 100%, 0 0%);
+    }
+    85% {
+        clip-path: polygon(50% 50%, 100% 100%, 100% 100%, 100% 100%, 0 100%, 0 0%);
+    }
+    90% {
+        clip-path: polygon(50% 50%, 0 100%, 0 100%, 0 100%, 0 100%, 0 0%);
+    }
+    95% {
+        clip-path: polygon(50% 50%, 0 50%, 0 50%, 0 50%, 0 50%, 0 0%);
+    }
     100% {
-        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 50% 0);
     }
 }
 .loading {
@@ -182,11 +206,13 @@ defineExpose({
         top: 0;
         left: 0;
 
+        display: block;
+
         width: 100%;
         height: 100%;
         margin: auto;
 
-        animation: loaderRotate 1s linear infinite;
+        animation: loaderRotate 1.5s linear infinite;
 
         border-radius: 50%;
         &::before {
@@ -195,7 +221,7 @@ defineExpose({
             box-sizing: border-box;
 
             content: "";
-            animation: prixClipFix 2s linear infinite;
+            animation: prixClipFix 3s linear infinite;
 
             border: 2px solid rgba(#000, 1);
             border-radius: 50%;
