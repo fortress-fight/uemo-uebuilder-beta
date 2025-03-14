@@ -1,15 +1,13 @@
 <template>
-    <div class="grid" :class="$style['search-bar']">
-        <UeElTextInput
-            padding-size="level4"
-            ref="imageInput"
-            sub-type="search"
-            theme="enterText"
-            :placeholder="t('IMAGE_SEARCH_PLACEHOLDER')"
-            :value="searchText"
-            @confirm="changeSearchText"
-        />
-    </div>
+    <UeElTextInput
+        padding-size="level4"
+        ref="imageInput"
+        sub-type="search"
+        theme="enterText"
+        :placeholder="t('IMAGE_SEARCH_PLACEHOLDER')"
+        :value="searchText"
+        @confirm="changeSearchText"
+    />
     <div class="relative" :class="$style['search-result']">
         <UeElLoading v-if="loading" type="circle" />
         <div v-if="imageList.length" :class="$style['image-list']">
