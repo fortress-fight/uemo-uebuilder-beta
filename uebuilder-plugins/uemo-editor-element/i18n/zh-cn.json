@@ -144,6 +144,7 @@
     "UPLOAD_IMAGE_TITLE": "上传图片",
     "UPLOAD_IMG_TIP_1": "建议压缩后再上传，推荐使用<a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
     "UPLOAD_IMG_TIP_2": "请上传图片文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
+    "UPLOAD_IMG_HISTORY_TITLE": "资源",
 
     "UPLOAD_VIDEO_TITLE": "上传视频",
     "UPLOAD_VIDEO_TIP_1": "请上传视频文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
@@ -168,6 +169,8 @@
     "ERROR_UPLOAD_ERROR": "上传错误，请稍后重试",
     "ERROR_UPLOAD_NOT_CONFIG_QINIU": "未配置七牛云参数",
     "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "获取七牛云上传凭证失败",
+    "ERROR_UPLOAD_HISTORY_TYPE_ERROR": "获取已上传资源功能配置错误",
+    "ERROR_UPLOAD_HISTORY_GET_LIST_FAILED": "获取已上传资源列表失败",
 
     "SHAPE_LIBRARY_TIP_EMPTY": "未能获取到图形资源",
     "SHAPE_LIBRARY_TITLE": "图形库",

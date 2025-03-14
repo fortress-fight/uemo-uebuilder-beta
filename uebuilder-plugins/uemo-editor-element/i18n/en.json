@@ -144,6 +144,7 @@
     "UPLOAD_IMAGE_TITLE": "Upload image",
     "UPLOAD_IMG_TIP_1": "It is recommended to compress it before uploading, recommended to use <a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
     "UPLOAD_IMG_TIP_2": "Please upload image file, file size cannot exceed <span data-ue-tip-color=\"red\">{size}</span>",
+    "UPLOAD_IMG_HISTORY_TITLE": "Archive",
 
     "UPLOAD_VIDEO_TITLE": "Upload video",
     "UPLOAD_VIDEO_TIP_1": "Please upload video file, file size cannot exceed <span data-ue-tip-color=\"red\">{size}</span>",
@@ -168,6 +169,8 @@
     "ERROR_UPLOAD_ERROR": "Upload error, please try again later",
     "ERROR_UPLOAD_NOT_CONFIG_QINIU": "No upload configuration",
     "ERROR_UPLOAD_GET_QINIU_TOKEN_FAILED": "Get Qiniu upload token failed",
+    "ERROR_UPLOAD_HISTORY_TYPE_ERROR": "Get upload history configuration error",
+    "ERROR_UPLOAD_HISTORY_GET_LIST_FAILED": "Get upload history list failed",
 
     "SHAPE_LIBRARY_TIP_EMPTY": "Unable to get Shape resource",
     "SHAPE_LIBRARY_TITLE": "Shape Library",

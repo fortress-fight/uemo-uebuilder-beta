@@ -91,7 +91,11 @@ declare global {
          * @description 上传配置旧版
          */
         type UploadConfigOld = (
-            | { imageUploadSize: number; imageDataPath: string }
+            | {
+                  uploadFileSize: number;
+                  imageUploadSize: number;
+                  imageDataPath: string;
+              }
             | { fileLimitSize: number; uploadFileQueryPath: string; image?: ImageUploadConfig | false }
         ) & {
             uploadPath: string;
@@ -177,7 +181,7 @@ declare global {
         /**
          * @description 上传历史记录配置
          */
-        type UploadHistoryConfig = { type: "MO005" } | { type: "custom"; url: "" };
+        type UploadHistoryConfig = { type: "MO005" } | { type: "custom"; url: string };
 
         /**
          * @description 上传拦截器
@@ -196,6 +200,52 @@ declare global {
                 }
             ) => Promise<string>;
         };
+
+        /**
+         * @description 上传历史记录处理程序
+         */
+        export type UploadHistoryHandler = {
+            config: UploadHistoryConfig;
+            getUploadFileData: (query: UploadHistoryQueryParams) => Promise<UploadHistoryResponse>;
+        };
+
+        /**
+         * @description 上传历史记录文件数据
+         */
+        export interface UploadHistoryFileData {
+            id: string;
+            filename: string;
+            url: string;
+            size: string;
+            type: string;
+            post_date: string;
+        }
+
+        /**
+         * @description 上传历史记录响应
+         */
+        export type UploadHistoryResponse = {
+            code: number;
+            data:
+                | {
+                      limit: number;
+                      page: number;
+                      total: number;
+                      list: UploadHistoryFileData[];
+                  }
+                | {
+                      // NOTE 用于兼容 uemo 上传历史记录， uemo 接口缺少 total 信息
+                      limit: number;
+                      page: number;
+                      list: UploadHistoryFileData[];
+                      next: { url: string; title: string };
+                  };
+        };
+
+        /**
+         * @description 上传历史记录查询参数
+         */
+        export type UploadHistoryQueryParams = { page?: string; limit?: number; type?: string; filename?: string };
 
         /**
          * @description 错误类型
