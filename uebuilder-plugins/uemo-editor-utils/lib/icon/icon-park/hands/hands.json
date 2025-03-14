@@ -1,0 +1,266 @@
+[
+    {
+        "title": "坏的",
+        "name": "bad"
+    },
+    {
+        "title": "差劲",
+        "name": "bad-one"
+    },
+    {
+        "title": "踩",
+        "name": "bad-two"
+    },
+    {
+        "title": "保佑",
+        "name": "bless"
+    },
+    {
+        "title": "拜拜",
+        "name": "bye"
+    },
+    {
+        "title": "鼓掌",
+        "name": "clap"
+    },
+    {
+        "title": "点击",
+        "name": "click-tap"
+    },
+    {
+        "title": "点击",
+        "name": "click-tap-two"
+    },
+    {
+        "title": "招引",
+        "name": "come"
+    },
+    {
+        "title": "理念共享",
+        "name": "concept-sharing"
+    },
+    {
+        "title": "酷的",
+        "name": "cool"
+    },
+    {
+        "title": "交货",
+        "name": "delivery"
+    },
+    {
+        "title": "简单",
+        "name": "easy"
+    },
+    {
+        "title": "空手",
+        "name": "empty"
+    },
+    {
+        "title": "指纹",
+        "name": "fingerprint"
+    },
+    {
+        "title": "指纹",
+        "name": "fingerprint-three"
+    },
+    {
+        "title": "指纹",
+        "name": "fingerprint-two"
+    },
+    {
+        "title": "第一",
+        "name": "first"
+    },
+    {
+        "title": "拳头",
+        "name": "fist"
+    },
+    {
+        "title": "五",
+        "name": "five"
+    },
+    {
+        "title": "五",
+        "name": "five-five"
+    },
+    {
+        "title": "勾引",
+        "name": "flirt"
+    },
+    {
+        "title": "四",
+        "name": "four"
+    },
+    {
+        "title": "四",
+        "name": "four-four"
+    },
+    {
+        "title": "好的",
+        "name": "good"
+    },
+    {
+        "title": "优秀",
+        "name": "good-one"
+    },
+    {
+        "title": "赞",
+        "name": "good-two"
+    },
+    {
+        "title": "向下指",
+        "name": "hand-down"
+    },
+    {
+        "title": "手动拖动",
+        "name": "hand-drag"
+    },
+    {
+        "title": "向左指",
+        "name": "hand-left"
+    },
+    {
+        "title": "向右指",
+        "name": "hand-right"
+    },
+    {
+        "title": "向上指",
+        "name": "hand-up"
+    },
+    {
+        "title": "打招呼",
+        "name": "hi"
+    },
+    {
+        "title": "承接",
+        "name": "hold"
+    },
+    {
+        "title": "托起",
+        "name": "hold-interface"
+    },
+    {
+        "title": "孕育",
+        "name": "hold-seeds"
+    },
+    {
+        "title": "食指",
+        "name": "index-finger"
+    },
+    {
+        "title": "马尤拉手势",
+        "name": "mayura-gesture"
+    },
+    {
+        "title": "中指",
+        "name": "middle-finger"
+    },
+    {
+        "title": "移动",
+        "name": "move"
+    },
+    {
+        "title": "认可",
+        "name": "okay"
+    },
+    {
+        "title": "一",
+        "name": "one"
+    },
+    {
+        "title": "一",
+        "name": "one-one"
+    },
+    {
+        "title": "打开",
+        "name": "open"
+    },
+    {
+        "title": "手掌",
+        "name": "palm"
+    },
+    {
+        "title": "指向",
+        "name": "point"
+    },
+    {
+        "title": "指出",
+        "name": "point-out"
+    },
+    {
+        "title": "点击",
+        "name": "press"
+    },
+    {
+        "title": "重装",
+        "name": "reload"
+    },
+    {
+        "title": "抱拳",
+        "name": "respect"
+    },
+    {
+        "title": "摇滚指",
+        "name": "rock"
+    },
+    {
+        "title": "摇滚手势",
+        "name": "rock-gesture"
+    },
+    {
+        "title": "六",
+        "name": "six"
+    },
+    {
+        "title": "弹指",
+        "name": "spider-man"
+    },
+    {
+        "title": "招手",
+        "name": "swing"
+    },
+    {
+        "title": "三",
+        "name": "three"
+    },
+    {
+        "title": "三",
+        "name": "three-three"
+    },
+    {
+        "title": "踩",
+        "name": "thumbs-down"
+    },
+    {
+        "title": "赞",
+        "name": "thumbs-up"
+    },
+    {
+        "title": "打开",
+        "name": "turn-on"
+    },
+    {
+        "title": "二",
+        "name": "two"
+    },
+    {
+        "title": "两个手指",
+        "name": "two-fingers"
+    },
+    {
+        "title": "两只手",
+        "name": "two-hands"
+    },
+    {
+        "title": "二",
+        "name": "two-two"
+    },
+    {
+        "title": "胜利",
+        "name": "yep"
+    },
+    {
+        "title": "放大",
+        "name": "zoom"
+    }
+]

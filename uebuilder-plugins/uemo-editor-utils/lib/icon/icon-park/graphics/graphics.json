@@ -1,0 +1,74 @@
+[
+    {
+        "title": "菱形1",
+        "name": "diamond-one"
+    },
+    {
+        "title": "菱形3",
+        "name": "diamond-three"
+    },
+    {
+        "title": "菱形2",
+        "name": "diamond-two"
+    },
+    {
+        "title": "六边形1",
+        "name": "hexagon-one"
+    },
+    {
+        "title": "八边形",
+        "name": "octagon"
+    },
+    {
+        "title": "椭圆形",
+        "name": "oval-one"
+    },
+    {
+        "title": "平行四边形",
+        "name": "parallelogram"
+    },
+    {
+        "title": "五边形",
+        "name": "pentagon-one"
+    },
+    {
+        "title": "四边形",
+        "name": "quadrilateral"
+    },
+    {
+        "title": "矩形",
+        "name": "rectangle"
+    },
+    {
+        "title": "矩形1",
+        "name": "rectangle-one"
+    },
+    {
+        "title": "小矩形",
+        "name": "rectangle-small"
+    },
+    {
+        "title": "直角形",
+        "name": "right-angle"
+    },
+    {
+        "title": "圆形",
+        "name": "round"
+    },
+    {
+        "title": "方形",
+        "name": "square"
+    },
+    {
+        "title": "小方形",
+        "name": "square-small"
+    },
+    {
+        "title": "梯形",
+        "name": "trapezoid"
+    },
+    {
+        "title": "三角形",
+        "name": "triangle"
+    }
+]

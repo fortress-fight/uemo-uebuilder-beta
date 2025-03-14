@@ -1,0 +1,334 @@
+[
+    {
+        "title": "adobe-illustrate",
+        "name": "adobe-illustrate"
+    },
+    {
+        "title": "adobe-indesign",
+        "name": "adobe-indesign"
+    },
+    {
+        "title": "adobe-lightroom",
+        "name": "adobe-lightroom"
+    },
+    {
+        "title": "adobe-photoshop",
+        "name": "adobe-photoshop"
+    },
+    {
+        "title": "支付宝",
+        "name": "alipay"
+    },
+    {
+        "title": "安卓",
+        "name": "android"
+    },
+    {
+        "title": "应用商店",
+        "name": "app-store"
+    },
+    {
+        "title": "苹果",
+        "name": "apple"
+    },
+    {
+        "title": "behance",
+        "name": "behance"
+    },
+    {
+        "title": "浏览器",
+        "name": "browser-chrome"
+    },
+    {
+        "title": "浏览器-safari",
+        "name": "browser-safari"
+    },
+    {
+        "title": "字节设计",
+        "name": "bydesign"
+    },
+    {
+        "title": "字节跳动",
+        "name": "bytedance"
+    },
+    {
+        "title": "巨量创意",
+        "name": "cc"
+    },
+    {
+        "title": "小六客服",
+        "name": "customer"
+    },
+    {
+        "title": "电子签",
+        "name": "dianziqian"
+    },
+    {
+        "title": "懂车帝",
+        "name": "dongchedi"
+    },
+    {
+        "title": "追波",
+        "name": "dribble"
+    },
+    {
+        "title": "管理箱",
+        "name": "dropbox"
+    },
+    {
+        "title": "脸书",
+        "name": "facebook"
+    },
+    {
+        "title": "脸书",
+        "name": "facebook-one"
+    },
+    {
+        "title": "视频电话",
+        "name": "facetime"
+    },
+    {
+        "title": "激萌",
+        "name": "faceu"
+    },
+    {
+        "title": "番茄小说",
+        "name": "fanqiexiaoshuo"
+    },
+    {
+        "title": "feelgood",
+        "name": "feelgood"
+    },
+    {
+        "title": "feegood1",
+        "name": "feelgood-one"
+    },
+    {
+        "title": "飞鱼CRM",
+        "name": "feiyu"
+    },
+    {
+        "title": "figma",
+        "name": "figma"
+    },
+    {
+        "title": "foursquare",
+        "name": "foursquare"
+    },
+    {
+        "title": "朋友圈",
+        "name": "friends-circle"
+    },
+    {
+        "title": "github ",
+        "name": "github"
+    },
+    {
+        "title": "github-one",
+        "name": "github-one"
+    },
+    {
+        "title": "gitlab",
+        "name": "gitlab"
+    },
+    {
+        "title": "谷歌",
+        "name": "google"
+    },
+    {
+        "title": "谷歌广告",
+        "name": "google-ads"
+    },
+    {
+        "title": "健康",
+        "name": "health"
+    },
+    {
+        "title": "html5",
+        "name": "html-five"
+    },
+    {
+        "title": "抖音火山",
+        "name": "huoshanzhibo"
+    },
+    {
+        "title": "instagram",
+        "name": "instagram"
+    },
+    {
+        "title": "instagram",
+        "name": "instagram-one"
+    },
+    {
+        "title": "今日头条",
+        "name": "jinritoutiao"
+    },
+    {
+        "title": "飞书",
+        "name": "lark"
+    },
+    {
+        "title": "飞书1",
+        "name": "lark-one"
+    },
+    {
+        "title": "林肯",
+        "name": "lincoln"
+    },
+    {
+        "title": "邮件1",
+        "name": "maill-one"
+    },
+    {
+        "title": "易拍",
+        "name": "market"
+    },
+    {
+        "title": "剪映",
+        "name": "mediaeditor"
+    },
+    {
+        "title": "短信",
+        "name": "messages"
+    },
+    {
+        "title": "短信1",
+        "name": "messages-one"
+    },
+    {
+        "title": "三菱",
+        "name": "mitsubishi"
+    },
+    {
+        "title": "电子签-新",
+        "name": "new-dianziqian"
+    },
+    {
+        "title": "飞书-新",
+        "name": "new-lark"
+    },
+    {
+        "title": "巨量引擎",
+        "name": "oceanengine"
+    },
+    {
+        "title": "橙子建站",
+        "name": "orange-station"
+    },
+    {
+        "title": "穿山甲",
+        "name": "pangle"
+    },
+    {
+        "title": "paypal",
+        "name": "paypal"
+    },
+    {
+        "title": "电话2",
+        "name": "phone-two"
+    },
+    {
+        "title": "青鸟线索通",
+        "name": "qingniao-clue"
+    },
+    {
+        "title": "企业号",
+        "name": "qiyehao"
+    },
+    {
+        "title": "雷诺",
+        "name": "renault"
+    },
+    {
+        "title": "sketch",
+        "name": "sketch"
+    },
+    {
+        "title": "星星",
+        "name": "star-one"
+    },
+    {
+        "title": "淘宝",
+        "name": "taobao"
+    },
+    {
+        "title": "Telegram",
+        "name": "telegram"
+    },
+    {
+        "title": "QQ",
+        "name": "tencent-qq"
+    },
+    {
+        "title": "抖音",
+        "name": "tiktok"
+    },
+    {
+        "title": "topbuzz",
+        "name": "topbuzz"
+    },
+    {
+        "title": "图虫",
+        "name": "tuchong"
+    },
+    {
+        "title": "tumblr",
+        "name": "tumblr"
+    },
+    {
+        "title": "推特",
+        "name": "twitter"
+    },
+    {
+        "title": "轻颜相机",
+        "name": "ulikecam"
+    },
+    {
+        "title": "火山小视频",
+        "name": "vigo"
+    },
+    {
+        "title": "大众",
+        "name": "volkswagen"
+    },
+    {
+        "title": "微信",
+        "name": "wechat"
+    },
+    {
+        "title": "微博",
+        "name": "weibo"
+    },
+    {
+        "title": "微软视窗",
+        "name": "windows"
+    },
+    {
+        "title": "小度",
+        "name": "xiaodu"
+    },
+    {
+        "title": "西瓜视频",
+        "name": "xigua"
+    },
+    {
+        "title": "幸福里",
+        "name": "xingfuli"
+    },
+    {
+        "title": "星图",
+        "name": "xingtu"
+    },
+    {
+        "title": "油管",
+        "name": "youtobe"
+    },
+    {
+        "title": "优兔",
+        "name": "youtube"
+    },
+    {
+        "title": "资金运营平台",
+        "name": "zijinyunying"
+    }
+]

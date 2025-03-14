@@ -1,0 +1,274 @@
+[
+    {
+        "title": "活动源",
+        "name": "activity-source"
+    },
+    {
+        "title": "分析",
+        "name": "analysis"
+    },
+    {
+        "title": "区域图",
+        "name": "area-map"
+    },
+    {
+        "title": "计算",
+        "name": "arithmetic"
+    },
+    {
+        "title": "计算",
+        "name": "arithmetic-one"
+    },
+    {
+        "title": "平均值",
+        "name": "average"
+    },
+    {
+        "title": "广播",
+        "name": "broadcast-one"
+    },
+    {
+        "title": "气泡图",
+        "name": "bubble-chart"
+    },
+    {
+        "title": "子弹图",
+        "name": "bullet-map"
+    },
+    {
+        "title": "按修改日期排序",
+        "name": "change-date-sort"
+    },
+    {
+        "title": "关系图",
+        "name": "chart-graph"
+    },
+    {
+        "title": "条形图",
+        "name": "chart-histogram"
+    },
+    {
+        "title": "条形图",
+        "name": "chart-histogram-one"
+    },
+    {
+        "title": "条形图",
+        "name": "chart-histogram-two"
+    },
+    {
+        "title": "折线图",
+        "name": "chart-line"
+    },
+    {
+        "title": "折线面积图",
+        "name": "chart-line-area"
+    },
+    {
+        "title": "饼图",
+        "name": "chart-pie"
+    },
+    {
+        "title": "占比图",
+        "name": "chart-proportion"
+    },
+    {
+        "title": "环形图",
+        "name": "chart-ring"
+    },
+    {
+        "title": "散点图",
+        "name": "chart-scatter"
+    },
+    {
+        "title": "K线图",
+        "name": "chart-stock"
+    },
+    {
+        "title": "按创建日期排序",
+        "name": "creation-date-sort"
+    },
+    {
+        "title": "数据库",
+        "name": "data"
+    },
+    {
+        "title": "数据",
+        "name": "data-all"
+    },
+    {
+        "title": "数据到达",
+        "name": "data-arrival"
+    },
+    {
+        "title": "数据",
+        "name": "data-four"
+    },
+    {
+        "title": "数据空",
+        "name": "data-null"
+    },
+    {
+        "title": "数据",
+        "name": "data-one"
+    },
+    {
+        "title": "数据看板",
+        "name": "data-screen"
+    },
+    {
+        "title": "数据表",
+        "name": "data-sheet"
+    },
+    {
+        "title": "数据",
+        "name": "data-three"
+    },
+    {
+        "title": "数据",
+        "name": "data-two"
+    },
+    {
+        "title": "按截止日期排序",
+        "name": "deadline-sort"
+    },
+    {
+        "title": "心电图",
+        "name": "electrocardiogram"
+    },
+    {
+        "title": "按结束时间排序",
+        "name": "end-time-sort"
+    },
+    {
+        "title": "按跟进日期排序",
+        "name": "follow-up-date-sort"
+    },
+    {
+        "title": "表格",
+        "name": "form"
+    },
+    {
+        "title": "直方图",
+        "name": "histogram"
+    },
+    {
+        "title": "kagi图",
+        "name": "kagi-map"
+    },
+    {
+        "title": "马斯洛金字塔",
+        "name": "maslow-pyramids"
+    },
+    {
+        "title": "材料3",
+        "name": "material-three"
+    },
+    {
+        "title": "最大值",
+        "name": "maximum"
+    },
+    {
+        "title": "最小值",
+        "name": "min"
+    },
+    {
+        "title": "多播",
+        "name": "multicast"
+    },
+    {
+        "title": "消极动态",
+        "name": "negative-dynamics"
+    },
+    {
+        "title": "抛物线",
+        "name": "parabola"
+    },
+    {
+        "title": "进度",
+        "name": "pie"
+    },
+    {
+        "title": "进度5",
+        "name": "pie-five"
+    },
+    {
+        "title": "进度4",
+        "name": "pie-four"
+    },
+    {
+        "title": "进度1",
+        "name": "pie-one"
+    },
+    {
+        "title": "进度7",
+        "name": "pie-seven"
+    },
+    {
+        "title": "进度6",
+        "name": "pie-six"
+    },
+    {
+        "title": "进度3",
+        "name": "pie-three"
+    },
+    {
+        "title": "进度2",
+        "name": "pie-two"
+    },
+    {
+        "title": "数据透视表",
+        "name": "pivot-table"
+    },
+    {
+        "title": "积极动态",
+        "name": "positive-dynamics"
+    },
+    {
+        "title": "雷达图",
+        "name": "radar-chart"
+    },
+    {
+        "title": "排行榜",
+        "name": "ranking"
+    },
+    {
+        "title": "排行榜",
+        "name": "ranking-list"
+    },
+    {
+        "title": "按最近浏览量排序",
+        "name": "recent-views-sort"
+    },
+    {
+        "title": "正弦曲线",
+        "name": "sinusoid"
+    },
+    {
+        "title": "幻灯片",
+        "name": "slide"
+    },
+    {
+        "title": "幻灯片",
+        "name": "slide-two"
+    },
+    {
+        "title": "按开始时间排序",
+        "name": "start-time-sort"
+    },
+    {
+        "title": "时间线",
+        "name": "timeline"
+    },
+    {
+        "title": "单播",
+        "name": "unicast"
+    },
+    {
+        "title": "垂直时间线",
+        "name": "vertical-timeline"
+    },
+    {
+        "title": "维恩图",
+        "name": "viencharts"
+    }
+]

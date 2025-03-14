@@ -1,0 +1,894 @@
+[
+    {
+        "title": "计算机添加",
+        "name": "add-computer"
+    },
+    {
+        "title": "空调",
+        "name": "air-conditioning"
+    },
+    {
+        "title": "AirPlay",
+        "name": "airplay"
+    },
+    {
+        "title": "星号键",
+        "name": "asterisk-key"
+    },
+    {
+        "title": "电池故障",
+        "name": "battery-failure"
+    },
+    {
+        "title": "电池充电",
+        "name": "battery-storage"
+    },
+    {
+        "title": "电池提示",
+        "name": "battery-tips"
+    },
+    {
+        "title": "电池",
+        "name": "battery-working-one"
+    },
+    {
+        "title": "自行车",
+        "name": "bike"
+    },
+    {
+        "title": "插头",
+        "name": "bolt-one"
+    },
+    {
+        "title": "收音机",
+        "name": "broadcast-radio"
+    },
+    {
+        "title": "大巴",
+        "name": "bus"
+    },
+    {
+        "title": "计算器",
+        "name": "calculator"
+    },
+    {
+        "title": "计算器",
+        "name": "calculator-one"
+    },
+    {
+        "title": "摄像头",
+        "name": "camera-five"
+    },
+    {
+        "title": "监控录像",
+        "name": "camera-four"
+    },
+    {
+        "title": "摄像头",
+        "name": "camera-one"
+    },
+    {
+        "title": "智能摄像头",
+        "name": "camera-three"
+    },
+    {
+        "title": "相机",
+        "name": "camera-two"
+    },
+    {
+        "title": "汽车",
+        "name": "car"
+    },
+    {
+        "title": "光盘",
+        "name": "cd"
+    },
+    {
+        "title": "充电宝",
+        "name": "charging-treasure"
+    },
+    {
+        "title": "芯片",
+        "name": "chip"
+    },
+    {
+        "title": "云存储",
+        "name": "cloud-storage"
+    },
+    {
+        "title": "计算机代码",
+        "name": "code-computer"
+    },
+    {
+        "title": "笔记本电脑代码",
+        "name": "code-laptop"
+    },
+    {
+        "title": "计算机收藏",
+        "name": "collect-computer"
+    },
+    {
+        "title": "笔记本电脑收集",
+        "name": "collect-laptop"
+    },
+    {
+        "title": "电脑",
+        "name": "computer"
+    },
+    {
+        "title": "计算机",
+        "name": "computer-one"
+    },
+    {
+        "title": "控制器",
+        "name": "control"
+    },
+    {
+        "title": "芯片",
+        "name": "cpu"
+    },
+    {
+        "title": "咖啡杯",
+        "name": "cup"
+    },
+    {
+        "title": "仪表盘",
+        "name": "dashboard-one"
+    },
+    {
+        "title": "仪表盘",
+        "name": "dashboard-two"
+    },
+    {
+        "title": "数据服务器",
+        "name": "data-server"
+    },
+    {
+        "title": "删除键",
+        "name": "delete-key"
+    },
+    {
+        "title": "台灯",
+        "name": "desk-lamp"
+    },
+    {
+        "title": "设备",
+        "name": "devices"
+    },
+    {
+        "title": "电子表",
+        "name": "digital-watches"
+    },
+    {
+        "title": "计算机禁用",
+        "name": "disabled-computer"
+    },
+    {
+        "title": "笔记本电脑禁用",
+        "name": "disabled-laptop"
+    },
+    {
+        "title": "磁盘",
+        "name": "disk"
+    },
+    {
+        "title": "U盘1",
+        "name": "disk-one"
+    },
+    {
+        "title": "U盘2",
+        "name": "disk-two"
+    },
+    {
+        "title": "顶灯",
+        "name": "dome-light"
+    },
+    {
+        "title": "计算机下载",
+        "name": "download-computer"
+    },
+    {
+        "title": "笔记本电脑下载",
+        "name": "download-laptop"
+    },
+    {
+        "title": "无人机",
+        "name": "drone"
+    },
+    {
+        "title": "无人机",
+        "name": "drone-one"
+    },
+    {
+        "title": "DVI",
+        "name": "dvi"
+    },
+    {
+        "title": "按键八",
+        "name": "eight-key"
+    },
+    {
+        "title": "电熨斗",
+        "name": "electric-iron"
+    },
+    {
+        "title": "智能门锁",
+        "name": "electronic-door-lock"
+    },
+    {
+        "title": "电子锁关",
+        "name": "electronic-locks-close"
+    },
+    {
+        "title": "电子锁开",
+        "name": "electronic-locks-open"
+    },
+    {
+        "title": "触电笔",
+        "name": "electronic-pen"
+    },
+    {
+        "title": "回车键",
+        "name": "enter-key"
+    },
+    {
+        "title": "回车键",
+        "name": "enter-key-one"
+    },
+    {
+        "title": "计算机错误",
+        "name": "error-computer"
+    },
+    {
+        "title": "网口关",
+        "name": "ethernet-off"
+    },
+    {
+        "title": "网口开",
+        "name": "ethernet-on"
+    },
+    {
+        "title": "F8",
+        "name": "f-eight-key"
+    },
+    {
+        "title": "F5",
+        "name": "f-five-key"
+    },
+    {
+        "title": "F4",
+        "name": "f-four-key"
+    },
+    {
+        "title": "Fn",
+        "name": "f-n-key"
+    },
+    {
+        "title": "F9",
+        "name": "f-nine-key"
+    },
+    {
+        "title": "F1",
+        "name": "f-one-key"
+    },
+    {
+        "title": "F7",
+        "name": "f-seven-key"
+    },
+    {
+        "title": "F6",
+        "name": "f-six-key"
+    },
+    {
+        "title": "F3",
+        "name": "f-three-key"
+    },
+    {
+        "title": "F2",
+        "name": "f-two-key"
+    },
+    {
+        "title": "F0",
+        "name": "f-zero-key"
+    },
+    {
+        "title": "按键五",
+        "name": "five-key"
+    },
+    {
+        "title": "手电筒",
+        "name": "flashlight"
+    },
+    {
+        "title": "按键四",
+        "name": "four-key"
+    },
+    {
+        "title": "游戏机",
+        "name": "game-console"
+    },
+    {
+        "title": "移动游戏机",
+        "name": "game-console-one"
+    },
+    {
+        "title": "游戏手柄",
+        "name": "game-three"
+    },
+    {
+        "title": "游戏机",
+        "name": "gamepad"
+    },
+    {
+        "title": "运动相机",
+        "name": "gopro"
+    },
+    {
+        "title": "吹风机",
+        "name": "hair-dryer-one"
+    },
+    {
+        "title": "手绘板",
+        "name": "hand-painted-plate"
+    },
+    {
+        "title": "硬盘",
+        "name": "hard-disk"
+    },
+    {
+        "title": "移动硬盘",
+        "name": "hard-disk-one"
+    },
+    {
+        "title": "井号键",
+        "name": "hashtag-key"
+    },
+    {
+        "title": "HDD",
+        "name": "hdd"
+    },
+    {
+        "title": "HDMI线",
+        "name": "hdmi-cable"
+    },
+    {
+        "title": "HDMI接口",
+        "name": "hdmi-connector"
+    },
+    {
+        "title": "耳机",
+        "name": "headset-two"
+    },
+    {
+        "title": "从动装置",
+        "name": "hunting-gear"
+    },
+    {
+        "title": "苹果电脑iMac",
+        "name": "i-mac"
+    },
+    {
+        "title": "感应锁",
+        "name": "induction-lock"
+    },
+    {
+        "title": "对讲机",
+        "name": "intercom"
+    },
+    {
+        "title": "Ipad",
+        "name": "ipad"
+    },
+    {
+        "title": "平板电脑",
+        "name": "ipad-one"
+    },
+    {
+        "title": "苹果手机",
+        "name": "iphone"
+    },
+    {
+        "title": "智能手表",
+        "name": "iwatch-one"
+    },
+    {
+        "title": "苹果智能手表",
+        "name": "iwatch-two"
+    },
+    {
+        "title": "热水壶",
+        "name": "kettle"
+    },
+    {
+        "title": "键盘",
+        "name": "keyboard"
+    },
+    {
+        "title": "键盘",
+        "name": "keyboard-one"
+    },
+    {
+        "title": "节能灯",
+        "name": "lamp"
+    },
+    {
+        "title": "笔记本",
+        "name": "laptop"
+    },
+    {
+        "title": "笔记本电脑",
+        "name": "laptop-computer"
+    },
+    {
+        "title": "笔记本电脑",
+        "name": "laptop-one"
+    },
+    {
+        "title": "计算机锁定",
+        "name": "locking-computer"
+    },
+    {
+        "title": "笔记本电脑锁定",
+        "name": "locking-laptop"
+    },
+    {
+        "title": "访达",
+        "name": "mac-finder"
+    },
+    {
+        "title": "主机",
+        "name": "master"
+    },
+    {
+        "title": "储存卡",
+        "name": "memory"
+    },
+    {
+        "title": "存储卡",
+        "name": "memory-card"
+    },
+    {
+        "title": "记忆卡",
+        "name": "memory-card-one"
+    },
+    {
+        "title": "储存器",
+        "name": "memory-one"
+    },
+    {
+        "title": "微型SD",
+        "name": "micro-sd"
+    },
+    {
+        "title": "微单",
+        "name": "micro-slr-camera"
+    },
+    {
+        "title": "麦克风",
+        "name": "microphone"
+    },
+    {
+        "title": "收音器",
+        "name": "microphone-one"
+    },
+    {
+        "title": "显微镜",
+        "name": "microscope-one"
+    },
+    {
+        "title": "微波炉",
+        "name": "microwave-oven"
+    },
+    {
+        "title": "微波炉",
+        "name": "microwaves"
+    },
+    {
+        "title": "微型存储卡",
+        "name": "mini-sd-card"
+    },
+    {
+        "title": "监控摄像头",
+        "name": "monitor-camera"
+    },
+    {
+        "title": "显示器",
+        "name": "monitor-one"
+    },
+    {
+        "title": "鼠标",
+        "name": "mouse"
+    },
+    {
+        "title": "鼠标",
+        "name": "mouse-one"
+    },
+    {
+        "title": "多功能刀",
+        "name": "multi-function-knife"
+    },
+    {
+        "title": "云办公",
+        "name": "network-drive"
+    },
+    {
+        "title": "计算机",
+        "name": "new-computer"
+    },
+    {
+        "title": "按键九",
+        "name": "nine-key"
+    },
+    {
+        "title": "按键一",
+        "name": "one-key"
+    },
+    {
+        "title": "平板电脑",
+        "name": "pad"
+    },
+    {
+        "title": "绘制屏",
+        "name": "painted-screen"
+    },
+    {
+        "title": "手机",
+        "name": "phone"
+    },
+    {
+        "title": "电话",
+        "name": "phone-one"
+    },
+    {
+        "title": "留声机",
+        "name": "phonograph"
+    },
+    {
+        "title": "插头",
+        "name": "plug"
+    },
+    {
+        "title": "插电头",
+        "name": "plug-one"
+    },
+    {
+        "title": "插头2",
+        "name": "power-supply"
+    },
+    {
+        "title": "插头1",
+        "name": "power-supply-one"
+    },
+    {
+        "title": "打印机",
+        "name": "printer"
+    },
+    {
+        "title": "打印机",
+        "name": "printer-one"
+    },
+    {
+        "title": "打印机",
+        "name": "printer-two"
+    },
+    {
+        "title": "投影仪",
+        "name": "projector"
+    },
+    {
+        "title": "投影机",
+        "name": "projector-one"
+    },
+    {
+        "title": "放映机",
+        "name": "projector-three"
+    },
+    {
+        "title": "投影仪",
+        "name": "projector-two"
+    },
+    {
+        "title": "收音机",
+        "name": "radio"
+    },
+    {
+        "title": "收音机",
+        "name": "radio-one"
+    },
+    {
+        "title": "接收器",
+        "name": "receiver"
+    },
+    {
+        "title": "播放器",
+        "name": "record-player"
+    },
+    {
+        "title": "遥控器",
+        "name": "remote-control"
+    },
+    {
+        "title": "遥控器",
+        "name": "remote-control-one"
+    },
+    {
+        "title": "机器人2",
+        "name": "robot"
+    },
+    {
+        "title": "机器人1",
+        "name": "robot-one"
+    },
+    {
+        "title": "火箭",
+        "name": "rocket-one"
+    },
+    {
+        "title": "圆形插座",
+        "name": "round-socket"
+    },
+    {
+        "title": "路由器",
+        "name": "router"
+    },
+    {
+        "title": "路由器",
+        "name": "router-one"
+    },
+    {
+        "title": "RS",
+        "name": "rs-male"
+    },
+    {
+        "title": "SD卡",
+        "name": "sd"
+    },
+    {
+        "title": "存储卡",
+        "name": "sd-card"
+    },
+    {
+        "title": "印章",
+        "name": "seal"
+    },
+    {
+        "title": "服务器",
+        "name": "server"
+    },
+    {
+        "title": "计算机设置",
+        "name": "setting-computer"
+    },
+    {
+        "title": "笔记本电脑设置",
+        "name": "setting-laptop"
+    },
+    {
+        "title": "按键七",
+        "name": "seven-key"
+    },
+    {
+        "title": "剃须刀",
+        "name": "shaver"
+    },
+    {
+        "title": "信号塔",
+        "name": "signal-tower"
+    },
+    {
+        "title": "电话卡",
+        "name": "sim"
+    },
+    {
+        "title": "储存卡",
+        "name": "sim-card"
+    },
+    {
+        "title": "按键六",
+        "name": "six-key"
+    },
+    {
+        "title": "附件",
+        "name": "slave"
+    },
+    {
+        "title": "太阳能",
+        "name": "solar-energy"
+    },
+    {
+        "title": "固态硬盘",
+        "name": "solid-state-disk"
+    },
+    {
+        "title": "音响",
+        "name": "sound"
+    },
+    {
+        "title": "音响",
+        "name": "sound-one"
+    },
+    {
+        "title": "音响",
+        "name": "speaker"
+    },
+    {
+        "title": "喇叭",
+        "name": "speaker-one"
+    },
+    {
+        "title": "SSD",
+        "name": "ssd"
+    },
+    {
+        "title": "订书机",
+        "name": "stapler"
+    },
+    {
+        "title": "立体声",
+        "name": "stereo-one"
+    },
+    {
+        "title": "储存卡1",
+        "name": "storage-card-one"
+    },
+    {
+        "title": "储存卡2",
+        "name": "storage-card-two"
+    },
+    {
+        "title": "保险箱",
+        "name": "strongbox"
+    },
+    {
+        "title": "地铁",
+        "name": "subway"
+    },
+    {
+        "title": "监控摄像头",
+        "name": "surveillance-cameras"
+    },
+    {
+        "title": "监控摄像头",
+        "name": "surveillance-cameras-one"
+    },
+    {
+        "title": "监控摄像头",
+        "name": "surveillance-cameras-two"
+    },
+    {
+        "title": "任天堂游戏",
+        "name": "switch-nintendo"
+    },
+    {
+        "title": "开关",
+        "name": "switch-one"
+    },
+    {
+        "title": "台灯",
+        "name": "table-lamp"
+    },
+    {
+        "title": "望远镜",
+        "name": "telescope"
+    },
+    {
+        "title": "按键三",
+        "name": "three-key"
+    },
+    {
+        "title": "霹雳接口",
+        "name": "thunderbolt"
+    },
+    {
+        "title": "计时器",
+        "name": "timer"
+    },
+    {
+        "title": "马桶",
+        "name": "toilet"
+    },
+    {
+        "title": "送货车",
+        "name": "transporter"
+    },
+    {
+        "title": "货车",
+        "name": "truck"
+    },
+    {
+        "title": "喇叭",
+        "name": "trumpet"
+    },
+    {
+        "title": "电视",
+        "name": "tv"
+    },
+    {
+        "title": "电视",
+        "name": "tv-one"
+    },
+    {
+        "title": "按键二",
+        "name": "two-key"
+    },
+    {
+        "title": "磁带",
+        "name": "type-drive"
+    },
+    {
+        "title": "U盘",
+        "name": "u-disk"
+    },
+    {
+        "title": "计算机上传",
+        "name": "upload-computer"
+    },
+    {
+        "title": "笔记本电脑上传",
+        "name": "upload-laptop"
+    },
+    {
+        "title": "数据接口",
+        "name": "usb"
+    },
+    {
+        "title": "U盘",
+        "name": "usb-memory-stick"
+    },
+    {
+        "title": "微型USB1",
+        "name": "usb-micro-one"
+    },
+    {
+        "title": "微型USB2",
+        "name": "usb-micro-two"
+    },
+    {
+        "title": "数据接口",
+        "name": "usb-one"
+    },
+    {
+        "title": "TypeC",
+        "name": "usb-type-c"
+    },
+    {
+        "title": "吸尘器",
+        "name": "vacuum-cleaner"
+    },
+    {
+        "title": "摄像机1",
+        "name": "videocamera"
+    },
+    {
+        "title": "摄像机2",
+        "name": "videocamera-one"
+    },
+    {
+        "title": "虚拟现实眼镜",
+        "name": "virtual-reality-glasses"
+    },
+    {
+        "title": "VR 眼镜",
+        "name": "vr-glasses"
+    },
+    {
+        "title": "洗衣机",
+        "name": "washing-machine"
+    },
+    {
+        "title": "洗衣机1",
+        "name": "washing-machine-one"
+    },
+    {
+        "title": "手表",
+        "name": "watch-one"
+    },
+    {
+        "title": "网络摄像头",
+        "name": "webcam"
+    },
+    {
+        "title": "按键零",
+        "name": "zero-key"
+    }
+]

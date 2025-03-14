@@ -1,3 +1,5 @@
+import { guid } from "./guid";
+
 /**
  * 获取文件大小描述
  * @param limitSize 文件大小 (单位: KB)
@@ -78,4 +80,33 @@ export const isImageReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(jpg|jpeg|png|gif
  */
 export async function delayPromise(ms = 2000, res?: Promise<any>): Promise<any> {
     return await new Promise((resolve) => setTimeout(() => resolve(res), ms));
+}
+
+/**
+ * 加载脚本
+ * @param dom 元素
+ * @param param 参数
+ * @returns 加载后的 Promise
+ */
+export function loadScript(dom: HTMLElement, param: { title: string; source: string }) {
+    const { title, source } = param;
+    const useId = title + guid();
+    return new Promise<{ id: string; source: string }>((res, rej) => {
+        if (!source || !dom) return rej(new Error("load script error: source or dom is null"));
+
+        if (document.querySelector("#" + useId)) {
+            return res({ id: useId, source: param.source });
+        }
+
+        const script = document.createElement("script");
+        script.src = source;
+        script.id = useId;
+        script.onload = () => {
+            return res({ id: useId, source: param.source });
+        };
+        script.onerror = () => {
+            return rej(new Error("load script error：" + param.source));
+        };
+        dom.appendChild(script);
+    });
 }

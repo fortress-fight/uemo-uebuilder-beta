@@ -1,0 +1,230 @@
+[
+    {
+        "title": "声波",
+        "name": "acoustic"
+    },
+    {
+        "title": "添加音乐",
+        "name": "add-music"
+    },
+    {
+        "title": "AirPods",
+        "name": "airpods"
+    },
+    {
+        "title": "上课铃",
+        "name": "bell-ring"
+    },
+    {
+        "title": "轮播视频",
+        "name": "carousel-video"
+    },
+    {
+        "title": "关闭提醒",
+        "name": "close-remind"
+    },
+    {
+        "title": "收藏音乐",
+        "name": "collection-records"
+    },
+    {
+        "title": "关注",
+        "name": "concern"
+    },
+    {
+        "title": "娱乐",
+        "name": "entertainment"
+    },
+    {
+        "title": "胶片",
+        "name": "film"
+    },
+    {
+        "title": "电台",
+        "name": "fm"
+    },
+    {
+        "title": "耳机声音",
+        "name": "headphone-sound"
+    },
+    {
+        "title": "耳机",
+        "name": "headset"
+    },
+    {
+        "title": "耳机",
+        "name": "headset-one"
+    },
+    {
+        "title": "添加列表",
+        "name": "list-add"
+    },
+    {
+        "title": "摄像",
+        "name": "monitor"
+    },
+    {
+        "title": "关闭摄像",
+        "name": "monitor-off"
+    },
+    {
+        "title": "音波控制",
+        "name": "monitor-two"
+    },
+    {
+        "title": "电影",
+        "name": "movie"
+    },
+    {
+        "title": "影视板",
+        "name": "movie-board"
+    },
+    {
+        "title": "音乐",
+        "name": "music"
+    },
+    {
+        "title": "音乐cd",
+        "name": "music-cd"
+    },
+    {
+        "title": "音乐菜单",
+        "name": "music-list"
+    },
+    {
+        "title": "音乐菜单",
+        "name": "music-menu"
+    },
+    {
+        "title": "音乐",
+        "name": "music-one"
+    },
+    {
+        "title": "音乐律动",
+        "name": "music-rhythm"
+    },
+    {
+        "title": "静音",
+        "name": "mute"
+    },
+    {
+        "title": "暂停",
+        "name": "pause"
+    },
+    {
+        "title": "暂停",
+        "name": "pause-one"
+    },
+    {
+        "title": "演出",
+        "name": "performance"
+    },
+    {
+        "title": "钢琴",
+        "name": "piano"
+    },
+    {
+        "title": "播放",
+        "name": "play"
+    },
+    {
+        "title": "播放",
+        "name": "play-one"
+    },
+    {
+        "title": "播放出错",
+        "name": "play-wrong"
+    },
+    {
+        "title": "播放进度",
+        "name": "playback-progress"
+    },
+    {
+        "title": "幻灯片",
+        "name": "ppt"
+    },
+    {
+        "title": "唱片集",
+        "name": "record"
+    },
+    {
+        "title": "光盘",
+        "name": "record-disc"
+    },
+    {
+        "title": "提醒",
+        "name": "remind"
+    },
+    {
+        "title": "无效提醒",
+        "name": "remind-disable"
+    },
+    {
+        "title": "播放5次",
+        "name": "replay-five"
+    },
+    {
+        "title": "重新播放",
+        "name": "replay-music"
+    },
+    {
+        "title": "信号强度",
+        "name": "signal-strength"
+    },
+    {
+        "title": "音波",
+        "name": "sound-wave"
+    },
+    {
+        "title": "磁带",
+        "name": "tape"
+    },
+    {
+        "title": "视频",
+        "name": "video"
+    },
+    {
+        "title": "录音",
+        "name": "voice"
+    },
+    {
+        "title": "关闭录音",
+        "name": "voice-off"
+    },
+    {
+        "title": "声音",
+        "name": "voice-one"
+    },
+    {
+        "title": "语音信息",
+        "name": "voicemail"
+    },
+    {
+        "title": "音量减小",
+        "name": "volume-down"
+    },
+    {
+        "title": "静音",
+        "name": "volume-mute"
+    },
+    {
+        "title": "声音-大",
+        "name": "volume-notice"
+    },
+    {
+        "title": "声音-小",
+        "name": "volume-small"
+    },
+    {
+        "title": "音量增大",
+        "name": "volume-up"
+    },
+    {
+        "title": "左音波",
+        "name": "waves-left"
+    },
+    {
+        "title": "右音波",
+        "name": "waves-right"
+    }
+]

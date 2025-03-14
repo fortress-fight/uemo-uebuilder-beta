@@ -1,0 +1,150 @@
+[
+    {
+        "title": "生气",
+        "name": "angry-face"
+    },
+    {
+        "title": "圆嘴",
+        "name": "anguished-face"
+    },
+    {
+        "title": "张大嘴",
+        "name": "astonished-face"
+    },
+    {
+        "title": "抿嘴闭眼",
+        "name": "confounded-face"
+    },
+    {
+        "title": "别嘴",
+        "name": "confused-face"
+    },
+    {
+        "title": "失落",
+        "name": "disappointed-face"
+    },
+    {
+        "title": "闭眼生气",
+        "name": "distraught-face"
+    },
+    {
+        "title": "张嘴晕",
+        "name": "dizzy-face"
+    },
+    {
+        "title": "开心",
+        "name": "emotion-happy"
+    },
+    {
+        "title": "不开心",
+        "name": "emotion-unhappy"
+    },
+    {
+        "title": "无语脸",
+        "name": "expressionless-face"
+    },
+    {
+        "title": "大眼笑",
+        "name": "face-with-smiling-open-eyes"
+    },
+    {
+        "title": "无嘴脸",
+        "name": "face-without-mouth"
+    },
+    {
+        "title": "别嘴生气",
+        "name": "frowning-face-whit-open-mouth"
+    },
+    {
+        "title": "呲牙张嘴",
+        "name": "grimacing-face"
+    },
+    {
+        "title": "开心",
+        "name": "grinning-face"
+    },
+    {
+        "title": "张嘴笑",
+        "name": "grinning-face-with-open-mouth"
+    },
+    {
+        "title": "笑眯眼",
+        "name": "grinning-face-with-squinting-eyes"
+    },
+    {
+        "title": "闭眼笑",
+        "name": "grinning-face-with-tightly-closed-eyes"
+    },
+    {
+        "title": "张嘴闭眼笑",
+        "name": "grinning-face-with-tightly-closed-eyes-open-mouth"
+    },
+    {
+        "title": "哭",
+        "name": "loudly-crying-face"
+    },
+    {
+        "title": "张嘴哭",
+        "name": "loudly-crying-face-whit-open-mouth"
+    },
+    {
+        "title": "正常标签",
+        "name": "neutral-face"
+    },
+    {
+        "title": "愤怒",
+        "name": "pouting-face"
+    },
+    {
+        "title": "笑眯眼",
+        "name": "relieved-face"
+    },
+    {
+        "title": "轻微沮丧",
+        "name": "slightly-frowning-face-whit-open-mouth"
+    },
+    {
+        "title": "微笑",
+        "name": "slightly-smiling-face"
+    },
+    {
+        "title": "囧笑",
+        "name": "sly-face-whit-smile"
+    },
+    {
+        "title": "笑脸",
+        "name": "smiling-face"
+    },
+    {
+        "title": "笑眯眼",
+        "name": "smiling-face-with-squinting-eyes"
+    },
+    {
+        "title": "惊讶张嘴",
+        "name": "surprised-face-with-open-big-mouth"
+    },
+    {
+        "title": "惊讶",
+        "name": "surprised-face-with-open-mouth"
+    },
+    {
+        "title": "翻转笑脸",
+        "name": "upside-down-face"
+    },
+    {
+        "title": "沮丧",
+        "name": "weary-face"
+    },
+    {
+        "title": "眨眼睛",
+        "name": "winking-face"
+    },
+    {
+        "title": "眨一个眼睛",
+        "name": "winking-face-with-open-eyes"
+    },
+    {
+        "title": "担心",
+        "name": "worried-face"
+    }
+]
