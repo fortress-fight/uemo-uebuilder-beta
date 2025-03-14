@@ -6,6 +6,9 @@ import { i18n } from "@/i18n";
 
 export function install(app: App) {
     app.config.globalProperties.$ueElError = <T = undefined>(error: Error, callback?: (error: Error) => T): T => {
+        if (!error) {
+            return callback?.(error) as T;
+        }
         if (!(error instanceof UeError)) {
             if (error instanceof Error) {
                 console.error(error);
