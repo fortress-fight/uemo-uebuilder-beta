@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:27:20
+ * @LastEditTime: 2025-03-15 16:33:09
 -->
 <template>
     <div
@@ -40,6 +40,15 @@
                     class="flex justify-center items-center"
                 >
                     <UeElIcon
+                        v-if="value"
+                        :size="15"
+                        :class="$style['ic']"
+                        class="justify-center cursor-pointer"
+                        name="icon-app-remove-14"
+                        @click="clear"
+                    />
+                    <UeElIcon
+                        v-else
                         :size="15"
                         :class="$style['ic']"
                         class="justify-center cursor-pointer"
@@ -72,6 +81,10 @@ const hasSlotComponent = computed<boolean>(() => {
 });
 
 const inputDom = ref<HTMLInputElement>();
+
+function clear() {
+    emit("confirm", "");
+}
 
 const labelParam = computed<UE_EL_UTIL.LabelOption>(() => {
     return prop.label ? { content: prop.label, delay: [1000, null], offset: [0, 10] } : undefined;
