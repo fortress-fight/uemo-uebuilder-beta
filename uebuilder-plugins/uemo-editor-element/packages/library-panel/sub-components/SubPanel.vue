@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 16:53:16
+ * @LastEditTime: 2025-03-15 17:20:06
 -->
 <template>
     <div v-if="search" :class="$style['search-input-wrapper']">
@@ -32,7 +32,7 @@
                             :key="index"
                             @click="updateLocalActiveCategory(item.value)"
                         >
-                            <span class="text">{{ item.name }}</span>
+                            <span class="text" :title="item.name">{{ item.name }}</span>
                         </div>
                     </div>
                 </div>
