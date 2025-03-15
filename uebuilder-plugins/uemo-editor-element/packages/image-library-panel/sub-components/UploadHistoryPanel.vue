@@ -13,20 +13,21 @@
             <UeElLoading v-if="loading" type="circle" />
             <div v-if="imageList.length" :class="$style['image-list']">
                 <div ref="resultListDom" :class="$style['result-list']" class="grid grid-cols-2">
-                    <div
+                    <UeElSelectBox
                         v-for="(item, index) in imageList"
-                        ref="resultItemsDom"
                         :key="index"
-                        :class="$style['result-item']"
-                        class="cursor-pointer"
-                        :data-select="item.isActive"
-                        @click="select = item.url"
+                        :select="item.isActive"
+                        :width="100"
+                        :height="60"
+                        @trigger="select = item.url"
                     >
-                        <div :class="$style['image-box']">
+                        <div :class="$style['image-box']" class="h-full flex items-center justify-center">
                             <img :src="item.url" alt="" />
                         </div>
-                        <div :class="$style['image-title']">{{ item.title }}</div>
-                    </div>
+                        <template #footer>
+                            <div :class="$style['image-title']">{{ item.title }}</div>
+                        </template>
+                    </UeElSelectBox>
                 </div>
                 <UeElButton
                     v-if="!isEnd"
@@ -44,6 +45,8 @@
     <UeElEmptyPanel v-else description="未开通上传历史功能" />
 </template>
 <script lang="ts" setup>
+import UeElSelectBox from "../../library-panel/sub-components/SelectBox.vue";
+
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const select = defineModel<string>("select", { required: false });
@@ -145,39 +148,11 @@ onBeforeMount(() => {
 
         content: "";
     }
-}
-.btn--add-more {
-    margin-top: 10px;
-
-    color: color(var(--ue-font-color));
-}
-.empty-area {
-    color: color(var(--ue-font-color));
-}
-.search-result {
-    min-height: 300px;
-}
-.result-item {
-    border-radius: 4px;
-    &[data-select="true"] {
-        .image-box {
-            &::after {
-                box-shadow: inset 0 0 0 4px var(--editor-color-text), inset 0 0 0 7px #fff;
-            }
-        }
-    }
     .image-box {
-        @include image-placeholder(100px, 60px);
         width: 100%;
 
         border-radius: 4px;
         background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTUyOUU2MTAwNjczMTFFOEE1MEQ5RTI4RUQzQzJBNTUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTUyOUU2MTEwNjczMTFFOEE1MEQ5RTI4RUQzQzJBNTUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFNTI5RTYwRTA2NzMxMUU4QTUwRDlFMjhFRDNDMkE1NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNTI5RTYwRjA2NzMxMUU4QTUwRDlFMjhFRDNDMkE1NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuLRCmkAAAAqSURBVHjaYvz//z8DNnD27Fms4kwMJIJRDcQAFlzhbWxsPBpK9NMAEGAA+cQIhpHCLJEAAAAASUVORK5CYII=");
-        &::before {
-            @include ab-cover;
-            content: "";
-
-            background-color: rgba(#000, 0.1);
-        }
         img {
             right: 0;
             bottom: 0;
@@ -193,5 +168,16 @@ onBeforeMount(() => {
 
         color: var(--c-gray-40);
     }
+}
+.btn--add-more {
+    margin-top: 10px;
+
+    color: color(var(--ue-font-color));
+}
+.empty-area {
+    color: color(var(--ue-font-color));
+}
+.search-result {
+    min-height: 300px;
 }
 </style>

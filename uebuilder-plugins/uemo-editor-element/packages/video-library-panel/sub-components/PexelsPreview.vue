@@ -1,35 +1,38 @@
 <template>
-    <div
-        class="cursor-pointer"
-        ref="rootDom"
+    <UeElSelectBox
+        :width="data.width"
+        :height="data.height"
         :class="$style['pexels-preview']"
-        :data-select="data.links.includes(select || '')"
-        @click="useVideoLink($event, data)"
+        ref="rootDom"
+        @trigger="useVideoLink($event, data)"
+        :select="data.links.includes(select || '')"
     >
-        <div :class="$style['item-box']" :style="{ '--width': data.width, '--height': data.height }">
-            <video
-                loop
-                muted
-                playsinline
-                preload="none"
-                :poster="data.thumb"
-                :src="data.link"
-                @pointerout="stop"
-                @pointerover="play"
-            />
-        </div>
-        <div :class="$style['author']">
-            by
-            <a target="_blank" :href="data.userUrl">{{ data.userName }}</a>
-            on Pexels
-        </div>
-    </div>
+        <video
+            loop
+            muted
+            playsinline
+            preload="none"
+            :poster="data.thumb"
+            :src="data.link"
+            @pointerout="stop"
+            @pointerover="play"
+        />
+        <template #footer>
+            <div :class="$style['author']">
+                by
+                <a target="_blank" :href="data.userUrl">{{ data.userName }}</a>
+                on Pexels
+            </div>
+        </template>
+    </UeElSelectBox>
     <UeElPopPanel v-model:open="optionIsOpen" :panel="popPanelParams">
         <UeElSelectOption :list="selectOptions" :value="select" @change="selectVideo" />
     </UeElPopPanel>
 </template>
 <script lang="ts" setup>
 import type { PEXELS_VIDEO } from "../index";
+
+import UeElSelectBox from "../../library-panel/sub-components/SelectBox.vue";
 
 const { t } = useI18n();
 const _prop = defineProps<{ data: PEXELS_VIDEO; select?: string }>();
@@ -70,7 +73,7 @@ const qTr = computed(() => ({
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => ({
     position: {
-        refEl: rootDomRef.value as HTMLElement,
+        refEl: rootDomRef.value?.$el as HTMLElement,
         options: {
             placement: "right-start",
             middleware: [
@@ -110,49 +113,20 @@ onBeforeUnmount(() => {
 .pexels-preview {
     width: calc(50% - 5px);
     margin-bottom: 10px;
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
 
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        .item-box {
-            &::before {
-                box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-            }
-        }
-    }
-    .item-box {
-        position: relative;
+        width: 100%;
+        height: 100%;
 
-        overflow: hidden;
-
-        border-radius: var(--ue-border-radius--lv1);
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-        &::before {
-            @include ab-cover;
-            z-index: 10;
-
-            content: "";
-            pointer-events: none;
-        }
-        &::after {
-            display: block;
-
-            padding-bottom: calc(100% * (var(--height) / var(--width)));
-
-            content: "";
-            pointer-events: none;
-        }
+        object-fit: cover;
     }
 }
 .author {
+    font-size: 12px;
+
     margin-top: 3px;
 
     color: color(var(--ue-font-color));

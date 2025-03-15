@@ -1,25 +1,25 @@
 <!--
  * @Description: 文字装饰资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:55:29
+ * @LastEditTime: 2025-03-15 19:17:39
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
         <template #textDecorationLib>
             <UeElLoading v-if="loading" />
             <div :class="$style['library-list']" class="grid grid-cols-3 gap-2" v-if="!!list">
-                <div
+                <UeElSelectBox
                     v-for="(item, index) in list"
                     :key="index"
-                    :class="$style['library-item']"
-                    class="cursor-pointer"
-                    :data-select="select === item.name"
-                    @click="select = item.name"
+                    :select="select === item.name"
+                    :width="320"
+                    :height="161"
+                    @trigger="select = item.name"
                 >
                     <div :class="$style['thumb-box']">
                         <img :src="item.thumb" />
                     </div>
-                </div>
+                </UeElSelectBox>
             </div>
             <div v-else>
                 <UeElEmptyPanel :description="t('TEXT_DECORATION_LIBRARY_TIP_EMPTY')" />
@@ -29,6 +29,8 @@
 </template>
 <script lang="ts" setup>
 import type { UeElTextDecorationLibraryPanelBaseProps } from "./index";
+
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 
 defineOptions({ name: "UeElTextDecorationLibraryPanel" });
 
@@ -79,36 +81,5 @@ onBeforeMount(() => {
 <style lang="scss" module>
 .text-decoration-library-panel {
     //
-}
-.library-item {
-    width: 100%;
-
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        .thumb-box {
-            &::before {
-                box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-            }
-        }
-    }
-    .thumb-box {
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-        &::before {
-            @include ab-cover;
-            z-index: 10;
-
-            content: "";
-            pointer-events: none;
-
-            border-radius: var(--ue-border-radius--lv1);
-            box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
-        }
-    }
 }
 </style>

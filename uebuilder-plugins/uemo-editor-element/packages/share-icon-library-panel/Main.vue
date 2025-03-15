@@ -1,28 +1,28 @@
 <!--
  * @Description: 社交分享资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:53:03
+ * @LastEditTime: 2025-03-15 19:31:08
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
         <template #ShareLibList>
             <UeElLoading v-if="loading" />
             <div :class="$style['library-list']" class="grid grid-cols-4 gap-2" v-if="!!list">
-                <template v-for="item in list">
-                    <div
-                        v-for="iconClass in item.icon"
-                        :key="iconClass"
-                        :class="$style['library-item']"
-                        class="cursor-pointer"
-                        :data-select="iconClass == select"
-                        @click="select = iconClass"
-                    >
-                        <div :class="$style['thumb-box']" class="flex justify-center items-center">
-                            <i class="ue-share" :class="item.icon"></i>
+                <UeElSelectBox
+                    v-for="iconClass in list"
+                    :key="iconClass.name"
+                    :select="select === iconClass.name"
+                    :width="80"
+                    :height="90"
+                    @trigger="select = iconClass.name"
+                >
+                    <div :class="$style['library-item']" class="h-full flex flex-col">
+                        <div :class="$style['thumb-box']" class="flex justify-center items-center h-full">
+                            <i class="ue-share" :class="iconClass.icon"></i>
                         </div>
-                        <div :class="$style['icon-name']" class="text-center">{{ item.name }}</div>
+                        <div :class="$style['icon-name']" class="text-center">{{ iconClass.name }}</div>
                     </div>
-                </template>
+                </UeElSelectBox>
             </div>
             <div v-else>
                 <UeElEmptyPanel :description="t('SHARE_ICON_LIBRARY_TIP_EMPTY')" />
@@ -32,6 +32,8 @@
 </template>
 <script lang="ts" setup>
 import type { UeElShareIconLibraryPanelBaseProps } from "./index";
+
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 
 defineOptions({ name: "UeElShareIconLibraryPanel" });
 
@@ -83,39 +85,9 @@ onBeforeMount(() => {
 
     overflow: hidden;
 
-    padding-bottom: 10px;
-
-    border-radius: var(--ue-border-radius--lv1);
-    &:hover {
-        background-color: color(var(--ue-background-color));
-    }
-    &[data-select="true"] {
-        background-color: transparent;
-        &::before {
-            box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-        }
-    }
+    padding: 8px 0;
     .thumb-box {
-        @include space-placeholder(100, 80, 100%);
-        font-size: 28px;
-
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-    }
-    &::before {
-        @include ab-cover;
-        z-index: 10;
-
-        content: "";
-        pointer-events: none;
-
-        border-radius: var(--ue-border-radius--lv1);
-        box-shadow: inset 0 0 0 0 color(var(--ue-border-color));
+        font-size: 26px;
     }
 }
 </style>

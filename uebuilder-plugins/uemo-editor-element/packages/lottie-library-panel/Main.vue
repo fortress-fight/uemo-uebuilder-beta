@@ -1,7 +1,7 @@
 <!--
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 17:02:51
+ * @LastEditTime: 2025-03-15 18:55:39
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -12,18 +12,14 @@
                 v-if="getLottieList(activeCategory).length > 0"
                 :class="[$style['library-list'], activeCategory === 'icon' ? 'grid-cols-3' : 'grid-cols-2']"
             >
-                <div
-                    class="cursor-pointer"
+                <UeElSelectBox
                     v-for="item in getLottieList(activeCategory)"
-                    :class="$style['library-item']"
-                    :data-select="select === item.url"
                     :key="item.url"
-                    @click="selectLottie(item.url)"
+                    :select="select === item.url"
+                    @trigger="selectLottie(item.url)"
                 >
-                    <div :class="$style['thumb-box']">
-                        <LottiePreview :size="lottieLib?.[activeCategory].size" :url="item.url" />
-                    </div>
-                </div>
+                    <LottiePreview :size="lottieLib?.[activeCategory].size" :url="item.url" />
+                </UeElSelectBox>
             </div>
             <div v-else>
                 <UeElEmptyPanel :description="t('LOTTIE_LIBRARY_TIP_EMPTY')" />
@@ -49,6 +45,8 @@
 import type { UeElLottieLibraryPanelBaseProps } from "./index";
 
 import { isLottieReg } from "@stone/uemo-editor-utils/lib/utils";
+
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 import LottiePreview from "./sub-components/LottiePreview.vue";
 
 defineOptions({ name: "UeElLottieLibraryPanel" });
@@ -202,37 +200,5 @@ onBeforeMount(() => {
 <style lang="scss" module>
 .lottie-library-panel {
     //
-}
-.library-item {
-    width: 100%;
-
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        .thumb-box {
-            &::before {
-                box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-            }
-        }
-    }
-    .thumb-box {
-        @include image-placeholder-v4(300, 300);
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-        &::before {
-            @include ab-cover;
-            z-index: 10;
-
-            content: "";
-            pointer-events: none;
-
-            border-radius: var(--ue-border-radius--lv1);
-            box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
-        }
-    }
 }
 </style>

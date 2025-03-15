@@ -1,24 +1,23 @@
 <!--
  * @Description: 按钮 hover 动效库
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 17:36:38
+ * @LastEditTime: 2025-03-15 22:11:15
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
         <template #buttonHoverEffectLibList>
             <div :class="$style['library-list']" class="grid grid-cols-2 gap-2">
-                <div
+                <UeElSelectBox
                     v-for="item in list"
                     :key="item.value"
-                    :class="$style['library-item']"
-                    class="cursor-pointer"
-                    :data-select="item.value == select"
-                    @click="select = item.value"
+                    :select="select === item.value"
+                    :auto-height="true"
+                    @trigger="select = item.value"
                 >
-                    <div :class="$style['thumb-box']">
+                    <div :class="$style['library-item']">
                         <PreviewButton v-bind="item" />
                     </div>
-                </div>
+                </UeElSelectBox>
             </div>
         </template>
     </UeElLibraryPanel>
@@ -27,6 +26,7 @@
 import type { UeElButtonHoverEffectLibraryPanelBaseProps } from "./index";
 
 import PreviewButton from "./sub-components/PreviewButton.vue";
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 
 defineOptions({ name: "UeElButtonHoverEffectLibraryPanel" });
 
@@ -57,38 +57,5 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
 <style lang="scss" module>
 .button-hover-effect-library-panel {
     //
-}
-.library-item {
-    position: relative;
-
-    overflow: hidden;
-
-    padding: calc(var(--ue-editor-row-space--lv1) + 0.5em) var(--ue-editor-row-space--lv1);
-
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        &::before {
-            box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-        }
-    }
-    .thumb-box {
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-    }
-    &::before {
-        @include ab-cover;
-        z-index: 10;
-
-        content: "";
-        pointer-events: none;
-
-        border-radius: var(--ue-border-radius--lv1);
-        box-shadow: inset 0 0 0 1px rgba(var(--ue-border-color), 1);
-    }
 }
 </style>

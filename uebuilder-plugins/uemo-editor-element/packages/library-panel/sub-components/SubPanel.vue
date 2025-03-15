@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 17:20:06
+ * @LastEditTime: 2025-03-15 22:40:05
 -->
 <template>
     <div v-if="search" :class="$style['search-input-wrapper']">
@@ -128,6 +128,9 @@ defineExpose({ scrollTo });
     padding: 0 20px;
 
     gap: var(--ue-editor-row-space--lv3);
+}
+.category-list {
+    grid-auto-rows: max-content;
 }
 .category-area {
     font-size: 12px;

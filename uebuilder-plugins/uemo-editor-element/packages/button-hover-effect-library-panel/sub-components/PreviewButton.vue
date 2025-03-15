@@ -56,12 +56,14 @@ defineProps<ResourceButtonHoverEffectItemType>();
 
     position: relative;
 
+    // padding: calc(var(--ue-editor-row-space--lv1) + 0.5em) var(--ue-editor-row-space--lv1);
+
     background-color: color(var(--ue-background-color));
     .button-box {
         @include ab-cover;
     }
     .button-preview {
-        min-width: 90%;
+        min-width: 86%;
         padding: 10px 20px;
 
         color: #fff;

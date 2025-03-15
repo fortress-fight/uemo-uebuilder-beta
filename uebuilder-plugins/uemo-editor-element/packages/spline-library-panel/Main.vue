@@ -1,25 +1,21 @@
 <!--
  * @Description: spline资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:50:37
+ * @LastEditTime: 2025-03-15 19:19:34
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
         <template #splineLibList>
             <UeElLoading v-if="loading" />
             <div :class="$style['library-list']" class="grid grid-cols-2 gap-2" v-if="!!list">
-                <div
+                <UeElSelectBox
                     v-for="(item, index) in list"
                     :key="index"
-                    :class="$style['library-item']"
-                    class="cursor-pointer"
-                    :data-select="select === item.url"
-                    @click="selectSpline(item.url)"
+                    :select="select === item.url"
+                    @trigger="selectSpline(item.url)"
                 >
-                    <div :class="$style['thumb-box']">
-                        <img :src="item.poster" />
-                    </div>
-                </div>
+                    <img :src="item.poster" />
+                </UeElSelectBox>
             </div>
             <div v-else>
                 <UeElEmptyPanel :description="t('SPLINE_LIBRARY_TIP_EMPTY')" />
@@ -41,6 +37,8 @@
 <script lang="ts" setup>
 import type { UeElSplineLibraryPanelBaseProps } from "./index";
 import { isSplineReg } from "@stone/uemo-editor-utils/lib/utils";
+
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 
 defineOptions({ name: "UeElSplineLibraryPanel" });
 
@@ -144,37 +142,5 @@ onBeforeMount(() => {
 <style lang="scss" module>
 .library-list {
     //
-}
-.library-item {
-    width: 100%;
-
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        .thumb-box {
-            &::before {
-                box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-            }
-        }
-    }
-    .thumb-box {
-        @include image-placeholder-v4(300, 300);
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-        &::before {
-            @include ab-cover;
-            z-index: 10;
-
-            content: "";
-            pointer-events: none;
-
-            border-radius: var(--ue-border-radius--lv1);
-            box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
-        }
-    }
 }
 </style>

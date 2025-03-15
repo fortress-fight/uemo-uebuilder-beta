@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 16:19:03
+ * @LastEditTime: 2025-03-15 19:17:06
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -69,7 +69,7 @@ const prop = withDefaults(defineProps<UeElLibraryPanelBaseProps>(), {
     loading: false,
     theme: "theme-1",
     draggable: true,
-    minHeight: "50px",
+    minHeight: "150px",
     maxHeight: "500px",
 });
 const emit = defineEmits<{ (e: "error", param: { type: "tabError"; data: string }): void }>();

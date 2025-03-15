@@ -1,25 +1,23 @@
 <!--
  * @Description: 图形资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:42:05
+ * @LastEditTime: 2025-03-15 22:09:16
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
         <template #shapeLibList>
             <UeElLoading v-if="loading" />
             <div :class="$style['library-list']" class="grid grid-cols-2 gap-2" v-if="!!list">
-                <div
+                <UeElSelectBox
                     v-for="(item, index) in list"
                     :key="index"
-                    :class="$style['library-item']"
-                    class="cursor-pointer"
-                    :data-select="select === item.name"
-                    @click="select = item.name"
+                    :select="select === item.name"
+                    :width="150"
+                    :height="100"
+                    @trigger="select = item.name"
                 >
-                    <div :class="$style['thumb-box']">
-                        <img :src="item.thumb" />
-                    </div>
-                </div>
+                    <img class="w-full" :src="item.thumb" />
+                </UeElSelectBox>
             </div>
             <div v-else>
                 <UeElEmptyPanel :description="t('SHAPE_LIBRARY_TIP_EMPTY')" />
@@ -29,6 +27,8 @@
 </template>
 <script lang="ts" setup>
 import type { UeElShapeLibraryPanelBaseProps } from "./index";
+
+import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
 
 defineOptions({ name: "UeElShapeLibraryPanel" });
 
@@ -71,37 +71,5 @@ onBeforeMount(() => {
 <style lang="scss" module>
 .library-list {
     //
-}
-.library-item {
-    width: 100%;
-
-    border-radius: var(--ue-border-radius--lv1);
-    &[data-select="true"] {
-        .thumb-box {
-            &::before {
-                box-shadow: inset 0 0 0 4px color(var(--ue-border-color--deeper)), inset 0 0 0 7px #fff;
-            }
-        }
-    }
-    .thumb-box {
-        @include image-placeholder-v4(150, 100);
-        position: relative;
-
-        overflow: hidden;
-
-        max-width: 100%;
-
-        border-radius: var(--ue-border-radius--lv1);
-        &::before {
-            @include ab-cover;
-            z-index: 10;
-
-            content: "";
-            pointer-events: none;
-
-            border-radius: var(--ue-border-radius--lv1);
-            box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
-        }
-    }
 }
 </style>
