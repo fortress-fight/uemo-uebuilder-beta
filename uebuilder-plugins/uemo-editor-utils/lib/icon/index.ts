@@ -37,7 +37,7 @@ export function loadSvgIcon(sources: string[] = []) {
     function loadIcon() {
         return Promise.all(loadFile.map((item) => loadScript(document.body, item)))
             .then(() => {
-                $("iconpark-icon").each((_i, dom) => {
+                document.querySelectorAll("iconpark-icon").forEach((dom) => {
                     (dom as any)?.update?.();
                 });
             })
