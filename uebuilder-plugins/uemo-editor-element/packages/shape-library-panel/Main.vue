@@ -1,7 +1,7 @@
 <!--
  * @Description: 图形资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 22:09:16
+ * @LastEditTime: 2025-03-16 01:33:34
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -20,7 +20,7 @@
                 </UeElSelectBox>
             </div>
             <div v-else>
-                <UeElEmptyPanel :description="t('SHAPE_LIBRARY_TIP_EMPTY')" />
+                <UeElEmptyPanel :description="t('UNIT_SEARCH_EMPTY')" />
             </div>
         </template>
     </UeElLibraryPanel>

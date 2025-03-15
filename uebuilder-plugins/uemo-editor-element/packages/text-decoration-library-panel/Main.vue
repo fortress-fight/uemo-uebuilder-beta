@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 19:17:39
+ * @LastEditTime: 2025-03-16 01:34:17
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -22,7 +22,7 @@
                 </UeElSelectBox>
             </div>
             <div v-else>
-                <UeElEmptyPanel :description="t('TEXT_DECORATION_LIBRARY_TIP_EMPTY')" />
+                <UeElEmptyPanel :description="t('UNIT_SEARCH_EMPTY')" />
             </div>
         </template>
     </UeElLibraryPanel>

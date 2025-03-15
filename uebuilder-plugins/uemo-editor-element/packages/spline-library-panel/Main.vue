@@ -1,7 +1,7 @@
 <!--
  * @Description: spline资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 19:19:34
+ * @LastEditTime: 2025-03-16 01:34:03
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -18,7 +18,7 @@
                 </UeElSelectBox>
             </div>
             <div v-else>
-                <UeElEmptyPanel :description="t('SPLINE_LIBRARY_TIP_EMPTY')" />
+                <UeElEmptyPanel :description="t('UNIT_SEARCH_EMPTY')" />
             </div>
         </template>
         <template #splineLink>

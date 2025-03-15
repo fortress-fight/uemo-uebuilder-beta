@@ -42,7 +42,7 @@
             <UeElEmptyPanel v-else :description="t('UNIT_SEARCH_EMPTY')" />
         </div>
     </template>
-    <UeElEmptyPanel v-else description="未开通上传历史功能" />
+    <UeElEmptyPanel v-else :description="t('UPLOAD_IMG_HISTORY_NOT_SUPPORT')" />
 </template>
 <script lang="ts" setup>
 import UeElSelectBox from "../../library-panel/sub-components/SelectBox.vue";
@@ -84,7 +84,7 @@ const imageList = computed<{ url: string; title: string; isActive?: boolean }[]>
 
 function getImageHistoryList(type: "replace" | "add" = "replace") {
     if (!fileUploadHistory?.config) {
-        instance?.proxy?.$ueElToast.error("缺少历史记录相关配置");
+        instance?.proxy?.$ueElToast.error(t("UPLOAD_IMG_HISTORY_CONFIG_ERROR"));
         return;
     }
 
@@ -102,7 +102,7 @@ function getImageHistoryList(type: "replace" | "add" = "replace") {
             type: "image",
         })
         .then((res) => {
-            if (!res) return Promise.reject(new Error("获取图片列表失败"));
+            if (!res) return Promise.reject(new Error(t("UPLOAD_IMG_HISTORY_GET_LIST_FAILED")));
 
             if (type === "replace") {
                 imageHistoryList.value = res.data.list;

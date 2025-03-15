@@ -145,6 +145,9 @@
     "UPLOAD_IMG_TIP_1": "建议压缩后再上传，推荐使用<a data-link-type=\"tip\" href=\"https://tinypng.com\" target=\"_blank\">TinyPNG</a>",
     "UPLOAD_IMG_TIP_2": "请上传图片文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
     "UPLOAD_IMG_HISTORY_TITLE": "资源",
+    "UPLOAD_IMG_HISTORY_NOT_SUPPORT": "未开通上传历史功能",
+    "UPLOAD_IMG_HISTORY_CONFIG_ERROR": "缺少历史记录相关配置",
+    "UPLOAD_IMG_HISTORY_GET_LIST_FAILED": "获取图片列表失败",
 
     "UPLOAD_VIDEO_TITLE": "上传视频",
     "UPLOAD_VIDEO_TIP_1": "请上传视频文件，文件大小不超过 <span data-ue-tip-color=\"red\">{size}</span>",
@@ -172,14 +175,11 @@
     "ERROR_UPLOAD_HISTORY_TYPE_ERROR": "获取已上传资源功能配置错误",
     "ERROR_UPLOAD_HISTORY_GET_LIST_FAILED": "获取已上传资源列表失败",
 
-    "SHAPE_LIBRARY_TIP_EMPTY": "未能获取到图形资源",
     "SHAPE_LIBRARY_TITLE": "图形库",
 
-    "SPLINE_LIBRARY_TIP_EMPTY": "未能获取到 Spline 资源",
     "SPLINE_LIBRARY_TITLE": "Spline库",
     "SPLINE_LIBRARY_LINK_TIP": "请输入 splinecode 文件链接",
 
-    "LOTTIE_LIBRARY_TIP_EMPTY": "未能获取到 Lottie 资源",
     "LOTTIE_LIBRARY_TITLE": "Lottie库",
     "LOTTIE_LIBRARY_LINK_TIP": "请输入 Lottie 文件链接",
 
@@ -213,14 +213,11 @@
     "IMAGE_AI_CHAT_CANCEL": "取消",
     "IMAGE_AI_CHAT_CLEAR": "清空聊天记录",
 
-    "TEXT_DECORATION_LIBRARY_TIP_EMPTY": "未能获取到文字装饰资源",
     "TEXT_DECORATION_LIBRARY_TITLE": "效果库",
 
-    "SHARE_ICON_LIBRARY_TIP_EMPTY": "未能获取到社交分享资源",
     "SHARE_ICON_LIBRARY_TITLE": "社交库",
 
     "ICON_LIBRARY_TITLE": "图标库",
-    "ICON_LIBRARY_TIP_EMPTY": "未能获取到图标资源",
     "ICON_LIBRARY_SEARCH_PLACEHOLDER": "搜索图标",
 
     "BUTTON_HOVER_EFFECT_LIBRARY_TITLE": "动效库",

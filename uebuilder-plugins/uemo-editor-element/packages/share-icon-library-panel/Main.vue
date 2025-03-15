@@ -1,7 +1,7 @@
 <!--
  * @Description: 社交分享资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 19:31:08
+ * @LastEditTime: 2025-03-16 01:33:48
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -25,7 +25,7 @@
                 </UeElSelectBox>
             </div>
             <div v-else>
-                <UeElEmptyPanel :description="t('SHARE_ICON_LIBRARY_TIP_EMPTY')" />
+                <UeElEmptyPanel :description="t('UNIT_SEARCH_EMPTY')" />
             </div>
         </template>
     </UeElLibraryPanel>
