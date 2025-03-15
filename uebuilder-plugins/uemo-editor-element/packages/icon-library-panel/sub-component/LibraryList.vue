@@ -1,22 +1,29 @@
 <template>
     <div class="relative h-full grid grid-cols-5 gap-1 items-start" :class="$style['library-list']">
         <UeElLoading v-if="loading || fuseReady" type="circle" />
-        <div
-            v-for="(item, index) in searchLibraryList || iconLibraryList"
-            :class="$style['library-list-item']"
-            :data-active="select?.name === item.name"
-            :key="index"
-            @click="useIcon(item.name)"
-        >
-            <div class="flex items-center justify-center" :class="$style['icon-box']" :label="item.name">
-                <iconpark-icon :key="item.name" :name="item.name" />
+        <template v-if="search && searchLibraryList?.length === 0">
+            <UeElEmptyPanel class="col-span-full" :description="t('UNIT_SEARCH_EMPTY')" />
+        </template>
+        <template v-else>
+            <div
+                v-for="(item, index) in searchLibraryList || iconLibraryList"
+                :class="$style['library-list-item']"
+                :data-active="select?.name === item.name"
+                :key="index"
+                @click="useIcon(item.name)"
+            >
+                <div class="flex items-center justify-center" :class="$style['icon-box']" :label="item.name">
+                    <iconpark-icon :key="item.name" :name="item.name" />
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 <script lang="ts" setup>
 import { loadSvgIcon } from "@stone/uemo-editor-utils/lib/icon";
 import { _flatten } from "@stone/uemo-editor-utils/lib/lodash";
+
+const { t } = useI18n();
 const instance = getCurrentInstance();
 const props = defineProps<{ search?: string; lib: UE_EL_UTIL.ResourceIconItem[]; source: string }>();
 const select = defineModel<{ name: string; source: string }>("select", { required: false });
@@ -80,7 +87,7 @@ async function initFuse() {
             const categoryResult = fuseResult.map((item) => item.item);
 
             if (categoryResult.length === 0) {
-                searchLibraryList.value = null;
+                searchLibraryList.value = [];
                 return;
             }
 
