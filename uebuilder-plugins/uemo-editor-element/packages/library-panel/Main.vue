@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 00:34:24
+ * @LastEditTime: 2025-03-15 16:19:03
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -37,10 +37,16 @@
                         ref="cardItems"
                         :max-height="maxHeight"
                         :min-height="minHeight"
+                        :search="item.search"
                         :category="item.category"
                     >
-                        <template #default="{ activeCategory, scrollTo }">
-                            <slot :name="item.name" :active-category="activeCategory" :scrollTo="scrollTo"></slot>
+                        <template #default="{ activeCategory, searchText, scrollTo }">
+                            <slot
+                                :name="item.name"
+                                :active-category="activeCategory"
+                                :search-text="searchText"
+                                :scrollTo="scrollTo"
+                            ></slot>
                         </template>
                     </SubPanel>
                 </template>

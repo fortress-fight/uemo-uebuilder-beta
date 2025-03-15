@@ -1,35 +1,36 @@
 <!--
  * @Description: 资源库面板内部组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 00:33:37
+ * @LastEditTime: 2025-03-15 16:53:16
 -->
 <template>
-    <div :class="$style['library-panel-group']" v-if="!category">
-        <div
-            ref="scrollBox"
-            :class="$style['group-inner']"
-            :style="{ minHeight: minHeight, maxHeight: maxHeight }"
-            class="grid items-start"
-        >
-            <slot :scrollTo="scrollTo"></slot>
+    <div v-if="search" :class="$style['search-input-wrapper']">
+        <UeElTextInput
+            padding-size="level4"
+            ref="imageInput"
+            sub-type="search"
+            theme="enterText"
+            :placeholder="search.placeholder"
+            :value="searchText"
+            @confirm="changeSearchText"
+        />
+    </div>
+    <div v-if="!category" :class="$style['library-panel-group']">
+        <div class="grid items-start" ref="scrollBox" :class="$style['group-inner']" :style="scrollBoxStyle">
+            <slot :scrollTo="scrollTo" :searchText="searchText" />
         </div>
     </div>
-    <div :class="$style['library-panel-group--wrapper']" class="grid min-h-0 items-start" v-else>
+    <div class="grid min-h-0" v-else :class="$style['library-panel-group--wrapper']">
         <div :class="$style['category-area']">
             <div :class="$style['library-panel-group']">
-                <div
-                    ref="categoryScrollBox"
-                    :class="$style['group-inner']"
-                    :style="{ minHeight: minHeight, maxHeight: maxHeight }"
-                    class="grid"
-                >
-                    <div :class="$style['category-list']" class="grid gap-1">
+                <div class="grid" ref="categoryScrollBox" :class="$style['group-inner']" :style="scrollBoxStyle">
+                    <div class="grid gap-1" :class="$style['category-list']">
                         <div
                             v-for="(item, index) in category"
-                            :key="index"
                             :class="$style['category-item']"
-                            :data-active="activeCategory === item.value"
-                            @click="activeCategory = item.value"
+                            :data-active="!!searchText ? false : localActiveCategory === item.value"
+                            :key="index"
+                            @click="updateLocalActiveCategory(item.value)"
                         >
                             <span class="text">{{ item.name }}</span>
                         </div>
@@ -38,14 +39,14 @@
             </div>
         </div>
         <div :class="$style['content-area']">
-            <div :class="$style['library-panel-group']">
+            <div class="h-full" :class="$style['library-panel-group']">
                 <div
+                    class="grid items-start h-full"
                     ref="scrollBox"
                     :class="$style['group-inner']"
-                    :style="{ minHeight: minHeight, maxHeight: maxHeight }"
-                    class="grid items-start"
+                    :style="scrollBoxStyle"
                 >
-                    <slot :active-category="activeCategory" :scrollTo="scrollTo"></slot>
+                    <slot :active-category="localActiveCategory" :scrollTo="scrollTo" :searchText="searchText" />
                 </div>
             </div>
         </div>
@@ -58,22 +59,39 @@ defineOptions({ name: "UeElLibraryPanelGroup" });
 
 const prop = withDefaults(defineProps<UeElLibraryPanelCard>(), {});
 const scrollBox = ref<HTMLElement>();
-const activeCategory = ref<string>("");
+const localActiveCategory = ref<string>("");
+const searchText = ref<string>("");
 
-const propActiveCategory = computed(() => {
+function changeSearchText(value: string) {
+    searchText.value = value;
+}
+
+const activeCategory = computed(() => {
     return prop.category?.find((item) => item.active)?.value || "";
 });
 
-watch(propActiveCategory, (newVal) => {
-    if (activeCategory.value === newVal) return;
-    activeCategory.value = newVal;
+function updateLocalActiveCategory(value: string) {
+    searchText.value = "";
+    localActiveCategory.value = value;
+}
+
+watch(activeCategory, (newVal) => {
+    if (localActiveCategory.value === newVal) return;
+    localActiveCategory.value = newVal;
 });
-watch(activeCategory, () => {
+watch(localActiveCategory, () => {
     scrollTo("top");
 });
 
 onBeforeMount(() => {
-    activeCategory.value = propActiveCategory.value;
+    localActiveCategory.value = activeCategory.value;
+});
+
+const scrollBoxStyle = computed(() => {
+    return {
+        minHeight: `calc(${prop.minHeight} - ${prop.search ? "64px" : "0px"} - 40px)`,
+        maxHeight: `calc(${prop.maxHeight} - ${prop.search ? "64px" : "0px"} - 40px)`,
+    };
 });
 
 function scrollTo(pos: "top" | "bottom") {
@@ -95,6 +113,11 @@ defineExpose({ scrollTo });
     .group-inner {
         padding: 0 12px;
     }
+}
+.search-input-wrapper {
+    padding: 12px;
+
+    border-bottom: 1px solid color(var(--ue-border-color));
 }
 .library-panel-group {
     padding: 20px 0;
