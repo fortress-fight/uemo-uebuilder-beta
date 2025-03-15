@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 23:54:36
+ * @LastEditTime: 2025-03-16 02:12:16
  */
 
 // SECTION - 样式文件
@@ -10,7 +10,9 @@ import "@stone/uemo-editor-assets/assets/style/reset.scss";
 
 import { createApp } from "vue";
 
+import { getLocalFontLib, setLocalFontLib } from "@stone/uemo-editor-utils/lib/resource";
 import UeEl from "@/index";
+
 import App from "./index.vue";
 import router from "../../router/index";
 import { AI_CONFIG } from "../../utils/ai-config";
@@ -31,6 +33,13 @@ const uploadConfig: UE_EL_UTIL.UploadConfigOld = {
     // history: { type: "MO005" as const },
     history: { type: "custom" as const, url: "http://127.0.0.1:9005/service/history" },
 };
+
+setLocalFontLib([
+    {
+        name: "阿里妈妈数黑体-Bold",
+        src: "https://qiniu-uematerial.uemo.net/Upfile/Font/20221104/AlimamaShuHeiTi-Bold.ttf",
+    },
+]);
 
 app.use(router);
 app.use(UeEl, {
@@ -73,6 +82,7 @@ app.use(UeEl, {
             fontFamilyLibrary: {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/font-family").then((res) => res.default()),
+                getUsedFontFamily: () => Promise.resolve(getLocalFontLib()),
             },
         },
     },

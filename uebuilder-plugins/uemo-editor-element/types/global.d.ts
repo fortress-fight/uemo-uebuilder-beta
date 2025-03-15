@@ -343,7 +343,9 @@ declare global {
             imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;
             textDecorationLibrary: ResourceValue<UE_EL_UTIL.ResourceTextDecoration>;
             shareIconLibrary: ResourceValue<UE_EL_UTIL.ResourceShareIcon>;
-            fontFamilyLibrary: ResourceValue<UE_EL_UTIL.ResourceFontFamily>;
+            fontFamilyLibrary: ResourceValue<UE_EL_UTIL.ResourceFontFamily> & {
+                getUsedFontFamily?: () => Promise<{ name: string; src: string }[]>;
+            };
         };
     }
 }

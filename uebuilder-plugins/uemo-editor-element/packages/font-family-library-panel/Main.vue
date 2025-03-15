@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:24:03
+ * @LastEditTime: 2025-03-16 02:14:59
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -55,12 +55,31 @@ const libraryPanelParam = computed(() => {
 
 const loading = ref(false);
 
-const usedFontFamily = computed<UE_EL_UTIL.ResourceFontFamilyItem[]>(() => {
-    return [
-        { label: "微软雅黑", name: "微软雅黑", lang: "zh", src: "", subList: [] },
-        { label: "宋体", name: "宋体", lang: "zh", src: "", subList: [] },
-        { label: "Arial", name: "Arial", lang: "zh", src: "", subList: [] },
-    ];
+const usedFontFamily = shallowRef<UE_EL_UTIL.ResourceFontFamilyItem[]>([
+    { label: "微软雅黑", name: "微软雅黑", lang: "zh", src: "", subList: [] },
+    { label: "宋体", name: "宋体", lang: "zh", src: "", subList: [] },
+    { label: "Arial", name: "Arial", lang: "zh", src: "", subList: [] },
+]);
+
+onBeforeMount(() => {
+    let pageUsedFontFamily: UE_EL_UTIL.ResourceFontFamilyItem[] = [];
+    if (fontFamilyLibrary.value?.getUsedFontFamily) {
+        fontFamilyLibrary.value
+            .getUsedFontFamily()
+            .then((res) => {
+                pageUsedFontFamily = res.map((item) => ({
+                    label: item.name,
+                    name: item.name,
+                    lang: "",
+                    src: item.src,
+                    subList: [],
+                }));
+                usedFontFamily.value = [...usedFontFamily.value, ...pageUsedFontFamily];
+            })
+            .catch((error) => {
+                instance?.proxy?.$ueElError(error);
+            });
+    }
 });
 
 const zhFontFamily = shallowRef<UE_EL_UTIL.ResourceFontFamilyItem[]>([]);
