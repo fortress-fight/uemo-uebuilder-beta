@@ -2,11 +2,19 @@ export type ResourceLottieItem = { url: string; poster?: string; name?: string }
 
 export type ResourceLottie = Record<
     string,
-    { size: "small" | "normal"; default: ResourceLottieItem; list: ResourceLottieItem[] }
+    {
+        name: string;
+        nameCN: string;
+        size: "small" | "normal";
+        default: ResourceLottieItem;
+        list: ResourceLottieItem[];
+    }
 >;
 
 const lottieLib: ResourceLottie = {
     figure: {
+        name: "figure",
+        nameCN: "人物",
         size: "normal",
         default: {
             poster: "https://static.jsmo.xin/uebuilder/public-resource/spline/spline-1.png",
@@ -48,6 +56,8 @@ const lottieLib: ResourceLottie = {
         ],
     },
     icon: {
+        name: "icon",
+        nameCN: "图标",
         size: "small",
         default: {
             url: "https://static.jsmo.xin/uebuilder/public-resource/lottie-icon/system-regular-161-trending-flat.lottie",

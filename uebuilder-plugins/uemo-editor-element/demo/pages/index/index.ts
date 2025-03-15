@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 10:48:31
+ * @LastEditTime: 2025-03-15 01:29:13
  */
 
 // SECTION - 样式文件
@@ -49,6 +49,10 @@ app.use(UeEl, {
             lottieLibrary: {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/lottie").then((res) => res.default),
+            },
+            iconLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/icon").then((res) => res.default),
             },
             videoLibrary: {
                 enable: true,

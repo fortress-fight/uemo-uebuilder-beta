@@ -1,5 +1,9 @@
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceLottie as ResourceLottieType } from "@stone/uemo-editor-assets/resource/lottie";
+import type {
+    ResourceIcon as ResourceIconType,
+    ResourceIconItem as ResourceIconItemType,
+} from "@stone/uemo-editor-assets/resource/icon";
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
 import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
@@ -268,6 +272,12 @@ declare global {
         type ResourceLottie = ResourceLottieType;
 
         /**
+         * @description Icon 资源列表
+         */
+        type ResourceIcon = ResourceIconType;
+        type ResourceIconItem = ResourceIconItemType;
+
+        /**
          * @description Video 资源列表
          */
         type ResourceVideo = ResourceVideoType;
@@ -318,6 +328,7 @@ declare global {
             shapeLibrary: ResourceValue<UE_EL_UTIL.ResourceShape>;
             splineLibrary: ResourceValue<UE_EL_UTIL.ResourceSpline>;
             lottieLibrary: ResourceValue<UE_EL_UTIL.ResourceLottie>;
+            iconLibrary: ResourceValue<UE_EL_UTIL.ResourceIcon>;
             videoLibrary: ResourceValue<UE_EL_UTIL.ResourceVideo>;
             imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;
             textDecorationLibrary: ResourceValue<UE_EL_UTIL.ResourceTextDecoration>;
