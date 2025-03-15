@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 01:29:13
+ * @LastEditTime: 2025-03-15 23:54:36
  */
 
 // SECTION - 样式文件
@@ -69,6 +69,10 @@ app.use(UeEl, {
             shareIconLibrary: {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/share-icon").then((res) => res.default),
+            },
+            fontFamilyLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/font-family").then((res) => res.default()),
             },
         },
     },

@@ -10,6 +10,10 @@ import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-edi
 import type { ResourceButtonHoverEffect as ResourceButtonHoverEffectType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
 import type { ResourceVideo as ResourceVideoType } from "@stone/uemo-editor-assets/resource/video";
 import type { ResourceImage as ResourceImageType } from "@stone/uemo-editor-assets/resource/image";
+import type {
+    ResourceFontFamily as ResourceFontFamilyType,
+    ResourceFontFamilyItem as ResourceFontFamilyItemType,
+} from "@stone/uemo-editor-assets/resource/font-family";
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
@@ -298,6 +302,12 @@ declare global {
         type ResourceShareIcon = ResourceShareIconType;
 
         /**
+         * @description 字体资源列表
+         */
+        type ResourceFontFamily = ResourceFontFamilyType;
+        type ResourceFontFamilyItem = ResourceFontFamilyItemType;
+
+        /**
          * @description 按钮 hover 动效资源列表
          */
         type ResourceButtonHoverEffect = ResourceButtonHoverEffectType;
@@ -333,6 +343,7 @@ declare global {
             imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;
             textDecorationLibrary: ResourceValue<UE_EL_UTIL.ResourceTextDecoration>;
             shareIconLibrary: ResourceValue<UE_EL_UTIL.ResourceShareIcon>;
+            fontFamilyLibrary: ResourceValue<UE_EL_UTIL.ResourceFontFamily>;
         };
     }
 }

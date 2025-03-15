@@ -28,13 +28,13 @@ const testComponents = [
     TestTextDecorationLibraryPanel,
     TestSvgLibraryPanel,
     TestShareIconLibraryPanel,
-    TestButtonHoverEffectLibraryPanel,
+    TestIconLibraryPanel,
     TestEmojiLibraryPanel,
     TestGridLayoutLibraryPanel,
     TestLottieLibraryPanel,
     TestVideoLibraryPanel,
+    TestButtonHoverEffectLibraryPanel,
     TestImageLibraryPanel,
-    TestIconLibraryPanel,
 ];
 </script>
 <style lang="scss" module>
