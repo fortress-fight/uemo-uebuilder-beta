@@ -1,23 +1,23 @@
 <!--
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:38:58
+ * @LastEditTime: 2025-03-15 17:02:51
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
         <template #LottieLibList="{ activeCategory }">
             <UeElLoading v-if="loading" />
             <div
-                :class="[$style['library-list'], activeCategory === 'icon' ? 'grid-cols-3' : 'grid-cols-2']"
                 class="grid gap-2"
                 v-if="getLottieList(activeCategory).length > 0"
+                :class="[$style['library-list'], activeCategory === 'icon' ? 'grid-cols-3' : 'grid-cols-2']"
             >
                 <div
-                    v-for="item in getLottieList(activeCategory)"
-                    :key="item.url"
-                    :class="$style['library-item']"
                     class="cursor-pointer"
+                    v-for="item in getLottieList(activeCategory)"
+                    :class="$style['library-item']"
                     :data-select="select === item.url"
+                    :key="item.url"
                     @click="selectLottie(item.url)"
                 >
                     <div :class="$style['thumb-box']">
@@ -29,19 +29,19 @@
                 <UeElEmptyPanel :description="t('LOTTIE_LIBRARY_TIP_EMPTY')" />
             </div>
         </template>
-        <template #LottieUpload>
+        <template #LottieUpload="">
             <UeElFileUploadButton type="lottie" @submit="useUpload" />
         </template>
-        <template #LottieLink>
+        <template #LottieLink="">
             <UeElTextInput
-                :value="lottieLink"
                 padding-size="level4"
                 theme="enterText"
                 :placeholder="t('LOTTIE_LIBRARY_LINK_TIP')"
                 :rules="lottieInputRules"
+                :value="lottieLink"
                 @confirm="changeSelect($event)"
             />
-            <UeElButton theme="fillText" size="large" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
+            <UeElButton size="large" theme="fillText" :text="t('UNIT_SUBMIT')" @trigger="useLink" />
         </template>
     </UeElLibraryPanel>
 </template>
@@ -53,7 +53,7 @@ import LottiePreview from "./sub-components/LottiePreview.vue";
 
 defineOptions({ name: "UeElLottieLibraryPanel" });
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElLottieLibraryPanelBaseProps>(), {});
 const emit = defineEmits<{ (e: "close"): void }>();
@@ -87,23 +87,30 @@ const selectCategory = ref<string>("");
 function capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+// 分类列表
 const categoryList = computed(() => {
-    return Object.keys(lottieLib.value || {}).map((item) => ({
-        name: capitalizeFirstLetter(item),
+    const useLib = lottieLib.value;
+    const name = locale.value === "zh-cn" ? "nameCN" : "name";
+    return Object.keys(useLib || {}).map((item) => ({
+        name: capitalizeFirstLetter(useLib?.[item]?.[name] || ""),
         value: item,
         active: selectCategory.value === item,
     }));
 });
 
+// 获取 Lottie 列表
 function getLottieList(category: string) {
     return lottieLib.value?.[category]?.list || [];
 }
 
+// 选择 Lottie
 function selectLottie(url: string) {
     lottieLink.value = "";
     select.value = url;
 }
 
+// 上传 Lottie
 function useUpload(url: UE_EL_UTIL.FileUploadInfo) {
     select.value = url.url;
 }
