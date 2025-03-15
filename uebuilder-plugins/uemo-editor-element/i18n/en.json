@@ -219,6 +219,10 @@
     "SHARE_ICON_LIBRARY_TIP_EMPTY": "Unable to get Share Icon resource",
     "SHARE_ICON_LIBRARY_TITLE": "Social Library",
 
+    "ICON_LIBRARY_TITLE": "Icon",
+    "ICON_LIBRARY_TIP_EMPTY": "Unable to get Icon resource",
+    "ICON_LIBRARY_SEARCH_PLACEHOLDER": "Search Icon",
+
     "BUTTON_HOVER_EFFECT_LIBRARY_TITLE": "Effect Library",
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_UP": "Move Up",
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_SHAKE_X": "Shake X",

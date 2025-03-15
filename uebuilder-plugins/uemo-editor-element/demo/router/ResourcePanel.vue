@@ -20,6 +20,7 @@ import TestGridLayoutLibraryPanel from "~/demo/components/TestGridLayoutLibraryP
 import TestLottieLibraryPanel from "~/demo/components/TestLottieLibraryPanel.vue";
 import TestVideoLibraryPanel from "~/demo/components/TestVideoLibraryPanel.vue";
 import TestImageLibraryPanel from "~/demo/components/TestImageLibraryPanel.vue";
+import TestIconLibraryPanel from "~/demo/components/TestIconLibraryPanel.vue";
 
 const testComponents = [
     TestShapeLibraryPanel,
@@ -33,6 +34,7 @@ const testComponents = [
     TestLottieLibraryPanel,
     TestVideoLibraryPanel,
     TestImageLibraryPanel,
+    TestIconLibraryPanel,
 ];
 </script>
 <style lang="scss" module>
