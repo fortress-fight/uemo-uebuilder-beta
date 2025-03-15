@@ -58,7 +58,7 @@ defineProps<ResourceButtonHoverEffectItemType>();
 
     // padding: calc(var(--ue-editor-row-space--lv1) + 0.5em) var(--ue-editor-row-space--lv1);
 
-    background-color: color(var(--ue-background-color));
+    // background-color: color(var(--ue-background-color));
     .button-box {
         @include ab-cover;
     }
