@@ -13,8 +13,6 @@
         :href="data.link"
         :style="boxStyle"
         :target="data.linkTarget || '_blank'"
-        @pointerenter="onPointerEnter"
-        @pointerleave="onPointerLeave"
     >
         <template v-if="data.beforeSvgIcon">
             <ButtonIcon ref="beforeIcon" v-bind="beforeIconAttrs" />
@@ -28,8 +26,6 @@
 <script lang="ts" setup>
 import type { UeElButtonIconProps } from "../index";
 
-import $ from "@stone/uemo-editor-utils/lib/jquery";
-import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { _pickBy } from "@stone/uemo-editor-utils/lib/lodash";
 
 import { getBoxStyle } from "../utils/getBoxStyle";
@@ -37,10 +33,6 @@ import $pageStyle from "../utils/app.module.scss";
 import ButtonIcon from "./ButtonIcon.vue";
 
 const props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();
-
-const button = useTemplateRef("button");
-const beforeIcon = useTemplateRef("beforeIcon");
-const afterIcon = useTemplateRef("afterIcon");
 
 const beforeIconAttrs = computed<UeElButtonIconProps>(() => {
     const beforeSvgIcon = props.data.beforeSvgIcon;
@@ -69,59 +61,6 @@ const afterIconAttrs = computed<UeElButtonIconProps>(() => {
 const boxStyle = computed(() => {
     return getBoxStyle(props.data);
 });
-
-const backgroundColor = computed(() => {
-    let result = props.data.background || "transparent";
-    if (!result.includes("linear-gradient")) {
-        result = `linear-gradient(90deg, ${result} 0%, ${result} 100%)`;
-    }
-    return result;
-});
-
-const hoverBackgroundColor = computed(() => {
-    let result = props.data.hoverBackground || "";
-    if (!result?.includes("linear-gradient")) {
-        result = `linear-gradient(90deg, ${result} 0%, ${result} 100%)`;
-    }
-    return result;
-});
-
-function onPointerEnter() {
-    if (button.value) {
-        $(button.value).data("buttonCreatorCtrl")?.play?.();
-        if (hoverBackgroundColor.value) {
-            gsap.fromTo(
-                button.value,
-                { background: backgroundColor.value },
-                {
-                    background: hoverBackgroundColor.value,
-                    duration: 0.3,
-                }
-            );
-        }
-    }
-
-    beforeIcon.value?.play();
-    afterIcon.value?.play();
-}
-
-function onPointerLeave() {
-    if (button.value && hoverBackgroundColor.value) {
-        gsap.fromTo(
-            button.value,
-            { background: hoverBackgroundColor.value },
-            {
-                background: backgroundColor.value,
-                duration: 0.3,
-                onComplete() {
-                    if (button.value) {
-                        $(button.value).css({ background: "" });
-                    }
-                },
-            }
-        );
-    }
-}
 </script>
 <style lang="scss" module>
 .button-normal {

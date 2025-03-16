@@ -8,18 +8,14 @@
     </div>
 </template>
 <script lang="ts" setup>
-import $ from "@stone/uemo-editor-utils/lib/jquery";
-import { initIconParkComponent } from "@stone/uemo-editor-utils/lib/icon";
-import { buttonCreator } from "../utils/initButtonEffect";
-
 import $pageStyle from "../utils/app.module.scss";
 import ButtonNormal from "./ButtonNormal.vue";
 import ButtonRotate from "./ButtonRotate.vue";
+import { UeElButton } from "../utils/initButtonEffect";
 
 defineOptions({ name: "UeElPreviewButton", components: { ButtonNormal, ButtonRotate } });
 
 const props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();
-const rootDom = useTemplateRef("rootDom");
 const buttonRef = useTemplateRef<InstanceType<typeof ButtonNormal>>("button");
 
 const componentName = computed(() => {
@@ -34,35 +30,16 @@ const componentName = computed(() => {
 });
 
 onMounted(() => {
-    const iconparkDom = rootDom.value?.querySelectorAll("iconpark-icon");
+    const ueButtonInstance = new UeElButton();
 
-    if (iconparkDom) {
-        initIconParkComponent(iconparkDom);
-    }
+    if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
 
-    const dotLottieDom = rootDom.value?.querySelectorAll("dotlottie-player");
+    ueButtonInstance.initButton([buttonRef.value.$el]);
 
-    if (dotLottieDom) {
-        import("@stone/uemo-editor-utils/lib/lottie").catch((err) => {
-            console.error(err);
-        });
-    }
-
-    if (props.data.theme !== "rotate" && buttonRef.value?.$el instanceof HTMLElement) {
-        buttonCreator(props.data.theme || "normal", buttonRef.value.$el)
-            .then(() => {
-                //
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }
-});
-
-onBeforeUnmount(() => {
-    if (props.data.theme !== "rotate" && buttonRef.value?.$el instanceof HTMLElement) {
-        $(buttonRef.value.$el).data("buttonCreatorCtrl")?.destroy();
-    }
+    onBeforeUnmount(() => {
+        if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
+        ueButtonInstance.destroyButton([buttonRef.value.$el]);
+    });
 });
 </script>
 <style lang="scss" module>

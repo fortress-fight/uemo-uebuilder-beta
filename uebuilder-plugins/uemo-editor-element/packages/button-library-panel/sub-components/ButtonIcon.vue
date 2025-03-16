@@ -11,8 +11,6 @@
         ]"
         :src="source"
         :style="dotLottieStyle"
-        @complete="complete()"
-        @ready="domReady"
     />
     <ue-svg-viewer
         v-else-if="source?.endsWith('.svg')"
@@ -40,7 +38,6 @@
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 import type { UeElButtonIconProps } from "../index";
 
-import $ from "@stone/uemo-editor-utils/lib/jquery";
 import $pageStyle from "../utils/app.module.scss";
 
 const prop = defineProps<UeElButtonIconProps>();
@@ -54,50 +51,9 @@ const dotLottieStyle = computed(() => ({
     "--icon-size": prop.size,
 }));
 
-watch(
-    () => prop.source,
-    (url) => {
-        if (!url || !isLottie(url)) return;
-        requestAnimationFrame(() => {
-            iconDom.value
-                ?.load?.(url)
-                .then()
-                .catch((err) => {
-                    console.error(err);
-                });
-        });
-    }
-);
-
 function isLottie(source: string) {
     return (source || "").endsWith(".lottie");
 }
-
-function domReady() {
-    const lottieDom = iconDom.value;
-    const lottieItem = lottieDom?.getLottie();
-    if (lottieItem) {
-        lottieItem.autoplay = true;
-        lottieItem.loop = false;
-        lottieItem.play();
-    }
-}
-
-function complete() {
-    if (!iconDom.value) return;
-    const lottieItem = iconDom.value.getLottie();
-    lottieItem?.goToAndStop($(iconDom.value).data("playerDir") == -1 ? lottieItem.totalFrames - 1 : 0, true);
-}
-
-function play() {
-    if (!iconDom.value) return;
-    $(iconDom.value).data("playerDir", 1);
-    const afterLottieItem = iconDom.value.getLottie();
-    afterLottieItem?.setDirection(1);
-    afterLottieItem?.play();
-}
-
-defineExpose({ play });
 </script>
 <style lang="scss" module>
 .button-icon {

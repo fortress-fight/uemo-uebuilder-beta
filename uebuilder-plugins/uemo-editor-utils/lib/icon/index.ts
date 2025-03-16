@@ -62,7 +62,7 @@ export function loadSvgIcon(sources: string[] = []) {
  * @param components - 需要初始化的 IconPark 组件列表
  * @returns 返回组件实例对象,包含销毁方法
  */
-export function initIconParkComponent(components: NodeListOf<Element>) {
+export function initIconParkComponent(components: NodeListOf<Element> | Element[]) {
     if (!components || components.length === 0) return;
 
     // 提取所有组件的图标资源路径
