@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 23:22:33
+ * @LastEditTime: 2025-03-16 23:41:57
 -->
 <template>
     <UeElLibraryPanel :class="$style['button-library-panel']" :cards="libraryPanelParam.cards">
@@ -39,9 +39,7 @@ const { t } = useI18n();
 const instance = getCurrentInstance();
 defineOptions({ name: "UeElButtonLibraryPanel" });
 const _prop = withDefaults(defineProps<UeElButtonLibraryPanelBaseProps>(), {});
-const emit = defineEmits<{
-    (e: "select", select: UE_EL_UTIL.ResourceButtonItem): void;
-}>();
+const select = defineModel<UE_EL_UTIL.ResourceButtonItem["attrs"]>("select", { required: false });
 
 const loading = ref(false);
 const buttonLib = ref<UE_EL_UTIL.ResourceButton | null>(null);
@@ -93,7 +91,7 @@ const getButtonLibrary = async () => {
 const selectButtonId = ref<string>("");
 function useButton(item: UE_EL_UTIL.ResourceButtonItem) {
     selectButtonId.value = item.id;
-    emit("select", toRaw(item));
+    select.value = toRaw(item.attrs);
 }
 
 onBeforeMount(() => {

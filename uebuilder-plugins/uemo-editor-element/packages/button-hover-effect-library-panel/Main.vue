@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮 hover 动效库
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 22:11:15
+ * @LastEditTime: 2025-03-17 01:33:51
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -33,7 +33,7 @@ defineOptions({ name: "UeElButtonHoverEffectLibraryPanel" });
 const { t } = useI18n();
 
 const _prop = withDefaults(defineProps<UeElButtonHoverEffectLibraryPanelBaseProps>(), {});
-const select = defineModel<string>("select", { required: true });
+const select = defineModel<string>("select", { required: false });
 
 const list = ref<UE_EL_UTIL.ResourceButtonHoverEffect>([
     { value: "moveUp", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_UP") },
