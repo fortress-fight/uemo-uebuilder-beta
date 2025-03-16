@@ -233,5 +233,7 @@
     "FONT_LIBRARY_EN_FONT_TITLE": "English",
     "FONT_LIBRARY_ZH_FONT_TITLE": "Chinese",
 
+    "BUTTON_LIBRARY_TITLE": "Button",
+
     "GRID_LAYOUT_REPLACE": "Swap Position"
 }

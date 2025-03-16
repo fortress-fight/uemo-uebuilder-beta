@@ -233,5 +233,7 @@
     "FONT_LIBRARY_EN_FONT_TITLE": "英文",
     "FONT_LIBRARY_ZH_FONT_TITLE": "中文",
 
+    "BUTTON_LIBRARY_TITLE": "按钮库",
+
     "GRID_LAYOUT_REPLACE": "交换位置"
 }
