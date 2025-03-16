@@ -1,7 +1,7 @@
 <!--
  * @Description: 社交分享资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:33:48
+ * @LastEditTime: 2025-03-17 01:29:49
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -11,10 +11,10 @@
                 <UeElSelectBox
                     v-for="iconClass in list"
                     :key="iconClass.name"
-                    :select="select === iconClass.name"
+                    :select="select === iconClass.icon[0]"
                     :width="80"
                     :height="90"
-                    @trigger="select = iconClass.name"
+                    @trigger="select = iconClass.icon[0]"
                 >
                     <div :class="$style['library-item']" class="h-full flex flex-col">
                         <div :class="$style['thumb-box']" class="flex justify-center items-center h-full">
@@ -41,7 +41,7 @@ const { t } = useI18n();
 
 const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElShareIconLibraryPanelBaseProps>(), {});
-const select = defineModel<string>("select", { required: true });
+const select = defineModel<string>("select", { required: false });
 
 const loading = ref(false);
 const list = ref<UE_EL_UTIL.ResourceShareIcon | null>(null);
