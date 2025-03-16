@@ -38,7 +38,7 @@
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 import type { UeElButtonIconProps } from "../index";
 
-import $pageStyle from "../utils/app.module.scss";
+import $pageStyle from "../utils/ue-button/app.module.scss";
 
 const prop = defineProps<UeElButtonIconProps>();
 

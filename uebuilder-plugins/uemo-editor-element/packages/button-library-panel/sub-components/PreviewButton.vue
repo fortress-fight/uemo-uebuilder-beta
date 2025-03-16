@@ -8,10 +8,10 @@
     </div>
 </template>
 <script lang="ts" setup>
-import $pageStyle from "../utils/app.module.scss";
+import $pageStyle from "../utils/ue-button/app.module.scss";
 import ButtonNormal from "./ButtonNormal.vue";
 import ButtonRotate from "./ButtonRotate.vue";
-import { UeElButton } from "../utils/initButtonEffect";
+import { UeElButton } from "../utils/ue-button";
 
 defineOptions({ name: "UeElPreviewButton", components: { ButtonNormal, ButtonRotate } });
 

@@ -39,8 +39,8 @@
 import type { UeElButtonIconProps } from "../index";
 
 import { _pickBy, _debounce } from "@stone/uemo-editor-utils/lib/lodash";
-import $pageStyle from "../utils/app.module.scss";
-import { getBoxStyle } from "../utils/getBoxStyle";
+import $pageStyle from "../utils/ue-button/app.module.scss";
+import { getBoxStyle } from "../utils/ue-button/utils/get-box-style";
 import ButtonIcon from "./ButtonIcon.vue";
 
 const props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();
