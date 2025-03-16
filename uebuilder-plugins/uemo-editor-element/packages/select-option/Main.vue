@@ -1,26 +1,34 @@
 <!--
- * @Description: 选项面板
+ * @Description: 选项面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-17 00:07:54
+ * @LastEditTime: 2025-03-17 02:28:22
+ * @FileOverview: 提供可选择的选项列表，支持图标显示和主题切换
+ * @Events: change - 选项改变时触发
+ * @Props:
+ *   - list: 选项列表
+ *   - value: 当前选中值
+ *   - theme: 主题，支持 'dark'|'light'
+ *   - hideIcon: 是否隐藏图标
+ *   - pinValue: 是否固定选中值位置
 -->
 <template>
     <div ref="rootDomRef" :class="$style['select-option']" :data-theme="theme">
         <div :class="$style['option-group']">
             <div class="h-full" :class="$style['scroll-box']">
                 <div
-                    class="flex items-center justify-between"
                     v-for="(item, index) in list"
+                    :key="item.value || index"
                     ref="optionDomsRef"
                     :class="$style['option-item']"
                     :data-select="value === item.value"
-                    :key="index"
-                    @click="emit('change', item.value)"
+                    class="flex items-center justify-between"
+                    @click="handleOptionClick(item)"
                 >
                     <template v-if="!hideIcon">
                         <UeElIcon v-if="item.icon" :class="$style['ic']" :name="item.icon" />
-                        <UeElIcon v-else name="icon-duigou" :class="[$style['ic'], $style['select-ic']]" />
+                        <UeElIcon v-else :class="[$style['ic'], $style['select-ic']]" name="icon-duigou" />
                     </template>
-                    <div v-if="item.text" :class="$style['text']" :label="item.label">
+                    <div v-if="item.text" :class="$style['text']" :title="item.label || item.text">
                         {{ item.text }}
                     </div>
                 </div>
@@ -28,52 +36,66 @@
         </div>
     </div>
 </template>
+
 <script lang="ts" setup>
 import type { UeElSelectOptionBaseProps } from "./index";
-import type { DialogUpdatePosHandler } from "../pop-panel";
+
+import { UeElProvideDialogCalcPosHandler } from "../pop-panel";
 
 defineOptions({ name: "UeElSelectOption" });
-const prop = defineProps<UeElSelectOptionBaseProps>();
-const emit = defineEmits<{ (e: "change", value: string | number): void }>();
 
+const props = defineProps<UeElSelectOptionBaseProps>();
+const emit = defineEmits<{
+    (e: "change", value: string | number): void;
+}>();
+
+// DOM 引用
 const rootDomRef = useTemplateRef("rootDomRef");
 const optionDomsRef = useTemplateRef("optionDomsRef");
 
-const UeElDialogCalcPosHandler = inject<((fn: DialogUpdatePosHandler) => void) | undefined>(
-    "UeElDialogCalcPosHandler",
-    undefined
-);
+// 注入弹窗位置处理器
+const dialogCalcPosHandler = inject(UeElProvideDialogCalcPosHandler, undefined);
 
 /**
- * 设置 UeDialog 方法中的更新位置的处理函数
+ * 处理选项点击事件
+ * @param item - 选项数据
  */
-function setDialogUpdatePosHandler() {
-    if (!prop.pinValue) return;
+function handleOptionClick(item: UE_EL_UTIL.SelectOption): void {
+    emit("change", item.value);
+}
 
-    UeElDialogCalcPosHandler?.((res) => {
-        if (!res.middleware) {
-            return res;
-        }
+/**
+ * 设置弹窗位置更新处理器
+ * 用于固定选中项位置
+ */
+function setDialogUpdatePosHandler(): void {
+    if (!props.pinValue) return;
+
+    dialogCalcPosHandler?.((res) => {
+        if (!res.middleware) return res;
+
         res.middleware.unshift([
             "custom",
             {
                 name: "dialogDistance",
                 fn: (param) => {
-                    if (!rootDomRef.value) return param;
+                    const rootEl = rootDomRef.value;
+                    if (!rootEl) return param;
 
                     const { x, y } = param;
+                    const options = optionDomsRef.value || [];
 
-                    const options = optionDomsRef.value;
-                    const activeOption = options?.find((item) => item.dataset.select === "true");
-                    const targetOption = activeOption || options?.[0];
+                    // 查找选中项或默认第一项
+                    const activeOption = options.find((item) => item.dataset.select === "true") || options[0];
 
-                    if (!targetOption) return param;
+                    if (!activeOption) return param;
 
-                    const rootRect = rootDomRef.value.getBoundingClientRect();
-                    const optionRect = targetOption.getBoundingClientRect();
-                    const disY = optionRect.top - rootRect.top + optionRect.height / 2;
+                    // 计算位置偏移
+                    const rootRect = rootEl.getBoundingClientRect();
+                    const optionRect = activeOption.getBoundingClientRect();
+                    const offsetY = optionRect.top - rootRect.top + optionRect.height / 2;
 
-                    return { x, y: y - disY };
+                    return { x, y: y - offsetY };
                 },
             },
         ]);
@@ -81,6 +103,7 @@ function setDialogUpdatePosHandler() {
     });
 }
 
+// 生命周期钩子
 onBeforeMount(setDialogUpdatePosHandler);
 </script>
 <style lang="scss" module>
@@ -136,16 +159,17 @@ onBeforeMount(setDialogUpdatePosHandler);
             opacity: 1;
         }
     }
-    .text {
-        @include ellipse(1);
-        min-width: 0;
-        margin-right: 11px;
-        margin-left: 11px;
-    }
-    .ic {
-        font-size: var(--icon-size, 16px);
-    }
-    .select-ic {
+}
+.text {
+    @include ellipse(1);
+    min-width: 0;
+    margin: 0 11px;
+}
+.ic {
+    font-size: var(--icon-size, 16px);
+    &.select-ic {
+        transition: opacity 0.2s ease;
+
         opacity: 0;
     }
 }

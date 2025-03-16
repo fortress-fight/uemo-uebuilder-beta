@@ -1,7 +1,15 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:10:56
+ * @LastEditTime: 2025-03-17 02:19:56
+ * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
+ * @Events: onShow, onHide
+ * @Props:
+ *   - immediate: 是否立即显示，默认 true
+ *   - autoClose: 是否自动关闭，默认 true
+ *   - draggable: 是否可拖拽，默认 false
+ *   - panel: 面板配置，包含位置信息
+ *   - mask: 遮罩层配置
 -->
 <template>
     <Teleport to="body">
@@ -13,12 +21,12 @@
             @leave="onLeave"
             @after-leave="onAfterLeave"
         >
-            <div :class="$style['pop-panel']" v-if="openModel" :style="{ zIndex: zIndex }">
+            <div v-if="openModel" :class="$style['pop-panel']" :style="{ zIndex }" :data-root-id="rootId">
                 <div
+                    ref="dialogBoxRef"
                     :class="$style['layer-dialog-box']"
                     v-on-click-outside="closeModal"
                     v-ue-el-dragger="draggable"
-                    ref="dialogBoxRef"
                 >
                     <slot></slot>
                 </div>
@@ -26,6 +34,7 @@
         </Transition>
     </Teleport>
 </template>
+
 <script lang="ts" setup>
 import type { UeElPopPanelBaseProps, DialogUpdatePosHandler } from "./index";
 
@@ -34,169 +43,226 @@ import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 import { computeFloatingPosition, autoUpdate } from "@stone/uemo-editor-utils/lib/floating-ui";
+import { guid } from "@stone/uemo-editor-utils/lib/guid";
+import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import { defaultCalcPosParam } from "./index";
+import { defaultCalcPosParam, UeElProvideDialogCalcPosHandler, UeElProvideDialogCloseHandler } from "./index";
 
 defineOptions({ name: "UeElPopPanel" });
-const mittManage = mitt<{ clearUploadControl: undefined }>();
 
-const prop = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
+// #region 组件配置和状态
+const props = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
     immediate: true,
     autoClose: true,
     draggable: false,
     panel: () => ({ position: "center" }),
 });
-const emit = defineEmits<{ (e: "onShow" | "onHide"): void }>();
+
+const emit = defineEmits<{
+    (e: "onShow" | "onHide"): void;
+}>();
 
 const cssModule = useCssModule();
 const openModel = defineModel("open");
 const dialogBoxRef = useTemplateRef("dialogBoxRef");
 
+/**
+ * 事件管理器，用于清理自动更新位置的监听器
+ */
+const eventBus = mitt<{ clearUploadControl: undefined }>();
+
+/**
+ * 遮罩层配置计算
+ */
 const maskLayerParams = computed(() => {
+    if (!props.mask) return false;
     const defaultMaskParams = { color: "rgba(0,0,0,0.5)" };
-    if (!prop.mask) return false;
-    if (prop.mask === true) return defaultMaskParams;
-    return Object.assign({}, defaultMaskParams, prop.mask);
+    return props.mask === true ? defaultMaskParams : { ...defaultMaskParams, ...props.mask };
 });
 
-// #region transition
+// #endregion
 
-function onEnter(el: Element, done: () => void) {
-    const maskLayerDom = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
-    const dialogBoxDom = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
+// #region 位置更新处理
+let dialogPosHandler: DialogUpdatePosHandler = (param) => param;
 
-    updateDialogPos()
-        .then(() => {
-            return new Promise((res, _rej) => {
-                const dialogTl = gsap.timeline({
-                    paused: true,
-                    defaults: { ease: "none", overwrite: "auto" },
-                    onComplete: res,
-                });
+/**
+ * 更新弹窗位置
+ * @returns Promise 位置更新完成的Promise
+ */
+async function updateDialogPos(): Promise<void> {
+    const { position } = props.panel;
+    const dialogBox = dialogBoxRef.value;
 
-                if (maskLayerParams.value) {
-                    dialogTl.to(maskLayerDom, { background: maskLayerParams.value.color, duration: 0.16 });
-                }
+    if (!dialogBox) return;
 
-                dialogTl.to(dialogBoxDom, { duration: 0.36, opacity: 1 });
-
-                if (prop.immediate) {
-                    dialogTl.progress(1);
-                } else {
-                    dialogTl.play();
-                }
-            });
-        })
-        .then(done)
-        .catch((err) => {
-            console.error(err);
-        });
-}
-
-function onAfterEnter(_el: Element) {
-    emit("onShow");
-    const { position } = prop.panel;
-    if (typeof position === "string") return;
-
-    const autoUpdatePosition = position.autoUpdate;
-    if (!autoUpdatePosition) return;
-    if (!dialogBoxRef.value) return;
-
-    const clearUploadControl = autoUpdate(
-        position.refEl,
-        dialogBoxRef.value,
-        _debounce(
-            () => {
-                updateDialogPos().catch((err) => console.error(err));
-            },
-            0,
-            { leading: true }
-        )
-    );
-
-    mittManage.on("clearUploadControl", clearUploadControl);
-}
-function onLeave(el: Element, done: () => void) {
-    const maskLayerDom = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
-    const dialogBoxDom = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
-
-    new Promise((res, _rej) => {
-        const dialogTl = gsap.timeline({
-            paused: true,
-            defaults: { ease: "none", overwrite: "auto" },
-            onStart: () => {
-                mittManage.emit("clearUploadControl");
-            },
-            onComplete: res,
-        });
-
-        if (maskLayerParams.value) {
-            dialogTl.to(maskLayerDom, { background: "rgba(0,0,0,0)", duration: 0.16 });
+    if (typeof position === "string") {
+        if (position === "center") {
+            gsap.set(dialogBox, { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
         }
+        return;
+    }
 
-        dialogTl.to(dialogBoxDom, { duration: 0.36, opacity: 0 }, 0);
+    const { refEl, options = defaultCalcPosParam } = position;
+    const { x, y } = await computeFloatingPosition(refEl, dialogBox, dialogPosHandler(options));
 
-        if (prop.immediate) {
-            dialogTl.progress(1);
-        } else {
-            dialogTl.play();
-        }
-    })
-        .then(() => done())
-        .catch((err) => {
-            console.error(err);
-        });
-}
-function onAfterLeave(_el: Element) {
-    emit("onHide");
+    gsap.set(dialogBox, { top: y, left: x });
 }
 
 // #endregion
 
-let UeElDialogCalcPosHandler: DialogUpdatePosHandler = (param) => param;
-function updateDialogPos() {
-    const { position } = prop.panel;
+// #region 动画处理
+/**
+ * 进入动画
+ */
+async function onEnter(el: Element, done: () => void) {
+    try {
+        const maskLayer = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
+        const dialogBox = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
 
-    if (typeof position === "string") {
-        if (position === "center") {
-            gsap.set(dialogBoxRef.value, { top: "50%", left: "50%", xPercent: -50, yPercent: -50 });
-            return Promise.resolve();
+        await updateDialogPos();
+
+        const timeline = gsap.timeline({
+            paused: true,
+            defaults: { ease: "none", overwrite: "auto" },
+        });
+
+        if (maskLayerParams.value) {
+            timeline.to(maskLayer, {
+                background: maskLayerParams.value.color,
+                duration: 0.16,
+            });
         }
-        return Promise.resolve();
+
+        timeline.to(dialogBox, { duration: 0.36, opacity: 1 });
+
+        if (props.immediate) {
+            timeline.progress(1);
+        } else {
+            timeline.play();
+        }
+
+        await timeline;
+        done();
+    } catch (err) {
+        console.error("动画执行错误:", err);
+        done();
     }
-
-    if (!dialogBoxRef.value) return Promise.resolve();
-
-    const { refEl, options = defaultCalcPosParam } = position;
-
-    return computeFloatingPosition(refEl, dialogBoxRef.value, UeElDialogCalcPosHandler(options)).then(({ x, y }) => {
-        gsap.set(dialogBoxRef.value, { top: y, left: x });
-    });
 }
 
-function closeModal() {
-    if (!prop.autoClose) return;
+/**
+ * 进入动画完成后的处理
+ */
+function onAfterEnter(_el: Element) {
+    emit("onShow");
 
-    const allowClose = prop.checkAllowClose?.();
+    const { position } = props.panel;
+    if (typeof position === "string") return;
+
+    const shouldAutoUpdate = position.autoUpdate;
+    if (!shouldAutoUpdate || !dialogBoxRef.value) return;
+
+    const cleanup = autoUpdate(
+        position.refEl,
+        dialogBoxRef.value,
+        _debounce(() => void updateDialogPos().catch((err) => console.error("位置更新错误:", err)), 0, {
+            leading: true,
+        })
+    );
+
+    eventBus.on("clearUploadControl", cleanup);
+}
+
+/**
+ * 离开动画
+ */
+async function onLeave(el: Element, done: () => void) {
+    try {
+        const maskLayer = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
+        const dialogBox = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
+
+        const timeline = gsap.timeline({
+            paused: true,
+            defaults: { ease: "none", overwrite: "auto" },
+            onStart: () => eventBus.emit("clearUploadControl"),
+        });
+
+        if (maskLayerParams.value) {
+            timeline.to(maskLayer, {
+                background: "rgba(0,0,0,0)",
+                duration: 0.16,
+            });
+        }
+
+        timeline.to(dialogBox, { duration: 0.36, opacity: 0 }, 0);
+
+        if (props.immediate) {
+            timeline.progress(1);
+        } else {
+            timeline.play();
+        }
+
+        await timeline;
+        done();
+    } catch (err) {
+        console.error("动画执行错误:", err);
+        done();
+    }
+}
+
+function onAfterLeave(_el: Element) {
+    emit("onHide");
+}
+// #endregion
+
+// #region ID管理和关闭处理
+const currentId = guid();
+const rootId = inject("UeElPopPanelRootId", "");
+provide("UeElPopPanelRootId", rootId || currentId);
+
+/**
+ * 处理弹窗关闭
+ */
+function closeModal(e: Event) {
+    if (!props.autoClose) return;
+
+    const triggerRootId = $(e.target!).closest("[data-root-id]").data("root-id");
+    if (currentId === triggerRootId) return;
+
+    const allowClose = props.checkAllowClose?.();
     if (allowClose === false) return;
 
     openModel.value = false;
 }
+// #endregion
 
-// 向内部 slot 提供注册计算弹窗位置的处理函数的方法
-provide("UeElDialogCalcPosHandler", (fn: DialogUpdatePosHandler) => {
-    if (typeof fn != "function") return;
-    UeElDialogCalcPosHandler = fn;
+// #region Provide/Inject
+
+/**
+ * 提供对话框位置计算处理函数
+ */
+provide(UeElProvideDialogCalcPosHandler, (fn: DialogUpdatePosHandler) => {
+    if (typeof fn === "function") {
+        dialogPosHandler = fn;
+    }
 });
-// 向内部组件注册关闭面板操作
-provide("UeElDialogCloseHandler", () => {
+
+/**
+ * 提供对话框关闭处理函数
+ */
+provide(UeElProvideDialogCloseHandler, () => {
     openModel.value = false;
 });
 
+// #endregion
+
+// #region 生命周期
 onBeforeUnmount(() => {
-    mittManage.emit("clearUploadControl");
+    eventBus.emit("clearUploadControl");
+    eventBus.all.clear();
 });
+// #endregion
 </script>
+
 <style lang="scss" module>
 .pop-panel {
     position: fixed;
@@ -231,8 +297,6 @@ onBeforeUnmount(() => {
     z-index: var(--ue-z-index--mini);
     top: 0;
     left: 0;
-
-    // max-width: 92%;
 
     pointer-events: all;
 

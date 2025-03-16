@@ -1,12 +1,15 @@
 /*
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:11:11
+ * @LastEditTime: 2025-03-17 02:18:16
  */
 import type { App } from "vue";
 import type { ReferenceElement, EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib/floating-ui";
 
 import UeElPopPanel from "./Main.vue";
+
+export const UeElProvideDialogCalcPosHandler = Symbol() as InjectionKey<(fn: DialogUpdatePosHandler) => void>;
+export const UeElProvideDialogCloseHandler = Symbol() as InjectionKey<() => void>;
 
 UeElPopPanel.install = (app: App) => {
     if (!UeElPopPanel.name) return;
