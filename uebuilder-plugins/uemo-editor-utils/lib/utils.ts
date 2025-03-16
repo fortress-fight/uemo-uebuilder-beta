@@ -110,3 +110,20 @@ export function loadScript(dom: HTMLElement, param: { title: string; source: str
         dom.appendChild(script);
     });
 }
+/**
+ * 将属性对象转换为CSS样式字符串
+ *
+ * @export
+ * @param {Record<string, string | undefined>} attr - 样式属性对象
+ * @returns {string} 转换后的CSS样式字符串
+ */
+export function attrToStyle(attr: Record<string, string | undefined>): string {
+    // 使用reduce代替forEach,减少中间变量
+    return Object.entries(attr).reduce((styles, [key, value]) => {
+        // 使用单个条件判断无效值
+        if (value && value !== "0") {
+            return `${styles}${key}:${value};`;
+        }
+        return styles;
+    }, "");
+}

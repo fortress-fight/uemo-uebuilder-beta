@@ -55,3 +55,33 @@ export function loadSvgIcon(sources: string[] = []) {
 
     return loadIcon();
 }
+
+/**
+ * 初始化 IconPark 组件
+ * @description 从组件列表中提取图标资源路径并加载相应的 SVG 图标
+ * @param components - 需要初始化的 IconPark 组件列表
+ * @returns 返回组件实例对象,包含销毁方法
+ */
+export function initIconParkComponent(components: NodeListOf<Element>) {
+    if (!components || components.length === 0) return;
+
+    // 提取所有组件的图标资源路径
+    const sourceList = Array.from(components)
+        .map((dom) => dom.getAttribute("data-source"))
+        .filter(Boolean) as string[];
+
+    // 加载SVG图标资源
+    loadSvgIcon(sourceList).catch((err) => {
+        console.error("Failed to load SVG icons:", err);
+    });
+
+    return {
+        /**
+         * 销毁方法
+         * @description IconPark组件不需要手动销毁
+         */
+        destroy() {
+            console.warn("IconPark 组件不需要手动销毁");
+        },
+    };
+}
