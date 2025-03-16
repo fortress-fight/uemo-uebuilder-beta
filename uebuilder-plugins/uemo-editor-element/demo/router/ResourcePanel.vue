@@ -22,6 +22,7 @@ import TestVideoLibraryPanel from "~/demo/components/TestVideoLibraryPanel.vue";
 import TestImageLibraryPanel from "~/demo/components/TestImageLibraryPanel.vue";
 import TestIconLibraryPanel from "~/demo/components/TestIconLibraryPanel.vue";
 import TestFontFamilyLibraryPanel from "~/demo/components/TestFontFamilyLibraryPanel.vue";
+import TestButtonLibraryPanel from "~/demo/components/TestButtonLibraryPanel.vue";
 
 const testComponents = [
     TestShapeLibraryPanel,
@@ -37,6 +38,7 @@ const testComponents = [
     TestButtonHoverEffectLibraryPanel,
     TestImageLibraryPanel,
     TestFontFamilyLibraryPanel,
+    TestButtonLibraryPanel,
 ];
 </script>
 <style lang="scss" module>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 16:42:12
+ * @LastEditTime: 2025-03-16 23:22:33
 -->
 <template>
     <UeElLibraryPanel :class="$style['button-library-panel']" :cards="libraryPanelParam.cards">
@@ -78,7 +78,6 @@ const getButtonLibrary = async () => {
 
     try {
         const res = await instance?.proxy?.$ueElResource.buttonLibrary.getData();
-        console.log("res", res);
         buttonLib.value = res || null;
 
         clearTimeout(timer);
