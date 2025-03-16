@@ -1,24 +1,24 @@
 <!--
  * @Description: 选项面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:20:48
+ * @LastEditTime: 2025-03-17 00:07:54
 -->
 <template>
     <div ref="rootDomRef" :class="$style['select-option']" :data-theme="theme">
         <div :class="$style['option-group']">
             <div class="h-full" :class="$style['scroll-box']">
                 <div
+                    class="flex items-center justify-between"
                     v-for="(item, index) in list"
                     ref="optionDomsRef"
-                    :key="index"
-                    class="flex items-center justify-between"
                     :class="$style['option-item']"
                     :data-select="value === item.value"
+                    :key="index"
                     @click="emit('change', item.value)"
                 >
                     <template v-if="!hideIcon">
                         <UeElIcon v-if="item.icon" :class="$style['ic']" :name="item.icon" />
-                        <UeElIcon v-else :class="[$style['ic'], $style['select-ic']]" name="icon-duigou" />
+                        <UeElIcon v-else name="icon-duigou" :class="[$style['ic'], $style['select-ic']]" />
                     </template>
                     <div v-if="item.text" :class="$style['text']" :label="item.label">
                         {{ item.text }}
