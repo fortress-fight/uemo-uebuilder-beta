@@ -49,5 +49,6 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         textDecorationLibrary: createCache(param.textDecorationLibrary),
         shareIconLibrary: createCache(param.shareIconLibrary),
         fontFamilyLibrary: createCache(param.fontFamilyLibrary),
+        buttonLibrary: createCache(param.buttonLibrary),
     };
 }

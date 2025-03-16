@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 02:12:16
+ * @LastEditTime: 2025-03-16 02:32:15
  */
 
 // SECTION - 样式文件
@@ -83,6 +83,10 @@ app.use(UeEl, {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/font-family").then((res) => res.default()),
                 getUsedFontFamily: () => Promise.resolve(getLocalFontLib()),
+            },
+            buttonLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/button").then((res) => res.default),
             },
         },
     },

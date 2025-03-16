@@ -14,6 +14,10 @@ import type {
     ResourceFontFamily as ResourceFontFamilyType,
     ResourceFontFamilyItem as ResourceFontFamilyItemType,
 } from "@stone/uemo-editor-assets/resource/font-family";
+import type {
+    ResourceButton as ResourceButtonType,
+    ResourceButtonItem as ResourceButtonItemType,
+} from "@stone/uemo-editor-assets/resource/button";
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
@@ -313,6 +317,12 @@ declare global {
         type ResourceButtonHoverEffect = ResourceButtonHoverEffectType;
 
         /**
+         * @description 按钮资源列表
+         */
+        type ResourceButton = ResourceButtonType;
+        type ResourceButtonItem = ResourceButtonItemType;
+
+        /**
          * @description 文件上传信息
          */
         type FileUploadInfo = {
@@ -346,6 +356,7 @@ declare global {
             fontFamilyLibrary: ResourceValue<UE_EL_UTIL.ResourceFontFamily> & {
                 getUsedFontFamily?: () => Promise<{ name: string; src: string }[]>;
             };
+            buttonLibrary: ResourceValue<UE_EL_UTIL.ResourceButton>;
         };
     }
 }
