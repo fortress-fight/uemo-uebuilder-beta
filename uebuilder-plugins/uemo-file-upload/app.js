@@ -13,6 +13,7 @@ const FILE_TYPE_MAP = {
     lottie: [".lottie", ".json"],
     spline: [".splinecode"],
     jsmo: [".jsmo"],
+    svg: [".svg"],
 };
 
 // 获取文件类型
