@@ -1,5 +1,3 @@
-import type { UNSPLASH_IMAGE } from "../index";
-
 import { Masonry } from "@stone/uemo-editor-utils/lib/masonry-layout";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
@@ -14,13 +12,10 @@ interface MasonryOptions {
 /**
  * Masonry 混入函数 - 用于处理视频列表的瀑布流布局
  * @param listDomRef - 容器DOM引用
- * @param imageList - 视频列表数据
+ * @param listData - 列表数据
  * @throws {Error} 当DOM引用无效时抛出错误
  */
-export function MasonryMixin(
-    listDomRef: ReturnType<typeof useTemplateRef<HTMLElement>>,
-    imageList: Ref<UNSPLASH_IMAGE[]>
-): void {
+export function MasonryMixin(listDomRef: ReturnType<typeof useTemplateRef<HTMLElement>>, listData: Ref<any[]>): void {
     // Masonry 实例
     let msnry: Masonry | null = null;
 
@@ -68,7 +63,7 @@ export function MasonryMixin(
     };
 
     // 监听视频列表变化
-    watch(imageList, (newList) => {
+    watch(listData, (newList) => {
         if (newList.length === 0) {
             destroyMsnry();
             return;

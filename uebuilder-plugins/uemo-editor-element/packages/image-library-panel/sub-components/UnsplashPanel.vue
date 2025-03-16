@@ -38,8 +38,8 @@ import type { UNSPLASH_IMAGE } from "../index";
 import type { PhotosBasic } from "@stone/uemo-editor-utils/lib/unsplash";
 
 import Unsplash from "@stone/uemo-editor-utils/lib/unsplash";
+import { MasonryMixin } from "@stone/uemo-editor-element/utils/masonry-mixin";
 
-import { MasonryMixin } from "../utils/masonry-mixin";
 import UnsplashPreview from "./UnsplashPreview.vue";
 
 const { t } = useI18n();

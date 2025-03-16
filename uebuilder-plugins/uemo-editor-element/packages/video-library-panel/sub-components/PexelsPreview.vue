@@ -1,11 +1,11 @@
 <template>
     <UeElSelectBox
-        :width="data.width"
-        :height="data.height"
-        :class="$style['pexels-preview']"
         ref="rootDom"
-        @trigger="useVideoLink($event, data)"
+        :class="$style['pexels-preview']"
+        :height="data.height"
         :select="data.links.includes(select || '')"
+        :width="data.width"
+        @trigger="useVideoLink($event, data)"
     >
         <video
             loop
@@ -55,7 +55,7 @@ function play(e: PointerEvent) {
 function stop(e: PointerEvent) {
     clearTimeout(timer);
     const target = e.target;
-    if (target instanceof HTMLVideoElement && target.paused === false) {
+    if (target instanceof HTMLVideoElement && !target.paused) {
         target.pause();
     }
 }

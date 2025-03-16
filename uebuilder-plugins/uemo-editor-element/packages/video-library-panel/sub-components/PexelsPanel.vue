@@ -45,10 +45,10 @@
 import type { PEXELS_VIDEO } from "../index";
 import type { Video } from "@stone/uemo-editor-utils/lib/pexels";
 
-import PexelsPreview from "./PexelsPreview.vue";
 import Pexels from "@stone/uemo-editor-utils/lib/pexels";
+import { MasonryMixin } from "@stone/uemo-editor-element/utils/masonry-mixin";
 
-import { MasonryMixin } from "../utils/masonry-mixin";
+import PexelsPreview from "./PexelsPreview.vue";
 
 const { t } = useI18n();
 const instance = getCurrentInstance();

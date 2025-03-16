@@ -1,17 +1,13 @@
 <!--
  * @Description: 视频库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 19:35:34
+ * @LastEditTime: 2025-03-17 00:36:13
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
         <template #VideoLibList="">
             <UeElLoading v-if="loading" />
-            <PexelsPanel
-                v-if="videoLib?.type === 'Pexels'"
-                v-model:select="select"
-                :accessKey="videoLib.accessKey"
-            ></PexelsPanel>
+            <PexelsPanel v-if="videoLib?.type === 'Pexels'" v-model:select="select" :accessKey="videoLib.accessKey" />
         </template>
         <template #VideoUpload="">
             <UeElFileUploadButton type="video" @submit="useUpload" />
