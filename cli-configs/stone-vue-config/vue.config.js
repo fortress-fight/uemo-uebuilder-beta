@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 15:01:47
+ * @LastEditTime: 2025-03-16 15:58:56
  */
 const { defineConfig } = require("@stone/vue-cli-service");
 const path = require("path");
@@ -90,7 +90,7 @@ module.exports = (publicPath = "./", param = {}) => {
                     ...options,
                     compilerOptions: {
                         // 将所有以 ion- 开头的标签都视为自定义元素
-                        isCustomElement: (tag) => ["dotlottie-player", "iconpark-icon"].includes(tag),
+                        isCustomElement: (tag) => ["dotlottie-player", "iconpark-icon", "ue-svg-viewer"].includes(tag),
                     },
                 }));
         },
