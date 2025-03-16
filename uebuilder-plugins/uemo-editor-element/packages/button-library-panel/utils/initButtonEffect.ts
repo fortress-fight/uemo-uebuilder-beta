@@ -1,6 +1,5 @@
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 
-import mitt from "mitt";
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 import { mobileCheck } from "@stone/uemo-editor-utils/lib/device-check";
@@ -319,14 +318,11 @@ export async function buttonCreator(theme = "", button?: HTMLElement) {
  * 按钮管理器类 - 负责按钮组件的生命周期管理和功能初始化
  */
 export class UeElButton {
-    private static instance: UeElButton;
-    private static eventBus = mitt<{ [ButtonEventName.RESIZE]: undefined }>();
+    private static instance: UeElButton | null;
     private static buttonElements = new Set<HTMLElement>();
 
     // 使用防抖优化 resize 事件处理
-    private static resizeObserver = new ResizeObserver(
-        _debounce(() => UeElButton.eventBus.emit(ButtonEventName.RESIZE), 200)
-    );
+    private static resizeObserver: ResizeObserver;
 
     /**
      * 触发指定事件
@@ -348,6 +344,14 @@ export class UeElButton {
 
     constructor() {
         if (UeElButton.instance) return UeElButton.instance;
+
+        UeElButton.resizeObserver = new ResizeObserver(
+            _debounce((targets) => {
+                targets.forEach(({ target }: { target: HTMLElement }) => {
+                    $(target).trigger(ButtonEventName.RESIZE);
+                });
+            }, 200)
+        );
         UeElButton.instance = this;
     }
 
@@ -388,6 +392,13 @@ export class UeElButton {
             // 添加 resize 监听并记录按钮
             UeElButton.resizeObserver.observe(button);
             UeElButton.buttonElements.add(button);
+
+            function destroy() {
+                UeElButton.resizeObserver.unobserve(button);
+                UeElButton.buttonElements.delete(button);
+                $(button).off(ButtonEventName.DESTROY, destroy);
+            }
+            $(button).on(ButtonEventName.DESTROY, destroy);
         });
     }
 
@@ -396,20 +407,16 @@ export class UeElButton {
      */
     public destroyButton(buttons: HTMLElement[]) {
         $(buttons).trigger(ButtonEventName.DESTROY);
-        buttons.forEach((button) => {
-            UeElButton.buttonElements.delete(button);
-        });
     }
 
     /**
      * 清理所有资源
      */
     public destroy() {
+        UeElButton.instance = null;
         this.isLottieReady = false;
         this.destroyButton(Array.from(UeElButton.buttonElements));
         UeElButton.resizeObserver.disconnect();
-        UeElButton.buttonElements.clear();
-        UeElButton.eventBus.all.clear();
         UeElButton.buttonElements.clear();
     }
 }
