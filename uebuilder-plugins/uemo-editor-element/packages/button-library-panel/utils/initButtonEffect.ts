@@ -7,6 +7,14 @@ import { mobileCheck } from "@stone/uemo-editor-utils/lib/device-check";
 
 import $pageStyle from "./app.module.scss";
 
+enum ButtonEventName {
+    RESIZE = "ue.button.resize",
+    HOVER = "ue.button.hover",
+    LEAVE = "ue.button.leave",
+    PLAY = "ue.button.play",
+    DESTROY = "ue.button.destroy",
+}
+
 /**
  * 初始化按钮波浪效果
  * @param button - 按钮DOM元素
@@ -59,21 +67,24 @@ async function initWaveEffect(button: HTMLElement) {
         destroy: () => {
             timeline.kill();
             $(textBox!).text(originText || "");
-            $(button).off("ue.button.play", controller.play);
-            $(button).off("ue.button.destroy", controller.destroy);
+            $(button).off(ButtonEventName.PLAY, controller.play);
+            $(button).off(ButtonEventName.DESTROY, controller.destroy);
         },
     };
 
     // 将控制器绑定到按钮元素
-    $(button).on("ue.button.play", () => {
+    $(button).on(ButtonEventName.PLAY, () => {
         controller.play();
     });
 
-    $(button).on("ue.button.destroy", () => {
+    $(button).on(ButtonEventName.DESTROY, () => {
         controller.destroy();
     });
 }
-
+/**
+ * 初始化按钮旋转效果
+ * @param button - 按钮DOM元素
+ */
 function initRotateEffect(button: HTMLElement) {
     const updateOriginX = () => {
         if (!button) return;
@@ -81,7 +92,7 @@ function initRotateEffect(button: HTMLElement) {
         button.style.setProperty("--origin-z", `${-height / 2}px`);
     };
 
-    $(button).on("resize.button", updateOriginX);
+    $(button).on(ButtonEventName.RESIZE, updateOriginX);
     updateOriginX();
 
     const controller = {
@@ -89,22 +100,26 @@ function initRotateEffect(button: HTMLElement) {
             //
         },
         destroy: () => {
-            $(button).off("resize.button", updateOriginX);
-            $(button).off("ue.button.play", controller.play);
-            $(button).off("ue.button.destroy", controller.destroy);
+            $(button).off(ButtonEventName.RESIZE, updateOriginX);
+            $(button).off(ButtonEventName.PLAY, controller.play);
+            $(button).off(ButtonEventName.DESTROY, controller.destroy);
         },
     };
 
-    $(button).on("ue.button.play", () => {
+    $(button).on(ButtonEventName.PLAY, () => {
         controller.play();
     });
 
-    $(button).on("ue.button.destroy", () => {
+    $(button).on(ButtonEventName.DESTROY, () => {
         controller.destroy();
     });
 }
 
-async function initHoverEffect(button: HTMLElement) {
+/**
+ * 初始化按钮背景悬浮效果
+ * @param button - 按钮DOM元素
+ */
+async function initBackgroundHoverEffect(button: HTMLElement) {
     // 动态导入GSAP
     const { gsap } = await import("@stone/uemo-editor-utils/lib/gsap");
 
@@ -135,7 +150,7 @@ async function initHoverEffect(button: HTMLElement) {
     const color = btnStyle.getPropertyValue("--color");
     const hoverColor = btnStyle.getPropertyValue("--hover-color") || color;
     const bgColor = toLinearGradient(getBackgroundColor());
-    const hoverBgColor = toLinearGradient(getHoverBackgroundColor());
+    const hoverBgColor = toLinearGradient(getHoverBackgroundColor()) || bgColor;
 
     // 判断是否需要动画过渡
     const needsAnimation = bgColor.includes("linear-gradient") || hoverBgColor?.includes("linear-gradient");
@@ -162,118 +177,118 @@ async function initHoverEffect(button: HTMLElement) {
             );
         },
         destroy: () => {
-            $(button).off("ue.button.hover", controller.hover);
-            $(button).off("ue.button.leave", controller.leave);
-            $(button).off("ue.button.destroy", controller.destroy);
+            $(button).off(ButtonEventName.HOVER, controller.hover);
+            $(button).off(ButtonEventName.LEAVE, controller.leave);
+            $(button).off(ButtonEventName.DESTROY, controller.destroy);
         },
     };
 
     // 绑定事件
-    $(button).on("ue.button.hover", controller.hover);
-    $(button).on("ue.button.leave", controller.leave);
-    $(button).on("ue.button.destroy", controller.destroy);
+    $(button).on(ButtonEventName.HOVER, controller.hover);
+    $(button).on(ButtonEventName.LEAVE, controller.leave);
+    $(button).on(ButtonEventName.DESTROY, controller.destroy);
 
     return controller;
 }
 
+/**
+ * 初始化按钮悬浮事件
+ * @param button - 按钮DOM元素
+ */
 function initHoverEvent(button: HTMLElement) {
     const isMobile = mobileCheck();
     const enterEventName = isMobile ? "touchstart" : "pointerenter";
     const leaveEventName = isMobile ? "touchend" : "pointerleave";
-    const method = $(button).attr("data-trigger-method");
 
-    if (!method) {
-        const controller = {
-            hover: () => {
-                $(button).trigger("ue.button.hover");
-            },
-            leave: () => {
-                $(button).trigger("ue.button.leave");
-            },
-            destroy: () => {
-                $(button).off(enterEventName + ".hover", controller.hover);
-                $(button).off(leaveEventName + ".hover", controller.leave);
-                $(button).off("ue.button.destroy", controller.destroy);
-            },
-        };
-
-        $(button).on(enterEventName + ".hover", controller.hover);
-        $(button).on(leaveEventName + ".hover", controller.leave);
-        $(button).on("ue.button.destroy", controller.destroy);
-    }
-}
-
-function initLottieIcon(button: HTMLElement) {
-    const beforeLottieIcon = $(button).find("." + $pageStyle["btn-before-lottie-icon"]);
-    const afterLottieIcon = $(button).find("." + $pageStyle["btn-after-lottie-icon"]);
-
-    function hoverLottie() {
-        const beforeLottie = beforeLottieIcon[0] as DotLottiePlayer;
-        if (beforeLottie) {
-            $(beforeLottie).data("playerDir", 1);
-            const beforeLottieItem = beforeLottie.getLottie();
-            beforeLottieItem?.setDirection(1);
-            beforeLottieItem?.play();
-        }
-
-        const afterLottie = afterLottieIcon[0] as DotLottiePlayer;
-        if (afterLottie) {
-            $(afterLottie).data("playerDir", 1);
-            const afterLottieItem = afterLottie.getLottie();
-            afterLottieItem?.setDirection(1);
-            afterLottieItem?.play();
-        }
-    }
-
-    function resetLottie(lottieDom: DotLottiePlayer) {
-        if (!lottieDom) return;
-        const lottieItem = lottieDom.getLottie();
-        lottieItem?.goToAndStop($(lottieDom).data("playerDir") == -1 ? lottieItem.totalFrames - 1 : 0, true);
-    }
-
-    function lottieReady(lottieDom: DotLottiePlayer) {
-        if (!lottieDom) return;
-        const lottieItem = lottieDom.getLottie();
-        if (lottieItem) {
-            lottieItem.autoplay = true;
-            lottieItem.loop = false;
-            lottieItem.play();
-        }
-    }
-
-    $(beforeLottieIcon)
-        .add(afterLottieIcon)
-        .on("lottieReady.hoverLottie", (ev) => {
-            const lottieDom = ev.currentTarget as DotLottiePlayer;
-            lottieReady(lottieDom);
-        });
-
-    $(beforeLottieIcon)
-        .add(afterLottieIcon)
-        .on("complete.hoverLottie", (ev) => {
-            const lottieDom = ev.currentTarget as DotLottiePlayer;
-            resetLottie(lottieDom);
-        });
+    if ($(button).attr("data-trigger-method")) return;
 
     const controller = {
         hover: () => {
-            hoverLottie();
+            $(button).trigger(ButtonEventName.HOVER);
+        },
+        leave: () => {
+            $(button).trigger(ButtonEventName.LEAVE);
         },
         destroy: () => {
-            $(beforeLottieIcon).add(afterLottieIcon).off("complete.hoverLottie");
-            $(button).off("ue.button.hover", controller.hover);
-            $(button).off("ue.button.destroy", controller.destroy);
+            $(button).off(enterEventName + ".hover", controller.hover);
+            $(button).off(leaveEventName + ".hover", controller.leave);
+            $(button).off(ButtonEventName.DESTROY, controller.destroy);
         },
     };
 
-    $(button).on("ue.button.hover", controller.hover);
-    $(button).on("ue.button.destroy", controller.destroy);
+    $(button).on(enterEventName + ".hover", controller.hover);
+    $(button).on(leaveEventName + ".hover", controller.leave);
+    $(button).on(ButtonEventName.DESTROY, controller.destroy);
 }
 
+/**
+ * 初始化按钮Lottie图标效果
+ * @param button - 按钮DOM元素
+ */
+function initLottieIcon(button: HTMLElement) {
+    const lottieIcons = $(button).find(
+        `.${$pageStyle["btn-before-lottie-icon"]}, .${$pageStyle["btn-after-lottie-icon"]}`
+    );
+
+    if (!lottieIcons.length) return;
+
+    function handleLottie(lottieDom: DotLottiePlayer, action: "hover" | "ready" | "reset") {
+        if (!lottieDom) return;
+
+        const lottieItem = lottieDom.getLottie();
+        if (!lottieItem) return;
+
+        switch (action) {
+            case "hover":
+                $(lottieDom).data("playerDir", 1);
+                lottieItem.setDirection(1);
+                lottieItem.play();
+                break;
+            case "ready":
+                lottieItem.autoplay = true;
+                lottieItem.loop = false;
+                lottieItem.play();
+                break;
+            case "reset":
+                const playerDir = $(lottieDom).data("playerDir");
+                lottieItem.goToAndStop(playerDir == -1 ? lottieItem.totalFrames - 1 : 0, true);
+                break;
+        }
+    }
+
+    const controller = {
+        hover: () => {
+            lottieIcons.each((_, el) => {
+                handleLottie(el as DotLottiePlayer, "hover");
+            });
+        },
+        destroy: () => {
+            lottieIcons.off(".hoverLottie");
+            $(button).off(ButtonEventName.HOVER, controller.hover);
+            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+        },
+    };
+
+    lottieIcons
+        .on("ready.hoverLottie", (ev) => {
+            handleLottie(ev.currentTarget as DotLottiePlayer, "ready");
+        })
+        .on("complete.hoverLottie", (ev) => {
+            handleLottie(ev.currentTarget as DotLottiePlayer, "reset");
+        });
+
+    $(button).on(ButtonEventName.HOVER, controller.hover).on(ButtonEventName.DESTROY, controller.destroy);
+}
+
+/**
+ * 按钮创建器
+ * @param theme - 按钮主题
+ * @param button - 按钮DOM元素
+ */
 export async function buttonCreator(theme = "", button?: HTMLElement) {
     if (!button) return;
 
-    initHoverEffect(button).catch((error) => {
+    initBackgroundHoverEffect(button).catch((error) => {
         console.error(error);
     });
 
@@ -300,71 +315,101 @@ export async function buttonCreator(theme = "", button?: HTMLElement) {
     initLottieIcon(button);
 }
 
+/**
+ * 按钮管理器类 - 负责按钮组件的生命周期管理和功能初始化
+ */
 export class UeElButton {
     private static instance: UeElButton;
-    private static mittManager = mitt<{ "resize.button": undefined }>();
-    private static resizeObserver: ResizeObserver = new ResizeObserver(
-        _debounce(() => {
-            UeElButton.mittManager.emit("resize.button");
-        }, 200)
+    private static eventBus = mitt<{ [ButtonEventName.RESIZE]: undefined }>();
+    private static buttonElements = new Set<HTMLElement>();
+
+    // 使用防抖优化 resize 事件处理
+    private static resizeObserver = new ResizeObserver(
+        _debounce(() => UeElButton.eventBus.emit(ButtonEventName.RESIZE), 200)
     );
-    private static initButtonDoms = new Set<HTMLElement>();
+
+    /**
+     * 触发指定事件
+     * @param eventName - 事件名称
+     * @param button - 按钮DOM元素
+     */
+    static triggerEvent(eventName: ButtonEventName, button: HTMLElement | HTMLElement[] | NodeListOf<HTMLElement>) {
+        if (Array.isArray(button)) {
+            button.forEach((btn) => {
+                $(btn).trigger(eventName);
+            });
+        } else {
+            $(button).trigger(eventName);
+        }
+    }
+
+    // 标记 Lottie 组件是否已初始化
+    private isLottieReady = false;
 
     constructor() {
-        if (UeElButton.instance) {
-            return UeElButton.instance;
-        }
+        if (UeElButton.instance) return UeElButton.instance;
         UeElButton.instance = this;
     }
 
-    dotLottieComponentReady = false;
-
-    async initDotLottie(doms: HTMLElement[]) {
-        if (doms.length <= 0 || this.dotLottieComponentReady) return;
-
+    /**
+     * 初始化 Lottie 动画组件
+     */
+    private async initLottieComponent(elements: HTMLElement[]) {
+        if (elements.length === 0 || this.isLottieReady) return;
         await import("@stone/uemo-editor-utils/lib/lottie");
-        this.dotLottieComponentReady = true;
+        this.isLottieReady = true;
     }
 
-    async initIconPark(doms: HTMLElement[]) {
-        if (doms.length <= 0) return;
-
+    /**
+     * 初始化图标组件
+     */
+    private async initIcons(elements: HTMLElement[]) {
+        if (elements.length === 0) return;
         const { initIconParkComponent } = await import("@stone/uemo-editor-utils/lib/icon");
-        initIconParkComponent(doms);
+        initIconParkComponent(elements);
     }
 
-    initButton(buttonDoms: HTMLElement[]) {
-        this.initDotLottie(Array.from($(buttonDoms).find("dotlottie-player"))).catch((err) => {
-            console.error(err);
-        });
+    /**
+     * 初始化按钮组
+     * @param buttons - 需要初始化的按钮DOM元素数组
+     */
+    public initButton(buttons: HTMLElement[]) {
+        // 并行初始化组件
+        Promise.all([
+            this.initLottieComponent(Array.from($(buttons).find("dotlottie-player"))),
+            this.initIcons(Array.from($(buttons).find("iconpark-icon"))),
+        ]).catch(console.error);
 
-        this.initIconPark(Array.from($(buttonDoms).find("iconpark-icon"))).catch((err) => {
-            console.error(err);
-        });
+        // 初始化每个按钮
+        buttons.forEach((button) => {
+            const theme = $(button).data("theme") || "normal";
+            buttonCreator(theme, button).catch(console.error);
 
-        buttonDoms.forEach((button) => {
-            const theme = $(button).data("theme");
-            buttonCreator(theme || "normal", button).catch((err) => {
-                console.error(err);
-            });
-        });
-
-        buttonDoms.forEach((button) => {
+            // 添加 resize 监听并记录按钮
             UeElButton.resizeObserver.observe(button);
-            UeElButton.initButtonDoms.add(button);
+            UeElButton.buttonElements.add(button);
         });
     }
 
-    destroyButton(buttonDoms: HTMLElement[]) {
-        $(buttonDoms).each((_index, button) => {
-            $(button).trigger("ue.button.destroy");
+    /**
+     * 销毁指定按钮组
+     */
+    public destroyButton(buttons: HTMLElement[]) {
+        $(buttons).trigger(ButtonEventName.DESTROY);
+        buttons.forEach((button) => {
+            UeElButton.buttonElements.delete(button);
         });
     }
 
-    destroy() {
-        this.destroyButton(Array.from(UeElButton.initButtonDoms));
+    /**
+     * 清理所有资源
+     */
+    public destroy() {
+        this.isLottieReady = false;
+        this.destroyButton(Array.from(UeElButton.buttonElements));
         UeElButton.resizeObserver.disconnect();
-        UeElButton.initButtonDoms.clear();
-        UeElButton.mittManager.all.clear();
+        UeElButton.buttonElements.clear();
+        UeElButton.eventBus.all.clear();
+        UeElButton.buttonElements.clear();
     }
 }
