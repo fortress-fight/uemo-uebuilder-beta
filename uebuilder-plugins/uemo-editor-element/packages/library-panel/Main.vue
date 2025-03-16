@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 19:17:06
+ * @LastEditTime: 2025-03-16 23:40:05
 -->
 <template>
     <div :class="$style['library-panel']" :data-size="panelSize">
@@ -159,6 +159,8 @@ defineExpose({ tabTo });
 }
 .panel-head {
     padding-top: 22px;
+
+    cursor: grab;
     .nav-list {
         padding: 0 26px;
     }
