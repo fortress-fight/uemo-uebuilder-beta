@@ -101,3 +101,21 @@ export function initLottieIcon(button: HTMLElement) {
 
     $(button).on(ButtonEventName.HOVER, controller.hover).on(ButtonEventName.DESTROY, controller.destroy);
 }
+
+/**
+ * 初始化按钮SVG图标效果
+ * @param button - 按钮DOM元素
+ */
+export function initSvgIcon(button: HTMLElement) {
+    const svgIcons = $(button).find(`.${$pageStyle["btn-before-svg-icon"]}, .${$pageStyle["btn-after-svg-icon"]}`);
+
+    if (!svgIcons.length) return;
+
+    import("@stone/uemo-editor-utils/lib/svg")
+        .then(({ initSvgIconComponent }) => {
+            return initSvgIconComponent();
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}

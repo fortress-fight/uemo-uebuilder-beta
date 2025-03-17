@@ -1,7 +1,7 @@
 import { initWaveEffect } from "./wave-effect";
 import { initRotateEffect } from "./rotate-effect";
 import { initBackgroundHoverEffect } from "./background-effect";
-import { initHoverEvent, initLottieIcon } from "./helper";
+import { initHoverEvent, initLottieIcon, initSvgIcon } from "./helper";
 
 /**
  * 按钮创建器
@@ -36,4 +36,5 @@ export async function buttonCreator(theme = "", button?: HTMLElement) {
 
     initHoverEvent(button);
     initLottieIcon(button);
+    initSvgIcon(button);
 }
