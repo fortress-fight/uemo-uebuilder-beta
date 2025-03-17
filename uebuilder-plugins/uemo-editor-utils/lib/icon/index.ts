@@ -1,3 +1,10 @@
+/*
+ * @Description: 图标库初始化相关
+ * @Author: F-Stone
+ * @LastEditTime: 2025-03-18 01:19:25
+ */
+// NOTE 请使用异步的方式导入该文件
+
 import { loadScript } from "../utils";
 
 export type IconLib = {
@@ -19,7 +26,7 @@ export type IconCategory = {
  * @param iconPath 图标路径
  * @returns 图标项目数据
  */
-export function loadIconProjectData(iconPath: string) {
+function _loadIconProjectData(iconPath: string) {
     return import(/* webpackChunkName: "icon" */ `${iconPath}`);
 }
 
