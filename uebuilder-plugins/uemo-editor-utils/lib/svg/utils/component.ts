@@ -152,4 +152,6 @@ class UeSvgView extends HTMLElement {
     }
 }
 
-customElements.define("ue-svg-viewer", UeSvgView);
+if (!customElements.get("ue-svg-viewer")) {
+    customElements.define("ue-svg-viewer", UeSvgView);
+}
