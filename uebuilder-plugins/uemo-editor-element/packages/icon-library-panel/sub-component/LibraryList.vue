@@ -20,13 +20,12 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { loadSvgIcon } from "@stone/uemo-editor-utils/lib/icon";
 import { _flatten } from "@stone/uemo-editor-utils/lib/lodash";
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const props = defineProps<{ search?: string; lib: UE_EL_UTIL.ResourceIconItem[]; source: string }>();
-const select = defineModel<{ name: string; source: string }>("select", { required: false });
+const select = defineModel<UE_EL_UTIL.ResourceIconAttrs>("select", { required: false });
 
 const loading = ref(false);
 const fuseReady = ref(false);
@@ -35,8 +34,10 @@ const searchLibraryList = shallowRef<UE_EL_UTIL.ResourceIconItem["data"] | null>
 
 const getIconList = (source: string[]) => {
     loading.value = true;
-    return loadSvgIcon(source).then(() => {
-        loading.value = false;
+    return import("@stone/uemo-editor-utils/lib/icon").then(({ loadSvgIcon }) => {
+        return loadSvgIcon(source).then(() => {
+            loading.value = false;
+        });
     });
 };
 

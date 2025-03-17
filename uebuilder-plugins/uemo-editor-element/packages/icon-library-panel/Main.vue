@@ -1,7 +1,7 @@
 <!--
  * @Description: 图库库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 17:19:19
+ * @LastEditTime: 2025-03-18 02:55:38
 -->
 <template>
     <UeElLibraryPanel minHeight="200px" :cards="libraryPanelParam.cards">
@@ -27,7 +27,7 @@ defineOptions({ name: "UeElIconLibraryPanel" });
 const { t, locale } = useI18n();
 const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElIconLibraryPanelBaseProps>(), {});
-const select = defineModel<{ name: string; source: string }>("select", { required: false });
+const select = defineModel<UE_EL_UTIL.ResourceIconAttrs>("select", { required: false });
 
 const loading = ref(false);
 const iconLib = ref<UE_EL_UTIL.ResourceIconItem[] | null>(null);
