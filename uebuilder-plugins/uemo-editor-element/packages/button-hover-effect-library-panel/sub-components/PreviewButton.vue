@@ -1,18 +1,33 @@
 <template>
     <div :class="$style['preview-box']">
         <div :class="$style['button-box']" class="flex justify-center items-center">
-            <button :class="$style['button-preview']" class="flex justify-center items-center" :data-animation="value">
-                <UeElIcon v-if="beforeIcon" :class="[$style['before-ic'], $style['btn-icon']]" :name="beforeIcon" />
-                <span :class="$style['btn-text']">{{ name }}</span>
-                <UeElIcon v-if="afterIcon" :class="[$style['after-ic'], $style['btn-icon']]" :name="afterIcon" />
+            <button
+                :class="$style['button-preview']"
+                v-if="attrs"
+                class="flex justify-center items-center"
+                :data-animation="value"
+            >
+                <UeElIcon
+                    v-if="attrs.beforeIcon"
+                    :class="[$style['before-ic'], $style['btn-icon']]"
+                    :name="attrs.beforeIcon"
+                />
+                <span :class="$style['btn-text']">{{ attrs.name }}</span>
+                <UeElIcon
+                    v-if="attrs.afterIcon"
+                    :class="[$style['after-ic'], $style['btn-icon']]"
+                    :name="attrs.afterIcon"
+                />
             </button>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import type { ResourceButtonHoverEffectItem as ResourceButtonHoverEffectItemType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
+import { mixOptions } from "../utils/options";
 
-defineProps<ResourceButtonHoverEffectItemType>();
+const props = defineProps<{ value: string }>();
+const list = mixOptions();
+const attrs = computed(() => list.value.find((item) => item.value === props.value));
 </script>
 <style lang="scss" module>
 @keyframes rubberBand {
@@ -65,6 +80,8 @@ defineProps<ResourceButtonHoverEffectItemType>();
     .button-preview {
         min-width: 86%;
         padding: 10px 20px;
+
+        white-space: nowrap;
 
         color: #fff;
         border-radius: 4px;

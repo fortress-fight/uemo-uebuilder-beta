@@ -46,7 +46,6 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         iconLibrary: createCache(param.iconLibrary),
         videoLibrary: createCache(param.videoLibrary),
         imageLibrary: createCache(param.imageLibrary),
-        textDecorationLibrary: createCache(param.textDecorationLibrary),
         shareIconLibrary: createCache(param.shareIconLibrary),
         fontFamilyLibrary: createCache(param.fontFamilyLibrary),
         buttonLibrary: createCache(param.buttonLibrary),

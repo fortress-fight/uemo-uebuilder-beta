@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:34:17
+ * @LastEditTime: 2025-03-18 02:40:09
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -16,9 +16,7 @@
                     :height="161"
                     @trigger="select = item.name"
                 >
-                    <div :class="$style['thumb-box']">
-                        <img :src="item.thumb" />
-                    </div>
+                    <TextDecorationPreview :value="item.value" />
                 </UeElSelectBox>
             </div>
             <div v-else>
@@ -29,18 +27,20 @@
 </template>
 <script lang="ts" setup>
 import type { UeElTextDecorationLibraryPanelBaseProps } from "./index";
+import type { ResourceTextDecoration } from "./utils/options";
 
 import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
+import { textDecorationOptions } from "./utils/options";
+import TextDecorationPreview from "./sub-component/TextDecorationPreview.vue";
 
 defineOptions({ name: "UeElTextDecorationLibraryPanel" });
 
 const { t } = useI18n();
 
-const instance = getCurrentInstance();
 const _prop = withDefaults(defineProps<UeElTextDecorationLibraryPanelBaseProps>(), {});
 
 const loading = ref(false);
-const list = ref<UE_EL_UTIL.ResourceTextDecoration | null>(null);
+const list = ref<ResourceTextDecoration | null>(textDecorationOptions);
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
     cards: [
         {
@@ -53,30 +53,6 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
 }));
 
 const select = defineModel<string>("select", { required: false });
-
-const getTextDecorationLibrary = async () => {
-    // 启动1秒定时器：若超过1秒未返回，则显示 loading
-    const timer = setTimeout(() => (loading.value = true), 20);
-
-    try {
-        const res = await instance?.proxy?.$ueElResource.textDecorationLibrary.getData();
-
-        clearTimeout(timer);
-
-        list.value = res || null;
-        loading.value = false;
-    } catch (error) {
-        clearTimeout(timer);
-        loading.value = false;
-        throw error;
-    }
-};
-
-onBeforeMount(() => {
-    getTextDecorationLibrary().catch((error) => {
-        instance?.proxy?.$ueElError(error);
-    });
-});
 </script>
 <style lang="scss" module>
 .text-decoration-library-panel {

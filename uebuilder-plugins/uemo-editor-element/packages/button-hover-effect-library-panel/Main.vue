@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮 hover 动效库
  * @Author: F-Stone
- * @LastEditTime: 2025-03-17 01:33:51
+ * @LastEditTime: 2025-03-18 02:45:11
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -15,7 +15,7 @@
                     @trigger="select = item.value"
                 >
                     <div :class="$style['library-item']">
-                        <PreviewButton v-bind="item" />
+                        <PreviewButton :value="item.value" />
                     </div>
                 </UeElSelectBox>
             </div>
@@ -27,6 +27,7 @@ import type { UeElButtonHoverEffectLibraryPanelBaseProps } from "./index";
 
 import PreviewButton from "./sub-components/PreviewButton.vue";
 import UeElSelectBox from "../library-panel/sub-components/SelectBox.vue";
+import { mixOptions } from "./utils/options";
 
 defineOptions({ name: "UeElButtonHoverEffectLibraryPanel" });
 
@@ -35,14 +36,7 @@ const { t } = useI18n();
 const _prop = withDefaults(defineProps<UeElButtonHoverEffectLibraryPanelBaseProps>(), {});
 const select = defineModel<string>("select", { required: false });
 
-const list = ref<UE_EL_UTIL.ResourceButtonHoverEffect>([
-    { value: "moveUp", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_UP") },
-    { value: "shakeX", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_SHAKE_X") },
-    { value: "rubberBand", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_RUBBER_BAND") },
-    { value: "scale", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_SCALE") },
-    { value: "moveLeft", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_LEFT"), beforeIcon: "icon-app-play" },
-    { value: "moveRight", name: t("BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_RIGHT"), afterIcon: "icon-app-play" },
-]);
+const list = mixOptions();
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
     cards: [
         {

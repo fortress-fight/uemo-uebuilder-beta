@@ -5,9 +5,7 @@ import type {
     ResourceIconItem as ResourceIconItemType,
 } from "@stone/uemo-editor-assets/resource/icon";
 import type { ResourceShape as ResourceShapeType } from "@stone/uemo-editor-assets/resource/shape";
-import type { ResourceTextDecoration as ResourceTextDecorationType } from "@stone/uemo-editor-assets/resource/text-decoration";
 import type { ResourceShareIcon as ResourceShareIconType } from "@stone/uemo-editor-assets/resource/share-icon";
-import type { ResourceButtonHoverEffect as ResourceButtonHoverEffectType } from "@stone/uemo-editor-assets/resource/button-hover-effect";
 import type { ResourceVideo as ResourceVideoType } from "@stone/uemo-editor-assets/resource/video";
 import type { ResourceImage as ResourceImageType } from "@stone/uemo-editor-assets/resource/image";
 import type {
@@ -284,6 +282,7 @@ declare global {
          */
         type ResourceIcon = ResourceIconType;
         type ResourceIconItem = ResourceIconItemType;
+        type ResourceIconAttrs = { name: string; source: string };
 
         /**
          * @description Video 资源列表
@@ -296,11 +295,6 @@ declare global {
         type ResourceImage = ResourceImageType;
 
         /**
-         * @description 文字装饰资源列表
-         */
-        type ResourceTextDecoration = ResourceTextDecorationType;
-
-        /**
          * @description 社交分享资源列表
          */
         type ResourceShareIcon = ResourceShareIconType;
@@ -310,11 +304,6 @@ declare global {
          */
         type ResourceFontFamily = ResourceFontFamilyType;
         type ResourceFontFamilyItem = ResourceFontFamilyItemType;
-
-        /**
-         * @description 按钮 hover 动效资源列表
-         */
-        type ResourceButtonHoverEffect = ResourceButtonHoverEffectType;
 
         /**
          * @description 按钮资源列表
@@ -351,7 +340,6 @@ declare global {
             iconLibrary: ResourceValue<UE_EL_UTIL.ResourceIcon>;
             videoLibrary: ResourceValue<UE_EL_UTIL.ResourceVideo>;
             imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;
-            textDecorationLibrary: ResourceValue<UE_EL_UTIL.ResourceTextDecoration>;
             shareIconLibrary: ResourceValue<UE_EL_UTIL.ResourceShareIcon>;
             fontFamilyLibrary: ResourceValue<UE_EL_UTIL.ResourceFontFamily> & {
                 getUsedFontFamily?: () => Promise<{ name: string; src: string }[]>;

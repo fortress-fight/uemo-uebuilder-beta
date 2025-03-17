@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试图库库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 17:23:06
+ * @LastEditTime: 2025-03-18 00:56:13
 -->
 <template>
     <TestArea
@@ -23,7 +23,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElIconLibraryPanelProps & {
     testOptionTitle?: string;
-    select?: { name: string; source: string };
+    select?: UE_EL_UTIL.ResourceIconAttrs;
 })[] = [
     {
         select: {
