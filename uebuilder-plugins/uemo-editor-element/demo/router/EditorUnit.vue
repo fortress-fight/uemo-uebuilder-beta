@@ -21,6 +21,7 @@ import TestColorPicker from "~/demo/components/TestColorPicker.vue";
 import TestColorInput from "~/demo/components/TestColorInput.vue";
 import TestFileUploader from "~/demo/components/TestFileUploader.vue";
 import TestGirdLayoutUtil from "~/demo/components/TestGirdLayoutUtil.vue";
+import TestResourcePreview from "~/demo/components/TestResourcePreview.vue";
 
 const containerComponents = [TestSettingBar, TestControlGroup, TestEditorGroup, TestSettingGroup];
 const unitTestComponents = [
@@ -30,6 +31,7 @@ const unitTestComponents = [
     TestColorPicker,
     TestFileUploader,
     TestGirdLayoutUtil,
+    TestResourcePreview,
 ];
 const helperTestComponents = [TestLoading, TestTipGroup];
 

@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/16 02:17:36
+ * @LastEditTime: 2025/3/18 00:46:45
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -12,8 +12,8 @@ import UeElBoxShadowSettingGroup from "../packages/box-shadow-setting-group";
 import UeElButton from "../packages/button";
 import UeElButtonHoverEffectLibraryPanel from "../packages/button-hover-effect-library-panel";
 import UeElButtonLibraryPanel from "../packages/button-library-panel";
-import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSetting from "../packages/calender-setting";
+import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
 import UeElCheckBox from "../packages/check-box";
 import UeElColorInput from "../packages/color-input";
@@ -49,12 +49,14 @@ import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
+import UeElResourceSetting from "../packages/resource-setting";
+import UeElResourcePreview from "../packages/resource-preview";
 import UeElSelect from "../packages/select";
-import UeElSelectOption from "../packages/select-option";
 import UeElSettingBar from "../packages/setting-bar";
+import UeElSelectOption from "../packages/select-option";
 import UeElSettingGroup from "../packages/setting-group";
-import UeElShapeLibraryPanel from "../packages/shape-library-panel";
 import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
+import UeElShapeLibraryPanel from "../packages/shape-library-panel";
 import UeElSplineLibraryPanel from "../packages/spline-library-panel";
 import UeElSvgLibraryPanel from "../packages/svg-library-panel";
 import UeElTabCard from "../packages/tab-card";
@@ -75,8 +77,8 @@ export const components = [
     UeElButton,
     UeElButtonHoverEffectLibraryPanel,
     UeElButtonLibraryPanel,
-    UeElCalenderPicker,
     UeElCalenderSetting,
+    UeElCalenderPicker,
     UeElCalenderSettingGroup,
     UeElCheckBox,
     UeElColorInput,
@@ -112,12 +114,14 @@ export const components = [
     UeElPopPanel,
     UeElRadiusSetting,
     UeElRadiusSettingGroup,
+    UeElResourceSetting,
+    UeElResourcePreview,
     UeElSelect,
-    UeElSelectOption,
     UeElSettingBar,
+    UeElSelectOption,
     UeElSettingGroup,
-    UeElShapeLibraryPanel,
     UeElShareIconLibraryPanel,
+    UeElShapeLibraryPanel,
     UeElSplineLibraryPanel,
     UeElSvgLibraryPanel,
     UeElTabCard,
