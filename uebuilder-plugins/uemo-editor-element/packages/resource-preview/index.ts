@@ -91,7 +91,7 @@ export function isResourcePreviewType(type: string): type is UeElResourcePreview
 export function isResourcePreviewAttrs(
     type: string,
     attrs?: string | Record<string, any>
-): attrs is UE_EL_UTIL.ResourceIconAttrs {
+): attrs is ResourceParam[keyof ResourceParam] {
     if (!isResourcePreviewType(type)) return false;
     return typeof attrs === "undefined" || typeof attrs === "string" || "source" in attrs;
 }
