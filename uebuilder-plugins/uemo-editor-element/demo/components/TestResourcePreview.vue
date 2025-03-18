@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 03:15:04
+ * @LastEditTime: 2025-03-18 12:03:52
 -->
 <template>
     <TestArea
@@ -25,7 +25,10 @@ const testValueList: (UE_EL_COMPONENT.UeElResourcePreviewProps & { testOptionTit
     {
         testOptionTitle: "SVG",
         type: "svg",
-        attrs: "http://127.0.0.1:9005/uploads/1742234474622.svg",
+        attrs: {
+            source: "http://127.0.0.1:9005/uploads/1742234474622.svg",
+            data: { w: 100, h: 100 },
+        },
     },
     {
         testOptionTitle: "文字装饰",

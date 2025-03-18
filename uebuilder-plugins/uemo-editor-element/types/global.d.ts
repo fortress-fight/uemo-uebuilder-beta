@@ -314,7 +314,7 @@ declare global {
         /**
          * @description SVG 文件上传信息
          */
-        type ResourceSvgAttrs = { source: string; data: SvgFileUploadData };
+        type ResourceSvgAttrs = { source: string; data?: SvgFileUploadData };
 
         /**
          * @description 文件上传信息
