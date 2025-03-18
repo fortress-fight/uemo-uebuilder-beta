@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 03:36:33
+ * @LastEditTime: 2025-03-18 11:23:13
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -15,8 +15,11 @@
             @pointerenter="handlePointerEnter"
             @pointerleave="handlePointerLeave"
         >
-            <template v-if="isIconAttr(attrs)">
-                <iconpark-icon v-if="type === 'icon'" :class="$style['icon-preview']" :name="attrs.name" />
+            <template v-if="isIconAttr(type, attrs)">
+                <iconpark-icon :class="$style['icon-preview']" :name="attrs.name" />
+            </template>
+            <template v-else-if="isSvgAttr(type, attrs)">
+                <ue-svg-viewer :class="$style['svg-preview']" :src="attrs.source" />
             </template>
             <template v-else>
                 <dotlottie-player
@@ -30,7 +33,6 @@
                     @ready="handleLottieReady"
                     @complete="handleLottieComplete"
                 />
-                <ue-svg-viewer v-if="type === 'svg'" :class="$style['svg-preview']" :src="attrs" />
                 <i v-if="type === 'shareIcon'" :class="[$style['share-icon-preview'], attrs]"></i>
                 <UeElHoverEffectPreviewButton
                     v-if="type === 'buttonHoverEffect'"
@@ -71,9 +73,27 @@ const dotlottieRef = useTemplateRef<DotLottiePlayer>("dotlottieRef");
  * @param attrs - 属性值
  * @returns 是否为图标属性
  */
-function isIconAttr(attrs: string | UE_EL_UTIL.ResourceIconAttrs | undefined): attrs is UE_EL_UTIL.ResourceIconAttrs {
+function isIconAttr(
+    type: UeElResourcePreviewBaseProps["type"],
+    attrs: UeElResourcePreviewBaseProps["attrs"]
+): attrs is UE_EL_UTIL.ResourceIconAttrs {
+    if (type !== "icon") return false;
     if (typeof attrs === "undefined" || typeof attrs === "string") return false;
-    return "name" in attrs;
+    return "name" in attrs && "source" in attrs;
+}
+
+/**
+ * 类型守卫：检查是否为 SVG 属性
+ * @param attrs - 属性值
+ * @returns 是否为 SVG 属性
+ */
+function isSvgAttr(
+    type: UeElResourcePreviewBaseProps["type"],
+    attrs: UeElResourcePreviewBaseProps["attrs"]
+): attrs is UE_EL_UTIL.ResourceSvgAttrs {
+    if (type !== "svg") return false;
+    if (typeof attrs === "undefined" || typeof attrs === "string") return false;
+    return "source" in attrs;
 }
 
 /**
@@ -162,24 +182,23 @@ function handlePointerLeave(): void {
     }
 }
 
-/**
- * 初始化组件
- */
-onBeforeMount(async () => {
-    try {
-        if (props.type === "icon" && isIconAttr(props.attrs)) {
-            await getIconList([props.attrs.source]);
+watchEffect(() => {
+    void (async () => {
+        try {
+            if (isIconAttr(props.type, props.attrs)) {
+                await getIconList([props.attrs.source]);
+            }
+            if (props.type === "lottie") {
+                await import("@stone/uemo-editor-utils/lib/lottie");
+            }
+            if (isSvgAttr(props.type, props.attrs)) {
+                const { initSvgIconComponent } = await import("@stone/uemo-editor-utils/lib/svg");
+                await initSvgIconComponent();
+            }
+        } catch (error) {
+            console.error("Failed to initialize component:", error);
         }
-        if (props.type === "lottie") {
-            await import("@stone/uemo-editor-utils/lib/lottie");
-        }
-        if (props.type === "svg") {
-            const { initSvgIconComponent } = await import("@stone/uemo-editor-utils/lib/svg");
-            await initSvgIconComponent();
-        }
-    } catch (error) {
-        console.error("Failed to initialize component:", error);
-    }
+    })();
 });
 </script>
 

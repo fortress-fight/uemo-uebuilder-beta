@@ -1,7 +1,7 @@
 /*
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 00:55:12
+ * @LastEditTime: 2025-03-18 11:00:39
  */
 import type { App } from "vue";
 
@@ -12,7 +12,11 @@ UeElResourceSetting.install = (app: App) => {
     app.component(UeElResourceSetting.name, UeElResourceSetting);
 };
 
-export type ResourceValue = UE_EL_UTIL.ResourceButtonItem["attrs"] | string | UE_EL_UTIL.ResourceIconAttrs;
+export type ResourceValue =
+    | string
+    | UE_EL_UTIL.ResourceButtonItem["attrs"]
+    | UE_EL_UTIL.ResourceIconAttrs
+    | UE_EL_UTIL.ResourceSvgAttrs;
 
 export interface UeElResourceSettingBaseProps {
     removable?: boolean;

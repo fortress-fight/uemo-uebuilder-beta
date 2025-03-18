@@ -312,12 +312,15 @@ declare global {
         type ResourceButtonItem = ResourceButtonItemType;
 
         /**
+         * @description SVG 文件上传信息
+         */
+        type ResourceSvgAttrs = { source: string; data: SvgFileUploadData };
+
+        /**
          * @description 文件上传信息
          */
-        type FileUploadInfo = {
-            url: string;
-            data: Record<string, string>;
-        };
+        type FileUploadInfo = { url: string; data: SvgFileUploadData };
+        type SvgFileUploadData = { w: number; h: number };
     }
 
     namespace UE_PLUGIN_OPTIONS {

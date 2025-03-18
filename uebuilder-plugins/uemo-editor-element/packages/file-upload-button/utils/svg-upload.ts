@@ -85,12 +85,12 @@ function createSvgInterceptor(isDealing: Ref<boolean>, fileData: Ref<Record<stri
 }
 
 export const uploadBeforeInterceptors = function (file: Ref<UploadType>): {
-    fileData: Ref<Record<string, any>>;
+    fileData: Ref<UE_EL_UTIL.SvgFileUploadData>;
     isDealing: Ref<boolean>;
     interceptor: Ref<UE_EL_UTIL.UploadIntercept[]>;
 } {
     const isDealing = ref(false);
-    const fileData = ref<Record<string, any>>({});
+    const fileData = ref<UE_EL_UTIL.SvgFileUploadData>({ w: 0, h: 0 });
     const interceptor = ref<UE_EL_UTIL.UploadIntercept[]>([]);
 
     if (file.value === "svg") {

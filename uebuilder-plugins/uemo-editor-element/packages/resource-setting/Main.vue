@@ -1,11 +1,11 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 03:49:01
+ * @LastEditTime: 2025-03-18 11:10:15
 -->
 <template>
     <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
-        <template v-if="isResourcePreviewAttrs(valueRef)">
+        <template v-if="isResourcePreviewAttrs(type, valueRef)">
             <UeElResourcePreview v-if="isResourcePreviewType(type)" :type="type" :attrs="valueRef" />
         </template>
         <div class="flex gap-2 w-full" :class="$style['resource-setting']">

@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试SVG库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-09 02:44:27
+ * @LastEditTime: 2025-03-18 10:53:57
 -->
 <template>
     <TestArea
@@ -21,9 +21,10 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElSvgLibraryPanelProps & { testOptionTitle?: string; select?: string })[] = [
-    { select: "" },
-];
+const testValueList: (UE_EL_COMPONENT.UeElSvgLibraryPanelProps & {
+    testOptionTitle?: string;
+    select?: UE_EL_UTIL.ResourceSvgAttrs;
+})[] = [{ select: undefined }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
