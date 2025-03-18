@@ -1,5 +1,10 @@
 <template>
-    <div :class="$style['image-preview']" class="flex justify-center items-center" ref="previewBoxDom">
+    <div
+        :class="$style['image-preview']"
+        class="flex justify-center items-center"
+        ref="previewBoxDom"
+        :data-focus-enable="enableFocus"
+    >
         <img ref="imageDom" :class="$style['preview-img']" :src="src" @load="handleImageLoad" alt="预览图片" />
         <Transition :css="false" appear @after-enter="handleAfterEnter" @leave="handleLeave">
             <div
@@ -204,6 +209,14 @@ defineExpose({ loading });
 <style lang="scss" module>
 .image-preview {
     position: relative;
+    &[data-focus-enable="true"] {
+        img {
+            cursor: grab !important;
+        }
+        img:active {
+            cursor: none !important;
+        }
+    }
     .preview-img {
         max-width: 100%;
         max-height: 100%;
@@ -216,6 +229,8 @@ defineExpose({ loading });
 
         width: 0;
         height: 0;
+
+        pointer-events: none;
     }
     .pos-ring--inner {
         width: 18px;

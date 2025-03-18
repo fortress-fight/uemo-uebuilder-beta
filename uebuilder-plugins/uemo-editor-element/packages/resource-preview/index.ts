@@ -86,14 +86,16 @@ export function isResourcePreviewType(type: string): type is UeElResourcePreview
  * 检查是否为有效的资源预览属性
  * @param type - 资源类型
  * @param attrs - 资源属性
+ * @param enhance - 资源预览增强类型
  * @returns 是否为有效的资源预览属性
  */
-export function isResourcePreviewAttrs(
-    type: string,
-    attrs?: string | Record<string, any>
-): attrs is ResourceParam[keyof ResourceParam] {
-    if (!isResourcePreviewType(type)) return false;
-    return typeof attrs === "undefined" || typeof attrs === "string" || "source" in attrs;
+export function isResourcePreviewAttrs(attrs: {
+    type: string;
+    attrs?: string | Record<string, any>;
+    enhance?: Record<string, { enable: boolean; [attr: string]: any }> | undefined;
+}): attrs is UeElResourcePreviewBaseProps {
+    if (!isResourcePreviewType(attrs.type)) return false;
+    return true;
 }
 
 /**
