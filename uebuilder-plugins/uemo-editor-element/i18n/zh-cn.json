@@ -32,6 +32,7 @@
     "UNIT_SHARE_ICON": "分享图标",
     "UNIT_EFFECT": "效果",
     "UNIT_FONT_FAMILY": "字体",
+    "UNIT_INTERACTION_EFFECT": "交互效果",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
