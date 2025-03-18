@@ -1,7 +1,7 @@
 <template>
     <div :class="$style['image-preview']" class="flex justify-center items-center" ref="previewBoxDom">
-        <img ref="imageDom" :class="$style['preview-img']" :src="src" @load="loading = false" />
-        <Transition :css="false" appear @after-enter="onAfterEnter" @leave="onLeave">
+        <img ref="imageDom" :class="$style['preview-img']" :src="src" @load="handleImageLoad" alt="预览图片" />
+        <Transition :css="false" appear @after-enter="handleAfterEnter" @leave="handleLeave">
             <div
                 ref="focusDragger"
                 class="flex items-center justify-center"
@@ -13,36 +13,57 @@
         </Transition>
     </div>
 </template>
+
 <script lang="ts" setup>
 import type { ResourcePreviewEmitsParams } from "../index";
-
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { numRound } from "@stone/uemo-editor-utils/lib/number";
 import { Dragger, DraggerControl } from "@stone/uemo-editor-utils/lib/dragger";
 
 defineOptions({ name: "UeElImagePreview" });
 
-const props = withDefaults(
-    defineProps<{
-        src: string;
-        enhance?: { focus: { enable: boolean; pos?: string } };
-    }>(),
-    { enhance: () => ({ focus: { enable: false } }) }
-);
+/**
+ * 组件属性定义
+ */
+interface Props {
+    /** 图片源地址 */
+    src: string;
+    /** 增强功能配置 */
+    enhance?: {
+        focus: {
+            /** 是否启用焦点功能 */
+            enable: boolean;
+            /** 焦点位置 */
+            pos?: string;
+        };
+    };
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    enhance: () => ({ focus: { enable: false } }),
+});
+
 const emit = defineEmits<{
     (e: "trigger", params: ResourcePreviewEmitsParams["image"]): void;
 }>();
 
 // #region 焦点位置控制
 
+/** 图片DOM引用 */
 const imageDomRef = useTemplateRef("imageDom");
+/** 预览框DOM引用 */
 const previewBoxDomRef = useTemplateRef("previewBoxDom");
+/** 焦点拖拽器DOM引用 */
 const focusDraggerDomRef = useTemplateRef("focusDragger");
+/** 加载状态 */
 const loading = ref(false);
+/** 拖拽状态 */
 const dragging = ref<boolean>(false);
 
+/** 是否启用焦点功能 */
 const enableFocus = computed(() => props.enhance?.focus.enable);
 
+/** 焦点位置计算属性 */
 const focusPos = computed({
     get: () => props.enhance?.focus.pos || "0% 0%",
     set(value: string) {
@@ -52,6 +73,13 @@ const focusPos = computed({
     },
 });
 
+/** 图片与预览框的偏移距离 */
+let offsetX = 0;
+let offsetY = 0;
+
+/**
+ * 更新拖拽器位置
+ */
 function updateDraggerPos() {
     if (!focusDraggerDomRef.value) return;
 
@@ -61,14 +89,20 @@ function updateDraggerPos() {
     const { maxX, maxY } = dragger.bounds;
     const { x, y } = dragger.getCurrentPosition();
 
-    const pos = `${numRound(((x - disX) / (maxX - disX)) * 100)}% ${numRound(((y - disY) / (maxY - disY)) * 100)}%`;
+    const pos = `${numRound(((x - offsetX) / (maxX - offsetX)) * 100)}% ${numRound(
+        ((y - offsetY) / (maxY - offsetY)) * 100
+    )}%`;
     focusPos.value = pos;
 }
 
+/**
+ * 初始化位置拖拽器
+ */
 function initPosDragger() {
     const posRingDom = focusDraggerDomRef.value;
     const imageDom = imageDomRef.value;
     const boxDom = previewBoxDomRef.value;
+
     if (!enableFocus.value || !imageDom || !boxDom || !posRingDom) {
         return;
     }
@@ -86,20 +120,19 @@ function initPosDragger() {
             this.refreshPosition();
             updateDraggerPos();
         },
-        onDrag() {
-            updateDraggerPos();
-        },
+        onDrag: updateDraggerPos,
         onRelease() {
             dragging.value = false;
         },
     }).init();
 
-    updateDistance();
+    updateOffset();
 }
 
-let disX = 0;
-let disY = 0;
-function updateDistance() {
+/**
+ * 更新偏移距离
+ */
+function updateOffset() {
     const posRingDom = focusDraggerDomRef.value;
     const imageDom = imageDomRef.value;
     const boxDom = previewBoxDomRef.value;
@@ -111,21 +144,44 @@ function updateDistance() {
     const boxBound = boxDom.getBoundingClientRect();
     const imageBound = imageDom.getBoundingClientRect();
 
-    disX = imageBound.left - boxBound.left;
-    disY = imageBound.top - boxBound.top;
+    offsetX = imageBound.left - boxBound.left;
+    offsetY = imageBound.top - boxBound.top;
 
-    const value = focusPos.value.split(" ");
+    const [xPercent, yPercent] = focusPos.value.split(" ");
 
-    if (value.length === 2) {
+    if (xPercent && yPercent) {
         const imgWidth = gsap.getProperty(imageDom, "width").toString();
         const imgHeight = gsap.getProperty(imageDom, "height").toString();
         gsap.set(posRingDom, {
-            x: disX + (parseInt(imgWidth) * parseInt(value[0])) / 100,
-            y: disY + (parseInt(imgHeight) * parseInt(value[1])) / 100,
+            x: offsetX + (parseInt(imgWidth) * parseInt(xPercent)) / 100,
+            y: offsetY + (parseInt(imgHeight) * parseInt(yPercent)) / 100,
         });
     }
 }
 
+/**
+ * 处理图片加载完成
+ */
+function handleImageLoad() {
+    loading.value = false;
+}
+
+/**
+ * 处理过渡动画进入后
+ */
+function handleAfterEnter() {
+    initPosDragger();
+}
+
+/**
+ * 处理过渡动画离开
+ */
+function handleLeave() {
+    if (!focusDraggerDomRef.value) return;
+    DraggerControl.get(focusDraggerDomRef.value)?.destroy();
+}
+
+// 监听图片源变化
 watch(
     () => props.src,
     (src) => {
@@ -134,15 +190,7 @@ watch(
     { immediate: true }
 );
 
-function onAfterEnter() {
-    initPosDragger();
-}
-
-function onLeave() {
-    if (!focusDraggerDomRef.value) return;
-    DraggerControl.get(focusDraggerDomRef.value)?.destroy();
-}
-
+// 组件卸载前清理
 onBeforeUnmount(() => {
     if (!focusDraggerDomRef.value) return;
     DraggerControl.get(focusDraggerDomRef.value)?.destroy();
@@ -152,6 +200,7 @@ onBeforeUnmount(() => {
 
 defineExpose({ loading });
 </script>
+
 <style lang="scss" module>
 .image-preview {
     position: relative;
