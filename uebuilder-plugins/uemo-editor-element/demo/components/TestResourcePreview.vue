@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 12:45:55
+ * @LastEditTime: 2025-03-18 23:57:03
 -->
 <template>
     <TestArea
@@ -11,7 +11,7 @@
         v-model:testValueSelect="testValueSelect"
         title="测试资源文件预览组件"
     >
-        <UeElResourcePreview v-bind="testValue">
+        <UeElResourcePreview :class="$style['test-component']" v-bind="testValue" @trigger="handleTrigger">
             <!--  -->
         </UeElResourcePreview>
     </TestArea>
@@ -26,6 +26,13 @@ const testValueList: (UE_EL_COMPONENT.UeElResourcePreviewProps & { testOptionTit
         testOptionTitle: "图片",
         type: "image",
         attrs: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixid=M3wxNzk2NDF8MHwxfHNlYXJjaHwxfHxXYWxscGFwZXJ8emgtSGFuc3wxfHx8fDE3NDIxODQzMzN8MA&ixlib=rb-4.0.3&w=1200",
+        enhance: {
+            focus: { enable: true, pos: "0% 0%" },
+        },
+    },
+    {
+        testOptionTitle: "图片",
+        type: "image",
     },
     {
         testOptionTitle: "SVG",
@@ -69,9 +76,17 @@ const testValue = ref(testValueList[testValueSelect.value]);
 watch(testValueSelect, (newValue) => {
     testValue.value = testValueList[newValue];
 });
+
+function handleTrigger(params?: { type: "focus"; data: { pos: string } }): void {
+    if (!testValue.value.enhance?.focus) return;
+    testValue.value.enhance.focus.pos = params?.data.pos || "0% 0%";
+}
 </script>
 <style lang="scss" module>
 .test-area {
-    // init
+    //
+}
+.test-component {
+    width: 500px;
 }
 </style>

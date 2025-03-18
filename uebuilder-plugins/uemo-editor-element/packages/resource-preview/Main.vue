@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 12:50:32
+ * @LastEditTime: 2025-03-18 23:51:15
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -44,7 +44,13 @@
                     v-if="type === 'textDecoration'"
                     :value="attrs"
                 />
-                <UeElImagePreview v-if="type === 'image'" :class="$style['image-preview']" :src="attrs" />
+                <UeElImagePreview
+                    v-if="type === 'image'"
+                    :class="$style['image-preview']"
+                    :src="attrs"
+                    :enhance="enhance"
+                    @trigger="handleTrigger"
+                />
             </template>
         </div>
         <UeElLoading v-if="loading" :duration="3" title="" :class="$style['loading-bar']" />
@@ -52,7 +58,7 @@
 </template>
 
 <script lang="ts" setup generic="T extends UeElResourcePreviewType">
-import type { UeElResourcePreviewBaseProps, UeElResourcePreviewType } from "./index";
+import type { UeElResourcePreviewBaseProps, UeElResourcePreviewType, ResourcePreviewEmitsParams } from "./index";
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 
 import UeElHoverEffectPreviewButton from "../button-hover-effect-library-panel/sub-components/PreviewButton.vue";
@@ -62,6 +68,11 @@ import UeElImagePreview from "./sub-components/ImagePreview.vue";
 
 defineOptions({ name: "UeElResourcePreview" });
 const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
+const emit = defineEmits<(e: "trigger", params: ResourcePreviewEmitsParams[T]) => void>();
+
+function handleTrigger(params: ResourcePreviewEmitsParams[T]): void {
+    emit("trigger", params);
+}
 
 // 常量定义
 const LOADING_TIMEOUT = 20;
