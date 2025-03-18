@@ -40,7 +40,7 @@ export class Dragger {
      * - minX/Y: 最小可拖拽位置
      * - maxX/Y: 最大可拖拽位置
      */
-    private bounds = {
+    bounds = {
         maxX: 0,
         maxY: 0,
         minX: 0,
@@ -345,7 +345,7 @@ export class Dragger {
         };
     }
 
-    private getCurrentPosition(): Position {
+    getCurrentPosition(): Position {
         return {
             x: gsap.getProperty(this.moveEl, "x") as number,
             y: gsap.getProperty(this.moveEl, "y") as number,
@@ -435,7 +435,7 @@ export class Dragger {
  * 用于获取元素关联的拖拽实例
  */
 export const DraggerControl = {
-    get(el: HTMLElement): Dragger {
-        return $(el).data("dragger") as Dragger;
+    get(el: HTMLElement): Dragger | undefined {
+        return $(el).data("dragger") as Dragger | undefined;
     },
 };

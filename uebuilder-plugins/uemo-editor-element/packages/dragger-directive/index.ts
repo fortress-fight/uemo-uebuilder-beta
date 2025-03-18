@@ -1,7 +1,7 @@
 /*
  * @Description: 拖拽行为指令
  * @Author: F-Stone
- * @LastEditTime: 2025-02-28 15:21:30
+ * @LastEditTime: 2025-03-18 23:38:36
  */
 
 import type { App, DirectiveBinding } from "vue";
@@ -71,16 +71,16 @@ function createDragger(el: HTMLElement): DraggerControl {
 
     const instance = {
         destroy: () => {
-            control.destroy();
+            control?.destroy();
             globalState.resizeObserver.unobserve(el);
             $el.data(CONSTANTS.DATA_DRAGGER_KEY, null);
             globalState.$window.off(`resize.${uid}`);
         },
-        disable: () => control.disable(),
-        enable: () => control.enable(),
+        disable: () => control?.disable(),
+        enable: () => control?.enable(),
         update: () => {
-            if (!control.isDisabled()) {
-                control.applyBounds();
+            if (!control?.isDisabled()) {
+                control?.applyBounds();
             }
         },
     };
