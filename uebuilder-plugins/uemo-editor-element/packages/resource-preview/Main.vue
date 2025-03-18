@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 11:23:13
+ * @LastEditTime: 2025-03-18 12:39:11
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -50,15 +50,15 @@
     </div>
 </template>
 
-<script lang="ts" setup>
-import type { UeElResourcePreviewBaseProps } from "./index";
+<script lang="ts" setup generic="T extends UeElResourcePreviewType">
+import type { UeElResourcePreviewBaseProps, UeElResourcePreviewType } from "./index";
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 
 import UeElHoverEffectPreviewButton from "../button-hover-effect-library-panel/sub-components/PreviewButton.vue";
 import TextDecorationPreview from "../text-decoration-library-panel/sub-component/TextDecorationPreview.vue";
 
 defineOptions({ name: "UeElResourcePreview" });
-const props = withDefaults(defineProps<UeElResourcePreviewBaseProps>(), {});
+const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
 
 // 常量定义
 const LOADING_TIMEOUT = 20;
