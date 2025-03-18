@@ -87,7 +87,7 @@ function updateDraggerPos() {
     if (!dragger) return;
 
     const { maxX, maxY } = dragger.bounds;
-    const { x, y } = dragger.getCurrentPosition();
+    const { x, y } = dragger.currentPosition;
 
     const pos = `${numRound(((x - offsetX) / (maxX - offsetX)) * 100)}% ${numRound(
         ((y - offsetY) / (maxY - offsetY)) * 100

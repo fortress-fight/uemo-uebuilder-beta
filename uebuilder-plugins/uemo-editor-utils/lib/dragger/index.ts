@@ -1,17 +1,32 @@
-import { calcElastic, type Bounce, type DraggerOption } from "./utils/helper";
+/**
+ * @file 拖拽控制器
+ * @description 提供元素拖拽、边界控制、弹性效果等功能
+ * @author F-Stone
+ */
 
+import { calcElastic, type Bounce, type DraggerOption } from "./utils/helper";
 import { guid } from "../guid";
 import { numRound } from "../number";
 import { gsap } from "../gsap";
 import $ from "../jquery";
 
+/**
+ * 位置信息接口
+ */
 interface Position {
+    /** X 坐标 */
     x: number;
+    /** Y 坐标 */
     y: number;
 }
 
+/**
+ * 拖拽开始位置信息接口
+ */
 interface DragStartPosition extends Position {
+    /** 鼠标在屏幕上的 X 坐标 */
     clientX: number;
+    /** 鼠标在屏幕上的 Y 坐标 */
     clientY: number;
 }
 
@@ -20,12 +35,15 @@ interface DragStartPosition extends Position {
  * 提供元素拖拽、边界控制、弹性效果等功能
  */
 export class Dragger {
-    // 实例标识和状态
+    /** 实例唯一标识 */
     private readonly id: string = guid();
+    /** 是否已初始化 */
     private ready = false;
     /** 当前是否处于拖拽状态 */
     private dragging = false;
+    /** 是否禁用拖拽 */
     protected _disable = false;
+    /** 遮罩层元素 */
     private mask: JQuery<HTMLElement> | undefined;
 
     /**
@@ -56,6 +74,11 @@ export class Dragger {
         y: false,
     };
 
+    /**
+     * 构造函数
+     * @param moveEl - 可移动的元素
+     * @param options - 拖拽配置选项
+     */
     constructor(
         private readonly moveEl: HTMLElement,
         private options: DraggerOption
@@ -101,22 +124,18 @@ export class Dragger {
     }
 
     /**
-     * NOTE: 用于替换旧版的 update 方法
      * 更新拖拽状态
      * 当元素位置发生外部变化时调用，重新计算边界和位置信息
      */
     public refreshPosition(): void {
-        const currentPos = this.getCurrentPosition();
-        this.startPos = { ...this.startPos, ...currentPos };
+        this.startPos = { ...this.startPos, ...this.currentPosition };
         this.applyBounds();
     }
 
     /**
      * 应用边界限制
-     * 根据配置的边界容器计算并设置元素的可移动范围
-     *
-     * @param bounce 边界容器元素或尺寸
-     * @param option 动画配置选项
+     * @param bounce - 边界容器元素或尺寸
+     * @param option - 动画配置选项
      */
     public applyBounds(bounce?: Bounce, option?: { immediate: boolean; onEnd?: () => void }): void {
         if (bounce) {
@@ -130,7 +149,7 @@ export class Dragger {
 
         this.calcBounds();
 
-        const { x: currentX, y: currentY } = this.getCurrentPosition();
+        const { x: currentX, y: currentY } = this.currentPosition;
         const targetPosition = {
             x: this.overflow.x
                 ? this.bounds.minX
@@ -141,31 +160,33 @@ export class Dragger {
         };
 
         const duration = option?.immediate || !this.options.elastic ? 0 : 0.36;
-
         this.animateToPosition(targetPosition, duration, option?.onEnd);
     }
 
+    /** 启用拖拽 */
     public enable(): void {
         this._disable = false;
     }
 
+    /** 禁用拖拽 */
     public disable(): void {
         this._disable = true;
     }
 
+    /** 销毁实例，清理资源 */
     public destroy(): void {
         this.unbindEvents();
         this.mask?.remove();
         $(this.moveEl).data("dragger", null);
     }
 
+    /** 检查是否禁用 */
     public isDisabled(): boolean {
         return this._disable;
     }
 
     /**
      * 绑定拖拽相关的事件监听
-     * 根据不同的触发器类型（字符串选择器/对象/元素）绑定对应的事件
      */
     private bindEvents(): void {
         const target = this.options.trigger;
@@ -193,6 +214,7 @@ export class Dragger {
         }
     }
 
+    /** 解绑事件监听 */
     private unbindEvents(): void {
         const uid = this.id;
         const target = this.options.trigger;
@@ -211,10 +233,6 @@ export class Dragger {
 
     /**
      * 处理拖拽开始
-     * - 记录初始位置
-     * - 创建遮罩层
-     * - 设置拖拽状态
-     * - 绑定移动和释放事件
      */
     private press(ev: PointerEvent, draggerTarget?: HTMLElement): void {
         if (this.shouldIgnorePress(ev)) return;
@@ -229,7 +247,7 @@ export class Dragger {
         this.startPos = {
             clientX: ev.clientX,
             clientY: ev.clientY,
-            ...this.getCurrentPosition(),
+            ...this.currentPosition,
         };
 
         this.createMaskIfNeeded();
@@ -244,9 +262,6 @@ export class Dragger {
 
     /**
      * 处理拖拽移动
-     * - 计算移动偏移
-     * - 应用边界限制
-     * - 更新元素位置
      */
     private move(ev: PointerEvent): void {
         ev.preventDefault();
@@ -263,10 +278,6 @@ export class Dragger {
 
     /**
      * 处理拖拽结束
-     * - 清理事件监听
-     * - 移除遮罩层
-     * - 重置状态
-     * - 应用最终边界限制
      */
     private release(ev: PointerEvent): void {
         const el = ev.currentTarget as HTMLElement;
@@ -287,12 +298,11 @@ export class Dragger {
 
     /**
      * 计算拖拽边界
-     * 根据容器和元素的尺寸关系，计算可移动范围
      */
     private calcBounds(): void {
         const moveDomRect = this.moveEl.getBoundingClientRect();
         const bounceRect = this.getBounce();
-        const { x: currentX, y: currentY } = this.getCurrentPosition();
+        const { x: currentX, y: currentY } = this.currentPosition;
 
         this.overflow = {
             x: moveDomRect.width > bounceRect.width,
@@ -309,10 +319,6 @@ export class Dragger {
 
     /**
      * 获取边界容器的尺寸信息
-     * 支持三种边界类型：
-     * 1. 无边界：使用视窗尺寸
-     * 2. 元素边界：使用元素的 getBoundingClientRect
-     * 3. 自定义边界：直接使用传入的尺寸对象
      */
     private getBounce(bounce: Bounce | undefined = this.options.bounds): {
         top: number;
@@ -345,13 +351,20 @@ export class Dragger {
         };
     }
 
-    getCurrentPosition(): Position {
+    /**
+     * 获取当前位置
+     * @returns 当前位置信息
+     */
+    get currentPosition(): Position {
         return {
             x: gsap.getProperty(this.moveEl, "x") as number,
             y: gsap.getProperty(this.moveEl, "y") as number,
         };
     }
 
+    /**
+     * 检查是否应该忽略按下事件
+     */
     private shouldIgnorePress(ev: PointerEvent): boolean {
         const excludeTrigger = this.options.excludeTrigger;
         if (!excludeTrigger) return false;
@@ -360,6 +373,9 @@ export class Dragger {
         return $(ev.target!).closest(excludeEl).length > 0;
     }
 
+    /**
+     * 创建遮罩层
+     */
     private createMaskIfNeeded(): void {
         if (!this.options.mask) return;
 
@@ -370,8 +386,6 @@ export class Dragger {
 
     /**
      * 计算新的位置信息
-     * 根据移动偏移量和边界限制计算目标位置
-     * 支持弹性效果和自定义的吸附功能
      */
     private calculateNewPosition(moveOffset: Position): Position {
         const newX = this.options.elastic
@@ -387,7 +401,6 @@ export class Dragger {
 
     /**
      * 更新元素位置
-     * 根据移动类型(xy/x/y)更新对应方向的变换
      */
     private updatePosition(position: Position): void {
         switch (this.options.type) {
@@ -405,7 +418,6 @@ export class Dragger {
 
     /**
      * 使用动画更新元素位置
-     * 支持不同方向的移动和过渡效果
      */
     private animateToPosition(position: Position, duration: number, onComplete?: () => void): void {
         const tl = gsap.timeline({
@@ -435,6 +447,11 @@ export class Dragger {
  * 用于获取元素关联的拖拽实例
  */
 export const DraggerControl = {
+    /**
+     * 获取元素关联的拖拽实例
+     * @param el - 目标元素
+     * @returns 拖拽实例或 undefined
+     */
     get(el: HTMLElement): Dragger | undefined {
         return $(el).data("dragger") as Dragger | undefined;
     },
