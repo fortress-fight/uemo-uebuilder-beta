@@ -117,7 +117,7 @@ export class Dragger {
 
         const target = this.options.trigger;
         if (target instanceof HTMLElement || Array.isArray(target)) {
-            gsap.set(target, { cursor: "move" });
+            gsap.set(target, { cursor: "grab" });
         }
 
         return this;
