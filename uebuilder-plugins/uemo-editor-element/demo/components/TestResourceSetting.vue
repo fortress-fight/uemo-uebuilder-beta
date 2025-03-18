@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 11:08:16
+ * @LastEditTime: 2025-03-18 12:49:06
 -->
 <template>
     <TestArea
@@ -22,6 +22,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElResourceSettingProps & { testOptionTitle?: string; value?: any })[] = [
+    { testOptionTitle: "图片", type: "image" },
     {
         testOptionTitle: "SVG",
         type: "svg",
@@ -35,7 +36,6 @@ const testValueList: (UE_EL_COMPONENT.UeElResourceSettingProps & { testOptionTit
     { testOptionTitle: "Lottie", type: "lottie" },
     { testOptionTitle: "图标", type: "icon" },
     { testOptionTitle: "按钮 hover 动效", type: "buttonHoverEffect" },
-    { testOptionTitle: "图片", type: "image" },
     { testOptionTitle: "Spline", type: "spline" },
     { testOptionTitle: "视频", type: "video" },
     { testOptionTitle: "按钮", type: "button" },

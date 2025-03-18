@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 12:39:11
+ * @LastEditTime: 2025-03-18 12:50:32
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -44,6 +44,7 @@
                     v-if="type === 'textDecoration'"
                     :value="attrs"
                 />
+                <UeElImagePreview v-if="type === 'image'" :class="$style['image-preview']" :src="attrs" />
             </template>
         </div>
         <UeElLoading v-if="loading" :duration="3" title="" :class="$style['loading-bar']" />
@@ -56,6 +57,8 @@ import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 
 import UeElHoverEffectPreviewButton from "../button-hover-effect-library-panel/sub-components/PreviewButton.vue";
 import TextDecorationPreview from "../text-decoration-library-panel/sub-component/TextDecorationPreview.vue";
+
+import UeElImagePreview from "./sub-components/ImagePreview.vue";
 
 defineOptions({ name: "UeElResourcePreview" });
 const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
@@ -107,6 +110,7 @@ const ueElIconParam = computed<UE_EL_COMPONENT.UeElIconProps | null>(() => {
         shareIcon: { name: "icon-app-share", size: ICON_SIZE },
         buttonHoverEffect: { name: "icon-app-animation", size: ICON_SIZE },
         textDecoration: { name: "icon-app-svg-line", size: ICON_SIZE },
+        image: { name: "icon-shangchuantupian", size: ICON_SIZE },
     };
     return iconMap[props.type] || null;
 });
@@ -253,5 +257,11 @@ watchEffect(() => {
     max-width: 60%;
 
     background-color: #fff;
+}
+.image-preview {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
 }
 </style>

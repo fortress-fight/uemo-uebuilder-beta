@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 12:03:52
+ * @LastEditTime: 2025-03-18 12:45:55
 -->
 <template>
     <TestArea
@@ -22,6 +22,11 @@ import TestArea from "~/demo/components/TestArea.vue";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElResourcePreviewProps & { testOptionTitle?: string })[] = [
+    {
+        testOptionTitle: "图片",
+        type: "image",
+        attrs: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixid=M3wxNzk2NDF8MHwxfHNlYXJjaHwxfHxXYWxscGFwZXJ8emgtSGFuc3wxfHx8fDE3NDIxODQzMzN8MA&ixlib=rb-4.0.3&w=1200",
+    },
     {
         testOptionTitle: "SVG",
         type: "svg",

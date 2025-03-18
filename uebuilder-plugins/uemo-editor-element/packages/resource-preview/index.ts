@@ -1,7 +1,7 @@
 /*
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 12:41:05
+ * @LastEditTime: 2025-03-18 12:49:34
  */
 import type { App } from "vue";
 
@@ -14,6 +14,7 @@ interface ResourceParam {
     shareIcon: string;
     textDecoration: string;
     buttonHoverEffect: string;
+    image: string;
 }
 
 export type UeElResourcePreviewType = keyof ResourceParam;
@@ -30,6 +31,7 @@ const ResourcePreviewTypeList: UeElResourcePreviewType[] = [
     "shareIcon",
     "textDecoration",
     "buttonHoverEffect",
+    "image",
 ];
 
 export function isResourcePreviewType(type: string): type is UeElResourcePreviewType {
