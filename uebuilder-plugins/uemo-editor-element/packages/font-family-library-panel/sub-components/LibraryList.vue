@@ -61,7 +61,7 @@ function selectFontFamily(value?: string | number) {
 function useFontFamily(event: MouseEvent, item: UE_EL_UTIL.ResourceFontFamilyItem) {
     activeBtn.value = event.currentTarget as HTMLElement;
 
-    if (item.subList.length === 0) {
+    if (item.subList.length <= 1) {
         select.value = item.name;
         return;
     }
