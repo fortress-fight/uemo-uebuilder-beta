@@ -50,13 +50,13 @@ interface ResourcePreviewEnhance {
  * @interface ResourcePreviewEmits
  */
 export interface ResourcePreviewEmitsParams {
+    icon: never;
+    svg: never;
+    lottie: never;
+    shareIcon: never;
+    textDecoration: never;
+    buttonHoverEffect: never;
     image: { type: "focus"; data: { pos: string } };
-    icon: undefined;
-    lottie: undefined;
-    svg: undefined;
-    shareIcon: undefined;
-    textDecoration: undefined;
-    buttonHoverEffect: undefined;
 }
 
 /** 资源预览类型 */

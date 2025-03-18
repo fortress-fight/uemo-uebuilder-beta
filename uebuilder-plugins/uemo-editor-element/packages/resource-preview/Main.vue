@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 23:51:15
+ * @LastEditTime: 2025-03-19 01:25:57
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -68,9 +68,11 @@ import UeElImagePreview from "./sub-components/ImagePreview.vue";
 
 defineOptions({ name: "UeElResourcePreview" });
 const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
-const emit = defineEmits<(e: "trigger", params: ResourcePreviewEmitsParams[T]) => void>();
+const emit = defineEmits<{
+    (e: "trigger", params: ResourcePreviewEmitsParams[UeElResourcePreviewType]): void;
+}>();
 
-function handleTrigger(params: ResourcePreviewEmitsParams[T]): void {
+function handleTrigger(params: ResourcePreviewEmitsParams["image"]): void {
     emit("trigger", params);
 }
 
