@@ -31,6 +31,7 @@
     "UNIT_ICON": "Icon",
     "UNIT_SHARE_ICON": "Share Icon",
     "UNIT_EFFECT": "Effect",
+    "UNIT_FONT_FAMILY": "Font",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -238,8 +239,9 @@
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_LEFT": "Move Left",
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_RIGHT": "Move Right",
 
+    "FONT_LIBRARY_DEFAULT_FONT": "Default Font",
     "FONT_LIBRARY_USE_DEFAULT": "Use Default Font",
-    "FONT_LIBRARY_USED_FONT_TITLE": "Used",
+    "FONT_LIBRARY_USED_FONT_TITLE": "Common",
     "FONT_LIBRARY_EN_FONT_TITLE": "English",
     "FONT_LIBRARY_ZH_FONT_TITLE": "Chinese",
 

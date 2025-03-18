@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestResourceSetting.vue";
+import TestComponent from "~/demo/components/TestFontFamilySetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {

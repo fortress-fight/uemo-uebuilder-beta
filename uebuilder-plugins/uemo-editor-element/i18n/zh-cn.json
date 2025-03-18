@@ -31,6 +31,7 @@
     "UNIT_ICON": "图标",
     "UNIT_SHARE_ICON": "分享图标",
     "UNIT_EFFECT": "效果",
+    "UNIT_FONT_FAMILY": "字体",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -238,6 +239,7 @@
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_LEFT": "位移 (左)",
     "BUTTON_HOVER_EFFECT_LIBRARY_ITEM_MOVE_RIGHT": "位移 (右)",
 
+    "FONT_LIBRARY_DEFAULT_FONT": "默认字体",
     "FONT_LIBRARY_USE_DEFAULT": "使用默认字体",
     "FONT_LIBRARY_USED_FONT_TITLE": "常用",
     "FONT_LIBRARY_EN_FONT_TITLE": "英文",

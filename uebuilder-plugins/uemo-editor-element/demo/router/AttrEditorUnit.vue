@@ -25,6 +25,7 @@ import TestRadiusSettingGroup from "~/demo/components/TestRadiusSettingGroup.vue
 import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGroup.vue";
 import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
 import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
+import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -43,6 +44,7 @@ const testComponents = [
     TestBoxShadowSettingGroup,
     TestCalenderSettingGroup,
     TestResourceSetting,
+    TestFontFamilySetting,
 ];
 </script>
 <style lang="scss" module>
