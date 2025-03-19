@@ -1,7 +1,7 @@
 /*
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 02:13:20
+ * @LastEditTime: 2025-03-19 11:25:23
  */
 import type { App } from "vue";
 
@@ -37,11 +37,18 @@ export type UeElResourceSettingEmitParams = {
     buttonHoverEffect: never;
 };
 
-export type UeElResourceSettingValue =
-    | string
-    | UE_EL_UTIL.ResourceButtonItem["attrs"]
-    | UE_EL_UTIL.ResourceIconAttrs
-    | UE_EL_UTIL.ResourceSvgAttrs;
+export type UeElResourceSettingValue = {
+    button: UE_EL_UTIL.ResourceButtonItem["attrs"];
+    icon: UE_EL_UTIL.ResourceIconAttrs;
+    svg: UE_EL_UTIL.ResourceSvgAttrs;
+    lottie: string;
+    video: string;
+    spline: string;
+    shareIcon: string;
+    textDecoration: string;
+    buttonHoverEffect: string;
+    image: string;
+};
 
 export interface UeElResourceSettingBaseProps<T extends UeElResourceSettingType = UeElResourceSettingType> {
     type: T;

@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 02:13:22
+ * @LastEditTime: 2025-03-19 11:25:52
 -->
 <template>
     <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -64,7 +64,7 @@ const rootDomRef = useTemplateRef("rootDom");
 /**
  * 资源值的双向绑定
  */
-const valueRef = defineModel<UeElResourceSettingValue>("value", { required: false });
+const valueRef = defineModel<UeElResourceSettingValue[T]>("value", { required: false });
 
 /**
  * 资源类型对应的按钮配置
@@ -161,7 +161,7 @@ function handleRemove(): void {
  * 统一处理资源选择
  * @param value - 选中的资源值
  */
-function handleResourceSelect(value?: UeElResourceSettingValue): void {
+function handleResourceSelect(value?: UeElResourceSettingValue[T]): void {
     valueRef.value = value;
 }
 
