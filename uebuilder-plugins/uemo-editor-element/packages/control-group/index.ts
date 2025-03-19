@@ -1,7 +1,7 @@
 /*
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 19:07:47
+ * @LastEditTime: 2025-03-19 10:55:49
  */
 import type { App } from "vue";
 
@@ -13,6 +13,7 @@ UeElControlGroup.install = (app: App) => {
 };
 
 export interface UeElControlGroupBaseProps {
+    title?: string;
     colCount?: number;
     disable?: boolean;
     hideOper?: boolean;

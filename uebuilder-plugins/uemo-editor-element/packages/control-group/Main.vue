@@ -1,57 +1,62 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:34:54
+ * @LastEditTime: 2025-03-19 10:58:44
 -->
 <template>
-    <div :class="$style['control-group']" class="grid" :data-with-oper="showOper">
-        <div :class="$style['control-oper']" :data-col="colCount">
-            <slot :disable="disable"></slot>
+    <div class="control-group--wrapper">
+        <div :class="$style['control-group-title']" v-if="title">
+            <span class="text">{{ title }}</span>
         </div>
-        <div v-if="showOper" :class="$style['oper-box']">
-            <slot name="oper">
-                <UeElButton
-                    v-if="operType === 'remove'"
-                    theme="squareIcon"
-                    :class="$style['oper-btn']"
-                    data-oper-type="remove"
-                    :disable="disable"
-                    :icon="{ name: 'icon-shanchu', size: 16 }"
-                    @trigger="trigger('remove')"
-                />
-                <UeElOnOff
-                    v-else-if="operType === 'onOff' && !!onOffParam"
-                    v-bind="onOffParam"
-                    :class="$style['oper-btn']"
-                    :disable="disable"
-                    @update:value="trigger('onOffChange', $event)"
-                />
-                <UeElButton
-                    v-else-if="operType === 'button' && !!buttonParam"
-                    :class="$style['oper-btn']"
-                    :disable="disable"
-                    v-bind="buttonParam"
-                    theme="squareIcon"
-                    @trigger="trigger('trigger')"
-                />
-                <UeElSelect
-                    v-else-if="operType === 'select' && !!selectParam"
-                    v-bind="selectParam"
-                    @update:value="trigger('selectChange', $event)"
-                >
-                    <template #info>
-                        <UeElButton
-                            :class="$style['oper-btn']"
-                            :disable="disable"
-                            v-bind="buttonParam"
-                            theme="squareIcon"
-                        />
+        <div :class="$style['control-group']" class="grid" :data-with-oper="showOper">
+            <div :class="$style['control-oper']" :data-col="colCount">
+                <slot :disable="disable"></slot>
+            </div>
+            <div v-if="showOper" :class="$style['oper-box']">
+                <slot name="oper">
+                    <UeElButton
+                        v-if="operType === 'remove'"
+                        theme="squareIcon"
+                        :class="$style['oper-btn']"
+                        data-oper-type="remove"
+                        :disable="disable"
+                        :icon="{ name: 'icon-shanchu', size: 16 }"
+                        @trigger="trigger('remove')"
+                    />
+                    <UeElOnOff
+                        v-else-if="operType === 'onOff' && !!onOffParam"
+                        v-bind="onOffParam"
+                        :class="$style['oper-btn']"
+                        :disable="disable"
+                        @update:value="trigger('onOffChange', $event)"
+                    />
+                    <UeElButton
+                        v-else-if="operType === 'button' && !!buttonParam"
+                        :class="$style['oper-btn']"
+                        :disable="disable"
+                        v-bind="buttonParam"
+                        theme="squareIcon"
+                        @trigger="trigger('trigger')"
+                    />
+                    <UeElSelect
+                        v-else-if="operType === 'select' && !!selectParam"
+                        v-bind="selectParam"
+                        @update:value="trigger('selectChange', $event)"
+                    >
+                        <template #info>
+                            <UeElButton
+                                :class="$style['oper-btn']"
+                                :disable="disable"
+                                v-bind="buttonParam"
+                                theme="squareIcon"
+                            />
+                        </template>
+                    </UeElSelect>
+                    <template v-else>
+                        <div :class="$style['placeholder']"></div>
                     </template>
-                </UeElSelect>
-                <template v-else>
-                    <div :class="$style['placeholder']"></div>
-                </template>
-            </slot>
+                </slot>
+            </div>
         </div>
     </div>
 </template>
@@ -106,6 +111,15 @@ function trigger(
 </script>
 
 <style lang="scss" module>
+.control-group--wrapper {
+    //
+}
+.control-group-title {
+    font-size: 12px;
+    line-height: 28px;
+
+    padding: 0 var(--ue-editor-row-space--lv1);
+}
 .control-group {
     gap: var(--ue-control-row-space);
     &[data-with-oper="true"] {
