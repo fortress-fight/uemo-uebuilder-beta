@@ -1,7 +1,7 @@
 <!--
  * @Description: 控件组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 10:58:44
+ * @LastEditTime: 2025-03-19 15:19:08
 -->
 <template>
     <div class="control-group--wrapper">
@@ -116,6 +116,7 @@ function trigger(
 }
 .control-group-title {
     font-size: 12px;
+    font-weight: bold;
     line-height: 28px;
 
     padding: 0 var(--ue-editor-row-space--lv1);

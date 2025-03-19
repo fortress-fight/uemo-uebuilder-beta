@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-04 18:29:15
+ * @LastEditTime: 2025-03-19 15:18:42
 -->
 <template>
     <div :class="$style['editor-collapse-group']" class="relative" :data-disable="disable" :data-active="!!$slots.body">
@@ -105,6 +105,7 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
 }
 .group-title {
     font-size: 12px;
+    font-weight: bold;
     line-height: 28px;
 
     padding: 0 var(--ue-editor-row-space--lv1);
