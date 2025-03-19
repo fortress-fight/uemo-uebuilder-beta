@@ -9,7 +9,6 @@ import _throttle from "lodash/throttle";
 import _defaultsDeep from "lodash/defaultsDeep";
 import _reject from "lodash/reject";
 import _pickBy from "lodash/pickBy";
-import _isEqual from "lodash/isEqual";
 import _eq from "lodash/eq";
 import _isEmpty from "lodash/isEmpty";
 import _cloneDeep from "lodash/cloneDeep";
@@ -22,6 +21,7 @@ import _omitBy from "lodash/omitBy";
 import _pick from "lodash/pick";
 import _differenceBy from "lodash/differenceBy";
 import _flatMap from "lodash/flatMap";
+import _isEqual from "fast-deep-equal";
 
 // 一个深度 pickBy 方法
 function _deepPickBy<T extends object>(obj: T, predicate: (value: any, key: string) => boolean) {
