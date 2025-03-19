@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 11:42:36
+ * @LastEditTime: 2025-03-20 01:16:57
 -->
 <template>
     <UeElSettingBar
@@ -19,6 +19,7 @@
 <script lang="ts" setup>
 import type { UeElFontFamilySettingBaseProps } from "./index";
 
+import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElSettingBar from "../setting-bar";
 
 const { t } = useI18n();
@@ -38,21 +39,10 @@ function openFontFamilySetting(): void {
  * 弹窗位置配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const domRef = settingBarRef.value?.$el;
-    if (!domRef) return;
-    return {
-        position: {
-            refEl: domRef,
-            options: {
-                placement: "left-start",
-                middleware: [
-                    ["flip", { crossAxis: false }],
-                    ["offset", { mainAxis: 10 }],
-                    ["shift", { crossAxis: true, padding: 17 }],
-                ],
-            },
-        },
-    };
+    const dom = settingBarRef.value?.$el;
+    if (!dom) return;
+
+    return getPopPanelParams("editorPanel", dom);
 });
 </script>
 <style lang="scss" module>

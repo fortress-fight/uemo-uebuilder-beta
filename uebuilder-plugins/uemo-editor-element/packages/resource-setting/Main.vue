@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 13:30:37
+ * @LastEditTime: 2025-03-20 01:16:06
 -->
 <template>
     <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -47,6 +47,7 @@ import type {
     UeElResourceSettingEmitParams,
 } from "./index";
 
+import { getPopPanelParams } from "../pop-panel/utils/helper";
 import { isResourcePreviewAttrs } from "../resource-preview";
 
 const { t } = useI18n();
@@ -178,22 +179,10 @@ function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
  * 弹窗位置配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const domRef = rootDomRef.value;
-    if (!domRef) return;
+    const dom = rootDomRef.value;
+    if (!dom) return;
 
-    return {
-        position: {
-            refEl: domRef,
-            options: {
-                placement: "left-start",
-                middleware: [
-                    ["flip", { crossAxis: false }],
-                    ["offset", { mainAxis: 10 }],
-                    ["shift", { crossAxis: true, padding: 17 }],
-                ],
-            },
-        },
-    };
+    return getPopPanelParams("editorPanel", dom);
 });
 </script>
 

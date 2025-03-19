@@ -1,7 +1,7 @@
 <!--
  * @Description: 日期控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 19:07:36
+ * @LastEditTime: 2025-03-20 01:16:30
 -->
 <template>
     <UeElSettingBar
@@ -23,6 +23,7 @@ import type { UeElCalenderSettingBaseProps } from "./index";
 import type { UeElSettingBarInstance } from "../setting-bar";
 
 import * as dateFns from "@stone/uemo-editor-utils/lib/date-fns";
+import { getPopPanelParams } from "../pop-panel/utils/helper";
 
 const { t } = useI18n();
 
@@ -50,23 +51,10 @@ const pickerPanelOpen = ref(false);
  * @returns {UE_EL_COMPONENT.UeElPopPanelProps["panel"]} 弹出面板参数
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const domRef = rootDomRef.value;
+    const dom = rootDomRef.value?.$el;
+    if (!dom) return;
 
-    if (!domRef) return;
-
-    return {
-        position: {
-            refEl: domRef.$el as HTMLElement,
-            options: {
-                placement: "left-start",
-                middleware: [
-                    ["flip", { crossAxis: false }],
-                    ["offset", { mainAxis: 20 }],
-                    ["shift", { crossAxis: true, padding: 17 }],
-                ],
-            },
-        },
-    };
+    return getPopPanelParams("editorPanel", dom);
 });
 
 const useDate = computed({

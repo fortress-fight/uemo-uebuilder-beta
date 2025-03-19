@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:51:13
+ * @LastEditTime: 2025-03-20 01:16:37
 -->
 <template>
     <UeElColorInput
@@ -22,6 +22,8 @@
 import type { UeElColorSettingBaseProps } from "./index";
 import type { UeElColorInputInstance } from "../color-input";
 
+import { getPopPanelParams } from "../pop-panel/utils/helper";
+
 defineOptions({ name: "UeElColorSetting" });
 
 const prop = withDefaults(defineProps<UeElColorSettingBaseProps>(), {
@@ -37,23 +39,17 @@ function openColorPickerPanel() {
 }
 
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const domRef = colorInputRef.value?.rootDomRef;
+    const dom = colorInputRef.value?.rootDomRef;
+    if (!dom) return;
 
-    if (!domRef) return;
-
-    return {
-        position: {
-            refEl: domRef,
-            options: {
-                placement: prop.placement,
-                middleware: [
-                    ["flip", { crossAxis: false }],
-                    ["offset", { crossAxis: -100 }],
-                    ["shift", { crossAxis: true, padding: 17 }],
-                ],
-            },
-        },
-    };
+    return getPopPanelParams("editorPanel", dom, {
+        placement: prop.placement,
+        middleware: [
+            ["flip", { crossAxis: false }],
+            ["offset", { crossAxis: -100, mainAxis: 10 }],
+            ["shift", { crossAxis: true, padding: 17 }],
+        ],
+    });
 });
 </script>
 <style lang="scss" module>
