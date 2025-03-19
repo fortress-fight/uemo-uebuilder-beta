@@ -252,6 +252,7 @@
 
     "GRID_LAYOUT_REPLACE": "Swap Position",
 
+    "BUTTON_ICON_TITLE": "Button Icon",
     "BUTTON_ICON_ATTR": "Icon Attribute",
     "BUTTON_ICON_ATTR_FOLLOW_TEXT": "Follow Text Color"
 }

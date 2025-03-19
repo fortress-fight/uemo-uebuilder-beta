@@ -252,6 +252,7 @@
 
     "GRID_LAYOUT_REPLACE": "交换位置",
 
+    "BUTTON_ICON_TITLE": "按钮图标",
     "BUTTON_ICON_ATTR": "图标属性",
     "BUTTON_ICON_ATTR_FOLLOW_TEXT": "跟随文字颜色"
 }
