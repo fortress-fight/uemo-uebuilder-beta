@@ -33,6 +33,8 @@
     "UNIT_EFFECT": "Effect",
     "UNIT_FONT_FAMILY": "Font",
     "UNIT_INTERACTION_EFFECT": "Interaction Effect",
+    "UNIT_SIZE": "Size",
+    "UNIT_SPACE": "Space",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -248,5 +250,8 @@
 
     "BUTTON_LIBRARY_TITLE": "Button",
 
-    "GRID_LAYOUT_REPLACE": "Swap Position"
+    "GRID_LAYOUT_REPLACE": "Swap Position",
+
+    "BUTTON_ICON_ATTR": "Icon Attribute",
+    "BUTTON_ICON_ATTR_FOLLOW_TEXT": "Follow Text Color"
 }
