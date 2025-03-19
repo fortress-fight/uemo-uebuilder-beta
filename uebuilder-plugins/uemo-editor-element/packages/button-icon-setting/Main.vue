@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮图标属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 13:32:15
+ * @LastEditTime: 2025-03-19 14:12:00
 -->
 <template>
     <UeElEditorGroup :class="$style['button-icon-setting']">
@@ -263,6 +263,9 @@ function changeValue(value: undefined | Partial<UeElButtonIconSettingValue>) {
 
 <style lang="scss" module>
 .button-icon-setting {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
     border-bottom: 0 !important;
 }
 </style>
