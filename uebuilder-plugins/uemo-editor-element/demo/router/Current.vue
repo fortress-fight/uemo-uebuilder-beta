@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestButtonHoverEffectSetting.vue";
+import TestComponent from "~/demo/components/TestButtonIconSetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {
