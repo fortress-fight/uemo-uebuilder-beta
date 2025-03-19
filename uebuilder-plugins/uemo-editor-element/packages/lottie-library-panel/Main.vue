@@ -1,7 +1,7 @@
 <!--
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:33:19
+ * @LastEditTime: 2025-03-19 13:48:09
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -53,7 +53,7 @@ defineOptions({ name: "UeElLottieLibraryPanel" });
 
 const { t, locale } = useI18n();
 const instance = getCurrentInstance();
-const _prop = withDefaults(defineProps<UeElLottieLibraryPanelBaseProps>(), {});
+const props = withDefaults(defineProps<UeElLottieLibraryPanelBaseProps>(), {});
 const emit = defineEmits<{ (e: "close"): void }>();
 const select = defineModel<string>("select", { required: false });
 
@@ -87,14 +87,25 @@ function capitalizeFirstLetter(str: string) {
 }
 
 // 分类列表
+const categoryGroup: Record<UE_EL_UTIL.LottieLibraryType, string[]> = {
+    icon: ["icon"],
+    normal: ["icon", "figure"],
+};
 const categoryList = computed(() => {
     const useLib = lottieLib.value;
     const name = locale.value === "zh-cn" ? "nameCN" : "name";
-    return Object.keys(useLib || {}).map((item) => ({
-        name: capitalizeFirstLetter(useLib?.[item]?.[name] || ""),
-        value: item,
-        active: selectCategory.value === item,
-    }));
+    return Object.keys(useLib || {})
+        .filter((item) => {
+            if (props.type) {
+                return categoryGroup[props.type].includes(item);
+            }
+            return true;
+        })
+        .map((item) => ({
+            name: capitalizeFirstLetter(useLib?.[item]?.[name] || ""),
+            value: item,
+            active: selectCategory.value === item,
+        }));
 });
 
 // 获取 Lottie 列表
@@ -137,19 +148,22 @@ function updateSelectCategory() {
         selectCategory.value = "";
         return;
     }
+    const useLibCategory = categoryList.value.map((item) => item.value);
+
     if (select.value && lottieLib.value) {
         let _selectCategory = "";
-        Object.entries(lottieLib.value).some(([key, value]) => {
-            if (value.list.find((item) => item.url === select.value)) {
+        useLibCategory.some((key) => {
+            if (lottieLib.value?.[key]?.list.find((item) => item.url === select.value)) {
                 _selectCategory = key;
                 return true;
             }
             return false;
         });
+
         selectCategory.value = _selectCategory;
         return;
     }
-    selectCategory.value = Object.keys(lottieLib.value || {})[0] || "";
+    selectCategory.value = useLibCategory[0] || "";
 }
 
 function updateCurrentCard() {

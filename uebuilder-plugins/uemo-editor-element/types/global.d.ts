@@ -321,6 +321,11 @@ declare global {
          */
         type FileUploadInfo = { url: string; data: SvgFileUploadData };
         type SvgFileUploadData = { w: number; h: number };
+
+        /**
+         * @description Lottie 库类型
+         */
+        type LottieLibraryType = "icon" | "normal";
     }
 
     namespace UE_PLUGIN_OPTIONS {

@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 11:25:52
+ * @LastEditTime: 2025-03-19 13:30:37
 -->
 <template>
     <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -32,6 +32,7 @@
             <component
                 :is="resourceComponents[type]"
                 v-if="type && resourceComponents[type]"
+                v-bind="libraryAttrs"
                 @update:select="handleResourceSelect"
             />
         </UeElPopPanel>

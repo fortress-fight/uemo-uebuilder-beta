@@ -1,7 +1,7 @@
 /*
  * @Description: Lottie 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-11 12:20:26
+ * @LastEditTime: 2025-03-19 13:34:25
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeElLottieLibraryPanel.install = (app: App) => {
 };
 
 export interface UeElLottieLibraryPanelBaseProps {
-    type?: "iconPanel" | "normalPanel";
+    type?: UE_EL_UTIL.LottieLibraryType;
 }
 export type UeElLottieLibraryPanelInstance = InstanceType<typeof UeElLottieLibraryPanel>;
 

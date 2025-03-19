@@ -1,7 +1,7 @@
 /*
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 11:25:23
+ * @LastEditTime: 2025-03-19 13:35:43
  */
 import type { App } from "vue";
 
@@ -53,6 +53,7 @@ export type UeElResourceSettingValue = {
 export interface UeElResourceSettingBaseProps<T extends UeElResourceSettingType = UeElResourceSettingType> {
     type: T;
     removable?: boolean;
+    libraryAttrs?: { type: UE_EL_UTIL.LottieLibraryType };
     enhance?: {
         image: {
             focus: { enable: boolean; pos: string };
