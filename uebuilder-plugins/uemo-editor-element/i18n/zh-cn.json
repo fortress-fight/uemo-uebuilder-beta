@@ -35,6 +35,7 @@
     "UNIT_INTERACTION_EFFECT": "交互效果",
     "UNIT_SIZE": "尺寸",
     "UNIT_SPACE": "间距",
+    "UNIT_TIP": "使用说明",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
