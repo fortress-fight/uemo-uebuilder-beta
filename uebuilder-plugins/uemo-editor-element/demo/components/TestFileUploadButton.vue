@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试图片上传按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-07 03:19:08
+ * @LastEditTime: 2025-03-21 02:45:25
 -->
 <template>
     <TestArea
@@ -27,8 +27,7 @@ const testValueList: (UE_EL_COMPONENT.UeElFileUploadButtonProps & { testOptionTi
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
 
-function handleSubmit(value: { url: string; data?: Record<string, string> }) {
-    console.log("UeElFileUploadButton-value", value);
+function handleSubmit(value: UE_EL_UTIL.FileUploadInfo) {
     testValue.value.value = value.url;
 }
 
