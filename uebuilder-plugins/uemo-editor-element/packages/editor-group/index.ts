@@ -1,7 +1,7 @@
 /*
  * @Description: 通用编辑器容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 01:20:13
+ * @LastEditTime: 2025-03-20 14:51:30
  */
 import type { App } from "vue";
 
@@ -12,7 +12,8 @@ UeElEditorGroup.install = (app: App) => {
     app.component(UeElEditorGroup.name, UeElEditorGroup);
 };
 export interface UeElEditorGroupBaseProps {
-    disable?: boolean;
+    isFirst?: boolean;
+    isLast?: boolean;
 }
 export type UeElEditorGroupInstance = InstanceType<typeof UeElEditorGroup>;
 

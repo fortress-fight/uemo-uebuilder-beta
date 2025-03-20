@@ -1,10 +1,10 @@
 <!--
  * @Description: 通用编辑器容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-04 18:29:57
+ * @LastEditTime: 2025-03-20 14:51:40
 -->
 <template>
-    <div :class="$style['editor-group']">
+    <div :class="[$style['editor-group'], { [$style['is-first']]: isFirst, [$style['is-last']]: isLast }]">
         <div :class="$style['group-body']" class="grid">
             <slot></slot>
         </div>
@@ -25,6 +25,14 @@ const _prop = withDefaults(defineProps<UeElEditorGroupBaseProps>(), {});
     padding: var(--ue-editor-row-space--lv3) var(--ue-editor-row-space--lv2);
 
     border-bottom: 1px solid color(var(--ue-border-color));
+    &.is-first {
+        padding-top: 0;
+    }
+    &.is-last {
+        padding-bottom: 0;
+
+        border-bottom: 0;
+    }
 }
 .group-body {
     gap: var(--ue-control-col-space);
