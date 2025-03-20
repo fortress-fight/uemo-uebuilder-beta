@@ -1,7 +1,7 @@
 <!--
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 17:37:22
+ * @LastEditTime: 2025-03-21 02:04:21
 -->
 <template>
     <div>
@@ -27,7 +27,7 @@ withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
     font-weight: 600;
     line-height: 28px;
 
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     padding-left: var(--ue-editor-row-space--lv1);
 
     color: color(var(--ue-font-color--deeper));
