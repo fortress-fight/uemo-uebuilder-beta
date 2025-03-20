@@ -1,7 +1,7 @@
 /*
  * @Description: 网格布局工具
  * @Author: F-Stone
- * @LastEditTime: 2025-03-10 11:14:12
+ * @LastEditTime: 2025-03-20 13:53:09
  */
 
 /**
@@ -58,7 +58,7 @@ export function getGridInfo(grid?: string): GridInfo {
 export function getGridCss(gridInfo: GridInfo) {
     const { colTemplate, rowTemplate, subColInfo: subColInfoArr } = gridInfo;
 
-    const rowInfo = rowTemplate.split(" ").join("-");
+    const rowInfo = rowTemplate.split(" ").join("-").replaceAll("fr", "");
     const colInfo = colTemplate.split(" ").join("-").replaceAll("fr", "");
     const subColInfo = subColInfoArr.join(",").replaceAll(" ", "");
 
