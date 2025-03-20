@@ -1,7 +1,7 @@
 <!--
  * @Description: 通用编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 00:53:10
+ * @LastEditTime: 2025-03-21 01:42:31
 -->
 <template>
     <div :class="$style['editor-panel']" class="relative">
@@ -51,7 +51,7 @@
                             class="w-full"
                             @click="emit('confirm')"
                         >
-                            {{ confirm.text }}
+                            {{ confirm?.text || t("CONFIRM") }}
                         </button>
                     </div>
                 </slot>
@@ -71,7 +71,6 @@ const _prop = withDefaults(defineProps<UeElEditorPanelBaseProps>(), {
     withClose: false,
     withDragger: true,
     maxHeight: "80vh",
-    confirm: () => ({ text: "确认" }),
 });
 const emit = defineEmits<{ (e: "close" | "confirm" | "cancel"): void }>();
 </script>
