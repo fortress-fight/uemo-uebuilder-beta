@@ -1,6 +1,6 @@
 <template>
     <UeElEditorPanel :class="$style['grid-layout-area-setting']" :title="t('GRID_LAYOUT_SETTING_SWAP_POSITION')">
-        <UeElEditorGroup title="原始结构">
+        <UeElEditorGroup :title="t('GRID_LAYOUT_SETTING_ORIGIN_LAYOUT')" is-first>
             <UeElGirdLayoutUtil
                 :data="value"
                 type="select"
@@ -9,7 +9,11 @@
                 @subitemTrigger="emit('trigger', $event)"
             />
         </UeElEditorGroup>
-        <UeElTipGroup type="warn" :tips="tips" :title="t('UNIT_TIP')" />
+        <UeElEditorGroup is-last>
+            <UeElControlGroup :title="t('UNIT_TIP')">
+                <UeElTipGroup type="warn" :tips="tips" />
+            </UeElControlGroup>
+        </UeElEditorGroup>
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
