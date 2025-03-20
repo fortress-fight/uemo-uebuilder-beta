@@ -44,10 +44,10 @@
         </div>
     </UeElControlGroup>
     <!-- 弹窗面板 -->
-    <UeElPopPanel v-model:open="gridSizePanelOpen" :panel="popPanelParams" :draggable="true">
+    <UeElPopPanel v-model:open="gridSizePanelOpen" v-bind="popPanelParams">
         <SizeAdjust :size="gridSize" @change="handleGridSizeChange" />
     </UeElPopPanel>
-    <UeElPopPanel v-model:open="replaceLayoutPanelOpen" :panel="popPanelParams" :draggable="true">
+    <UeElPopPanel v-model:open="replaceLayoutPanelOpen" v-bind="popPanelParams">
         <ReplaceLayout
             v-if="props.mode === 'replace'"
             :value="props.data"
@@ -146,8 +146,8 @@ const gridSize = computed(() => gridColArr.value[gridSizeAdjustIndex.value]);
 /**
  * 弹窗位置配置计算属性
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    if (!popPanelRelateDom.value) return;
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (!popPanelRelateDom.value) return undefined;
     return getPopPanelParams("editorPanel", popPanelRelateDom.value, {
         placement: "right-start",
     });

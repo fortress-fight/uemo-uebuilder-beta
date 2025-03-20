@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 01:16:57
+ * @LastEditTime: 2025-03-21 01:49:54
 -->
 <template>
     <UeElSettingBar
@@ -12,7 +12,7 @@
         @triggerSetting="openFontFamilySetting"
         ref="settingBarRef"
     />
-    <UeElPopPanel v-model:open="popPanelOpen" :panel="popPanelParams" :draggable="true">
+    <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
         <UeElFontFamilyLibraryPanel v-model:select="valueRef" />
     </UeElPopPanel>
 </template>
@@ -38,11 +38,9 @@ function openFontFamilySetting(): void {
 /**
  * 弹窗位置配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const dom = settingBarRef.value?.$el;
-    if (!dom) return;
-
-    return getPopPanelParams("editorPanel", dom);
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (!settingBarRef.value?.$el) return undefined;
+    return getPopPanelParams("editorPanel", settingBarRef.value.$el);
 });
 </script>
 <style lang="scss" module>

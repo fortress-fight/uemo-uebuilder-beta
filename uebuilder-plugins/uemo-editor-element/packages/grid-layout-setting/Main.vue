@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 14:55:09
+ * @LastEditTime: 2025-03-21 01:50:35
 -->
 <template>
     <UeElEditorGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
@@ -19,7 +19,7 @@
             <UeElButton v-if="enableZIndexMode" v-bind="zIndexButtonParam" @trigger="toggleZIndexMode" />
         </UeElControlGroup>
         <!-- 布局库弹窗面板 -->
-        <UeElPopPanel v-model:open="popPanelOpen" :panel="popPanelParams" :draggable="true">
+        <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
             <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
         </UeElPopPanel>
     </UeElEditorGroup>
@@ -28,8 +28,8 @@
 <script lang="ts" setup>
 import type { UeElGridLayoutSettingBaseProps } from "./index";
 
-import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElEditorGroup from "../editor-group";
+import { getPopPanelParams } from "../pop-panel/utils/helper";
 import PreviewBox from "./sub-components/PreviewLayoutBox.vue";
 
 defineOptions({ name: "UeElGridLayoutSetting" });
@@ -107,12 +107,11 @@ const previewBoxMode = computed(() => {
 
 /**
  * 弹窗位置配置计算属性
- * @returns {UeElPopPanelProps["panel"]} 弹窗配置对象
+ * @returns {UE_EL_COMPONENT.UeElPopPanelProps} 弹窗配置对象
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const dom = rootComponentRef.value?.$el;
-    if (!dom) return;
-    return getPopPanelParams("editorPanel", dom);
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (!rootComponentRef.value?.$el) return undefined;
+    return getPopPanelParams("editorPanel", rootComponentRef.value.$el);
 });
 
 /**

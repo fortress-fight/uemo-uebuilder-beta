@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:56:32
+ * @LastEditTime: 2025-03-21 01:44:39
 -->
 <template>
     <UeElTextInput
@@ -81,7 +81,7 @@ const independentOpacityControlEnabled = computed(() => {
 
 const colorRootRef = useTemplateRef("colorRootRef");
 const gradientRootRef = useTemplateRef("gradientRootRef");
-const rootDomRef = computed(() => {
+const rootDomRef = computed<HTMLElement | undefined>(() => {
     return colorRootRef.value?.$el || gradientRootRef.value;
 });
 

@@ -28,11 +28,14 @@ export function getPopPanelParams(
     _mode: PopPanelMode = "editorPanel",
     dom: HTMLElement,
     options: EnhancedComputePositionConfig = {}
-): UE_EL_COMPONENT.UeElPopPanelProps["panel"] {
+): UE_EL_COMPONENT.UeElPopPanelProps {
     return {
-        position: {
-            refEl: dom,
-            options: { ...DEFAULT_POSITION_CONFIG, ...options },
+        draggable: true,
+        panel: {
+            position: {
+                refEl: dom,
+                options: { ...DEFAULT_POSITION_CONFIG, ...options },
+            },
         },
     };
 }

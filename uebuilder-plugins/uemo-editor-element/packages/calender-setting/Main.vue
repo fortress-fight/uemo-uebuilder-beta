@@ -1,7 +1,7 @@
 <!--
  * @Description: 日期控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 01:16:30
+ * @LastEditTime: 2025-03-21 01:49:12
 -->
 <template>
     <UeElSettingBar
@@ -13,7 +13,7 @@
         :infoText="infoText"
         @triggerSetting="pickerPanelOpen = true"
     >
-        <UeElPopPanel v-model:open="pickerPanelOpen" :panel="popPanelParams">
+        <UeElPopPanel v-model:open="pickerPanelOpen" v-bind="popPanelParams">
             <UeElCalenderPicker v-model:value="useDate" />
         </UeElPopPanel>
     </UeElSettingBar>
@@ -50,11 +50,9 @@ const pickerPanelOpen = ref(false);
  * 计算弹出面板的参数
  * @returns {UE_EL_COMPONENT.UeElPopPanelProps["panel"]} 弹出面板参数
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const dom = rootDomRef.value?.$el;
-    if (!dom) return;
-
-    return getPopPanelParams("editorPanel", dom);
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (!rootDomRef.value?.$el) return undefined;
+    return getPopPanelParams("editorPanel", rootDomRef.value.$el);
 });
 
 const useDate = computed({
