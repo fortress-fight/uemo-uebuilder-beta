@@ -1,7 +1,7 @@
 /*
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 13:11:56
+ * @LastEditTime: 2025-03-21 04:19:42
  */
 import type { App } from "vue";
 
@@ -15,6 +15,7 @@ UeElLoading.install = (app: App) => {
 export type UeElLoadingBaseProps = {
     type?: "bar" | "circle";
     bg?: string;
+    color?: string;
     bar?: {
         fake?: boolean;
         progress?: string;

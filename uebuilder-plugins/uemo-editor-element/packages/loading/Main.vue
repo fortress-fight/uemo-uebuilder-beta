@@ -1,10 +1,10 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 01:35:16
+ * @LastEditTime: 2025-03-21 04:19:44
 -->
 <template>
-    <div :class="$style['loading']" class="flex justify-center items-center" :style="{ '--bg': bg }">
+    <div :class="$style['loading']" class="flex justify-center items-center" :style="{ '--bg': bg, '--color': color }">
         <div v-if="type === 'bar'" :class="$style['loading-box--bar']">
             <span v-if="barInfo.message !== false" :class="$style['loading-message']">
                 {{ barInfo.message || t("LOADING_TIP") }}
@@ -34,6 +34,7 @@ const { t } = useI18n();
 const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
     type: "bar",
     bg: "#fff",
+    color: "#000",
     bar: () => ({ fake: true, message: "", progress: "0", duration: 5 }),
     circle: () => ({ size: "50px" }),
 });
@@ -223,7 +224,7 @@ defineExpose({
             content: "";
             animation: prixClipFix 3s linear infinite;
 
-            border: 2px solid rgba(#000, 1);
+            border: 2px solid var(--color);
             border-radius: 50%;
 
             inset: 0;
