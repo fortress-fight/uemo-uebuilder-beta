@@ -1,5 +1,5 @@
 <template>
-    <UeElTipGroup v-if="tipAttrs.tips.length > 0" v-bind="tipAttrs" :title="t('UNIT_TIP')" />
+    <UeElTipGroup v-if="tipAttrs.tips.length > 0" v-bind="tipAttrs" />
 </template>
 <script lang="ts" setup>
 import type { UploadType } from "../index";

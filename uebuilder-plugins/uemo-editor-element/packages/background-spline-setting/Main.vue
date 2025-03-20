@@ -1,7 +1,7 @@
 <!--
  * @Description: Spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:29:12
+ * @LastEditTime: 2025-03-21 02:41:02
 -->
 <template>
     <UeElEditorPanel
@@ -28,7 +28,7 @@
 
         <!-- 提示信息 -->
         <UeElEditorGroup is-last>
-            <UeElControlGroup>
+            <UeElControlGroup :title="t('UNIT_TIP')">
                 <UeElTipGroup v-bind="tipMessage" />
             </UeElControlGroup>
         </UeElEditorGroup>
@@ -67,7 +67,6 @@ const rootComponentRef = useTemplateRef<InstanceType<typeof UeElEditorPanel>>("r
  * @description 包含 Spline 使用的注意事项
  */
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
-    title: t("UNIT_TIP"),
     tips: [`1. ${t("BACKGROUND_SPLINE_SETTING_TIP_1")}`, `2. ${t("BACKGROUND_SPLINE_SETTING_TIP_2")}`],
 }));
 

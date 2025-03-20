@@ -1,17 +1,12 @@
 <!--
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:04:21
+ * @LastEditTime: 2025-03-21 02:49:00
 -->
 <template>
-    <div>
-        <div v-if="title" :class="$style['editor-tip-group-title']">
-            <span class="text">{{ title }}</span>
-        </div>
-        <div class="flex" :class="$style['editor-tip-group']" :data-type="type">
-            <div class="grid" :class="$style['editor-group-inner']">
-                <div v-for="(item, index) in tips" v-html="item" :class="$style['editor-tip']" :key="index"></div>
-            </div>
+    <div class="flex" :class="$style['editor-tip-group']" :data-type="type">
+        <div class="grid" :class="$style['editor-group-inner']">
+            <div v-for="(item, index) in tips" v-html="item" :class="$style['editor-tip']" :key="index"></div>
         </div>
     </div>
 </template>
@@ -22,16 +17,6 @@ defineOptions({ name: "UeElTipGroup" });
 withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
 </script>
 <style lang="scss" module>
-.editor-tip-group-title {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 28px;
-
-    margin-bottom: 4px;
-    padding-left: var(--ue-editor-row-space--lv1);
-
-    color: color(var(--ue-font-color--deeper));
-}
 .editor-tip-group {
     font-size: 12px;
 

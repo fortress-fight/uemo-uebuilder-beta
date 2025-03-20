@@ -1,7 +1,7 @@
 <!--
  * @Description: 图片上传按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 17:19:08
+ * @LastEditTime: 2025-03-21 02:49:38
 -->
 <template>
     <div class="grid" :class="$style['file-upload-button']">
@@ -21,7 +21,9 @@
                 />
             </template>
         </UeElFileUploader>
-        <Tip :type="type" />
+        <UeElControlGroup :title="t('UNIT_TIP')">
+            <Tip :type="type" />
+        </UeElControlGroup>
     </div>
 </template>
 <script lang="ts" setup>
@@ -34,6 +36,7 @@ import { uploadBeforeInterceptors } from "./utils/svg-upload";
 
 defineOptions({ name: "UeElFileUploadButton" });
 
+const { t } = useI18n();
 const prop = withDefaults(defineProps<UeElFileUploadButtonBaseProps>(), {});
 const emit = defineEmits<{ (e: "submit", value: UE_EL_UTIL.FileUploadInfo): void }>();
 
@@ -45,6 +48,6 @@ function handleSubmit(value: string) {
 </script>
 <style lang="scss" module>
 .file-upload-button {
-    gap: var(--ue-editor-row-space--lv3);
+    gap: var(--ue-control-col-space);
 }
 </style>
