@@ -59,6 +59,8 @@
     "ALIGN_ITEM_TOP": "Top",
     "ALIGN_ITEM_CENTER": "Center",
     "ALIGN_ITEM_BOTTOM": "Bottom",
+    "ALIGN_ITEM_LEFT": "Left",
+    "ALIGN_ITEM_RIGHT": "Right",
 
     "GAP_SETTING_X": "Horizontal Gap",
     "GAP_SETTING_Y": "Vertical Gap",
@@ -270,6 +272,7 @@
     "GRID_LAYOUT_SETTING_SIZE_AUTO": "Auto",
     "GRID_LAYOUT_SETTING_SIZE_FIXED": "Fixed",
     "GRID_LAYOUT_SETTING_SWAP_POSITION": "Swap Position",
+    "GRID_LAYOUT_SETTING_ORIGIN_LAYOUT": "Original Layout",
     "GRID_LAYOUT_SETTING_SWAP_POSITION_TIP": "Click the specified content block position to swap with the target content block position",
     "GRID_LAYOUT_SETTING_REPLACE": "Replace Layout",
     "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "Adjust Z Index",
@@ -278,6 +281,6 @@
     "SCROLL_EFFECT_TITLE": "Scroll Effect",
 
     "BACKGROUND_SPLINE_SETTING_TITLE": "{type} Background",
-    "BACKGROUND_SPLINE_SETTING_TIP_1": "Due to the complexity of Spline effects, use no more than 2 to avoid performance issues.",
+    "BACKGROUND_SPLINE_SETTING_TIP_1": "Due to the complexity of Spline effects, <span data-ue-tip-color=\"red\">use no more than 2 to avoid performance issues.</span>",
     "BACKGROUND_SPLINE_SETTING_TIP_2": "Due to Spline loading time, please be patient during the switch."
 }

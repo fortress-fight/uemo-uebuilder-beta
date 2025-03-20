@@ -59,6 +59,8 @@
     "ALIGN_ITEM_TOP": "居上",
     "ALIGN_ITEM_CENTER": "居中",
     "ALIGN_ITEM_BOTTOM": "居下",
+    "ALIGN_ITEM_LEFT": "居左",
+    "ALIGN_ITEM_RIGHT": "居右",
 
     "GAP_SETTING_X": "横向间距",
     "GAP_SETTING_Y": "纵向间距",
@@ -270,6 +272,7 @@
     "GRID_LAYOUT_SETTING_SIZE_AUTO": "内容宽度",
     "GRID_LAYOUT_SETTING_SIZE_FIXED": "固定宽度",
     "GRID_LAYOUT_SETTING_SWAP_POSITION": "交换位置",
+    "GRID_LAYOUT_SETTING_ORIGIN_LAYOUT": "原始结构",
     "GRID_LAYOUT_SETTING_SWAP_POSITION_TIP": "点击指定的内容块位置，与目标内容块位置进行交换",
     "GRID_LAYOUT_SETTING_REPLACE": "更换版型",
     "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "调节层级",
@@ -277,7 +280,7 @@
 
     "SCROLL_EFFECT_TITLE": "滚动效果",
 
-    "BACKGROUND_SPLINE_SETTING_TITLE": "{type} 背景",
-    "BACKGROUND_SPLINE_SETTING_TIP_1": "由于 Spline 特效的复杂性，会消耗较多的电脑性能，建议使用数量不要超过 2 个。",
+    "BACKGROUND_SPLINE_SETTING_TITLE": "{type}背景",
+    "BACKGROUND_SPLINE_SETTING_TIP_1": "由于 Spline 特效的复杂性，会消耗较多的电脑性能，<span data-ue-tip-color=\"red\">建议使用数量不要超过 2 个。</span>",
     "BACKGROUND_SPLINE_SETTING_TIP_2": "由于 Spline 加载需要一段时间，切换时请耐心等待一下。"
 }

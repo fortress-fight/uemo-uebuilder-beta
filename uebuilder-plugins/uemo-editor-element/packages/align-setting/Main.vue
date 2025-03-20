@@ -1,7 +1,7 @@
 <!--
  * @Description: Align设置
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 04:23:22
+ * @LastEditTime: 2025-03-21 03:02:17
 -->
 <template>
     <UeElControlGroup :class="$style['align-setting']" oper-type="none" :data-disable="disable ? '' : undefined">
@@ -37,28 +37,29 @@
 import type { UeElAlignSettingBaseProps, UeElAlignSettingOption } from "./index";
 
 defineOptions({ name: "UeElAlignSetting" });
+
+const { t } = useI18n();
 const prop = withDefaults(defineProps<UeElAlignSettingBaseProps>(), {
     type: "xy",
     disable: false,
     disableAlign: false,
 });
-
 const emit = defineEmits<{
     (e: "change", value: { x?: UE_EL_UTIL.ALIGN_X; y?: UE_EL_UTIL.ALIGN_Y }): void;
 }>();
 
 const valueRef = defineModel<UE_EL_UTIL.ALIGN>("value", { required: false });
 
-const xOptions: ({ value: UE_EL_UTIL.ALIGN_X } & UeElAlignSettingOption)[] = [
-    { value: "left", icon: { name: "icon-zuoduiqi", size: 17 }, label: "居左" },
-    { value: "center", icon: { name: "icon-shuipingjuzhong", size: 17 }, label: "横向居中" },
-    { value: "right", icon: { name: "icon-youduiqi", size: 17 }, label: "居右" },
-];
-const yOptions: ({ value: UE_EL_UTIL.ALIGN_Y } & UeElAlignSettingOption)[] = [
-    { value: "top", icon: { name: "icon-shangduiqi", size: 17 }, label: "居上" },
-    { value: "center", icon: { name: "icon-chuizhijuzhong", size: 17 }, label: "纵向居中" },
-    { value: "bottom", icon: { name: "icon-dingbuduiqi", size: 17 }, label: "居下" },
-];
+const xOptions = computed<({ value: UE_EL_UTIL.ALIGN_X } & UeElAlignSettingOption)[]>(() => [
+    { value: "left", icon: { name: "icon-zuoduiqi", size: 17 }, label: t("ALIGN_ITEM_LEFT") },
+    { value: "center", icon: { name: "icon-shuipingjuzhong", size: 17 }, label: t("ALIGN_ITEM_CENTER") },
+    { value: "right", icon: { name: "icon-youduiqi", size: 17 }, label: t("ALIGN_ITEM_RIGHT") },
+]);
+const yOptions = computed<({ value: UE_EL_UTIL.ALIGN_Y } & UeElAlignSettingOption)[]>(() => [
+    { value: "top", icon: { name: "icon-shangduiqi", size: 17 }, label: t("ALIGN_ITEM_TOP") },
+    { value: "center", icon: { name: "icon-chuizhijuzhong", size: 17 }, label: t("ALIGN_ITEM_CENTER") },
+    { value: "bottom", icon: { name: "icon-dingbuduiqi", size: 17 }, label: t("ALIGN_ITEM_BOTTOM") },
+]);
 
 // 提取当前对齐方式，减少重复 split 操作
 const currentAlign = computed(() => {
