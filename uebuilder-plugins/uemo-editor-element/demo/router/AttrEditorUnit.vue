@@ -30,6 +30,7 @@ import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
 import TestButtonIconSettingGroup from "~/demo/components/TestButtonIconSettingGroup.vue";
 import TestGridLayoutSetting from "~/demo/components/TestGridLayoutSetting.vue";
 import TestBackgroundSplineSetting from "~/demo/components/TestBackgroundSplineSetting.vue";
+import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -49,6 +50,7 @@ const testComponents = [
     TestCalenderSettingGroup,
     TestButtonIconSettingGroup,
     TestFontFamilySetting,
+    TestTranslateSetting,
     TestGridLayoutSetting,
     TestResourceSetting,
     TestButtonIconSetting,

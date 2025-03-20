@@ -41,6 +41,8 @@
     "UNIT_NORMAL": "Normal",
     "UNIT_PARALLAX": "Parallax",
     "UNIT_STICKY": "Sticky",
+    "UNIT_SCROLL": "Scroll",
+    "UNIT_FIXED": "Fixed",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -284,5 +286,10 @@
 
     "BACKGROUND_SPLINE_SETTING_TITLE": "{type} Background",
     "BACKGROUND_SPLINE_SETTING_TIP_1": "Due to the complexity of Spline effects, <span data-ue-tip-color=\"red\">use no more than 2 to avoid performance issues.</span>",
-    "BACKGROUND_SPLINE_SETTING_TIP_2": "Due to Spline loading time, please be patient during the switch."
+    "BACKGROUND_SPLINE_SETTING_TIP_2": "Due to Spline loading time, please be patient during the switch.",
+
+    "BACKGROUND_REPEAT_NORMAL": "Normal",
+    "BACKGROUND_REPEAT_COVER": "Cover",
+    "BACKGROUND_REPEAT_CONTAIN": "Contain",
+    "BACKGROUND_REPEAT_REPEAT": "Repeat"
 }
