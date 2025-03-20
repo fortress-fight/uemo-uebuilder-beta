@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格结构工具
  * @Author: F-Stone
- * @LastEditTime: 2025-03-10 11:30:48
+ * @LastEditTime: 2025-03-20 14:43:28
 -->
 <template>
     <div
@@ -24,7 +24,11 @@
             @click="subitemTrigger($event, index)"
         >
             <UeElIcon v-if="item.disable" :class="$style['ic']" :size="22" name="icon-disable" />
-            <div v-else-if="type === 'zIndexMode' && gridItemZIndexArray" :class="$style['z-index-control']">
+            <div
+                v-else-if="type === 'zIndexMode' && gridItemZIndexArray"
+                :class="$style['z-index-control']"
+                v-ue-el-label="t('GRID_LAYOUT_SETTING_TOP')"
+            >
                 <span :class="$style['text']">
                     {{ gridItemZIndexArray.length - gridItemZIndexArray[index] + 1 }}
                 </span>

@@ -36,6 +36,8 @@
     "UNIT_SIZE": "尺寸",
     "UNIT_SPACE": "间距",
     "UNIT_TIP": "使用说明",
+    "UNIT_MODE": "模式",
+    "UNIT_ATTR": "属性",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -255,5 +257,18 @@
 
     "BUTTON_ICON_TITLE": "按钮图标",
     "BUTTON_ICON_ATTR": "图标属性",
-    "BUTTON_ICON_ATTR_FOLLOW_TEXT": "跟随文字颜色"
+    "BUTTON_ICON_ATTR_FOLLOW_TEXT": "跟随文字颜色",
+
+    "GRID_LAYOUT_SETTING_TOP": "置顶",
+    "GRID_LAYOUT_SETTING_ADJUST_SIZE": "调节尺寸",
+    "GRID_LAYOUT_SETTING_CONTENT_HEIGHT": "使用内容高",
+    "GRID_LAYOUT_SETTING_EQUAL_HEIGHT": "使用等高",
+    "GRID_LAYOUT_SETTING_SIZE_RATIO": "固定比例",
+    "GRID_LAYOUT_SETTING_SIZE_AUTO": "内容宽度",
+    "GRID_LAYOUT_SETTING_SIZE_FIXED": "固定宽度",
+    "GRID_LAYOUT_SETTING_SWAP_POSITION": "交换位置",
+    "GRID_LAYOUT_SETTING_SWAP_POSITION_TIP": "点击指定的内容块位置，与目标内容块位置进行交换",
+    "GRID_LAYOUT_SETTING_REPLACE": "更换版型",
+    "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "调节层级",
+    "GRID_LAYOUT_SETTING_COMPLETE": "完成调节"
 }

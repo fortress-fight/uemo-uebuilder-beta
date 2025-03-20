@@ -36,6 +36,8 @@
     "UNIT_SIZE": "Size",
     "UNIT_SPACE": "Space",
     "UNIT_TIP": "TIP",
+    "UNIT_MODE": "Mode",
+    "UNIT_ATTR": "Attribute",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -255,5 +257,18 @@
 
     "BUTTON_ICON_TITLE": "Button Icon",
     "BUTTON_ICON_ATTR": "Icon Attribute",
-    "BUTTON_ICON_ATTR_FOLLOW_TEXT": "Follow Text Color"
+    "BUTTON_ICON_ATTR_FOLLOW_TEXT": "Follow Text Color",
+
+    "GRID_LAYOUT_SETTING_TOP": "Pin to Top",
+    "GRID_LAYOUT_SETTING_ADJUST_SIZE": "Adjust Size",
+    "GRID_LAYOUT_SETTING_CONTENT_HEIGHT": "Use Content Height",
+    "GRID_LAYOUT_SETTING_EQUAL_HEIGHT": "Use Equal Height",
+    "GRID_LAYOUT_SETTING_SIZE_RATIO": "Ratio",
+    "GRID_LAYOUT_SETTING_SIZE_AUTO": "Auto",
+    "GRID_LAYOUT_SETTING_SIZE_FIXED": "Fixed",
+    "GRID_LAYOUT_SETTING_SWAP_POSITION": "Swap Position",
+    "GRID_LAYOUT_SETTING_SWAP_POSITION_TIP": "Click the specified content block position to swap with the target content block position",
+    "GRID_LAYOUT_SETTING_REPLACE": "Replace Layout",
+    "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "Adjust Z Index",
+    "GRID_LAYOUT_SETTING_COMPLETE": "Complete Adjustment"
 }
