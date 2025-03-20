@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 01:16:06
+ * @LastEditTime: 2025-03-21 01:52:19
 -->
 <template>
     <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -28,7 +28,7 @@
                 @trigger="handleRemove"
             />
         </div>
-        <UeElPopPanel v-model:open="popPanelOpen" :panel="popPanelParams" :draggable="true">
+        <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
             <component
                 :is="resourceComponents[type]"
                 v-if="type && resourceComponents[type]"
@@ -178,11 +178,11 @@ function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
 /**
  * 弹窗位置配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps["panel"]>(() => {
-    const dom = rootDomRef.value;
-    if (!dom) return;
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (typeof props.popPanelProps !== "undefined") return props.popPanelProps;
 
-    return getPopPanelParams("editorPanel", dom);
+    if (!rootDomRef.value) return undefined;
+    return getPopPanelParams("editorPanel", rootDomRef.value);
 });
 </script>
 

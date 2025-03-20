@@ -1,7 +1,7 @@
 /*
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 13:35:43
+ * @LastEditTime: 2025-03-21 01:02:45
  */
 import type { App } from "vue";
 
@@ -54,6 +54,7 @@ export interface UeElResourceSettingBaseProps<T extends UeElResourceSettingType 
     type: T;
     removable?: boolean;
     libraryAttrs?: { type: UE_EL_UTIL.LottieLibraryType };
+    popPanelProps?: UE_EL_COMPONENT.UeElPopPanelProps;
     enhance?: {
         image: {
             focus: { enable: boolean; pos: string };
