@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-17 02:19:56
+ * @LastEditTime: 2025-03-20 13:17:37
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -13,7 +13,6 @@
 -->
 <template>
     <Teleport to="body">
-        <div v-if="maskLayerParams && openModel" ref="maskLayer" :class="$style['layer--dialog-mask']"></div>
         <Transition
             :css="false"
             @enter="onEnter"
@@ -21,10 +20,11 @@
             @leave="onLeave"
             @after-leave="onAfterLeave"
         >
-            <div v-if="openModel" :class="$style['pop-panel']" :style="{ zIndex }" :data-root-id="rootId">
+            <div v-if="openModel" :data-root-id="rootId" :class="$style['layer--pop-panel']">
+                <div v-if="maskLayerParams" :class="$style['dialog-mask']"></div>
                 <div
-                    ref="dialogBoxRef"
-                    :class="$style['layer-dialog-box']"
+                    ref="dialogBox"
+                    :class="$style['dialog-box']"
                     v-on-click-outside="closeModal"
                     v-ue-el-dragger="draggable"
                 >
@@ -63,8 +63,8 @@ const emit = defineEmits<{
 }>();
 
 const cssModule = useCssModule();
-const openModel = defineModel("open");
-const dialogBoxRef = useTemplateRef("dialogBoxRef");
+const openModel = defineModel<boolean>("open", { default: false });
+const dialogBoxRef = useTemplateRef("dialogBox");
 
 /**
  * 事件管理器，用于清理自动更新位置的监听器
@@ -116,8 +116,8 @@ async function updateDialogPos(): Promise<void> {
  */
 async function onEnter(el: Element, done: () => void) {
     try {
-        const maskLayer = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
-        const dialogBox = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
+        const maskLayer = el.querySelector(`.${cssModule["dialog-mask"]}`);
+        const dialogBox = el.querySelector(`.${cssModule["dialog-box"]}`);
 
         await updateDialogPos();
 
@@ -177,8 +177,8 @@ function onAfterEnter(_el: Element) {
  */
 async function onLeave(el: Element, done: () => void) {
     try {
-        const maskLayer = el.querySelector(`.${cssModule["layer--dialog-mask"]}`);
-        const dialogBox = el.querySelector(`.${cssModule["layer-dialog-box"]}`);
+        const maskLayer = el.querySelector(`.${cssModule["dialog-mask"]}`);
+        const dialogBox = el.querySelector(`.${cssModule["dialog-box"]}`);
 
         const timeline = gsap.timeline({
             paused: true,
@@ -264,42 +264,39 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" module>
-.pop-panel {
+.layer--pop-panel {
     position: fixed;
     z-index: var(--ue-z-index--dialog);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
 
     pointer-events: none;
+
+    inset: 0;
     &[data-pos="center"] {
         display: flex;
 
         align-items: center;
         justify-content: center;
         .layer-dialog-box {
-            position: relative;
+            position: static;
         }
     }
-}
-.layer--dialog-mask {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    .dialog-mask {
+        position: absolute;
+        z-index: var(--ue-z-index--mini);
 
-    pointer-events: all;
-}
-.layer-dialog-box {
-    position: absolute;
-    z-index: var(--ue-z-index--mini);
-    top: 0;
-    left: 0;
+        pointer-events: all;
 
-    pointer-events: all;
+        inset: 0;
+    }
+    .dialog-box {
+        position: absolute;
+        z-index: var(--ue-z-index--mini);
+        top: 0;
+        left: 0;
 
-    opacity: 0;
+        pointer-events: all;
+
+        opacity: 0;
+    }
 }
 </style>
