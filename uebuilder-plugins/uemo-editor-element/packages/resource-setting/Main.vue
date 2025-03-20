@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:32:52
+ * @LastEditTime: 2025-03-21 03:43:46
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -9,24 +9,26 @@
             <UeElResourcePreview v-bind="previewComponentAttrs" @trigger="handleTrigger" />
         </template>
         <div class="flex gap-2 w-full" :class="$style['resource-setting']">
-            <UeElButton
-                class="w-full"
-                v-bind="resourceButtonConfig[type]"
-                size="normal"
-                theme="strokeText"
-                :class="$style['oper-btn']"
-                @trigger="openPopPanel"
-            />
-            <UeElButton
-                v-if="valueRef && removable"
-                class="w-full"
-                size="normal"
-                :text="t('UNIT_REMOVE')"
-                theme="strokeText"
-                :class="$style['oper-btn']"
-                :icon="{ name: 'icon-shanchu', size: 16 }"
-                @trigger="handleRemove"
-            />
+            <slot name="operGroup" :openPopPanel="openPopPanel" :handleRemove="handleRemove">
+                <UeElButton
+                    class="w-full"
+                    v-bind="resourceButtonConfig[type]"
+                    size="normal"
+                    theme="strokeText"
+                    :class="$style['oper-btn']"
+                    @trigger="openPopPanel"
+                />
+                <UeElButton
+                    v-if="valueRef && removable"
+                    class="w-full"
+                    size="normal"
+                    :text="t('UNIT_REMOVE')"
+                    theme="strokeText"
+                    :class="$style['oper-btn']"
+                    :icon="{ name: 'icon-shanchu', size: 16 }"
+                    @trigger="handleRemove"
+                />
+            </slot>
         </div>
         <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
             <component
