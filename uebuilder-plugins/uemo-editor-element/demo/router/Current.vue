@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestGridLayoutSetting.vue";
+import TestComponent from "~/demo/components/TestBackgroundSplineSetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {

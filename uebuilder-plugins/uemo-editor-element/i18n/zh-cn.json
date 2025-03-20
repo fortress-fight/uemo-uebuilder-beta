@@ -38,6 +38,9 @@
     "UNIT_TIP": "使用说明",
     "UNIT_MODE": "模式",
     "UNIT_ATTR": "属性",
+    "UNIT_NORMAL": "常规",
+    "UNIT_PARALLAX": "视差",
+    "UNIT_STICKY": "吸附",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -270,5 +273,11 @@
     "GRID_LAYOUT_SETTING_SWAP_POSITION_TIP": "点击指定的内容块位置，与目标内容块位置进行交换",
     "GRID_LAYOUT_SETTING_REPLACE": "更换版型",
     "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "调节层级",
-    "GRID_LAYOUT_SETTING_COMPLETE": "完成调节"
+    "GRID_LAYOUT_SETTING_COMPLETE": "完成调节",
+
+    "SCROLL_EFFECT_TITLE": "滚动效果",
+
+    "BACKGROUND_SPLINE_SETTING_TITLE": "{type} 背景",
+    "BACKGROUND_SPLINE_SETTING_TIP_1": "由于 Spline 特效的复杂性，会消耗较多的电脑性能，建议使用数量不要超过 2 个。",
+    "BACKGROUND_SPLINE_SETTING_TIP_2": "由于 Spline 加载需要一段时间，切换时请耐心等待一下。"
 }
