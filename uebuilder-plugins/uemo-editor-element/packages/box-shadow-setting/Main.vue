@@ -68,7 +68,7 @@ const color = computed({
 });
 
 const xInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
-    label: t("BOX_SHADOW_SETTING_X"),
+    label: t("TRANSLATE_X"),
     title: { text: t("UNIT_X") },
     units: [{ text: "px", value: "px" }],
     hideUnit: true,
@@ -88,7 +88,7 @@ const x = computed({
 
 const yInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
     title: { text: t("UNIT_Y") },
-    label: t("BOX_SHADOW_SETTING_Y"),
+    label: t("TRANSLATE_Y"),
     units: [{ text: "px", value: "px" }],
     hideUnit: true,
     show: {

@@ -137,8 +137,10 @@
     "COLOR_PICKER_TIP_NOT_SUPPORTED": "请使用线性或径向渐变",
     "COLOR_PICKER_TIP_NOT_SUPPORTED_EYE_DROPPER": "当前浏览器不支持拾色器，目前仅支持 Chrome 或 Edge",
 
-    "BOX_SHADOW_SETTING_X": "横向偏移",
-    "BOX_SHADOW_SETTING_Y": "纵向偏移",
+    "TRANSLATE_SETTING_TITLE": "偏移",
+    "TRANSLATE_X": "横向偏移",
+    "TRANSLATE_Y": "纵向偏移",
+
     "BOX_SHADOW_SETTING_BLUR": "模糊范围",
     "BOX_SHADOW_SETTING_SPREAD": "扩展范围",
     "BOX_SHADOW_SETTING_INDEPENDENT": "独立调节",

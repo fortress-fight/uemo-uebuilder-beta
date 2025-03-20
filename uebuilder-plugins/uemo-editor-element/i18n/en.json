@@ -137,8 +137,10 @@
     "COLOR_PICKER_TIP_NOT_SUPPORTED": "Please use linear or radial gradient",
     "COLOR_PICKER_TIP_NOT_SUPPORTED_EYE_DROPPER": "Currently only supports Chrome or Edge",
 
-    "BOX_SHADOW_SETTING_X": "Horizontal Offset",
-    "BOX_SHADOW_SETTING_Y": "Vertical Offset",
+    "TRANSLATE_SETTING_TITLE": "Translate",
+    "TRANSLATE_X": "Horizontal Offset",
+    "TRANSLATE_Y": "Vertical Offset",
+
     "BOX_SHADOW_SETTING_BLUR": "Blur Radius",
     "BOX_SHADOW_SETTING_SPREAD": "Spread Radius",
     "BOX_SHADOW_SETTING_INDEPENDENT": "Independent Adjustment",
