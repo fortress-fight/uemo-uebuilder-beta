@@ -1,7 +1,7 @@
 <!--
  * @Description: Spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:59:19
+ * @LastEditTime: 2025-03-21 02:29:12
 -->
 <template>
     <UeElEditorPanel
@@ -11,14 +11,12 @@
     >
         <!-- Spline资源设置 -->
         <UeElEditorGroup is-first>
-            <UeElControlGroup>
-                <UeElResourceSetting
-                    type="spline"
-                    :removable="false"
-                    v-model:value="splineSource"
-                    :pop-panel-props="popPanelProps"
-                />
-            </UeElControlGroup>
+            <UeElResourceSetting
+                type="spline"
+                :removable="false"
+                v-model:value="splineSource"
+                :pop-panel-props="popPanelProps"
+            />
         </UeElEditorGroup>
 
         <!-- 滚动效果设置 -->
