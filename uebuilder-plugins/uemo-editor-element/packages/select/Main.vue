@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 02:16:50
+ * @LastEditTime: 2025-03-20 13:13:18
 -->
 <template>
     <UeElSettingBar
@@ -19,7 +19,7 @@
         <template #info="{ infoText }">
             <slot name="info" :infoText="infoText"></slot>
         </template>
-        <UeElPopPanel v-model:open="optionIsOpen" :panel="popPanelParams">
+        <UeElPopPanel v-model:open="optionIsOpen" :panel="popPanelParams" :mask="{ color: 'rgba(0,0,0,0)' }">
             <UeElSelectOption
                 :style="optionPanelStyle"
                 :value="valueModel"
