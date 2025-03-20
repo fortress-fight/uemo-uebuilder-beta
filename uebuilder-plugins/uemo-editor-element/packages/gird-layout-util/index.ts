@@ -18,7 +18,7 @@ export interface UeElGirdLayoutUtilBaseProps {
     type?: "replace" | "option" | "select" | "zIndexMode" | "delete";
     active?: boolean;
     selectList?: number[];
-    gridItemZIndexInfo?: number[];
+    gridItemZIndexArray?: number[];
     disableGridItemIndex?: number[];
 }
 export type UeElGirdLayoutUtilInstance = InstanceType<typeof UeElGirdLayoutUtil>;

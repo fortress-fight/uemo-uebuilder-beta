@@ -24,9 +24,9 @@
             @click="subitemTrigger($event, index)"
         >
             <UeElIcon v-if="item.disable" :class="$style['ic']" :size="22" name="icon-disable" />
-            <div v-else-if="type === 'zIndexMode' && gridItemZIndexInfo" :class="$style['z-index-control']">
+            <div v-else-if="type === 'zIndexMode' && gridItemZIndexArray" :class="$style['z-index-control']">
                 <span :class="$style['text']">
-                    {{ gridItemZIndexInfo.length - gridItemZIndexInfo[index] + 1 }}
+                    {{ gridItemZIndexArray.length - gridItemZIndexArray[index] + 1 }}
                 </span>
                 <UeElIcon :class="$style['ic']" name="icon-app-to-top" />
             </div>
