@@ -6,6 +6,14 @@
         :data-focus-enable="enableFocus"
     >
         <img ref="imageDom" :class="$style['preview-img']" :src="src" @load="handleImageLoad" alt="预览图片" />
+        <UeElLoading
+            v-if="loading"
+            :duration="3"
+            type="circle"
+            bg="rgba(0,0,0,0.2)"
+            color="#fff"
+            :class="$style['loading-bar']"
+        />
         <Transition :css="false" appear @after-enter="handleAfterEnter" @leave="handleLeave">
             <div
                 ref="focusDragger"
