@@ -1,10 +1,10 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 14:31:40
+ * @LastEditTime: 2025-03-20 14:55:09
 -->
 <template>
-    <UeElEditorGroup :class="$style['grid-layout-setting']" ref="rootComponent">
+    <UeElEditorGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
         <PreviewBox
             :data="valueRef"
             :mode="previewBoxMode"
@@ -144,8 +144,6 @@ const toggleZIndexMode = () => {
 
 <style lang="scss" module>
 .grid-layout-setting {
-    border-bottom: 0 !important;
-
-    padding-block: 0 !important;
+    //
 }
 </style>

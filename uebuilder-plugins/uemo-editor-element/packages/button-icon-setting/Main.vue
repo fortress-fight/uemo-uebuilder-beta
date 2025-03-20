@@ -1,10 +1,10 @@
 <!--
  * @Description: 按钮图标属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 14:12:00
+ * @LastEditTime: 2025-03-20 14:53:20
 -->
 <template>
-    <UeElEditorGroup :class="$style['button-icon-setting']">
+    <UeElEditorGroup :class="$style['button-icon-setting']" is-first is-last>
         <UeElControlGroup :col-count="3">
             <UeElButton
                 v-bind="item"
@@ -263,9 +263,6 @@ function changeValue(value: undefined | Partial<UeElButtonIconSettingValue>) {
 
 <style lang="scss" module>
 .button-icon-setting {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-
-    border-bottom: 0 !important;
+    //
 }
 </style>

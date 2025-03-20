@@ -4,7 +4,7 @@
 -->
 <template>
     <UeElEditorPanel :class="$style['size-adjust']" :title="t('GRID_LAYOUT_SETTING_ADJUST_SIZE')">
-        <UeElEditorGroup :class="[$style['first-group'], $style['last-group']]">
+        <UeElEditorGroup is-first is-last>
             <UeElControlGroup
                 :col-count="sizeType === 'auto' ? 1 : 2"
                 :class="$style['grid-layout-setting']"
@@ -86,14 +86,7 @@ const inputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => {
 
 <style lang="scss" module>
 .size-adjust {
-    .first-group {
-        padding-top: 0 !important;
-    }
-    .last-group {
-        padding-bottom: 0 !important;
-
-        border-bottom: 0 !important;
-    }
+    //
 }
 .size-adjust-item {
     // 样式定义
