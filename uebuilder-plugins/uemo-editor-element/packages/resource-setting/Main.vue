@@ -1,10 +1,10 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:52:19
+ * @LastEditTime: 2025-03-21 02:32:52
 -->
 <template>
-    <div :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
+    <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
         <template v-if="isResourcePreviewAttrs(previewComponentAttrs)">
             <UeElResourcePreview v-bind="previewComponentAttrs" @trigger="handleTrigger" />
         </template>
@@ -36,7 +36,7 @@
                 @update:select="handleResourceSelect"
             />
         </UeElPopPanel>
-    </div>
+    </UeElControlGroup>
 </template>
 
 <script lang="ts" setup generic="T extends UeElResourceSettingType">
@@ -49,6 +49,7 @@ import type {
 
 import { getPopPanelParams } from "../pop-panel/utils/helper";
 import { isResourcePreviewAttrs } from "../resource-preview";
+import UeElEditorPanel from "../editor-panel";
 
 const { t } = useI18n();
 defineOptions({ name: "UeElResourceSetting" });
@@ -61,7 +62,7 @@ const emit = defineEmits<{
     (e: "trigger", params: UeElResourceSettingEmitParams[UeElResourceSettingType]): void;
 }>();
 
-const rootDomRef = useTemplateRef("rootDom");
+const rootDomRef = useTemplateRef<InstanceType<typeof UeElEditorPanel>>("rootDom");
 
 /**
  * 资源值的双向绑定
@@ -181,14 +182,14 @@ function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
     if (typeof props.popPanelProps !== "undefined") return props.popPanelProps;
 
-    if (!rootDomRef.value) return undefined;
-    return getPopPanelParams("editorPanel", rootDomRef.value);
+    if (!rootDomRef.value?.$el) return undefined;
+    return getPopPanelParams("editorPanel", rootDomRef.value.$el);
 });
 </script>
 
 <style lang="scss" module>
 .resource-setting-panel {
-    gap: var(--ue-control-col-space);
+    // gap: var(--ue-control-col-space);
 }
 .resource-setting {
     // 资源设置组件样式
