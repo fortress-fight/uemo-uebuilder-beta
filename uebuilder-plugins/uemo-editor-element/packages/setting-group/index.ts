@@ -1,7 +1,7 @@
 /*
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 19:30:26
+ * @LastEditTime: 2025-03-22 00:19:49
  */
 import type { App } from "vue";
 
@@ -11,6 +11,10 @@ UeElSettingGroup.install = (app: App) => {
     if (!UeElSettingGroup.name) return;
     app.component(UeElSettingGroup.name, UeElSettingGroup);
 };
+
+export const settingGroupPopPanelPropsKey = Symbol() as InjectionKey<
+    ComputedRef<UE_EL_COMPONENT.UeElPopPanelProps | undefined> | undefined
+>;
 
 export type OperItem =
     | { id: string; type: "none" | "add" | "remove" }

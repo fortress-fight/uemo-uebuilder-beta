@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:00:58
+ * @LastEditTime: 2025-03-22 00:20:04
 -->
 <template>
     <div
@@ -10,6 +10,7 @@
         :data-disable="disable"
         :data-active="!!$slots.body"
         :data-header-exists="!!title"
+        ref="rootDomRef"
     >
         <div :class="$style['group-head']" class="flex justify-between items-center" v-if="title">
             <div :class="$style['group-title']">
@@ -61,11 +62,31 @@
 <script lang="ts" setup>
 import type { UeElSettingGroupBaseProps } from "./index";
 
+import { getPopPanelParams } from "../pop-panel/utils/helper";
+import { settingGroupPopPanelPropsKey } from "./index";
+
 defineOptions({ name: "UeElSettingGroup" });
 const _prop = withDefaults(defineProps<UeElSettingGroupBaseProps>(), {
     disable: false,
 });
 const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
+
+/**
+ * 组件引用
+ */
+const rootDomRef = useTemplateRef("rootDomRef");
+
+/**
+ * 弹窗面板配置
+ * @description 配置资源选择弹窗的位置和行为
+ */
+const popPanelProps = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
+    if (!rootDomRef.value) return undefined;
+
+    return getPopPanelParams("editorPanel", rootDomRef.value);
+});
+
+provide(settingGroupPopPanelPropsKey, popPanelProps);
 </script>
 <style lang="scss" module>
 .editor-setting-group {

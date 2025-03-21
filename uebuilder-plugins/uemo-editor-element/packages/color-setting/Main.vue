@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 12:11:36
+ * @LastEditTime: 2025-03-22 00:20:59
 -->
 <template>
     <UeElColorInput
@@ -22,6 +22,7 @@
 import type { UeElColorSettingBaseProps } from "./index";
 import type { UeElColorInputInstance } from "../color-input";
 
+import { settingGroupPopPanelPropsKey } from "../setting-group";
 import { editorGroupPopPanelPropsKey } from "../editor-group";
 import { getPopPanelParams } from "../pop-panel/utils/helper";
 
@@ -36,14 +37,17 @@ const valueRef = defineModel<string>("value", { required: true });
 const colorPickerPanelOpen = ref<boolean>(false);
 const colorInputRef = useTemplateRef<UeElColorInputInstance>("colorInput");
 
-const injectPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
+const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
+const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
 
 function openColorPickerPanel() {
     colorPickerPanelOpen.value = true;
 }
 
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectPopPanelProps?.value) return injectPopPanelProps.value;
+    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
+    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
+
     if (!colorInputRef.value?.rootDomRef) return undefined;
     return getPopPanelParams("editorPanel", colorInputRef.value.rootDomRef, {
         placement: prop.placement,
