@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:30:37
+ * @LastEditTime: 2025-03-22 01:14:33
 -->
 <template>
     <div
@@ -124,7 +124,7 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
     }
     &.is-last {
         .group-body {
-            padding-bottom: 0;
+            // padding-bottom: 0;
         }
         &::after {
             // display: none;

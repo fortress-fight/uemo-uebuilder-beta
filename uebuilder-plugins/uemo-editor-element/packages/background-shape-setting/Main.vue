@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图形控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 19:18:38
+ * @LastEditTime: 2025-03-22 01:19:57
 -->
 <template>
     <UeElEditorPanel
@@ -17,11 +17,7 @@
         </UeElSettingGroup>
 
         <!-- 颜色设置 -->
-        <UeElSettingGroup :title="t('UNIT_MAIN_COLOR')">
-            <template #body>
-                <UeElColorSetting v-model:value="color" />
-            </template>
-        </UeElSettingGroup>
+        <UeElColorSettingGroup v-model:value="color" :title="t('UNIT_MAIN_COLOR')" :enableOper="false" />
 
         <!-- 位置设置 -->
         <UeElSettingGroup :title="t('UNIT_POSITION')">

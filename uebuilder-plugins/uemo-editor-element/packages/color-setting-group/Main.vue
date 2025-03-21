@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:21:57
+ * @LastEditTime: 2025-03-22 01:19:47
 -->
 <template>
     <UeElSettingGroup :class="$style['color-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
@@ -14,12 +14,13 @@
 import type { UeElColorSettingGroupBaseProps } from "./index";
 
 defineOptions({ name: "UeElColorSettingGroup" });
-const prop = withDefaults(defineProps<UeElColorSettingGroupBaseProps>(), { type: "color" });
+const prop = withDefaults(defineProps<UeElColorSettingGroupBaseProps>(), { type: "color", enableOper: true });
 const valueRef = defineModel<string>("value", { required: false });
 
 const { t } = useI18n();
 
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
+    if (!prop.enableOper) return { title: prop.title || t("UNIT_COLOR") };
     return {
         title: prop.title || t("UNIT_COLOR"),
         oper: !valueRef.value ? [{ id: "addColor", type: "add" }] : [{ id: "removeColor", type: "remove" }],

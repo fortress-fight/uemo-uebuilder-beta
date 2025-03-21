@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:54:05
+ * @LastEditTime: 2025-03-22 01:20:35
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting']" :title="t('TEXT_DECORATION_TITLE')">
@@ -23,11 +23,7 @@
         </UeElSettingGroup>
 
         <!-- 颜色设置 -->
-        <UeElSettingGroup :title="t('UNIT_MAIN_COLOR')">
-            <template #body>
-                <UeElColorSetting v-model:value="color" />
-            </template>
-        </UeElSettingGroup>
+        <UeElColorSettingGroup v-model:value="color" :title="t('UNIT_MAIN_COLOR')" :enableOper="false" />
 
         <!-- 动画设置 -->
         <UeElSettingGroup v-bind="animateSettingGroup" is-last @trigger="handleTrigger">

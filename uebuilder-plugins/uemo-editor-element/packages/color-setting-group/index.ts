@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:09:20
+ * @LastEditTime: 2025-03-22 01:19:53
  */
 import type { App } from "vue";
 
@@ -15,6 +15,7 @@ UeElColorSettingGroup.install = (app: App) => {
 export interface UeElColorSettingGroupBaseProps {
     title?: string;
     type?: UE_EL_UTIL.ColorType | "mixin";
+    enableOper?: boolean;
     defaultValue?: string;
 }
 export type UeElColorSettingGroupInstance = InstanceType<typeof UeElColorSettingGroup>;
