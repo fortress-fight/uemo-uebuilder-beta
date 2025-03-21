@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestBackgroundShapeSetting.vue";
+import TestComponent from "~/demo/components/TestTextDecorationSetting.vue";
 </script>
 <style lang="scss" module>
 .test-group {

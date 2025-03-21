@@ -49,6 +49,18 @@
     "UNIT_OTHER": "其他",
     "UNIT_TOP": "顶部",
     "UNIT_BOTTOM": "底部",
+    "UNIT_STYLE": "样式",
+    "UNIT_STROKE": "描边",
+    "UNIT_ANIMATION": "动画",
+    "UNIT_EASE": "缓动",
+    "UNIT_EASE_OUT_IN": "先快后慢",
+    "UNIT_EASE_IN_OUT": "先慢后快",
+    "UNIT_DELAY": "延迟",
+    "UNIT_DURATION": "过渡",
+    "UNIT_PREVIEW": "预览",
+    "UNIT_POINTER": "端点",
+    "UNIT_ROUND": "圆角",
+    "UNIT_SQUARE": "直角",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -246,6 +258,7 @@
     "IMAGE_AI_CHAT_CANCEL": "取消",
     "IMAGE_AI_CHAT_CLEAR": "清空聊天记录",
 
+    "TEXT_DECORATION_TITLE": "文字装饰",
     "TEXT_DECORATION_LIBRARY_TITLE": "效果库",
 
     "SHARE_ICON_LIBRARY_TITLE": "社交库",

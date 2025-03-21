@@ -49,6 +49,18 @@
     "UNIT_OTHER": "Other",
     "UNIT_TOP": "Top",
     "UNIT_BOTTOM": "Bottom",
+    "UNIT_STYLE": "Style",
+    "UNIT_STROKE": "Stroke",
+    "UNIT_ANIMATION": "Animation",
+    "UNIT_EASE": "Ease",
+    "UNIT_EASE_OUT_IN": "Out In",
+    "UNIT_EASE_IN_OUT": "In Out",
+    "UNIT_DELAY": "Delay",
+    "UNIT_DURATION": "Duration",
+    "UNIT_PREVIEW": "Preview",
+    "UNIT_POINTER": "Pointer",
+    "UNIT_ROUND": "Round",
+    "UNIT_SQUARE": "Square",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -246,6 +258,7 @@
     "IMAGE_AI_CHAT_CANCEL": "Cancel",
     "IMAGE_AI_CHAT_CLEAR": "Clear chat history",
 
+    "TEXT_DECORATION_TITLE": "Text Decoration",
     "TEXT_DECORATION_LIBRARY_TITLE": "Effect Library",
 
     "SHARE_ICON_LIBRARY_TITLE": "Social Library",
