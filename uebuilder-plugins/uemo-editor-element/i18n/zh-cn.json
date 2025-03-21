@@ -45,6 +45,7 @@
     "UNIT_SCROLL": "滚动",
     "UNIT_FIXED": "锁定",
     "UNIT_MAIN_COLOR": "主色",
+    "UNIT_SECONDARY_COLOR": "副色",
     "UNIT_POSITION": "位置",
     "UNIT_OTHER": "其他",
     "UNIT_TOP": "顶部",
@@ -61,6 +62,8 @@
     "UNIT_POINTER": "端点",
     "UNIT_ROUND": "圆角",
     "UNIT_SQUARE": "直角",
+    "UNIT_FONT_COLOR": "字体色",
+    "UNIT_BACKGROUND_COLOR": "背景色",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

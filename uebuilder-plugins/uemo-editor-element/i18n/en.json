@@ -45,6 +45,7 @@
     "UNIT_SCROLL": "Scroll",
     "UNIT_FIXED": "Fixed",
     "UNIT_MAIN_COLOR": "Main Color",
+    "UNIT_SECONDARY_COLOR": "Secondary Color",
     "UNIT_POSITION": "Position",
     "UNIT_OTHER": "Other",
     "UNIT_TOP": "Top",
@@ -61,6 +62,8 @@
     "UNIT_POINTER": "Pointer",
     "UNIT_ROUND": "Round",
     "UNIT_SQUARE": "Square",
+    "UNIT_FONT_COLOR": "Font Color",
+    "UNIT_BACKGROUND_COLOR": "Background Color",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
