@@ -1,7 +1,7 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 23:28:03
+ * @LastEditTime: 2025-03-21 12:24:41
 -->
 <template>
     <UeElTextInput
@@ -17,11 +17,11 @@
         @confirm="inputConfirm"
     >
         <template #before>
-            <UeElNumberInputDragger :title="title" @start="onDraggerStart" @change="onDraggerChange">
+            <NumberInputDragger :title="title" @start="onDraggerStart" @change="onDraggerChange">
                 <template #default>
                     <slot name="dragger" />
                 </template>
-            </UeElNumberInputDragger>
+            </NumberInputDragger>
         </template>
         <template v-if="showUnitSelect" #after>
             <UeElSelect :class="$style['unit-select']" v-model:value="unitValue" :options="props.units || []">
@@ -43,7 +43,7 @@
 <script lang="ts" setup>
 import type { UeElNumberInputBaseProps } from "./index";
 import { numDiv, numClamp, numAddWithStep } from "@stone/uemo-editor-utils/lib/number";
-import UeElNumberInputDragger from "./sub-components/Dragger.vue";
+import NumberInputDragger from "./sub-components/Dragger.vue";
 import { computed, ref } from "vue";
 
 // 组件名称定义
