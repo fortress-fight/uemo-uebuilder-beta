@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:20:04
+ * @LastEditTime: 2025-03-22 00:30:37
 -->
 <template>
     <div
@@ -127,7 +127,7 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
             padding-bottom: 0;
         }
         &::after {
-            display: none;
+            // display: none;
         }
     }
     &::after {
@@ -150,9 +150,7 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
     // }
 }
 .group-head {
-    line-height: 26px;
-
-    padding: var(--ue-editor-row-space--lv3) var(--ue-editor-row-space--lv2);
+    padding: var(--ue-editor-row-space--lv1) var(--ue-editor-row-space--lv2);
 
     color: color(var(--ue-font-color));
 }
@@ -164,7 +162,7 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
     padding: 0 var(--ue-editor-row-space--lv1);
 }
 .group-body {
-    padding: 0 var(--ue-editor-row-space--lv2) var(--ue-editor-row-space--lv3);
+    padding: 0 var(--ue-editor-row-space--lv1) var(--ue-editor-row-space--lv3);
 
     gap: var(--ue-control-col-space);
 }
