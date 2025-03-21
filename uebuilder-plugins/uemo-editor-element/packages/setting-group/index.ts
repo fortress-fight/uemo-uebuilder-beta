@@ -1,7 +1,7 @@
 /*
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 01:46:00
+ * @LastEditTime: 2025-03-21 19:30:26
  */
 import type { App } from "vue";
 
@@ -18,8 +18,10 @@ export type OperItem =
     | { id: string; type: "onOff"; param: UE_EL_COMPONENT.UeElOnOffProps; value: boolean };
 
 export interface UeElSettingGroupBaseProps {
-    title: string;
     oper?: OperItem[];
+    title?: string;
+    isLast?: boolean;
+    isFirst?: boolean;
     disable?: boolean;
 }
 export type UeElSettingGroupInstance = InstanceType<typeof UeElSettingGroup>;

@@ -1,11 +1,17 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 15:18:42
+ * @LastEditTime: 2025-03-21 19:38:46
 -->
 <template>
-    <div :class="$style['editor-collapse-group']" class="relative" :data-disable="disable" :data-active="!!$slots.body">
-        <div :class="$style['group-head']" class="flex justify-between items-center">
+    <div
+        :class="[$style['editor-setting-group'], { [$style['is-first']]: isFirst, [$style['is-last']]: isLast }]"
+        class="relative"
+        :data-disable="disable"
+        :data-active="!!$slots.body"
+        :data-header-exists="!!title"
+    >
+        <div :class="$style['group-head']" class="flex justify-between items-center" v-if="title">
             <div :class="$style['group-title']">
                 <span :class="$style['text']">{{ title }}</span>
             </div>
@@ -62,7 +68,7 @@ const _prop = withDefaults(defineProps<UeElSettingGroupBaseProps>(), {
 const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
 </script>
 <style lang="scss" module>
-.editor-collapse-group {
+.editor-setting-group {
     width: 100%;
 
     background-color: #fff;
@@ -76,6 +82,22 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
     &[data-active="true"] {
         .group-head {
             color: color(var(--ue-font-color--deeper));
+        }
+    }
+    &[data-header-exists="false"] {
+        .group-body {
+            padding: var(--ue-editor-row-space--lv3) var(--ue-editor-row-space--lv2);
+        }
+    }
+    &.is-first {
+        //
+    }
+    &.is-last {
+        .group-body {
+            padding-bottom: 0;
+        }
+        &::after {
+            display: none;
         }
     }
     &::after {
