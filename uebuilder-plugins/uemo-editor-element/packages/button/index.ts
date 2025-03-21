@@ -1,7 +1,7 @@
 /*
  * @Description: 按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 17:18:08
+ * @LastEditTime: 2025-03-22 00:02:48
  */
 import type { App } from "vue";
 
@@ -18,7 +18,7 @@ export interface UeElButtonBaseProps {
     theme: "squareIcon" | "hoverStrokeText" | "hoverStrokeText2" | "strokeText" | "fillText";
     text?: string;
     icon?: string | { name: string; size: number };
-    size?: "small" | "small-y" | "normal" | "large";
+    size?: "small" | "normal" | "large";
     loading?: boolean;
     type?: "warning" | "primary" | "danger";
     active?: boolean;
