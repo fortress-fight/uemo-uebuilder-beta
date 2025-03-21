@@ -41,6 +41,24 @@ app.mount("#app");
 
 更多组件用法和详细文档，请参考项目文档或 demo 示例目录。
 
+### 控制器包裹组件
+
+```html
+<!-- 一个完整组 | 可以在头部添加操作器 -->
+<UeElSettingGroup title="动画" is-last>
+    <template #body>
+        <!-- 控件容器 | 可以在右侧添加操作按钮 -->
+        <UeElEditorGroup>
+            <!-- 控件分栏容器 -->
+            <UeElControlGroup>
+                <!-- 控件 -->
+                <UeElColorSetting v-model:value="color" />
+            </UeElControlGroup>
+        </UeElEditorGroup>
+    </template>
+</UeElSettingGroup>
+```
+
 ## 贡献
 
 欢迎提交 issue 或 pull request 以改进此项目。
