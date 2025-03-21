@@ -1,19 +1,21 @@
 <template>
     <UeElEditorPanel :class="$style['grid-layout-area-setting']" :title="t('GRID_LAYOUT_SETTING_SWAP_POSITION')">
-        <UeElEditorGroup :title="t('GRID_LAYOUT_SETTING_ORIGIN_LAYOUT')" is-first>
-            <UeElGirdLayoutUtil
-                :data="value"
-                type="select"
-                icon="icon-duigou"
-                :disable-grid-item-index="disableGridItemIndex"
-                @subitemTrigger="emit('trigger', $event)"
-            />
-        </UeElEditorGroup>
-        <UeElEditorGroup is-last>
-            <UeElControlGroup :title="t('UNIT_TIP')">
+        <UeElSettingGroup :title="t('GRID_LAYOUT_SETTING_ORIGIN_LAYOUT')" is-first>
+            <template #body>
+                <UeElGirdLayoutUtil
+                    :data="value"
+                    type="select"
+                    icon="icon-duigou"
+                    :disable-grid-item-index="disableGridItemIndex"
+                    @subitemTrigger="emit('trigger', $event)"
+                />
+            </template>
+        </UeElSettingGroup>
+        <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
+            <template #body>
                 <UeElTipGroup type="warn" :tips="tips" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+            </template>
+        </UeElSettingGroup>
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图形控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 12:37:14
+ * @LastEditTime: 2025-03-21 19:18:38
 -->
 <template>
     <UeElEditorPanel
@@ -10,35 +10,39 @@
         ref="rootComponent"
     >
         <!-- 图形资源设置 -->
-        <UeElEditorGroup is-first>
-            <UeElResourceSetting type="shape" :removable="false" v-model:value="valueRef.name" />
-        </UeElEditorGroup>
-        <UeElEditorGroup>
-            <UeElControlGroup :title="t('UNIT_MAIN_COLOR')">
+        <UeElSettingGroup is-first>
+            <template #body>
+                <UeElResourceSetting type="shape" :removable="false" v-model:value="valueRef.name" />
+            </template>
+        </UeElSettingGroup>
+
+        <!-- 颜色设置 -->
+        <UeElSettingGroup :title="t('UNIT_MAIN_COLOR')">
+            <template #body>
                 <UeElColorSetting v-model:value="color" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+            </template>
+        </UeElSettingGroup>
 
         <!-- 位置设置 -->
-        <UeElEditorGroup>
-            <UeElControlGroup :title="t('UNIT_POSITION')">
+        <UeElSettingGroup :title="t('UNIT_POSITION')">
+            <template #body>
                 <UeElSelect v-model:value="position" :options="positionOptions" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+            </template>
+        </UeElSettingGroup>
 
         <!-- 高度设置 -->
-        <UeElEditorGroup>
-            <UeElControlGroup :title="t('UNIT_HEIGHT')">
+        <UeElSettingGroup :title="t('UNIT_HEIGHT')">
+            <template #body>
                 <UeElNumberInput v-model:value="valueRef.height" v-bind="heightNumInputParam" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+            </template>
+        </UeElSettingGroup>
 
         <!-- 翻转设置 -->
-        <UeElEditorGroup is-last>
-            <UeElControlGroup :title="t('UNIT_OTHER')">
+        <UeElSettingGroup is-last :title="t('UNIT_OTHER')">
+            <template #body>
                 <UeElCheckBox v-model:value="valueRef.mirroring" :text="t('SHAPE_MIRRORING')" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+            </template>
+        </UeElSettingGroup>
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
