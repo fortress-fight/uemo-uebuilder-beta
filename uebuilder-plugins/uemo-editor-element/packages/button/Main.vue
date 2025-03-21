@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 18:21:37
+ * @LastEditTime: 2025-03-21 18:55:01
 -->
 <template>
     <button
@@ -151,6 +151,8 @@ function trigger(ev: MouseEvent) {
 
         margin-right: var(--ue-control-col-space);
 
+        transition: color 0.26s ease;
+
         color: color(var(--ue-font-color));
     }
 }
@@ -171,6 +173,8 @@ function trigger(ev: MouseEvent) {
 }
 .button[data-theme="hoverStrokeText"],
 .button[data-theme="hoverStrokeText2"] {
+    transition: 0.26s ease;
+
     color: color(var(--ue-font-color--deeper));
     border: 1px solid color(var(--ue-border-color), 0);
     &:hover,
