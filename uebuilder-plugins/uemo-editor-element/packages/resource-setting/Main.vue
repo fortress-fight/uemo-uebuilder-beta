@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 03:43:46
+ * @LastEditTime: 2025-03-21 12:11:07
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -51,6 +51,7 @@ import type {
 
 import { getPopPanelParams } from "../pop-panel/utils/helper";
 import { isResourcePreviewAttrs } from "../resource-preview";
+import { editorGroupPopPanelPropsKey } from "../editor-group";
 import UeElEditorPanel from "../editor-panel";
 
 const { t } = useI18n();
@@ -119,6 +120,10 @@ const resourceButtonConfig = computed(() => {
             icon: { name: "icon-app-animation", size: 16 },
             text: hasAttr ? t("UNIT_REPLACE", { text: t("UNIT_EFFECT") }) : t("UNIT_ADD", { text: t("UNIT_EFFECT") }),
         },
+        shape: {
+            icon: { name: "icon-xingzhuang", size: 16 },
+            text: hasAttr ? t("UNIT_REPLACE", { text: t("UNIT_SHAPE") }) : t("UNIT_ADD", { text: t("UNIT_SHAPE") }),
+        },
     } as const;
 });
 
@@ -136,6 +141,7 @@ const resourceComponents = {
     shareIcon: "UeElShareIconLibraryPanel",
     textDecoration: "UeElTextDecorationLibraryPanel",
     buttonHoverEffect: "UeElButtonHoverEffectLibraryPanel",
+    shape: "UeElShapeLibraryPanel",
 } as const;
 
 const previewComponentAttrs = computed(() => {
@@ -178,11 +184,13 @@ function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
     emit("trigger", params);
 }
 
+const injectPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
+
 /**
  * 弹窗位置配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (typeof props.popPanelProps !== "undefined") return props.popPanelProps;
+    if (injectPopPanelProps?.value) return injectPopPanelProps.value;
 
     if (!rootDomRef.value?.$el) return undefined;
     return getPopPanelParams("editorPanel", rootDomRef.value.$el);

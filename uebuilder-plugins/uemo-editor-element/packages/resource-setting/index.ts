@@ -1,7 +1,7 @@
 /*
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:02:45
+ * @LastEditTime: 2025-03-21 11:57:09
  */
 import type { App } from "vue";
 
@@ -22,7 +22,8 @@ export type UeElResourceSettingType =
     | "icon"
     | "shareIcon"
     | "textDecoration"
-    | "buttonHoverEffect";
+    | "buttonHoverEffect"
+    | "shape";
 
 export type UeElResourceSettingEmitParams = {
     image: { type: "focus"; data: { pos: string } };
@@ -35,6 +36,7 @@ export type UeElResourceSettingEmitParams = {
     shareIcon: never;
     textDecoration: never;
     buttonHoverEffect: never;
+    shape: never;
 };
 
 export type UeElResourceSettingValue = {
@@ -48,13 +50,13 @@ export type UeElResourceSettingValue = {
     textDecoration: string;
     buttonHoverEffect: string;
     image: string;
+    shape: string;
 };
 
 export interface UeElResourceSettingBaseProps<T extends UeElResourceSettingType = UeElResourceSettingType> {
     type: T;
     removable?: boolean;
     libraryAttrs?: { type: UE_EL_UTIL.LottieLibraryType };
-    popPanelProps?: UE_EL_COMPONENT.UeElPopPanelProps;
     enhance?: {
         image: {
             focus: { enable: boolean; pos: string };
@@ -68,6 +70,7 @@ export interface UeElResourceSettingBaseProps<T extends UeElResourceSettingType 
         shareIcon: undefined;
         textDecoration: undefined;
         buttonHoverEffect: undefined;
+        shape: undefined;
     }[T];
 }
 export type UeElResourceSettingInstance = InstanceType<typeof UeElResourceSetting>;
