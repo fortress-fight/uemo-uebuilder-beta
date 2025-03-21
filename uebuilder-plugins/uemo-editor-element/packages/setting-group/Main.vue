@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 19:38:46
+ * @LastEditTime: 2025-03-22 00:00:58
 -->
 <template>
     <div
@@ -81,6 +81,8 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
     }
     &[data-active="true"] {
         .group-head {
+            padding-bottom: var(--ue-control-col-space);
+
             color: color(var(--ue-font-color--deeper));
         }
     }
@@ -90,7 +92,14 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
         }
     }
     &.is-first {
-        //
+        .group-head {
+            padding-top: 0;
+        }
+        &[data-header-exists="false"] {
+            .group-body {
+                padding-top: 0;
+            }
+        }
     }
     &.is-last {
         .group-body {
@@ -120,8 +129,9 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
     // }
 }
 .group-head {
-    height: 40px;
-    padding: 0 var(--ue-editor-row-space--lv2);
+    line-height: 26px;
+
+    padding: var(--ue-editor-row-space--lv3) var(--ue-editor-row-space--lv2);
 
     color: color(var(--ue-font-color));
 }

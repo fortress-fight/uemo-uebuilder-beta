@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮图标属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 14:53:20
+ * @LastEditTime: 2025-03-22 00:03:17
 -->
 <template>
     <UeElEditorGroup :class="$style['button-icon-setting']" is-first is-last>
@@ -102,19 +102,16 @@ const iconTypeButtons = computed(
     () =>
         [
             {
-                size: "small-y",
                 text: "Icon",
                 icon: { name: "icon-app-icon", size: 16 },
                 value: "static",
             },
             {
-                size: "small-y",
                 text: "Lottie",
                 icon: { name: "icon-app-lottie", size: 16 },
                 value: "lottie",
             },
             {
-                size: "small-y",
                 text: "SVG",
                 icon: { name: "icon-app-svg", size: 16 },
                 value: "svg",
