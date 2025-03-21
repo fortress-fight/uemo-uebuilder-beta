@@ -1,7 +1,7 @@
 <!--
  * @Description: 图形资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:33:34
+ * @LastEditTime: 2025-03-21 11:57:43
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -42,7 +42,7 @@ const list = ref<UE_EL_UTIL.ResourceShape | null>(null);
 const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => ({
     cards: [{ title: t("SHAPE_LIBRARY_TITLE"), name: "shapeLibList", icon: "icon-xingzhuang", iconSize: 16 }],
 }));
-const select = defineModel<string>("select", { required: true });
+const select = defineModel<string>("select", { required: false });
 
 const getShapeLibrary = async () => {
     // 启动1秒定时器：若超过1秒未返回，则显示 loading

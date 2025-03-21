@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 04:14:25
+ * @LastEditTime: 2025-03-21 12:37:46
 -->
 <template>
     <UeElEditorPanel
@@ -11,12 +11,7 @@
     >
         <!-- 图片资源设置 -->
         <UeElEditorGroup is-first ref="resourceSettingRef">
-            <UeElResourceSetting
-                type="image"
-                :removable="false"
-                v-model:value="valueRef.image"
-                :pop-panel-props="popPanelProps"
-            >
+            <UeElResourceSetting type="image" :removable="false" v-model:value="valueRef.image">
                 <template v-if="valueRef.image" #operGroup="{ openPopPanel }">
                     <div :class="$style['oper-bar']" class="w-full grid grid-cols-3">
                         <template v-for="item in operList" :key="item.type">
@@ -56,7 +51,6 @@
 <script lang="ts" setup>
 import type { UeElBackgroundImageSettingBaseProps, UeElBackgroundImageSettingValue } from "./index";
 
-import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElEditorPanel from "../editor-panel";
 import UeElEditorGroup from "../editor-group";
 
@@ -71,21 +65,12 @@ const _props = withDefaults(defineProps<UeElBackgroundImageSettingBaseProps>(), 
 /**
  * 组件数据模型
  */
-const valueRef = defineModel<UeElBackgroundImageSettingValue>("value", {
-    default: () => ({}),
-});
+const valueRef = defineModel<UeElBackgroundImageSettingValue>("value", { required: true });
 
 /**
  * 组件引用
  */
 const resourceSettingRef = useTemplateRef<InstanceType<typeof UeElEditorGroup>>("resourceSettingRef");
-
-/**
- * 弹窗面板配置
- */
-const popPanelProps = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() =>
-    getPopPanelParams("editorPanel", resourceSettingRef.value?.$el)
-);
 
 /**
  * 操作列表配置

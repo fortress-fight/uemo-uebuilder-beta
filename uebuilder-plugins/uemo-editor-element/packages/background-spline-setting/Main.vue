@@ -1,22 +1,16 @@
 <!--
  * @Description: Spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:41:02
+ * @LastEditTime: 2025-03-21 12:37:58
 -->
 <template>
     <UeElEditorPanel
         :class="$style['background-spline-setting']"
         :title="t('BACKGROUND_SPLINE_SETTING_TITLE', { type: 'Spline' })"
-        ref="rootComponent"
     >
         <!-- Spline资源设置 -->
         <UeElEditorGroup is-first>
-            <UeElResourceSetting
-                type="spline"
-                :removable="false"
-                v-model:value="splineSource"
-                :pop-panel-props="popPanelProps"
-            />
+            <UeElResourceSetting type="spline" :removable="false" v-model:value="splineSource" />
         </UeElEditorGroup>
 
         <!-- 滚动效果设置 -->
@@ -38,7 +32,6 @@
 <script lang="ts" setup>
 import type { UeElBackgroundSplineSettingBaseProps, UeElBackgroundSplineSettingValue } from "./index";
 
-import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElEditorPanel from "../editor-panel";
 
 defineOptions({ name: "UeElBackgroundSplineSetting" });
@@ -53,14 +46,7 @@ const _props = withDefaults(defineProps<UeElBackgroundSplineSettingBaseProps>(),
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundSplineSettingValue>("value", {
-    default: () => ({}),
-});
-
-/**
- * 组件引用
- */
-const rootComponentRef = useTemplateRef<InstanceType<typeof UeElEditorPanel>>("rootComponent");
+const valueRef = defineModel<UeElBackgroundSplineSettingValue>("value", { required: true });
 
 /**
  * 提示信息配置
@@ -109,14 +95,6 @@ const effectOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => ({
         { value: "sticky", text: t("UNIT_STICKY") },
     ] as const,
 }));
-
-/**
- * 弹窗面板配置
- * @description 配置资源选择弹窗的位置和行为
- */
-const popPanelProps = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => {
-    return getPopPanelParams("editorPanel", rootComponentRef.value?.$el);
-});
 
 /**
  * 更新组件值
