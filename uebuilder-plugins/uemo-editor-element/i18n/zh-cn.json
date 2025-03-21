@@ -31,6 +31,7 @@
     "UNIT_ICON": "图标",
     "UNIT_SHARE_ICON": "分享图标",
     "UNIT_EFFECT": "效果",
+    "UNIT_SHAPE": "图形",
     "UNIT_FONT_FAMILY": "字体",
     "UNIT_INTERACTION_EFFECT": "交互效果",
     "UNIT_SIZE": "尺寸",
@@ -43,6 +44,11 @@
     "UNIT_STICKY": "吸附",
     "UNIT_SCROLL": "滚动",
     "UNIT_FIXED": "锁定",
+    "UNIT_MAIN_COLOR": "主色",
+    "UNIT_POSITION": "位置",
+    "UNIT_OTHER": "其他",
+    "UNIT_TOP": "顶部",
+    "UNIT_BOTTOM": "底部",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -201,6 +207,7 @@
     "ERROR_UPLOAD_HISTORY_TYPE_ERROR": "获取已上传资源功能配置错误",
     "ERROR_UPLOAD_HISTORY_GET_LIST_FAILED": "获取已上传资源列表失败",
 
+    "SHAPE_MIRRORING": "翻转图形",
     "SHAPE_LIBRARY_TITLE": "图形库",
 
     "SPLINE_LIBRARY_TITLE": "Spline库",

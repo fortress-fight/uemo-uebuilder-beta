@@ -31,6 +31,8 @@ import TestButtonIconSettingGroup from "~/demo/components/TestButtonIconSettingG
 import TestGridLayoutSetting from "~/demo/components/TestGridLayoutSetting.vue";
 import TestBackgroundSplineSetting from "~/demo/components/TestBackgroundSplineSetting.vue";
 import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
+import TestBackgroundImageSetting from "~/demo/components/TestBackgroundImageSetting.vue";
+import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -55,6 +57,8 @@ const testComponents = [
     TestResourceSetting,
     TestButtonIconSetting,
     TestBackgroundSplineSetting,
+    TestBackgroundImageSetting,
+    TestBackgroundShapeSetting,
 ];
 </script>
 <style lang="scss" module>

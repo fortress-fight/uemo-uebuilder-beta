@@ -31,6 +31,7 @@
     "UNIT_ICON": "Icon",
     "UNIT_SHARE_ICON": "Share Icon",
     "UNIT_EFFECT": "Effect",
+    "UNIT_SHAPE": "Shape",
     "UNIT_FONT_FAMILY": "Font",
     "UNIT_INTERACTION_EFFECT": "Interaction Effect",
     "UNIT_SIZE": "Size",
@@ -43,6 +44,11 @@
     "UNIT_STICKY": "Sticky",
     "UNIT_SCROLL": "Scroll",
     "UNIT_FIXED": "Fixed",
+    "UNIT_MAIN_COLOR": "Main Color",
+    "UNIT_POSITION": "Position",
+    "UNIT_OTHER": "Other",
+    "UNIT_TOP": "Top",
+    "UNIT_BOTTOM": "Bottom",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -201,6 +207,7 @@
     "ERROR_UPLOAD_HISTORY_TYPE_ERROR": "Get upload history configuration error",
     "ERROR_UPLOAD_HISTORY_GET_LIST_FAILED": "Get upload history list failed",
 
+    "SHAPE_MIRRORING": "Flip Shape",
     "SHAPE_LIBRARY_TITLE": "Shape Library",
 
     "SPLINE_LIBRARY_TITLE": "Spline Library",
