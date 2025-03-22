@@ -15,6 +15,10 @@ interface DetectModelChangeOptions<T> {
     deep?: boolean;
     /** 自定义相等性比较函数 */
     equalityFn?: (a: T, b: T) => boolean;
+    /** 是否自动更新父组件值 */
+    autoUpdateParent?: boolean;
+    /** 自定义转换值的函数 */
+    transformValue?: (value: T) => T;
 }
 
 /**
@@ -25,21 +29,30 @@ interface DetectModelChangeOptions<T> {
  * @returns 包含本地值引用和控制方法的对象
  */
 export function detectModelChangeOrigin<T>(valueRef: ModelRef<T>, options: DetectModelChangeOptions<T>) {
-    const { onParentChange, onLocalChange, deep = true, equalityFn = _isEqual } = options;
+    const {
+        onParentChange,
+        onLocalChange,
+        deep = true,
+        equalityFn = _isEqual,
+        autoUpdateParent = true,
+        transformValue = (value) => value,
+    } = options;
 
     /**
      * 本地状态引用，用于处理值的更新
      */
-    const localValueRef = ref<T>(valueRef.value);
+    const localValueRef = ref<T>(transformValue(valueRef.value));
 
     /**
      * 监听本地值变化，同步到父组件
      */
     watch(
         localValueRef,
-        (current, previous) => {
-            valueRef.value = current;
-            onLocalChange?.(toRaw(current), toRaw(previous));
+        (current, _previous) => {
+            if (autoUpdateParent) {
+                valueRef.value = current;
+            }
+            onLocalChange?.(toRaw(current), toRaw(valueRef.value));
         },
         { deep }
     );
@@ -68,5 +81,7 @@ export function detectModelChangeOrigin<T>(valueRef: ModelRef<T>, options: Detec
         reset: () => (localValueRef.value = valueRef.value),
         /** 同步本地值到父组件 */
         syncToParent: () => (valueRef.value = localValueRef.value),
+        /** 判断本地值是否有未同步的改变 */
+        checkHasUnsyncedChanges: () => !equalityFn(toRaw(valueRef.value), toRaw(localValueRef.value)),
     };
 }
