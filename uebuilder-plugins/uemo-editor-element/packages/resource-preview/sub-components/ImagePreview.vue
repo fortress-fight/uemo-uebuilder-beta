@@ -5,7 +5,13 @@
         ref="previewBoxDom"
         :data-focus-enable="enableFocus"
     >
-        <img ref="imageDom" :class="$style['preview-img']" :src="src" @load="handleImageLoad" alt="预览图片" />
+        <img
+            ref="imageDom"
+            :class="$style['preview-img']"
+            :src="src"
+            @load="handleImageLoad"
+            :alt="t('UNIT_PREVIEW_IMAGE')"
+        />
         <UeElLoading
             v-if="loading"
             :duration="3"
@@ -33,6 +39,7 @@ import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { numRound } from "@stone/uemo-editor-utils/lib/number";
 import { Dragger, DraggerControl } from "@stone/uemo-editor-utils/lib/dragger";
 
+const { t } = useI18n();
 defineOptions({ name: "UeElImagePreview" });
 
 /**

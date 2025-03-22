@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 01:25:57
+ * @LastEditTime: 2025-03-22 14:11:41
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -51,6 +51,12 @@
                     :enhance="enhance"
                     @trigger="handleTrigger"
                 />
+                <UeElVideoPreview
+                    v-if="type === 'video'"
+                    :class="$style['video-preview']"
+                    :src="attrs"
+                    :enhance="enhance"
+                />
             </template>
         </div>
         <UeElLoading v-if="loading" :duration="3" title="" :class="$style['loading-bar']" />
@@ -65,6 +71,7 @@ import UeElHoverEffectPreviewButton from "../button-hover-effect-library-panel/s
 import TextDecorationPreview from "../text-decoration-library-panel/sub-component/TextDecorationPreview.vue";
 
 import UeElImagePreview from "./sub-components/ImagePreview.vue";
+import UeElVideoPreview from "./sub-components/VideoPreview.vue";
 
 defineOptions({ name: "UeElResourcePreview" });
 const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
@@ -124,6 +131,7 @@ const ueElIconParam = computed<UE_EL_COMPONENT.UeElIconProps | null>(() => {
         buttonHoverEffect: { name: "icon-app-animation", size: ICON_SIZE },
         textDecoration: { name: "icon-app-svg-line", size: ICON_SIZE },
         image: { name: "icon-shangchuantupian", size: ICON_SIZE },
+        video: { name: "icon-app-video", size: ICON_SIZE },
     };
     return iconMap[props.type] || null;
 });

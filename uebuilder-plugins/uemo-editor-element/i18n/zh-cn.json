@@ -64,6 +64,8 @@
     "UNIT_SQUARE": "直角",
     "UNIT_FONT_COLOR": "字体色",
     "UNIT_BACKGROUND_COLOR": "背景色",
+    "UNIT_PREVIEW_IMAGE": "预览图片",
+    "UNIT_PREVIEW_VIDEO": "预览视频",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

@@ -27,6 +27,8 @@ interface ResourceParam {
     buttonHoverEffect: string;
     /** 图片资源 */
     image: string;
+    /** 视频资源 */
+    video: string;
 }
 
 /**
@@ -43,6 +45,7 @@ interface ResourcePreviewEnhance {
     shareIcon: undefined;
     textDecoration: undefined;
     buttonHoverEffect: undefined;
+    video: undefined;
 }
 
 /**
@@ -57,6 +60,7 @@ export interface ResourcePreviewEmitsParams {
     textDecoration: never;
     buttonHoverEffect: never;
     image: { type: "focus"; data: { pos: string } };
+    video: never;
 }
 
 /** 资源预览类型 */
@@ -71,6 +75,7 @@ const RESOURCE_PREVIEW_TYPES: UeElResourcePreviewType[] = [
     "textDecoration",
     "buttonHoverEffect",
     "image",
+    "video",
 ] as const;
 
 /**

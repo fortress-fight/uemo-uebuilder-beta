@@ -64,6 +64,8 @@
     "UNIT_SQUARE": "Square",
     "UNIT_FONT_COLOR": "Font Color",
     "UNIT_BACKGROUND_COLOR": "Background Color",
+    "UNIT_PREVIEW_IMAGE": "Preview Image",
+    "UNIT_PREVIEW_VIDEO": "Preview Video",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
