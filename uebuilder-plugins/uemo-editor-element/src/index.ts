@@ -14,6 +14,8 @@ export interface UE_EL_OPTIONS {
         fileUpload: UE_PLUGIN_OPTIONS.FileUpload;
         toast?: UE_PLUGIN_OPTIONS.Toast;
         ai?: UE_PLUGIN_OPTIONS.AI;
+        link?: UE_PLUGIN_OPTIONS.Link;
+
         [key: string]: any;
     };
 }

@@ -359,6 +359,13 @@ declare global {
             };
             buttonLibrary: ResourceValue<UE_EL_UTIL.ResourceButton>;
         };
+
+        type Link = {
+            anchor: {
+                enable: boolean;
+                getData: () => Promise<{ name: string; src: string }[]>;
+            };
+        };
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 02:37:48
+ * @LastEditTime: 2025-03-22 16:18:02
  */
 
 // SECTION - 样式文件
@@ -46,6 +46,12 @@ app.use(UeEl, {
     plugin: {
         ai: AI_CONFIG,
         fileUpload: { uploadConfig },
+        link: {
+            anchor: {
+                enable: true,
+                getData: () => Promise.resolve([{ name: "测试锚点", src: "#asdf" }]),
+            },
+        },
         resource: {
             shapeLibrary: {
                 enable: true,

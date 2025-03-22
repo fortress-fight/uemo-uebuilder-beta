@@ -7,8 +7,9 @@ declare module "vue" {
         $ueElResource: UE_PLUGIN_OPTIONS.Resource;
         $ueElAI?: UE_AI_CONFIG;
         $ueElImageAI?: UE_AI_PLUGIN | false | undefined;
-        $ueFileUpload: UE_EL_UTIL.UploadHandler;
+        $ueElLink?: UE_PLUGIN_OPTIONS.Link;
         $ueFileUploadHistory?: UE_EL_UTIL.UploadHistoryHandler;
+        $ueFileUpload: UE_EL_UTIL.UploadHandler;
         $ueElError: <T = undefined>(error: Error, callback?: (error: Error) => T) => T;
     }
 }
