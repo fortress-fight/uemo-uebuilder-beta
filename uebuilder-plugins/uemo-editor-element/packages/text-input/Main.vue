@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-15 16:33:09
+ * @LastEditTime: 2025-03-22 16:49:42
 -->
 <template>
     <div
@@ -220,7 +220,7 @@ defineExpose({
         --text-border-color: #{color(var(--ue-border-color))};
         .text-input {
             font-size: 12px;
-            line-height: 30px;
+            line-height: 26px;
         }
     }
     &[data-padding-size="level2"] {
