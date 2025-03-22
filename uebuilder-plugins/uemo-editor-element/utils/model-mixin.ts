@@ -1,6 +1,6 @@
 import type { ModelRef } from "vue";
 
-import { _isEqual } from "@stone/uemo-editor-utils/lib/lodash";
+import { _isEqual, _set, _cloneDeep } from "@stone/uemo-editor-utils/lib/lodash";
 
 /**
  * 模型变化检测的配置选项
@@ -83,5 +83,71 @@ export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectMo
         syncToParent: () => (valueRef.value = localValueRef.value),
         /** 判断本地值是否有未同步的改变 */
         checkHasUnsyncedChanges: () => !equalityFn(toRaw(valueRef.value), toRaw(localValueRef.value)),
+    };
+}
+
+/**
+ * 定义一个对象模型的计算属性，用于处理复杂对象的双向绑定
+ * @template T - 源对象类型，必须是键值对对象
+ * @template R - 转换后的值类型
+ * @param valueRef - 父组件传入的模型引用
+ * @param param - 包含 get 和 set 方法的配置对象
+ * @returns 一个计算属性，用于双向绑定转换后的值
+ */
+export function useDefineObjectModel<T extends Record<string, any>, R>(
+    valueRef: ModelRef<T>,
+    param: {
+        get: (modelValue: T) => R;
+        set: (value: R, modelValue: T) => T | undefined;
+    },
+    options?: { deep?: boolean }
+): WritableComputedRef<R, R> {
+    const { deep = false } = options || {};
+
+    /**
+     * 缓存原始值引用，避免重复调用 toRaw
+     */
+    const rawValue = computed(() => toRaw(valueRef.value));
+
+    return computed<R>({
+        get() {
+            try {
+                return param.get(rawValue.value);
+            } catch (error) {
+                console.warn("[useDefineObjectModel] Error in getter:", error);
+                throw error;
+            }
+        },
+        set(newValue) {
+            try {
+                const currentValue = deep ? _cloneDeep(rawValue.value) : { ...rawValue.value };
+
+                const result = param.set(newValue, currentValue);
+                if (typeof result !== "undefined") {
+                    valueRef.value = result;
+                }
+            } catch (error) {
+                console.warn("[useDefineObjectModel] Error in setter:", error);
+                throw error;
+            }
+        },
+    });
+}
+
+/**
+ * 定义一个对象模型的计算属性，用于处理复杂对象的双向绑定
+ * @template T - 源对象类型，必须是键值对对象
+ * @param valueRef - 父组件传入的模型引用
+ * @returns 一个函数，用于设置对象的属性值
+ */
+export function useDefineObjectModuleProxy<T extends Record<string, any>>(valueRef: ModelRef<T>) {
+    return <K extends keyof T>(key: K, value: T[K], deep = false) => {
+        const rawValue = toRaw(valueRef.value);
+        const currentValue = deep ? _cloneDeep(rawValue) : { ...rawValue };
+
+        const result = _set(currentValue, key, value);
+        if (typeof result !== "undefined") {
+            valueRef.value = result;
+        }
     };
 }
