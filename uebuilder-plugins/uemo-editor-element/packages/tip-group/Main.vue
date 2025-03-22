@@ -1,7 +1,7 @@
 <!--
  * @Description: 提示组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:49:00
+ * @LastEditTime: 2025-03-22 13:43:46
 -->
 <template>
     <div class="flex" :class="$style['editor-tip-group']" :data-type="type">
@@ -20,7 +20,7 @@ withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
 .editor-tip-group {
     font-size: 12px;
 
-    padding: 0 var(--editor-components-padding);
+    padding: 0 var(--ue-editor-row-space--lv2);
     .editor-group-inner {
         gap: var(--ue-control-col-space);
     }
