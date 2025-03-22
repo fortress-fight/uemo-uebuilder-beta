@@ -73,6 +73,19 @@ export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 /** image类型 */
 export const isImageReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(jpg|jpeg|png|gif|webp))/;
 
+/** 下载文件类型 */
+export const isDownloadFileReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(pdf|doc|docx|xls|xlsx|ppt|pptx|gif|png|jpg))/g;
+
+/**
+ * 检查链接是否为网站链接
+ * @param link 链接
+ * @returns 是否为网站链接
+ */
+export function checkSiteLink(link: string): boolean {
+    // return isWebReg.test(link) || /^(.+)?\/[^\s]+$/.test(link);
+    return /^[^\s]+$/.test(link);
+}
+
 /**
  * 延迟 Promise
  * @param ms 延迟时间 (单位: 毫秒)
