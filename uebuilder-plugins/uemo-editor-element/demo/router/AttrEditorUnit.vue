@@ -35,6 +35,7 @@ import TestBackgroundImageSetting from "~/demo/components/TestBackgroundImageSet
 import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
 import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
+import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -63,6 +64,7 @@ const testComponents = [
     TestBackgroundShapeSetting,
     TestTextDecorationSetting,
     TestButtonStyleSetting,
+    TestLinkSetting,
 ];
 </script>
 <style lang="scss" module>
