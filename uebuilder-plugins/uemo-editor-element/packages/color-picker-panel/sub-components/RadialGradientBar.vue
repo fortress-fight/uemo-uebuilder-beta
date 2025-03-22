@@ -48,7 +48,7 @@ const valueRef = defineModel<string>("value", { required: true });
 const colorPicker = useTemplateRef("colorPicker");
 const colorPointBar = useTemplateRef("colorPointBar");
 
-const editorColorPointId = ref<string>();
+const editorColorPointId = ref<string>("");
 const currentColorPoints = ref<GradientPoint[]>([]);
 const currentXPos = ref<string>();
 const currentYPos = ref<string>();
