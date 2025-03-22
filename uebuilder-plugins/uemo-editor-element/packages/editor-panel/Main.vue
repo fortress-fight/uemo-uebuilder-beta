@@ -1,7 +1,7 @@
 <!--
  * @Description: 通用编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:42:31
+ * @LastEditTime: 2025-03-22 02:01:44
 -->
 <template>
     <div :class="$style['editor-panel']" class="relative">
@@ -30,10 +30,10 @@
             <div :class="$style['panel-body']" class="overflow-auto">
                 <slot></slot>
             </div>
-            <div v-if="withOperate" :class="$style['panel-footer']">
+            <div v-if="isOperationEnabled" :class="$style['panel-footer']">
                 <slot name="panelFooter">
                     <div
-                        v-if="operateName === 'confirmWithCancel'"
+                        v-if="actionMode === 'confirmWithCancel'"
                         :class="$style['operate-group']"
                         class="grid grid-cols-2"
                     >
@@ -44,7 +44,7 @@
                             {{ t("CONFIRM") }}
                         </button>
                     </div>
-                    <div v-if="operateName === 'confirm'" :class="$style['operate-group']">
+                    <div v-if="actionMode === 'confirm'" :class="$style['operate-group']">
                         <button
                             data-theme="confirm"
                             :class="$style['operate-btn']"
