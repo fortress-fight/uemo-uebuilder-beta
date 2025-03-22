@@ -1,7 +1,7 @@
 <!--
  * @Description: Spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 19:25:02
+ * @LastEditTime: 2025-03-23 01:05:31
 -->
 <template>
     <UeElEditorPanel
@@ -36,6 +36,8 @@ import type { UeElBackgroundSplineSettingBaseProps, UeElBackgroundSplineSettingV
 
 import UeElEditorPanel from "../editor-panel";
 
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
+
 defineOptions({ name: "UeElBackgroundSplineSetting" });
 
 /**
@@ -62,12 +64,13 @@ const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
  * 滚动效果配置
  * @description 控制 Spline 背景的滚动行为
  */
-const scrollEffect = computed({
-    get() {
-        return valueRef.value.effect || "normal";
+const scrollEffect = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.effect || "normal";
     },
-    set(value) {
-        updateValue({ effect: value });
+    set(value, modelValue) {
+        modelValue.effect = value;
+        return modelValue;
     },
 });
 
@@ -75,12 +78,13 @@ const scrollEffect = computed({
  * Spline 资源配置
  * @description 控制 Spline 资源的 URL
  */
-const splineSource = computed<string>({
-    get() {
-        return valueRef.value.url;
+const splineSource = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.url;
     },
-    set(value) {
-        updateValue({ url: value });
+    set(value, modelValue) {
+        modelValue.url = value;
+        return modelValue;
     },
 });
 
@@ -97,17 +101,6 @@ const effectOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => ({
         { value: "sticky", text: t("UNIT_STICKY") },
     ] as const,
 }));
-
-/**
- * 更新组件值
- * @description 使用不可变更新方式更新组件状态
- */
-function updateValue(value: Partial<UeElBackgroundSplineSettingValue>) {
-    valueRef.value = {
-        ...valueRef.value,
-        ...value,
-    };
-}
 </script>
 
 <style lang="scss" module>

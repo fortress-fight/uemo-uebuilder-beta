@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 19:23:50
+ * @LastEditTime: 2025-03-23 01:04:19
 -->
 <template>
     <UeElEditorPanel
@@ -60,6 +60,8 @@
 
 <script lang="ts" setup>
 import type { UeElBackgroundImageSettingBaseProps, UeElBackgroundImageSettingValue } from "./index";
+
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 import UeElEditorPanel from "../editor-panel";
 import UeElEditorGroup from "../editor-group";
@@ -158,21 +160,23 @@ const adjustOptions = computed(() => [
 /**
  * 尺寸和效果状态计算属性
  */
-const size = computed({
-    get() {
-        return valueRef.value.size || "normal";
+const size = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.size || "normal";
     },
-    set(value) {
-        valueRef.value.size = value;
+    set(value, modelValue) {
+        modelValue.size = value;
+        return modelValue;
     },
 });
 
-const adjust = computed({
-    get() {
-        return valueRef.value.effect || "normal";
+const adjust = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.effect || "normal";
     },
-    set(value) {
-        valueRef.value.effect = value;
+    set(value, modelValue) {
+        modelValue.effect = value;
+        return modelValue;
     },
 });
 </script>

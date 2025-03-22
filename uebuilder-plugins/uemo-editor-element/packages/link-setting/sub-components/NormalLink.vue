@@ -19,26 +19,30 @@
 <script lang="ts" setup>
 import type { UeElLinkSettingValue } from "../index";
 
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
+
 const { t } = useI18n();
 const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
 
-const linkAddress = computed({
-    get() {
-        return valueRef.value.link;
+const linkAddress = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.link;
     },
-    set(v) {
-        valueRef.value.link = v;
+    set(value, modelValue) {
+        modelValue.link = value;
+        return modelValue;
     },
 });
 
-const linkTarget = computed({
-    get() {
-        if (valueRef.value.type !== "link") return;
-        return valueRef.value.target === "_blank";
+const linkTarget = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        if (modelValue.type !== "link") return;
+        return modelValue.target === "_blank";
     },
-    set(isBlank) {
-        if (valueRef.value.type !== "link") return;
-        valueRef.value.target = isBlank ? "_blank" : "_self";
+    set(isBlank, modelValue) {
+        if (modelValue.type !== "link") return;
+        modelValue.target = isBlank ? "_blank" : "_self";
+        return modelValue;
     },
 });
 </script>

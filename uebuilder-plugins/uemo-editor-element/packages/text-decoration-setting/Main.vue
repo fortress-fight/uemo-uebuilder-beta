@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 01:20:35
+ * @LastEditTime: 2025-03-23 01:00:51
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting']" :title="t('TEXT_DECORATION_TITLE')">
@@ -49,6 +49,8 @@
 <script lang="ts" setup>
 import type { UeElTextDecorationSettingBaseProps, UeElTextDecorationSettingValue } from "./index";
 
+import { useDefineObjectModel, useDefineObjectModuleProxy } from "@stone/uemo-editor-element/utils/model-mixin";
+
 defineOptions({ name: "UeElTextDecorationSetting" });
 
 /**
@@ -66,6 +68,7 @@ const DEFAULT_EASE = "power4.out";
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeElTextDecorationSettingBaseProps>(), {});
 const valueRef = defineModel<UeElTextDecorationSettingValue>("value", { required: true });
+const valueRefProxy = useDefineObjectModuleProxy(valueRef);
 
 /**
  * 输入控件配置
@@ -138,66 +141,73 @@ const animateSettingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() =
 /**
  * 计算属性
  */
-const color = computed({
-    get() {
-        return valueRef.value.color || DEFAULT_COLOR;
+const color = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.color || DEFAULT_COLOR;
     },
-    set(value) {
-        valueRef.value.color = value;
-    },
-});
-
-const width = computed({
-    get() {
-        return valueRef.value.width || DEFAULT_WIDTH;
-    },
-    set(value) {
-        valueRef.value.width = value;
+    set(value, modelValue) {
+        modelValue.color = value;
+        return modelValue;
     },
 });
 
-const pointer = computed({
-    get() {
-        return valueRef.value.pointer || "";
+const width = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.width || DEFAULT_WIDTH;
     },
-    set(value) {
-        valueRef.value.pointer = value;
-    },
-});
-
-const duration = computed({
-    get() {
-        return valueRef.value.duration || DEFAULT_DURATION;
-    },
-    set(value) {
-        valueRef.value.duration = value;
+    set(value, modelValue) {
+        modelValue.width = value;
+        return modelValue;
     },
 });
 
-const delay = computed({
-    get() {
-        return valueRef.value.delay || DEFAULT_DELAY;
+const pointer = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.pointer || "";
     },
-    set(value) {
-        valueRef.value.delay = value;
-    },
-});
-
-const ease = computed({
-    get() {
-        return valueRef.value.ease || DEFAULT_EASE;
-    },
-    set(value) {
-        valueRef.value.ease = value;
+    set(value, modelValue) {
+        modelValue.pointer = value;
+        return modelValue;
     },
 });
 
-const animate = computed({
-    get() {
-        return valueRef.value.animate || false;
+const duration = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.duration || DEFAULT_DURATION;
     },
-    set(value) {
-        valueRef.value.animate = value;
+    set(value, modelValue) {
+        modelValue.duration = value;
+        return modelValue;
+    },
+});
+
+const delay = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.delay || DEFAULT_DELAY;
+    },
+    set(value, modelValue) {
+        modelValue.delay = value;
+        return modelValue;
+    },
+});
+
+const ease = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.ease || DEFAULT_EASE;
+    },
+    set(value, modelValue) {
+        modelValue.ease = value;
+        return modelValue;
+    },
+});
+
+const animate = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.animate || false;
+    },
+    set(value, modelValue) {
+        modelValue.animate = value;
+        return modelValue;
     },
 });
 /**
@@ -206,11 +216,11 @@ const animate = computed({
 function handleTrigger(type: string) {
     switch (type) {
         case "add":
-            valueRef.value.animate = true;
+            animate.value = true;
             break;
 
         case "remove":
-            valueRef.value.animate = false;
+            animate.value = false;
             break;
 
         default:
@@ -219,7 +229,7 @@ function handleTrigger(type: string) {
 }
 
 const togglePreview = () => {
-    valueRef.value.preview = !valueRef.value.preview;
+    valueRefProxy("preview", !valueRef.value.preview);
 };
 </script>
 

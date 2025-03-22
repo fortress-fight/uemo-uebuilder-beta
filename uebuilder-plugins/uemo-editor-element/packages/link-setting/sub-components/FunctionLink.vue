@@ -50,6 +50,8 @@ import type { UeElLinkSettingValue } from "../index";
 
 import copy from "@stone/uemo-editor-utils/lib/copy";
 
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
+
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
@@ -63,12 +65,13 @@ const linkDetail = computed(() => {
 
 const anchorOptions = ref<UE_EL_COMPONENT.UeElSelectProps["options"]>([]);
 
-const link = computed({
-    get() {
-        return valueRef.value.link === "" ? undefined : valueRef.value.link;
+const link = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.link === "" ? undefined : modelValue.link;
     },
-    set(value) {
-        valueRef.value.link = value || "";
+    set(value, modelValue) {
+        modelValue.link = value || "";
+        return modelValue;
     },
 });
 
@@ -89,12 +92,13 @@ function copyAnchorLink(link: string) {
     }
 }
 
-const linkAddress = computed({
-    get() {
-        return valueRef.value.link || "";
+const linkAddress = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.link || "";
     },
-    set(v) {
-        valueRef.value.link = v;
+    set(value, modelValue) {
+        modelValue.link = value;
+        return modelValue;
     },
 });
 

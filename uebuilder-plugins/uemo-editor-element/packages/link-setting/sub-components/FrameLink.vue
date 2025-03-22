@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗链接设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:31:15
+ * @LastEditTime: 2025-03-23 01:08:39
 -->
 <template>
     <UeElSettingGroup :class="$style['frame-link']" :title="t('LINK_FRAME_CONTENT_TITLE')">
@@ -51,6 +51,8 @@
 import type { UeElLinkSettingValue } from "../index";
 import { isImageReg, isVideoReg } from "@stone/uemo-editor-utils/lib/utils";
 
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
+
 defineOptions({ name: "UeElFrameLink" });
 
 /**
@@ -79,31 +81,34 @@ const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
  * 响应式状态
  */
 const linkType = ref<LinkType>("link");
-const normalLink = computed({
-    get() {
+const normalLink = useDefineObjectModel(valueRef, {
+    get(modelValue) {
         if (linkType.value !== "link") return "";
-        return valueRef.value.link;
+        return modelValue.link;
     },
-    set(value) {
-        valueRef.value.link = value;
+    set(value, modelValue) {
+        modelValue.link = value;
+        return modelValue;
     },
 });
-const imageLink = computed({
-    get() {
+const imageLink = useDefineObjectModel(valueRef, {
+    get(modelValue) {
         if (linkType.value !== "image") return "";
-        return valueRef.value.link;
+        return modelValue.link;
     },
-    set(value) {
-        valueRef.value.link = value;
+    set(value, modelValue) {
+        modelValue.link = value;
+        return modelValue;
     },
 });
-const videoLink = computed({
-    get() {
+const videoLink = useDefineObjectModel(valueRef, {
+    get(modelValue) {
         if (linkType.value !== "video") return "";
-        return valueRef.value.link;
+        return modelValue.link;
     },
-    set(value) {
-        valueRef.value.link = value;
+    set(value, modelValue) {
+        modelValue.link = value;
+        return modelValue;
     },
 });
 
@@ -131,14 +136,15 @@ const widthInputProps = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
 /**
  * 弹窗宽度
  */
-const popLayerWidth = computed({
-    get() {
-        if (valueRef.value.type !== "frame") return;
-        return valueRef.value.popLayer?.width || DEFAULT_WIDTH;
+const popLayerWidth = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        if (modelValue.type !== "frame") return;
+        return modelValue.popLayer?.width || DEFAULT_WIDTH;
     },
-    set(value) {
-        if (valueRef.value.type !== "frame") return;
-        valueRef.value.popLayer = { ...valueRef.value.popLayer, width: value };
+    set(value, modelValue) {
+        if (modelValue.type !== "frame") return;
+        modelValue.popLayer = { ...modelValue.popLayer, width: value };
+        return modelValue;
     },
 });
 

@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图形控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 01:19:57
+ * @LastEditTime: 2025-03-23 01:05:03
 -->
 <template>
     <UeElEditorPanel
@@ -46,6 +46,8 @@ import type { UeElBackgroundShapeSettingBaseProps, UeElBackgroundShapeSettingVal
 
 import UeElEditorPanel from "../editor-panel";
 
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
+
 const { t } = useI18n();
 defineOptions({ name: "UeElBackgroundShapeSetting" });
 const _props = withDefaults(defineProps<UeElBackgroundShapeSettingBaseProps>(), {});
@@ -63,12 +65,13 @@ const positionOptions = computed(() => [
     { value: "top", text: t("UNIT_TOP") },
     { value: "bottom", text: t("UNIT_BOTTOM") },
 ]);
-const position = computed({
-    get() {
-        return valueRef.value.pos || "bottom";
+const position = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.pos || "bottom";
     },
-    set(value) {
-        valueRef.value.pos = value;
+    set(value, modelValue) {
+        modelValue.pos = value;
+        return modelValue;
     },
 });
 
@@ -87,12 +90,13 @@ const heightNumInputParam: UE_EL_COMPONENT.UeElNumberInputProps = {
 /**
  * 颜色设置
  */
-const color = computed({
-    get() {
-        return valueRef.value.color || "#999999";
+const color = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.color || "#999999";
     },
-    set(value) {
-        valueRef.value.color = value;
+    set(value, modelValue) {
+        modelValue.color = value;
+        return modelValue;
     },
 });
 </script>
