@@ -28,7 +28,7 @@ interface DetectModelChangeOptions<T> {
  * @param options - 配置选项
  * @returns 包含本地值引用和控制方法的对象
  */
-export function detectModelChangeOrigin<T>(valueRef: ModelRef<T>, options: DetectModelChangeOptions<T>) {
+export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectModelChangeOptions<T>) {
     const {
         onParentChange,
         onLocalChange,

@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:50:40
+ * @LastEditTime: 2025-03-22 22:25:01
 -->
 <template>
     <UeElEditorPanel
@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import type { UeElLinkSettingBaseProps, UeElLinkSettingValue } from "./index";
 
-import { detectModelChangeOrigin } from "~/utils/model-mixin";
+import { useDetectModelChange } from "~/utils/model-mixin";
 import FunctionLink from "./sub-components/FunctionLink.vue";
 import FrameLink from "./sub-components/FrameLink.vue";
 import NormalLink from "./sub-components/NormalLink.vue";
@@ -67,9 +67,9 @@ const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
 
 /**
  * 本地值引用，用于处理模型变更
- * @description 使用 detectModelChangeOrigin 处理模型变更，支持自动同步和值转换
+ * @description 使用 useDetectModelChange 处理模型变更，支持自动同步和值转换
  */
-const { localValueRef, checkHasUnsyncedChanges, syncToParent } = detectModelChangeOrigin(valueRef, {
+const { localValueRef, checkHasUnsyncedChanges, syncToParent } = useDetectModelChange(valueRef, {
     autoUpdateParent: false,
     transformValue: (value) => {
         // NOTE: 如果类型为功能链接，且detail为image，则转换为弹窗链接

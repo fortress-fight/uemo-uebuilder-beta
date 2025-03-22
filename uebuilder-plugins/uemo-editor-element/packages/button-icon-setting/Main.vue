@@ -44,7 +44,7 @@
 <script lang="ts" setup>
 import type { UeElButtonIconSettingBaseProps, UeElButtonIconSettingType, UeElButtonIconSettingValue } from "./index";
 
-import { detectModelChangeOrigin } from "@stone/uemo-editor-element/utils/model-mixin";
+import { useDetectModelChange } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeElButtonIconSetting" });
 
@@ -62,7 +62,7 @@ const valueRef = defineModel<UeElButtonIconSettingValue>("value", {
 /**
  * 本地状态引用，用于处理值的更新
  */
-const { localValueRef } = detectModelChangeOrigin<UeElButtonIconSettingValue | undefined>(valueRef, {
+const { localValueRef } = useDetectModelChange<UeElButtonIconSettingValue | undefined>(valueRef, {
     equalityFn: (a, b) => a?.source === b?.source,
     onParentChange: (local, parent) => {
         if (local?.source !== parent?.source) {
