@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:02:41
+ * @LastEditTime: 2025-03-23 18:32:46
 -->
 <template>
     <button
@@ -135,10 +135,11 @@ function trigger(ev: MouseEvent) {
     line-height: 26px;
 
     width: 100%;
+    padding: 0 var(--ue-editor-row-space--lv1);
 
     border-radius: var(--ue-border-radius--lv1);
     &[data-size="normal"] {
-        padding: 0 8px;
+        padding: 0 var(--ue-editor-row-space--lv1);
     }
     &[data-size="large"] {
         padding: 6px 10px;
