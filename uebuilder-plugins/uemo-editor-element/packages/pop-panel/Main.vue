@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 13:17:37
+ * @LastEditTime: 2025-03-23 17:57:25
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -49,6 +49,8 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { defaultCalcPosParam, UeElProvideDialogCalcPosHandler, UeElProvideDialogCloseHandler } from "./index";
 
 defineOptions({ name: "UeElPopPanel" });
+
+const instance = getCurrentInstance();
 
 // #region 组件配置和状态
 const props = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
@@ -230,6 +232,10 @@ function closeModal(e: Event) {
 
     const allowClose = props.checkAllowClose?.();
     if (allowClose === false) return;
+    if (typeof allowClose === "string") {
+        instance?.proxy?.$ueElToast.error(allowClose);
+        return;
+    }
 
     openModel.value = false;
 }
