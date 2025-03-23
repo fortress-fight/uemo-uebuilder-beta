@@ -61,7 +61,7 @@ import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
 import UeElResourcePreview from "../packages/resource-preview";
 import UeElResourceSetting from "../packages/resource-setting";
-import UeElScrollEffectSetting from "../packages/scroll-effect-setting";
+import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
 import UeElSelect from "../packages/select";
 import UeElSelectOption from "../packages/select-option";
 import UeElSettingBar from "../packages/setting-bar";
@@ -139,7 +139,7 @@ export const components = [
     UeElRadiusSettingGroup,
     UeElResourcePreview,
     UeElResourceSetting,
-    UeElScrollEffectSetting,
+    UeElScrollEffectSettingPanel,
     UeElSelect,
     UeElSelectOption,
     UeElSettingBar,

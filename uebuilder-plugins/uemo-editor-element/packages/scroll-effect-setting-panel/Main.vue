@@ -1,15 +1,15 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 10:47:31
+ * @LastEditTime: 2025-03-23 17:01:18
 -->
 <template>
-    <UeElEditorPanel :class="$style['scroll-effect-setting']" :title="scrollEffectName">
+    <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
         <component :is="controlComponent" v-model:value="optionsRef" :is-image="isImage" />
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
-import type { UeElScrollEffectSettingBaseProps, UeElScrollEffectSettingValue } from "./index";
+import type { UeElScrollEffectSettingPanelBaseProps, UeElScrollEffectSettingPanelValue } from "./index";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
@@ -24,7 +24,7 @@ import ScrollOpacitySetting from "./sub-components/ScrollOpacitySetting.vue";
 import ScrollImageParallaxSetting from "./sub-components/ScrollImageParallaxSetting.vue";
 
 defineOptions({
-    name: "UeElScrollEffectSetting",
+    name: "UeElScrollEffectSettingPanel",
     components: {
         ScrollRotateSetting,
         ScrollTranslateSetting,
@@ -38,10 +38,10 @@ defineOptions({
 });
 
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElScrollEffectSettingBaseProps>(), {
+const _props = withDefaults(defineProps<UeElScrollEffectSettingPanelBaseProps>(), {
     isImage: false,
 });
-const valueRef = defineModel<UeElScrollEffectSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: true });
 
 const optionsRef = useDefineObjectModel(valueRef, {
     get(modelValue) {
@@ -88,7 +88,7 @@ const controlComponent = computed(() => {
 });
 </script>
 <style lang="scss" module>
-.scroll-effect-setting {
+.scroll-effect-setting-panel {
     //
 }
 </style>

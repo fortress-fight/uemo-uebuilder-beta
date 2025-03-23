@@ -11,21 +11,21 @@
         v-model:testValueSelect="testValueSelect"
         title="测试滚动效果控制器"
     >
-        <UeElScrollEffectSetting v-bind="testValue" v-model:value="testValue.value">
+        <UeElScrollEffectSettingPanel v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
-        </UeElScrollEffectSetting>
+        </UeElScrollEffectSettingPanel>
     </TestArea>
 </template>
 <script lang="ts" setup>
-import type { UeElScrollEffectSettingValue } from "@stone/uemo-editor-element/packages/scroll-effect-setting";
+import type { UeElScrollEffectSettingPanelValue } from "@stone/uemo-editor-element/packages/scroll-effect-setting-panel";
 
 import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElScrollEffectSettingProps & {
+const testValueList: (UE_EL_COMPONENT.UeElScrollEffectSettingPanelProps & {
     testOptionTitle?: string;
-    value: UeElScrollEffectSettingValue;
+    value: UeElScrollEffectSettingPanelValue;
 })[] = [
     { testOptionTitle: "image-parallax", value: { type: "image-parallax", options: {} } },
     { testOptionTitle: "opacity", value: { type: "opacity", options: {} } },

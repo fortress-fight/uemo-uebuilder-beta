@@ -37,7 +37,7 @@
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
-import type { UeElScrollEffectSettingOptions } from "../index";
+import type { UeElScrollEffectSettingPanelOptions } from "../index";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
@@ -45,12 +45,12 @@ type TypeTriggerFiled = "mode" | "delay" | "duration" | "ease";
 
 const { t } = useI18n();
 const props = defineProps<{
-    value: UeElScrollEffectSettingOptions;
+    value: UeElScrollEffectSettingPanelOptions;
     disable?: boolean;
     hideField?: TypeTriggerFiled[];
     disableField?: TypeTriggerFiled[];
 }>();
-const valueRef = defineModel<UeElScrollEffectSettingOptions>("value", { required: true });
+const valueRef = defineModel<UeElScrollEffectSettingPanelOptions>("value", { required: true });
 
 const fields: TypeTriggerFiled[] = ["mode", "delay", "duration", "ease"];
 

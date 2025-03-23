@@ -1,15 +1,15 @@
 /*
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 10:57:53
+ * @LastEditTime: 2025-03-23 17:01:59
  */
 import type { App } from "vue";
 
-import UeElScrollEffectSetting from "./Main.vue";
+import UeElScrollEffectSettingPanel from "./Main.vue";
 
-UeElScrollEffectSetting.install = (app: App) => {
-    if (!UeElScrollEffectSetting.name) return;
-    app.component(UeElScrollEffectSetting.name, UeElScrollEffectSetting);
+UeElScrollEffectSettingPanel.install = (app: App) => {
+    if (!UeElScrollEffectSettingPanel.name) return;
+    app.component(UeElScrollEffectSettingPanel.name, UeElScrollEffectSettingPanel);
 };
 
 export type ScrollBaseOptions = {
@@ -64,7 +64,7 @@ export type ScrollImageParallaxOptions = {
     mode?: string;
 };
 
-export type UeElScrollEffectSettingOptions = ScrollRotateOptions &
+export type UeElScrollEffectSettingPanelOptions = ScrollRotateOptions &
     ScrollTranslateOptions &
     ScrollScaleOptions &
     ScrollFixedOptions &
@@ -73,7 +73,7 @@ export type UeElScrollEffectSettingOptions = ScrollRotateOptions &
     ScrollImageParallaxOptions &
     ScrollOpacityOptions;
 
-export type UeElScrollEffectSettingValue =
+export type UeElScrollEffectSettingPanelValue =
     | {
           type: "translate";
           options?: ScrollTranslateOptions;
@@ -107,10 +107,10 @@ export type UeElScrollEffectSettingValue =
           options?: ScrollOpacityOptions;
       };
 
-export interface UeElScrollEffectSettingBaseProps {
+export interface UeElScrollEffectSettingPanelBaseProps {
     disabled?: boolean;
     isImage?: boolean;
 }
-export type UeElScrollEffectSettingInstance = InstanceType<typeof UeElScrollEffectSetting>;
+export type UeElScrollEffectSettingPanelInstance = InstanceType<typeof UeElScrollEffectSettingPanel>;
 
-export default UeElScrollEffectSetting;
+export default UeElScrollEffectSettingPanel;

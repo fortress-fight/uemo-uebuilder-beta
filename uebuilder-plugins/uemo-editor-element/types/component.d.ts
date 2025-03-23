@@ -73,7 +73,9 @@ import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radiu
 import UeElRadiusSettingGroup, { UeElRadiusSettingGroupBaseProps } from "../packages/radius-setting-group";
 import UeElResourcePreview, { UeElResourcePreviewBaseProps } from "../packages/resource-preview";
 import UeElResourceSetting, { UeElResourceSettingBaseProps } from "../packages/resource-setting";
-import UeElScrollEffectSetting, { UeElScrollEffectSettingBaseProps } from "../packages/scroll-effect-setting";
+import UeElScrollEffectSettingPanel, {
+    UeElScrollEffectSettingPanelBaseProps,
+} from "../packages/scroll-effect-setting-panel";
 import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
 import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
@@ -156,7 +158,7 @@ declare module "vue" {
         UeElRadiusSettingGroup: typeof UeElRadiusSettingGroup;
         UeElResourcePreview: typeof UeElResourcePreview;
         UeElResourceSetting: typeof UeElResourceSetting;
-        UeElScrollEffectSetting: typeof UeElScrollEffectSetting;
+        UeElScrollEffectSettingPanel: typeof UeElScrollEffectSettingPanel;
         UeElSelect: typeof UeElSelect;
         UeElSelectOption: typeof UeElSelectOption;
         UeElSettingBar: typeof UeElSettingBar;
@@ -237,7 +239,7 @@ declare global {
         interface UeElRadiusSettingGroupProps extends UeElRadiusSettingGroupBaseProps {}
         interface UeElResourcePreviewProps extends UeElResourcePreviewBaseProps {}
         interface UeElResourceSettingProps extends UeElResourceSettingBaseProps {}
-        interface UeElScrollEffectSettingProps extends UeElScrollEffectSettingBaseProps {}
+        interface UeElScrollEffectSettingPanelProps extends UeElScrollEffectSettingPanelBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
         interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
