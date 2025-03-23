@@ -17,12 +17,12 @@
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
-import type { UeElLinkSettingValue } from "../index";
+import type { UeElLinkSettingPanelValue } from "../index";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 const { t } = useI18n();
-const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: true });
 
 const linkAddress = useDefineObjectModel(valueRef, {
     get(modelValue) {

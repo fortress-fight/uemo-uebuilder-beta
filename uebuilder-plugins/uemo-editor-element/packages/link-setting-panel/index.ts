@@ -1,18 +1,18 @@
 /*
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:43:50
+ * @LastEditTime: 2025-03-23 17:04:57
  */
 import type { App } from "vue";
 
-import UeElLinkSetting from "./Main.vue";
+import UeElLinkSettingPanel from "./Main.vue";
 
-UeElLinkSetting.install = (app: App) => {
-    if (!UeElLinkSetting.name) return;
-    app.component(UeElLinkSetting.name, UeElLinkSetting);
+UeElLinkSettingPanel.install = (app: App) => {
+    if (!UeElLinkSettingPanel.name) return;
+    app.component(UeElLinkSettingPanel.name, UeElLinkSettingPanel);
 };
 
-export type UeElLinkSettingValue =
+export type UeElLinkSettingPanelValue =
     | {
           type: "link";
           link: string;
@@ -34,10 +34,10 @@ export type UeElLinkSettingValue =
           };
       };
 
-export interface UeElLinkSettingBaseProps {
+export interface UeElLinkSettingPanelBaseProps {
     title?: string;
     enableTriggerArea?: boolean;
 }
-export type UeElLinkSettingInstance = InstanceType<typeof UeElLinkSetting>;
+export type UeElLinkSettingPanelInstance = InstanceType<typeof UeElLinkSettingPanel>;
 
-export default UeElLinkSetting;
+export default UeElLinkSettingPanel;

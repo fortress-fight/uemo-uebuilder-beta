@@ -46,7 +46,7 @@
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
-import type { UeElLinkSettingValue } from "../index";
+import type { UeElLinkSettingPanelValue } from "../index";
 
 import copy from "@stone/uemo-editor-utils/lib/copy";
 
@@ -54,7 +54,7 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
-const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: true });
 
 const linkDetail = computed(() => {
     if (valueRef.value.type === "function") {

@@ -50,7 +50,7 @@ import UeElImageLibraryPanel from "../packages/image-library-panel";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElLibraryPanel from "../packages/library-panel";
 import UeElLoading from "../packages/loading";
-import UeElLinkSetting from "../packages/link-setting";
+import UeElLinkSettingPanel from "../packages/link-setting-panel";
 import UeElMarginSetting from "../packages/margin-setting";
 import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElNumberInput from "../packages/number-input";
@@ -128,7 +128,7 @@ export const components = [
     UeElJustifyContentSetting,
     UeElLibraryPanel,
     UeElLoading,
-    UeElLinkSetting,
+    UeElLinkSettingPanel,
     UeElMarginSetting,
     UeElLottieLibraryPanel,
     UeElNumberInput,

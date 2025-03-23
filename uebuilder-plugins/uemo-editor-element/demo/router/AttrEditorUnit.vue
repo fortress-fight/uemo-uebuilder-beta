@@ -35,7 +35,7 @@ import TestBackgroundImageSettingPanel from "~/demo/components/TestBackgroundIma
 import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
 import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSettingPanel.vue";
-import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
+import TestLinkSettingPanel from "~/demo/components/TestLinkSettingPanel.vue";
 import TestScrollEffectSettingPanel from "~/demo/components/TestScrollEffectSettingPanel.vue";
 
 const testComponents = [
@@ -65,7 +65,7 @@ const testComponents = [
     TestBackgroundShapeSetting,
     TestButtonStyleSetting,
     TestScrollEffectSettingPanel,
-    TestLinkSetting,
+    TestLinkSettingPanel,
     TestBackgroundImageSettingPanel,
 ];
 </script>

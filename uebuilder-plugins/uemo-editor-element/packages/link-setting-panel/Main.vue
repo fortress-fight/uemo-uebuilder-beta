@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 22:25:01
+ * @LastEditTime: 2025-03-23 17:04:39
 -->
 <template>
     <UeElEditorPanel
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElLinkSettingBaseProps, UeElLinkSettingValue } from "./index";
+import type { UeElLinkSettingPanelBaseProps, UeElLinkSettingPanelValue } from "./index";
 
 import { useDetectModelChange } from "~/utils/model-mixin";
 import FunctionLink from "./sub-components/FunctionLink.vue";
@@ -57,13 +57,13 @@ import FrameLink from "./sub-components/FrameLink.vue";
 import NormalLink from "./sub-components/NormalLink.vue";
 import { checkLink } from "./utils/helper";
 
-defineOptions({ name: "UeElLinkSetting" });
+defineOptions({ name: "UeElLinkSettingPanel" });
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
-const _props = withDefaults(defineProps<UeElLinkSettingBaseProps>(), {});
+const _props = withDefaults(defineProps<UeElLinkSettingPanelBaseProps>(), {});
 const emit = defineEmits<{ (e: "cancel" | "confirm"): void }>();
-const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: true });
 
 /**
  * 本地值引用，用于处理模型变更

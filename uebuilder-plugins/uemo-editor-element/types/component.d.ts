@@ -62,7 +62,7 @@ import UeElImageLibraryPanel, { UeElImageLibraryPanelBaseProps } from "../packag
 import UeElJustifyContentSetting, { UeElJustifyContentSettingBaseProps } from "../packages/justify-content-setting";
 import UeElLibraryPanel, { UeElLibraryPanelBaseProps } from "../packages/library-panel";
 import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
-import UeElLinkSetting, { UeElLinkSettingBaseProps } from "../packages/link-setting";
+import UeElLinkSettingPanel, { UeElLinkSettingPanelBaseProps } from "../packages/link-setting-panel";
 import UeElMarginSetting, { UeElMarginSettingBaseProps } from "../packages/margin-setting";
 import UeElLottieLibraryPanel, { UeElLottieLibraryPanelBaseProps } from "../packages/lottie-library-panel";
 import UeElNumberInput, { UeElNumberInputBaseProps } from "../packages/number-input";
@@ -147,7 +147,7 @@ declare module "vue" {
         UeElJustifyContentSetting: typeof UeElJustifyContentSetting;
         UeElLibraryPanel: typeof UeElLibraryPanel;
         UeElLoading: typeof UeElLoading;
-        UeElLinkSetting: typeof UeElLinkSetting;
+        UeElLinkSettingPanel: typeof UeElLinkSettingPanel;
         UeElMarginSetting: typeof UeElMarginSetting;
         UeElLottieLibraryPanel: typeof UeElLottieLibraryPanel;
         UeElNumberInput: typeof UeElNumberInput;
@@ -228,7 +228,7 @@ declare global {
         interface UeElJustifyContentSettingProps extends UeElJustifyContentSettingBaseProps {}
         interface UeElLibraryPanelProps extends UeElLibraryPanelBaseProps {}
         interface UeElLoadingProps extends UeElLoadingBaseProps {}
-        interface UeElLinkSettingProps extends UeElLinkSettingBaseProps {}
+        interface UeElLinkSettingProps extends UeElLinkSettingPanelBaseProps {}
         interface UeElMarginSettingProps extends UeElMarginSettingBaseProps {}
         interface UeElLottieLibraryPanelProps extends UeElLottieLibraryPanelBaseProps {}
         interface UeElNumberInputProps extends UeElNumberInputBaseProps {}

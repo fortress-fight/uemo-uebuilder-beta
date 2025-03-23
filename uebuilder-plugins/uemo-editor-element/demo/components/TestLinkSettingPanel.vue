@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:24:11
+ * @LastEditTime: 2025-03-23 17:06:23
 -->
 <template>
     <TestArea
@@ -11,20 +11,20 @@
         v-model:testValueSelect="testValueSelect"
         title="测试链接属性控制器"
     >
-        <UeElLinkSetting v-bind="testValue" v-model:value="testValue.value">
+        <UeElLinkSettingPanel v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
-        </UeElLinkSetting>
+        </UeElLinkSettingPanel>
     </TestArea>
 </template>
 <script lang="ts" setup>
-import type { UeElLinkSettingValue } from "~/packages/link-setting";
+import type { UeElLinkSettingPanelValue } from "~/packages/link-setting-panel";
 import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElLinkSettingProps & {
     testOptionTitle?: string;
-    value: UeElLinkSettingValue;
+    value: UeElLinkSettingPanelValue;
 })[] = [
     {
         testOptionTitle: "网址链接",

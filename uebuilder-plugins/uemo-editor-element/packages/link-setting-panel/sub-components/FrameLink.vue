@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElLinkSettingValue } from "../index";
+import type { UeElLinkSettingPanelValue } from "../index";
 import { isImageReg, isVideoReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
@@ -75,7 +75,7 @@ interface LinkTypeOption {
  * 组件状态和工具函数
  */
 const { t } = useI18n();
-const valueRef = defineModel<UeElLinkSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: true });
 
 /**
  * 响应式状态
