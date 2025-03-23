@@ -9,6 +9,7 @@ import { directive } from "./directive";
 import { i18n } from "./i18n";
 
 export interface UE_EL_OPTIONS {
+    config: UE_EL.Config;
     plugin: {
         resource: UE_PLUGIN_OPTIONS.Resource;
         fileUpload: UE_PLUGIN_OPTIONS.FileUpload;
@@ -30,6 +31,8 @@ export default {
             if (!component.name) return;
             app.component(component.name, component);
         });
+
+        app.config.globalProperties.$ueElGlobalConfig = options.config;
 
         Object.entries(plugins).forEach(([key, install]) => {
             install(app, options.plugin[key]);

@@ -22,8 +22,19 @@ import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
 import type { UeElError as UeError } from "~/utils/error";
 import type { UE_AI_CONFIG } from "~/packages/ai-plugin";
+import type { UE_EL_BACKGROUND_PARAM_MAP } from "~/packages/background-setting-group";
 
 declare global {
+    namespace UE_EL {
+        type Config = {
+            backgroundSetting: {
+                defaultImageData: UE_EL_BACKGROUND_PARAM_MAP["image"];
+                defaultSvgData: UE_EL_BACKGROUND_PARAM_MAP["svg"];
+                defaultVideoData: UE_EL_BACKGROUND_PARAM_MAP["video"];
+                defaultSplineData: UE_EL_BACKGROUND_PARAM_MAP["spline"];
+            };
+        };
+    }
     namespace UE_EL_UTIL {
         /**
          * @description 输入框校验参数

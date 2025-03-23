@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:18:02
+ * @LastEditTime: 2025-03-24 01:14:11
  */
 
 // SECTION - 样式文件
@@ -40,9 +40,28 @@ setLocalFontLib([
         src: "https://qiniu-uematerial.uemo.net/Upfile/Font/20221104/AlimamaShuHeiTi-Bold.ttf",
     },
 ]);
+// backgroundSetting: {
+// },
 
 app.use(router);
 app.use(UeEl, {
+    config: {
+        backgroundSetting: {
+            defaultImageData: {
+                image: "https://static.jsmo.xin/uebuilder/public-resource/images/base-image.jpg",
+                size: "cover",
+            },
+            defaultSvgData: {
+                url: "https://static.jsmo.xin/uebuilder/public-resource/svg-bg/svg-bg-default.svg",
+                natureWidth: 580,
+                natureHeight: 580,
+            },
+            defaultVideoData: { video: "https://static.jsmo.xin/static/video/background001.mp4" },
+            defaultSplineData: {
+                url: "https://static.jsmo.xin/uebuilder/public-resource/spline/beijing/spline001.splinecode",
+            },
+        },
+    },
     plugin: {
         ai: AI_CONFIG,
         fileUpload: { uploadConfig },

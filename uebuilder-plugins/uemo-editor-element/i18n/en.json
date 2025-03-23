@@ -63,6 +63,7 @@
     "UNIT_ROUND": "Round",
     "UNIT_SQUARE": "Square",
     "UNIT_FONT_COLOR": "Font Color",
+    "UNIT_BACKGROUND": "Background",
     "UNIT_BACKGROUND_COLOR": "Background Color",
     "UNIT_PREVIEW_IMAGE": "Preview Image",
     "UNIT_PREVIEW_VIDEO": "Preview Video",
