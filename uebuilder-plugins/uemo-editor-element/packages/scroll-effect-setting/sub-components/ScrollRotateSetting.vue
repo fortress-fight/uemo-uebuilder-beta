@@ -1,22 +1,26 @@
 <template>
     <ScrollSetting v-model:value="valueRef">
-        <UeElSettingGroup title="旋转参数">
+        <UeElSettingGroup :title="t('SCROLL_ROTATE_ATTRS')">
             <template #body>
                 <UeElSelect
                     v-model:value="axis"
-                    title="旋转轴"
+                    :title="t('SCROLL_ROTATE_AXIS')"
                     :options="rotateAxisOptions"
                     :show-value-icon="true"
                     value-align="right"
                 />
-                <UeElSelect v-model:value="axisPos" title="旋转位置" v-bind="axisPosSelectParam" />
+                <UeElSelect v-model:value="axisPos" :title="t('SCROLL_ROTATE_AXIS_POS')" v-bind="axisPosSelectParam" />
             </template>
         </UeElSettingGroup>
-        <UeElSettingGroup title="旋转角度">
+        <UeElSettingGroup :title="t('SCROLL_ROTATE_ANGLE')">
             <template #body>
                 <UeElControlGroup v-if="value" :col-count="2">
-                    <UeElNumberInput v-bind="inputParam" v-model:value="startAngle" :title="{ text: '起始' }" />
-                    <UeElNumberInput v-bind="inputParam" v-model:value="endAngle" :title="{ text: '结束' }" />
+                    <UeElNumberInput
+                        v-bind="inputParam"
+                        v-model:value="startAngle"
+                        :title="{ text: t('UNIT_START') }"
+                    />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="endAngle" :title="{ text: t('UNIT_END') }" />
                 </UeElControlGroup>
             </template>
         </UeElSettingGroup>
@@ -31,6 +35,8 @@ import ScrollSetting from "./ScrollSetting.vue";
 import { defaultScrollOptions } from "../utils/helper";
 
 defineOptions({ name: "ScrollRotateControl" });
+
+const { t } = useI18n();
 
 const _props = defineProps<{ isImage?: boolean }>();
 const valueRef = defineModel<ScrollRotateOptions>("value", { required: true });
@@ -66,11 +72,11 @@ const axis = computed({
     },
 });
 
-const rotateAxisOptions = [
-    { text: "X 轴", value: "x", icon: "icon-app-rotate-x" },
-    { text: "Y 轴", value: "y", icon: "icon-app-rotate-y" },
-    { text: "Z 轴", value: "z", icon: "icon-app-rotate-z" },
-];
+const rotateAxisOptions = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => [
+    { text: t("SCROLL_ROTATE_AXIS_X"), value: "x", icon: "icon-app-rotate-x" },
+    { text: t("SCROLL_ROTATE_AXIS_Y"), value: "y", icon: "icon-app-rotate-y" },
+    { text: t("SCROLL_ROTATE_AXIS_Z"), value: "z", icon: "icon-app-rotate-z" },
+]);
 
 const axisPos = computed({
     get: () => rotateAxis.value.split("-")[1],
@@ -85,27 +91,27 @@ const axisPosSelectParam = computed<UE_EL_COMPONENT.UeElSelectProps>(() => {
     switch (axis.value) {
         case "x":
             options = [
-                { text: "顶部", value: "t", icon: "icon-app-axis-t" },
-                { text: "底部", value: "b", icon: "icon-app-axis-b" },
+                { text: t("UNIT_TOP"), value: "t", icon: "icon-app-axis-t" },
+                { text: t("UNIT_BOTTOM"), value: "b", icon: "icon-app-axis-b" },
             ];
             break;
         case "y":
             options = [
-                { text: "左边", value: "l", icon: "icon-app-axis-l" },
-                { text: "右边", value: "r", icon: "icon-app-axis-r" },
+                { text: t("UNIT_LEFT"), value: "l", icon: "icon-app-axis-l" },
+                { text: t("UNIT_RIGHT"), value: "r", icon: "icon-app-axis-r" },
             ];
             break;
         case "z":
             options = [
-                { text: "上左", value: "tl", icon: "icon-app-axis-t-l" },
-                { text: "上中", value: "tc", icon: "icon-app-axis-t-c" },
-                { text: "上右", value: "tr", icon: "icon-app-axis-t-r" },
-                { text: "中左", value: "cl", icon: "icon-app-axis-c-l" },
-                { text: "中心", value: "cc", icon: "icon-app-axis-c-c" },
-                { text: "中右", value: "cr", icon: "icon-app-axis-c-r" },
-                { text: "下左", value: "bl", icon: "icon-app-axis-b-l" },
-                { text: "下中", value: "bc", icon: "icon-app-axis-b-c" },
-                { text: "下右", value: "br", icon: "icon-app-axis-b-r" },
+                { text: t("UNIT_TOP_LEFT"), value: "tl", icon: "icon-app-axis-t-l" },
+                { text: t("UNIT_TOP_CENTER"), value: "tc", icon: "icon-app-axis-t-c" },
+                { text: t("UNIT_TOP_RIGHT"), value: "tr", icon: "icon-app-axis-t-r" },
+                { text: t("UNIT_CENTER_LEFT"), value: "cl", icon: "icon-app-axis-c-l" },
+                { text: t("UNIT_CENTER_CENTER"), value: "cc", icon: "icon-app-axis-c-c" },
+                { text: t("UNIT_CENTER_RIGHT"), value: "cr", icon: "icon-app-axis-c-r" },
+                { text: t("UNIT_BOTTOM_LEFT"), value: "bl", icon: "icon-app-axis-b-l" },
+                { text: t("UNIT_BOTTOM_CENTER"), value: "bc", icon: "icon-app-axis-b-c" },
+                { text: t("UNIT_BOTTOM_RIGHT"), value: "br", icon: "icon-app-axis-b-r" },
             ];
             break;
 

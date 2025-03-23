@@ -36,6 +36,7 @@ import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSet
 import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
 import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
+import TestScrollEffectSetting from "~/demo/components/TestScrollEffectSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -60,11 +61,12 @@ const testComponents = [
     TestResourceSetting,
     TestButtonIconSetting,
     TestBackgroundSplineSetting,
-    TestBackgroundImageSetting,
-    TestBackgroundShapeSetting,
     TestTextDecorationSetting,
+    TestBackgroundShapeSetting,
     TestButtonStyleSetting,
+    TestScrollEffectSetting,
     TestLinkSetting,
+    TestBackgroundImageSetting,
 ];
 </script>
 <style lang="scss" module>

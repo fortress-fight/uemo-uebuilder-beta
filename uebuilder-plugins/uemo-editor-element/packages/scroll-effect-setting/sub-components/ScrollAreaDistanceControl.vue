@@ -2,12 +2,12 @@
     <UeElSettingGroup v-bind="settingGroup" @trigger="handleTrigger">
         <template #body v-if="isActive">
             <UeElControlGroup v-if="isActive" :col-count="triggerMode !== 'enter-leaver' ? 2 : 1">
-                <UeElNumberInput v-bind="inputParam" v-model:value="startPosDis" :title="{ text: '起始' }" />
+                <UeElNumberInput v-bind="inputParam" v-model:value="startPosDis" :title="{ text: t('UNIT_START') }" />
                 <UeElNumberInput
                     v-if="triggerMode !== 'enter-leaver'"
                     v-bind="inputParam"
                     v-model:value="endPosDis"
-                    :title="{ text: '结束' }"
+                    :title="{ text: t('UNIT_END') }"
                 />
             </UeElControlGroup>
         </template>
@@ -18,6 +18,8 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 
 type TYPE_SCROLL_POS_DIS = { startPosDis?: string; endPosDis?: string };
 
+const { t } = useI18n();
+
 const _props = defineProps<{ triggerMode?: string }>();
 const valueRef = defineModel<TYPE_SCROLL_POS_DIS>("value", { required: true });
 
@@ -27,7 +29,7 @@ const isActive = computed(() => {
 
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     return {
-        title: "运动范围偏移量",
+        title: t("SCROLL_AREA_DISTANCE_SETTING_TITLE_OFFSET"),
         oper: !isActive.value ? [{ id: "add", type: "add" }] : [{ id: "remove", type: "remove" }],
     };
 });

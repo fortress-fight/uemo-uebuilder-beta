@@ -1,10 +1,10 @@
 <template>
-    <UeElSettingGroup :class="$style['scroll-area']" title="运动范围">
+    <UeElSettingGroup :class="$style['scroll-area']" :title="t('SCROLL_AREA_DISTANCE_SETTING_TITLE')">
         <template #body>
             <UeElControlGroup :col-count="1">
                 <UeElSelect
                     v-model:value="startPos"
-                    title="起始"
+                    :title="t('UNIT_START')"
                     :options="startPosOptions"
                     :show-value-icon="true"
                     value-align="right"
@@ -12,7 +12,7 @@
                 <UeElSelect
                     v-if="triggerMode !== 'enter-leaver'"
                     v-model:value="endPos"
-                    title="结束"
+                    :title="t('UNIT_END')"
                     :options="endPosOptions"
                     :show-value-icon="true"
                     value-align="right"
@@ -25,6 +25,8 @@
 import { useDefineObjectModel } from "~/utils/model-mixin";
 
 type TYPE_SCROLL_POS = { startPos: string; endPos: string };
+
+const { t } = useI18n();
 
 const _props = defineProps<{ triggerMode: string }>();
 const valueRef = defineModel<Partial<TYPE_SCROLL_POS>>("value", { required: true });
@@ -52,11 +54,11 @@ const endPos = useDefineObjectModel(valueRef, {
 });
 
 const posOptions = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => [
-    { text: "目标底部对齐窗口顶部时", value: "bottom top", icon: "icon-app-align-b-t" },
-    { text: "目标顶部对齐窗口顶部时", value: "top top", icon: "icon-app-align-t-t" },
-    { text: "目标中间对齐窗口中间时", value: "center center", icon: "icon-app-align-c-c" },
-    { text: "目标底部对齐窗口底部时", value: "bottom bottom", icon: "icon-app-align-b-b" },
-    { text: "目标顶部对齐窗口底部时", value: "top bottom", icon: "icon-app-align-t-b" },
+    { text: t("SCROLL_AREA_DISTANCE_BOTTOM_TOP"), value: "bottom top", icon: "icon-app-align-b-t" },
+    { text: t("SCROLL_AREA_DISTANCE_TOP_TOP"), value: "top top", icon: "icon-app-align-t-t" },
+    { text: t("SCROLL_AREA_DISTANCE_CENTER_CENTER"), value: "center center", icon: "icon-app-align-c-c" },
+    { text: t("SCROLL_AREA_DISTANCE_BOTTOM_BOTTOM"), value: "bottom bottom", icon: "icon-app-align-b-b" },
+    { text: t("SCROLL_AREA_DISTANCE_TOP_BOTTOM"), value: "top bottom", icon: "icon-app-align-t-b" },
 ]);
 
 function getAllowEndPos(startPos: string | undefined) {

@@ -1,7 +1,11 @@
 <template>
-    <UeElSettingGroup title="高度差模式">
+    <UeElSettingGroup :title="t('SCROLL_IMAGE_PARALLAX_SETTING_MODE')">
         <template #body>
-            <UeElSelect v-model:value="scrollHeightType" :options="options" />
+            <UeElSelect
+                v-model:value="scrollHeightType"
+                :options="options"
+                :title="t('SCROLL_IMAGE_PARALLAX_SETTING_MODE')"
+            />
         </template>
     </UeElSettingGroup>
     <!-- 提示信息 -->
@@ -23,11 +27,11 @@ defineOptions({ name: "ScrollImageParallaxSetting", inheritAttrs: false });
 const { t } = useI18n();
 const valueRef = defineModel<ScrollImageParallaxOptions>("value", { required: true });
 
-const options = [
-    { text: "常规", value: "parallax-normal" },
-    { text: "缩小容器", value: "parallax" },
-    { text: "放大图片", value: "parallax-image" },
-];
+const options = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => [
+    { text: t("SCROLL_IMAGE_PARALLAX_MODE_NORMAL"), value: "parallax-normal" },
+    { text: t("SCROLL_IMAGE_PARALLAX_MODE_CONTAINER"), value: "parallax" },
+    { text: t("SCROLL_IMAGE_PARALLAX_MODE_IMAGE"), value: "parallax-image" },
+]);
 
 const scrollHeightType = useDefineObjectModel(valueRef, {
     get() {
@@ -42,10 +46,7 @@ const scrollHeightType = useDefineObjectModel(valueRef, {
  * 提示信息配置
  */
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
-    tips: [
-        "1. 由于视差特性需要图片与其外层容器的存在高度差，所以请选择 “放大图片” 或 “缩小容器” 来创造高度差。",
-        "2. 使用常规模式配合图片比例，需要图片高于显示区域，才能创建高度差。不然图片会被动放大。",
-    ],
+    tips: [t("SCROLL_IMAGE_PARALLAX_TIP_1"), t("SCROLL_IMAGE_PARALLAX_TIP_2")],
 }));
 </script>
 <style lang="scss" module>

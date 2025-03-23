@@ -1,5 +1,5 @@
 <template>
-    <UeElSettingGroup title="吸附边距">
+    <UeElSettingGroup :title="t('SCROLL_STICKY_SETTING_PADDING')">
         <template #body>
             <UeElPaddingSetting v-bind="paddingInputParam" v-model:value="padding" />
         </template>
@@ -44,7 +44,7 @@ const padding = useDefineObjectModel(valueRef, {
  * 提示信息配置
  */
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
-    tips: [`吸附元素触发的偏移值可以通过吸附边距调节`],
+    tips: [t("SCROLL_STICKY_TIP_1")],
 }));
 </script>
 <style lang="scss" module>

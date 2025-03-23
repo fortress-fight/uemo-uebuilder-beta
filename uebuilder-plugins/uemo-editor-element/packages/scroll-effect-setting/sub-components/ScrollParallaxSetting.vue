@@ -1,5 +1,5 @@
 <template>
-    <UeElSettingGroup title="速度差">
+    <UeElSettingGroup :title="t('SCROLL_PARALLAX_SETTING_SPEED')">
         <template #body>
             <UeElNumberInput v-bind="speedInputParam" v-model:value="speed" />
         </template>
@@ -23,11 +23,10 @@ defineOptions({ name: "ScrollParallaxSetting", inheritAttrs: false });
 const { t } = useI18n();
 const valueRef = defineModel<ScrollParallaxOptions>("value", { required: true });
 
-const speedInputParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
-    title: { text: "速度差" },
-    placeholder: "请输入速度差",
+const speedInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
+    title: { text: t("SCROLL_PARALLAX_SETTING_SPEED") },
     limit: [-100, 100],
-});
+}));
 
 const speed = useDefineObjectModel(valueRef, {
     get: (modelValue) => modelValue.speed || defaultScrollOptions.parallax.speed,
@@ -41,7 +40,7 @@ const speed = useDefineObjectModel(valueRef, {
  * 提示信息配置
  */
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
-    tips: ["速度差大于0为加速，小于0为减速"],
+    tips: [t("SCROLL_PARALLAX_TIP_1")],
 }));
 </script>
 <style lang="scss" module>

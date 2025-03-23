@@ -1,15 +1,19 @@
 <template>
     <ScrollSetting v-model:value="valueRef">
-        <UeElSettingGroup title="缩放过渡">
+        <UeElSettingGroup :title="t('SCROLL_SCALE_SETTING_TITLE')">
             <template #body>
                 <UeElControlGroup :col-count="2">
-                    <UeElNumberInput v-bind="inputParam" v-model:value="startScale" :title="{ text: '起始' }" />
-                    <UeElNumberInput v-bind="inputParam" v-model:value="endScale" :title="{ text: '结束' }" />
+                    <UeElNumberInput
+                        v-bind="inputParam"
+                        v-model:value="startScale"
+                        :title="{ text: t('UNIT_START') }"
+                    />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="endScale" :title="{ text: t('UNIT_END') }" />
                     <UeElCheckBox
                         v-if="isImage"
                         :class="$style['scale-overflow']"
                         v-model:value="overflow"
-                        text="缩放时，图片始终保持在容器内部"
+                        :text="t('SCROLL_SCALE_SETTING_SCALE_OVERFLOW')"
                     />
                 </UeElControlGroup>
             </template>
@@ -23,6 +27,8 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 import ScrollSetting from "./ScrollSetting.vue";
 
 import { defaultScrollOptions } from "../utils/helper";
+
+const { t } = useI18n();
 
 const _props = defineProps<{ isImage?: boolean }>();
 const valueRef = defineModel<ScrollScaleOptions>("value", { required: true });

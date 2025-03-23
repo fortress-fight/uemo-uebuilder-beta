@@ -1,11 +1,11 @@
 <template>
-    <UeElSettingGroup :class="$style['scroll-trigger-mode']" title="运动模式">
+    <UeElSettingGroup :class="$style['scroll-trigger-mode']" :title="t('SCROLL_EFFECT_MODE')">
         <template #body>
             <UeElControlGroup :col-count="showFiled.length > 2 && isAutoPlay ? 2 : 1">
                 <UeElSelect
                     v-model:value="triggerMode"
                     :disable="testFiledDisable('mode')"
-                    title="效果"
+                    :title="t('UNIT_MODE')"
                     :options="modeOption"
                 />
                 <template v-if="isAutoPlay">
@@ -14,19 +14,19 @@
                         v-bind="timeInputParam"
                         v-model:value="delay"
                         :disable="testFiledDisable('delay')"
-                        :title="{ text: '延时' }"
+                        :title="{ text: t('SCROLL_EFFECT_TRIGGER_DELAY') }"
                     />
                     <UeElNumberInput
                         v-if="showFiled.includes('duration')"
                         v-bind="timeInputParam"
                         v-model:value="duration"
                         :disable="testFiledDisable('duration')"
-                        :title="{ text: '时间' }"
+                        :title="{ text: t('SCROLL_EFFECT_TRIGGER_DURATION') }"
                     />
                     <UeElSelect
                         v-if="showFiled.includes('ease') && false"
                         v-model:value="ease"
-                        title="运动"
+                        :title="t('SCROLL_EFFECT_TRIGGER_EASE')"
                         :class="$style['ease-control']"
                         :disable="testFiledDisable('ease')"
                         :options="easeOptions"
@@ -43,6 +43,7 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 
 type TypeTriggerFiled = "mode" | "delay" | "duration" | "ease";
 
+const { t } = useI18n();
 const props = defineProps<{
     value: UeElScrollEffectSettingOptions;
     disable?: boolean;
@@ -53,10 +54,12 @@ const valueRef = defineModel<UeElScrollEffectSettingOptions>("value", { required
 
 const fields: TypeTriggerFiled[] = ["mode", "delay", "duration", "ease"];
 
-const modeOption = [
-    { text: "线性执行", value: "" },
-    { text: "自动执行", value: "enter-leaver" },
-];
+const modeOption = computed(() => {
+    return [
+        { text: t("SCROLL_EFFECT_LINEAR"), value: "" },
+        { text: t("SCROLL_EFFECT_AUTO"), value: "enter-leaver" },
+    ];
+});
 
 /**
  * 显示的字段

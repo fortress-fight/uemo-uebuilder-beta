@@ -2,12 +2,12 @@
     <UeElSettingGroup v-bind="settingGroup" @trigger="handleTrigger">
         <template #body v-if="isActive">
             <UeElControlGroup v-if="isActive" :col-count="triggerMode !== 'enter-leaver' ? 2 : 1">
-                <UeElNumberInput v-bind="inputParam" v-model:value="start" :title="{ text: '起始' }" />
+                <UeElNumberInput v-bind="inputParam" v-model:value="start" :title="{ text: t('UNIT_START') }" />
                 <UeElNumberInput
                     v-if="triggerMode !== 'enter-leaver'"
                     v-bind="inputParam"
                     v-model:value="end"
-                    :title="{ text: '结束' }"
+                    :title="{ text: t('UNIT_END') }"
                 />
             </UeElControlGroup>
         </template>
@@ -18,6 +18,7 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 
 type TYPE_OPACITY_VALUE = { opacityStart?: string; opacityEnd?: string };
 
+const { t } = useI18n();
 const _props = defineProps<{ triggerMode?: string }>();
 const valueRef = defineModel<TYPE_OPACITY_VALUE>("value", { required: true });
 
@@ -27,7 +28,7 @@ const isActive = computed(() => {
 
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     return {
-        title: "透明过渡",
+        title: t("SCROLL_OPACITY_SETTING_TITLE"),
         oper: !isActive.value ? [{ id: "add", type: "add" }] : [{ id: "remove", type: "remove" }],
     };
 });

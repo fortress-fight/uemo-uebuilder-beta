@@ -1,5 +1,5 @@
 <template>
-    <UeElSettingGroup title="纵向偏移">
+    <UeElSettingGroup :title="t('SCROLL_FIXED_Y_OFFSET')">
         <template #body>
             <UeElNumberInput v-bind="moveYInputParam" v-model:value="moveY" />
         </template>
@@ -23,11 +23,10 @@ defineOptions({ name: "ScrollFixedSetting", inheritAttrs: false });
 const { t } = useI18n();
 const valueRef = defineModel<ScrollFixedOptions>("value", { required: true });
 
-const moveYInputParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
-    title: { text: "纵向偏移" },
-    placeholder: "请输入纵向偏移值",
+const moveYInputParam = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
+    title: { text: t("SCROLL_FIXED_Y_OFFSET") },
     limit: [-500, 500],
-});
+}));
 
 const moveY = useDefineObjectModel(valueRef, {
     get: (modelValue) => modelValue.moveY || defaultScrollOptions.fixed.moveY,
@@ -40,10 +39,7 @@ const moveY = useDefineObjectModel(valueRef, {
  * 提示信息配置
  */
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps>(() => ({
-    tips: [
-        "1. 锁定的元素会定位在屏幕中间，可以通过偏移值调节相对位置",
-        "2. 为了更好的展示，建议开启布局或板块的裁切功能。",
-    ],
+    tips: [t("SCROLL_FIXED_TIP_1"), t("SCROLL_FIXED_TIP_2")],
 }));
 </script>
 <style lang="scss" module>

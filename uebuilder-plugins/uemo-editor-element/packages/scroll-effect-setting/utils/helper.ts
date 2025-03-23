@@ -1,28 +1,32 @@
+import { i18n } from "@/i18n";
+
 export function getEffectName(type: string) {
+    const { t } = i18n.global;
+
     switch (type) {
         case "opacity":
-            return "滚动渐显";
+            return t("SCROLL_EFFECT_SETTING_OPTION_TITLE");
 
         case "rotate":
-            return "滚动旋转";
+            return t("SCROLL_EFFECT_SETTING_ROTATE_TITLE");
 
         case "fixed":
-            return "滚动锁定";
+            return t("SCROLL_EFFECT_SETTING_FIXED_TITLE");
 
         case "sticky":
-            return "滚动吸附";
+            return t("SCROLL_EFFECT_SETTING_STICKY_TITLE");
 
         case "image-parallax":
-            return "滚动视差 [图片]";
+            return t("SCROLL_EFFECT_SETTING_IMAGE_PARALLAX_TITLE");
 
         case "parallax":
-            return "滚动视差 [速度]";
+            return t("SCROLL_EFFECT_SETTING_PARALLAX_TITLE");
 
         case "scale":
-            return "滚动缩放";
+            return t("SCROLL_EFFECT_SETTING_SCALE_TITLE");
 
         case "translate":
-            return "滚动位移";
+            return t("SCROLL_EFFECT_SETTING_TRANSLATE_TITLE");
 
         default:
             return "";
