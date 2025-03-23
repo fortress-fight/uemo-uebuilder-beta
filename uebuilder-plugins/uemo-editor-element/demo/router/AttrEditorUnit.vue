@@ -40,6 +40,7 @@ import TestScrollEffectSettingPanel from "~/demo/components/TestScrollEffectSett
 import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
 import TestLinkSettingGroup from "~/demo/components/TestLinkSettingGroup.vue";
 import TestScrollEffectSettingGroup from "~/demo/components/TestScrollEffectSettingGroup.vue";
+import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -52,6 +53,7 @@ const testComponents = [
     TestRadiusSetting,
     TestBoxShadowSetting,
     TestBorderSetting,
+    TestButtonStyleSetting,
     TestColorSettingGroup,
     TestBorderSettingGroup,
     TestRadiusSettingGroup,
