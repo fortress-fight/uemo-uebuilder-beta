@@ -18,7 +18,7 @@ import UeElButtonHoverEffectSetting from "../packages/button-hover-effect-settin
 import UeElButtonIconSetting from "../packages/button-icon-setting";
 import UeElButtonIconSettingGroup from "../packages/button-icon-setting-group";
 import UeElButtonLibraryPanel from "../packages/button-library-panel";
-import UeElButtonStyleSetting from "../packages/button-style-setting";
+import UeElButtonStyleSettingPanel from "../packages/button-style-setting-panel";
 import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
@@ -96,7 +96,7 @@ export const components = [
     UeElButtonIconSetting,
     UeElButtonIconSettingGroup,
     UeElButtonLibraryPanel,
-    UeElButtonStyleSetting,
+    UeElButtonStyleSettingPanel,
     UeElCalenderPicker,
     UeElCalenderSetting,
     UeElCalenderSettingGroup,

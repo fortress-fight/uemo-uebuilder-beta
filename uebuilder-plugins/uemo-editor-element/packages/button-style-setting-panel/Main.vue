@@ -1,10 +1,10 @@
 <!--
  * @Description: 按钮样式属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 01:44:55
+ * @LastEditTime: 2025-03-23 16:57:05
 -->
 <template>
-    <UeElEditorPanel :class="$style['button-style-setting']" :title="title || t('UNIT_BUTTON')">
+    <UeElEditorPanel :class="$style['button-style-setting-panel']" :title="title || t('UNIT_BUTTON')">
         <UeElButtonHoverEffectSetting is-first v-if="mode === 'hover'" v-model:value="valueRef.animation" />
         <template v-if="isRotateTheme || isOutlineTheme">
             <UeElColorSettingGroup
@@ -29,19 +29,22 @@
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
-import type { UeElButtonStyleSettingBaseProps, UeElButtonStyleSettingValue } from "./index";
+import type { UeElButtonStyleSettingPanelPanelBaseProps, UeElButtonStyleSettingPanelPanelValue } from "./index";
 
-defineOptions({ name: "UeElButtonStyleSetting" });
+defineOptions({ name: "UeElButtonStyleSettingPanel" });
 
 const { t } = useI18n();
-const props = withDefaults(defineProps<UeElButtonStyleSettingBaseProps>(), { mode: "normal", theme: "normal" });
-const valueRef = defineModel<UeElButtonStyleSettingValue>("value", { required: true });
+const props = withDefaults(defineProps<UeElButtonStyleSettingPanelPanelBaseProps>(), {
+    mode: "normal",
+    theme: "normal",
+});
+const valueRef = defineModel<UeElButtonStyleSettingPanelPanelValue>("value", { required: true });
 
 const isRotateTheme = computed(() => props.theme.startsWith("rotate"));
 const isOutlineTheme = computed(() => props.theme.startsWith("outline"));
 </script>
 <style lang="scss" module>
-.button-style-setting {
+.button-style-setting-panel {
     //
 }
 </style>

@@ -34,7 +34,7 @@ import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
 import TestBackgroundImageSettingPanel from "~/demo/components/TestBackgroundImageSettingPanel.vue";
 import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
 import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
-import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
+import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSettingPanel.vue";
 import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
 import TestScrollEffectSetting from "~/demo/components/TestScrollEffectSetting.vue";
 

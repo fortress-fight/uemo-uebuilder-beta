@@ -28,7 +28,9 @@ import UeElButtonHoverEffectSetting, {
 import UeElButtonIconSetting, { UeElButtonIconSettingBaseProps } from "../packages/button-icon-setting";
 import UeElButtonIconSettingGroup, { UeElButtonIconSettingGroupBaseProps } from "../packages/button-icon-setting-group";
 import UeElButtonLibraryPanel, { UeElButtonLibraryPanelBaseProps } from "../packages/button-library-panel";
-import UeElButtonStyleSetting, { UeElButtonStyleSettingBaseProps } from "../packages/button-style-setting";
+import UeElButtonStyleSettingPanel, {
+    UeElButtonStyleSettingPanelPanelBaseProps,
+} from "../packages/button-style-setting-panel";
 import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/calender-setting";
 import UeElCalenderSettingGroup, { UeElCalenderSettingGroupBaseProps } from "../packages/calender-setting-group";
@@ -111,7 +113,7 @@ declare module "vue" {
         UeElButtonIconSetting: typeof UeElButtonIconSetting;
         UeElButtonIconSettingGroup: typeof UeElButtonIconSettingGroup;
         UeElButtonLibraryPanel: typeof UeElButtonLibraryPanel;
-        UeElButtonStyleSetting: typeof UeElButtonStyleSetting;
+        UeElButtonStyleSettingPanel: typeof UeElButtonStyleSettingPanel;
         UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElCalenderSetting: typeof UeElCalenderSetting;
         UeElCalenderSettingGroup: typeof UeElCalenderSettingGroup;
@@ -192,7 +194,7 @@ declare global {
         interface UeElButtonIconSettingProps extends UeElButtonIconSettingBaseProps {}
         interface UeElButtonIconSettingGroupProps extends UeElButtonIconSettingGroupBaseProps {}
         interface UeElButtonLibraryPanelProps extends UeElButtonLibraryPanelBaseProps {}
-        interface UeElButtonStyleSettingProps extends UeElButtonStyleSettingBaseProps {}
+        interface UeElButtonStyleSettingPanelProps extends UeElButtonStyleSettingPanelPanelBaseProps {}
         interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElCalenderSettingProps extends UeElCalenderSettingBaseProps {}
         interface UeElCalenderSettingGroupProps extends UeElCalenderSettingGroupBaseProps {}
