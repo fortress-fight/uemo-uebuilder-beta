@@ -1,10 +1,10 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 01:00:51
+ * @LastEditTime: 2025-03-23 16:55:15
 -->
 <template>
-    <UeElEditorPanel :class="$style['text-decoration-setting']" :title="t('TEXT_DECORATION_TITLE')">
+    <UeElEditorPanel :class="$style['text-decoration-setting-panel']" :title="t('TEXT_DECORATION_TITLE')">
         <!-- 文字样式资源设置 -->
         <UeElSettingGroup is-first>
             <template #body>
@@ -47,11 +47,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElTextDecorationSettingBaseProps, UeElTextDecorationSettingValue } from "./index";
+import type { UeElTextDecorationPanelSettingBaseProps, UeElTextDecorationPanelSettingPanelValue } from "./index";
 
 import { useDefineObjectModel, useDefineObjectModuleProxy } from "@stone/uemo-editor-element/utils/model-mixin";
 
-defineOptions({ name: "UeElTextDecorationSetting" });
+defineOptions({ name: "UeElTextDecorationPanelSetting" });
 
 /**
  * 组件配置常量
@@ -66,8 +66,8 @@ const DEFAULT_EASE = "power4.out";
  * 组件状态和工具函数
  */
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElTextDecorationSettingBaseProps>(), {});
-const valueRef = defineModel<UeElTextDecorationSettingValue>("value", { required: true });
+const _props = withDefaults(defineProps<UeElTextDecorationPanelSettingBaseProps>(), {});
+const valueRef = defineModel<UeElTextDecorationPanelSettingPanelValue>("value", { required: true });
 const valueRefProxy = useDefineObjectModuleProxy(valueRef);
 
 /**
@@ -234,7 +234,7 @@ const togglePreview = () => {
 </script>
 
 <style lang="scss" module>
-.text-decoration-setting {
+.text-decoration-setting-panel {
     .oper-btn {
         width: 100%;
     }

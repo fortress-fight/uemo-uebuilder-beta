@@ -83,7 +83,9 @@ import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
 import UeElSvgLibraryPanel, { UeElSvgLibraryPanelBaseProps } from "../packages/svg-library-panel";
 import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
-import UeElTextDecorationSetting, { UeElTextDecorationSettingBaseProps } from "../packages/text-decoration-setting";
+import UeElTextDecorationPanelSetting, {
+    UeElTextDecorationPanelSettingBaseProps,
+} from "../packages/text-decoration-setting-panel";
 import UeElTextDecorationLibraryPanel, {
     UeElTextDecorationLibraryPanelBaseProps,
 } from "../packages/text-decoration-library-panel";
@@ -164,7 +166,7 @@ declare module "vue" {
         UeElSvgLibraryPanel: typeof UeElSvgLibraryPanel;
         UeElTagInput: typeof UeElTagInput;
         UeElTextInput: typeof UeElTextInput;
-        UeElTextDecorationSetting: typeof UeElTextDecorationSetting;
+        UeElTextDecorationPanelSetting: typeof UeElTextDecorationPanelSetting;
         UeElTextDecorationLibraryPanel: typeof UeElTextDecorationLibraryPanel;
         UeElTipGroup: typeof UeElTipGroup;
         UeElTranslateSetting: typeof UeElTranslateSetting;
@@ -245,7 +247,7 @@ declare global {
         interface UeElSvgLibraryPanelProps extends UeElSvgLibraryPanelBaseProps {}
         interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
-        interface UeElTextDecorationSettingProps extends UeElTextDecorationSettingBaseProps {}
+        interface UeElTextDecorationPanelSettingProps extends UeElTextDecorationPanelSettingBaseProps {}
         interface UeElTextDecorationLibraryPanelProps extends UeElTextDecorationLibraryPanelBaseProps {}
         interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
         interface UeElTranslateSettingProps extends UeElTranslateSettingBaseProps {}

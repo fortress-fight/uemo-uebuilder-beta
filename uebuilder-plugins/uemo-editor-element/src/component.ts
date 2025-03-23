@@ -73,7 +73,7 @@ import UeElTabCard from "../packages/tab-card";
 import UeElSvgLibraryPanel from "../packages/svg-library-panel";
 import UeElTagInput from "../packages/tag-input";
 import UeElTextInput from "../packages/text-input";
-import UeElTextDecorationSetting from "../packages/text-decoration-setting";
+import UeElTextDecorationPanelSetting from "../packages/text-decoration-setting-panel";
 import UeElTextDecorationLibraryPanel from "../packages/text-decoration-library-panel";
 import UeElTipGroup from "../packages/tip-group";
 import UeElTranslateSetting from "../packages/translate-setting";
@@ -151,7 +151,7 @@ export const components = [
     UeElSvgLibraryPanel,
     UeElTagInput,
     UeElTextInput,
-    UeElTextDecorationSetting,
+    UeElTextDecorationPanelSetting,
     UeElTextDecorationLibraryPanel,
     UeElTipGroup,
     UeElTranslateSetting,
