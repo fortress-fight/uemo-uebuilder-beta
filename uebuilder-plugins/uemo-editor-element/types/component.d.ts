@@ -11,8 +11,8 @@ import UeElBackgroundShapeSettingPanel, {
     UeElBackgroundShapeSettingPanelBaseProps,
 } from "../packages/background-shape-setting-panel";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
-import UeElBackgroundSplinePanelSetting, {
-    UeElBackgroundSplinePanelSettingBaseProps,
+import UeElBackgroundSplineSettingPanel, {
+    UeElBackgroundSplineSettingPanelBaseProps,
 } from "../packages/background-spline-setting-panel";
 import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
 import UeElBorderSettingGroup, { UeElBorderSettingGroupBaseProps } from "../packages/border-setting-group";
@@ -104,7 +104,7 @@ declare module "vue" {
         UeElBackgroundImageSettingPanel: typeof UeElBackgroundImageSettingPanel;
         UeElBackgroundShapeSettingPanel: typeof UeElBackgroundShapeSettingPanel;
         UeElAlignSetting: typeof UeElAlignSetting;
-        UeElBackgroundSplinePanelSetting: typeof UeElBackgroundSplinePanelSetting;
+        UeElBackgroundSplineSettingPanel: typeof UeElBackgroundSplineSettingPanel;
         UeElBorderSetting: typeof UeElBorderSetting;
         UeElBorderSettingGroup: typeof UeElBorderSettingGroup;
         UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
@@ -185,7 +185,7 @@ declare global {
         interface UeElBackgroundImageSettingPanelProps extends UeElBackgroundImageSettingPanelBaseProps {}
         interface UeElBackgroundShapeSettingPanelProps extends UeElBackgroundShapeSettingPanelBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
-        interface UeElBackgroundSplinePanelSettingProps extends UeElBackgroundSplinePanelSettingBaseProps {}
+        interface UeElBackgroundSplineSettingPanelProps extends UeElBackgroundSplineSettingPanelBaseProps {}
         interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
         interface UeElBorderSettingGroupProps extends UeElBorderSettingGroupBaseProps {}
         interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}

@@ -32,25 +32,25 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElBackgroundSplinePanelSettingBaseProps, UeElBackgroundSplinePanelSettingPanelValue } from "./index";
+import type { UeElBackgroundSplineSettingPanelBaseProps, UeElBackgroundSplineSettingPanelPanelValue } from "./index";
 
 import UeElEditorPanel from "../editor-panel";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
-defineOptions({ name: "UeElBackgroundSplinePanelSetting" });
+defineOptions({ name: "UeElBackgroundSplineSettingPanel" });
 
 /**
  * 组件属性和事件定义
  */
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElBackgroundSplinePanelSettingBaseProps>(), {});
+const _props = withDefaults(defineProps<UeElBackgroundSplineSettingPanelBaseProps>(), {});
 
 /**
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundSplinePanelSettingPanelValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundSplineSettingPanelPanelValue>("value", { required: true });
 
 /**
  * 提示信息配置
