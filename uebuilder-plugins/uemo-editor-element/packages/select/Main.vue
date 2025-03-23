@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 13:13:18
+ * @LastEditTime: 2025-03-23 19:16:34
 -->
 <template>
     <UeElSettingBar
@@ -26,6 +26,7 @@
                 :list="options"
                 :hide-icon="hideOptionIcon"
                 :pin-value="true"
+                :icon-size="props.iconSize"
                 @change="changeValue"
             />
         </UeElPopPanel>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 选项面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-17 02:28:22
+ * @LastEditTime: 2025-03-23 19:17:03
  * @FileOverview: 提供可选择的选项列表，支持图标显示和主题切换
  * @Events: change - 选项改变时触发
  * @Props:
@@ -25,8 +25,13 @@
                     @click="handleOptionClick(item)"
                 >
                     <template v-if="!hideIcon">
-                        <UeElIcon v-if="item.icon" :class="$style['ic']" :name="item.icon" />
-                        <UeElIcon v-else :class="[$style['ic'], $style['select-ic']]" name="icon-duigou" />
+                        <UeElIcon v-if="item.icon" :class="$style['ic']" :name="item.icon" :size="iconSize" />
+                        <UeElIcon
+                            v-else
+                            :class="[$style['ic'], $style['select-ic']]"
+                            name="icon-duigou"
+                            :size="iconSize"
+                        />
                     </template>
                     <div v-if="item.text" :class="$style['text']" :title="item.label || item.text">
                         {{ item.text }}
