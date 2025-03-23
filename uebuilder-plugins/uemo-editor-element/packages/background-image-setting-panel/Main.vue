@@ -1,11 +1,11 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 01:04:19
+ * @LastEditTime: 2025-03-23 16:46:37
 -->
 <template>
     <UeElEditorPanel
-        :class="$style['background-image-setting']"
+        :class="$style['background-image-setting-panel']"
         :title="t('BACKGROUND_SPLINE_SETTING_TITLE', { type: t('UNIT_IMAGE') })"
         ref="rootComponent"
     >
@@ -59,25 +59,25 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElBackgroundImageSettingBaseProps, UeElBackgroundImageSettingValue } from "./index";
+import type { UeElBackgroundImageSettingPanelBaseProps, UeElBackgroundImageSettingPanelValue } from "./index";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 import UeElEditorPanel from "../editor-panel";
 import UeElEditorGroup from "../editor-group";
 
-defineOptions({ name: "UeElBackgroundImageSetting" });
+defineOptions({ name: "UeElBackgroundImageSettingPanel" });
 
 /**
  * 组件属性和事件定义
  */
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElBackgroundImageSettingBaseProps>(), {});
+const _props = withDefaults(defineProps<UeElBackgroundImageSettingPanelBaseProps>(), {});
 
 /**
  * 组件数据模型
  */
-const valueRef = defineModel<UeElBackgroundImageSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundImageSettingPanelValue>("value", { required: true });
 
 /**
  * 组件引用
@@ -182,7 +182,7 @@ const adjust = useDefineObjectModel(valueRef, {
 </script>
 
 <style lang="scss" module>
-.background-image-setting {
+.background-image-setting-panel {
     .oper-btn {
         width: 100%;
     }

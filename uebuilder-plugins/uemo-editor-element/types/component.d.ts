@@ -1,10 +1,12 @@
 /*
  * @Description: 组件注册
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 15:32:50
+ * @LastEditTime: 2025-03-23 16:46:04
  */
 import UeElAlignItemSetting, { UeElAlignItemSettingBaseProps } from "../packages/align-item-setting";
-import UeElBackgroundImageSetting, { UeElBackgroundImageSettingBaseProps } from "../packages/background-image-setting";
+import UeElBackgroundImageSettingPanel, {
+    UeElBackgroundImageSettingPanelBaseProps,
+} from "../packages/background-image-setting-panel";
 import UeElBackgroundShapeSetting, { UeElBackgroundShapeSettingBaseProps } from "../packages/background-shape-setting";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
 import UeElBackgroundSplineSetting, {
@@ -91,7 +93,7 @@ import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel
 declare module "vue" {
     export interface GlobalComponents {
         UeElAlignItemSetting: typeof UeElAlignItemSetting;
-        UeElBackgroundImageSetting: typeof UeElBackgroundImageSetting;
+        UeElBackgroundImageSettingPanel: typeof UeElBackgroundImageSettingPanel;
         UeElBackgroundShapeSetting: typeof UeElBackgroundShapeSetting;
         UeElAlignSetting: typeof UeElAlignSetting;
         UeElBackgroundSplineSetting: typeof UeElBackgroundSplineSetting;
@@ -172,7 +174,7 @@ declare module "vue" {
 declare global {
     namespace UE_EL_COMPONENT {
         interface UeElAlignItemSettingProps extends UeElAlignItemSettingBaseProps {}
-        interface UeElBackgroundImageSettingProps extends UeElBackgroundImageSettingBaseProps {}
+        interface UeElBackgroundImageSettingPanelProps extends UeElBackgroundImageSettingPanelBaseProps {}
         interface UeElBackgroundShapeSettingProps extends UeElBackgroundShapeSettingBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
         interface UeElBackgroundSplineSettingProps extends UeElBackgroundSplineSettingBaseProps {}

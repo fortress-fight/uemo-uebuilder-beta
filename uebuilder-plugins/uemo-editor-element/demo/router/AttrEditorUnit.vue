@@ -31,7 +31,7 @@ import TestButtonIconSettingGroup from "~/demo/components/TestButtonIconSettingG
 import TestGridLayoutSetting from "~/demo/components/TestGridLayoutSetting.vue";
 import TestBackgroundSplineSetting from "~/demo/components/TestBackgroundSplineSetting.vue";
 import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
-import TestBackgroundImageSetting from "~/demo/components/TestBackgroundImageSetting.vue";
+import TestBackgroundImageSettingPanel from "~/demo/components/TestBackgroundImageSettingPanel.vue";
 import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
 import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
@@ -66,7 +66,7 @@ const testComponents = [
     TestButtonStyleSetting,
     TestScrollEffectSetting,
     TestLinkSetting,
-    TestBackgroundImageSetting,
+    TestBackgroundImageSettingPanel,
 ];
 </script>
 <style lang="scss" module>

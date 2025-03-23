@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试背景图片控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 02:22:28
+ * @LastEditTime: 2025-03-23 16:44:15
 -->
 <template>
     <TestArea
@@ -11,9 +11,9 @@
         v-model:testValueSelect="testValueSelect"
         title="测试背景图片控制器"
     >
-        <UeElBackgroundImageSetting v-bind="testValue">
+        <UeElBackgroundImageSettingPanel v-bind="testValue">
             <!--  -->
-        </UeElBackgroundImageSetting>
+        </UeElBackgroundImageSettingPanel>
     </TestArea>
 </template>
 <script lang="ts" setup>
@@ -21,7 +21,10 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElBackgroundImageSettingProps & { testOptionTitle?: string; value?: any })[] = [
+const testValueList: (UE_EL_COMPONENT.UeElBackgroundImageSettingPanelProps & {
+    testOptionTitle?: string;
+    value?: any;
+})[] = [
     {
         value: {
             image: "https://static.jsmo.xin/uebuilder/public-resource/images/base-image.jpg",
