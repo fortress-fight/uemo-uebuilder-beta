@@ -5,7 +5,7 @@
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElBackgroundImageSettingPanel from "../packages/background-image-setting-panel";
-import UeElBackgroundShapeSetting from "../packages/background-shape-setting";
+import UeElBackgroundShapeSettingPanel from "../packages/background-shape-setting-panel";
 import UeElAlignSetting from "../packages/align-setting";
 import UeElBackgroundSplineSetting from "../packages/background-spline-setting";
 import UeElBorderSetting from "../packages/border-setting";
@@ -83,7 +83,7 @@ import UeElVideoPanel from "../packages/video-panel";
 export const components = [
     UeElAlignItemSetting,
     UeElBackgroundImageSettingPanel,
-    UeElBackgroundShapeSetting,
+    UeElBackgroundShapeSettingPanel,
     UeElAlignSetting,
     UeElBackgroundSplineSetting,
     UeElBorderSetting,

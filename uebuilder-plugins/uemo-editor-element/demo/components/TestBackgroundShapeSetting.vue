@@ -11,9 +11,9 @@
         v-model:testValueSelect="testValueSelect"
         title="测试背景图形控制器组件"
     >
-        <UeElBackgroundShapeSetting v-bind="testValue" v-model:value="testValue.value">
+        <UeElBackgroundShapeSettingPanel v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
-        </UeElBackgroundShapeSetting>
+        </UeElBackgroundShapeSettingPanel>
     </TestArea>
 </template>
 <script lang="ts" setup>
@@ -21,9 +21,10 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElBackgroundShapeSettingProps & { testOptionTitle?: string; value?: any })[] = [
-    { value: { name: "shape-bg-2", mirroring: false } },
-];
+const testValueList: (UE_EL_COMPONENT.UeElBackgroundShapeSettingPanelProps & {
+    testOptionTitle?: string;
+    value?: any;
+})[] = [{ value: { name: "shape-bg-2", mirroring: false } }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {

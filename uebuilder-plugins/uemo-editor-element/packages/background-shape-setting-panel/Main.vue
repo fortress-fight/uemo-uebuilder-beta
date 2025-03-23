@@ -5,7 +5,7 @@
 -->
 <template>
     <UeElEditorPanel
-        :class="$style['background-shape-setting']"
+        :class="$style['background-shape-setting-panel']"
         :title="t('BACKGROUND_SPLINE_SETTING_TITLE', { type: t('UNIT_SHAPE') })"
         ref="rootComponent"
     >
@@ -42,21 +42,21 @@
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
-import type { UeElBackgroundShapeSettingBaseProps, UeElBackgroundShapeSettingValue } from "./index";
+import type { UeElBackgroundShapeSettingPanelBaseProps, UeElBackgroundShapeSettingPanelPanelValue } from "./index";
 
 import UeElEditorPanel from "../editor-panel";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 const { t } = useI18n();
-defineOptions({ name: "UeElBackgroundShapeSetting" });
-const _props = withDefaults(defineProps<UeElBackgroundShapeSettingBaseProps>(), {});
+defineOptions({ name: "UeElBackgroundShapeSettingPanel" });
+const _props = withDefaults(defineProps<UeElBackgroundShapeSettingPanelBaseProps>(), {});
 
 /**
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundShapeSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundShapeSettingPanelPanelValue>("value", { required: true });
 
 /**
  * 位置设置
@@ -101,7 +101,7 @@ const color = useDefineObjectModel(valueRef, {
 });
 </script>
 <style lang="scss" module>
-.background-shape-setting {
+.background-shape-setting-panel {
     //
 }
 </style>
