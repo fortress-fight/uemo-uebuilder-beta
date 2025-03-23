@@ -29,12 +29,12 @@ import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
 import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
 import TestButtonIconSettingGroup from "~/demo/components/TestButtonIconSettingGroup.vue";
 import TestGridLayoutSetting from "~/demo/components/TestGridLayoutSetting.vue";
-import TestBackgroundSplineSetting from "~/demo/components/TestBackgroundSplineSetting.vue";
+import TestBackgroundSplineSettingPanel from "~/demo/components/TestBackgroundSplineSettingPanel.vue";
 import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
 import TestBackgroundImageSettingPanel from "~/demo/components/TestBackgroundImageSettingPanel.vue";
-import TestBackgroundShapeSetting from "~/demo/components/TestBackgroundShapeSetting.vue";
-import TestTextDecorationSetting from "~/demo/components/TestTextDecorationSetting.vue";
-import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSettingPanel.vue";
+import TestBackgroundShapeSettingPanel from "~/demo/components/TestBackgroundShapeSettingPanel.vue";
+import TestTextDecorationSettingPanel from "~/demo/components/TestTextDecorationSettingPanel.vue";
+import TestButtonStyleSettingPanel from "~/demo/components/TestButtonStyleSettingPanel.vue";
 import TestLinkSettingPanel from "~/demo/components/TestLinkSettingPanel.vue";
 import TestScrollEffectSettingPanel from "~/demo/components/TestScrollEffectSettingPanel.vue";
 
@@ -60,10 +60,10 @@ const testComponents = [
     TestGridLayoutSetting,
     TestResourceSetting,
     TestButtonIconSetting,
-    TestBackgroundSplineSetting,
-    TestTextDecorationSetting,
-    TestBackgroundShapeSetting,
-    TestButtonStyleSetting,
+    TestBackgroundSplineSettingPanel,
+    TestTextDecorationSettingPanel,
+    TestBackgroundShapeSettingPanel,
+    TestButtonStyleSettingPanel,
     TestScrollEffectSettingPanel,
     TestLinkSettingPanel,
     TestBackgroundImageSettingPanel,
