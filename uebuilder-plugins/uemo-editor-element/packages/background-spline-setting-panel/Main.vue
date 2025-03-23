@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElBackgroundSplineSettingPanelBaseProps, UeElBackgroundSplineSettingPanelPanelValue } from "./index";
+import type { UeElBackgroundSplineSettingPanelBaseProps, UeElBackgroundSplineSettingPanelValue } from "./index";
 
 import UeElEditorPanel from "../editor-panel";
 
@@ -50,7 +50,7 @@ const _props = withDefaults(defineProps<UeElBackgroundSplineSettingPanelBaseProp
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundSplineSettingPanelPanelValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundSplineSettingPanelValue>("value", { required: true });
 
 /**
  * 提示信息配置

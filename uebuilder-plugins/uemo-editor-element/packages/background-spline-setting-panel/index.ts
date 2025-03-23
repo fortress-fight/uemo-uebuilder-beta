@@ -1,7 +1,7 @@
 /*
  * @Description: spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:54:15
+ * @LastEditTime: 2025-03-23 18:10:43
  */
 import type { App } from "vue";
 
@@ -12,7 +12,7 @@ UeElBackgroundSplineSettingPanel.install = (app: App) => {
     app.component(UeElBackgroundSplineSettingPanel.name, UeElBackgroundSplineSettingPanel);
 };
 
-export type UeElBackgroundSplineSettingPanelPanelValue = {
+export type UeElBackgroundSplineSettingPanelValue = {
     url: string;
     effect?: "normal" | "parallax" | "sticky";
 };

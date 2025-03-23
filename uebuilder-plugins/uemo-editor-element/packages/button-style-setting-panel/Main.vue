@@ -29,16 +29,16 @@
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
-import type { UeElButtonStyleSettingPanelPanelBaseProps, UeElButtonStyleSettingPanelPanelValue } from "./index";
+import type { UeElButtonStyleSettingPanelBaseProps, UeElButtonStyleSettingPanelValue } from "./index";
 
 defineOptions({ name: "UeElButtonStyleSettingPanel" });
 
 const { t } = useI18n();
-const props = withDefaults(defineProps<UeElButtonStyleSettingPanelPanelBaseProps>(), {
+const props = withDefaults(defineProps<UeElButtonStyleSettingPanelBaseProps>(), {
     mode: "normal",
     theme: "normal",
 });
-const valueRef = defineModel<UeElButtonStyleSettingPanelPanelValue>("value", { required: true });
+const valueRef = defineModel<UeElButtonStyleSettingPanelValue>("value", { required: true });
 
 const isRotateTheme = computed(() => props.theme.startsWith("rotate"));
 const isOutlineTheme = computed(() => props.theme.startsWith("outline"));

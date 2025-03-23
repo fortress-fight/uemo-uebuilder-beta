@@ -1,7 +1,7 @@
 /*
  * @Description: 按钮样式属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:57:25
+ * @LastEditTime: 2025-03-23 18:09:13
  */
 import type { App } from "vue";
 
@@ -12,7 +12,7 @@ UeElButtonStyleSettingPanel.install = (app: App) => {
     app.component(UeElButtonStyleSettingPanel.name, UeElButtonStyleSettingPanel);
 };
 
-export interface UeElButtonStyleSettingPanelPanelValue {
+export interface UeElButtonStyleSettingPanelValue {
     color?: string;
     animation?: string;
     background?: string;
@@ -21,7 +21,7 @@ export interface UeElButtonStyleSettingPanelPanelValue {
     shadow?: string;
 }
 
-export interface UeElButtonStyleSettingPanelPanelBaseProps {
+export interface UeElButtonStyleSettingPanelBaseProps {
     mode?: "normal" | "hover";
     theme?: string;
     title?: string;

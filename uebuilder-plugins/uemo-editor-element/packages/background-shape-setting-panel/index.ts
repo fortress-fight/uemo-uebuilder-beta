@@ -1,7 +1,7 @@
 /*
  * @Description: 背景图形控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:52:36
+ * @LastEditTime: 2025-03-23 18:10:30
  */
 import type { App } from "vue";
 
@@ -12,7 +12,7 @@ UeElBackgroundShapeSettingPanel.install = (app: App) => {
     app.component(UeElBackgroundShapeSettingPanel.name, UeElBackgroundShapeSettingPanel);
 };
 
-export interface UeElBackgroundShapeSettingPanelPanelValue {
+export interface UeElBackgroundShapeSettingPanelValue {
     name: string;
     pos?: string;
     mirroring?: boolean;

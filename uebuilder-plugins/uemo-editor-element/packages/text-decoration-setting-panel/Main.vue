@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElTextDecorationSettingPanelBaseProps, UeElTextDecorationSettingPanelPanelValue } from "./index";
+import type { UeElTextDecorationSettingPanelBaseProps, UeElTextDecorationSettingPanelValue } from "./index";
 
 import { useDefineObjectModel, useDefineObjectModuleProxy } from "@stone/uemo-editor-element/utils/model-mixin";
 
@@ -67,7 +67,7 @@ const DEFAULT_EASE = "power4.out";
  */
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeElTextDecorationSettingPanelBaseProps>(), {});
-const valueRef = defineModel<UeElTextDecorationSettingPanelPanelValue>("value", { required: true });
+const valueRef = defineModel<UeElTextDecorationSettingPanelValue>("value", { required: true });
 const valueRefProxy = useDefineObjectModuleProxy(valueRef);
 
 /**

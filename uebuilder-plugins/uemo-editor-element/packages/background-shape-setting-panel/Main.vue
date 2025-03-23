@@ -42,7 +42,7 @@
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
-import type { UeElBackgroundShapeSettingPanelBaseProps, UeElBackgroundShapeSettingPanelPanelValue } from "./index";
+import type { UeElBackgroundShapeSettingPanelBaseProps, UeElBackgroundShapeSettingPanelValue } from "./index";
 
 import UeElEditorPanel from "../editor-panel";
 
@@ -56,7 +56,7 @@ const _props = withDefaults(defineProps<UeElBackgroundShapeSettingPanelBaseProps
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundShapeSettingPanelPanelValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundShapeSettingPanelValue>("value", { required: true });
 
 /**
  * 位置设置

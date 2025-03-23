@@ -12,7 +12,7 @@ UeElTextDecorationSettingPanel.install = (app: App) => {
     app.component(UeElTextDecorationSettingPanel.name, UeElTextDecorationSettingPanel);
 };
 
-export interface UeElTextDecorationSettingPanelPanelValue {
+export interface UeElTextDecorationSettingPanelValue {
     svgName?: string;
     color?: string;
     width?: string;
