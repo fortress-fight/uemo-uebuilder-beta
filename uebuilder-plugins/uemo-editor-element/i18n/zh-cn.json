@@ -432,5 +432,8 @@
     "SCROLL_STICKY_TIP_1": "吸附元素触发的偏移值可以通过吸附边距调节",
 
     "SCROLL_TRANSLATE_SETTING_X": "横向位移",
-    "SCROLL_TRANSLATE_SETTING_Y": "纵向位移"
+    "SCROLL_TRANSLATE_SETTING_Y": "纵向位移",
+
+    "SCROLL_SETTING_TITLE": "调节参数",
+    "SCROLL_SETTING_PREVIEW_TITLE": "可视化调节参数"
 }

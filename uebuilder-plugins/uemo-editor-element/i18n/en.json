@@ -433,5 +433,8 @@
     "SCROLL_STICKY_TIP_1": "The offset value triggered by the sticky element can be adjusted by the sticky padding",
 
     "SCROLL_TRANSLATE_SETTING_X": "X Offset",
-    "SCROLL_TRANSLATE_SETTING_Y": "Y Offset"
+    "SCROLL_TRANSLATE_SETTING_Y": "Y Offset",
+
+    "SCROLL_SETTING_TITLE": "Setting",
+    "SCROLL_SETTING_PREVIEW_TITLE": "Setting Preview"
 }

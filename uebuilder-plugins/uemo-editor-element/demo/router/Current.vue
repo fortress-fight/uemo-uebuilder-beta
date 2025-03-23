@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestButtonStyleSetting.vue";
+import TestComponent from "~/demo/components/TestScrollEffectSettingGroup.vue";
 </script>
 <style lang="scss" module>
 .test-group {

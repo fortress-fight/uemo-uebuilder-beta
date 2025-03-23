@@ -1,18 +1,31 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 18:03:28
+ * @LastEditTime: 2025-03-23 18:54:39
 -->
 <template>
-    <UeElSettingGroup :class="$style['scroll-effect-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
+    <UeElSettingGroup
+        :class="$style['scroll-effect-setting-group']"
+        v-bind="settingGroup"
+        @trigger="handleTrigger"
+        ref="rootComponentRef"
+    >
         <template v-if="!!valueRef && valueRef.type" #body>
-            <UeElSettingBar
-                :title="t('UNIT_MODE')"
-                :infoText="infoText"
-                :class="$style['link-setting']"
-                @triggerSetting="openLinkSettingPanel"
-                ref="settingBarRef"
-            />
+            <UeElSelect v-model:value="effectType" :title="t('UNIT_MODE')" :options="enableEffectOptions" />
+            <UeElControlGroup :col-count="2">
+                <UeElButton
+                    v-if="effectType"
+                    theme="strokeText"
+                    :text="t('SCROLL_SETTING_TITLE')"
+                    @trigger="openLinkSettingPanel"
+                />
+                <UeElButton
+                    v-if="effectType"
+                    theme="strokeText"
+                    :text="t('SCROLL_SETTING_PREVIEW_TITLE')"
+                    @trigger="openPreviewSettingPanel"
+                />
+            </UeElControlGroup>
         </template>
     </UeElSettingGroup>
     <UeElPopPanel v-model:open="scrollEffectSettingPanelOpen" v-bind="popPanelParams">
@@ -23,7 +36,7 @@
 import type { UeElScrollEffectSettingGroupBaseProps } from "./index";
 import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
 
-import UeElSettingBar from "../setting-bar";
+import UeElSettingGroup from "../setting-group";
 import UeElScrollEffectSettingPanel from "../scroll-effect-setting-panel";
 import { settingGroupPopPanelPropsKey } from "../setting-group";
 import { editorGroupPopPanelPropsKey } from "../editor-group";
@@ -31,16 +44,20 @@ import { getPopPanelParams } from "../pop-panel/utils/helper";
 
 defineOptions({ name: "UeElScrollEffectSettingGroup" });
 
+const { t } = useI18n();
+
 const props = withDefaults(defineProps<UeElScrollEffectSettingGroupBaseProps>(), {
     defaultValue: () => ({ type: "opacity", options: {} }),
 });
 const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: false });
-const settingBarRef = useTemplateRef<InstanceType<typeof UeElSettingBar>>("settingBarRef");
+const rootComponentRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("rootComponentRef");
 const scrollEffectSettingPanelRef =
     useTemplateRef<InstanceType<typeof UeElScrollEffectSettingPanel>>("scrollEffectSettingPanelRef");
 
-const { t } = useI18n();
-
+/**
+ * 设置组的配置属性，包含标题和操作按钮
+ * @returns {UE_EL_COMPONENT.UeElSettingGroupProps} 设置组的配置对象
+ */
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     return {
         title: t("SCROLL_EFFECT_SETTING_TITLE"),
@@ -48,6 +65,10 @@ const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     };
 });
 
+/**
+ * 处理设置组的触发事件
+ * @param {string} id - 触发事件的ID，用于识别不同的操作类型
+ */
 const handleTrigger = (id: string) => {
     switch (id) {
         case "add":
@@ -63,7 +84,25 @@ const handleTrigger = (id: string) => {
     }
 };
 
-const infoText = computed(() => {
+/**
+ * 效果类型的计算属性，用于双向绑定滚动效果的类型
+ * @returns {ComputedRef<string | undefined>} 当前选中的效果类型
+ */
+const effectType = computed({
+    get() {
+        return valueRef.value?.type;
+    },
+    set(v) {
+        if (!v || v === valueRef.value?.type) return;
+        valueRef.value = { type: v, options: {} };
+    },
+});
+
+/**
+ * 可用的效果选项列表
+ * @returns {UE_EL_COMPONENT.UeElSelectProps["options"]} 过滤后的效果选项数组
+ */
+const enableEffectOptions = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => {
     const effectOptions = [
         { text: t("SCROLL_EFFECT_SETTING_OPTION_TITLE"), value: "opacity" },
         { text: t("SCROLL_EFFECT_SETTING_ROTATE_TITLE"), value: "rotate" },
@@ -75,26 +114,35 @@ const infoText = computed(() => {
         { text: t("SCROLL_EFFECT_SETTING_IMAGE_PARALLAX_TITLE"), value: "image-parallax" },
     ];
 
-    return effectOptions.find((item) => item.value === valueRef.value?.type)?.text || "";
+    return effectOptions.filter((item) => {
+        if (props.enableType) {
+            return props.enableType.includes(item.value);
+        }
+        return true;
+    });
 });
 
 const scrollEffectSettingPanelOpen = ref(false);
 function openLinkSettingPanel() {
     scrollEffectSettingPanelOpen.value = true;
 }
+function openPreviewSettingPanel() {
+    alert("openPreviewSettingPanel");
+}
 
 const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
 const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
 
 /**
- * 弹窗位置配置
+ * 弹窗位置配置的计算属性
+ * @returns {UE_EL_COMPONENT.UeElPopPanelProps | undefined} 弹窗的位置和样式配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
     if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
     if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
 
-    if (!settingBarRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", settingBarRef.value.$el);
+    if (!rootComponentRef.value?.$el) return undefined;
+    return getPopPanelParams("editorPanel", rootComponentRef.value.$el);
 });
 </script>
 <style lang="scss" module>
