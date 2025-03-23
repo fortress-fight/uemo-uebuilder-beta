@@ -37,6 +37,8 @@ import TestTextDecorationSettingPanel from "~/demo/components/TestTextDecoration
 import TestButtonStyleSettingPanel from "~/demo/components/TestButtonStyleSettingPanel.vue";
 import TestLinkSettingPanel from "~/demo/components/TestLinkSettingPanel.vue";
 import TestScrollEffectSettingPanel from "~/demo/components/TestScrollEffectSettingPanel.vue";
+import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
+import TestLinkSettingGroup from "~/demo/components/TestLinkSettingGroup.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -55,7 +57,9 @@ const testComponents = [
     TestBoxShadowSettingGroup,
     TestCalenderSettingGroup,
     TestButtonIconSettingGroup,
+    TestLinkSettingGroup,
     TestFontFamilySetting,
+    TestLinkSetting,
     TestTranslateSetting,
     TestGridLayoutSetting,
     TestResourceSetting,
