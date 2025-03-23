@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试链接属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 17:43:37
+ * @LastEditTime: 2025-03-23 17:45:58
 -->
 <template>
     <TestArea
@@ -11,7 +11,7 @@
         v-model:testValueSelect="testValueSelect"
         title="测试链接属性控制组"
     >
-        <UeElLinkSettingGroup v-bind="testValue">
+        <UeElLinkSettingGroup v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
         </UeElLinkSettingGroup>
     </TestArea>

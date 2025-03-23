@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:30:31
+ * @LastEditTime: 2025-03-23 17:57:41
 -->
 <template>
     <UeElSettingBar
@@ -13,7 +13,12 @@
         ref="settingBarRef"
     />
     <UeElPopPanel v-model:open="linkSettingPanelOpen" v-bind="popPanelParams">
-        <UeElLinkSettingPanel v-model:value="valueRef" />
+        <UeElLinkSettingPanel
+            ref="linkSettingPanelRef"
+            v-model:value="valueRef"
+            @cancel="handleCancel"
+            @confirm="handleConfirm"
+        />
     </UeElPopPanel>
 </template>
 <script lang="ts" setup>
@@ -21,6 +26,7 @@ import type { UeElLinkSettingBaseProps } from "./index";
 import type { UeElLinkSettingPanelValue } from "../link-setting-panel";
 
 import UeElSettingBar from "../setting-bar";
+import UeElLinkSettingPanel from "../link-setting-panel";
 import { settingGroupPopPanelPropsKey } from "../setting-group";
 import { editorGroupPopPanelPropsKey } from "../editor-group";
 import { getPopPanelParams } from "../pop-panel/utils/helper";
@@ -34,6 +40,7 @@ const instance = getCurrentInstance();
 const _props = withDefaults(defineProps<UeElLinkSettingBaseProps>(), {});
 const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: true });
 const settingBarRef = useTemplateRef<InstanceType<typeof UeElSettingBar>>("settingBarRef");
+const linkSettingPanelRef = useTemplateRef<InstanceType<typeof UeElLinkSettingPanel>>("linkSettingPanelRef");
 
 const typeName = computed(() => {
     const type = valueRef.value.type;
@@ -90,12 +97,40 @@ const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undef
  * 弹窗位置配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
-    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
+    let result: UE_EL_COMPONENT.UeElPopPanelProps | null = null;
 
-    if (!settingBarRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", settingBarRef.value.$el);
+    if (injectSettingGroupPopPanelProps?.value) {
+        result = injectSettingGroupPopPanelProps.value;
+    } else if (injectEditorGroupPopPanelProps?.value) {
+        result = injectEditorGroupPopPanelProps.value;
+    } else if (!settingBarRef.value?.$el) {
+        return undefined;
+    } else {
+        result = getPopPanelParams("editorPanel", settingBarRef.value.$el);
+    }
+
+    result.mask = {
+        color: "transparent",
+    };
+    result.checkAllowClose = () => {
+        const hasChange = linkSettingPanelRef.value?.checkHasUnsyncedChanges();
+        if (hasChange) {
+            return t("LINK_SETTING_UNSAVED_TIP");
+        } else {
+            return true;
+        }
+    };
+
+    return result;
 });
+
+function handleConfirm() {
+    linkSettingPanelOpen.value = false;
+}
+
+function handleCancel() {
+    linkSettingPanelOpen.value = false;
+}
 
 onBeforeMount(() => {
     instance?.proxy?.$ueElLink?.anchor

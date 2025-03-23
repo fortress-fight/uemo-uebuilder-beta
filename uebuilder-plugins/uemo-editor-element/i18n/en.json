@@ -374,6 +374,7 @@
     "LINK_ERROR_TIP_FRAME": "Please enter the image/video/website address",
     "LINK_ERROR_TIP_FILE_LINK": "Please enter the file link, for example: https://www.xxxx.com/xxx.pdf",
     "LINK_ERROR_TIP_ANCHOR_ERROR": "Failed to get anchor list",
+    "LINK_SETTING_UNSAVED_TIP": "The link information has been modified, please confirm the current setting",
 
     "SCROLL_EFFECT_SETTING_TITLE": "Scroll Effect",
     "SCROLL_EFFECT_SETTING_OPTION_TITLE": "Opacity",
