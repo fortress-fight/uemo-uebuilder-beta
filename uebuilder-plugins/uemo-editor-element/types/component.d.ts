@@ -11,9 +11,9 @@ import UeElBackgroundShapeSettingPanel, {
     UeElBackgroundShapeSettingPanelBaseProps,
 } from "../packages/background-shape-setting-panel";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
-import UeElBackgroundSplineSetting, {
-    UeElBackgroundSplineSettingBaseProps,
-} from "../packages/background-spline-setting";
+import UeElBackgroundSplinePanelSetting, {
+    UeElBackgroundSplinePanelSettingBaseProps,
+} from "../packages/background-spline-setting-panel";
 import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
 import UeElBorderSettingGroup, { UeElBorderSettingGroupBaseProps } from "../packages/border-setting-group";
 import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
@@ -98,7 +98,7 @@ declare module "vue" {
         UeElBackgroundImageSettingPanel: typeof UeElBackgroundImageSettingPanel;
         UeElBackgroundShapeSettingPanel: typeof UeElBackgroundShapeSettingPanel;
         UeElAlignSetting: typeof UeElAlignSetting;
-        UeElBackgroundSplineSetting: typeof UeElBackgroundSplineSetting;
+        UeElBackgroundSplinePanelSetting: typeof UeElBackgroundSplinePanelSetting;
         UeElBorderSetting: typeof UeElBorderSetting;
         UeElBorderSettingGroup: typeof UeElBorderSettingGroup;
         UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
@@ -179,7 +179,7 @@ declare global {
         interface UeElBackgroundImageSettingPanelProps extends UeElBackgroundImageSettingPanelBaseProps {}
         interface UeElBackgroundShapeSettingPanelProps extends UeElBackgroundShapeSettingPanelBaseProps {}
         interface UeElAlignSettingProps extends UeElAlignSettingBaseProps {}
-        interface UeElBackgroundSplineSettingProps extends UeElBackgroundSplineSettingBaseProps {}
+        interface UeElBackgroundSplinePanelSettingProps extends UeElBackgroundSplinePanelSettingBaseProps {}
         interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
         interface UeElBorderSettingGroupProps extends UeElBorderSettingGroupBaseProps {}
         interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}

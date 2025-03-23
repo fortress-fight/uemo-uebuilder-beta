@@ -5,7 +5,7 @@
 -->
 <template>
     <UeElEditorPanel
-        :class="$style['background-spline-setting']"
+        :class="$style['background-spline-setting-panel']"
         :title="t('BACKGROUND_SPLINE_SETTING_TITLE', { type: 'Spline' })"
     >
         <!-- Spline资源设置 -->
@@ -32,25 +32,25 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElBackgroundSplineSettingBaseProps, UeElBackgroundSplineSettingValue } from "./index";
+import type { UeElBackgroundSplinePanelSettingBaseProps, UeElBackgroundSplinePanelSettingPanelValue } from "./index";
 
 import UeElEditorPanel from "../editor-panel";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
-defineOptions({ name: "UeElBackgroundSplineSetting" });
+defineOptions({ name: "UeElBackgroundSplinePanelSetting" });
 
 /**
  * 组件属性和事件定义
  */
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElBackgroundSplineSettingBaseProps>(), {});
+const _props = withDefaults(defineProps<UeElBackgroundSplinePanelSettingBaseProps>(), {});
 
 /**
  * 组件数据模型
  * @description 使用 defineModel 定义双向绑定的数据
  */
-const valueRef = defineModel<UeElBackgroundSplineSettingValue>("value", { required: true });
+const valueRef = defineModel<UeElBackgroundSplinePanelSettingPanelValue>("value", { required: true });
 
 /**
  * 提示信息配置
@@ -104,7 +104,7 @@ const effectOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => ({
 </script>
 
 <style lang="scss" module>
-.background-spline-setting {
+.background-spline-setting-panel {
     // 预留样式空间，方便后续扩展
 }
 </style>

@@ -11,9 +11,9 @@
         v-model:testValueSelect="testValueSelect"
         title="测试spline背景设置控制组件"
     >
-        <UeElBackgroundSplineSetting v-bind="testValue" v-model:value="testValue.value">
+        <UeElBackgroundSplinePanelSetting v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
-        </UeElBackgroundSplineSetting>
+        </UeElBackgroundSplinePanelSetting>
     </TestArea>
 </template>
 <script lang="ts" setup>
@@ -21,8 +21,10 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElBackgroundSplineSettingProps & { testOptionTitle?: string; value?: any })[] =
-    [{ value: {} }];
+const testValueList: (UE_EL_COMPONENT.UeElBackgroundSplinePanelSettingProps & {
+    testOptionTitle?: string;
+    value?: any;
+})[] = [{ value: {} }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
