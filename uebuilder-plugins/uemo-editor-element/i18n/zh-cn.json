@@ -360,5 +360,7 @@
     "LINK_ERROR_TIP_TARGET": "请选择触发区域",
     "LINK_ERROR_TIP_FRAME": "请输入图片/视频/网站地址",
     "LINK_ERROR_TIP_FILE_LINK": "请输入文件链接，例如：https://www.xxxx.com/xxx.pdf",
-    "LINK_ERROR_TIP_ANCHOR_ERROR": "获取锚点列表失败"
+    "LINK_ERROR_TIP_ANCHOR_ERROR": "获取锚点列表失败",
+
+    "SCROLL_EFFECT_SETTING_TITLE": "滚动效果"
 }
