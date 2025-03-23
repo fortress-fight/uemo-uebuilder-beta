@@ -5,14 +5,14 @@
  */
 import type { App } from "vue";
 
-import UeElTextDecorationPanelSetting from "./Main.vue";
+import UeElTextDecorationSettingPanel from "./Main.vue";
 
-UeElTextDecorationPanelSetting.install = (app: App) => {
-    if (!UeElTextDecorationPanelSetting.name) return;
-    app.component(UeElTextDecorationPanelSetting.name, UeElTextDecorationPanelSetting);
+UeElTextDecorationSettingPanel.install = (app: App) => {
+    if (!UeElTextDecorationSettingPanel.name) return;
+    app.component(UeElTextDecorationSettingPanel.name, UeElTextDecorationSettingPanel);
 };
 
-export interface UeElTextDecorationPanelSettingPanelValue {
+export interface UeElTextDecorationSettingPanelPanelValue {
     svgName?: string;
     color?: string;
     width?: string;
@@ -24,9 +24,9 @@ export interface UeElTextDecorationPanelSettingPanelValue {
     preview?: boolean;
 }
 
-export interface UeElTextDecorationPanelSettingBaseProps {
+export interface UeElTextDecorationSettingPanelBaseProps {
     disabled?: boolean;
 }
-export type UeElTextDecorationPanelSettingInstance = InstanceType<typeof UeElTextDecorationPanelSetting>;
+export type UeElTextDecorationSettingPanelInstance = InstanceType<typeof UeElTextDecorationSettingPanel>;
 
-export default UeElTextDecorationPanelSetting;
+export default UeElTextDecorationSettingPanel;

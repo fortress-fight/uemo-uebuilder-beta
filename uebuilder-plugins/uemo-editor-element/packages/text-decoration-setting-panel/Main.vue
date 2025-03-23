@@ -47,11 +47,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { UeElTextDecorationPanelSettingBaseProps, UeElTextDecorationPanelSettingPanelValue } from "./index";
+import type { UeElTextDecorationSettingPanelBaseProps, UeElTextDecorationSettingPanelPanelValue } from "./index";
 
 import { useDefineObjectModel, useDefineObjectModuleProxy } from "@stone/uemo-editor-element/utils/model-mixin";
 
-defineOptions({ name: "UeElTextDecorationPanelSetting" });
+defineOptions({ name: "UeElTextDecorationSettingPanel" });
 
 /**
  * 组件配置常量
@@ -66,8 +66,8 @@ const DEFAULT_EASE = "power4.out";
  * 组件状态和工具函数
  */
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElTextDecorationPanelSettingBaseProps>(), {});
-const valueRef = defineModel<UeElTextDecorationPanelSettingPanelValue>("value", { required: true });
+const _props = withDefaults(defineProps<UeElTextDecorationSettingPanelBaseProps>(), {});
+const valueRef = defineModel<UeElTextDecorationSettingPanelPanelValue>("value", { required: true });
 const valueRefProxy = useDefineObjectModuleProxy(valueRef);
 
 /**

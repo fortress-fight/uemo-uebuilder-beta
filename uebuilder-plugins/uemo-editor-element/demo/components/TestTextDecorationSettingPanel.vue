@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 18:42:56
+ * @LastEditTime: 2025-03-23 17:11:05
 -->
 <template>
     <TestArea
@@ -11,9 +11,9 @@
         v-model:testValueSelect="testValueSelect"
         title="测试文字装饰效果控制组件"
     >
-        <UeElTextDecorationPanelSetting v-bind="testValue" v-model:value="testValue.value">
+        <UeElTextDecorationSettingPanel v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
-        </UeElTextDecorationPanelSetting>
+        </UeElTextDecorationSettingPanel>
     </TestArea>
 </template>
 <script lang="ts" setup>
@@ -21,7 +21,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElTextDecorationPanelSettingProps & {
+const testValueList: (UE_EL_COMPONENT.UeElTextDecorationSettingPanelProps & {
     testOptionTitle?: string;
     value?: any;
 })[] = [{ value: {} }];
