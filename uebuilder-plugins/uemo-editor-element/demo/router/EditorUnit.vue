@@ -22,6 +22,7 @@ import TestColorInput from "~/demo/components/TestColorInput.vue";
 import TestFileUploader from "~/demo/components/TestFileUploader.vue";
 import TestGirdLayoutUtil from "~/demo/components/TestGirdLayoutUtil.vue";
 import TestResourcePreview from "~/demo/components/TestResourcePreview.vue";
+import TestDraggable from "~/demo/components/TestDraggable.vue";
 
 const containerComponents = [TestSettingBar, TestControlGroup, TestEditorGroup, TestSettingGroup];
 const unitTestComponents = [
@@ -32,6 +33,7 @@ const unitTestComponents = [
     TestFileUploader,
     TestGirdLayoutUtil,
     TestResourcePreview,
+    TestDraggable,
 ];
 const helperTestComponents = [TestLoading, TestTipGroup];
 
