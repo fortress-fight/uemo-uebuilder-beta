@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:20:59
+ * @LastEditTime: 2025-03-25 11:06:19
 -->
 <template>
     <UeElColorInput
@@ -15,7 +15,7 @@
         v-bind="$attrs"
     />
     <UeElPopPanel v-model:open="colorPickerPanelOpen" v-bind="popPanelParams">
-        <UeElColorPickerPanel v-model:value="valueRef" :disable-opacity="disableOpacity" />
+        <UeElColorPickerPanel v-model:value="valueRef" :disable-opacity="disableOpacity" :type="type" />
     </UeElPopPanel>
 </template>
 <script lang="ts" setup>

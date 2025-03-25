@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:42:23
+ * @LastEditTime: 2025-03-25 11:07:15
 -->
 <template>
     <TestArea
@@ -26,9 +26,16 @@ const testValueList: (UE_EL_COMPONENT.UeElColorSettingProps & {
     value?: any;
     opacity?: number;
 })[] = [
-    { value: "#000000" },
-    { value: "linear-gradient(135deg, #FEB692 0%, #EA5455 100%)", type: "linearGradient", opacity: 0.5 },
+    { testOptionTitle: "默认颜色", value: "#000000" },
+    { testOptionTitle: "混合颜色", value: "#000000", type: "mixin" },
     {
+        testOptionTitle: "线性渐变",
+        value: "linear-gradient(135deg, #FEB692 0%, #EA5455 100%)",
+        type: "linearGradient",
+        opacity: 0.5,
+    },
+    {
+        testOptionTitle: "径向渐变",
         value: "radial-gradient(100% 100% ellipse at 50% 50%, #FEB692 0%, #EA5455 100%)",
         type: "radialGradient",
         opacity: 1,
