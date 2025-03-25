@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:46:37
+ * @LastEditTime: 2025-03-26 01:34:36
 -->
 <template>
     <UeElEditorPanel
@@ -55,6 +55,13 @@
                 <UeElTranslateSetting v-model:value="valueRef.translate" />
             </template>
         </UeElSettingGroup>
+
+        <!-- 滚动效果设置 -->
+        <UeElScrollEffectSettingGroup
+            v-if="valueRef.effect === 'scroll'"
+            v-model:value="valueRef.scrollEffect"
+            :allow-remove="false"
+        />
     </UeElEditorPanel>
 </template>
 
@@ -175,6 +182,12 @@ const adjust = useDefineObjectModel(valueRef, {
         return modelValue.effect || "normal";
     },
     set(value, modelValue) {
+        if (value === "scroll" && !modelValue.scrollEffect) {
+            modelValue.scrollEffect = { type: "opacity" };
+        } else if (value !== "scroll" && modelValue.scrollEffect) {
+            modelValue.scrollEffect = undefined;
+        }
+
         modelValue.effect = value;
         return modelValue;
     },

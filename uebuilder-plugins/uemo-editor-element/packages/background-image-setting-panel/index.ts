@@ -1,9 +1,10 @@
 /*
  * @Description: 背景图片控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:42:53
+ * @LastEditTime: 2025-03-26 01:20:14
  */
 import type { App } from "vue";
+import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
 
 import UeElBackgroundImageSettingPanel from "./Main.vue";
 
@@ -19,7 +20,7 @@ export type UeElBackgroundImageSettingPanelValue = {
     align?: UE_EL_UTIL.ALIGN;
     opacity?: number;
     size?: "repeat" | "cover" | "normal" | "contain";
-    scrollEffect?: UE_EL_UTIL.SCROLL_EFFECT;
+    scrollEffect?: UeElScrollEffectSettingPanelValue;
 };
 export interface UeElBackgroundImageSettingPanelBaseProps {
     disabled?: boolean;
