@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 01:42:57
+ * @LastEditTime: 2025-03-25 11:35:40
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeElColorPicker.install = (app: App) => {
 };
 
 export interface UeElColorPickerBaseProps {
-    disableOpacity?: boolean;
+    pureColor?: boolean;
 }
 export type UeElColorPickerInstance = InstanceType<typeof UeElColorPicker>;
 

@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 01:15:26
+ * @LastEditTime: 2025-03-25 11:35:51
 -->
 <template>
     <UeElEditorGroup :class="$style['color-panel']">
@@ -20,7 +20,7 @@
                 :class="$style['new-color-input']"
                 :value="value"
                 @update:value="updateHSV($event)"
-                :disable-opacity="disableOpacity"
+                :pure-color="pureColor"
             />
             <div
                 v-if="enableColorPicker"

@@ -1,5 +1,5 @@
 <template>
-    <UeElColorPicker v-model:value="useColor" :class="$style['color-picker']" :disable-opacity="disableOpacity" />
+    <UeElColorPicker v-model:value="useColor" :class="$style['color-picker']" :pure-color="pureColor" />
     <ColorGroup v-if="usedColors.length" :colors="usedColors" @submit="updateColor($event)" />
     <ColorGroup :colors="DEFAULT_COLORS" @submit="updateColor($event)" />
 </template>
@@ -12,7 +12,7 @@ import ColorGroup from "./ColorGroup.vue";
 defineOptions({ inheritAttrs: false });
 const prop = defineProps<{
     defaultValue: string;
-    disableOpacity: boolean;
+    pureColor: boolean;
 }>();
 const valueRef = defineModel<string>("value", { required: true });
 
@@ -27,7 +27,7 @@ const useColor = computed({
 });
 
 function updateColor(color: string) {
-    if (prop.disableOpacity) {
+    if (prop.pureColor) {
         useColor.value = Color(color).alpha(1).rgb().toString();
     } else {
         useColor.value = color;

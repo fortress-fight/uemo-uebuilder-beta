@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色选择器面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 15:40:26
+ * @LastEditTime: 2025-03-25 12:24:43
  */
 import type { App } from "vue";
 
@@ -20,8 +20,8 @@ export type GradientPoint = {
 
 export interface UeElColorPickerPanelBaseProps {
     type?: UE_EL_UTIL.ColorType | "mixin";
+    pureColor?: boolean | UE_EL_UTIL.ColorType[];
     defaultValue?: string;
-    disableOpacity?: boolean;
     defaultGradientColor?: string;
     defaultRadialGradientColor?: string;
 }

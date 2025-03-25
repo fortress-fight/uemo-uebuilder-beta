@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:44:39
+ * @LastEditTime: 2025-03-25 11:51:42
 -->
 <template>
     <UeElTextInput
@@ -20,11 +20,19 @@
                 class="flex items-center justify-center cursor-pointer"
                 @click="triggerColorInput"
             >
-                <div :class="$style['inner-box']" :style="{ '--background': useColor }"></div>
+                <div :class="$style['inner-box']" :style="{ '--background': useValue }"></div>
             </div>
         </template>
-        <template #after v-if="!disableOpacity">
+        <template #after v-if="!pureColor">
             <UeElNumberInput
+                v-if="independentOpacityControl"
+                v-bind="opacityParam"
+                v-model:value="independentOpacityRef"
+                :class="$style['opacity-input']"
+                :hide-unit="true"
+            />
+            <UeElNumberInput
+                v-else
                 v-bind="opacityParam"
                 v-model:value="opacity"
                 :class="$style['opacity-input']"
@@ -37,20 +45,19 @@
         ref="gradientRootRef"
         :title="t('UNIT_LINEAR_GRADIENT')"
         :class="$style['gradient-color-input']"
-        @click="triggerColorInput"
     >
-        <div :class="$style['setting-bar']" class="flex cursor-pointer items-center">
+        <div :class="$style['setting-bar']" class="flex cursor-pointer items-center" @click="triggerColorInput">
             <div
                 :class="$style['color-box']"
                 class="flex items-center justify-center cursor-pointer"
                 :style="{ opacity: independentOpacityRef }"
             >
-                <div :class="$style['inner-box']" :style="{ '--background': useColor }"></div>
+                <div :class="$style['inner-box']" :style="{ '--background': useValue }"></div>
             </div>
             <div :class="$style['title']">{{ t("UNIT_LINEAR_GRADIENT") }}</div>
         </div>
         <UeElNumberInput
-            v-if="independentOpacityControlEnabled"
+            v-if="independentOpacityControl"
             v-bind="opacityParam"
             v-model:value="independentOpacityRef"
             :class="$style['opacity-input']"
@@ -69,15 +76,13 @@ defineOptions({ name: "UeElColorInput" });
 const { t } = useI18n();
 const prop = withDefaults(defineProps<UeElColorInputBaseProps>(), {
     type: "color",
-    disableOpacity: false,
+    pureColor: false,
+    independentOpacityControl: false,
 });
 const emit = defineEmits<{ (ev: "trigger", value: string): void }>();
 
 const valueRef = defineModel<string>("value", { required: false });
 const independentOpacityRef = defineModel<number | string>("opacity", { required: false });
-const independentOpacityControlEnabled = computed(() => {
-    return !prop.disableOpacity && typeof independentOpacityRef.value !== "undefined";
-});
 
 const colorRootRef = useTemplateRef("colorRootRef");
 const gradientRootRef = useTemplateRef("gradientRootRef");
@@ -85,12 +90,19 @@ const rootDomRef = computed<HTMLElement | undefined>(() => {
     return colorRootRef.value?.$el || gradientRootRef.value;
 });
 
-const useColor = computed({
+const disableOpacity = computed(() => {
+    if (prop.pureColor || prop.independentOpacityControl) {
+        return true;
+    }
+    return false;
+});
+
+const useValue = computed({
     get() {
         return valueRef.value || prop.defaultValue || "#000000";
     },
     set(value) {
-        if (prop.disableOpacity) {
+        if (disableOpacity.value && prop.type === "color") {
             valueRef.value = Color(value).alpha(1).rgb().toString();
         } else {
             valueRef.value = value;
@@ -115,7 +127,7 @@ const colorType = computed(() => {
     }
 
     // mixin类型需要解析color值
-    const colorValue = useColor.value;
+    const colorValue = useValue.value;
     if (colorValue.includes("linear-gradient")) {
         return COLOR_TYPES.LINEAR_GRADIENT;
     }
@@ -135,7 +147,7 @@ const hexRules = [
 ];
 const hex = computed<string>({
     get() {
-        return Color(useColor.value.trim()).hex().slice(1);
+        return Color(useValue.value.trim()).hex().slice(1);
     },
     set(value) {
         let newColor = "";
@@ -143,7 +155,7 @@ const hex = computed<string>({
             .alpha(opacity.value)
             .rgb()
             .toString();
-        useColor.value = newColor;
+        useValue.value = newColor;
     },
 });
 
@@ -167,19 +179,19 @@ const opacityParam = ref<UE_EL_COMPONENT.UeElNumberInputProps>({
 
 const opacity = computed<number>({
     get() {
-        return Color(useColor.value.trim()).alpha();
+        return Color(useValue.value.trim()).alpha();
     },
     set(value) {
         const newVal = Color("#" + hex.value)
             .alpha(value)
             .rgb();
 
-        useColor.value = newVal.toString();
+        useValue.value = newVal.toString();
     },
 });
 
 function triggerColorInput() {
-    emit("trigger", useColor.value);
+    emit("trigger", useValue.value);
 }
 
 defineExpose({ rootDomRef });
@@ -227,7 +239,7 @@ defineExpose({ rootDomRef });
 }
 .gradient-color-input {
     --text-border-color: transparent;
-    --text-input-padding: 0 var(--ue-editor-row-space--lv1) 0 2px;
+    --text-input-padding: 0 var(--ue-editor-row-space--lv1) 0 0;
     position: relative;
     z-index: 10;
 

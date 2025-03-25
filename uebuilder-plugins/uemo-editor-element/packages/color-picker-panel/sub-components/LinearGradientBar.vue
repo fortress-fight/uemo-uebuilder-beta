@@ -32,7 +32,7 @@
         ref="colorPicker"
         v-model:value="editorColorPointColor"
         :class="$style['color-picker']"
-        :disable-opacity="disableOpacity"
+        :pure-color="pureColor"
     />
 </template>
 <script lang="ts" setup>
@@ -44,7 +44,7 @@ import { parseLinearGradient } from "@stone/uemo-editor-utils/lib/css-gradient-p
 import ColorPointBar from "./ColorPointBar.vue";
 
 const { t } = useI18n();
-const prop = withDefaults(defineProps<{ defaultValue: string; disableOpacity: boolean }>(), {});
+const prop = withDefaults(defineProps<{ defaultValue: string; pureColor: boolean }>(), {});
 const valueRef = defineModel<string>("value", { required: true });
 
 const colorPicker = useTemplateRef("colorPicker");

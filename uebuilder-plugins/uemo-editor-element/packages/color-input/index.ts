@@ -1,7 +1,7 @@
 /*
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:22:45
+ * @LastEditTime: 2025-03-25 11:31:15
  */
 import type { App } from "vue";
 
@@ -15,8 +15,9 @@ UeElColorInput.install = (app: App) => {
 export interface UeElColorInputBaseProps {
     type?: UE_EL_UTIL.ColorType | "mixin";
     disable?: boolean;
-    disableOpacity?: boolean;
+    pureColor?: boolean;
     defaultValue?: string;
+    independentOpacityControl?: boolean;
 }
 export type UeElColorInputInstance = InstanceType<typeof UeElColorInput>;
 

@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色选择器面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-02 18:53:21
+ * @LastEditTime: 2025-03-25 12:27:31
 -->
 <template>
     <UeElEditorPanel :title="panelTitle" :class="$style['color-picker-panel']" :with-dragger="true" :with-close="false">
@@ -9,19 +9,23 @@
             <ModeSelect v-bind="modeSelectParam" :mode="colorMode" @change-color="useValue = $event" />
         </template>
         <template v-if="colorMode === 'color'">
-            <ColorPicker v-model:value="useValue" :disable-opacity="disableOpacity" :default-value="defaultValue" />
+            <ColorPicker
+                v-model:value="useValue"
+                :pure-color="checkIsPureColor('color')"
+                :default-value="defaultValue"
+            />
         </template>
         <template v-if="colorMode === 'linearGradient'">
             <LinearGradientColor
                 v-model:value="useValue"
-                :disable-opacity="disableOpacity"
+                :pure-color="checkIsPureColor('linearGradient')"
                 :default-value="defaultGradientColor"
             />
         </template>
         <template v-if="colorMode === 'radialGradient'">
             <RadialGradientColor
                 v-model:value="useValue"
-                :disable-opacity="disableOpacity"
+                :pure-color="checkIsPureColor('radialGradient')"
                 :default-value="defaultRadialGradientColor"
             />
         </template>
@@ -42,7 +46,7 @@ const { t } = useI18n();
 defineOptions({ name: "UeElColorPickerPanel" });
 
 const prop = withDefaults(defineProps<UeElColorPickerPanelBaseProps>(), {
-    disableOpacity: false,
+    pureColor: false,
     defaultValue: "#000000",
     defaultGradientColor: "linear-gradient(90deg, #000 0%, rgba(0,0,0,0) 100%)",
     defaultRadialGradientColor: "radial-gradient(ellipse at 50% 50%, #e66465 50%, rgba(0,0,0,0) 100%)",
@@ -57,6 +61,13 @@ const useValue = computed({
         valueRef.value = value;
     },
 });
+
+function checkIsPureColor(value: UE_EL_UTIL.ColorType) {
+    if (typeof prop.pureColor === "boolean") {
+        return prop.pureColor;
+    }
+    return prop.pureColor.includes(value);
+}
 
 function checkValueType(value: string) {
     if (prop.type === "mixin" || typeof prop.type === "undefined") return true;
@@ -119,6 +130,8 @@ onBeforeUnmount(() => {
         addLocalColorLib(color);
     }
 });
+
+defineExpose({ colorMode });
 </script>
 <style lang="scss" module>
 .color-picker-panel {

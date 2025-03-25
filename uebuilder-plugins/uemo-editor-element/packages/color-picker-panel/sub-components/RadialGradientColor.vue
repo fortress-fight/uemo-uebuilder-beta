@@ -3,7 +3,7 @@
         v-if="isRadialGradient"
         v-model:value="valueRef"
         :defaultValue="defaultValue"
-        :disable-opacity="disableOpacity"
+        :pure-color="pureColor"
     />
     <ColorGroup v-if="usedColors.length" :colors="usedColors" @submit="useColor = $event" />
     <ColorGroup :colors="DEFAULT_RADIAL_GRADIENT_COLORS" @submit="useColor = $event" />
@@ -15,7 +15,7 @@ import RadialGradientBar from "./RadialGradientBar.vue";
 
 defineOptions({ inheritAttrs: false });
 
-const _prop = defineProps<{ defaultValue: string; disableOpacity: boolean }>();
+const _prop = defineProps<{ defaultValue: string; pureColor: boolean }>();
 const valueRef = defineModel<string>("value", { required: true });
 
 const useColor = computed({
