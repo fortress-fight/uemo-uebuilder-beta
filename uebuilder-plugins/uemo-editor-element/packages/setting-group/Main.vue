@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 10:52:44
+ * @LastEditTime: 2025-03-24 23:27:05
 -->
 <template>
     <div
@@ -168,7 +168,7 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
     // }
 }
 .group-head {
-    padding: var(--ue-editor-row-space--lv1) var(--ue-editor-row-space--lv2);
+    padding: var(--ue-editor-row-space--lv1) var(--ue-editor-row-space--lv1);
 
     color: color(var(--ue-font-color));
 }
