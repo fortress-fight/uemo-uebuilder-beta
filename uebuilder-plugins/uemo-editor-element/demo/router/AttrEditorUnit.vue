@@ -41,6 +41,7 @@ import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
 import TestLinkSettingGroup from "~/demo/components/TestLinkSettingGroup.vue";
 import TestScrollEffectSettingGroup from "~/demo/components/TestScrollEffectSettingGroup.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
+import TestBackgroundVideoSettingPanel from "~/demo/components/TestBackgroundVideoSettingPanel.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -75,6 +76,7 @@ const testComponents = [
     TestScrollEffectSettingPanel,
     TestLinkSettingPanel,
     TestBackgroundImageSettingPanel,
+    TestBackgroundVideoSettingPanel,
 ];
 </script>
 <style lang="scss" module>

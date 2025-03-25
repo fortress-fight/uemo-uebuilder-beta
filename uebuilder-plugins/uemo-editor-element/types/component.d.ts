@@ -12,21 +12,24 @@ import UeElBackgroundSettingGroup, { UeElBackgroundSettingGroupBaseProps } from 
 import UeElBackgroundShapeSettingPanel, {
     UeElBackgroundShapeSettingPanelBaseProps,
 } from "../packages/background-shape-setting-panel";
-import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
+import UeElBackgroundVideoSettingPanel, {
+    UeElBackgroundVideoSettingPanelBaseProps,
+} from "../packages/background-video-setting-panel";
 import UeElBackgroundSplineSettingPanel, {
     UeElBackgroundSplineSettingPanelBaseProps,
 } from "../packages/background-spline-setting-panel";
+import UeElBorderSetting, { UeElBorderSettingBaseProps } from "../packages/border-setting";
 import UeElBorderSettingGroup, { UeElBorderSettingGroupBaseProps } from "../packages/border-setting-group";
-import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
 import UeElBoxShadowSettingGroup, { UeElBoxShadowSettingGroupBaseProps } from "../packages/box-shadow-setting-group";
+import UeElBoxShadowSetting, { UeElBoxShadowSettingBaseProps } from "../packages/box-shadow-setting";
 import UeElButton, { UeElButtonBaseProps } from "../packages/button";
 import UeElButtonHoverEffectLibraryPanel, {
     UeElButtonHoverEffectLibraryPanelBaseProps,
 } from "../packages/button-hover-effect-library-panel";
-import UeElButtonIconSetting, { UeElButtonIconSettingBaseProps } from "../packages/button-icon-setting";
 import UeElButtonHoverEffectSetting, {
     UeElButtonHoverEffectSettingBaseProps,
 } from "../packages/button-hover-effect-setting";
+import UeElButtonIconSetting, { UeElButtonIconSettingBaseProps } from "../packages/button-icon-setting";
 import UeElButtonLibraryPanel, { UeElButtonLibraryPanelBaseProps } from "../packages/button-library-panel";
 import UeElButtonIconSettingGroup, { UeElButtonIconSettingGroupBaseProps } from "../packages/button-icon-setting-group";
 import UeElButtonStyleSetting, { UeElButtonStyleSettingBaseProps } from "../packages/button-style-setting";
@@ -38,22 +41,22 @@ import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/c
 import UeElCalenderSettingGroup, { UeElCalenderSettingGroupBaseProps } from "../packages/calender-setting-group";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElColorInput, { UeElColorInputBaseProps } from "../packages/color-input";
+import UeElColorSetting, { UeElColorSettingBaseProps } from "../packages/color-setting";
 import UeElColorPicker, { UeElColorPickerBaseProps } from "../packages/color-picker";
 import UeElColorPickerPanel, { UeElColorPickerPanelBaseProps } from "../packages/color-picker-panel";
-import UeElColorSetting, { UeElColorSettingBaseProps } from "../packages/color-setting";
 import UeElColorSettingGroup, { UeElColorSettingGroupBaseProps } from "../packages/color-setting-group";
-import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
 import UeElContextmenu, { UeElContextmenuBaseProps } from "../packages/contextmenu";
-import UeElDraggable, { UeElDraggableBaseProps } from "../packages/draggable";
+import UeElConfirmPanel, { UeElConfirmPanelBaseProps } from "../packages/confirm-panel";
 import UeElControlGroup, { UeElControlGroupBaseProps } from "../packages/control-group";
+import UeElDraggable, { UeElDraggableBaseProps } from "../packages/draggable";
 import UeElEditorGroup, { UeElEditorGroupBaseProps } from "../packages/editor-group";
-import UeElEmojiLibraryPanel, { UeElEmojiLibraryPanelBaseProps } from "../packages/emoji-library-panel";
-import UeElEmptyPanel, { UeElEmptyPanelBaseProps } from "../packages/empty-panel";
-import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../packages/enter-animate-setting";
 import UeElEditorPanel, { UeElEditorPanelBaseProps } from "../packages/editor-panel";
+import UeElEmojiLibraryPanel, { UeElEmojiLibraryPanelBaseProps } from "../packages/emoji-library-panel";
+import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../packages/enter-animate-setting";
+import UeElEmptyPanel, { UeElEmptyPanelBaseProps } from "../packages/empty-panel";
 import UeElFileUploadButton, { UeElFileUploadButtonBaseProps } from "../packages/file-upload-button";
-import UeElFontFamilyLibraryPanel, { UeElFontFamilyLibraryPanelBaseProps } from "../packages/font-family-library-panel";
 import UeElFileUploader, { UeElFileUploaderBaseProps } from "../packages/file-uploader";
+import UeElFontFamilyLibraryPanel, { UeElFontFamilyLibraryPanelBaseProps } from "../packages/font-family-library-panel";
 import UeElFontFamilySetting, { UeElFontFamilySettingBaseProps } from "../packages/font-family-setting";
 import UeElGapSetting, { UeElGapSettingBaseProps } from "../packages/gap-setting";
 import UeElGirdLayoutUtil, { UeElGirdLayoutUtilBaseProps } from "../packages/gird-layout-util";
@@ -67,8 +70,8 @@ import UeElLibraryPanel, { UeElLibraryPanelBaseProps } from "../packages/library
 import UeElLinkSetting, { UeElLinkSettingBaseProps } from "../packages/link-setting";
 import UeElLinkSettingGroup, { UeElLinkSettingGroupBaseProps } from "../packages/link-setting-group";
 import UeElLinkSettingPanel, { UeElLinkSettingPanelBaseProps } from "../packages/link-setting-panel";
-import UeElLottieLibraryPanel, { UeElLottieLibraryPanelBaseProps } from "../packages/lottie-library-panel";
 import UeElLoading, { UeElLoadingBaseProps } from "../packages/loading";
+import UeElLottieLibraryPanel, { UeElLottieLibraryPanelBaseProps } from "../packages/lottie-library-panel";
 import UeElMarginSetting, { UeElMarginSettingBaseProps } from "../packages/margin-setting";
 import UeElNumberInput, { UeElNumberInputBaseProps } from "../packages/number-input";
 import UeElOnOff, { UeElOnOffBaseProps } from "../packages/on-off";
@@ -76,35 +79,35 @@ import UeElPaddingSetting, { UeElPaddingSettingBaseProps } from "../packages/pad
 import UeElPopPanel, { UeElPopPanelBaseProps } from "../packages/pop-panel";
 import UeElRadiusSetting, { UeElRadiusSettingBaseProps } from "../packages/radius-setting";
 import UeElRadiusSettingGroup, { UeElRadiusSettingGroupBaseProps } from "../packages/radius-setting-group";
-import UeElResourcePreview, { UeElResourcePreviewBaseProps } from "../packages/resource-preview";
 import UeElResourceSetting, { UeElResourceSettingBaseProps } from "../packages/resource-setting";
+import UeElResourcePreview, { UeElResourcePreviewBaseProps } from "../packages/resource-preview";
 import UeElScrollEffectSettingGroup, {
     UeElScrollEffectSettingGroupBaseProps,
 } from "../packages/scroll-effect-setting-group";
+import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElScrollEffectSettingPanel, {
     UeElScrollEffectSettingPanelBaseProps,
 } from "../packages/scroll-effect-setting-panel";
-import UeElSelect, { UeElSelectBaseProps } from "../packages/select";
 import UeElSelectOption, { UeElSelectOptionBaseProps } from "../packages/select-option";
 import UeElSettingBar, { UeElSettingBarBaseProps } from "../packages/setting-bar";
-import UeElSettingGroup, { UeElSettingGroupBaseProps } from "../packages/setting-group";
+import UeElSplineLibraryPanel, { UeElSplineLibraryPanelBaseProps } from "../packages/spline-library-panel";
 import UeElShapeLibraryPanel, { UeElShapeLibraryPanelBaseProps } from "../packages/shape-library-panel";
 import UeElShareIconLibraryPanel, { UeElShareIconLibraryPanelBaseProps } from "../packages/share-icon-library-panel";
-import UeElSplineLibraryPanel, { UeElSplineLibraryPanelBaseProps } from "../packages/spline-library-panel";
+import UeElSettingGroup, { UeElSettingGroupBaseProps } from "../packages/setting-group";
 import UeElSvgLibraryPanel, { UeElSvgLibraryPanelBaseProps } from "../packages/svg-library-panel";
+import UeElTextDecorationLibraryPanel, {
+    UeElTextDecorationLibraryPanelBaseProps,
+} from "../packages/text-decoration-library-panel";
 import UeElTagInput, { UeElTagInputBaseProps } from "../packages/tag-input";
 import UeElTabCard, { UeElTabCardBaseProps } from "../packages/tab-card";
 import UeElTextDecorationSettingPanel, {
     UeElTextDecorationSettingPanelBaseProps,
 } from "../packages/text-decoration-setting-panel";
-import UeElTextDecorationLibraryPanel, {
-    UeElTextDecorationLibraryPanelBaseProps,
-} from "../packages/text-decoration-library-panel";
-import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
 import UeElTranslateSetting, { UeElTranslateSettingBaseProps } from "../packages/translate-setting";
 import UeElVideoLibraryPanel, { UeElVideoLibraryPanelBaseProps } from "../packages/video-library-panel";
 import UeElVideoPanel, { UeElVideoPanelBaseProps } from "../packages/video-panel";
+import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 
 declare module "vue" {
     export interface GlobalComponents {
@@ -113,15 +116,16 @@ declare module "vue" {
         UeElBackgroundImageSettingPanel: typeof UeElBackgroundImageSettingPanel;
         UeElBackgroundSettingGroup: typeof UeElBackgroundSettingGroup;
         UeElBackgroundShapeSettingPanel: typeof UeElBackgroundShapeSettingPanel;
-        UeElBorderSetting: typeof UeElBorderSetting;
+        UeElBackgroundVideoSettingPanel: typeof UeElBackgroundVideoSettingPanel;
         UeElBackgroundSplineSettingPanel: typeof UeElBackgroundSplineSettingPanel;
+        UeElBorderSetting: typeof UeElBorderSetting;
         UeElBorderSettingGroup: typeof UeElBorderSettingGroup;
-        UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
         UeElBoxShadowSettingGroup: typeof UeElBoxShadowSettingGroup;
+        UeElBoxShadowSetting: typeof UeElBoxShadowSetting;
         UeElButton: typeof UeElButton;
         UeElButtonHoverEffectLibraryPanel: typeof UeElButtonHoverEffectLibraryPanel;
-        UeElButtonIconSetting: typeof UeElButtonIconSetting;
         UeElButtonHoverEffectSetting: typeof UeElButtonHoverEffectSetting;
+        UeElButtonIconSetting: typeof UeElButtonIconSetting;
         UeElButtonLibraryPanel: typeof UeElButtonLibraryPanel;
         UeElButtonIconSettingGroup: typeof UeElButtonIconSettingGroup;
         UeElButtonStyleSetting: typeof UeElButtonStyleSetting;
@@ -131,22 +135,22 @@ declare module "vue" {
         UeElCalenderSettingGroup: typeof UeElCalenderSettingGroup;
         UeElCheckBox: typeof UeElCheckBox;
         UeElColorInput: typeof UeElColorInput;
+        UeElColorSetting: typeof UeElColorSetting;
         UeElColorPicker: typeof UeElColorPicker;
         UeElColorPickerPanel: typeof UeElColorPickerPanel;
-        UeElColorSetting: typeof UeElColorSetting;
         UeElColorSettingGroup: typeof UeElColorSettingGroup;
-        UeElConfirmPanel: typeof UeElConfirmPanel;
         UeElContextmenu: typeof UeElContextmenu;
-        UeElDraggable: typeof UeElDraggable;
+        UeElConfirmPanel: typeof UeElConfirmPanel;
         UeElControlGroup: typeof UeElControlGroup;
+        UeElDraggable: typeof UeElDraggable;
         UeElEditorGroup: typeof UeElEditorGroup;
-        UeElEmojiLibraryPanel: typeof UeElEmojiLibraryPanel;
-        UeElEmptyPanel: typeof UeElEmptyPanel;
-        UeElEnterAnimateSetting: typeof UeElEnterAnimateSetting;
         UeElEditorPanel: typeof UeElEditorPanel;
+        UeElEmojiLibraryPanel: typeof UeElEmojiLibraryPanel;
+        UeElEnterAnimateSetting: typeof UeElEnterAnimateSetting;
+        UeElEmptyPanel: typeof UeElEmptyPanel;
         UeElFileUploadButton: typeof UeElFileUploadButton;
-        UeElFontFamilyLibraryPanel: typeof UeElFontFamilyLibraryPanel;
         UeElFileUploader: typeof UeElFileUploader;
+        UeElFontFamilyLibraryPanel: typeof UeElFontFamilyLibraryPanel;
         UeElFontFamilySetting: typeof UeElFontFamilySetting;
         UeElGapSetting: typeof UeElGapSetting;
         UeElGirdLayoutUtil: typeof UeElGirdLayoutUtil;
@@ -160,8 +164,8 @@ declare module "vue" {
         UeElLinkSetting: typeof UeElLinkSetting;
         UeElLinkSettingGroup: typeof UeElLinkSettingGroup;
         UeElLinkSettingPanel: typeof UeElLinkSettingPanel;
-        UeElLottieLibraryPanel: typeof UeElLottieLibraryPanel;
         UeElLoading: typeof UeElLoading;
+        UeElLottieLibraryPanel: typeof UeElLottieLibraryPanel;
         UeElMarginSetting: typeof UeElMarginSetting;
         UeElNumberInput: typeof UeElNumberInput;
         UeElOnOff: typeof UeElOnOff;
@@ -169,27 +173,27 @@ declare module "vue" {
         UeElPopPanel: typeof UeElPopPanel;
         UeElRadiusSetting: typeof UeElRadiusSetting;
         UeElRadiusSettingGroup: typeof UeElRadiusSettingGroup;
-        UeElResourcePreview: typeof UeElResourcePreview;
         UeElResourceSetting: typeof UeElResourceSetting;
+        UeElResourcePreview: typeof UeElResourcePreview;
         UeElScrollEffectSettingGroup: typeof UeElScrollEffectSettingGroup;
-        UeElScrollEffectSettingPanel: typeof UeElScrollEffectSettingPanel;
         UeElSelect: typeof UeElSelect;
+        UeElScrollEffectSettingPanel: typeof UeElScrollEffectSettingPanel;
         UeElSelectOption: typeof UeElSelectOption;
         UeElSettingBar: typeof UeElSettingBar;
-        UeElSettingGroup: typeof UeElSettingGroup;
+        UeElSplineLibraryPanel: typeof UeElSplineLibraryPanel;
         UeElShapeLibraryPanel: typeof UeElShapeLibraryPanel;
         UeElShareIconLibraryPanel: typeof UeElShareIconLibraryPanel;
-        UeElSplineLibraryPanel: typeof UeElSplineLibraryPanel;
+        UeElSettingGroup: typeof UeElSettingGroup;
         UeElSvgLibraryPanel: typeof UeElSvgLibraryPanel;
+        UeElTextDecorationLibraryPanel: typeof UeElTextDecorationLibraryPanel;
         UeElTagInput: typeof UeElTagInput;
         UeElTabCard: typeof UeElTabCard;
         UeElTextDecorationSettingPanel: typeof UeElTextDecorationSettingPanel;
-        UeElTextDecorationLibraryPanel: typeof UeElTextDecorationLibraryPanel;
-        UeElTipGroup: typeof UeElTipGroup;
         UeElTextInput: typeof UeElTextInput;
         UeElTranslateSetting: typeof UeElTranslateSetting;
         UeElVideoLibraryPanel: typeof UeElVideoLibraryPanel;
         UeElVideoPanel: typeof UeElVideoPanel;
+        UeElTipGroup: typeof UeElTipGroup;
     }
 }
 
@@ -200,15 +204,16 @@ declare global {
         interface UeElBackgroundImageSettingPanelProps extends UeElBackgroundImageSettingPanelBaseProps {}
         interface UeElBackgroundSettingGroupProps extends UeElBackgroundSettingGroupBaseProps {}
         interface UeElBackgroundShapeSettingPanelProps extends UeElBackgroundShapeSettingPanelBaseProps {}
-        interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
+        interface UeElBackgroundVideoSettingPanelProps extends UeElBackgroundVideoSettingPanelBaseProps {}
         interface UeElBackgroundSplineSettingPanelProps extends UeElBackgroundSplineSettingPanelBaseProps {}
+        interface UeElBorderSettingProps extends UeElBorderSettingBaseProps {}
         interface UeElBorderSettingGroupProps extends UeElBorderSettingGroupBaseProps {}
-        interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}
         interface UeElBoxShadowSettingGroupProps extends UeElBoxShadowSettingGroupBaseProps {}
+        interface UeElBoxShadowSettingProps extends UeElBoxShadowSettingBaseProps {}
         interface UeElButtonProps extends UeElButtonBaseProps {}
         interface UeElButtonHoverEffectLibraryPanelProps extends UeElButtonHoverEffectLibraryPanelBaseProps {}
-        interface UeElButtonIconSettingProps extends UeElButtonIconSettingBaseProps {}
         interface UeElButtonHoverEffectSettingProps extends UeElButtonHoverEffectSettingBaseProps {}
+        interface UeElButtonIconSettingProps extends UeElButtonIconSettingBaseProps {}
         interface UeElButtonLibraryPanelProps extends UeElButtonLibraryPanelBaseProps {}
         interface UeElButtonIconSettingGroupProps extends UeElButtonIconSettingGroupBaseProps {}
         interface UeElButtonStyleSettingProps extends UeElButtonStyleSettingBaseProps {}
@@ -218,22 +223,22 @@ declare global {
         interface UeElCalenderSettingGroupProps extends UeElCalenderSettingGroupBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElColorInputProps extends UeElColorInputBaseProps {}
+        interface UeElColorSettingProps extends UeElColorSettingBaseProps {}
         interface UeElColorPickerProps extends UeElColorPickerBaseProps {}
         interface UeElColorPickerPanelProps extends UeElColorPickerPanelBaseProps {}
-        interface UeElColorSettingProps extends UeElColorSettingBaseProps {}
         interface UeElColorSettingGroupProps extends UeElColorSettingGroupBaseProps {}
-        interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
         interface UeElContextmenuProps extends UeElContextmenuBaseProps {}
-        interface UeElDraggableProps extends UeElDraggableBaseProps {}
+        interface UeElConfirmPanelProps extends UeElConfirmPanelBaseProps {}
         interface UeElControlGroupProps extends UeElControlGroupBaseProps {}
+        interface UeElDraggableProps extends UeElDraggableBaseProps {}
         interface UeElEditorGroupProps extends UeElEditorGroupBaseProps {}
-        interface UeElEmojiLibraryPanelProps extends UeElEmojiLibraryPanelBaseProps {}
-        interface UeElEmptyPanelProps extends UeElEmptyPanelBaseProps {}
-        interface UeElEnterAnimateSettingProps extends UeElEnterAnimateSettingBaseProps {}
         interface UeElEditorPanelProps extends UeElEditorPanelBaseProps {}
+        interface UeElEmojiLibraryPanelProps extends UeElEmojiLibraryPanelBaseProps {}
+        interface UeElEnterAnimateSettingProps extends UeElEnterAnimateSettingBaseProps {}
+        interface UeElEmptyPanelProps extends UeElEmptyPanelBaseProps {}
         interface UeElFileUploadButtonProps extends UeElFileUploadButtonBaseProps {}
-        interface UeElFontFamilyLibraryPanelProps extends UeElFontFamilyLibraryPanelBaseProps {}
         interface UeElFileUploaderProps extends UeElFileUploaderBaseProps {}
+        interface UeElFontFamilyLibraryPanelProps extends UeElFontFamilyLibraryPanelBaseProps {}
         interface UeElFontFamilySettingProps extends UeElFontFamilySettingBaseProps {}
         interface UeElGapSettingProps extends UeElGapSettingBaseProps {}
         interface UeElGirdLayoutUtilProps extends UeElGirdLayoutUtilBaseProps {}
@@ -247,8 +252,8 @@ declare global {
         interface UeElLinkSettingProps extends UeElLinkSettingBaseProps {}
         interface UeElLinkSettingGroupProps extends UeElLinkSettingGroupBaseProps {}
         interface UeElLinkSettingPanelProps extends UeElLinkSettingPanelBaseProps {}
-        interface UeElLottieLibraryPanelProps extends UeElLottieLibraryPanelBaseProps {}
         interface UeElLoadingProps extends UeElLoadingBaseProps {}
+        interface UeElLottieLibraryPanelProps extends UeElLottieLibraryPanelBaseProps {}
         interface UeElMarginSettingProps extends UeElMarginSettingBaseProps {}
         interface UeElNumberInputProps extends UeElNumberInputBaseProps {}
         interface UeElOnOffProps extends UeElOnOffBaseProps {}
@@ -256,27 +261,27 @@ declare global {
         interface UeElPopPanelProps extends UeElPopPanelBaseProps {}
         interface UeElRadiusSettingProps extends UeElRadiusSettingBaseProps {}
         interface UeElRadiusSettingGroupProps extends UeElRadiusSettingGroupBaseProps {}
-        interface UeElResourcePreviewProps extends UeElResourcePreviewBaseProps {}
         interface UeElResourceSettingProps extends UeElResourceSettingBaseProps {}
+        interface UeElResourcePreviewProps extends UeElResourcePreviewBaseProps {}
         interface UeElScrollEffectSettingGroupProps extends UeElScrollEffectSettingGroupBaseProps {}
-        interface UeElScrollEffectSettingPanelProps extends UeElScrollEffectSettingPanelBaseProps {}
         interface UeElSelectProps extends UeElSelectBaseProps {}
+        interface UeElScrollEffectSettingPanelProps extends UeElScrollEffectSettingPanelBaseProps {}
         interface UeElSelectOptionProps extends UeElSelectOptionBaseProps {}
         interface UeElSettingBarProps extends UeElSettingBarBaseProps {}
-        interface UeElSettingGroupProps extends UeElSettingGroupBaseProps {}
+        interface UeElSplineLibraryPanelProps extends UeElSplineLibraryPanelBaseProps {}
         interface UeElShapeLibraryPanelProps extends UeElShapeLibraryPanelBaseProps {}
         interface UeElShareIconLibraryPanelProps extends UeElShareIconLibraryPanelBaseProps {}
-        interface UeElSplineLibraryPanelProps extends UeElSplineLibraryPanelBaseProps {}
+        interface UeElSettingGroupProps extends UeElSettingGroupBaseProps {}
         interface UeElSvgLibraryPanelProps extends UeElSvgLibraryPanelBaseProps {}
+        interface UeElTextDecorationLibraryPanelProps extends UeElTextDecorationLibraryPanelBaseProps {}
         interface UeElTagInputProps extends UeElTagInputBaseProps {}
         interface UeElTabCardProps extends UeElTabCardBaseProps {}
         interface UeElTextDecorationSettingPanelProps extends UeElTextDecorationSettingPanelBaseProps {}
-        interface UeElTextDecorationLibraryPanelProps extends UeElTextDecorationLibraryPanelBaseProps {}
-        interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
         interface UeElTranslateSettingProps extends UeElTranslateSettingBaseProps {}
         interface UeElVideoLibraryPanelProps extends UeElVideoLibraryPanelBaseProps {}
         interface UeElVideoPanelProps extends UeElVideoPanelBaseProps {}
+        interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
     }
 }
 
