@@ -1,7 +1,7 @@
 /*
  * @Description: 背景属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-24 01:15:05
+ * @LastEditTime: 2025-03-26 00:21:53
  */
 import type { App } from "vue";
 import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
@@ -75,7 +75,7 @@ export type UE_EL_BACKGROUND_PARAM_MAP = {
 /**
  * @description 背景参数
  */
-type BACKGROUND_VALUE<T extends keyof UE_EL_BACKGROUND_PARAM_MAP> = {
+export type BACKGROUND_VALUE<T extends TYPE_BG_TYPE> = {
     id: string;
     type: T;
     value: UE_EL_BACKGROUND_PARAM_MAP[T];

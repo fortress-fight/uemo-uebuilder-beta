@@ -337,11 +337,6 @@ declare global {
          * @description Lottie 库类型
          */
         type LottieLibraryType = "icon" | "normal";
-
-        /**
-         * @description 滚动效果参数
-         */
-        type SCROLL_EFFECT = { type: string; options?: Record<string, string | undefined> };
     }
 
     namespace UE_PLUGIN_OPTIONS {
