@@ -1,11 +1,11 @@
 <!--
  * @Description: 拖拽组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-25 00:10:06
+ * @LastEditTime: 2025-03-25 12:20:54
 -->
 <template>
     <VueDraggable
-        v-model="sortList"
+        v-model="valueRef"
         :class="$style['sort-list']"
         :animation="150"
         :data-disable="value.length <= 1"
@@ -30,16 +30,7 @@ import { VueDraggable } from "vue-draggable-plus";
 defineOptions({ name: "UeElDraggable" });
 const _prop = withDefaults(defineProps<UeElDraggableBaseProps>(), {});
 const valueRef = defineModel<any>("value", { required: false });
-
 const dragging = ref<boolean>(false);
-const sortList = computed({
-    get() {
-        return valueRef.value;
-    },
-    set(val) {
-        valueRef.value = val;
-    },
-});
 </script>
 <style lang="scss" module>
 .sort-list {
