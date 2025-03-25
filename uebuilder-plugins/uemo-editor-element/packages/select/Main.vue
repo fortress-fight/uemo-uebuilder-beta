@@ -1,7 +1,7 @@
 <!--
  * @Description: 选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 19:16:34
+ * @LastEditTime: 2025-03-25 12:13:24
 -->
 <template>
     <UeElSettingBar
@@ -43,6 +43,7 @@ const { t } = useI18n();
 
 const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UeElSelectBaseProps>(), { showIcon: true, disable: false });
+const emit = defineEmits<{ (e: "trigger", value: SelectValue): void }>();
 const valueModel = defineModel<SelectValue>("value", { default: "" });
 
 const settingBarRef = useTemplateRef("settingBarRef");
@@ -126,6 +127,8 @@ function openOptionPanel() {
  * @returns {void}
  */
 function changeValue(value: string | number) {
+    emit("trigger", value);
+
     valueModel.value = value;
     optionIsOpen.value = false;
 }

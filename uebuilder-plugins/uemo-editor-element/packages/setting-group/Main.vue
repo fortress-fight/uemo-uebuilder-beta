@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-24 23:27:05
+ * @LastEditTime: 2025-03-25 12:13:32
 -->
 <template>
     <div
@@ -44,7 +44,7 @@
                             v-if="item.type === 'addSelect' && item.param.options.length > 0"
                             v-bind="item.param"
                             :class="$style['oper-btn']"
-                            @update:value="emit('trigger', item.id, $event)"
+                            @trigger="emit('trigger', item.id, $event)"
                         >
                             <template #info>
                                 <UeElButton theme="squareIcon" :icon="{ name: 'icon-tianjia', size: 15 }" />

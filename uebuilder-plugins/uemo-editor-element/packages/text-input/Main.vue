@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 16:49:42
+ * @LastEditTime: 2025-03-25 11:40:40
 -->
 <template>
     <div
@@ -224,10 +224,10 @@ defineExpose({
         }
     }
     &[data-padding-size="level2"] {
-        --text-input-padding: 0 var(--ue-editor-row-space--lv1) 0 2px;
+        --text-input-padding: 0 var(--ue-editor-row-space--lv1) 0 0;
     }
     &[data-padding-size="level3"] {
-        --text-input-padding: 0 2px;
+        --text-input-padding: 0;
     }
     &[data-padding-size="level4"] {
         --text-input-padding: 3px var(--ue-editor-row-space--lv1);
