@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 18:54:39
+ * @LastEditTime: 2025-03-26 01:57:44
 -->
 <template>
     <UeElSettingGroup
@@ -38,9 +38,8 @@ import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting
 
 import UeElSettingGroup from "../setting-group";
 import UeElScrollEffectSettingPanel from "../scroll-effect-setting-panel";
-import { settingGroupPopPanelPropsKey } from "../setting-group";
-import { editorGroupPopPanelPropsKey } from "../editor-group";
-import { getPopPanelParams } from "../pop-panel/utils/helper";
+
+import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 
 defineOptions({ name: "UeElScrollEffectSettingGroup" });
 
@@ -48,6 +47,7 @@ const { t } = useI18n();
 
 const props = withDefaults(defineProps<UeElScrollEffectSettingGroupBaseProps>(), {
     defaultValue: () => ({ type: "opacity", options: {} }),
+    allowRemove: false,
 });
 const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: false });
 const rootComponentRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("rootComponentRef");
@@ -61,7 +61,11 @@ const scrollEffectSettingPanelRef =
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     return {
         title: t("SCROLL_EFFECT_SETTING_TITLE"),
-        oper: !valueRef.value ? [{ id: "add", type: "add" }] : [{ id: "remove", type: "remove" }],
+        oper: props.allowRemove
+            ? !valueRef.value
+                ? [{ id: "add", type: "add" }]
+                : [{ id: "remove", type: "remove" }]
+            : undefined,
     };
 });
 
@@ -130,20 +134,11 @@ function openPreviewSettingPanel() {
     alert("openPreviewSettingPanel");
 }
 
-const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
-const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
-
 /**
  * 弹窗位置配置的计算属性
  * @returns {UE_EL_COMPONENT.UeElPopPanelProps | undefined} 弹窗的位置和样式配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
-    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
-
-    if (!rootComponentRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", rootComponentRef.value.$el);
-});
+const popPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$el));
 </script>
 <style lang="scss" module>
 .scroll-effect-setting-group {

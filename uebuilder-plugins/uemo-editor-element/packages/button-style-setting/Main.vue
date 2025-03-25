@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮样式设置控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 18:30:19
+ * @LastEditTime: 2025-03-26 01:46:25
 -->
 <template>
     <UeElControlGroup :class="$style['button-style-setting']" :col-count="2" ref="controlGroup">
@@ -35,10 +35,8 @@
 import type { UeElButtonStyleSettingBaseProps } from "./index";
 import type { UeElButtonStyleSettingPanelValue } from "../button-style-setting-panel";
 
+import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 import UeElControlGroup from "../control-group";
-import { settingGroupPopPanelPropsKey } from "../setting-group";
-import { editorGroupPopPanelPropsKey } from "../editor-group";
-import { getPopPanelParams } from "../pop-panel/utils/helper";
 
 defineOptions({ name: "UeElButtonStyleSetting" });
 
@@ -75,19 +73,10 @@ watch([buttonStyleSettingPanelOpen, currentEditorType], ([open, type]) => {
     hoverStateRef.value = open && type === "hover";
 });
 
-const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
-const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
-
 /**
  * 弹窗位置配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
-    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
-
-    if (!controlGroupRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", controlGroupRef.value.$el);
-});
+const popPanelParams = usePopPanelParam(computed(() => controlGroupRef.value?.$el));
 </script>
 <style lang="scss" module>
 .button-style-setting {

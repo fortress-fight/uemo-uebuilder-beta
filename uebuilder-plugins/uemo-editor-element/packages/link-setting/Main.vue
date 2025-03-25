@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:57:41
+ * @LastEditTime: 2025-03-26 02:00:28
 -->
 <template>
     <UeElSettingBar
@@ -25,11 +25,9 @@
 import type { UeElLinkSettingBaseProps } from "./index";
 import type { UeElLinkSettingPanelValue } from "../link-setting-panel";
 
+import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 import UeElSettingBar from "../setting-bar";
 import UeElLinkSettingPanel from "../link-setting-panel";
-import { settingGroupPopPanelPropsKey } from "../setting-group";
-import { editorGroupPopPanelPropsKey } from "../editor-group";
-import { getPopPanelParams } from "../pop-panel/utils/helper";
 import { isImageReg, isVideoReg } from "@stone/uemo-editor-utils/lib/utils";
 
 defineOptions({ name: "UeElLinkSetting" });
@@ -90,24 +88,15 @@ function openLinkSettingPanel() {
     linkSettingPanelOpen.value = true;
 }
 
-const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
-const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
-
 /**
  * 弹窗位置配置
  */
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    let result: UE_EL_COMPONENT.UeElPopPanelProps | null = null;
+    const result: UE_EL_COMPONENT.UeElPopPanelProps | undefined = usePopPanelParam(
+        computed(() => settingBarRef.value?.$el)
+    ).value;
 
-    if (injectSettingGroupPopPanelProps?.value) {
-        result = injectSettingGroupPopPanelProps.value;
-    } else if (injectEditorGroupPopPanelProps?.value) {
-        result = injectEditorGroupPopPanelProps.value;
-    } else if (!settingBarRef.value?.$el) {
-        return undefined;
-    } else {
-        result = getPopPanelParams("editorPanel", settingBarRef.value.$el);
-    }
+    if (!result) return undefined;
 
     result.mask = {
         color: "transparent",

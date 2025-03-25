@@ -1,7 +1,7 @@
 /*
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 18:39:16
+ * @LastEditTime: 2025-03-26 01:27:43
  */
 import type { App } from "vue";
 import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
@@ -15,6 +15,7 @@ UeElScrollEffectSettingGroup.install = (app: App) => {
 
 export interface UeElScrollEffectSettingGroupBaseProps {
     defaultValue?: UeElScrollEffectSettingPanelValue;
+    allowRemove?: boolean;
     enableType?: string[];
 }
 export type UeElScrollEffectSettingGroupInstance = InstanceType<typeof UeElScrollEffectSettingGroup>;

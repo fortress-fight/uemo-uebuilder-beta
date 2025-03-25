@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:21:57
+ * @LastEditTime: 2025-03-26 02:00:12
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -49,12 +49,9 @@ import type {
     UeElResourceSettingEmitParams,
 } from "./index";
 
-import { getPopPanelParams } from "../pop-panel/utils/helper";
+import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 import { isResourcePreviewAttrs } from "../resource-preview";
 import UeElEditorPanel from "../editor-panel";
-
-import { settingGroupPopPanelPropsKey } from "../setting-group";
-import { editorGroupPopPanelPropsKey } from "../editor-group";
 
 const { t } = useI18n();
 defineOptions({ name: "UeElResourceSetting" });
@@ -186,19 +183,10 @@ function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
     emit("trigger", params);
 }
 
-const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
-const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
-
 /**
  * 弹窗位置配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
-    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
-
-    if (!rootDomRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", rootDomRef.value.$el);
-});
+const popPanelParams = usePopPanelParam(computed(() => rootDomRef.value?.$el));
 </script>
 
 <style lang="scss" module>

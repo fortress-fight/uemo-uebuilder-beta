@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-25 12:29:49
+ * @LastEditTime: 2025-03-26 01:49:34
 -->
 <template>
     <UeElColorInput
@@ -23,9 +23,7 @@
 import type { UeElColorSettingBaseProps } from "./index";
 import type { UeElColorInputInstance } from "../color-input";
 
-import { settingGroupPopPanelPropsKey } from "../setting-group";
-import { editorGroupPopPanelPropsKey } from "../editor-group";
-import { getPopPanelParams } from "../pop-panel/utils/helper";
+import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 
 defineOptions({ name: "UeElColorSetting" });
 
@@ -50,27 +48,21 @@ const colorPickerPanelPureColor = computed<boolean | UE_EL_UTIL.ColorType[]>(() 
     return false;
 });
 
-const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
-const injectEditorGroupPopPanelProps = inject(editorGroupPopPanelPropsKey, undefined);
-
 function openColorPickerPanel() {
     colorPickerPanelOpen.value = true;
 }
 
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
-    if (injectEditorGroupPopPanelProps?.value) return injectEditorGroupPopPanelProps.value;
-
-    if (!colorInputRef.value?.rootDomRef) return undefined;
-    return getPopPanelParams("editorPanel", colorInputRef.value.rootDomRef, {
+const popPanelParams = usePopPanelParam(
+    computed(() => colorInputRef.value?.rootDomRef),
+    {
         placement: props.placement,
         middleware: [
             ["flip", { crossAxis: false }],
             ["offset", { crossAxis: -100, mainAxis: 10 }],
             ["shift", { crossAxis: true, padding: 17 }],
         ],
-    });
-});
+    }
+);
 </script>
 <style lang="scss" module>
 .color-setting {
