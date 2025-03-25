@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 01:57:44
+ * @LastEditTime: 2025-03-26 02:09:10
 -->
 <template>
     <UeElSettingGroup
@@ -47,7 +47,7 @@ const { t } = useI18n();
 
 const props = withDefaults(defineProps<UeElScrollEffectSettingGroupBaseProps>(), {
     defaultValue: () => ({ type: "opacity", options: {} }),
-    allowRemove: false,
+    allowRemove: true,
 });
 const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: false });
 const rootComponentRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("rootComponentRef");
