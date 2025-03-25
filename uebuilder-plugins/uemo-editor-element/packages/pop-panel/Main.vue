@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:57:25
+ * @LastEditTime: 2025-03-26 03:49:43
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -217,9 +217,10 @@ function onAfterLeave(_el: Element) {
 // #endregion
 
 // #region ID管理和关闭处理
-const currentId = guid();
 const rootId = inject("UeElPopPanelRootId", "");
-provide("UeElPopPanelRootId", rootId || currentId);
+const currentId = rootId || guid();
+
+provide("UeElPopPanelRootId", currentId);
 
 /**
  * 处理弹窗关闭
@@ -228,6 +229,8 @@ function closeModal(e: Event) {
     if (!props.autoClose) return;
 
     const triggerRootId = $(e.target!).closest("[data-root-id]").data("root-id");
+
+    // NOTE 如果当前弹窗的ID与第一次打开的弹窗的ID相同，则不关闭，这种情况发生在弹窗嵌套时
     if (currentId === triggerRootId) return;
 
     const allowClose = props.checkAllowClose?.();
