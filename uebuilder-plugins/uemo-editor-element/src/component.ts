@@ -1,14 +1,14 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/3/26 03:18:16
+ * @LastEditTime: 2025/3/27 01:21:35
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
 import UeElBackgroundImageSettingPanel from "../packages/background-image-setting-panel";
 import UeElBackgroundSettingGroup from "../packages/background-setting-group";
-import UeElBackgroundSplineSettingPanel from "../packages/background-spline-setting-panel";
 import UeElBackgroundShapeSettingPanel from "../packages/background-shape-setting-panel";
+import UeElBackgroundSplineSettingPanel from "../packages/background-spline-setting-panel";
 import UeElBackgroundSvgSettingPanel from "../packages/background-svg-setting-panel";
 import UeElBackgroundVideoSettingPanel from "../packages/background-video-setting-panel";
 import UeElBorderSetting from "../packages/border-setting";
@@ -43,58 +43,59 @@ import UeElEmptyPanel from "../packages/empty-panel";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElFileUploadButton from "../packages/file-upload-button";
 import UeElFileUploader from "../packages/file-uploader";
-import UeElFontFamilySetting from "../packages/font-family-setting";
 import UeElGapSetting from "../packages/gap-setting";
+import UeElFontFamilySetting from "../packages/font-family-setting";
 import UeElFontFamilyLibraryPanel from "../packages/font-family-library-panel";
 import UeElGirdLayoutUtil from "../packages/gird-layout-util";
-import UeElIcon from "../packages/icon";
 import UeElGridLayoutLibraryPanel from "../packages/grid-layout-library-panel";
 import UeElGridLayoutSetting from "../packages/grid-layout-setting";
-import UeElIconLibraryPanel from "../packages/icon-library-panel";
+import UeElIcon from "../packages/icon";
 import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElImageLibraryPanel from "../packages/image-library-panel";
+import UeElIconLibraryPanel from "../packages/icon-library-panel";
 import UeElLibraryPanel from "../packages/library-panel";
-import UeElLinkSetting from "../packages/link-setting";
 import UeElLinkSettingGroup from "../packages/link-setting-group";
+import UeElLinkSetting from "../packages/link-setting";
+import UeElLoading from "../packages/loading";
 import UeElLinkSettingPanel from "../packages/link-setting-panel";
 import UeElMarginSetting from "../packages/margin-setting";
-import UeElLoading from "../packages/loading";
+import UeElMiniEditorPanel from "../packages/mini-editor-panel";
 import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElNumberInput from "../packages/number-input";
+import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
-import UeElOnOff from "../packages/on-off";
 import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
+import UeElResourcePreview from "../packages/resource-preview";
 import UeElResourceSetting from "../packages/resource-setting";
 import UeElScrollEffectSettingGroup from "../packages/scroll-effect-setting-group";
 import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
-import UeElResourcePreview from "../packages/resource-preview";
 import UeElSelect from "../packages/select";
-import UeElSettingGroup from "../packages/setting-group";
-import UeElSettingBar from "../packages/setting-bar";
 import UeElSelectOption from "../packages/select-option";
+import UeElSettingBar from "../packages/setting-bar";
 import UeElShapeLibraryPanel from "../packages/shape-library-panel";
-import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
-import UeElTabCard from "../packages/tab-card";
-import UeElSvgLibraryPanel from "../packages/svg-library-panel";
+import UeElSettingGroup from "../packages/setting-group";
 import UeElSplineLibraryPanel from "../packages/spline-library-panel";
+import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
+import UeElSvgLibraryPanel from "../packages/svg-library-panel";
+import UeElTabCard from "../packages/tab-card";
 import UeElTagInput from "../packages/tag-input";
 import UeElTextDecorationLibraryPanel from "../packages/text-decoration-library-panel";
-import UeElTextInput from "../packages/text-input";
 import UeElTextDecorationSettingPanel from "../packages/text-decoration-setting-panel";
+import UeElTextInput from "../packages/text-input";
 import UeElTipGroup from "../packages/tip-group";
 import UeElTranslateSetting from "../packages/translate-setting";
-import UeElVideoPanel from "../packages/video-panel";
 import UeElVideoLibraryPanel from "../packages/video-library-panel";
+import UeElVideoPanel from "../packages/video-panel";
 
 export const components = [
     UeElAlignItemSetting,
     UeElAlignSetting,
     UeElBackgroundImageSettingPanel,
     UeElBackgroundSettingGroup,
-    UeElBackgroundSplineSettingPanel,
     UeElBackgroundShapeSettingPanel,
+    UeElBackgroundSplineSettingPanel,
     UeElBackgroundSvgSettingPanel,
     UeElBackgroundVideoSettingPanel,
     UeElBorderSetting,
@@ -129,48 +130,49 @@ export const components = [
     UeElEnterAnimateSetting,
     UeElFileUploadButton,
     UeElFileUploader,
-    UeElFontFamilySetting,
     UeElGapSetting,
+    UeElFontFamilySetting,
     UeElFontFamilyLibraryPanel,
     UeElGirdLayoutUtil,
-    UeElIcon,
     UeElGridLayoutLibraryPanel,
     UeElGridLayoutSetting,
-    UeElIconLibraryPanel,
+    UeElIcon,
     UeElJustifyContentSetting,
     UeElImageLibraryPanel,
+    UeElIconLibraryPanel,
     UeElLibraryPanel,
-    UeElLinkSetting,
     UeElLinkSettingGroup,
+    UeElLinkSetting,
+    UeElLoading,
     UeElLinkSettingPanel,
     UeElMarginSetting,
-    UeElLoading,
+    UeElMiniEditorPanel,
     UeElLottieLibraryPanel,
     UeElNumberInput,
+    UeElOnOff,
     UeElPaddingSetting,
     UeElPopPanel,
-    UeElOnOff,
     UeElRadiusSetting,
     UeElRadiusSettingGroup,
+    UeElResourcePreview,
     UeElResourceSetting,
     UeElScrollEffectSettingGroup,
     UeElScrollEffectSettingPanel,
-    UeElResourcePreview,
     UeElSelect,
-    UeElSettingGroup,
-    UeElSettingBar,
     UeElSelectOption,
+    UeElSettingBar,
     UeElShapeLibraryPanel,
-    UeElShareIconLibraryPanel,
-    UeElTabCard,
-    UeElSvgLibraryPanel,
+    UeElSettingGroup,
     UeElSplineLibraryPanel,
+    UeElShareIconLibraryPanel,
+    UeElSvgLibraryPanel,
+    UeElTabCard,
     UeElTagInput,
     UeElTextDecorationLibraryPanel,
-    UeElTextInput,
     UeElTextDecorationSettingPanel,
+    UeElTextInput,
     UeElTipGroup,
     UeElTranslateSetting,
-    UeElVideoPanel,
     UeElVideoLibraryPanel,
+    UeElVideoPanel,
 ];

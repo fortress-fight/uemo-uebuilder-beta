@@ -5,6 +5,11 @@
             <template v-for="(component, index) in testComponents" :key="index">
                 <component :is="component"></component>
             </template>
+            <template v-for="(component, index) in rowTestComponents" :key="index">
+                <div :class="$style['row']">
+                    <component :is="component"></component>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -18,6 +23,7 @@ import TestEditorPanel from "~/demo/components/TestEditorPanel.vue";
 import TestColorPickerPanel from "~/demo/components/TestColorPickerPanel.vue";
 import TestLibraryPanel from "~/demo/components/TestLibraryPanel.vue";
 import TestEmptyPanel from "~/demo/components/TestEmptyPanel.vue";
+import TestMiniEditorPanel from "~/demo/components/TestMiniEditorPanel.vue";
 
 const testComponents = [
     TestCalenderPicker,
@@ -30,6 +36,8 @@ const testComponents = [
     TestLibraryPanel,
     TestEmptyPanel,
 ];
+
+const rowTestComponents = [TestMiniEditorPanel];
 </script>
 <style lang="scss" module>
 .page-head {

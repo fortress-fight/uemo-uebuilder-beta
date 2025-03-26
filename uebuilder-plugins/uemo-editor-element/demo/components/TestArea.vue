@@ -18,6 +18,7 @@ type TYPE_TEST_AREA_PROPS = {
     title?: string;
     testValue?: any;
     testValueList?: any[];
+    dataPanelWidth?: string;
 };
 
 const instance = getCurrentInstance();
@@ -38,6 +39,7 @@ const testValueOptions = computed(() => {
 
 const componentName = computed(() => {
     const defaultSlot = slots.default?.({})[0];
+    // @ts-expect-error
     return defaultSlot?.type.name || "";
 });
 
@@ -63,7 +65,7 @@ function copyData() {
     gap: 20px;
     grid-template-columns: minmax(350px, 1fr) minmax(0, 1fr);
     &[data-layout="layout2"] {
-        grid-template-columns: minmax(350px, 1fr) 270px;
+        grid-template-columns: minmax(350px, 1fr) 500px;
     }
 }
 .area-title {
