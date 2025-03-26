@@ -42,6 +42,7 @@ import TestLinkSettingGroup from "~/demo/components/TestLinkSettingGroup.vue";
 import TestScrollEffectSettingGroup from "~/demo/components/TestScrollEffectSettingGroup.vue";
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
 import TestBackgroundVideoSettingPanel from "~/demo/components/TestBackgroundVideoSettingPanel.vue";
+import TestBackgroundSettingGroup from "~/demo/components/TestBackgroundSettingGroup.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -63,6 +64,7 @@ const testComponents = [
     TestButtonIconSettingGroup,
     TestLinkSettingGroup,
     TestScrollEffectSettingGroup,
+    TestBackgroundSettingGroup,
     TestFontFamilySetting,
     TestLinkSetting,
     TestTranslateSetting,
