@@ -84,6 +84,8 @@
     "UNIT_CENTER_CENTER": "中心",
     "UNIT_CENTER_LEFT": "中左",
     "UNIT_CENTER_RIGHT": "中右",
+    "UNIT_STROKE_COLOR": "描边颜色",
+    "UNIT_FILL_COLOR": "填充颜色",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
