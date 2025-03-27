@@ -1,6 +1,6 @@
 <template>
     <div class="relative h-full grid grid-cols-5 gap-1 items-start" :class="$style['library-list']">
-        <UeElLoading v-if="loading || fuseReady" type="circle" />
+        <UeElLoading v-if="loading || fuseReady" type="circle" :delay="20" />
         <template v-if="search && searchLibraryList?.length === 0">
             <UeElEmptyPanel class="col-span-full" :description="t('UNIT_SEARCH_EMPTY')" />
         </template>
@@ -48,6 +48,7 @@ const useIcon = (name: string) => {
 watch(
     () => props.source,
     (iconSource) => {
+        iconLibraryList.value = [];
         getIconList([iconSource])
             .then(() => {
                 iconLibraryList.value = props.lib.find((item) => item.source === iconSource)?.data || [];
