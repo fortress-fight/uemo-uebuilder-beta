@@ -24,7 +24,7 @@ import TestColorPickerPanel from "~/demo/components/TestColorPickerPanel.vue";
 import TestLibraryPanel from "~/demo/components/TestLibraryPanel.vue";
 import TestEmptyPanel from "~/demo/components/TestEmptyPanel.vue";
 import TestMiniEditorPanel from "~/demo/components/TestMiniEditorPanel.vue";
-
+import TestBrowserMockupPanel from "~/demo/components/TestBrowserMockupPanel.vue";
 const testComponents = [
     TestCalenderPicker,
     TestConfirmPanel,
@@ -35,6 +35,7 @@ const testComponents = [
     TestColorPickerPanel,
     TestLibraryPanel,
     TestEmptyPanel,
+    TestBrowserMockupPanel,
 ];
 
 const rowTestComponents = [TestMiniEditorPanel];
