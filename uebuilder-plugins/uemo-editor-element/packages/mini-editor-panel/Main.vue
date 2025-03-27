@@ -1,7 +1,7 @@
 <!--
  * @Description: Mini 编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 03:01:23
+ * @LastEditTime: 2025-03-27 12:01:44
 -->
 <template>
     <div :class="$style['mini-editor-panel']">
@@ -58,7 +58,7 @@ const _prop = withDefaults(defineProps<UeElMiniEditorPanelBaseProps>(), {
     isOperationEnabled: true,
     actionMode: "confirmWithCancel",
 });
-const emit = defineEmits<{ (e: "cancel" | "confirm"): void }>();
+const emit = defineEmits<{ (e: "cancel" | "confirm"): void; (e: "update", value: T): void }>();
 const valueRef = defineModel<T>("value", { required: true });
 
 const cloneValue = shallowRef<T>(_cloneDeep(valueRef.value));
@@ -73,6 +73,7 @@ watch(
     (newValue) => {
         if (!_isEqual(newValue, cloneValue.value)) {
             cloneValue.value = _cloneDeep(newValue);
+            emit("update", cloneValue.value);
         }
     },
     { deep: true }
@@ -80,6 +81,7 @@ watch(
 
 function updateCloneValue(newValue: T) {
     cloneValue.value = _cloneDeep(newValue);
+    emit("update", cloneValue.value);
 }
 
 function triggerHandler(type: "cancel" | "confirm") {
