@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-02-28 01:49:20
+ * @LastEditTime: 2025-03-28 01:14:19
 -->
 <template>
     <TestArea
@@ -23,7 +23,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElNumberInputProps & { testOptionTitle?: string; value?: any })[] = [
     {
-        value: "",
+        value: "fitContent",
         required: false,
         placeholder: "请输入",
         limit: { px: [-200, 200], vw: [-50, 50] },
@@ -33,6 +33,9 @@ const testValueList: (UE_EL_COMPONENT.UeElNumberInputProps & { testOptionTitle?:
         ],
         show: {
             input(value) {
+                if (value.rawValue === "fitContent") {
+                    return "内容宽度";
+                }
                 if (value.num === 0 || !value.num) {
                     return "auto";
                 }

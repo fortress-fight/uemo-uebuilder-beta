@@ -1,7 +1,7 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 12:24:41
+ * @LastEditTime: 2025-03-28 01:10:18
 -->
 <template>
     <UeElTextInput
@@ -92,7 +92,7 @@ const startValue = ref(0);
 const parsedValue = computed(() => {
     const { num, unit } = parseValueString(valueRef.value);
     const limit = Array.isArray(props.limit) ? props.limit : props.limit?.[unit];
-    return { num, unit, limit };
+    return { num, unit, limit, rawValue: valueRef.value };
 });
 
 const showValue = computed(() => {
@@ -105,7 +105,9 @@ const unitValue = computed({
     set: (value) => changeUnit(value ?? ""),
 });
 
-const showUnitSelect = computed(() => props.units?.length && !props.hideUnit);
+const showUnitSelect = computed(() => {
+    return props.units?.length && !props.hideUnit && typeof parsedValue.value.num !== "undefined";
+});
 
 // 输入规则
 const inputRules: UE_EL_UTIL.InputRule[] = [

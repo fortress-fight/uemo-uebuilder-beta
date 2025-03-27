@@ -1,7 +1,7 @@
 /*
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 03:04:54
+ * @LastEditTime: 2025-03-28 01:02:30
  */
 import type { App } from "vue";
 
@@ -28,7 +28,12 @@ export interface UeElNumberInputBaseProps {
     limit?: UE_EL_UTIL.NumInputLimit;
     units?: UE_EL_UTIL.NumInputUnit[];
     show?: {
-        input: (value: { num?: number; unit?: string; limit?: number[] }) => string | undefined;
+        input: (value: {
+            num?: number;
+            unit?: string;
+            limit?: number[];
+            rawValue?: string | number;
+        }) => string | undefined;
         output?: (value: string) => string | undefined;
     };
 }
