@@ -1,10 +1,15 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 04:19:44
+ * @LastEditTime: 2025-03-27 12:34:02
 -->
 <template>
-    <div :class="$style['loading']" class="flex justify-center items-center" :style="{ '--bg': bg, '--color': color }">
+    <div
+        v-if="isShow"
+        :class="$style['loading']"
+        class="flex justify-center items-center"
+        :style="{ '--bg': bg, '--color': color }"
+    >
         <div v-if="type === 'bar'" :class="$style['loading-box--bar']">
             <span v-if="barInfo.message !== false" :class="$style['loading-message']">
                 {{ barInfo.message || t("LOADING_TIP") }}
@@ -32,6 +37,7 @@ defineOptions({ name: "UeElLoading" });
 const { t } = useI18n();
 
 const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
+    delay: 0,
     type: "bar",
     bg: "#fff",
     color: "#000",
@@ -40,6 +46,8 @@ const prop = withDefaults(defineProps<UeElLoadingBaseProps>(), {
 });
 
 const progressInner = useTemplateRef("progressInner");
+
+const isShow = ref(false);
 
 const barInfo = computed(() => prop.bar);
 const circleInfo = computed(() => prop.circle);
@@ -52,6 +60,7 @@ let tweenLoading: GSAPTween | null = null;
  * @description 使用 gsap 对 progressInner 元素进行动画处理，从 0% 动画到 98%，持续时间为 prop.duration。
  */
 function animateProgress() {
+    isShow.value = true;
     clearAnimate();
     if (progressInner.value && barInfo.value.fake) {
         tweenLoading = gsap.fromTo(
@@ -83,8 +92,15 @@ function clearAnimate() {
  * @function onMounted
  * @description 挂载时调用 animateProgress 方法，启动加载动画。
  */
+const timer = ref<number | undefined>(undefined);
 onMounted(() => {
-    animateProgress();
+    if (prop.delay > 0) {
+        timer.value = setTimeout(() => {
+            animateProgress();
+        }, prop.delay);
+    } else {
+        animateProgress();
+    }
 });
 
 /**
@@ -93,6 +109,9 @@ onMounted(() => {
  * @description 在组件卸载前，若存在 gsap 动画，则杀掉 progressInner 元素上的所有动画。
  */
 onBeforeUnmount(() => {
+    if (typeof timer.value !== "undefined") {
+        clearTimeout(timer.value);
+    }
     clearAnimate();
 });
 
