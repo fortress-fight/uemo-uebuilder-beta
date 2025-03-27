@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 03:49:43
+ * @LastEditTime: 2025-03-28 01:18:29
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -21,7 +21,7 @@
             @after-leave="onAfterLeave"
         >
             <div v-if="openModel" :data-root-id="rootId" :class="$style['layer--pop-panel']">
-                <div v-if="maskLayerParams" :class="$style['dialog-mask']"></div>
+                <div v-if="maskLayerParams" :class="$style['dialog-mask']" @click="maskClick"></div>
                 <div
                     ref="dialogBox"
                     :class="$style['dialog-box']"
@@ -240,6 +240,16 @@ function closeModal(e: Event) {
         return;
     }
 
+    openModel.value = false;
+}
+// #endregion
+
+// #region 遮罩层点击处理
+function maskClick() {
+    if (!props.autoClose) return;
+
+    const allowClose = props.checkAllowClose?.();
+    if (allowClose === false) return;
     openModel.value = false;
 }
 // #endregion
