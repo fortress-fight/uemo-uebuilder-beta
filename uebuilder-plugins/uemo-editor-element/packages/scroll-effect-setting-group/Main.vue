@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 02:09:10
+ * @LastEditTime: 2025-03-27 10:58:46
 -->
 <template>
     <UeElSettingGroup
@@ -28,8 +28,11 @@
             </UeElControlGroup>
         </template>
     </UeElSettingGroup>
-    <UeElPopPanel v-model:open="scrollEffectSettingPanelOpen" v-bind="popPanelParams">
+    <UeElPopPanel v-model:open="settingPanelOpen" v-bind="settingPanelParams">
         <UeElScrollEffectSettingPanel ref="scrollEffectSettingPanelRef" v-if="valueRef" v-model:value="valueRef" />
+    </UeElPopPanel>
+    <UeElPopPanel v-model:open="previewPanelOpen" v-bind="previewPanelParams">
+        <UeElScrollEffectPreviewPanel v-if="valueRef" v-model:value="valueRef" @close="previewPanelOpen = false" />
     </UeElPopPanel>
 </template>
 <script lang="ts" setup>
@@ -37,7 +40,9 @@ import type { UeElScrollEffectSettingGroupBaseProps } from "./index";
 import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
 
 import UeElSettingGroup from "../setting-group";
+import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElScrollEffectSettingPanel from "../scroll-effect-setting-panel";
+import UeElScrollEffectPreviewPanel from "./sub-components/PreviewPanel.vue";
 
 import { usePopPanelParam } from "~/utils/pop-panel-mixin";
 
@@ -126,19 +131,23 @@ const enableEffectOptions = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>
     });
 });
 
-const scrollEffectSettingPanelOpen = ref(false);
+const settingPanelOpen = ref(false);
 function openLinkSettingPanel() {
-    scrollEffectSettingPanelOpen.value = true;
+    settingPanelOpen.value = true;
 }
+const previewPanelOpen = ref(false);
 function openPreviewSettingPanel() {
-    alert("openPreviewSettingPanel");
+    previewPanelOpen.value = true;
 }
 
 /**
  * 弹窗位置配置的计算属性
  * @returns {UE_EL_COMPONENT.UeElPopPanelProps | undefined} 弹窗的位置和样式配置
  */
-const popPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$el));
+const settingPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$el));
+const previewPanelParams = computed(() => {
+    return getPopPanelParams("centerPanel", rootComponentRef.value?.$el);
+});
 </script>
 <style lang="scss" module>
 .scroll-effect-setting-group {
