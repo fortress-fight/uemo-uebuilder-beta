@@ -3,7 +3,7 @@ import type { EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib
 /**
  * 弹窗面板的显示模式
  */
-type PopPanelMode = "editorPanel" | "customPanel";
+type PopPanelMode = "editorPanel" | "centerPanel";
 
 /**
  * 默认的位置配置
@@ -25,17 +25,27 @@ const DEFAULT_POSITION_CONFIG: EnhancedComputePositionConfig = {
  * @returns 弹窗面板的位置参数
  */
 export function getPopPanelParams(
-    _mode: PopPanelMode = "editorPanel",
+    mode: PopPanelMode = "editorPanel",
     dom: HTMLElement,
     options: EnhancedComputePositionConfig = {}
 ): UE_EL_COMPONENT.UeElPopPanelProps {
-    return {
-        draggable: true,
-        panel: {
-            position: {
-                refEl: dom,
-                options: { ...DEFAULT_POSITION_CONFIG, ...options },
+    if (mode === "editorPanel") {
+        return {
+            draggable: true,
+            panel: {
+                position: {
+                    refEl: dom,
+                    options: { ...DEFAULT_POSITION_CONFIG, ...options },
+                },
             },
+        };
+    }
+    return {
+        draggable: false,
+        autoClose: false,
+        mask: { color: "rgba(0,0,0,0.2)" },
+        panel: {
+            position: "center",
         },
     };
 }
