@@ -75,6 +75,9 @@ export class UeElButton {
 
         // 初始化每个按钮
         buttons.forEach((button) => {
+            // 如果按钮已经存在，则不进行初始化
+            if (UeElButton.buttonElements.has(button)) return;
+
             const theme = $(button).data("theme") || "normal";
             buttonCreator(theme, button).catch(console.error);
 
