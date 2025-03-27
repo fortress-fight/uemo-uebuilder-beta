@@ -1,7 +1,7 @@
 <!--
  * @Description: 模拟浏览器窗口样式
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 12:05:14
+ * @LastEditTime: 2025-03-28 02:25:12
 -->
 <template>
     <div :class="$style['browser-mockup-panel']">
@@ -33,6 +33,7 @@ const _props = withDefaults(defineProps<UeElBrowserMockupPanelBaseProps>(), {});
 const scroller = useTemplateRef("scroller");
 const browserMockupBody = useTemplateRef("browserMockupBody");
 defineExpose({
+    scroller,
     browserMockupBody,
     scrollTo: (pos: "top" | "bottom", duration = 4) => {
         gsap.to(scroller.value as HTMLElement, {
