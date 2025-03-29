@@ -34,11 +34,10 @@ onMounted(() => {
 
     if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
 
-    ueButtonInstance.initButton([buttonRef.value.$el]);
+    const { kill } = ueButtonInstance.initButton([buttonRef.value.$el]);
 
     onBeforeUnmount(() => {
-        if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
-        ueButtonInstance.destroyButton([buttonRef.value.$el]);
+        kill();
     });
 });
 </script>

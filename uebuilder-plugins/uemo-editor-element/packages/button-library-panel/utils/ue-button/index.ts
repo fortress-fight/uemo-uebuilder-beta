@@ -52,6 +52,10 @@ export class UeElButton {
      * @param buttons - 需要初始化的按钮DOM元素数组
      */
     public initButton(buttons: HTMLElement[]) {
+        if (UeElButton.instance === null) {
+            throw new Error("UeElButton instance has been destroyed. Cannot reinitialize.");
+        }
+
         // 并行初始化组件
         Promise.all([
             this.initLottieComponent(Array.from($(buttons).find("dotlottie-player"))),
@@ -83,6 +87,8 @@ export class UeElButton {
      */
     public destroyButton(buttons: HTMLElement[]) {
         buttons.forEach((button) => {
+            if (!UeElButton.buttonElements.has(button)) return;
+
             UeElButton.resizeObserver.unobserve(button);
             UeElButton.buttonElements.delete(button);
             $(button).trigger(ButtonEventName.DESTROY);
