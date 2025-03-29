@@ -1,11 +1,17 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:01:18
+ * @LastEditTime: 2025-03-29 17:19:01
 -->
 <template>
     <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
         <component :is="controlComponent" v-model:value="optionsRef" :is-image="isImage" />
+        <!-- 提示信息 -->
+        <UeElSettingGroup :title="t('UNIT_TIP')" v-if="tipMessage.length > 0">
+            <template #body>
+                <UeElTipGroup :tips="tipMessage" />
+            </template>
+        </UeElSettingGroup>
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
@@ -38,7 +44,8 @@ defineOptions({
 });
 
 const { t } = useI18n();
-const _props = withDefaults(defineProps<UeElScrollEffectSettingPanelBaseProps>(), {
+const props = withDefaults(defineProps<UeElScrollEffectSettingPanelBaseProps>(), {
+    mode: "editor",
     isImage: false,
 });
 const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: true });
@@ -85,6 +92,13 @@ const controlComponent = computed(() => {
         return "ScrollTranslateSetting";
     }
     return "";
+});
+
+const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps["tips"]>(() => {
+    if (props.mode === "preview") {
+        return [t("SCROLL_SETTING_TIP_1"), t("SCROLL_SETTING_TIP_2")];
+    }
+    return [];
 });
 </script>
 <style lang="scss" module>

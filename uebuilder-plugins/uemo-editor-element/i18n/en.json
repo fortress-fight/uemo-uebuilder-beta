@@ -441,5 +441,8 @@
     "SCROLL_TRANSLATE_SETTING_Y": "Y Offset",
 
     "SCROLL_SETTING_TITLE": "Setting",
-    "SCROLL_SETTING_PREVIEW_TITLE": "Setting Preview"
+    "SCROLL_SETTING_PREVIEW_TITLE": "Setting Preview",
+
+    "SCROLL_SETTING_TIP_1": "1. When the <span style=\"color: #ff740e\">yellow line</span> is aligned, it represents the start of the transition; when the <span style=\"color: #2c48ff\">blue line</span> is aligned, it represents the end of the transition.",
+    "SCROLL_SETTING_TIP_2": "2. The movement offset is the offset distance between the starting position of the window and the ending position of the window. A positive value is downward movement, and a negative value is upward movement."
 }

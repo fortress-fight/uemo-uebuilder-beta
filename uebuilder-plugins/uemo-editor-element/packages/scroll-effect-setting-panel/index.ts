@@ -1,7 +1,7 @@
 /*
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:01:59
+ * @LastEditTime: 2025-03-29 17:17:30
  */
 import type { App } from "vue";
 
@@ -108,6 +108,7 @@ export type UeElScrollEffectSettingPanelValue =
       };
 
 export interface UeElScrollEffectSettingPanelBaseProps {
+    mode?: "preview" | "editor";
     disabled?: boolean;
     isImage?: boolean;
 }
