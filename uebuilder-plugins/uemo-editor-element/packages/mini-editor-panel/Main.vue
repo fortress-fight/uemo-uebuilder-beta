@@ -1,7 +1,7 @@
 <!--
  * @Description: Mini 编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 12:01:44
+ * @LastEditTime: 2025-03-29 23:33:17
 -->
 <template>
     <div :class="$style['mini-editor-panel']">
@@ -138,6 +138,8 @@ function triggerHandler(type: "cancel" | "confirm") {
         }
         .editor-panel-wrapper {
             flex: 1;
+
+            min-height: 0;
         }
         .editor-panel {
             height: 100%;
