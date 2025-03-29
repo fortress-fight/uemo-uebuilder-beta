@@ -11,7 +11,7 @@
 import $pageStyle from "../utils/ue-button/app.module.scss";
 import ButtonNormal from "./ButtonNormal.vue";
 import ButtonRotate from "./ButtonRotate.vue";
-import { UeElButton } from "../utils/ue-button";
+import { ueElButton } from "../utils/ue-button";
 
 defineOptions({ name: "UeElPreviewButton", components: { ButtonNormal, ButtonRotate } });
 
@@ -30,11 +30,9 @@ const componentName = computed(() => {
 });
 
 onMounted(() => {
-    const ueButtonInstance = new UeElButton();
-
     if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
 
-    const { kill } = ueButtonInstance.initButton([buttonRef.value.$el]);
+    const { kill } = ueElButton.initButton([buttonRef.value.$el]);
 
     onBeforeUnmount(() => {
         kill();
