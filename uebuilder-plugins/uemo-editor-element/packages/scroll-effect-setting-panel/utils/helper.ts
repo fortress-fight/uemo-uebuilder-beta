@@ -42,7 +42,7 @@ export const defaultScrollOptions = {
     translate: {
         startPos: "top bottom",
         endPos: "bottom bottom",
-        xStart: "0px",
+        xStart: "-50px",
         xEnd: "0px",
         yStart: "0px",
         yEnd: "0px",
