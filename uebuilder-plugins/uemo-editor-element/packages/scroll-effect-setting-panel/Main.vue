@@ -1,13 +1,13 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-29 17:19:01
+ * @LastEditTime: 2025-03-30 01:33:41
 -->
 <template>
     <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
         <component :is="controlComponent" v-model:value="optionsRef" :is-image="isImage" />
         <!-- 提示信息 -->
-        <UeElSettingGroup :title="t('UNIT_TIP')" v-if="tipMessage.length > 0">
+        <UeElSettingGroup :title="t('SCROLL_PANEL_TIP_TITLE')" v-if="tipMessage.length > 0">
             <template #body>
                 <UeElTipGroup :tips="tipMessage" />
             </template>
@@ -95,10 +95,14 @@ const controlComponent = computed(() => {
 });
 
 const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps["tips"]>(() => {
-    if (props.mode === "preview") {
-        return [t("SCROLL_SETTING_TIP_1"), t("SCROLL_SETTING_TIP_2")];
+    const tips: string[] = [];
+    if (props.mode !== "preview") return tips;
+
+    tips.push(t("SCROLL_SETTING_TIP_1"));
+    if (["rotate", "opacity", "scale", "translate"].includes(valueRef.value.type || "")) {
+        tips.push(t("SCROLL_SETTING_TIP_2"));
     }
-    return [];
+    return tips;
 });
 </script>
 <style lang="scss" module>
