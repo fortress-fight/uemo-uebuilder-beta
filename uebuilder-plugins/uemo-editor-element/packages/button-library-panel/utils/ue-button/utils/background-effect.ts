@@ -1,6 +1,6 @@
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import { ButtonEventName } from "./helper";
+import { ButtonEventEventBus } from "./event-bus";
 
 /**
  * 初始化按钮背景悬浮效果
@@ -64,16 +64,16 @@ export async function initBackgroundHoverEffect(button: HTMLElement) {
             );
         },
         destroy: () => {
-            $(button).off(ButtonEventName.HOVER, controller.hover);
-            $(button).off(ButtonEventName.LEAVE, controller.leave);
-            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+            ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.hover);
+            ButtonEventEventBus.unbind($(button), "ue.button.leave", controller.leave);
+            ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
     // 绑定事件
-    $(button).on(ButtonEventName.HOVER, controller.hover);
-    $(button).on(ButtonEventName.LEAVE, controller.leave);
-    $(button).on(ButtonEventName.DESTROY, controller.destroy);
+    ButtonEventEventBus.bind($(button), "ue.button.hover", controller.hover);
+    ButtonEventEventBus.bind($(button), "ue.button.leave", controller.leave);
+    ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 
     return controller;
 }

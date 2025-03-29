@@ -3,15 +3,9 @@ import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
 import { mobileCheck } from "@stone/uemo-editor-utils/lib/device-check";
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import $pageStyle from "../app.module.scss";
+import { ButtonEventEventBus } from "./event-bus";
 
-export enum ButtonEventName {
-    RESIZE = "ue.button.resize",
-    HOVER = "ue.button.hover",
-    LEAVE = "ue.button.leave",
-    PLAY = "ue.button.play",
-    DESTROY = "ue.button.destroy",
-}
+import $pageStyle from "../app.module.scss";
 
 /**
  * 初始化按钮悬浮事件
@@ -26,21 +20,23 @@ export function initHoverEvent(button: HTMLElement) {
 
     const controller = {
         hover: () => {
-            $(button).trigger(ButtonEventName.HOVER);
+            ButtonEventEventBus.emit($(button), "ue.button.hover");
         },
         leave: () => {
-            $(button).trigger(ButtonEventName.LEAVE);
+            ButtonEventEventBus.emit($(button), "ue.button.leave");
         },
         destroy: () => {
             $(button).off(enterEventName + ".hover", controller.hover);
             $(button).off(leaveEventName + ".hover", controller.leave);
-            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+
+            ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
     $(button).on(enterEventName + ".hover", controller.hover);
     $(button).on(leaveEventName + ".hover", controller.leave);
-    $(button).on(ButtonEventName.DESTROY, controller.destroy);
+
+    ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }
 
 /**
@@ -86,8 +82,9 @@ export function initLottieIcon(button: HTMLElement) {
         },
         destroy: () => {
             lottieIcons.off(".hoverLottie");
-            $(button).off(ButtonEventName.HOVER, controller.hover);
-            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+
+            ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.hover);
+            ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
@@ -99,7 +96,8 @@ export function initLottieIcon(button: HTMLElement) {
             handleLottie(ev.currentTarget as DotLottiePlayer, "reset");
         });
 
-    $(button).on(ButtonEventName.HOVER, controller.hover).on(ButtonEventName.DESTROY, controller.destroy);
+    ButtonEventEventBus.bind($(button), "ue.button.hover", controller.hover);
+    ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }
 
 /**

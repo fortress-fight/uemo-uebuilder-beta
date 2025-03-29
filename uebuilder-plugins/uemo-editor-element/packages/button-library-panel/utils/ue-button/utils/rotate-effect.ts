@@ -1,6 +1,6 @@
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import { ButtonEventName } from "./helper";
+import { ButtonEventEventBus } from "./event-bus";
 
 /**
  * 初始化按钮旋转效果
@@ -20,15 +20,15 @@ export function initRotateEffect(button: HTMLElement) {
             //
         },
         destroy: () => {
-            $(button).off(ButtonEventName.RESIZE, updateOriginX);
-            $(button).off(ButtonEventName.PLAY, controller.play);
-            $(button).off(ButtonEventName.HOVER, controller.play);
-            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+            ButtonEventEventBus.unbind($(button), "ue.button.resize", updateOriginX);
+            ButtonEventEventBus.unbind($(button), "ue.button.play", controller.play);
+            ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.play);
+            ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
-    $(button).on(ButtonEventName.RESIZE, updateOriginX);
-    $(button).on(ButtonEventName.PLAY, controller.play);
-    $(button).on(ButtonEventName.HOVER, controller.play);
-    $(button).on(ButtonEventName.DESTROY, controller.destroy);
+    ButtonEventEventBus.bind($(button), "ue.button.resize", updateOriginX);
+    ButtonEventEventBus.bind($(button), "ue.button.play", controller.play);
+    ButtonEventEventBus.bind($(button), "ue.button.hover", controller.play);
+    ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }

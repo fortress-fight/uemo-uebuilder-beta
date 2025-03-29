@@ -1,6 +1,6 @@
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
-import { ButtonEventName } from "./utils/helper";
+import { ButtonEventEventBus } from "./utils/event-bus";
 import { buttonCreator } from "./utils/create-button";
 
 /**
@@ -22,7 +22,7 @@ export class UeElButton {
         UeElButton.resizeObserver = new ResizeObserver(
             _debounce((targets) => {
                 targets.forEach(({ target }: { target: HTMLElement }) => {
-                    $(target).trigger(ButtonEventName.RESIZE);
+                    ButtonEventEventBus.emit($(target), "ue.button.resize");
                 });
             }, 200)
         );
@@ -91,7 +91,8 @@ export class UeElButton {
 
             UeElButton.resizeObserver.unobserve(button);
             UeElButton.buttonElements.delete(button);
-            $(button).trigger(ButtonEventName.DESTROY);
+            ButtonEventEventBus.emit($(button), "ue.button.destroy");
+            ButtonEventEventBus.clear($(button));
         });
 
         if (UeElButton.buttonElements.size === 0) {

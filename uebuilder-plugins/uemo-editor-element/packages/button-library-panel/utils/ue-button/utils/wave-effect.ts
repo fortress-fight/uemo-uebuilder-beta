@@ -1,6 +1,6 @@
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import { ButtonEventName } from "./helper";
+import { ButtonEventEventBus } from "./event-bus";
 import $pageStyle from "../app.module.scss";
 
 /**
@@ -57,14 +57,14 @@ export async function initWaveEffect(button: HTMLElement) {
         destroy: () => {
             timeline.kill();
             $(textBox!).text(originText || "");
-            $(button).off(ButtonEventName.PLAY, controller.play);
-            $(button).off(ButtonEventName.HOVER, controller.play);
-            $(button).off(ButtonEventName.DESTROY, controller.destroy);
+            ButtonEventEventBus.unbind($(button), "ue.button.play", controller.play);
+            ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.play);
+            ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
     // 将控制器绑定到按钮元素
-    $(button).on(ButtonEventName.PLAY, controller.play);
-    $(button).on(ButtonEventName.HOVER, controller.play);
-    $(button).on(ButtonEventName.DESTROY, controller.destroy);
+    ButtonEventEventBus.bind($(button), "ue.button.play", controller.play);
+    ButtonEventEventBus.bind($(button), "ue.button.hover", controller.play);
+    ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }
