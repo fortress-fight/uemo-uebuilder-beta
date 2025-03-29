@@ -19,30 +19,43 @@ type UeScrollEffectFactoryParams = {
 /**
  * 滚动效果工厂类
  * 用于管理和创建滚动效果，采用单例模式
+ * 负责处理滚动效果的初始化、更新和销毁，以及相关事件监听
  */
-export class UeScrollEffectFactory {
-    /** 单例实例 */
-    private static instance: UeScrollEffectFactory | null;
-    /** 存储DOM元素及其参数的映射 */
-    private static doms = new Map<HTMLElement, UeScrollEffectFactoryDomParams>();
-    /** 用于监听元素大小变化的观察器 */
-    private static resizeObserver: ResizeObserver;
-    /** 用于监听元素可见性的观察器 */
-    private static visibleObserver: IntersectionObserver | null = null;
+class UeScrollEffectFactory {
+    /** 标记工厂是否已初始化 */
+    private initialized = false;
 
-    /** 工厂参数 */
-    private params: UeScrollEffectFactoryParams = {};
+    /** 存储DOM元素及其参数的映射 */
+    private doms = new Map<HTMLElement, UeScrollEffectFactoryDomParams>();
+
+    /** 用于监听元素大小变化的观察器 */
+    private resizeObserver: ResizeObserver | null = null;
+
+    /** 用于监听元素可见性的观察器 */
+    private visibleObserver: IntersectionObserver | null = null;
 
     /**
      * 创建滚动效果工厂实例
-     * @param params - 工厂参数
+     * @param params - 工厂参数，包含滚动容器和调试模式配置
      */
-    constructor(params: UeScrollEffectFactoryParams) {
-        if (UeScrollEffectFactory.instance) return UeScrollEffectFactory.instance;
+    constructor(private params: UeScrollEffectFactoryParams) {
+        this.init();
+    }
 
-        this.params = params;
+    /**
+     * 初始化工厂实例，绑定必要的事件监听
+     */
+    init() {
+        this.bindEvent();
+        this.initialized = true;
+    }
 
-        UeScrollEffectFactory.resizeObserver = new ResizeObserver(
+    /**
+     * 绑定事件监听器
+     * 包括元素大小变化、可见性变化和窗口大小变化的事件监听
+     */
+    bindEvent() {
+        this.resizeObserver = new ResizeObserver(
             _debounce((targets) => {
                 targets.forEach(({ target }: { target: HTMLElement }) => {
                     ScrollEffectEventEventBus.emit($(target), "ue.scroll-effect.resize");
@@ -50,7 +63,7 @@ export class UeScrollEffectFactory {
             }, 200)
         );
 
-        UeScrollEffectFactory.visibleObserver = new IntersectionObserver((entries) => {
+        this.visibleObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) {
                     ScrollEffectEventEventBus.emit($(entry.target), "ue.scroll-effect.visible");
@@ -61,8 +74,23 @@ export class UeScrollEffectFactory {
         $(window).on("resize.scroll-effect-factory", () => {
             ScrollEffectEventEventBus.emit($(window), "ue.scroll-effect.window-resize");
         });
+    }
 
-        UeScrollEffectFactory.instance = this;
+    /**
+     * 更新工厂的默认参数
+     * @param params - 新的工厂参数
+     */
+    updateDefaultParams(params: UeScrollEffectFactoryParams) {
+        this.params = params;
+    }
+
+    /**
+     * 创建新的滚动效果工厂实例
+     * @param params - 工厂参数
+     * @returns 新的 UeScrollEffectFactory 实例
+     */
+    create(params: UeScrollEffectFactoryParams) {
+        return new UeScrollEffectFactory(params);
     }
 
     /**
@@ -72,22 +100,22 @@ export class UeScrollEffectFactory {
      * @returns 包含销毁方法的对象
      */
     initScrollEffect(doms: HTMLElement[], params: UeScrollEffectFactoryDomParams) {
-        if (UeScrollEffectFactory.instance === null) {
-            throw new Error("UeScrollEffectFactory instance has been destroyed. Cannot reinitialize.");
+        if (!this.initialized) {
+            this.init();
         }
 
         doms.forEach((dom) => {
-            if (UeScrollEffectFactory.doms.has(dom)) return;
+            if (this.doms.has(dom)) return;
 
             initScrollEffect(dom, { scroller: this.params.scroller, ...params });
 
-            UeScrollEffectFactory.resizeObserver.observe(dom);
-            UeScrollEffectFactory.visibleObserver?.observe(dom);
-            UeScrollEffectFactory.doms.set(dom, params);
+            this.resizeObserver?.observe(dom);
+            this.visibleObserver?.observe(dom);
+            this.doms.set(dom, params);
         });
         return {
             kill: () => {
-                this.destroyScrollEffect(doms);
+                this.destroy(doms);
             },
         };
     }
@@ -100,26 +128,25 @@ export class UeScrollEffectFactory {
     updateScrollEffect(doms: HTMLElement[], force = false) {
         if (force) {
             doms.forEach((dom) => {
-                const domParams = UeScrollEffectFactory.doms.get(dom);
+                const domParams = this.doms.get(dom);
                 if (!domParams) {
                     console.warn("No params found for element");
                     return;
                 }
 
                 // 深拷贝参数
-                const lastParams = { ...this.params };
                 const lastDomParams = { ...domParams };
 
                 // 销毁当前效果（包含事件清理）
-                this.destroyScrollEffect([dom]);
+                this.destroy([dom]);
 
                 // 确保实例存在
-                if (!UeScrollEffectFactory.instance) {
-                    UeScrollEffectFactory.instance = new UeScrollEffectFactory(lastParams);
+                if (!this.initialized) {
+                    this.init();
                 }
 
                 // 重新初始化效果
-                UeScrollEffectFactory.instance.initScrollEffect([dom], lastDomParams);
+                this.initScrollEffect([dom], lastDomParams);
             });
         } else {
             doms.forEach((dom) => {
@@ -129,31 +156,42 @@ export class UeScrollEffectFactory {
     }
 
     /**
-     * 销毁多个元素的滚动效果
-     * @param doms - 目标DOM元素数组
+     * 销毁所有滚动效果和工厂实例
      */
-    destroyScrollEffect(doms: HTMLElement[]) {
+    private destroyInstance() {
+        this.removeEvent();
+        this.initialized = false;
+    }
+
+    /**
+     * 移除所有事件监听器
+     */
+    private removeEvent() {
+        this.resizeObserver?.disconnect();
+        this.visibleObserver?.disconnect();
+        $(window).off("resize.scroll-effect-factory");
+    }
+
+    /**
+     * 销毁多个元素的滚动效果
+     * @param doms - 目标DOM元素数组，如果不提供则销毁所有元素
+     */
+    destroy(doms: HTMLElement[] = Array.from(this.doms.keys())) {
         doms.forEach((dom) => {
-            UeScrollEffectFactory.resizeObserver.unobserve(dom);
-            UeScrollEffectFactory.visibleObserver?.unobserve(dom);
-            UeScrollEffectFactory.doms.delete(dom);
+            this.resizeObserver?.unobserve(dom);
+            this.visibleObserver?.unobserve(dom);
+            this.doms.delete(dom);
 
             ScrollEffectEventEventBus.emit($(dom), "ue.scroll-effect.destroy");
             ScrollEffectEventEventBus.clear($(dom));
         });
 
-        if (UeScrollEffectFactory.doms.size === 0) {
-            UeScrollEffectFactory.instance = null;
-            UeScrollEffectFactory.resizeObserver.disconnect();
-            UeScrollEffectFactory.visibleObserver?.disconnect();
-            $(window).off("resize.scroll-effect-factory");
+        if (this.doms.size === 0) {
+            this.destroyInstance();
         }
     }
-
-    /**
-     * 销毁所有滚动效果和工厂实例
-     */
-    destroy() {
-        this.destroyScrollEffect(Array.from(UeScrollEffectFactory.doms.keys()));
-    }
 }
+
+const ueScrollEffect = new UeScrollEffectFactory({});
+
+export { ueScrollEffect };

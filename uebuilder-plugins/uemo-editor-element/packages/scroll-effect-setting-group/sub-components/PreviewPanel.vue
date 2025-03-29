@@ -42,7 +42,7 @@ import type { UeElBrowserMockupPanelInstance } from "@stone/uemo-editor-element/
 
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
-import { UeScrollEffectFactory } from "../utils/ue-scroll-effect";
+import { ueScrollEffect } from "../utils/ue-scroll-effect";
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
@@ -70,32 +70,24 @@ const scrollToBottom = () => {
     browserMockupPanel.value?.scrollTo("bottom");
 };
 
-function createScrollEffect() {
+onMounted(() => {
     if (!browserMockupPanel.value?.scroller) return;
-    const ueScrollEffectFactory = new UeScrollEffectFactory({
+
+    ueScrollEffect.updateDefaultParams({
         scroller: browserMockupPanel.value.scroller,
     });
 
-    ueScrollEffectFactory.initScrollEffect([previewBox.value as HTMLElement], {
+    const { kill } = ueScrollEffect.initScrollEffect([previewBox.value as HTMLElement], {
         stage: previewBody.value as HTMLElement,
         debugger: true,
     });
 
     eventBus.on("update", () => {
-        ueScrollEffectFactory.updateScrollEffect([previewBox.value as HTMLElement], true);
+        ueScrollEffect.updateScrollEffect([previewBox.value as HTMLElement], true);
     });
 
-    return {
-        destroy: () => {
-            ueScrollEffectFactory.destroy();
-        },
-    };
-}
-
-onMounted(() => {
-    const ctrl = createScrollEffect();
     onBeforeUnmount(() => {
-        ctrl?.destroy?.();
+        kill();
     });
 });
 </script>
