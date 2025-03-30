@@ -47,6 +47,20 @@ class UeParallaxController {
             const element = this.getController().createElement({ el: dom, props });
             this.domMap.set(dom, { element, props });
         });
+
+        return this;
+    }
+
+    updateScrollContainer(dom: HTMLElement) {
+        this.getController().updateScrollContainer(dom);
+    }
+
+    disableParallaxController() {
+        this.getController().disableParallaxController();
+    }
+
+    enableParallaxController() {
+        this.getController().enableParallaxController();
     }
 
     /**
@@ -97,4 +111,6 @@ class UeParallaxController {
     }
 }
 
-export default new UeParallaxController({});
+const ueParallaxController = new UeParallaxController({});
+
+export { ueParallaxController };

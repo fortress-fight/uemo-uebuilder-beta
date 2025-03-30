@@ -15983,6 +15983,11 @@ uglify-js@^3.1.4, uglify-js@^3.5.1:
   resolved "https://registry.npmmirror.com/uglify-js/-/uglify-js-3.19.3.tgz#82315e9bbc6f2b25888858acd1fff8441035b77f"
   integrity sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==
 
+ukiyojs@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/ukiyojs/-/ukiyojs-4.2.0.tgz#45e2f23de4f6625953b6bd971e144c8e153359f9"
+  integrity sha512-Y3rmK+Kdq4JooPk1mEsYIOFUOlH6uDZm4NGQW37knbPlFgV9WmMmsYuimnBsubd++gLrfDPKzqEzz1rg5lMAbQ==
+
 unbox-primitive@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/unbox-primitive/-/unbox-primitive-1.0.2.tgz#29032021057d5e6cdbd08c5129c226dff8ed6f9e"
