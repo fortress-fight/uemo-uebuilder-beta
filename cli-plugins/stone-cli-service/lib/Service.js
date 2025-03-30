@@ -115,7 +115,7 @@ module.exports = class Service {
         const load = (envPath) => {
             try {
                 const env = dotenv.config({ path: envPath, debug: process.env.DEBUG });
-                dotenvExpand.expand(env);
+                dotenvExpand(env);
                 logger(envPath, env);
             } catch (err) {
                 // only ignore error if file is not found
