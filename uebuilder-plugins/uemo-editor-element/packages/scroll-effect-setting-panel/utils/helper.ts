@@ -1,4 +1,4 @@
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
 
 export function getEffectName(type: string) {
     const { t } = i18n.global;

@@ -1,10 +1,11 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
 
 import { normalUpload } from "./normal-upload";
 import { qiniuUpload } from "./qiniu-upload";
 import { checkFileSize } from "./helper";
+import { UeElError, UeElErrorCode } from "../../../utils/error";
 
 const { t } = i18n.global;
 

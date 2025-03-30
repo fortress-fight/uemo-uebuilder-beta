@@ -7,7 +7,8 @@ import { videoUpload } from "./video-upload";
 import { imageUpload } from "./image-upload";
 import { assetUpload } from "./asset-upload";
 
-import { i18n } from "@/i18n";
+import { UeElError, UeElErrorCode } from "../../../utils/error";
+import { i18n } from "../../../src/i18n";
 const { t } = i18n.global;
 
 /**

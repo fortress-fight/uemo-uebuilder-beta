@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮样式设置控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 01:46:25
+ * @LastEditTime: 2025-03-31 01:33:06
 -->
 <template>
     <UeElControlGroup :class="$style['button-style-setting']" :col-count="2" ref="controlGroup">
@@ -35,7 +35,7 @@
 import type { UeElButtonStyleSettingBaseProps } from "./index";
 import type { UeElButtonStyleSettingPanelValue } from "../button-style-setting-panel";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import UeElControlGroup from "../control-group";
 
 defineOptions({ name: "UeElButtonStyleSetting" });

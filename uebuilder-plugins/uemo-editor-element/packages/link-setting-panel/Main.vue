@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:04:39
+ * @LastEditTime: 2025-03-31 01:33:27
 -->
 <template>
     <UeElEditorPanel
@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import type { UeElLinkSettingPanelBaseProps, UeElLinkSettingPanelValue } from "./index";
 
-import { useDetectModelChange } from "~/utils/model-mixin";
+import { useDetectModelChange } from "../../utils/model-mixin";
 import FunctionLink from "./sub-components/FunctionLink.vue";
 import FrameLink from "./sub-components/FrameLink.vue";
 import NormalLink from "./sub-components/NormalLink.vue";

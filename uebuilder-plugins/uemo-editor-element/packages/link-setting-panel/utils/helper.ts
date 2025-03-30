@@ -1,5 +1,5 @@
 import { checkSiteLink, isImageReg, isVideoReg, isDownloadFileReg } from "@stone/uemo-editor-utils/lib/utils";
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
 
 export function checkLink(
     type: "link" | "frame" | "function",

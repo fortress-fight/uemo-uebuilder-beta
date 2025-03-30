@@ -1,7 +1,8 @@
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
 import { getSizeDesc } from "@stone/uemo-editor-utils/lib/utils";
 import { axios } from "@stone/uemo-editor-utils/lib/axios";
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
+import { UeElError, UeElErrorCode } from "../../../utils/error";
 
 const DEFAULT_LIMIT_SIZE = 2048;
 
