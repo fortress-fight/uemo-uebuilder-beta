@@ -66,6 +66,8 @@ class UeScrollEffectFactory {
         this.visibleObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (!entry.isIntersecting) {
+                    ScrollEffectEventEventBus.emit($(entry.target), "ue.scroll-effect.hidden");
+                } else {
                     ScrollEffectEventEventBus.emit($(entry.target), "ue.scroll-effect.visible");
                 }
             });

@@ -5,6 +5,9 @@ import type {
     ScrollScaleOptions,
     ScrollTranslateOptions,
     ScrollStickyOptions,
+    ScrollFixedOptions,
+    ScrollParallaxOptions,
+    ScrollImageParallaxOptions,
     UeElScrollEffectSettingPanelValue,
 } from "~/packages/scroll-effect-setting-panel";
 
@@ -14,16 +17,17 @@ import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
 import $pageStyle from "../app.module.scss";
 import { ScrollEffectEventEventBus } from "./event-bus";
+import { i18n } from "@/i18n";
 
 /**
- * 滚动效果工厂DOM参数接口
+ * 滾動效果工廠DOM參數接口
  */
 export type UeScrollEffectFactoryDomParams = {
-    /** 舞台元素 */
+    /** 舞臺元素 */
     stage: HTMLElement;
-    /** 滚动容器元素 */
+    /** 滾動容器元素 */
     scroller?: HTMLElement;
-    /** 是否开启调试模式 */
+    /** 是否開啟調試模式 */
     debugger?: boolean;
 };
 
@@ -31,29 +35,31 @@ const DEFAULT_START = "top bottom";
 const DEFAULT_END = "bottom bottom";
 
 function updateScrollMarkerText(start: string, end: string) {
+    const { t } = i18n.global;
+
     const [tStart, cStart] = start.split(" ");
     const [tEnd, cEnd] = end.split(" ");
-    const textMap: Record<string, string> = { top: "顶部", center: "中间", bottom: "底部" };
+    const textMap: Record<string, string> = { top: t("UNIT_TOP"), center: t("UNIT_CENTER"), bottom: t("UNIT_BOTTOM") };
 
     $(".gsap-marker-scroller-start")
-        .text("窗口" + textMap[cStart] + "【起始】")
+        .text(`${textMap[cStart]} [${t("UNIT_START")}]`)
         .css({ width: "auto", "border-width": "0px 0px 2px" });
     $(".gsap-marker-scroller-end")
-        .text("窗口" + textMap[cEnd] + "【结束】")
+        .text(`${textMap[cEnd]} [${t("UNIT_END")}]`)
         .css({ width: "auto", "border-width": "2px 0px 0px" });
     $(".gsap-marker-start")
-        .text("目标" + textMap[tStart] + "【起始】")
+        .text(`${textMap[tStart]} [${t("UNIT_START")}]`)
         .css({ width: "auto", "border-width": "0px 0px 2px" });
     $(".gsap-marker-end")
-        .text("目标" + textMap[tEnd] + "【结束】")
+        .text(`${textMap[tEnd]} [${t("UNIT_END")}]`)
         .css({ width: "auto", "border-width": "2px 0px 0px" });
 }
 
 /**
- * 获取滚动效果的触发参数
- * @param dom - 目标DOM元素
- * @param params - 滚动效果参数
- * @returns ScrollTrigger的静态变量配置
+ * 獲取滾動效果的觸發參數
+ * @param dom - 目標DOM元素
+ * @param params - 滾動效果參數
+ * @returns ScrollTrigger的靜態變量配置
  */
 function getScrollEffectParams(
     dom: HTMLElement,
@@ -66,15 +72,15 @@ function getScrollEffectParams(
     const { startPos, endPos, startPosDis, endPosDis, triggerMode, triggerDelay, triggerDuration, triggerEase } =
         params.options;
 
-    // 设置默认的起始和结束位置
+    // 設置默認的起始和結束位置
     const start = startPos || DEFAULT_START;
     const end = endPos || DEFAULT_END;
 
-    // 计算带有偏移量的起始和结束位置
+    // 計算帶有偏移量的起始和結束位置
     const startParam = startPosDis ? `${start}+=${startPosDis}` : start;
     const endParam = endPosDis ? `${end}+=${endPosDis}` : end;
 
-    // 创建基础滚动触发参数
+    // 創建基礎滾動觸發參數
     const scrollTriggerParam: ScrollTrigger.StaticVars = {
         trigger: dom,
         start: startParam,
@@ -83,7 +89,7 @@ function getScrollEffectParams(
         scroller: params.scroller,
     };
 
-    // 创建进度动画
+    // 創建進度動畫
     const progress = { value: 0 };
     const progressAnimation = gsap.to(progress, {
         ease: "none",
@@ -98,7 +104,7 @@ function getScrollEffectParams(
     });
 
     if (triggerMode === "enter-leaver") {
-        // 进入离开模式的配置
+        // 進入離開模式的配置
         const delayValue = triggerDelay ? parseFloat(triggerDelay) : 0;
         const duration = triggerDuration ? parseFloat(triggerDuration) : 1;
         const ease = triggerEase || "power3.out";
@@ -117,7 +123,7 @@ function getScrollEffectParams(
         };
     }
 
-    // 默认滚动模式的配置
+    // 默認滾動模式的配置
     return {
         ...scrollTriggerParam,
         animation: gsap.to(progressAnimation, {
@@ -129,7 +135,7 @@ function getScrollEffectParams(
 }
 
 /**
- * 创建滚动效果
+ * 創建滾動效果
  *
  * @param {HTMLElement} dom
  * @param {{
@@ -181,15 +187,14 @@ function createScrollEffect(
     }, 200);
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.resize", debounceResizeCallback);
-    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.visible", debounceResizeCallbackVisible);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.hidden", debounceResizeCallbackVisible);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", resizeCallBack);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.window-resize", debounceResizeCallback);
-
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         scrollControl.kill();
 
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.resize", debounceResizeCallback);
-        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.visible", debounceResizeCallbackVisible);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.hidden", debounceResizeCallbackVisible);
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", resizeCallBack);
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.window-resize", debounceResizeCallback);
     });
@@ -198,10 +203,10 @@ function createScrollEffect(
 }
 
 /**
- * 初始化透明度滚动效果
- * @param dom - 目标DOM元素
- * @param params - 初始化参数
- * @param options - 滚动效果参数
+ * 初始化透明度滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
  */
 function initOpacityScrollEffect(
     dom: HTMLElement,
@@ -220,10 +225,10 @@ function initOpacityScrollEffect(
 }
 
 /**
- * 初始化旋转滚动效果
- * @param dom - 目标DOM元素
- * @param params - 初始化参数
- * @param options - 滚动效果参数
+ * 初始化旋轉滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
  */
 function initRotateScrollEffect(
     dom: HTMLElement,
@@ -253,10 +258,10 @@ function initRotateScrollEffect(
 }
 
 /**
- * 初始化缩放滚动效果
- * @param dom - 目标DOM元素
- * @param params - 初始化参数
- * @param options - 滚动效果参数
+ * 初始化縮放滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
  */
 function initScaleScrollEffect(
     dom: HTMLElement,
@@ -283,10 +288,10 @@ function initScaleScrollEffect(
 }
 
 /**
- * 初始化平移滚动效果
- * @param dom - 目标DOM元素
- * @param params - 初始化参数
- * @param options - 滚动效果参数
+ * 初始化平移滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
  */
 function initTranslateScrollEffect(
     dom: HTMLElement,
@@ -317,7 +322,7 @@ function initTranslateScrollEffect(
 }
 
 /**
- * 初始化粘性滚动效果
+ * 初始化粘性滾動效果
  *
  * @param {HTMLElement} dom
  * @param {UeScrollEffectFactoryDomParams} params
@@ -373,18 +378,132 @@ function initStickyScrollEffect(
         updateScrollMarkerText("top top", "bottom bottom");
     }
 
-    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", () => {
+    const updateSticky = _debounce(() => {
         ctrl.refresh();
-    });
+    }, 200);
+
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", updateSticky);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         ctrl.kill();
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", updateSticky);
+    });
+}
+
+async function initFixedScrollEffect(
+    dom: HTMLElement,
+    params: UeScrollEffectFactoryDomParams,
+    options: ScrollFixedOptions = {}
+) {
+    const fixedOption = Object.assign({ moveY: "0px" }, options);
+
+    const { ueParallaxController } = await import("@stone/uemo-editor-utils/lib/parallax-controller");
+
+    if (params.scroller) {
+        ueParallaxController.updateScrollContainer(params.scroller);
+    }
+
+    const rect = dom.getBoundingClientRect();
+    const wH = params.scroller ? params.scroller.clientHeight : window.innerHeight;
+    const margin = wH + (wH - rect.height) / 2;
+    const moveYNum = parseFloat(fixedOption.moveY);
+    const translateY: [string, string] = ["-" + (wH * 2 - moveYNum) + "px", wH * 2 + moveYNum + "px"];
+
+    const ctrl = ueParallaxController.createElement([dom], {
+        rootMargin: { top: margin, right: 0, bottom: margin, left: 0 },
+        translateY,
+    });
+
+    const updateParallax = _debounce(() => {
+        ctrl.update();
+    }, 200);
+
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.window-resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
+        ctrl.destroy();
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.resize", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.window-resize", updateParallax);
     });
 }
 
 /**
- * 初始化单个元素的滚动效果
- * @param dom - 目标DOM元素
- * @param params - 初始化参数
+ * 初始化視差滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
+ */
+async function initParallaxScrollEffect(
+    dom: HTMLElement,
+    params: UeScrollEffectFactoryDomParams,
+    options: ScrollParallaxOptions = {}
+) {
+    const { ueParallaxController } = await import("@stone/uemo-editor-utils/lib/parallax-controller");
+
+    const parallaxOption = Object.assign({ speed: "-100" }, options);
+
+    if (params.scroller) {
+        ueParallaxController.updateScrollContainer(params.scroller);
+    }
+
+    const ctrl = ueParallaxController.createElement([dom], {
+        speed: parseFloat(parallaxOption.speed),
+    });
+
+    const updateParallax = _debounce(() => {
+        ctrl.update();
+    }, 200);
+
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.window-resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
+        ctrl.destroy();
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.resize", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.window-resize", updateParallax);
+    });
+}
+
+async function initImageParallaxScrollEffect(
+    dom: HTMLElement,
+    params: UeScrollEffectFactoryDomParams,
+    options: ScrollImageParallaxOptions = {}
+) {
+    const { Ukiyo } = await import("@stone/uemo-editor-utils/lib/ukiyojs");
+
+    const useOptions = Object.assign({ mode: "image" }, options);
+
+    $(params.stage).attr("data-image-parallax-mode", useOptions.mode);
+
+    const ctrl = new Ukiyo(dom, {
+        scale: 1.5,
+        speed: 1.3,
+        willChange: true,
+        externalRAF: false,
+        wrapperClass: $pageStyle["js-image-parallax"],
+    });
+
+    const updateParallax = _debounce(() => {
+        ctrl.reset();
+    }, 200);
+
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.window-resize", updateParallax);
+    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
+        ctrl.destroy();
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.resize", updateParallax);
+        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.window-resize", updateParallax);
+    });
+}
+
+/**
+ * 初始化單個元素的滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
  */
 export function initScrollEffect(dom: HTMLElement, params: UeScrollEffectFactoryDomParams) {
     $(params.stage).removeData("scroll-effect");
@@ -408,6 +527,21 @@ export function initScrollEffect(dom: HTMLElement, params: UeScrollEffectFactory
             break;
         case "sticky":
             initStickyScrollEffect(dom, params, scrollEffectParams.options);
+            break;
+        case "fixed":
+            initFixedScrollEffect(dom, params, scrollEffectParams.options).catch((error) => {
+                console.error(error);
+            });
+            break;
+        case "parallax":
+            initParallaxScrollEffect(dom, params, scrollEffectParams.options).catch((error) => {
+                console.error(error);
+            });
+            break;
+        case "image-parallax":
+            initImageParallaxScrollEffect(dom, params, scrollEffectParams.options).catch((error) => {
+                console.error(error);
+            });
             break;
         default:
             break;

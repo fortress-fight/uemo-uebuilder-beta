@@ -19,7 +19,9 @@
                             ref="previewBody"
                             :data-scroll-effect="JSON.stringify(value.value)"
                         >
-                            <div :class="$style['preview-box']" ref="previewBox"></div>
+                            <div :class="$style['preview-box']" ref="previewBox">
+                                <img :src="previewImage" alt="" />
+                            </div>
                         </div>
                     </div>
                 </UeElBrowserMockupPanel>
@@ -42,6 +44,8 @@ import type { UeElBrowserMockupPanelInstance } from "@stone/uemo-editor-element/
 
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
+
+import previewImage from "../assets/image/base-image.jpg";
 import { ueScrollEffect } from "../utils/ue-scroll-effect";
 
 const { t } = useI18n();
@@ -57,7 +61,7 @@ const previewBox = useTemplateRef("previewBox");
 
 function updateScrollCtrl() {
     browserMockupPanel.value?.scrollTo("top", 0);
-    instance?.proxy?.$ueElToast.success("更新成功");
+    instance?.proxy?.$ueElToast.success(t("UNIT_UPDATE_SUCCESS"));
     eventBus.emit("update");
 }
 
@@ -114,18 +118,47 @@ onMounted(() => {
         }
     }
     .preview-body {
+        --parallax-scale: 1;
         padding-top: calc(var(--mock-vh) * 30);
         padding-bottom: calc(var(--mock-vh) * 30);
 
         border: 1px dashed #000;
         border-width: 1px 0;
         .preview-box {
-            width: 150px;
-            height: 100px;
+            --u-height: 790;
+            --u-width: 1200;
+
+            position: relative;
+
+            overflow: hidden;
+
+            width: 250px;
             margin: 0 auto;
 
             border-radius: 10px;
-            background-color: #0ae448;
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 100%;
+                height: 100%;
+
+                border-radius: 10px;
+
+                object-fit: cover;
+                object-position: center;
+            }
+
+            // background-color: #0ae448;
+            &::after {
+                display: block;
+
+                width: 100%;
+                padding-bottom: calc(var(--u-height) / var(--u-width) * 100% / var(--parallax-scale, 1)) !important;
+
+                content: "";
+            }
         }
     }
 }

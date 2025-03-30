@@ -8,6 +8,7 @@
     --scroll-x-end: 0;
     --scroll-y-start: 0;
     --scroll-y-end: 0;
+    --parallax-scale: 1;
     position: relative;
     &[data-scroll-effect*="opacity"] {
         .js-scroll-container {
@@ -105,6 +106,15 @@
                 var(--scroll-opacity-start) + var(--scroll-progress, 0) *
                     (var(--scroll-opacity-end) - var(--scroll-opacity-start))
             );
+        }
+    }
+    &[data-scroll-effect*="image-parallax"] {
+        --parallax-scale: 1;
+        &[data-image-parallax-mode="image"] {
+            --parallax-scale: 1;
+        }
+        &[data-image-parallax-mode="container"] {
+            --parallax-scale: 1.5;
         }
     }
 }

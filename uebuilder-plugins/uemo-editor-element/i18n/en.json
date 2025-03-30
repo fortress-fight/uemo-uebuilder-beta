@@ -49,6 +49,7 @@
     "UNIT_POSITION": "Position",
     "UNIT_OTHER": "Other",
     "UNIT_TOP": "Top",
+    "UNIT_CENTER": "Center",
     "UNIT_BOTTOM": "Bottom",
     "UNIT_STYLE": "Style",
     "UNIT_STROKE": "Stroke",
@@ -89,6 +90,8 @@
     "UNIT_FILL_COLOR": "Fill Color",
     "UNIT_PREVIEW_TITLE": "Preview Area",
     "UNIT_UPDATE_SUCCESS": "Updated",
+    "UNIT_WINDOW": "Window",
+    "UNIT_TARGET": "Target",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

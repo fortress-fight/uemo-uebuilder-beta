@@ -49,6 +49,7 @@
     "UNIT_POSITION": "位置",
     "UNIT_OTHER": "其他",
     "UNIT_TOP": "顶部",
+    "UNIT_CENTER": "中间",
     "UNIT_BOTTOM": "底部",
     "UNIT_STYLE": "样式",
     "UNIT_STROKE": "描边",
@@ -88,6 +89,8 @@
     "UNIT_FILL_COLOR": "填充颜色",
     "UNIT_PREVIEW_TITLE": "预览区域",
     "UNIT_UPDATE_SUCCESS": "更新成功",
+    "UNIT_WINDOW": "窗口",
+    "UNIT_TARGET": "目标",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
