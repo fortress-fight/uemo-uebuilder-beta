@@ -48,5 +48,5 @@ export const defaultScrollOptions = {
         yEnd: "0px",
     },
     parallax: { speed: "-100" },
-    "image-parallax": { mode: "parallax-normal" },
-};
+    "image-parallax": { mode: "image" },
+} as const;

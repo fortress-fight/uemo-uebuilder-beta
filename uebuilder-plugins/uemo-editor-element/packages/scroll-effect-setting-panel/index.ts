@@ -1,7 +1,7 @@
 /*
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-29 17:17:30
+ * @LastEditTime: 2025-03-30 17:39:54
  */
 import type { App } from "vue";
 
@@ -61,7 +61,7 @@ export type ScrollParallaxOptions = {
 };
 
 export type ScrollImageParallaxOptions = {
-    mode?: string;
+    mode?: "container" | "image";
 };
 
 export type UeElScrollEffectSettingPanelOptions = ScrollRotateOptions &

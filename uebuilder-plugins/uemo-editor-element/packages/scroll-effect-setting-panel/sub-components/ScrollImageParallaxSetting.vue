@@ -28,9 +28,8 @@ const { t } = useI18n();
 const valueRef = defineModel<ScrollImageParallaxOptions>("value", { required: true });
 
 const options = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => [
-    { text: t("SCROLL_IMAGE_PARALLAX_MODE_NORMAL"), value: "parallax-normal" },
-    { text: t("SCROLL_IMAGE_PARALLAX_MODE_CONTAINER"), value: "parallax" },
-    { text: t("SCROLL_IMAGE_PARALLAX_MODE_IMAGE"), value: "parallax-image" },
+    { text: t("SCROLL_IMAGE_PARALLAX_MODE_IMAGE"), value: "image" },
+    { text: t("SCROLL_IMAGE_PARALLAX_MODE_CONTAINER"), value: "container" },
 ]);
 
 const scrollHeightType = useDefineObjectModel(valueRef, {
