@@ -11,6 +11,8 @@ import type {
     UeElScrollEffectSettingPanelValue,
 } from "~/packages/scroll-effect-setting-panel";
 
+import { defaultScrollOptions } from "~/packages/scroll-effect-setting-panel/utils/helper";
+
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { gsap, ScrollTrigger } from "@stone/uemo-editor-utils/lib/gsap";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
@@ -30,9 +32,6 @@ export type UeScrollEffectFactoryDomParams = {
     /** 是否開啟調試模式 */
     debugger?: boolean;
 };
-
-const DEFAULT_START = "top bottom";
-const DEFAULT_END = "bottom bottom";
 
 function updateScrollMarkerText(start: string, end: string) {
     const { t } = i18n.global;
@@ -64,7 +63,7 @@ function updateScrollMarkerText(start: string, end: string) {
 function getScrollEffectParams(
     dom: HTMLElement,
     params: {
-        options: ScrollBaseOptions;
+        options: MakeRequired<ScrollBaseOptions, "startPos" | "endPos">;
         scroller?: HTMLElement;
         debugger?: boolean;
     }
@@ -72,13 +71,9 @@ function getScrollEffectParams(
     const { startPos, endPos, startPosDis, endPosDis, triggerMode, triggerDelay, triggerDuration, triggerEase } =
         params.options;
 
-    // 設置默認的起始和結束位置
-    const start = startPos || DEFAULT_START;
-    const end = endPos || DEFAULT_END;
-
     // 計算帶有偏移量的起始和結束位置
-    const startParam = startPosDis ? `${start}+=${startPosDis}` : start;
-    const endParam = endPosDis ? `${end}+=${endPosDis}` : end;
+    const startParam = startPosDis ? `${startPos}+=${startPosDis}` : startPos;
+    const endParam = endPosDis ? `${endPos}+=${endPosDis}` : endPos;
 
     // 創建基礎滾動觸發參數
     const scrollTriggerParam: ScrollTrigger.StaticVars = {
@@ -148,7 +143,7 @@ function getScrollEffectParams(
 function createScrollEffect(
     dom: HTMLElement,
     params: {
-        options: ScrollBaseOptions;
+        options: MakeRequired<ScrollBaseOptions, "startPos" | "endPos">;
         scroller?: HTMLElement;
         debugger?: boolean;
     }
@@ -169,10 +164,7 @@ function createScrollEffect(
     if (params.debugger) {
         const { endPos, startPos } = params.options;
 
-        const start = startPos || DEFAULT_START;
-        const end = endPos || DEFAULT_END;
-
-        updateScrollMarkerText(start, end);
+        updateScrollMarkerText(startPos, endPos);
     }
 
     function resizeCallBack() {
@@ -213,11 +205,13 @@ function initOpacityScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollOpacityOptions = {}
 ) {
+    const useOptions = Object.assign(defaultScrollOptions.opacity, options);
+
     $(dom).css({
-        "--scroll-start": options.opacityStart || "0",
-        "--scroll-end": options.opacityEnd || "1",
+        "--scroll-start": useOptions.start,
+        "--scroll-end": useOptions.end,
     });
-    createScrollEffect(dom, { scroller: params.scroller, options, debugger: params.debugger });
+    createScrollEffect(dom, { scroller: params.scroller, options: useOptions, debugger: params.debugger });
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         $(dom).css({ "--scroll-start": "", "--scroll-end": "" });
@@ -235,17 +229,19 @@ function initRotateScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollRotateOptions = {}
 ) {
-    const axis = options.axis || "x-b";
+    const useOptions = Object.assign(defaultScrollOptions.rotate, options);
+
+    const axis = useOptions.axis;
     $(dom).attr("data-axis", axis);
 
     $(dom).css({
-        "--scroll-opacity-start": options.opacityStart || "",
-        "--scroll-opacity-end": options.opacityEnd || "",
-        "--scroll-start": options.start || "60deg",
-        "--scroll-end": options.end || "0deg",
+        "--scroll-opacity-start": useOptions.opacityStart,
+        "--scroll-opacity-end": useOptions.opacityEnd,
+        "--scroll-start": useOptions.start,
+        "--scroll-end": useOptions.end,
     });
 
-    createScrollEffect(dom, { scroller: params.scroller, options, debugger: params.debugger });
+    createScrollEffect(dom, { scroller: params.scroller, options: useOptions, debugger: params.debugger });
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         $(dom).css({
@@ -268,14 +264,16 @@ function initScaleScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollScaleOptions = {}
 ) {
+    const useOptions = Object.assign(defaultScrollOptions.scale, options);
+
     $(dom).css({
-        "--scroll-opacity-start": options.opacityStart || "",
-        "--scroll-opacity-end": options.opacityEnd || "",
-        "--scroll-start": options.start || "0.5",
-        "--scroll-end": options.end || "1",
+        "--scroll-opacity-start": useOptions.opacityStart,
+        "--scroll-opacity-end": useOptions.opacityEnd,
+        "--scroll-start": useOptions.start,
+        "--scroll-end": useOptions.end,
     });
 
-    createScrollEffect(dom, { scroller: params.scroller, options, debugger: params.debugger });
+    createScrollEffect(dom, { scroller: params.scroller, options: useOptions, debugger: params.debugger });
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         $(dom).css({
@@ -298,16 +296,18 @@ function initTranslateScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollTranslateOptions = {}
 ) {
+    const useOptions = Object.assign(defaultScrollOptions.translate, options);
+
     $(dom).css({
-        "--scroll-opacity-start": options.opacityStart || "0",
-        "--scroll-opacity-end": options.opacityEnd || "1",
-        "--scroll-x-start": options.xStart || "-50px",
-        "--scroll-x-end": options.xEnd || "0px",
-        "--scroll-y-start": options.yStart || "0px",
-        "--scroll-y-end": options.yEnd || "0px",
+        "--scroll-opacity-start": useOptions.opacityStart,
+        "--scroll-opacity-end": useOptions.opacityEnd,
+        "--scroll-x-start": useOptions.xStart,
+        "--scroll-x-end": useOptions.xEnd,
+        "--scroll-y-start": useOptions.yStart,
+        "--scroll-y-end": useOptions.yEnd,
     });
 
-    createScrollEffect(dom, { scroller: params.scroller, options, debugger: params.debugger });
+    createScrollEffect(dom, { scroller: params.scroller, options: useOptions, debugger: params.debugger });
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
         $(dom).css({
@@ -333,10 +333,10 @@ function initStickyScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollStickyOptions = {}
 ) {
-    const stickyOption = Object.assign({ padding: "0px" }, options);
+    const useOptions = Object.assign(defaultScrollOptions.sticky, options);
 
     function getPaddingArr() {
-        const arr = stickyOption.padding.split(/\s+/);
+        const arr = useOptions.padding.split(/\s+/);
         if (arr.length === 1) {
             return [arr[0], arr[0], arr[0], arr[0]];
         }
@@ -394,7 +394,7 @@ async function initFixedScrollEffect(
     params: UeScrollEffectFactoryDomParams,
     options: ScrollFixedOptions = {}
 ) {
-    const fixedOption = Object.assign({ moveY: "0px" }, options);
+    const useOptions = Object.assign(defaultScrollOptions.fixed, options);
 
     const { ueParallaxController } = await import("@stone/uemo-editor-utils/lib/parallax-controller");
 
@@ -405,7 +405,7 @@ async function initFixedScrollEffect(
     const rect = dom.getBoundingClientRect();
     const wH = params.scroller ? params.scroller.clientHeight : window.innerHeight;
     const margin = wH + (wH - rect.height) / 2;
-    const moveYNum = parseFloat(fixedOption.moveY);
+    const moveYNum = parseFloat(useOptions.moveY);
     const translateY: [string, string] = ["-" + (wH * 2 - moveYNum) + "px", wH * 2 + moveYNum + "px"];
 
     const ctrl = ueParallaxController.createElement([dom], {
@@ -441,14 +441,14 @@ async function initParallaxScrollEffect(
 ) {
     const { ueParallaxController } = await import("@stone/uemo-editor-utils/lib/parallax-controller");
 
-    const parallaxOption = Object.assign({ speed: "-100" }, options);
+    const useOptions = Object.assign(defaultScrollOptions.parallax, options);
 
     if (params.scroller) {
         ueParallaxController.updateScrollContainer(params.scroller);
     }
 
     const ctrl = ueParallaxController.createElement([dom], {
-        speed: parseFloat(parallaxOption.speed),
+        speed: parseFloat(useOptions.speed),
     });
 
     const updateParallax = _debounce(() => {
@@ -466,6 +466,12 @@ async function initParallaxScrollEffect(
     });
 }
 
+/**
+ * 初始化圖片視差滾動效果
+ * @param dom - 目標DOM元素
+ * @param params - 初始化參數
+ * @param options - 滾動效果參數
+ */
 async function initImageParallaxScrollEffect(
     dom: HTMLElement,
     params: UeScrollEffectFactoryDomParams,
@@ -473,7 +479,7 @@ async function initImageParallaxScrollEffect(
 ) {
     const { Ukiyo } = await import("@stone/uemo-editor-utils/lib/ukiyojs");
 
-    const useOptions = Object.assign({ mode: "image" }, options);
+    const useOptions = Object.assign(defaultScrollOptions["image-parallax"], options);
 
     $(params.stage).attr("data-image-parallax-mode", useOptions.mode);
 
