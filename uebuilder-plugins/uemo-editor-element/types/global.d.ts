@@ -19,10 +19,10 @@ import type {
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
-import type { TOAST_OPTIONS } from "~/packages/toast-plugin";
-import type { UeElError as UeError } from "~/utils/error";
-import type { UE_AI_CONFIG } from "~/packages/ai-plugin";
-import type { UE_EL_BACKGROUND_PARAM_MAP } from "~/packages/background-setting-group";
+import type { TOAST_OPTIONS } from "../packages/toast-plugin";
+import type { UeElError as UeError } from "../utils/error";
+import type { UE_AI_CONFIG } from "../packages/ai-plugin";
+import type { UE_EL_BACKGROUND_PARAM_MAP } from "../packages/background-setting-group";
 
 declare global {
     type MakeRequired<T, K extends keyof T> = T & Required<Pick<T, K>>;

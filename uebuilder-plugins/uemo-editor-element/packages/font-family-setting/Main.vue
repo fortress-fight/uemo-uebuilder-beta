@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 01:52:18
+ * @LastEditTime: 2025-03-31 01:33:17
 -->
 <template>
     <UeElSettingBar
@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type { UeElFontFamilySettingBaseProps } from "./index";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import UeElSettingBar from "../setting-bar";
 
 const { t } = useI18n();

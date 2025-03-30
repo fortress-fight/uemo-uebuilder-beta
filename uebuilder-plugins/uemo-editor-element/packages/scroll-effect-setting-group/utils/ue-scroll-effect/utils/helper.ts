@@ -9,9 +9,9 @@ import type {
     ScrollParallaxOptions,
     ScrollImageParallaxOptions,
     UeElScrollEffectSettingPanelValue,
-} from "~/packages/scroll-effect-setting-panel";
+} from "../../../../../packages/scroll-effect-setting-panel";
 
-import { defaultScrollOptions } from "~/packages/scroll-effect-setting-panel/utils/helper";
+import { defaultScrollOptions } from "../../../../../packages/scroll-effect-setting-panel/utils/helper";
 
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { gsap, ScrollTrigger } from "@stone/uemo-editor-utils/lib/gsap";
@@ -19,7 +19,7 @@ import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
 import $pageStyle from "../app.module.scss";
 import { ScrollEffectEventEventBus } from "./event-bus";
-import { i18n } from "@/i18n";
+import { i18n } from "../../../../../src/i18n";
 
 /**
  * 滾動效果工廠DOM參數接口

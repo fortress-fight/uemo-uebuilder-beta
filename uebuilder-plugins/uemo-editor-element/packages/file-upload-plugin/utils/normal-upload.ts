@@ -1,9 +1,10 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
 
 import { createAxios } from "./helper";
+import { UeElError, UeElErrorCode } from "../../../utils/error";
 
 const { t } = i18n.global;
 

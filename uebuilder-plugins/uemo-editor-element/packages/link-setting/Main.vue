@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 02:00:28
+ * @LastEditTime: 2025-03-31 01:33:22
 -->
 <template>
     <UeElSettingBar
@@ -25,7 +25,7 @@
 import type { UeElLinkSettingBaseProps } from "./index";
 import type { UeElLinkSettingPanelValue } from "../link-setting-panel";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import UeElSettingBar from "../setting-bar";
 import UeElLinkSettingPanel from "../link-setting-panel";
 import { isImageReg, isVideoReg } from "@stone/uemo-editor-utils/lib/utils";

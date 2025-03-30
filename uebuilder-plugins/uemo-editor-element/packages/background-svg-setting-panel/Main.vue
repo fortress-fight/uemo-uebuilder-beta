@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景SVG控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 14:32:31
+ * @LastEditTime: 2025-03-31 01:32:59
 -->
 <template>
     <UeElEditorPanel
@@ -57,7 +57,7 @@
 <script lang="ts" setup>
 import type { UeElBackgroundSvgSettingPanelBaseProps, UeElBackgroundSvgSettingPanelValue } from "./index";
 
-import { useDefineObjectModel } from "~/utils/model-mixin";
+import { useDefineObjectModel } from "../../utils/model-mixin";
 
 const { t } = useI18n();
 defineOptions({ name: "UeElBackgroundSvgSettingPanel" });

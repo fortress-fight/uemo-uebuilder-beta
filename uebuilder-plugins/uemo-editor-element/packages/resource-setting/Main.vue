@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 02:00:12
+ * @LastEditTime: 2025-03-31 01:33:33
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -49,7 +49,7 @@ import type {
     UeElResourceSettingEmitParams,
 } from "./index";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import { isResourcePreviewAttrs } from "../resource-preview";
 import UeElEditorPanel from "../editor-panel";
 

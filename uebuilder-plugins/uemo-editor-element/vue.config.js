@@ -17,7 +17,8 @@ module.exports = () => {
                         /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
                         /\.vue\?vue&type=script/, // .vue
                     ],
-                    imports: ["vue", "vue-i18n", "vue-router", { "~/utils/error": ["UeElError", "UeElErrorCode"] }],
+                    imports: ["vue", "vue-i18n", "vue-router"],
+                    // imports: ["vue", "vue-i18n", "vue-router", { "~/utils/error": ["UeElError", "UeElErrorCode"] }],
                 }),
             ],
         }),

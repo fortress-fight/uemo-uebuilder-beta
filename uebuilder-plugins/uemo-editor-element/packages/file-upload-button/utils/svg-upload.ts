@@ -1,6 +1,7 @@
 import type { UploadType } from "../index";
 
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
+import { UeElError, UeElErrorCode } from "../../../utils/error";
 
 function createSvgInterceptor(isDealing: Ref<boolean>, fileData: Ref<Record<string, any>>): UE_EL_UTIL.UploadIntercept {
     const SVG_FILE_LIMIT = 1024 * 1024 * 0.4;

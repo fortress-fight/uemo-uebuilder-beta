@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { numDiv, numTimes } from "@stone/uemo-editor-utils/lib/number";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../../utils/pop-panel-mixin";
 
 const _props = defineProps<{ title: string; useOpacity: boolean }>();
 const rootDomRef = useTemplateRef("rootDom");

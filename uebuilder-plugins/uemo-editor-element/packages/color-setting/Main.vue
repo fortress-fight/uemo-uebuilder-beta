@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 01:49:34
+ * @LastEditTime: 2025-03-31 01:33:12
 -->
 <template>
     <UeElColorInput
@@ -23,7 +23,7 @@
 import type { UeElColorSettingBaseProps } from "./index";
 import type { UeElColorInputInstance } from "../color-input";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 
 defineOptions({ name: "UeElColorSetting" });
 

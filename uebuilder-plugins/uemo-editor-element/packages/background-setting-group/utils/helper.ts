@@ -1,5 +1,5 @@
 import type { TYPE_BG_TYPE, TYPE_BG_TYPE_PARAM } from "../index";
-import { i18n } from "@/i18n";
+import { i18n } from "../../../src/i18n";
 
 /**
  * @description 获取背景数据

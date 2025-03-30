@@ -22,7 +22,7 @@
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
-import { useDefineObjectModel } from "~/utils/model-mixin";
+import { useDefineObjectModel } from "../../../utils/model-mixin";
 
 type TYPE_SCROLL_POS = { startPos: string; endPos: string };
 

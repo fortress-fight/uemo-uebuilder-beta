@@ -1,10 +1,10 @@
 /*
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 16:21:56
+ * @LastEditTime: 2025-03-31 01:24:13
  */
 import type { App } from "vue";
-import type { UE_AI_PLUGIN } from "~/packages/ai-plugin";
+import type { UE_AI_PLUGIN } from "../ai-plugin";
 
 import UeElImageLibraryPanel from "./Main.vue";
 

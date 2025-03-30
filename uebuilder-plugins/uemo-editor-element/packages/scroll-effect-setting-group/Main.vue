@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 10:58:46
+ * @LastEditTime: 2025-03-31 01:34:15
 -->
 <template>
     <UeElSettingGroup
@@ -44,7 +44,7 @@ import { getPopPanelParams } from "../pop-panel/utils/helper";
 import UeElScrollEffectSettingPanel from "../scroll-effect-setting-panel";
 import UeElScrollEffectPreviewPanel from "./sub-components/PreviewPanel.vue";
 
-import { usePopPanelParam } from "~/utils/pop-panel-mixin";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 
 defineOptions({ name: "UeElScrollEffectSettingGroup" });
 

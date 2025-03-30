@@ -2,7 +2,7 @@ import type { App } from "vue";
 import type { ErrorLevel } from "@stone/uemo-editor-utils/lib/error";
 
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
-import { i18n } from "@/i18n";
+import { i18n } from "../../src/i18n";
 
 export function install(app: App) {
     app.config.globalProperties.$ueElError = <T = undefined>(error: Error, callback?: (error: Error) => T): T => {
