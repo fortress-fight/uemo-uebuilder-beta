@@ -1,0 +1,19 @@
+.resizable_arrow {
+    position: fixed;
+    z-index: var(--ue-z-index--max);
+    top: 0;
+    left: 0;
+
+    width: 25px;
+    height: 25px;
+}
+.resizable_arrow-svg {
+    width: 100%;
+
+    fill: #111;
+    filter: drop-shadow(0 1px 2.5px rgb(0 0 0 / 0.4));
+}
+.resizable_arrow-path {
+    stroke: #fff;
+    stroke-width: 50;
+}

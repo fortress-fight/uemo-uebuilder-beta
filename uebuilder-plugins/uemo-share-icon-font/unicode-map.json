@@ -1,0 +1,114 @@
+{
+  "behance": {
+    "unicode": 60588,
+    "salt": ""
+  },
+  "bilibili": {
+    "unicode": 58888,
+    "salt": ""
+  },
+  "call": {
+    "unicode": 59998,
+    "salt": ""
+  },
+  "discord": {
+    "unicode": 60716,
+    "salt": ""
+  },
+  "download": {
+    "unicode": 59528,
+    "salt": ""
+  },
+  "dribbble": {
+    "unicode": 58272,
+    "salt": ""
+  },
+  "eewu": {
+    "unicode": 58238,
+    "salt": ""
+  },
+  "facebook": {
+    "unicode": 60102,
+    "salt": ""
+  },
+  "github": {
+    "unicode": 58397,
+    "salt": ""
+  },
+  "google": {
+    "unicode": 57799,
+    "salt": ""
+  },
+  "instagram": {
+    "unicode": 59314,
+    "salt": ""
+  },
+  "instagram1": {
+    "unicode": 61119,
+    "salt": ""
+  },
+  "linkedin": {
+    "unicode": 57598,
+    "salt": ""
+  },
+  "mini-app": {
+    "unicode": 57429,
+    "salt": ""
+  },
+  "pinterest-1": {
+    "unicode": 57666,
+    "salt": ""
+  },
+  "pinterest": {
+    "unicode": 59494,
+    "salt": ""
+  },
+  "qq": {
+    "unicode": 60960,
+    "salt": ""
+  },
+  "qrcode": {
+    "unicode": 60530,
+    "salt": ""
+  },
+  "tiktok": {
+    "unicode": 61190,
+    "salt": ""
+  },
+  "twitter_icon": {
+    "unicode": 58683,
+    "salt": ""
+  },
+  "twitter_icon2": {
+    "unicode": 57843,
+    "salt": ""
+  },
+  "weibo": {
+    "unicode": 60648,
+    "salt": ""
+  },
+  "weixin": {
+    "unicode": 60830,
+    "salt": ""
+  },
+  "whatsapp": {
+    "unicode": 59794,
+    "salt": ""
+  },
+  "xiaohongshu": {
+    "unicode": 60417,
+    "salt": ""
+  },
+  "youtube": {
+    "unicode": 58589,
+    "salt": ""
+  },
+  "zcool-fill": {
+    "unicode": 58957,
+    "salt": ""
+  },
+  "zhihu": {
+    "unicode": 57672,
+    "salt": ""
+  }
+}

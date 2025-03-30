@@ -1,5 +1,6 @@
 <template>
-    <div :class="$style['nav-bar']" class="flex justify-center">
+    <div :class="$style['nav-bar']" class="flex justify-center items-center">
+        <UeElSelect v-model:value="currentLang" title="测试选择器" :options="langOptions" />
         <RouterLink v-for="(item, index) in linkList" :key="index" exact :class="$style['link']" :to="item.path">
             {{ item.text }}
         </RouterLink>
@@ -9,12 +10,28 @@
 <script lang="ts" setup>
 const linkList = ref([
     { path: "/", text: "当前编辑" },
-    { path: "/editor-panel", text: "模块面板" },
-    { path: "/editor-unit", text: "TipTap 面板" },
+    { path: "/editor-unit", text: "基础组件" },
+    { path: "/editor-form", text: "表单组件" },
+    { path: "/editor-attr", text: "属性组件" },
+    { path: "/editor-panel", text: "面板组件" },
+    { path: "/editor-resource-panel", text: "资源组件" },
+    { path: "/editor-attr-editor-panel", text: "属性面板组件" },
 ]);
-const className = useCssModule();
 
-console.log("className", className);
+const { locale } = useI18n();
+const langOptions = ref([
+    { value: "en", text: "English" },
+    { value: "zh-cn", text: "中文" },
+]);
+const currentLang = computed({
+    get() {
+        return locale.value;
+    },
+    set(v) {
+        locale.value = v;
+        localStorage.setItem("lang", currentLang.value);
+    },
+});
 </script>
 <style lang="scss" module>
 .nav-bar {

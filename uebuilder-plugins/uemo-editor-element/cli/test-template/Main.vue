@@ -1,12 +1,14 @@
 <!--
  * @Description: 测试<%- description %>
  * @Author: F-Stone
- * @LastEditTime: <%= date %>
+ * @LastEditTime: 2025-02-24 17:43:37
 -->
 <template>
     <TestArea
         :class="$style['test-area']"
-        :value="testValue"
+        :testValue="testValue"
+        :testValueList="testValueList"
+        v-model:testValueSelect="testValueSelect"
         title="测试<%- description %>"
     >
         <UeEl<%- elementName %> v-bind="testValue">
@@ -15,11 +17,15 @@
     </TestArea>
 </template>
 <script lang="ts" setup>
-import TestArea from "~/demo/components-utils/TestArea.vue";
+import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
-const testValue = ref({
-    //
+const testValueSelect = ref<number>(0);
+const testValueList:(UE_EL_COMPONENT.UeEl<%- elementName %>Props & {testOptionTitle?: string; value?: any})[] = [{}];
+const testValue = ref(testValueList[testValueSelect.value]);
+
+watch(testValueSelect, (newValue) => {
+    testValue.value = testValueList[newValue];
 });
 </script>
 <style lang="scss" module>

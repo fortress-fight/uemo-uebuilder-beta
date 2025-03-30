@@ -1,0 +1,66 @@
+[
+    {
+        "title": "多云",
+        "name": "cloudy"
+    },
+    {
+        "title": "夜间多云",
+        "name": "cloudy-night"
+    },
+    {
+        "title": "大雾",
+        "name": "fog"
+    },
+    {
+        "title": "大雨",
+        "name": "heavy-rain"
+    },
+    {
+        "title": "大风",
+        "name": "heavy-wind"
+    },
+    {
+        "title": "小雨",
+        "name": "light-rain"
+    },
+    {
+        "title": "月亮",
+        "name": "moon"
+    },
+    {
+        "title": "沙尘暴",
+        "name": "sandstorm"
+    },
+    {
+        "title": "下雪",
+        "name": "snow"
+    },
+    {
+        "title": "雪花",
+        "name": "snowflake"
+    },
+    {
+        "title": "太阳",
+        "name": "sun"
+    },
+    {
+        "title": "太阳1",
+        "name": "sun-one"
+    },
+    {
+        "title": "晴天",
+        "name": "sunny"
+    },
+    {
+        "title": "雷雨",
+        "name": "thunderstorm"
+    },
+    {
+        "title": "雷雨",
+        "name": "thunderstorm-one"
+    },
+    {
+        "title": "刮风",
+        "name": "wind"
+    }
+]

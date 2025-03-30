@@ -119,10 +119,8 @@ $grid-breakpoints: (
 // 全覆盖
 @mixin ab-cover() {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+
+    inset: 0;
 }
 
 /* ---------------------------------- */
@@ -686,9 +684,9 @@ $grid-breakpoints: (
     @return rgba($color, $op);
 }
 @function var-color($color) {
-    $red: color.channel($color, "red", $space: rgb);
-    $green: color.channel($color, "green", $space: rgb);
-    $blue: color.channel($color, "blue", $space: rgb);
+    $red: color.red($color);
+    $green: color.green($color);
+    $blue: color.blue($color);
     @return #{$red}, #{$green}, #{$blue};
 }
 @mixin dragger-cursor() {

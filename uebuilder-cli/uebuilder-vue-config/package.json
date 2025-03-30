@@ -17,7 +17,6 @@
         "@stone/vue-cli-plugin-babel": "^4.0.0",
         "@stone/vue-cli-plugin-dll": "4.0.0",
         "@stone/vue-cli-plugin-ejs": "4.0.0",
-        "@stone/vue-cli-plugin-jquery": "4.0.0",
         "@stone/vue-cli-plugin-normalize-css": "4.0.0",
         "@stone/vue-cli-plugin-sass": "4.0.0",
         "@stone/vue-cli-plugin-svg-sprite": "4.0.0",

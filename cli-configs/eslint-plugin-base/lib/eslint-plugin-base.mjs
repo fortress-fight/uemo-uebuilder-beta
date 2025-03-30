@@ -4,7 +4,7 @@ import vueTsEslintConfig from "@vue/eslint-config-typescript";
 import globals from "globals";
 
 const publicRules = {
-    "no-console": "off",
+    "no-console": ["error", { allow: ["warn", "error"] }],
     "no-debugger": "off",
     "prefer-const": [
         "error",

@@ -1,0 +1,53 @@
+<!--
+ * @Description: 提示组
+ * @Author: F-Stone
+ * @LastEditTime: 2025-03-22 13:43:46
+-->
+<template>
+    <div class="flex" :class="$style['editor-tip-group']" :data-type="type">
+        <div class="grid" :class="$style['editor-group-inner']">
+            <div v-for="(item, index) in tips" v-html="item" :class="$style['editor-tip']" :key="index"></div>
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+import type { UeElTipGroupBaseProps } from "./index";
+
+defineOptions({ name: "UeElTipGroup" });
+withDefaults(defineProps<UeElTipGroupBaseProps>(), { type: "normal" });
+</script>
+<style lang="scss" module>
+.editor-tip-group {
+    font-size: 12px;
+
+    padding: 0 var(--ue-editor-row-space--lv2);
+    .editor-group-inner {
+        gap: var(--ue-control-col-space);
+    }
+    &[data-type="warn"] {
+        &::before {
+            line-height: inherit;
+
+            margin-right: 0.5em;
+
+            content: "*";
+
+            color: color(var(--ue-color--error));
+        }
+    }
+    [data-ue-tip-color="red"] {
+        color: rgba(var(--ue-color--error), 1);
+    }
+    [data-ue-tip-color="blue"] {
+        color: rgba(var(--ue-color--blue), 1);
+    }
+    a {
+        margin: 0 0.5em;
+
+        text-decoration: underline;
+    }
+    a[data-link-type="tip"] {
+        color: color(var(--ue-color--blue), 1);
+    }
+}
+</style>

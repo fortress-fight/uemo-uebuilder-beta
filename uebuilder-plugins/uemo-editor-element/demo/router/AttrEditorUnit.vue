@@ -1,0 +1,103 @@
+<template>
+    <div :class="$style['editor-page']">
+        <h1 :class="$style['page-head']">共有 {{ testComponents.length }} 个组件</h1>
+        <div :class="$style['test-group']" class="grid grid-cols-2">
+            <template v-for="(component, index) in testComponents" :key="index">
+                <component :is="component"></component>
+            </template>
+        </div>
+    </div>
+</template>
+<script lang="ts" setup>
+import TestAlignItem from "~/demo/components/TestAlignItemSetting.vue";
+import TestAlignSetting from "~/demo/components/TestAlignSetting.vue";
+import TestJustifyContentSetting from "~/demo/components/TestJustifyContentSetting.vue";
+import TestGapSetting from "~/demo/components/TestGapSetting.vue";
+import TestMarginSetting from "~/demo/components/TestMarginSetting.vue";
+import TestPaddingSetting from "~/demo/components/TestPaddingSetting.vue";
+import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
+import TestEnterAnimateSetting from "~/demo/components/TestEnterAnimateSetting.vue";
+import TestBoxShadowSetting from "~/demo/components/TestBoxShadowSetting.vue";
+import TestBorderSetting from "~/demo/components/TestBorderSetting.vue";
+import TestColorSettingGroup from "~/demo/components/TestColorSettingGroup.vue";
+import TestBorderSettingGroup from "~/demo/components/TestBorderSettingGroup.vue";
+import TestRadiusSettingGroup from "~/demo/components/TestRadiusSettingGroup.vue";
+import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGroup.vue";
+import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
+import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
+import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
+import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
+import TestButtonIconSettingGroup from "~/demo/components/TestButtonIconSettingGroup.vue";
+import TestGridLayoutSetting from "~/demo/components/TestGridLayoutSetting.vue";
+import TestBackgroundSplineSettingPanel from "~/demo/components/TestBackgroundSplineSettingPanel.vue";
+import TestTranslateSetting from "~/demo/components/TestTranslateSetting.vue";
+import TestBackgroundImageSettingPanel from "~/demo/components/TestBackgroundImageSettingPanel.vue";
+import TestBackgroundShapeSettingPanel from "~/demo/components/TestBackgroundShapeSettingPanel.vue";
+import TestTextDecorationSettingPanel from "~/demo/components/TestTextDecorationSettingPanel.vue";
+import TestButtonStyleSettingPanel from "~/demo/components/TestButtonStyleSettingPanel.vue";
+import TestLinkSettingPanel from "~/demo/components/TestLinkSettingPanel.vue";
+import TestScrollEffectSettingPanel from "~/demo/components/TestScrollEffectSettingPanel.vue";
+import TestLinkSetting from "~/demo/components/TestLinkSetting.vue";
+import TestLinkSettingGroup from "~/demo/components/TestLinkSettingGroup.vue";
+import TestScrollEffectSettingGroup from "~/demo/components/TestScrollEffectSettingGroup.vue";
+import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
+import TestBackgroundVideoSettingPanel from "~/demo/components/TestBackgroundVideoSettingPanel.vue";
+import TestBackgroundSettingGroup from "~/demo/components/TestBackgroundSettingGroup.vue";
+
+const testComponents = [
+    TestAlignSetting,
+    TestEnterAnimateSetting,
+    TestAlignItem,
+    TestJustifyContentSetting,
+    TestGapSetting,
+    TestMarginSetting,
+    TestPaddingSetting,
+    TestRadiusSetting,
+    TestBoxShadowSetting,
+    TestBorderSetting,
+    TestButtonStyleSetting,
+    TestColorSettingGroup,
+    TestBorderSettingGroup,
+    TestRadiusSettingGroup,
+    TestBoxShadowSettingGroup,
+    TestCalenderSettingGroup,
+    TestButtonIconSettingGroup,
+    TestLinkSettingGroup,
+    TestScrollEffectSettingGroup,
+    TestBackgroundSettingGroup,
+    TestFontFamilySetting,
+    TestLinkSetting,
+    TestTranslateSetting,
+    TestGridLayoutSetting,
+    TestResourceSetting,
+    TestButtonIconSetting,
+    TestBackgroundSplineSettingPanel,
+    TestTextDecorationSettingPanel,
+    TestBackgroundShapeSettingPanel,
+    TestButtonStyleSettingPanel,
+    TestScrollEffectSettingPanel,
+    TestLinkSettingPanel,
+    TestBackgroundImageSettingPanel,
+    TestBackgroundVideoSettingPanel,
+];
+</script>
+<style lang="scss" module>
+.page-head {
+    font-size: 20px;
+    font-weight: bold;
+
+    margin-bottom: 40px;
+    padding: 50px 0;
+
+    text-align: center;
+}
+.test-group {
+    width: 100%;
+    padding: 20px;
+
+    gap: 70px 20px;
+    .row {
+        grid-area: auto / auto / auto / span 2;
+    }
+}
+</style>

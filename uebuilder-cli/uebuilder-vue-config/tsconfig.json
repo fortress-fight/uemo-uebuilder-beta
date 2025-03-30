@@ -9,7 +9,6 @@
             "@stone/uemo-editor-panel",
             "@stone/uemo-editor-utils",
             "@stone/uemo-editor-type",
-            "@stone/vue-cli-plugin-jquery",
             "unplugin-vue-define-options/macros-global"
         ],
         "paths": {

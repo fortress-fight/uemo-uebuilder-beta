@@ -1,0 +1,45 @@
+@font-face {font-family: "ue-share";
+  src: url('ue-share.eot?t=1741506058751'); /* IE9*/
+  src: url('ue-share.eot?t=1741506058751#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("ue-share.woff2?t=1741506058751") format("woff2"),
+  url("ue-share.woff?t=1741506058751") format("woff"),
+  url('ue-share.ttf?t=1741506058751') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('ue-share.svg?t=1741506058751#ue-share') format('svg'); /* iOS 4.1- */
+}
+
+[class^="ue-share-"], [class*=" ue-share-"] {
+  font-family: 'ue-share' !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ue-share-behance::before { content: "\ecac"; }
+.ue-share-bilibili::before { content: "\e608"; }
+.ue-share-call::before { content: "\ea5e"; }
+.ue-share-discord::before { content: "\ed2c"; }
+.ue-share-download::before { content: "\e888"; }
+.ue-share-dribbble::before { content: "\e3a0"; }
+.ue-share-eewu::before { content: "\e37e"; }
+.ue-share-facebook::before { content: "\eac6"; }
+.ue-share-github::before { content: "\e41d"; }
+.ue-share-google::before { content: "\e1c7"; }
+.ue-share-instagram::before { content: "\e7b2"; }
+.ue-share-instagram1::before { content: "\eebf"; }
+.ue-share-linkedin::before { content: "\e0fe"; }
+.ue-share-mini-app::before { content: "\e055"; }
+.ue-share-pinterest-1::before { content: "\e142"; }
+.ue-share-pinterest::before { content: "\e866"; }
+.ue-share-qq::before { content: "\ee20"; }
+.ue-share-qrcode::before { content: "\ec72"; }
+.ue-share-tiktok::before { content: "\ef06"; }
+.ue-share-twitter_icon::before { content: "\e53b"; }
+.ue-share-twitter_icon2::before { content: "\e1f3"; }
+.ue-share-weibo::before { content: "\ece8"; }
+.ue-share-weixin::before { content: "\ed9e"; }
+.ue-share-whatsapp::before { content: "\e992"; }
+.ue-share-xiaohongshu::before { content: "\ec01"; }
+.ue-share-youtube::before { content: "\e4dd"; }
+.ue-share-zcool-fill::before { content: "\e64d"; }
+.ue-share-zhihu::before { content: "\e148"; }
+

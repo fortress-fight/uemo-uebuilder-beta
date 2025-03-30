@@ -127,7 +127,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/node_modules/": true,
+        "**/node_modules/": true
         // "**/uebuilder-uemo/": true,
         // "**/uebuilder-tools/": true,
         // "**/uebuilder-custom/": true,
@@ -137,7 +137,18 @@
         // "**/uebuilder-editor/app-preview/": true,
         // "**/uebuilder-editor/app-editor/*.*": true,
     },
-    "editor.wordWrapColumn": 120
+    "editor.wordWrapColumn": 120,
+
+    "i18n-ally.namespace": true,
+    "i18n-ally.localesPaths": ["uebuilder-plugins/uemo-editor-element/i18n"],
+    "i18n-ally.keystyle": "nested",
+    "i18n-ally.displayLanguage": "zh-cn",
+    "i18n-ally.sourceLanguage": "zh-cn",
+    "i18n-ally.enabledFrameworks": ["vue"],
+    "i18n-ally.theme.annotationMissing": "#acb2be",
+
+    "vue.server.hybridMode": false
+
     // "http.proxy": "http://127.0.0.1:10809",
     // "http.proxyStrictSSL": false
 }
