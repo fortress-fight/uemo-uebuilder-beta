@@ -1,12 +1,12 @@
 <template>
     <div :class="$style['current-page']">
         <div :class="$style['test-group']" class="flex justify-center">
-            <!--  -->
+            <TestComponent />
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-//
+import TestComponent from "~/demo/components/TestBubbleEditor.vue";
 </script>
 <style lang="scss" module>
 .test-group {

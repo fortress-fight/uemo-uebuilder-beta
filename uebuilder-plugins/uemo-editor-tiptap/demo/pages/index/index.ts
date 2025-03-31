@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-03-31 01:25:55
+ * @LastEditTime: 2025-04-01 01:01:03
  */
 
 // SECTION - 样式文件
@@ -12,6 +12,7 @@ import { createApp } from "vue";
 
 import { getLocalFontLib, setLocalFontLib } from "@stone/uemo-editor-utils/lib/resource";
 import UeEl from "@stone/uemo-editor-element/src";
+import UeTiptap from "@/index";
 
 import App from "./index.vue";
 import router from "../../../router/index";
@@ -112,5 +113,6 @@ app.use(UeEl, {
         },
     },
 });
+app.use(UeTiptap);
 
 app.mount("#app");
