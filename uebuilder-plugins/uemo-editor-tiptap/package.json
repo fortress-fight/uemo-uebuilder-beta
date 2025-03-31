@@ -34,10 +34,13 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
-        "@stone/vue-cli-service": "4.0.0",
-        "@stone/uemo-share-icon-font": "4.0.0",
-        "@stone/uemo-editor-element": "4.0.0",
         "@inquirer/prompts": "^3.3.0",
+        "@stone/uemo-editor-element": "4.0.0",
+        "@stone/uemo-share-icon-font": "4.0.0",
+        "@stone/vue-cli-service": "4.0.0",
+        "@tiptap/pm": "^2.11.7",
+        "@tiptap/starter-kit": "^2.11.7",
+        "@tiptap/vue-3": "^2.11.7",
         "@types/inquirer": "^9.0.7",
         "change-case": "^5.3.0",
         "commander": "^11.1.0",
