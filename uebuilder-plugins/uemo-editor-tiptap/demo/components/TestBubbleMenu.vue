@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 03:35:22
+ * @LastEditTime: 2025-04-02 04:06:54
 -->
 <template>
     <TestArea
@@ -14,7 +14,11 @@
     >
         <template #default="{ editor }">
             <template v-if="editor">
-                <UeTiptapBubbleMenu v-bind="testValue"> 工具栏 </UeTiptapBubbleMenu>
+                <UeTiptapBubbleMenu v-bind="testValue">
+                    <div :class="$style['tippy-box']">
+                        <span :class="$style['tippy-content']">工具栏</span>
+                    </div>
+                </UeTiptapBubbleMenu>
                 <EditorContent :editor="editor" />
             </template>
         </template>
@@ -34,7 +38,18 @@ watch(testValueSelect, (newValue) => {
 });
 </script>
 <style lang="scss" module>
-.test-area {
-    // init
+.tippy-box {
+    font-size: 12px;
+    line-height: 1.4;
+
+    white-space: nowrap;
+
+    color: #000;
+    border-radius: 5px;
+    background: #{var-color(#f2f2f2)};
+    box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
+    .tippy-content {
+        padding: 3px 7px 2px;
+    }
 }
 </style>

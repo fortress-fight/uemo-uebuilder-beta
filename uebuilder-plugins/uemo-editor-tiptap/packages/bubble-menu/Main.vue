@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 03:44:59
+ * @LastEditTime: 2025-04-02 04:00:24
 -->
 <template>
     <div ref="rootDom" :class="$style['bubble-menu']">
@@ -15,6 +15,8 @@ import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { BubbleMenuPlugin } from "../extension-bubble-menu/src/bubble-menu-plugin";
 import { getDeviceExtensionStorage } from "../../utils/tiptap-helper";
+
+import "./utils/tiptap.scss";
 
 defineOptions({ name: "UeTiptapBubbleMenu" });
 const prop = withDefaults(defineProps<UeTiptapBubbleMenuBaseProps>(), {
