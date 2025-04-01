@@ -1,7 +1,7 @@
 {
-    "name": "@stone/uemo-editor-element",
+    "name": "@stone/uemo-editor-i18n",
     "version": "4.0.0",
-    "description": "用于建立编辑所需的 UI 组件库",
+    "description": "用于建立编辑器所需的 i18n 组件库",
     "author": "ff-stone <stone_fu_work@163.com>",
     "homepage": "",
     "license": "MIT",
@@ -18,10 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-element/.husky",
-        "create-element": "node ./cli/create-element.mjs",
-        "dev": "vue-cli-service serve",
-        "inspect": "vue-cli-service inspect > test.js",
+        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-i18n/.husky",
         "lint:js": "eslint .",
         "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore",
         "lint:pretter": "prettier . --check --write",
@@ -34,23 +31,7 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
-        "@stone/uemo-editor-i18n": "4.0.0",
-        "@stone/vue-cli-service": "^4.0.0",
-        "@stone/uemo-share-icon-font": "4.0.0",
-        "@inquirer/prompts": "^3.3.0",
-        "@types/inquirer": "^9.0.7",
-        "@vueuse/components": "^12.7.0",
-        "@vueuse/core": "^12.7.0",
-        "change-case": "^5.3.0",
-        "commander": "^11.1.0",
-        "ejs": "^3.1.9",
-        "fast-glob": "^3.3.2",
-        "fs-extra": "^11.2.0",
-        "vue": "^3.5.13",
-        "vue-draggable-plus": "^0.6.0",
-        "vue-inline-svg": "^4.0.0",
-        "vue-router": "^4.5.0",
-        "vuedraggable": "^2.24.3"
+        "vue-i18n": "10"
     },
     "devDependencies": {
         "@stone/eslint-plugin-base": "4.0.0",

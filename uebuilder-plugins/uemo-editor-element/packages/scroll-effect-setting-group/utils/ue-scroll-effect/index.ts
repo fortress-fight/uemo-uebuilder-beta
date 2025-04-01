@@ -31,9 +31,6 @@ class UeScrollEffectFactory {
     /** 用于监听元素大小变化的观察器 */
     private resizeObserver: ResizeObserver | null = null;
 
-    /** 用于监听元素可见性的观察器 */
-    private visibleObserver: IntersectionObserver | null = null;
-
     /**
      * 创建滚动效果工厂实例
      * @param params - 工厂参数，包含滚动容器和调试模式配置
@@ -62,16 +59,6 @@ class UeScrollEffectFactory {
                 });
             }, 200)
         );
-
-        this.visibleObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) {
-                    ScrollEffectEventEventBus.emit($(entry.target), "ue.scroll-effect.hidden");
-                } else {
-                    ScrollEffectEventEventBus.emit($(entry.target), "ue.scroll-effect.visible");
-                }
-            });
-        });
 
         $(window).on("resize.scroll-effect-factory", () => {
             ScrollEffectEventEventBus.emit($(window), "ue.scroll-effect.window-resize");
@@ -112,7 +99,6 @@ class UeScrollEffectFactory {
             initScrollEffect(dom, { scroller: this.params.scroller, ...params });
 
             this.resizeObserver?.observe(dom);
-            this.visibleObserver?.observe(dom);
             this.doms.set(dom, params);
         });
         return {
@@ -170,7 +156,6 @@ class UeScrollEffectFactory {
      */
     private removeEvent() {
         this.resizeObserver?.disconnect();
-        this.visibleObserver?.disconnect();
         $(window).off("resize.scroll-effect-factory");
     }
 
@@ -181,7 +166,6 @@ class UeScrollEffectFactory {
     destroy(doms: HTMLElement[] = Array.from(this.doms.keys())) {
         doms.forEach((dom) => {
             this.resizeObserver?.unobserve(dom);
-            this.visibleObserver?.unobserve(dom);
             this.doms.delete(dom);
 
             ScrollEffectEventEventBus.emit($(dom), "ue.scroll-effect.destroy");
