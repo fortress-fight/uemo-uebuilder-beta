@@ -9,7 +9,9 @@
     "publishConfig": {
         "registry": "https://registry.yarnpkg.com"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@stone/uemo-editor-i18n": "4.0.0"
+    },
     "devDependencies": {
         "@stone/stylelint-config-base": "4.0.0",
         "@stone/tsconfig": "4.0.0",
