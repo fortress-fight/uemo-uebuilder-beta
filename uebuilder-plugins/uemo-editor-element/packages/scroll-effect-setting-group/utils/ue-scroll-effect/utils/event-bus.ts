@@ -3,8 +3,6 @@ interface ScrollEffectEvent {
     "ue.scroll-effect.destroy": never;
     "ue.scroll-effect.resize": never;
     "ue.scroll-effect.window-resize": never;
-    "ue.scroll-effect.hidden": never;
-    "ue.scroll-effect.visible": never;
     "ue.scroll-effect.update": never;
 }
 

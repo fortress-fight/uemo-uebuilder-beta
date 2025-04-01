@@ -55,19 +55,19 @@ function updateScrollMarkerText(start: string, end: string) {
 }
 
 /**
- * 獲取滾動效果的觸發參數
+ * 創建滾動效果觸發器
  * @param dom - 目標DOM元素
  * @param params - 滾動效果參數
  * @returns ScrollTrigger的靜態變量配置
  */
-function getScrollEffectParams(
+function createScrollEffectST(
     dom: HTMLElement,
     params: {
         options: MakeRequired<ScrollBaseOptions, "startPos" | "endPos">;
         scroller?: HTMLElement;
         debugger?: boolean;
     }
-): ScrollTrigger.StaticVars {
+): { refresh: () => void; destroy: () => void } {
     const { startPos, endPos, startPosDis, endPosDis, triggerMode, triggerDelay, triggerDuration, triggerEase } =
         params.options;
 
@@ -76,12 +76,18 @@ function getScrollEffectParams(
     const endParam = endPosDis ? `${endPos}+=${endPosDis}` : endPos;
 
     // 創建基礎滾動觸發參數
-    const scrollTriggerParam: ScrollTrigger.StaticVars = {
+    let scrollTriggerParam: ScrollTrigger.StaticVars = {
         trigger: dom,
         start: startParam,
         end: endParam,
         scrub: 0.8,
         scroller: params.scroller,
+        onRefreshInit: () => {
+            $(dom).addClass(`${$pageStyle["js-disable-scroll-effect"]}`);
+        },
+        onRefresh: () => {
+            $(dom).removeClass(`${$pageStyle["js-disable-scroll-effect"]}`);
+        },
     };
 
     // 創建進度動畫
@@ -104,7 +110,7 @@ function getScrollEffectParams(
         const duration = triggerDuration ? parseFloat(triggerDuration) : 1;
         const ease = triggerEase || "power3.out";
 
-        return {
+        scrollTriggerParam = {
             ...scrollTriggerParam,
             scrub: false,
             animation: gsap.to(progressAnimation, {
@@ -116,16 +122,44 @@ function getScrollEffectParams(
             }),
             toggleActions: "play none none reverse",
         };
+    } else {
+        // 默認滾動模式的配置
+        scrollTriggerParam = {
+            ...scrollTriggerParam,
+            animation: gsap.to(progressAnimation, {
+                time: progressAnimation.duration(),
+                duration: 2,
+                ease: "none",
+            }),
+        };
     }
 
-    // 默認滾動模式的配置
+    if (params.debugger) {
+        scrollTriggerParam.markers = {
+            startColor: "#ff740e",
+            endColor: "#2c48ff",
+            fontSize: "14px",
+            fontWeight: "bold",
+            indent: 0,
+        };
+    }
+
+    // TODO: `${$pageStyle["js-disable-scroll-effect"]}` 用于解决在初始化时，元素已经产生位移，导致滚动触发位置与预期不符的问题。这种方式并非是最佳方式，最佳方式是通过外部层来进行触发位置的计算，目前缺少外部层级，所以暂时采用这种方式。
+    $(dom).addClass(`${$pageStyle["js-disable-scroll-effect"]}`);
+    const scrollControl = ScrollTrigger.create(scrollTriggerParam);
+    $(dom).removeClass(`${$pageStyle["js-disable-scroll-effect"]}`);
+
+    const resetSt = ScrollTrigger.create({ trigger: dom, onLeaveBack: () => scrollControl.animation?.pause(0) });
+
     return {
-        ...scrollTriggerParam,
-        animation: gsap.to(progressAnimation, {
-            time: progressAnimation.duration(),
-            duration: 2,
-            ease: "none",
-        }),
+        refresh: () => {
+            resetSt.refresh();
+            scrollControl.refresh();
+        },
+        destroy: () => {
+            resetSt.kill();
+            scrollControl.kill();
+        },
     };
 }
 
@@ -148,18 +182,7 @@ function createScrollEffect(
         debugger?: boolean;
     }
 ) {
-    const scrollTriggerParam = getScrollEffectParams(dom, params);
-
-    if (params.debugger) {
-        scrollTriggerParam.markers = {
-            startColor: "#ff740e",
-            endColor: "#2c48ff",
-            fontSize: "14px",
-            fontWeight: "bold",
-            indent: 0,
-        };
-    }
-    const scrollControl = ScrollTrigger.create(scrollTriggerParam);
+    const scrollEffectST = createScrollEffectST(dom, params);
 
     if (params.debugger) {
         const { endPos, startPos } = params.options;
@@ -169,29 +192,22 @@ function createScrollEffect(
 
     function resizeCallBack() {
         requestAnimationFrame(() => {
-            scrollControl.refresh();
+            scrollEffectST.refresh();
         });
     }
 
     const debounceResizeCallback = _debounce(resizeCallBack, 200);
-    const debounceResizeCallbackVisible = _debounce(() => {
-        scrollControl.endAnimation();
-    }, 200);
 
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.resize", debounceResizeCallback);
-    ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.hidden", debounceResizeCallbackVisible);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.update", resizeCallBack);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.window-resize", debounceResizeCallback);
     ScrollEffectEventEventBus.bind($(dom), "ue.scroll-effect.destroy", () => {
-        scrollControl.kill();
+        scrollEffectST.destroy();
 
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.resize", debounceResizeCallback);
-        ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.hidden", debounceResizeCallbackVisible);
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.update", resizeCallBack);
         ScrollEffectEventEventBus.unbind($(dom), "ue.scroll-effect.window-resize", debounceResizeCallback);
     });
-
-    return { scrollControl };
 }
 
 /**
