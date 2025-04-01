@@ -23,8 +23,7 @@ export interface UE_EL_OPTIONS {
 
 export default {
     install: (app: App, options: UE_EL_OPTIONS) => {
-        // @ts-expect-error
-        if (!app.__VUE_I18N__) {
+        if (!app.config.globalProperties.$i18n) {
             app.use(i18n);
         }
 

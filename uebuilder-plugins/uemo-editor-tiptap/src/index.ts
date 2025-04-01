@@ -5,8 +5,7 @@ import { i18n } from "./i18n";
 
 export default {
     install: (app: App) => {
-        // @ts-expect-error
-        if (!app.__VUE_I18N__) {
+        if (!app.config.globalProperties.$i18n) {
             app.use(i18n);
         }
 
