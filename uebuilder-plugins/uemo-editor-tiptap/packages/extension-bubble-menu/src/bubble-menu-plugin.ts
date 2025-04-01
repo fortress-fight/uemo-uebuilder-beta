@@ -7,6 +7,8 @@ import { EditorView } from "@tiptap/pm/view";
 
 import tippy from "@stone/uemo-editor-utils/lib/tippy";
 
+import { getAIExtensionStorage } from "../../../utils/tiptap-helper";
+
 /**
  * 不显示气泡菜单的节点名称
  */
@@ -139,7 +141,7 @@ export class BubbleMenuView {
         const { empty } = selection;
 
         // 如果编辑器正在加载 AI 内容，则不显示气泡菜单
-        if (this.editor.storage.aiLoading) return false;
+        if (getAIExtensionStorage(this.editor)?.loading) return false;
 
         // 如果正在拖动，则不显示气泡菜单
         if (this.dragging) return false;
