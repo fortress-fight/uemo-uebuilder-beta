@@ -1,20 +1,21 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 00:50:48
+ * @LastEditTime: 2025-04-02 03:39:02
 -->
 <template>
     <div :class="$style['bubble-editor']">
-        <EditorContent :editor="tiptapEditor" />
+        <TiptapEditorContent v-if="tiptapEditor" :editor="tiptapEditor" />
     </div>
 </template>
 <script lang="ts" setup>
 import type { UeTiptapBubbleEditorBaseProps } from "./index";
 
-import { Editor, EditorContent } from "@tiptap/vue-3";
+import { Editor } from "@tiptap/vue-3";
+import TiptapEditorContent from "./sub-components/TiptapEditorContent.vue";
 
-import { createBubbleEditorExtension } from "./utils/extension";
 import { linkRegex } from "./utils/helper";
+import { createBubbleEditorExtension } from "../../utils/tiptap-bubble-extension";
 
 import $pageStyle from "../../src/app.module.scss";
 
@@ -29,14 +30,15 @@ const tiptapEditor = ref<Editor>();
 watch(
     () => props.device,
     (value: string) => {
-        if (tiptapEditor.value) {
-            tiptapEditor.value.storage.deviceSettingExtension.device = value;
+        if (tiptapEditor.value?.storage.deviceExtension) {
+            tiptapEditor.value.storage.deviceExtension.device = value;
         }
     }
 );
 
 onMounted(() => {
     tiptapEditor.value = new Editor({
+        injectCSS: false,
         content: props.content.replace(linkRegex, ""),
         extensions: createBubbleEditorExtension(),
         editorProps: {
