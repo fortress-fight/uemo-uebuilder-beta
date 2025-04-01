@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-05 18:23:57
+ * @LastEditTime: 2025-04-01 15:27:12
  */
 
 const getBaseConfig = require("@stone/uebuilder-vue-config");
@@ -17,7 +17,7 @@ module.exports = () => {
                         /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
                         /\.vue\?vue&type=script/, // .vue
                     ],
-                    imports: ["vue", "vue-i18n", "vue-router"],
+                    imports: ["vue", "vue-router", { "@stone/uemo-editor-i18n": ["useI18n"] }],
                     // imports: ["vue", "vue-i18n", "vue-router", { "~/utils/error": ["UeElError", "UeElErrorCode"] }],
                 }),
             ],

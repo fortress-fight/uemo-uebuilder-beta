@@ -1,9 +1,9 @@
-import { createI18n } from "vue-i18n";
-import i18nZhCn from "../i18n/zh-cn.json";
-import i18nEn from "../i18n/en.json";
+import { i18n as i18nGlobal } from "@stone/uemo-editor-i18n";
 
-export const i18n = createI18n({
-    locale: "zh-cn",
-    fallbackLocale: "zh-cn",
-    messages: { en: i18nEn, "zh-cn": i18nZhCn },
-});
+import zhCn from "../i18n/zh-cn.json";
+import en from "../i18n/en.json";
+
+i18nGlobal.global.mergeLocaleMessage("zh-cn", zhCn);
+i18nGlobal.global.mergeLocaleMessage("en", en);
+
+export const i18n = i18nGlobal;
