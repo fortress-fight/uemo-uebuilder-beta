@@ -13,6 +13,8 @@ alwaysApply: true
 
 ### commit-message 中使用的 type 参考
 
+注意：type 不需要使用中文
+
 -   feat：新功能的实现（feature）。
 -   fix：修复 bug。
 -   docs：文档修改（如 README 或 API 文档）。
