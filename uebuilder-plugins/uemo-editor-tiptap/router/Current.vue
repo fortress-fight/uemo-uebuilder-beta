@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestBubbleEditor.vue";
+import TestComponent from "~/demo/components/TestBubbleMenu.vue";
 </script>
 <style lang="scss" module>
 .test-group {

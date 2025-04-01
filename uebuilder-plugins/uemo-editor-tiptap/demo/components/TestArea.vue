@@ -2,7 +2,7 @@
     <div ref="rootDom" :class="$style['test-area']" class="grid justify-center" :data-layout="layout">
         <div :class="$style['area-title']" class="cursor-pointer" @click="copyData()">{{ title }}</div>
         <div class="flex justify-center items-center relative z-10">
-            <slot></slot>
+            <slot :editor="tiptapEditor"></slot>
         </div>
         <TestDataPanel :value="testValue">
             <UeElSelect v-model:value="testValueSelect" title="测试数据" :options="testValueOptions" />
@@ -10,10 +10,20 @@
     </div>
 </template>
 <script lang="ts" setup>
+import type { Extensions } from "@tiptap/vue-3";
+
+import { Editor } from "@tiptap/vue-3";
+
 import copy from "@stone/uemo-editor-utils/lib/copy";
 import TestDataPanel from "./TestDataPanel.vue";
 
+import $pageStyle from "../../src/app.module.scss";
+import { useProvideTiptapEditor } from "../../utils/mixin-tiptap-editor";
+import { createBubbleEditorExtension } from "../../utils/tiptap-bubble-extension";
+
 type TYPE_TEST_AREA_PROPS = {
+    useEditor?: boolean;
+    editorExtension?: Extensions;
     layout?: string;
     title?: string;
     testValue?: any;
@@ -52,6 +62,32 @@ function copyData() {
         instance?.proxy?.$ueElToast.error("复制失败");
     }
 }
+
+const tiptapEditor = ref<Editor>();
+const content = ref("测试气泡工具栏控件");
+
+onMounted(() => {
+    if (!prop.useEditor) return;
+
+    const extensions = prop.editorExtension || createBubbleEditorExtension();
+
+    tiptapEditor.value = new Editor({
+        injectCSS: false,
+        content: content.value,
+        extensions,
+        editorProps: {
+            attributes: {
+                class: $pageStyle["ue-richtext-editor"],
+            },
+        },
+    });
+
+    useProvideTiptapEditor(tiptapEditor.value);
+});
+onBeforeUnmount(() => {
+    if (tiptapEditor.value?.isDestroyed) return;
+    tiptapEditor.value?.destroy();
+});
 </script>
 <style lang="scss" module>
 .test-area {
