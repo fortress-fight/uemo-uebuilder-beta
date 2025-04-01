@@ -1,11 +1,10 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-01 01:34:08
+ * @LastEditTime: 2025-04-02 00:50:48
 -->
 <template>
     <div :class="$style['bubble-editor']">
-        <!-- NOTE 内容区 -->
         <EditorContent :editor="tiptapEditor" />
     </div>
 </template>
@@ -13,21 +12,64 @@
 import type { UeTiptapBubbleEditorBaseProps } from "./index";
 
 import { Editor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
+
+import { createBubbleEditorExtension } from "./utils/extension";
+import { linkRegex } from "./utils/helper";
+
+import $pageStyle from "../../src/app.module.scss";
 
 defineOptions({ name: "UeTiptapBubbleEditor" });
-const props = withDefaults(defineProps<UeTiptapBubbleEditorBaseProps>(), {});
+const props = withDefaults(defineProps<UeTiptapBubbleEditorBaseProps>(), { device: "pc" });
+const emit = defineEmits<{
+    (e: "ready" | "update" | "create" | "destroy" | "blur" | "focus" | "selectionUpdate", editor: Editor | null): void;
+}>();
 
 const tiptapEditor = ref<Editor>();
 
+watch(
+    () => props.device,
+    (value: string) => {
+        if (tiptapEditor.value) {
+            tiptapEditor.value.storage.deviceSettingExtension.device = value;
+        }
+    }
+);
+
 onMounted(() => {
     tiptapEditor.value = new Editor({
-        content: props.content,
-        extensions: [StarterKit],
+        content: props.content.replace(linkRegex, ""),
+        extensions: createBubbleEditorExtension(),
+        editorProps: {
+            attributes: {
+                class: $pageStyle["ue-richtext-editor"],
+            },
+        },
+    });
+
+    emit("ready", tiptapEditor.value);
+
+    tiptapEditor.value.on("selectionUpdate", () => {
+        emit("selectionUpdate", tiptapEditor.value!);
+    });
+    tiptapEditor.value.on("blur", () => {
+        emit("blur", tiptapEditor.value!);
+    });
+    tiptapEditor.value.on("focus", () => {
+        emit("focus", tiptapEditor.value!);
+    });
+    tiptapEditor.value.on("update", () => {
+        emit("update", tiptapEditor.value!);
+    });
+    tiptapEditor.value.on("create", () => {
+        emit("create", tiptapEditor.value!);
+    });
+    tiptapEditor.value.on("destroy", () => {
+        emit("destroy", tiptapEditor.value!);
     });
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
+    if (tiptapEditor.value?.isDestroyed) return;
     tiptapEditor.value?.destroy();
 });
 </script>
