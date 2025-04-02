@@ -24,6 +24,7 @@ import Italic from "@tiptap/extension-italic";
 import { deviceExtension } from "../packages/extension-device";
 import { fontScaleExtension } from "../packages/extension-font-scale";
 import { AIExtension } from "../packages/extension-ai";
+import { Formatting } from "../packages/extension-formatting";
 
 // #endregion
 
@@ -46,6 +47,9 @@ export function createBubbleEditorExtension(): Extensions {
         Bold,
         Italic,
         TextStyle,
+
+        // 自定义插件
+        Formatting,
     ];
 
     const customExtensions = [deviceExtension, fontScaleExtension, AIExtension];
