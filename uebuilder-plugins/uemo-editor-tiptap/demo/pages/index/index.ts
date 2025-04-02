@@ -15,7 +15,7 @@ import UeEl from "@stone/uemo-editor-element/src";
 import UeTiptap from "@/index";
 
 import App from "./index.vue";
-import router from "../../../router/index";
+import router from "../../router/index";
 import { AI_CONFIG } from "../../../utils/ai-config";
 
 const app = createApp(App);

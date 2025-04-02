@@ -7,7 +7,7 @@
         "i18n/**/*",
         "utils/**/*",
         "packages/**/*",
-        "router/**/*",
+        "demo/router/**/*",
         "./auto-imports.d.ts",
         "./types/*.d.ts"
     ],
