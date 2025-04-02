@@ -1,7 +1,7 @@
 import { Extension } from "@tiptap/core";
 
 export interface fontScaleStorage {
-    fontScaleHandle: UE_TIPTAP_UNIT.FONT_SCALE_HANDLE;
+    fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle;
 }
 
 /**
@@ -11,7 +11,7 @@ export interface fontScaleStorage {
  * @param {number} [_scale] - 缩放比例
  * @returns {number | undefined} 获取时返回缩放比例，设置时返回 undefined
  */
-const fontScaleHandle: UE_TIPTAP_UNIT.FONT_SCALE_HANDLE = (
+const fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle = (
     type: "get" | "set",
     _fontSize?: string,
     _scale?: number
@@ -35,7 +35,7 @@ const fontScaleHandle: UE_TIPTAP_UNIT.FONT_SCALE_HANDLE = (
  */
 export const fontScaleExtension = Extension.create<{
     /** 字体缩放处理函数 */
-    fontScaleHandle: UE_TIPTAP_UNIT.FONT_SCALE_HANDLE;
+    fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle;
 }>({
     name: "fontScaleExtension",
 

@@ -8,10 +8,10 @@ declare module "@tiptap/core" {
         deviceExtension: {
             /**
              * 更新设备类型
-             * @param {UE_TIPTAP_UNIT.DEVICE} device - 设备类型
+             * @param {UE_TIPTAP_UNIT.Device} device - 设备类型
              * @returns {ReturnType} 命令执行结果
              */
-            updateDevice: (device: UE_TIPTAP_UNIT.DEVICE) => ReturnType;
+            updateDevice: (device: UE_TIPTAP_UNIT.Device) => ReturnType;
         };
     }
 }
@@ -21,7 +21,7 @@ declare module "@tiptap/core" {
  */
 export interface deviceStorage {
     /** 当前设备类型 */
-    device: UE_TIPTAP_UNIT.DEVICE;
+    device: UE_TIPTAP_UNIT.Device;
 }
 
 /**
@@ -31,7 +31,7 @@ export interface deviceStorage {
 export const deviceExtension = Extension.create<
     {
         /** 默认设备类型 */
-        defaultDevice: UE_TIPTAP_UNIT.DEVICE;
+        defaultDevice: UE_TIPTAP_UNIT.Device;
     },
     deviceStorage
 >({
@@ -65,7 +65,7 @@ export const deviceExtension = Extension.create<
         return {
             /**
              * 更新设备类型命令
-             * @param {UE_TIPTAP_UNIT.DEVICE} device - 新的设备类型
+             * @param {UE_TIPTAP_UNIT.Device} device - 新的设备类型
              * @returns {() => boolean} 命令执行函数
              */
             updateDevice: (device) => () => {
