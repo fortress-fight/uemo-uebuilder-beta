@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试网格属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 12:34:07
+ * @LastEditTime: 2025-04-02 22:54:26
 -->
 <template>
     <TestArea
@@ -21,7 +21,11 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_EL_COMPONENT.UeElGridLayoutSettingProps & { testOptionTitle?: string; value?: any })[] = [
+const testValueList: (UE_EL_COMPONENT.UeElGridLayoutSettingProps & {
+    testOptionTitle?: string;
+    value?: any;
+    zIndexData?: string;
+})[] = [
     {
         value: "1-1,1-1-1:1/1/3/2,1/2/2/4,2/2/3/4",
         withReplace: true,

@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 17:39:14
+ * @LastEditTime: 2025-04-02 22:26:06
 -->
 <template>
     <TestArea
@@ -22,7 +22,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: UE_EL_COMPONENT.UeElButtonProps[] = [
-    { theme: "squareIcon", icon: "icon-tianjia" },
+    { theme: "squareIcon", label: "测试按钮", icon: "icon-tianjia" },
     { theme: "fillText", size: "large", text: "测试按钮" },
     { theme: "hoverStrokeText", size: "large", text: "测试按钮" },
     { theme: "strokeText", size: "large", text: "测试按钮" },
