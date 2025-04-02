@@ -5,7 +5,7 @@ import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { CellSelection } from "@tiptap/pm/tables";
 import { EditorView } from "@tiptap/pm/view";
 
-import tippy from "@stone/uemo-editor-utils/lib/tippy";
+import { tippy } from "@stone/uemo-editor-utils/lib/tippy";
 
 import { getAIExtensionStorage } from "../../../utils/tiptap-helper";
 
