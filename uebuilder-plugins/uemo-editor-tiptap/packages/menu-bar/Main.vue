@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:03:34
+ * @LastEditTime: 2025-04-03 00:17:57
 -->
 <template>
     <div :class="$style['menu-bar']" class="flex">
@@ -16,7 +16,9 @@
 import type { UeTiptapMenuBarBaseProps } from "./index";
 
 defineOptions({ name: "UeTiptapMenuBar" });
-const _props = withDefaults(defineProps<UeTiptapMenuBarBaseProps>(), {});
+const _props = withDefaults(defineProps<UeTiptapMenuBarBaseProps>(), {
+    title: "",
+});
 </script>
 <style lang="scss" module>
 .menu-bar {

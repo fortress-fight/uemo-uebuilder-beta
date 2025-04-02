@@ -1,7 +1,7 @@
 /*
  * @Description: 菜单栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 23:58:13
+ * @LastEditTime: 2025-04-03 00:14:50
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeTiptapMenuBar.install = (app: App) => {
 };
 
 export interface UeTiptapMenuBarBaseProps {
-    title: string;
+    title?: string;
 }
 export type UeTiptapMenuBarInstance = InstanceType<typeof UeTiptapMenuBar>;
 
