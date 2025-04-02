@@ -10,8 +10,9 @@
 </template>
 <script lang="ts" setup>
 import TestBubbleMenu from "~/demo/components/TestBubbleMenu.vue";
+import TestMenuButton from "~/demo/components/TestMenuButton.vue";
 
-const unitTestComponents = [TestBubbleMenu];
+const unitTestComponents = [TestBubbleMenu, TestMenuButton];
 
 const testComponents = [...unitTestComponents];
 </script>

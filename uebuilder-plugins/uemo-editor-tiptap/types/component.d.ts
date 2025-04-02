@@ -5,11 +5,13 @@
  */
 import UeTiptapBubbleEditor, { UeTiptapBubbleEditorBaseProps } from "../packages/bubble-editor";
 import UeTiptapBubbleMenu, { UeTiptapBubbleMenuBaseProps } from "../packages/bubble-menu";
+import UeTiptapMenuButton, { UeTiptapMenuButtonBaseProps } from "../packages/menu-button";
 
 declare module "vue" {
     export interface GlobalComponents {
         UeTiptapBubbleEditor: typeof UeTiptapBubbleEditor;
         UeTiptapBubbleMenu: typeof UeTiptapBubbleMenu;
+        UeTiptapMenuButton: typeof UeTiptapMenuButton;
     }
 }
 
@@ -17,6 +19,7 @@ declare global {
     namespace UE_TIPTAP_COMPONENT {
         interface UeTiptapBubbleEditorProps extends UeTiptapBubbleEditorBaseProps {}
         interface UeTiptapBubbleMenuProps extends UeTiptapBubbleMenuBaseProps {}
+        interface UeTiptapMenuButtonProps extends UeTiptapMenuButtonBaseProps {}
     }
 }
 
