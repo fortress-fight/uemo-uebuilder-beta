@@ -11,8 +11,9 @@
 <script lang="ts" setup>
 import TestBubbleMenu from "~/demo/components/TestBubbleMenu.vue";
 import TestMenuButton from "~/demo/components/TestMenuButton.vue";
+import TestMenuBar from "~/demo/components/TestMenuBar.vue";
 
-const unitTestComponents = [TestBubbleMenu, TestMenuButton];
+const unitTestComponents = [TestBubbleMenu, TestMenuButton, TestMenuBar];
 
 const testComponents = [...unitTestComponents];
 </script>
