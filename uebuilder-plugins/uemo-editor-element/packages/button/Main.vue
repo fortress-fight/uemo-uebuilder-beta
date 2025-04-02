@@ -1,11 +1,11 @@
 <!--
  * @Description: 按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 18:32:46
+ * @LastEditTime: 2025-04-02 22:46:50
 -->
 <template>
     <button
-        v-ue-el-label="labelParam"
+        v-ue-el-label="label"
         :class="$style['button']"
         :data-active="active ? '' : undefined"
         :data-disable="disable ? '' : undefined"
@@ -63,10 +63,6 @@ defineOptions({ name: "UeElButton" });
 const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UeElButtonBaseProps>(), { size: "small" });
 const emit = defineEmits<{ (e: "trigger", ev: MouseEvent): void }>();
-
-const labelParam = computed<UE_EL_UTIL.LabelOption>(() => {
-    return props.label ? { content: props.label, delay: [1000, null] } : undefined;
-});
 
 const iconParam = computed<UE_EL_COMPONENT.UeElIconProps | undefined>(() => {
     if (!props.icon) return undefined;
