@@ -12,8 +12,9 @@
 import TestBubbleMenu from "~/demo/components/TestBubbleMenu.vue";
 import TestMenuButton from "~/demo/components/TestMenuButton.vue";
 import TestMenuBar from "~/demo/components/TestMenuBar.vue";
+import TestEditorMenu from "~/demo/components/TestEditorMenu.vue";
 
-const unitTestComponents = [TestBubbleMenu, TestMenuButton, TestMenuBar];
+const unitTestComponents = [TestBubbleMenu, TestMenuButton, TestMenuBar, TestEditorMenu];
 
 const testComponents = [...unitTestComponents];
 </script>

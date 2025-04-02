@@ -198,6 +198,8 @@ const operManage = {
     // #endregion
 } as const;
 
-const operMap: Record<keyof typeof operManage, OperInfo> = operManage;
+export type UeTiptapOperItem = keyof typeof operManage;
+
+const operMap: Record<UeTiptapOperItem, OperInfo> = operManage;
 
 export { operMap };
