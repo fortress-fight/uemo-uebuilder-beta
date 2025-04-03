@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 03:39:02
+ * @LastEditTime: 2025-04-04 04:18:36
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -22,7 +22,7 @@ import $pageStyle from "../../src/app.module.scss";
 defineOptions({ name: "UeTiptapBubbleEditor" });
 const props = withDefaults(defineProps<UeTiptapBubbleEditorBaseProps>(), { device: "pc" });
 const emit = defineEmits<{
-    (e: "ready" | "update" | "create" | "destroy" | "blur" | "focus" | "selectionUpdate", editor: Editor | null): void;
+    (e: "ready" | "update" | "create" | "destroy" | "blur" | "focus" | "selectionUpdate", editor: Editor): void;
 }>();
 
 const tiptapEditor = ref<Editor>();

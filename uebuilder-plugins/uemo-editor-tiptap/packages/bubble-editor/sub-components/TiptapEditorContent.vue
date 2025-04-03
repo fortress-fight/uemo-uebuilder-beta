@@ -1,5 +1,5 @@
 <template>
-    <UeTiptapBubbleMenu> 123321 </UeTiptapBubbleMenu>
+    <UeTiptapEditorMenu />
     <EditorContent :editor="editor" />
 </template>
 <script lang="ts" setup>
