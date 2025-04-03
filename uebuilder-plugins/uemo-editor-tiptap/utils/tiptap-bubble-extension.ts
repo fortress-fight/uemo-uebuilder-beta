@@ -4,6 +4,8 @@ import $pageStyle from "../src/app.module.scss";
 
 // #region 导入基础扩展
 
+import History from "@tiptap/extension-history";
+
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
@@ -25,6 +27,7 @@ import { deviceExtension } from "../packages/extension-device";
 import { fontScaleExtension } from "../packages/extension-font-scale";
 import { AIExtension } from "../packages/extension-ai";
 import { Formatting } from "../packages/extension-formatting";
+import { TextDecoration } from "../packages/extension-text-decoration/src";
 
 // #endregion
 
@@ -47,12 +50,12 @@ export function createBubbleEditorExtension(): Extensions {
         Bold,
         Italic,
         TextStyle,
-
+        History,
         // 自定义插件
         Formatting,
     ];
 
-    const customExtensions = [deviceExtension, fontScaleExtension, AIExtension];
+    const customExtensions = [deviceExtension, fontScaleExtension, AIExtension, TextDecoration];
 
     return [...baseExtensions, ...customExtensions];
 }
