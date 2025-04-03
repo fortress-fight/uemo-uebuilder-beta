@@ -1,7 +1,7 @@
 <template>
-    <div ref="rootDom" :class="$style['test-area']" class="grid justify-center" :data-layout="layout">
+    <div ref="rootDom" :class="[$style['test-area']]" class="grid justify-center" :data-layout="layout">
         <div :class="$style['area-title']" class="cursor-pointer" @click="copyData()">{{ title }}</div>
-        <div class="flex justify-center items-center relative z-10">
+        <div :class="$pageStyle['page-editor']" class="flex justify-center items-center relative z-10">
             <slot :editor="tiptapEditor"></slot>
         </div>
         <TestDataPanel :value="testValue">

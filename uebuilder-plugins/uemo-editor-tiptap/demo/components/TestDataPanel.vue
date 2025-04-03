@@ -56,6 +56,8 @@ function copyData() {
 
         max-height: 600px;
         padding: 60px;
+
+        white-space: pre-wrap;
     }
     .btn--copy {
         @include square(28px);
