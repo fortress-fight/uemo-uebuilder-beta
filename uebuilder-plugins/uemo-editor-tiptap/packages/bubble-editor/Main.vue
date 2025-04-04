@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 17:17:10
+ * @LastEditTime: 2025-04-04 17:52:33
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -12,7 +12,6 @@
 
 <script lang="ts" setup>
 import type { UeTiptapBubbleEditorBaseProps } from "./index";
-import type { EditorEvents } from "@tiptap/vue-3";
 
 import { Editor } from "@tiptap/vue-3";
 
@@ -21,11 +20,6 @@ import { createBubbleEditorExtension } from "../../utils/tiptap-bubble-extension
 
 import TiptapEditorContent from "./sub-components/TiptapEditorContent.vue";
 import $pageStyle from "../../src/app.module.scss";
-
-/**
- * 编辑器事件类型
- */
-type EditorEvent = keyof EditorEvents;
 
 defineOptions({
     name: "UeTiptapBubbleEditor",
@@ -37,7 +31,7 @@ const props = withDefaults(defineProps<UeTiptapBubbleEditorBaseProps>(), {
 });
 
 const emit = defineEmits<{
-    (e: EditorEvent | "ready", editor: Editor): void;
+    (e: "ready" | "update" | "create" | "destroy" | "blur" | "focus" | "selectionUpdate", editor: Editor): void;
 }>();
 
 const tiptapEditor = ref<Editor>();
@@ -48,7 +42,7 @@ const attrEditorPanel = useTemplateRef("attrEditorPanel");
  * @param editor - Tiptap 编辑器实例
  */
 const initEditorEvents = (editor: Editor) => {
-    const events: EditorEvent[] = ["selectionUpdate", "blur", "focus", "update", "create", "destroy"];
+    const events = ["selectionUpdate", "blur", "focus", "update", "create", "destroy"] as const;
 
     events.forEach((event) => {
         editor.on(event, () => {
