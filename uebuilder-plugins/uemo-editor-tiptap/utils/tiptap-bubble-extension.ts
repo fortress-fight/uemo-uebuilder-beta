@@ -30,6 +30,7 @@ import { AIExtension } from "../packages/extension-ai";
 import { Formatting } from "../packages/extension-formatting";
 import { TextDecoration } from "../packages/extension-text-decoration/src";
 import { Blockquote } from "../packages/extension-blockquote/src";
+import { Link } from "../packages/extension-link/src";
 
 // #endregion
 
@@ -70,6 +71,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         AIExtension,
         TextDecoration,
         Blockquote,
+        Link.configure({
+            autolink: false,
+        }),
     ];
 
     return [...baseExtensions, ...customExtensions];
