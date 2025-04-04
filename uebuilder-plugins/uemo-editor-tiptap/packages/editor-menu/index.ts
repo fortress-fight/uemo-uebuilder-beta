@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:08:16
+ * @LastEditTime: 2025-04-04 04:06:53
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeTiptapEditorMenu.install = (app: App) => {
 };
 
 export interface UeTiptapEditorMenuBaseProps {
-    menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[];
+    menuItems?: (UE_TIPTAP_UNIT.OperItem | "|")[];
 }
 export type UeTiptapEditorMenuInstance = InstanceType<typeof UeTiptapEditorMenu>;
 

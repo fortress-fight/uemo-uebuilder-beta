@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:16:33
+ * @LastEditTime: 2025-04-04 04:06:00
 -->
 <template>
     <TestArea
@@ -21,9 +21,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOptionTitle?: string; value?: any })[] = [
-    { menuItems: ["bold"] },
-];
+const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOptionTitle?: string; value?: any })[] = [];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
