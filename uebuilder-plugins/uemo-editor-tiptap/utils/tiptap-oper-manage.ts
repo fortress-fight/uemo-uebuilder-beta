@@ -65,7 +65,7 @@ const operManage = {
 
     // #region 链接
 
-    link: { title: "链接", shortcut: "Mod-K", icon: "icon-editor-link" },
+    link: { title: "链接", shortcut: "Mod-K", icon: "icon-editor-link", buttonType: "iconButton" },
     insertButton: { title: "按钮", subtitle: "Button", tip: "插入按钮", icon: "icon-editor-button" },
 
     // #endregion

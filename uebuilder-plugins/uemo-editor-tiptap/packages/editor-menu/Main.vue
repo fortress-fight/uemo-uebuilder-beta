@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 17:27:08
+ * @LastEditTime: 2025-04-04 23:15:05
 -->
 <template>
     <UeTiptapBubbleMenu>
@@ -19,21 +19,22 @@ import type { UeTiptapEditorMenuBaseProps } from "./index";
 import BoldButton from "./sub-component/BoldButton.vue";
 import ItalicButton from "./sub-component/ItalicButton.vue";
 import FormattingButton from "./sub-component/FormattingButton.vue";
-import TextDecoration from "./sub-component/TextDecoration.vue";
+import TextDecorationButton from "./sub-component/TextDecorationButton.vue";
 import BlockquoteButton from "./sub-component/BlockquoteButton.vue";
-
+import LinkButton from "./sub-component/LinkButton.vue";
 defineOptions({ name: "UeTiptapEditorMenu" });
 
 const _props = withDefaults(defineProps<UeTiptapEditorMenuBaseProps>(), {
-    menuItems: () => ["formatting", "|", "bold", "italic", "textDecoration", "blockquote"],
+    menuItems: () => ["formatting", "|", "bold", "italic", "textDecoration", "blockquote", "link"],
 });
 
 const buttonMap: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>> = {
     bold: BoldButton,
     italic: ItalicButton,
     formatting: FormattingButton,
-    textDecoration: TextDecoration,
+    textDecoration: TextDecorationButton,
     blockquote: BlockquoteButton,
+    link: LinkButton,
 };
 </script>
 <style lang="scss" module>
