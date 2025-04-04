@@ -29,6 +29,7 @@ import { fontScaleExtension } from "../packages/extension-font-scale";
 import { AIExtension } from "../packages/extension-ai";
 import { Formatting } from "../packages/extension-formatting";
 import { TextDecoration } from "../packages/extension-text-decoration/src";
+import { Blockquote } from "../packages/extension-blockquote/src";
 
 // #endregion
 
@@ -68,6 +69,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         fontScaleExtension,
         AIExtension,
         TextDecoration,
+        Blockquote,
     ];
 
     return [...baseExtensions, ...customExtensions];
