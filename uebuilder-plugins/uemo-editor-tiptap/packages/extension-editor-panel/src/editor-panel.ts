@@ -4,7 +4,7 @@
  */
 
 import { Extension } from "@tiptap/core";
-import { editorAttrHandler } from "../utils/helper";
+import { openAttrEditorPanel } from "../utils/helper";
 
 /**
  * 属性编辑器面板处理器类型定义
@@ -18,7 +18,7 @@ export type AttrEditorPanelHandler<T extends keyof UE_TIPTAP_EXTENSION.AttrEdito
         rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
         setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
         preview?: () => void; // 预览回调
-        focus?: () => void; // 聚焦回调
+        focus: () => void; // 聚焦回调
     }
 ) => R;
 
@@ -35,7 +35,7 @@ declare module "@tiptap/core" {
  * 编辑器面板配置选项
  */
 export type EditorPanelOptions = {
-    editorAttrHandler: AttrEditorPanelHandler<"textDecoration", void>;
+    openAttrEditorPanel: AttrEditorPanelHandler<"textDecoration", void>;
 };
 
 /**
@@ -47,15 +47,17 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions>({
 
     addOptions() {
         return {
-            editorAttrHandler,
+            openAttrEditorPanel,
         };
     },
 
     addCommands() {
         return {
             openAttrEditorPanel: (type, attr, param) => () => {
+                const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
+
                 // 调用属性处理器
-                this.options.editorAttrHandler(type, attr, param);
+                handler(type, attr, param);
                 return true;
             },
         };

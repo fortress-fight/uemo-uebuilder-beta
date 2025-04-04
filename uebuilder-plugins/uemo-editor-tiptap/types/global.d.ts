@@ -7,6 +7,17 @@ declare global {
         type FontScaleHandle = (type: "set" | "get", fontSize?: string, scale?: number) => void;
 
         type OperItem = UeTiptapOperItem;
+
+        type PositionRect = {
+            width: number;
+            height: number;
+            x: number;
+            y: number;
+            left: number;
+            right: number;
+            top: number;
+            bottom: number;
+        };
     }
 }
 

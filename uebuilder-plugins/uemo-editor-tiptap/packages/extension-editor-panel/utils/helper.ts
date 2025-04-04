@@ -1,6 +1,6 @@
 import type { AttrEditorPanelHandler } from "../src";
 
-export const editorAttrHandler: AttrEditorPanelHandler<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, void> = (
+export const openAttrEditorPanel: AttrEditorPanelHandler<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, void> = (
     type,
     attr,
     param

@@ -9,6 +9,6 @@ declare global {
             textDecoration: TextDecorationAttr;
         };
 
-        type openAttrEditorPanel = AttrEditorPanelHandler<keyof AttrEditorPanelMap, void>;
+        type openAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;
     }
 }
