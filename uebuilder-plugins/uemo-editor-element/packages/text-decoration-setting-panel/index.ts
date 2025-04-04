@@ -1,7 +1,7 @@
 /*
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:56:10
+ * @LastEditTime: 2025-04-04 12:55:48
  */
 import type { App } from "vue";
 
@@ -21,7 +21,6 @@ export interface UeElTextDecorationSettingPanelValue {
     pointer?: string;
     delay?: string;
     duration?: string;
-    preview?: boolean;
 }
 
 export interface UeElTextDecorationSettingPanelBaseProps {

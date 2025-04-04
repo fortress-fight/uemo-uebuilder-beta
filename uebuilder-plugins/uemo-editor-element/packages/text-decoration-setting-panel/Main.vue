@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:55:15
+ * @LastEditTime: 2025-04-04 12:56:30
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting-panel']" :title="t('TEXT_DECORATION_TITLE')">
@@ -39,7 +39,7 @@
                     theme="strokeText"
                     :icon="{ name: 'icon-app-play', size: 16 }"
                     :class="$style['oper-btn']"
-                    @trigger="togglePreview"
+                    @trigger="emit('preview')"
                 />
             </template>
         </UeElSettingGroup>
@@ -49,7 +49,7 @@
 <script lang="ts" setup>
 import type { UeElTextDecorationSettingPanelBaseProps, UeElTextDecorationSettingPanelValue } from "./index";
 
-import { useDefineObjectModel, useDefineObjectModuleProxy } from "@stone/uemo-editor-element/utils/model-mixin";
+import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeElTextDecorationSettingPanel" });
 
@@ -68,7 +68,7 @@ const DEFAULT_EASE = "power4.out";
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeElTextDecorationSettingPanelBaseProps>(), {});
 const valueRef = defineModel<UeElTextDecorationSettingPanelValue>("value", { required: true });
-const valueRefProxy = useDefineObjectModuleProxy(valueRef);
+const emit = defineEmits<{ (e: "preview"): void }>();
 
 /**
  * 输入控件配置
@@ -227,10 +227,6 @@ function handleTrigger(type: string) {
             break;
     }
 }
-
-const togglePreview = () => {
-    valueRefProxy("preview", !valueRef.value.preview);
-};
 </script>
 
 <style lang="scss" module>
