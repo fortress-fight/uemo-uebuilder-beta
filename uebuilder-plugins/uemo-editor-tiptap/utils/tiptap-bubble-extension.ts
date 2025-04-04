@@ -23,6 +23,7 @@ import Italic from "@tiptap/extension-italic";
 
 // #region 导入设备扩展
 
+import { EditorPanelExtension } from "../packages/extension-editor-panel/src";
 import { deviceExtension } from "../packages/extension-device";
 import { fontScaleExtension } from "../packages/extension-font-scale";
 import { AIExtension } from "../packages/extension-ai";
@@ -31,7 +32,11 @@ import { TextDecoration } from "../packages/extension-text-decoration/src";
 
 // #endregion
 
-export function createBubbleEditorExtension(): Extensions {
+export type CreateBubbleEditorExtensionParam = {
+    openAttrEditorPanel?: UE_TIPTAP_EXTENSION.openAttrEditorPanel<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>;
+};
+
+export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionParam = {}): Extensions {
     const baseExtensions = [
         Document,
         Paragraph,
@@ -55,7 +60,15 @@ export function createBubbleEditorExtension(): Extensions {
         Formatting,
     ];
 
-    const customExtensions = [deviceExtension, fontScaleExtension, AIExtension, TextDecoration];
+    const customExtensions = [
+        EditorPanelExtension.configure({
+            openAttrEditorPanel: param.openAttrEditorPanel,
+        }),
+        deviceExtension,
+        fontScaleExtension,
+        AIExtension,
+        TextDecoration,
+    ];
 
     return [...baseExtensions, ...customExtensions];
 }
