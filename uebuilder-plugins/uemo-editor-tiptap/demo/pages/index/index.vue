@@ -30,6 +30,9 @@ const currentLang = computed({
 });
 </script>
 <style lang="scss" module>
+body {
+    --ue-z-index--dialog: 999998;
+}
 .nav-bar {
     margin-bottom: 20px;
     padding: 20px;
