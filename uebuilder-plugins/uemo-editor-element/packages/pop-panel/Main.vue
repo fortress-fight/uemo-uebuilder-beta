@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-28 01:18:29
+ * @LastEditTime: 2025-04-04 16:26:21
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -276,6 +276,7 @@ provide(UeElProvideDialogCloseHandler, () => {
 
 // #region 生命周期
 onBeforeUnmount(() => {
+    openModel.value = false;
     eventBus.emit("clearUploadControl");
     eventBus.all.clear();
 });
