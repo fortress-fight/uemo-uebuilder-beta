@@ -1,9 +1,10 @@
 /*
  * @Description: tailwind.config 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2023-12-16 02:01:12
+ * @LastEditTime: 2025-04-04 14:09:24
  */
 const colors = require("tailwindcss/colors");
+const path = require("path");
 
 delete colors["lightBlue"];
 delete colors["warmGray"];
@@ -91,5 +92,10 @@ module.exports = {
         },
     },
     plugins: [],
-    content: [`src/**/*.vue`, `packages/**/*.vue`, `demo/**/*.vue`],
+    content: [
+        `src/**/*.vue`,
+        `packages/**/*.vue`,
+        `demo/**/*.vue`,
+        path.join(path.dirname(require.resolve("@stone/uemo-editor-element/package.json")), "packages/**/*.vue"),
+    ],
 };
