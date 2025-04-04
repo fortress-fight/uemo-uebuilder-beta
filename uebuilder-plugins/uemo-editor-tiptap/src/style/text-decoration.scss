@@ -1,0 +1,111 @@
+.page-editor {
+    span[data-clip="text"] {
+        .text-decoration-svg,
+        .text-decoration-svg u {
+            color: rgb(0 0 0 / 0);
+            background-clip: text;
+        }
+    }
+    .text-decoration-svg {
+        --text-decoration-color: #000;
+        --text-decoration-width: 1em;
+        --stroke-linecap: round;
+        --stroke-linejoin: square;
+        --opacity: 1;
+        --blend: none;
+        position: relative;
+        z-index: 10;
+
+        display: inline-block;
+
+        text-decoration: none;
+
+        background-image: inherit;
+        &[data-animate] path {
+            // opacity: 0;
+        }
+        u {
+            position: relative;
+            z-index: 10;
+
+            text-decoration: none;
+
+            background-image: inherit;
+        }
+    }
+    .text-decoration-svg-box {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: block;
+        overflow: visible;
+
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+
+        opacity: var(--opacity);
+        &[data-svg-name="line-1"] {
+            top: auto;
+            bottom: 16%;
+            left: 0;
+
+            width: 100%;
+            height: calc(8px / 73px * 100%);
+        }
+        &[data-svg-name="line-2"] {
+            top: auto;
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+        &[data-svg-name="line-3"] {
+            top: 81%;
+            left: 50%;
+
+            width: calc(273px / 280px * 100%);
+            height: calc(13px / 73px * 100%);
+
+            transform: translateX(-50%);
+        }
+        &[data-svg-name="line-4"] {
+            top: 71%;
+            left: 50%;
+
+            width: 93.5714285714286%;
+            height: 31.5068493150685%;
+
+            transform: translateX(-50%);
+        }
+        &[data-svg-name="line-5"] {
+            top: 50%;
+            left: 50%;
+
+            width: calc(297.5px / 280px * 100%);
+            height: calc(86.5px / 73px * 100%);
+
+            transform: translate3D(-50%, -50%, 0);
+        }
+        &[data-svg-name="line-6"] {
+            top: 73%;
+            left: 50%;
+
+            width: calc(266.5px / 280px * 100%);
+            height: calc(28.5px / 73px * 100%);
+
+            transform: translateX(-50%);
+        }
+        path {
+            fill: none;
+            stroke: var(--text-decoration-color);
+            stroke-linecap: var(--stroke-linecap);
+            stroke-linejoin: var(--stroke-linejoin);
+            stroke-width: var(--text-decoration-width);
+            stroke-width: max(1px, var(--text-decoration-width));
+        }
+    }
+}

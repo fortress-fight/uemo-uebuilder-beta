@@ -1,25 +1,14 @@
 // @type
-$project-name: app-editor !default;
-@if $project-name == app-editor {
-    .ue-richtext-editor {
-        box-sizing: border-box;
+@import "./style/tiptap-editing";
+@import "./style/text-decoration";
+.page-editor {
+    font-size: 14px;
+    line-height: 1.6;
 
-        cursor: text;
+    word-wrap: break-word;
 
-        outline: none;
-        &[hight-light-caret] {
-            caret-color: #999 !important;
-        }
-        *,
-        *::before,
-        *::after {
-            box-sizing: inherit;
-        }
-        .drop-cursor {
-            border-radius: 4px;
-        }
-        &.has-focus {
-            opacity: 1;
-        }
-    }
+    font-feature-settings: "liga" 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: none;
 }

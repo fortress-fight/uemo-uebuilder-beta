@@ -1,0 +1,24 @@
+$project-name: app-editor !default;
+@if $project-name == app-editor {
+    .ue-richtext-editor {
+        box-sizing: border-box;
+
+        cursor: text;
+
+        outline: none;
+        &[hight-light-caret] {
+            caret-color: #999 !important;
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+        .drop-cursor {
+            border-radius: 4px;
+        }
+        &.has-focus {
+            opacity: 1;
+        }
+    }
+}
