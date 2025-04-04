@@ -6,6 +6,7 @@
 import UeTiptapBubbleEditor, { UeTiptapBubbleEditorBaseProps } from "../packages/bubble-editor";
 import UeTiptapBubbleMenu, { UeTiptapBubbleMenuBaseProps } from "../packages/bubble-menu";
 import UeTiptapEditorMenu, { UeTiptapEditorMenuBaseProps } from "../packages/editor-menu";
+import UeTiptapEditorPanel, { UeTiptapEditorPanelBaseProps } from "../packages/editor-panel";
 import UeTiptapMenuBar, { UeTiptapMenuBarBaseProps } from "../packages/menu-bar";
 import UeTiptapMenuButton, { UeTiptapMenuButtonBaseProps } from "../packages/menu-button";
 import UeTiptapMenuDivideLine, { UeTiptapMenuDivideLineBaseProps } from "../packages/menu-divide-line";
@@ -15,6 +16,7 @@ declare module "vue" {
         UeTiptapBubbleEditor: typeof UeTiptapBubbleEditor;
         UeTiptapBubbleMenu: typeof UeTiptapBubbleMenu;
         UeTiptapEditorMenu: typeof UeTiptapEditorMenu;
+        UeTiptapEditorPanel: typeof UeTiptapEditorPanel;
         UeTiptapMenuBar: typeof UeTiptapMenuBar;
         UeTiptapMenuButton: typeof UeTiptapMenuButton;
         UeTiptapMenuDivideLine: typeof UeTiptapMenuDivideLine;
@@ -26,6 +28,7 @@ declare global {
         interface UeTiptapBubbleEditorProps extends UeTiptapBubbleEditorBaseProps {}
         interface UeTiptapBubbleMenuProps extends UeTiptapBubbleMenuBaseProps {}
         interface UeTiptapEditorMenuProps extends UeTiptapEditorMenuBaseProps {}
+        interface UeTiptapEditorPanelProps extends UeTiptapEditorPanelBaseProps {}
         interface UeTiptapMenuBarProps extends UeTiptapMenuBarBaseProps {}
         interface UeTiptapMenuButtonProps extends UeTiptapMenuButtonBaseProps {}
         interface UeTiptapMenuDivideLineProps extends UeTiptapMenuDivideLineBaseProps {}
