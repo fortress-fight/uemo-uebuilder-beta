@@ -1,14 +1,14 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 12:56:30
+ * @LastEditTime: 2025-04-04 16:44:52
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting-panel']" :title="t('TEXT_DECORATION_TITLE')">
         <!-- 文字样式资源设置 -->
         <UeElSettingGroup is-first>
             <template #body>
-                <UeElResourceSetting type="textDecoration" :removable="false" v-model:value="valueRef.svgName" />
+                <UeElResourceSetting type="textDecoration" v-model:value="svgName" />
             </template>
         </UeElSettingGroup>
 
@@ -141,6 +141,17 @@ const animateSettingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() =
 /**
  * 计算属性
  */
+
+const svgName = useDefineObjectModel(valueRef, {
+    get(modelValue) {
+        return modelValue.svgName || "";
+    },
+    set(value, modelValue) {
+        modelValue.svgName = value;
+        return modelValue;
+    },
+});
+
 const color = useDefineObjectModel(valueRef, {
     get(modelValue) {
         return modelValue.color || DEFAULT_COLOR;
