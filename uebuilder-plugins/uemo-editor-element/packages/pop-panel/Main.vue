@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 16:26:21
+ * @LastEditTime: 2025-04-06 01:10:06
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -281,6 +281,10 @@ onBeforeUnmount(() => {
     eventBus.all.clear();
 });
 // #endregion
+
+defineExpose({
+    updateDialogPos,
+});
 </script>
 
 <style lang="scss" module>
