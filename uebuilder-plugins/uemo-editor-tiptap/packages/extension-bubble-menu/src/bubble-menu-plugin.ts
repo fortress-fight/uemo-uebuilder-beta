@@ -1,11 +1,9 @@
-import type { Instance, Props } from "@stone/uemo-editor-utils/lib/tippy";
+import type { ReferenceElement } from "@stone/uemo-editor-utils/lib/floating-ui";
 
 import { Editor, isNodeSelection, isTextSelection, posToDOMRect } from "@tiptap/core";
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { CellSelection } from "@tiptap/pm/tables";
 import { EditorView } from "@tiptap/pm/view";
-
-import { tippy } from "@stone/uemo-editor-utils/lib/tippy";
 
 import { getAIExtensionStorage } from "../../../utils/tiptap-helper";
 
@@ -45,19 +43,6 @@ export interface BubbleMenuPluginProps {
     editor: Editor;
 
     /**
-     * 包含菜单的 DOM 元素
-     * @type {HTMLElement}
-     * @default null
-     */
-    element: HTMLElement;
-
-    /**
-     * tippy.js 实例的配置选项
-     * @see https://atomiks.github.io/tippyjs/v6/all-props/
-     */
-    tippyOptions?: Partial<Props>;
-
-    /**
      * 菜单更新前的延迟时间（毫秒）
      * 可用于防止性能问题
      * @type {number}
@@ -80,7 +65,6 @@ export interface BubbleMenuPluginProps {
     shouldShow?:
         | ((props: {
               editor: Editor;
-              element: HTMLElement;
               view: EditorView;
               state: EditorState;
               oldState?: EditorState;
@@ -88,6 +72,11 @@ export interface BubbleMenuPluginProps {
               to: number;
           }) => boolean)
         | null;
+
+    /**
+     * 控制菜单显示的函数
+     */
+    controller: ((type: "show" | "update" | "hide", refEl?: ReferenceElement) => void) | null;
 
     /**
      * 气泡菜单初始化时调用的函数
@@ -100,14 +89,6 @@ export interface BubbleMenuPluginProps {
      * @param {BubbleMenuView} bubbleMenu - 气泡菜单视图实例
      */
     onDestroy?: (bubbleMenu: BubbleMenuView) => void;
-
-    /**
-     * 气泡菜单更新时调用的函数
-     * @param {Instance} tippy - tippy 实例
-     * @param {Partial<Props>} param - 更新参数
-     * @returns {Partial<Props>} 更新后的配置选项
-     */
-    updateTippyOptions?: (tippy: Instance | undefined, param: Partial<Props>) => Partial<Props>;
 }
 
 export type BubbleMenuViewProps = BubbleMenuPluginProps & {
@@ -120,16 +101,12 @@ export type BubbleMenuViewProps = BubbleMenuPluginProps & {
  */
 export class BubbleMenuView {
     public editor: Editor;
-    public element: HTMLElement;
     public view: EditorView;
     public preventHide = false;
-    public tippy: Instance | undefined;
-    public tippyOptions?: Partial<Props>;
     public updateDelay: number;
     private updateDebounceTimer: number | undefined;
-    public preventShow = false;
     public dragging = false;
-    public updateTippyOptions = (_tippy: Instance | undefined, param: Partial<Props>) => param;
+    public controller?: BubbleMenuPluginProps["controller"];
 
     /**
      * 判断是否应该显示气泡菜单
@@ -151,15 +128,7 @@ export class BubbleMenuView {
         // 所以我们也检查空文本大小
         const isEmptyTextBlock = !doc.textBetween(from, to).length && isTextSelection(state.selection);
 
-        // 当点击气泡菜单内的元素时，编辑器的 "blur" 事件
-        // 被调用，气泡菜单项获得焦点。在这种情况下，我们应该
-        // 将菜单视为编辑器的一部分并保持显示
-        const isChildOfMenu = this.element.contains(document.activeElement);
-
-        // 如果点击的是菜单按钮，则不隐藏气泡菜单
-        const isMenuBtn = document.activeElement?.getAttribute("data-name") === "menuBtn";
-
-        const hasEditorFocus = view.hasFocus() || isChildOfMenu || isMenuBtn;
+        const hasEditorFocus = view.hasFocus();
 
         if (!hasEditorFocus || empty || isEmptyTextBlock || !this.editor.isEditable) {
             return false;
@@ -186,21 +155,17 @@ export class BubbleMenuView {
      * @param {BubbleMenuViewProps} param - 视图参数
      */
     constructor(public param: BubbleMenuViewProps) {
-        const { editor, element, view, tippyOptions = {}, updateDelay = 250 } = param;
-        const { shouldShow, updateTippyOptions, onInit } = param;
+        const { editor, view, updateDelay = 250 } = param;
+        const { shouldShow, onInit } = param;
 
         this.editor = editor;
-        this.element = element;
         this.view = view;
         this.updateDelay = updateDelay;
-
-        if (!this.element) return;
+        this.controller = param.controller;
 
         if (shouldShow) {
             this.shouldShow = shouldShow;
         }
-
-        this.element.addEventListener("mousedown", this.mousedownHandler, { capture: true });
 
         this.view.dom.addEventListener("pointerdown", this.pointerdownHandler);
         this.view.dom.addEventListener("dragstart", this.dragstartHandler);
@@ -208,21 +173,8 @@ export class BubbleMenuView {
         this.editor.on("focus", this.focusHandler);
         this.editor.on("blur", this.blurHandler);
 
-        this.tippyOptions = tippyOptions || { zIndex: 99999 };
-
-        if (updateTippyOptions) {
-            this.updateTippyOptions = updateTippyOptions;
-        }
-
-        // 将菜单内容从其当前父元素中分离
-        this.element.remove();
-        this.element.style.visibility = "visible";
         onInit?.(this);
     }
-
-    mousedownHandler = () => {
-        this.preventHide = true;
-    };
 
     dragstartHandler = () => {
         this.hide();
@@ -234,16 +186,6 @@ export class BubbleMenuView {
     };
 
     blurHandler = ({ event }: { event: FocusEvent }) => {
-        if (this.preventHide) {
-            this.preventHide = false;
-
-            return;
-        }
-
-        if (event?.relatedTarget && this.element.parentNode?.contains(event.relatedTarget as Node)) {
-            return;
-        }
-
         if (event?.relatedTarget === this.editor.view.dom) {
             return;
         }
@@ -265,66 +207,6 @@ export class BubbleMenuView {
         document.body.removeEventListener("pointerup", this.dragendHandler);
         document.body.addEventListener("pointerup", this.dragendHandler);
     };
-
-    /**
-     * 创建 tippy 工具提示实例
-     * 负责初始化和管理气泡菜单的显示位置
-     */
-    createTooltip() {
-        const { element: editorElement } = this.editor.options;
-        const editorIsAttached = !!editorElement.parentElement;
-
-        if (this.tippy || !editorIsAttached) {
-            return;
-        }
-
-        // this.tippy = tippy(editorElement, {
-        //     duration: 0,
-        //     getReferenceClientRect: null,
-        //     content: this.element,
-        //     interactive: true,
-        //     trigger: 'manual',
-        //     placement: 'top',
-        //     hideOnClick: 'toggle',
-        //     ...this.tippyOptions,
-        //   })
-
-        this.tippy = tippy(editorElement, {
-            duration: 100,
-            getReferenceClientRect: null,
-            content: this.element,
-            interactive: true,
-            trigger: "manual",
-            appendTo: document.body,
-            placement: "top",
-            hideOnClick: "toggle",
-            theme: "tip-tap",
-            arrow: false,
-            popperOptions: {
-                strategy: "fixed",
-                modifiers: [
-                    {
-                        name: "flip",
-                        enabled: false,
-                    },
-                    {
-                        name: "preventOverflow",
-                        options: {
-                            altAxis: true,
-                            tether: false,
-                            padding: 10,
-                        },
-                    },
-                ],
-            },
-            ...this.updateTippyOptions(this.tippy, this.tippyOptions || {}),
-        });
-
-        // 可能还需要在 tippy 自己的 blur 事件上隐藏
-        if (this.tippy.popper.firstChild) {
-            (this.tippy.popper.firstChild as HTMLElement).addEventListener("blur", this.tippyBlurHandler);
-        }
-    }
 
     /**
      * 更新气泡菜单的位置和状态
@@ -382,8 +264,6 @@ export class BubbleMenuView {
             return;
         }
 
-        this.createTooltip();
-
         // 支持单元格选择
         const { ranges } = selection;
         const from = Math.min(...ranges.map((range) => range.$from.pos));
@@ -391,7 +271,6 @@ export class BubbleMenuView {
 
         const shouldShow = this.shouldShow?.({
             editor: this.editor,
-            element: this.element,
             view,
             state,
             oldState,
@@ -399,19 +278,15 @@ export class BubbleMenuView {
             to,
         });
 
-        if (this.preventShow) return;
-
         if (!shouldShow) {
             this.hide();
 
             return;
         }
 
-        const updateTippyOptions = {
-            zIndex: 99999,
-            getReferenceClientRect:
-                this.tippyOptions?.getReferenceClientRect ||
-                (() => {
+        if (this.editor.isFocused) {
+            this.show({
+                getBoundingClientRect: () => {
                     if (isNodeSelection(state.selection)) {
                         let node = view.nodeDOM(from) as HTMLElement;
 
@@ -431,19 +306,16 @@ export class BubbleMenuView {
                     }
 
                     return posToDOMRect(view, from, to);
-                }),
-        };
-
-        this.tippy?.setProps(this.updateTippyOptions(this.tippy, updateTippyOptions));
-
-        this.show();
+                },
+            });
+        }
     };
 
     /**
      * 显示气泡菜单
      */
-    show() {
-        this.tippy?.show();
+    show(refEl: ReferenceElement) {
+        this.controller?.("show", refEl);
     }
 
     /**
@@ -451,20 +323,15 @@ export class BubbleMenuView {
      * 根据当前状态判断是否应该隐藏菜单
      */
     hide() {
-        const isChildOfMenu = this.element.contains(document.activeElement);
-        const isMenuBtn = document.activeElement?.getAttribute("data-name") === "menuBtn";
-        const isPreLink = !!this.editor.getAttributes("link").preLink;
-        const hasEditorFocus = isChildOfMenu || isMenuBtn || isPreLink;
-
         if (this.editor.options.showMenu) {
             return true;
         }
 
-        if (hasEditorFocus) {
+        if (!!this.editor.getAttributes("link").preLink) {
             return;
         }
 
-        this.tippy?.hide();
+        this.controller?.("hide");
     }
 
     /**
@@ -472,18 +339,14 @@ export class BubbleMenuView {
      * 清理所有事件监听和资源
      */
     destroy() {
-        if (this.tippy?.popper.firstChild) {
-            (this.tippy.popper.firstChild as HTMLElement).removeEventListener("blur", this.tippyBlurHandler);
-        }
-
-        this.tippy?.destroy();
         this.param.onDestroy?.(this);
 
-        this.element.removeEventListener("mousedown", this.mousedownHandler, { capture: true });
         this.view.dom.removeEventListener("dragstart", this.dragstartHandler);
-
         this.view.dom.removeEventListener("pointerdown", this.pointerdownHandler);
+
         document.body.removeEventListener("pointerup", this.dragendHandler);
+
+        this.controller?.("hide");
 
         this.editor.off("focus", this.focusHandler);
         this.editor.off("blur", this.blurHandler);
