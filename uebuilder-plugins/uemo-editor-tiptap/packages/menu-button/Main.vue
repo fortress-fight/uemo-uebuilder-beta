@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 23:33:38
+ * @LastEditTime: 2025-04-06 02:35:55
 -->
 <template>
     <button
@@ -64,7 +64,7 @@ const labelParam = computed<UE_EL_UTIL.LabelOption>(() => {
 
     return {
         content: `
-            <div :class="${className["btn-tip"]}" class="text-left">
+            <div class="${className["btn-tip"]}" class="text-left">
                 ${tipMessageDom}
                 ${shortcutDom}
             </div>
@@ -167,6 +167,8 @@ defineExpose({
 
     transform: scale(0.9);
     transform-origin: center;
+
+    color: #fff;
     .shortcut-tip {
         margin-left: 4px;
 
