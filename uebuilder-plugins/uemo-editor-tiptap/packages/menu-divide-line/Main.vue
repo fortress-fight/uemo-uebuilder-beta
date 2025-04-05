@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单分割线
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:03:24
+ * @LastEditTime: 2025-04-06 03:16:28
 -->
 <template>
     <div :class="$style['menu-divide-line']">
@@ -18,6 +18,6 @@ const _props = withDefaults(defineProps<UeTiptapMenuDivideLineBaseProps>(), {});
 .menu-divide-line {
     width: 1px;
 
-    background-color: color(var(--ue-tiptap-background-color));
+    background-color: #f2f2f2;
 }
 </style>

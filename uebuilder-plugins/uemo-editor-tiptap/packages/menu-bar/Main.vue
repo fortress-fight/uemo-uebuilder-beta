@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:17:57
+ * @LastEditTime: 2025-04-06 03:17:59
 -->
 <template>
     <div :class="$style['menu-bar']" class="flex">
@@ -28,9 +28,9 @@ const _props = withDefaults(defineProps<UeTiptapMenuBarBaseProps>(), {
     white-space: nowrap;
 
     color: color(var(--ue-font-color--deeper));
-    border-radius: var(--ue-tiptap-radius);
+    border-radius: 5px;
     background-color: #fff;
-    box-shadow: var(--ue-tiptap-shadow);
+    box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
     .bar-title {
         padding: 11px;
 
