@@ -1,10 +1,11 @@
 /*
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-05 00:50:52
+ * @LastEditTime: 2025-04-06 00:24:48
  */
 import type { App } from "vue";
 import type { FloatingMenuPluginProps } from "../extension-floating-menu/src";
+import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 
 import UeTiptapFloatingMenu from "./Main.vue";
 
@@ -16,7 +17,7 @@ UeTiptapFloatingMenu.install = (app: App) => {
 export interface UeTiptapFloatingMenuBaseProps {
     type: "easeFloatingMenu" | "floatingMenu";
     pluginKey?: FloatingMenuPluginProps["pluginKey"];
-    tippyOptions?: FloatingMenuPluginProps["tippyOptions"];
+    tippyOptions?: Partial<Props>;
     shouldShow?: FloatingMenuPluginProps["shouldShow"];
 }
 export type UeTiptapFloatingMenuInstance = InstanceType<typeof UeTiptapFloatingMenu>;
