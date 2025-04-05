@@ -17,15 +17,21 @@ export const FloatingMenu = Extension.create<FloatingMenuOptions>({
         return {
             pluginKey: "floatingMenu",
             shouldShow: null,
+            controller: null,
         };
     },
 
     addProseMirrorPlugins() {
+        if (!this.options.controller) {
+            return [];
+        }
+
         return [
             FloatingMenuPlugin({
                 pluginKey: this.options.pluginKey,
                 editor: this.editor,
                 shouldShow: this.options.shouldShow,
+                controller: this.options.controller,
             }),
         ];
     },

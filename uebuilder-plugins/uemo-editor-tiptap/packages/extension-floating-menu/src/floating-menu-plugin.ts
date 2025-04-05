@@ -1,6 +1,6 @@
+import type { ReferenceElement } from "@stone/uemo-editor-utils/lib/floating-ui";
 import type { EditorView } from "@tiptap/pm/view";
 import type { Node as ProseMirrorNode } from "@tiptap/pm/model";
-import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 
 import { Editor, posToDOMRect, getText, getTextSerializersFromSchema } from "@tiptap/core";
 import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
@@ -32,7 +32,19 @@ export interface FloatingMenuPluginProps {
     /**
      * 控制菜单显示的函数
      */
-    controller?: (type: "show" | "update" | "hide", tippy?: Partial<Props>) => void;
+    controller?: ((type: "show" | "update" | "hide", refEl?: ReferenceElement) => void) | null;
+
+    /**
+     * 气泡菜单初始化时调用的函数
+     * @param {FloatingMenuView} floatingMenu - 浮动菜单视图实例
+     */
+    onInit?: (floatingMenu: FloatingMenuView) => void;
+
+    /**
+     * 浮动菜单销毁时调用的函数
+     * @param {FloatingMenuView} floatingMenu - 浮动菜单视图实例
+     */
+    onDestroy?: (floatingMenu: FloatingMenuView) => void;
 }
 
 export type FloatingMenuViewProps = FloatingMenuPluginProps & {
@@ -91,7 +103,9 @@ export class FloatingMenuView {
         return true;
     };
 
-    constructor({ editor, view, shouldShow, controller }: FloatingMenuViewProps) {
+    constructor(public param: FloatingMenuViewProps) {
+        const { editor, view, shouldShow, controller, onInit } = param;
+
         this.editor = editor;
         this.view = view;
         this.controller = controller;
@@ -104,6 +118,8 @@ export class FloatingMenuView {
         // 添加鼠标按下事件监听器,用于阻止菜单隐藏
         this.editor.on("focus", this.focusHandler);
         this.editor.on("blur", this.blurHandler);
+
+        onInit?.(this);
     }
 
     focusHandler = () => {
@@ -122,19 +138,6 @@ export class FloatingMenuView {
     tippyBlurHandler = (event: FocusEvent) => {
         this.blurHandler({ event });
     };
-
-    get tippyOptions(): Partial<Props> {
-        return {
-            duration: [200, 300],
-            zIndex: 900,
-            getReferenceClientRect: null,
-            interactive: true,
-            trigger: "manual",
-            placement: "right",
-            hideOnClick: "toggle",
-            theme: "tip-tap",
-        };
-    }
 
     /**
      * 更新浮动菜单的状态和位置
@@ -165,16 +168,14 @@ export class FloatingMenuView {
         }
 
         if (this.editor.isFocused) {
-            this.show(
-                Object.assign(this.tippyOptions, {
-                    getReferenceClientRect: () => posToDOMRect(view, from, to),
-                })
-            );
+            this.show({
+                getBoundingClientRect: () => posToDOMRect(view, from, to),
+            });
         }
     }
 
-    show(tippy: Partial<Props>) {
-        this.controller?.("show", tippy);
+    show(refEl: ReferenceElement) {
+        this.controller?.("show", refEl);
     }
 
     hide() {
@@ -182,6 +183,8 @@ export class FloatingMenuView {
     }
 
     destroy() {
+        this.param.onDestroy?.(this);
+
         this.controller?.("hide");
 
         this.editor.off("focus", this.focusHandler);
