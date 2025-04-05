@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 01:10:06
+ * @LastEditTime: 2025-04-06 03:13:11
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -20,7 +20,12 @@
             @leave="onLeave"
             @after-leave="onAfterLeave"
         >
-            <div v-if="openModel" :data-root-id="rootId" :class="$style['layer--pop-panel']">
+            <div
+                v-if="openModel"
+                :data-root-id="rootId"
+                :class="$style['layer--pop-panel']"
+                :style="{ zIndex: zIndex }"
+            >
                 <div v-if="maskLayerParams" :class="$style['dialog-mask']" @click="maskClick"></div>
                 <div
                     ref="dialogBox"
