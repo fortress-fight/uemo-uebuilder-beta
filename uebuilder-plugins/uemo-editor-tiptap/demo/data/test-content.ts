@@ -10,4 +10,12 @@ export const testTextContent = {
         </p>
         <p>展望未来，AI技术将继续推动各行各业的创新。我们需要在享受技术便利的同时，也要关注其带来的社会影响，确保AI的发展方向符合人类的共同利益。</p>
     `,
+    linkData: `
+        <p>
+            测试链接
+        </p>
+        <p>
+            <a href="https://www.baidu.com">百度链接</a>
+        </p>
+    `,
 };

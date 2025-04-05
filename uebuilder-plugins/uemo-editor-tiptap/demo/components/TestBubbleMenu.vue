@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 17:23:14
+ * @LastEditTime: 2025-04-05 02:38:26
 -->
 <template>
     <TestArea
@@ -44,7 +44,6 @@ watch(testValueSelect, (newValue) => {
 
     white-space: nowrap;
 
-    color: #000;
     border-radius: 5px;
     background: #{var-color(#f2f2f2)};
     box-shadow: 0 5px 10px rgb(0 0 0 / 0.1);
