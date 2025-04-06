@@ -1,10 +1,10 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 03:42:30
+ * @LastEditTime: 2025-04-06 14:32:41
 -->
 <template>
-    <UeElPopPanel :class="$style['floating-menu']" ref="popPanel" v-model:open="showPopPanel" v-bind="popPanelParams">
+    <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
         <div
             tabindex="0"
             @focusin="isFocusInPopPanel = true"
@@ -21,8 +21,6 @@ import type { UeTiptapFloatingMenuBaseProps } from "./index";
 
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { FloatingMenuPlugin } from "../extension-floating-menu/src";
-
-const popPanelRef = useTemplateRef("popPanel");
 
 defineOptions({ name: "UeTiptapFloatingMenu" });
 const props = withDefaults(defineProps<UeTiptapFloatingMenuBaseProps>(), {
@@ -79,9 +77,6 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                     },
                 },
             };
-            requestAnimationFrame(() => {
-                popPanelRef.value?.updateDialogPos();
-            });
             break;
         case "hide":
             requestAnimationFrame(() => {

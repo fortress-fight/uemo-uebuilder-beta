@@ -1,10 +1,10 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 03:18:52
+ * @LastEditTime: 2025-04-06 14:34:28
 -->
 <template>
-    <UeElPopPanel :class="$style['bubble-menu']" ref="popPanel" v-model:open="showPopPanel" v-bind="popPanelParams">
+    <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
         <div
             tabindex="0"
             @focusin="isFocusInPopPanel = true"
@@ -29,7 +29,6 @@ const props = withDefaults(defineProps<UeTiptapBubbleMenuBaseProps>(), {
     shouldShow: null,
     pluginKey: "bubbleMenu",
 });
-const popPanelRef = useTemplateRef("popPanel");
 const { editor } = useInjectTiptapEditor();
 
 const showPopPanel = ref<boolean>(false);
@@ -42,8 +41,6 @@ const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
     // NOTE 如何编辑器聚焦，就将关闭逻辑交付给编辑内部管理，否则就交给 autoClose 管理
     checkAllowClose: () => !editor?.isFocused,
 });
-
-watch(popPanelParams, () => popPanelRef.value?.updateDialogPos(), { deep: true });
 
 const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
     switch (type) {
