@@ -447,5 +447,7 @@
 
     "SCROLL_SETTING_TIP_1": "1. 当<span style=\"color: #ff740e\">黄色线</span>对齐的时候，表示过渡开始；当<span style=\"color: #2c48ff\">蓝色线</span>对齐的时候，表示过渡结束。",
     "SCROLL_SETTING_TIP_2": "2. 运动偏移量是指，窗口起始位置和窗口结束位置的偏移距离。为正是向下移动，为负是向上移动。",
-    "SCROLL_PANEL_TIP_TITLE": "预览说明"
+    "SCROLL_PANEL_TIP_TITLE": "预览说明",
+
+    "POP_PANEL_UPDATE_ERROR": "位置更新错误"
 }

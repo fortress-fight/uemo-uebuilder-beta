@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 03:13:11
+ * @LastEditTime: 2025-04-06 14:38:21
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -54,6 +54,8 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { defaultCalcPosParam, UeElProvideDialogCalcPosHandler, UeElProvideDialogCloseHandler } from "./index";
 
 defineOptions({ name: "UeElPopPanel" });
+
+const { t } = useI18n();
 
 const instance = getCurrentInstance();
 
@@ -114,6 +116,14 @@ async function updateDialogPos(): Promise<void> {
 
     gsap.set(dialogBox, { top: y, left: x });
 }
+
+watch(
+    () => props.panel,
+    () => {
+        updateDialogPos().catch(() => instance?.proxy?.$ueElToast.error(t("POP_PANEL_UPDATE_ERROR")));
+    },
+    { deep: true }
+);
 
 // #endregion
 
