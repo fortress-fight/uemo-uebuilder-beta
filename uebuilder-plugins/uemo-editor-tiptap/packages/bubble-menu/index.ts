@@ -15,7 +15,7 @@ UeTiptapBubbleMenu.install = (app: App) => {
 
 export interface UeTiptapBubbleMenuBaseProps {
     shouldShow?: BubbleMenuPluginProps["shouldShow"];
-    pluginKey?: string | BubbleMenuPluginProps["pluginKey"];
+    pluginKey: string | BubbleMenuPluginProps["pluginKey"];
 }
 export type UeTiptapBubbleMenuInstance = InstanceType<typeof UeTiptapBubbleMenu>;
 

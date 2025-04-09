@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 14:34:28
+ * @LastEditTime: 2025-04-09 11:01:45
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -27,7 +27,6 @@ defineOptions({ name: "UeTiptapBubbleMenu" });
 
 const props = withDefaults(defineProps<UeTiptapBubbleMenuBaseProps>(), {
     shouldShow: null,
-    pluginKey: "bubbleMenu",
 });
 const { editor } = useInjectTiptapEditor();
 
