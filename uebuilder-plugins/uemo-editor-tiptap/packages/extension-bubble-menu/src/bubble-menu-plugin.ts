@@ -323,12 +323,10 @@ export class BubbleMenuView {
      * 根据当前状态判断是否应该隐藏菜单
      */
     hide() {
+        // NOTE 调用方式
+        // this.editor.setOptions({ showMenu: true });
         if (this.editor.options.showMenu) {
             return true;
-        }
-
-        if (!!this.editor.getAttributes("link").preLink) {
-            return;
         }
 
         this.controller?.("hide");
