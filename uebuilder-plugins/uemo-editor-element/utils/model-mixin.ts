@@ -22,11 +22,17 @@ interface DetectModelChangeOptions<T> {
 }
 
 /**
- * 创建一个模型变化检测器，用于处理组件间的双向绑定
+ * 创建一个模型变化检测器，用于处理组件间的双向绑定，将自动同步可以转换成手动同步，并在同步时，允许进行值的转换。
  * @template T - 模型值的类型
  * @param valueRef - 父组件传入的模型引用
  * @param options - 配置选项
  * @returns 包含本地值引用和控制方法的对象
+ * @example
+ * const value = ref({ name: "John", age: 30 });
+ * const { localValueRef, reset, syncToParent, checkHasUnsyncedChanges } = useDetectModelChange(value, {
+ *     onParentChange: (local, parent) => console.log("Parent changed:", local, parent),
+ *     onLocalChange: (local, previous) => console.log("Local changed:", local, previous),
+ * });
  */
 export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectModelChangeOptions<T>) {
     const {
@@ -87,12 +93,22 @@ export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectMo
 }
 
 /**
- * 定义一个对象模型的计算属性，用于处理复杂对象的双向绑定
+ * 定义一个对象模型的计算属性，用于处理复杂对象的双向绑定。 避免 model 对象，修改子属性时，相应差异（子属性如果不是相应属性，将无法触发数据更新）
  * @template T - 源对象类型，必须是键值对对象
  * @template R - 转换后的值类型
  * @param valueRef - 父组件传入的模型引用
  * @param param - 包含 get 和 set 方法的配置对象
  * @returns 一个计算属性，用于双向绑定转换后的值
+ * @example
+ * const value = ref({ name: "John", age: 30 });
+ * const computedValue = useDefineObjectModel(value, {
+ *     get: (modelValue) => modelValue.name,
+ *     set: (value, modelValue) => {
+ *         modelValue.name = value;
+ *         return modelValue;
+ *     },
+ * });
+ *
  */
 export function useDefineObjectModel<T extends Record<string, any>, R>(
     valueRef: ModelRef<T>,
