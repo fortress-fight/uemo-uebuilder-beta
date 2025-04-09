@@ -301,14 +301,14 @@ export const Link = Mark.create<LinkOptions>({
             setLink:
                 (attributes) =>
                 ({ chain }) => {
-                    const { href } = attributes;
+                    const { href, target } = attributes;
 
                     if (isTelNumberReg.test(href)) {
                         attributes.href = "tel:" + href;
-                        attributes.target = null;
+                        attributes.target = target || "_self";
                     } else if (isEmailReg.test(href)) {
                         attributes.href = "mailto:" + href;
-                        attributes.target = null;
+                        attributes.target = target || "_self";
                     }
 
                     if (
