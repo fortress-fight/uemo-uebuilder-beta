@@ -1,10 +1,10 @@
 <!--
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 23:15:05
+ * @LastEditTime: 2025-04-09 12:05:06
 -->
 <template>
-    <UeTiptapBubbleMenu>
+    <UeTiptapBubbleMenu pluginKey="editorMainMenu">
         <UeTiptapMenuBar :class="$style['editor-menu']">
             <template v-for="(item, index) in menuItems" :key="item">
                 <UeTiptapMenuDivideLine v-if="item === '|'" />
