@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-05 02:38:26
+ * @LastEditTime: 2025-04-09 11:04:23
 -->
 <template>
     <TestArea
@@ -14,7 +14,7 @@
     >
         <template #default="{ editor }">
             <template v-if="editor">
-                <UeTiptapBubbleMenu>
+                <UeTiptapBubbleMenu v-bind="testValue">
                     <UeTiptapEditorMenu />
                 </UeTiptapBubbleMenu>
                 <EditorContent :editor="editor" />
@@ -30,7 +30,7 @@ import { EditorContent } from "@tiptap/vue-3";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleMenuProps & {
     testOptionTitle?: string;
-})[] = [{ testOptionTitle: "测试基础工具栏" }];
+})[] = [{ testOptionTitle: "测试基础工具栏", pluginKey: "testBubbleMenu" }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
