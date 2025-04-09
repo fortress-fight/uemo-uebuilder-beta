@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 14:32:41
+ * @LastEditTime: 2025-04-09 11:02:07
 -->
 <template>
     <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -28,12 +28,18 @@ const props = withDefaults(defineProps<UeTiptapFloatingMenuBaseProps>(), {
     tippyOptions: () => ({}),
     shouldShow: null,
 });
-
-const usePluginKey = computed(() => props.pluginKey || props.type);
+const emit = defineEmits<{
+    (e: "startEdit" | "endEdit"): void;
+}>();
 
 const { editor } = useInjectTiptapEditor();
 
 const showPopPanel = ref<boolean>(false);
+watch(showPopPanel, (isShow) => {
+    if (!isShow) {
+        emit("endEdit");
+    }
+});
 
 const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
     // autoClose: false,
@@ -47,6 +53,11 @@ const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
 });
 
 const isFocusInPopPanel = ref<boolean>(false);
+watch(isFocusInPopPanel, (isFocus) => {
+    if (isFocus) {
+        emit("startEdit");
+    }
+});
 
 const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) => {
     switch (type) {
@@ -90,9 +101,12 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
 
 function getFloatingMenuPlugin() {
     if (!editor) return;
+    if (!props.pluginKey) {
+        throw new Error("pluginKey is required");
+    }
     return FloatingMenuPlugin({
         editor,
-        pluginKey: usePluginKey.value,
+        pluginKey: props.pluginKey,
         shouldShow: props.shouldShow,
         controller: pluginController,
     });
@@ -116,7 +130,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-    editor?.unregisterPlugin(usePluginKey.value);
+    editor?.unregisterPlugin(props.pluginKey);
 });
 
 defineExpose({

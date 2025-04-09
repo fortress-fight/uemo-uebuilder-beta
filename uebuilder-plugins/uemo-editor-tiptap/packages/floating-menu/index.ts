@@ -1,7 +1,7 @@
 /*
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 01:48:14
+ * @LastEditTime: 2025-04-09 10:58:44
  */
 import type { App } from "vue";
 import type { FloatingMenuPluginProps } from "../extension-floating-menu/src";
@@ -16,7 +16,7 @@ UeTiptapFloatingMenu.install = (app: App) => {
 
 export interface UeTiptapFloatingMenuBaseProps {
     type: "easeFloatingMenu" | "floatingMenu";
-    pluginKey?: FloatingMenuPluginProps["pluginKey"];
+    pluginKey: FloatingMenuPluginProps["pluginKey"];
     tippyOptions?: Partial<Props>;
     shouldShow?: FloatingMenuPluginProps["shouldShow"];
 }
