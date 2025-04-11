@@ -6,6 +6,7 @@ declare const styles: {
     readonly "page-editor": string;
     readonly "text-decoration-svg": string;
     readonly "text-decoration-svg-box": string;
+    readonly "ue-editing-mark": string;
     readonly "ue-richtext-editor": string;
 };
 export = styles;

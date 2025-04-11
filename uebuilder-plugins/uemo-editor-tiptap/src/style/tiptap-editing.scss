@@ -1,4 +1,4 @@
-$project-name: app-editor !default;
+$project-name: app-editor;
 @if $project-name == app-editor {
     .ue-richtext-editor {
         box-sizing: border-box;
@@ -19,6 +19,16 @@ $project-name: app-editor !default;
         }
         &.has-focus {
             opacity: 1;
+        }
+    }
+    .ue-editing-mark {
+        display: inline-block !important;
+
+        border-radius: 1px !important;
+        background: rgb(35 131 226 / 0.28) !important;
+        box-shadow: 0 0 0 3px rgb(35 131 226 / 0.28) !important;
+        &::selection {
+            background-color: transparent;
         }
     }
 }
