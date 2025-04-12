@@ -2,7 +2,7 @@ import type { Plugin } from "@tiptap/pm/state";
 import type { Attribute } from "@tiptap/core";
 import type { LinkAttrs } from "./index";
 
-import { Mark, markPasteRule, mergeAttributes } from "@tiptap/core";
+import { Mark, markPasteRule, mergeAttributes, getMarkAttributes } from "@tiptap/core";
 import { find, registerCustomProtocol, reset } from "linkifyjs";
 
 import $pageStyle from "../../../src/app.module.scss";
@@ -117,13 +117,15 @@ declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         link: {
             /**
+             * 打开链接编辑器面板
+             */
+            openLinkEditorPanel: (param: { rect: UE_TIPTAP_UNIT.PositionRect }) => ReturnType;
+
+            /**
              * 设置一个链接标记
              */
-            setLink: (attributes: { href: string; target?: string | null }) => ReturnType;
-            /**
-             * 切换一个链接标记
-             */
-            toggleLink: (attributes: { href: string; target?: string | null }) => ReturnType;
+            setLink: (attributes: MakeRequired<LinkAttrs, "link">) => ReturnType;
+
             /**
              * 取消一个链接标记
              */
@@ -180,10 +182,9 @@ export const Link = Mark.create<LinkOptions>({
             protocols: [],
             defaultProtocol: "http",
             HTMLAttributes: {
-                href: "",
+                type: "link",
+                link: "",
                 target: "_blank",
-                rel: "noopener noreferrer nofollow",
-                class: null,
             },
             isAllowedUri: (url, ctx) => !!isAllowedUri(url, ctx.protocols),
             validate: (url) => !!url,
@@ -191,20 +192,31 @@ export const Link = Mark.create<LinkOptions>({
         };
     },
 
-    addAttributes(): Record<keyof LinkAttrs, Attribute> {
+    addAttributes(): Record<AllKeys<LinkAttrs>, Attribute> {
         return {
-            href: {
+            type: {
+                default: "link",
+                parseHTML: (element) => element.getAttribute("data-type"),
+            },
+            link: {
                 default: null,
                 parseHTML: (element) => element.getAttribute("href"),
             },
             target: {
-                default: this.options.HTMLAttributes.target,
+                default: "_blank",
+                parseHTML: (element) => element.getAttribute("target"),
             },
-            rel: {
-                default: this.options.HTMLAttributes.rel,
+            triggerArea: {
+                default: null,
+                parseHTML: (element) => element.getAttribute("data-trigger-area"),
             },
-            class: {
-                default: this.options.HTMLAttributes.class,
+            detail: {
+                default: null,
+                parseHTML: (element) => element.getAttribute("data-detail"),
+            },
+            popLayer: {
+                default: null,
+                parseHTML: (element) => element.getAttribute("data-pop-layer"),
             },
         };
     },
@@ -236,12 +248,14 @@ export const Link = Mark.create<LinkOptions>({
         ];
     },
 
-    renderHTML({ HTMLAttributes }: { HTMLAttributes: LinkAttrs }) {
-        if (!HTMLAttributes.href) {
+    renderHTML(param) {
+        const HTMLAttributes = param.HTMLAttributes as LinkAttrs;
+
+        if (!HTMLAttributes.link) {
             return ["p"];
         }
 
-        const isUriAllowed = this.options.isAllowedUri(HTMLAttributes.href, {
+        const isUriAllowed = this.options.isAllowedUri(HTMLAttributes.link, {
             defaultValidate: (href) => !!isAllowedUri(href, this.options.protocols),
             protocols: this.options.protocols,
             defaultProtocol: this.options.defaultProtocol,
@@ -255,56 +269,87 @@ export const Link = Mark.create<LinkOptions>({
             ];
         }
 
-        return ["a", mergeAttributes(this.options.HTMLAttributes, { ...HTMLAttributes, class: $pageStyle.link }), 0];
+        return [
+            "a",
+            mergeAttributes(this.options.HTMLAttributes, {
+                ...HTMLAttributes,
+                href: HTMLAttributes.link,
+                class: $pageStyle.link,
+            }),
+            ["span", 0],
+        ];
     },
 
     addCommands() {
         return {
+            /**
+             * 打开链接编辑器面板
+             */
+            openLinkEditorPanel:
+                ({ rect }) =>
+                ({ editor, state, commands }) => {
+                    let linkAttr: LinkAttrs;
+                    if (!editor.isActive("link")) {
+                        linkAttr = {
+                            type: "link",
+                            link: "",
+                            target: "_blank",
+                        };
+                    } else {
+                        linkAttr = getMarkAttributes(state, this.name) as LinkAttrs;
+                    }
+
+                    const selection = editor.state.selection;
+                    commands.openAttrEditorPanel("link", linkAttr, {
+                        rect,
+                        setData: (attr) => {
+                            editor.chain().setTextSelection(selection).run();
+
+                            if (!attr.link) {
+                                editor.chain().unsetLink().run();
+                            } else {
+                                editor
+                                    .chain()
+                                    .setLink(attr as MakeRequired<LinkAttrs, "link">)
+                                    .run();
+                            }
+                        },
+                        focus: () => {
+                            commands.focus();
+                        },
+                    });
+                    return true;
+                },
+
             setLink:
                 (attributes) =>
                 ({ chain }) => {
-                    const { href, target } = attributes;
+                    const { type } = attributes;
 
-                    if (isTelNumberReg.test(href)) {
-                        attributes.href = "tel:" + href;
-                        attributes.target = target || "_self";
-                    } else if (isEmailReg.test(href)) {
-                        attributes.href = "mailto:" + href;
-                        attributes.target = target || "_self";
+                    if (type === "link") {
+                        const { link: href, target } = attributes;
+                        if (isTelNumberReg.test(href)) {
+                            attributes.link = "tel:" + href;
+                            attributes.target = target || "_self";
+                        } else if (isEmailReg.test(href)) {
+                            attributes.link = "mailto:" + href;
+                            attributes.target = target || "_self";
+                        }
+
+                        if (
+                            !this.options.isAllowedUri(href, {
+                                defaultValidate: (url) => !!isAllowedUri(url, this.options.protocols),
+                                protocols: this.options.protocols,
+                                defaultProtocol: this.options.defaultProtocol,
+                            })
+                        ) {
+                            return false;
+                        }
+
+                        return chain().focus().setMark(this.name, attributes).setMeta("preventAutolink", true).run();
                     }
 
-                    if (
-                        !this.options.isAllowedUri(href, {
-                            defaultValidate: (url) => !!isAllowedUri(url, this.options.protocols),
-                            protocols: this.options.protocols,
-                            defaultProtocol: this.options.defaultProtocol,
-                        })
-                    ) {
-                        return false;
-                    }
-
-                    return chain().focus().setMark(this.name, attributes).setMeta("preventAutolink", true).run();
-                },
-
-            toggleLink:
-                (attributes) =>
-                ({ chain }) => {
-                    const { href } = attributes;
-
-                    if (
-                        !this.options.isAllowedUri(href, {
-                            defaultValidate: (url) => !!isAllowedUri(url, this.options.protocols),
-                            protocols: this.options.protocols,
-                            defaultProtocol: this.options.defaultProtocol,
-                        })
-                    ) {
-                        return false;
-                    }
-
-                    return chain()
-                        .toggleMark(this.name, attributes, { extendEmptyMarkRange: true })
-                        .setMeta("preventAutolink", true)
-                        .run();
+                    return true;
                 },
 
             unsetLink:

@@ -1,3 +1,4 @@
+import type { Editor } from "@tiptap/core";
 import type { LinkOptions } from "../src";
 
 /**
@@ -46,4 +47,8 @@ export function isAllowedUri(uri: string | undefined, protocols?: LinkOptions["p
             uri.replace(ATTR_WHITESPACE, "")
         )
     );
+}
+
+export function getLinkAttr(editor: Editor) {
+    return editor.getAttributes("link") as UE_TIPTAP_EXTENSION.LinkAttr;
 }

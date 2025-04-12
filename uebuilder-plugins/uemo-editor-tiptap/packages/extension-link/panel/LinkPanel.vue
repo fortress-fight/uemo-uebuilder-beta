@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接编辑面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 14:02:44
+ * @LastEditTime: 2025-04-12 15:40:14
  * @Module: TipTap Link Extension
  * @Component: LinkPanel
  * @Features:
@@ -34,6 +34,7 @@ import type { UeElLinkSettingPanelValue } from "@stone/uemo-editor-element/packa
 import type { UeElLinkSettingPanelInstance } from "@stone/uemo-editor-element/packages/link-setting-panel";
 import type { Editor } from "@tiptap/core";
 
+import { getLinkAttr } from "../utils/helper";
 import { TextSelection } from "@tiptap/pm/state";
 import { getMarkRange, isTextSelection } from "@tiptap/core";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
@@ -70,23 +71,9 @@ const checkIsEmptyTextBlock = (editor: Editor) => {
 function updateCurrentLinkValue(): UeElLinkSettingPanelValue | undefined {
     if (!editor || linkPanelRef?.value?.valueChange) return;
 
-    const value: UeElLinkSettingPanelValue = {
-        type: "link" as const,
-        link: "",
-        target: "_blank",
-    };
-
     if (editor.isActive("link")) {
-        value.link = editor.getAttributes("link").href;
+        linkValue.value = getLinkAttr(editor);
     }
-
-    linkValue.value = {
-        type: "link",
-        link: value?.link || "",
-        target: value?.target,
-    };
-
-    return value;
 }
 
 /**
@@ -97,12 +84,12 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const isEmptyTextBlock = checkIsEmptyTextBlock(editor);
     const isLink = editor.isActive("link");
-    const isEditingMark = editor.isActive("editingMark");
 
-    if ((isLink && isEmptyTextBlock) || (isEditingMark && editor.getAttributes("editingMark").type === "link")) {
+    if (isLink && isEmptyTextBlock) {
         updateCurrentLinkValue();
         return true;
     }
+
     return false;
 };
 
@@ -137,25 +124,6 @@ function handleEndEdit() {
     if (!editor) return;
 
     editor.chain().unsetEditingMark().run();
-
-    // const hasLink = editor.getAttributes("link").href;
-    // if (!hasLink) {
-    //     editor.chain().unsetLink().run();
-    // }
-
-    // const isEmptyTextBlock = checkIsEmptyTextBlock(editor);
-    // if (isEmptyTextBlock) {
-    //     return;
-    // } else {
-    //     const { $from } = editor.state.selection;
-    //     const linkRange = getMarkRange($from, editor.state.schema.marks.link);
-
-    //     if (linkRange?.from && linkRange?.to) {
-    //         editor.chain().focus().setTextSelection(linkRange.to).run();
-    //     } else {
-    //         editor.chain().focus().setTextSelection(0).run();
-    //     }
-    // }
 }
 
 /**
@@ -170,15 +138,7 @@ function handleCancel() {
  * 确认链接编辑
  */
 function handleConfirm() {
-    if (linkValue.value.type === "link") {
-        editor
-            ?.chain()
-            .setLink({
-                href: linkValue.value.link,
-                target: linkValue.value.target,
-            })
-            .run();
-    }
+    editor?.chain().setLink(linkValue.value).run();
     closePanel();
 }
 
@@ -188,13 +148,10 @@ function handleConfirm() {
 function closePanel() {
     if (!editor) return;
 
-    const hasLink = editor.getAttributes("link").href;
+    const hasLink = getLinkAttr(editor).link;
     if (!hasLink) {
         editor.chain().unsetLink().run();
     }
-    // else {
-    //     setPreLink(null);
-    // }
 
     floatingMenuRef.value?.hide();
 }
