@@ -2,8 +2,7 @@ import type { Attribute } from "@tiptap/core";
 import type { TextDecorationAttrs } from "./index";
 
 import "@tiptap/extension-text-style";
-import { TextSelection } from "@tiptap/pm/state";
-import { Mark, getMarkAttributes, getMarkRange } from "@tiptap/core";
+import { Mark, getMarkAttributes } from "@tiptap/core";
 
 import $pageStyle from "../../../src/app.module.scss";
 import decorationSvgData from "../utils/decoration-svg-data";
@@ -149,27 +148,11 @@ export const TextDecoration = Mark.create<TextDecorationOptions>({
                 ({ rect }) =>
                 ({ editor, state, commands }) => {
                     const textDecorationAttr = getMarkAttributes(state, this.name) || {};
-                    const selection = editor.state.selection;
-
-                    const { $from, $to } = selection;
-                    const startMarkRange = getMarkRange($from, editor.state.schema.marks.textDecoration);
-                    const endMarkRange = getMarkRange($to, editor.state.schema.marks.textDecoration);
-
-                    if (startMarkRange?.from && endMarkRange?.to) {
-                        // 处理链接选区
-                        const newSelection = TextSelection.create(
-                            editor.state.doc,
-                            startMarkRange.from,
-                            endMarkRange.to
-                        );
-
-                        editor.chain().setTextSelection(newSelection).run();
-                    }
 
                     commands.openAttrEditorPanel("textDecoration", textDecorationAttr, {
                         rect,
                         setData: (attr) => {
-                            editor.chain().setTextSelection(selection).run();
+                            editor.chain().setMarkSelection("textDecoration").run();
 
                             if (!attr.svgName) {
                                 editor.chain().unsetTextDecoration().run();
