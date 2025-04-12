@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 14:38:21
+ * @LastEditTime: 2025-04-09 14:27:43
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -26,7 +26,7 @@
                 :class="$style['layer--pop-panel']"
                 :style="{ zIndex: zIndex }"
             >
-                <div v-if="maskLayerParams" :class="$style['dialog-mask']" @click="maskClick"></div>
+                <div v-if="maskLayerParams" ref="maskLayer" :class="$style['dialog-mask']" @click="maskClick"></div>
                 <div
                     ref="dialogBox"
                     :class="$style['dialog-box']"
@@ -74,6 +74,7 @@ const emit = defineEmits<{
 const cssModule = useCssModule();
 const openModel = defineModel<boolean>("open", { default: false });
 const dialogBoxRef = useTemplateRef("dialogBox");
+const maskLayerRef = useTemplateRef("maskLayer");
 
 /**
  * 事件管理器，用于清理自动更新位置的监听器
@@ -241,6 +242,11 @@ provide("UeElPopPanelRootId", currentId);
  * 处理弹窗关闭
  */
 function closeModal(e: Event) {
+    // 如果点击的是遮罩层，则将关闭逻辑交付给 maskLayerRef 的 click 事件
+    if (e.target === maskLayerRef.value) {
+        return;
+    }
+
     if (!props.autoClose) return;
 
     const triggerRootId = $(e.target!).closest("[data-root-id]").data("root-id");
