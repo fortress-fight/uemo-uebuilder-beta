@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-09 14:27:43
+ * @LastEditTime: 2025-04-12 16:00:00
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -255,6 +255,7 @@ function closeModal(e: Event) {
     if (currentId === triggerRootId) return;
 
     const allowClose = props.checkAllowClose?.();
+
     if (allowClose === false) return;
     if (typeof allowClose === "string") {
         instance?.proxy?.$ueElToast.error(allowClose);
@@ -270,7 +271,13 @@ function maskClick() {
     if (!props.autoClose) return;
 
     const allowClose = props.checkAllowClose?.();
+
     if (allowClose === false) return;
+    if (typeof allowClose === "string") {
+        instance?.proxy?.$ueElToast.error(allowClose);
+        return;
+    }
+
     openModel.value = false;
 }
 // #endregion
