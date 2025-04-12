@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 14:02:58
+ * @LastEditTime: 2025-04-12 16:10:13
 -->
 <template>
     <UeElPopPanel
@@ -84,7 +84,7 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                     options: {
                         strategy: "fixed",
                         middleware: [
-                            ["flip", { crossAxis: true }],
+                            ["flip", { crossAxis: true, padding: 17 }],
                             ["offset", { mainAxis: 10 }],
                             ["shift", { crossAxis: true, padding: 17 }],
                         ],
