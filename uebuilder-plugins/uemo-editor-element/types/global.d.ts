@@ -25,8 +25,6 @@ import type { UE_AI_CONFIG } from "../packages/ai-plugin";
 import type { UE_EL_BACKGROUND_PARAM_MAP } from "../packages/background-setting-group";
 
 declare global {
-    type MakeRequired<T, K extends keyof T> = T & Required<Pick<T, K>>;
-
     namespace UE_EL {
         type Config = {
             backgroundSetting: {

@@ -70,6 +70,7 @@
         "@stone/tsconfig": "4.0.0",
         "@stone/uebuilder-vue-config": "^4.0.0",
         "@stone/uemo-editor-utils": "4.0.0",
+        "@stone/uemo-editor-type": "4.0.0",
         "@stone/vue-cli-plugin-babel": "^4.0.0",
         "@stone/vue-cli-plugin-dll": "4.0.0",
         "@stone/vue-cli-plugin-ejs": "4.0.0",
