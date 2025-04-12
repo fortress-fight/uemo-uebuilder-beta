@@ -5,10 +5,11 @@ import type { LinkAttrs } from "../packages/extension-link/src";
 declare global {
     namespace UE_TIPTAP_EXTENSION {
         type TextDecorationAttr = TextDecorationAttrs;
+        type LinkAttr = LinkAttrs;
 
         type AttrEditorPanelMap = {
             textDecoration: TextDecorationAttr;
-            link: LinkAttrs;
+            link: LinkAttr;
         };
 
         type openAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;

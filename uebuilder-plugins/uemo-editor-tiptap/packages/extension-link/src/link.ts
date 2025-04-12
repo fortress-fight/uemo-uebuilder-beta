@@ -299,11 +299,10 @@ export const Link = Mark.create<LinkOptions>({
                         linkAttr = getMarkAttributes(state, this.name) as LinkAttrs;
                     }
 
-                    const selection = editor.state.selection;
                     commands.openAttrEditorPanel("link", linkAttr, {
                         rect,
                         setData: (attr) => {
-                            editor.chain().setTextSelection(selection).run();
+                            editor.chain().setMarkSelection("link").run();
 
                             if (!attr.link) {
                                 editor.chain().unsetLink().run();

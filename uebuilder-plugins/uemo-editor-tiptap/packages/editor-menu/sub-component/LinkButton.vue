@@ -12,12 +12,18 @@ import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 const { editor } = useInjectTiptapEditor();
 
+const rootDom = useTemplateRef("rootDom");
+
 const hasLink = computed(() => {
     return editor?.isActive("link");
 });
 
 function triggerLinkCommand() {
-    editor?.chain().focus().setEditingMark("link").run();
+    const rect = rootDom.value?.getButtonRect();
+
+    if (!editor || !rect) return;
+
+    editor.chain().openLinkEditorPanel({ rect }).run();
 }
 </script>
 <style lang="scss" module>

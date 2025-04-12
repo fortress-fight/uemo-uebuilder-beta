@@ -26,7 +26,16 @@ export type AttrEditorPanelHandler<T extends keyof UE_TIPTAP_EXTENSION.AttrEdito
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         editorPanelExtension: {
-            openAttrEditorPanel: AttrEditorPanelHandler<"textDecoration", ReturnType>;
+            openAttrEditorPanel<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>(
+                type: T,
+                attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
+                param: {
+                    rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
+                    setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
+                    preview?: () => void; // 预览回调
+                    focus: () => void; // 聚焦回调
+                }
+            ): ReturnType;
         };
     }
 }
@@ -35,7 +44,18 @@ declare module "@tiptap/core" {
  * 编辑器面板配置选项
  */
 export type EditorPanelOptions = {
-    openAttrEditorPanel: AttrEditorPanelHandler<"textDecoration", void>;
+    openAttrEditorPanel<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>(
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+        this: void,
+        type: T,
+        attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
+        param: {
+            rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
+            setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
+            preview?: () => void; // 预览回调
+            focus: () => void; // 聚焦回调
+        }
+    ): void;
 };
 
 /**
