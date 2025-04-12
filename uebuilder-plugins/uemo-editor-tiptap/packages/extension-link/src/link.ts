@@ -117,17 +117,6 @@ declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         link: {
             /**
-             * 设置一个预链接标记
-             */
-            setPreLink: (attributes: string | null) => ReturnType;
-
-            /**
-             * 取消一个预链接标记
-             */
-            unSetPreLink: () => ReturnType;
-
-            /**
-            /**
              * 设置一个链接标记
              */
             setLink: (attributes: { href: string; target?: string | null }) => ReturnType;
@@ -195,7 +184,6 @@ export const Link = Mark.create<LinkOptions>({
                 target: "_blank",
                 rel: "noopener noreferrer nofollow",
                 class: null,
-                preLink: null,
             },
             isAllowedUri: (url, ctx) => !!isAllowedUri(url, ctx.protocols),
             validate: (url) => !!url,
@@ -217,9 +205,6 @@ export const Link = Mark.create<LinkOptions>({
             },
             class: {
                 default: this.options.HTMLAttributes.class,
-            },
-            preLink: {
-                default: null,
             },
         };
     },
@@ -252,16 +237,6 @@ export const Link = Mark.create<LinkOptions>({
     },
 
     renderHTML({ HTMLAttributes }: { HTMLAttributes: LinkAttrs }) {
-        if (HTMLAttributes.preLink) {
-            return [
-                "span",
-                {
-                    style: `border-radius: 1px; display: inline-block; background: rgba(35, 131, 226, 0.28); box-shadow: 0 0 0 3px rgba(35, 131, 226, 0.28);`,
-                },
-                0,
-            ];
-        }
-
         if (!HTMLAttributes.href) {
             return ["p"];
         }
@@ -285,19 +260,6 @@ export const Link = Mark.create<LinkOptions>({
 
     addCommands() {
         return {
-            setPreLink:
-                (attributes) =>
-                ({ chain }) =>
-                    chain().setMark(this.name, { preLink: attributes }).setMeta("preventAutolink", true).run(),
-
-            unSetPreLink:
-                () =>
-                ({ chain }) =>
-                    chain()
-                        .unsetMark(this.name, { extendEmptyMarkRange: false })
-                        .setMeta("preventAutolink", true)
-                        .run(),
-
             setLink:
                 (attributes) =>
                 ({ chain }) => {
@@ -321,7 +283,7 @@ export const Link = Mark.create<LinkOptions>({
                         return false;
                     }
 
-                    return chain().setMark(this.name, attributes).setMeta("preventAutolink", true).run();
+                    return chain().focus().setMark(this.name, attributes).setMeta("preventAutolink", true).run();
                 },
 
             toggleLink:
@@ -348,7 +310,11 @@ export const Link = Mark.create<LinkOptions>({
             unsetLink:
                 () =>
                 ({ chain }) =>
-                    chain().unsetMark(this.name, { extendEmptyMarkRange: true }).setMeta("preventAutolink", true).run(),
+                    chain()
+                        .focus()
+                        .unsetMark(this.name, { extendEmptyMarkRange: true })
+                        .setMeta("preventAutolink", true)
+                        .run(),
         };
     },
 

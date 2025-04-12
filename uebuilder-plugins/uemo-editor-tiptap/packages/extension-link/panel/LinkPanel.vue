@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接编辑面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-09 12:21:46
+ * @LastEditTime: 2025-04-12 14:02:44
  * @Module: TipTap Link Extension
  * @Component: LinkPanel
  * @Features:
@@ -15,6 +15,7 @@
         type="floatingMenu"
         plugin-key="linkPanel"
         :should-show="shouldShow"
+        :disable-close-tip="disableCloseTip"
         ref="floatingMenuRef"
         @startEdit="handleStartEdit"
         @endEdit="handleEndEdit"
@@ -30,8 +31,11 @@
 
 <script lang="ts" setup>
 import type { UeElLinkSettingPanelValue } from "@stone/uemo-editor-element/packages/link-setting-panel";
+import type { UeElLinkSettingPanelInstance } from "@stone/uemo-editor-element/packages/link-setting-panel";
+import type { Editor } from "@tiptap/core";
+
 import { TextSelection } from "@tiptap/pm/state";
-import { isTextSelection } from "@tiptap/core";
+import { getMarkRange, isTextSelection } from "@tiptap/core";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 /**
@@ -45,70 +49,62 @@ const linkValue = ref<UeElLinkSettingPanelValue>({
     target: "_blank",
 });
 const panelClosing = ref<boolean>(false);
-const lastCursorPosition = ref<number>(-1);
+
+const linkPanelRef = useTemplateRef<UeElLinkSettingPanelInstance>("linkPanelRef");
+const disableCloseTip = computed<string | undefined>(() => {
+    return linkPanelRef?.value?.valueChange ? "链接设置未保存，请保存链接设置" : undefined;
+});
+
+const checkIsEmptyTextBlock = (editor: Editor) => {
+    if (!editor) return false;
+
+    const { doc, selection } = editor.state;
+    const isEmptyTextBlock = !doc.textBetween(selection.from, selection.to).length && isTextSelection(selection);
+    return isEmptyTextBlock;
+};
 
 /**
  * 获取当前链接值
  * @returns {UeElLinkSettingPanelValue | undefined} 当前链接的配置值
  */
-//  const linkPanelRef = useTemplateRef("linkPanelRef");
-//  import { getMarkRange, isTextSelection } from "@tiptap/core";
-// function getCurrentLinkValue(): UeElLinkSettingPanelValue | undefined {
-//     if (!editor) return;
+function updateCurrentLinkValue(): UeElLinkSettingPanelValue | undefined {
+    if (!editor || linkPanelRef?.value?.valueChange) return;
 
-//     const { doc, selection } = editor.state;
-//     const { from, to, $from } = selection;
-//     const value: UeElLinkSettingPanelValue = {
-//         type: "link" as const,
-//         link: "",
-//         target: "_blank",
-//     };
+    const value: UeElLinkSettingPanelValue = {
+        type: "link" as const,
+        link: "",
+        target: "_blank",
+    };
 
-//     let linkText = "";
-//     const selectedText = doc.textBetween(from, to);
-//     const isEmptyTextBlock = !selectedText.length && isTextSelection(selection);
-//     linkText = doc.textBetween(from, to);
+    if (editor.isActive("link")) {
+        value.link = editor.getAttributes("link").href;
+    }
 
-//     if (editor.isActive("link")) {
-//         value.link = editor.getAttributes("link").href;
-//         if (isEmptyTextBlock) {
-//             const linkRange = getMarkRange($from, editor.schema.marks.link);
-//             if (linkRange) {
-//                 linkText = doc.textBetween(linkRange.from, linkRange.to);
-//             }
-//         }
-//     } else {
-//         linkText = "";
-//     }
+    linkValue.value = {
+        type: "link",
+        link: value?.link || "",
+        target: value?.target,
+    };
 
-//     return value;
-// }
+    return value;
+}
 
 /**
  * 判断是否显示链接编辑面板
  */
-const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = ({ editor, state }) => {
+const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = ({ editor }) => {
     if (!editor || panelClosing.value) return false;
 
-    const { doc, selection } = state;
-    const isEmptyTextBlock = !doc.textBetween(selection.from, selection.to).length && isTextSelection(selection);
+    const isEmptyTextBlock = checkIsEmptyTextBlock(editor);
+    const isLink = editor.isActive("link");
+    const isEditingMark = editor.isActive("editingMark");
 
-    return editor.isActive("link") && isEmptyTextBlock;
+    if ((isLink && isEmptyTextBlock) || (isEditingMark && editor.getAttributes("editingMark").type === "link")) {
+        updateCurrentLinkValue();
+        return true;
+    }
+    return false;
 };
-
-/**
- * 处理链接选区
- * @param {number} from 选区起始位置
- * @param {number} to 选区结束位置
- */
-function handleLinkSelection(from: number, to: number) {
-    if (!editor) return;
-
-    const { view } = editor;
-    const newSelection = TextSelection.create(view.state.doc, from, to);
-    view.dispatch(view.state.tr.setSelection(newSelection));
-    editor.chain().setPreLink("link").run();
-}
 
 /**
  * 开始编辑时的处理
@@ -116,14 +112,22 @@ function handleLinkSelection(from: number, to: number) {
 function handleStartEdit() {
     if (!editor) return;
 
-    const { state, schema } = editor;
+    const { state, schema, view } = editor;
+    const { selection } = state;
+
+    const { $from } = selection;
+
     const linkMark = schema.marks.link;
 
-    state.doc.nodesBetween(state.selection.from, state.selection.to, (node, pos) => {
-        if (node.marks.some((mark) => mark.type === linkMark)) {
-            handleLinkSelection(pos, pos + node.nodeSize);
-        }
-    });
+    const linkRange = getMarkRange($from, linkMark);
+
+    if (linkRange?.from && linkRange?.to) {
+        // 处理链接选区
+        const newSelection = TextSelection.create(view.state.doc, linkRange.from, linkRange.to);
+        view.dispatch(view.state.tr.setSelection(newSelection));
+
+        editor.chain().setEditingMark("link").run();
+    }
 }
 
 /**
@@ -132,34 +136,26 @@ function handleStartEdit() {
 function handleEndEdit() {
     if (!editor) return;
 
-    const hasLink = editor.getAttributes("link").href;
-    editor
-        .chain()
-        .focus()
-        [hasLink ? "setPreLink" : "unSetPreLink"](hasLink ? null : null)
-        .run();
+    editor.chain().unsetEditingMark().run();
 
-    if (editor.isActive("link") && lastCursorPosition.value !== -1) {
-        const { view, state } = editor;
-        const { $from, $to } = state.selection;
+    // const hasLink = editor.getAttributes("link").href;
+    // if (!hasLink) {
+    //     editor.chain().unsetLink().run();
+    // }
 
-        let linkRange: { from: number; to: number } | null = null;
-        view.state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
-            if (linkRange) return false;
+    // const isEmptyTextBlock = checkIsEmptyTextBlock(editor);
+    // if (isEmptyTextBlock) {
+    //     return;
+    // } else {
+    //     const { $from } = editor.state.selection;
+    //     const linkRange = getMarkRange($from, editor.state.schema.marks.link);
 
-            const linkMark = node.marks.find((mark) => mark.type === editor.schema.marks.link);
-            if (linkMark) {
-                linkRange = { from: pos, to: pos + node.nodeSize };
-            }
-        });
-
-        if (linkRange) {
-            const newPosition = Math.min(lastCursorPosition.value, $to.pos - 1);
-            const newSelection = TextSelection.create(view.state.doc, newPosition, newPosition);
-            editor.chain().setTextSelection(newSelection).run();
-            lastCursorPosition.value = -1;
-        }
-    }
+    //     if (linkRange?.from && linkRange?.to) {
+    //         editor.chain().focus().setTextSelection(linkRange.to).run();
+    //     } else {
+    //         editor.chain().focus().setTextSelection(0).run();
+    //     }
+    // }
 }
 
 /**
@@ -193,11 +189,12 @@ function closePanel() {
     if (!editor) return;
 
     const hasLink = editor.getAttributes("link").href;
-    editor
-        .chain()
-        .focus()
-        [hasLink ? "setPreLink" : "unSetPreLink"](hasLink ? null : null)
-        .run();
+    if (!hasLink) {
+        editor.chain().unsetLink().run();
+    }
+    // else {
+    //     setPreLink(null);
+    // }
 
     floatingMenuRef.value?.hide();
 }

@@ -17,7 +17,7 @@ const hasLink = computed(() => {
 });
 
 function triggerLinkCommand() {
-    editor?.chain().focus().setPreLink("link").run();
+    editor?.chain().focus().setEditingMark("link").run();
 }
 </script>
 <style lang="scss" module>

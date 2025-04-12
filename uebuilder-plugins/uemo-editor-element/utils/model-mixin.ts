@@ -19,6 +19,8 @@ interface DetectModelChangeOptions<T> {
     autoUpdateParent?: boolean;
     /** 自定义转换值的函数 */
     transformValue?: (value: T) => T;
+    /** 是否监听值变化 */
+    watchChange?: boolean;
 }
 
 /**
@@ -83,6 +85,11 @@ export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectMo
 
     return {
         localValueRef,
+        valueChange: options.watchChange
+            ? computed(() => {
+                  return !equalityFn(toRaw(valueRef.value), toRaw(localValueRef.value));
+              })
+            : null,
         /** 重置本地值为父组件值 */
         reset: () => (localValueRef.value = valueRef.value),
         /** 同步本地值到父组件 */

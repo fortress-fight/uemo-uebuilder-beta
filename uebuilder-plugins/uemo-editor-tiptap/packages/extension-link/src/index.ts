@@ -3,7 +3,6 @@ export type LinkAttrs = {
     target?: string;
     rel?: string;
     class?: string | null;
-    preLink?: string | null;
 };
 
 export * from "./link";

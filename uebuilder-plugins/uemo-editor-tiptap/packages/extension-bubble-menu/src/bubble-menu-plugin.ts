@@ -113,7 +113,7 @@ export class BubbleMenuView {
      * @param {Object} props - 判断参数
      * @returns {boolean} 是否显示菜单
      */
-    public shouldShow: Exclude<BubbleMenuPluginProps["shouldShow"], null> = ({ view, state, from, to }) => {
+    public shouldShow: Exclude<BubbleMenuPluginProps["shouldShow"], null> = ({ view, state, from, to, editor }) => {
         const { doc, selection } = state;
         const { empty } = selection;
 
@@ -129,8 +129,9 @@ export class BubbleMenuView {
         const isEmptyTextBlock = !doc.textBetween(from, to).length && isTextSelection(state.selection);
 
         const hasEditorFocus = view.hasFocus();
+        const hasEditingMark = editor.isActive("editingMark");
 
-        if (!hasEditorFocus || empty || isEmptyTextBlock || !this.editor.isEditable) {
+        if (!hasEditorFocus || empty || isEmptyTextBlock || !this.editor.isEditable || hasEditingMark) {
             return false;
         }
 

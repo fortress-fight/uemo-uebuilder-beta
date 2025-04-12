@@ -1,12 +1,18 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-09 11:02:07
+ * @LastEditTime: 2025-04-12 14:02:58
 -->
 <template>
-    <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
+    <UeElPopPanel
+        :class="$style['floating-menu']"
+        v-model:open="showPopPanel"
+        v-bind="popPanelParams"
+        :mask="!!disableCloseTip ? { color: 'rgba(0, 0, 0, 0)' } : undefined"
+    >
         <div
             tabindex="0"
+            ref="popPanelRef"
             @focusin="isFocusInPopPanel = true"
             @focusout="isFocusInPopPanel = false"
             :class="$style['pop-panel-content']"
@@ -23,6 +29,8 @@ import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { FloatingMenuPlugin } from "../extension-floating-menu/src";
 
 defineOptions({ name: "UeTiptapFloatingMenu" });
+
+const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UeTiptapFloatingMenuBaseProps>(), {
     theme: "ue-tiptap",
     tippyOptions: () => ({}),
@@ -48,6 +56,10 @@ const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
     checkAllowClose: () => {
         // NOTE 如何编辑器聚焦，就将关闭逻辑交付给编辑内部管理，否则就交给 autoClose 管理
         if (editor?.isFocused) return false;
+        if (typeof props.disableCloseTip === "string") {
+            instance?.proxy?.$ueElToast.warning(props.disableCloseTip);
+            return false;
+        }
         return true;
     },
 });
@@ -71,17 +83,22 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                     autoUpdate: true,
                     options: {
                         strategy: "fixed",
-                        middleware:
-                            props.type === "easeFloatingMenu"
-                                ? [
-                                      ["flip", { crossAxis: false }],
-                                      ["offset", { mainAxis: 10 }],
-                                      ["shift", { crossAxis: true, padding: 17 }],
-                                  ]
-                                : [
-                                      ["flip", { crossAxis: false }],
-                                      ["offset", { mainAxis: 10 }],
-                                  ],
+                        middleware: [
+                            ["flip", { crossAxis: true }],
+                            ["offset", { mainAxis: 10 }],
+                            ["shift", { crossAxis: true, padding: 17 }],
+                        ],
+                        // props.type === "easeFloatingMenu"
+                        //     ? [
+                        //           ["flip", { crossAxis: false }],
+                        //           ["offset", { mainAxis: 10 }],
+                        //           ["shift", { crossAxis: true, padding: 17 }],
+                        //       ]
+                        //     : [
+                        //           ["flip", { crossAxis: true }],
+                        //           ["offset", { mainAxis: 10 }],
+                        //           ["shift", { crossAxis: true, padding: 17 }],
+                        //       ],
                     },
                     refEl: {
                         getBoundingClientRect: refEl.getBoundingClientRect,
@@ -91,9 +108,15 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
             break;
         case "hide":
             requestAnimationFrame(() => {
-                if (!isFocusInPopPanel.value) {
-                    showPopPanel.value = false;
+                // NOTE 如果 弹窗元素 聚焦，则将关闭逻辑交付给 弹窗元素 管理
+                if (isFocusInPopPanel.value) {
+                    return;
                 }
+                if (typeof props.disableCloseTip === "string") {
+                    instance?.proxy?.$ueElToast.warning(props.disableCloseTip);
+                    return false;
+                }
+                showPopPanel.value = false;
             });
             break;
     }
@@ -113,11 +136,9 @@ function getFloatingMenuPlugin() {
 }
 
 function registerPlugin() {
-    requestAnimationFrame(() => {
-        const floatingPlugin = getFloatingMenuPlugin();
-        if (!floatingPlugin) return;
-        editor?.registerPlugin(floatingPlugin);
-    });
+    const floatingPlugin = getFloatingMenuPlugin();
+    if (!floatingPlugin) return;
+    void (editor?.$doc && editor.registerPlugin(floatingPlugin));
 }
 
 watch(
@@ -131,6 +152,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     editor?.unregisterPlugin(props.pluginKey);
+    emit("endEdit");
 });
 
 defineExpose({

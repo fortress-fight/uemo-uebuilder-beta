@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-31 01:33:27
+ * @LastEditTime: 2025-04-11 17:57:55
 -->
 <template>
     <UeElEditorPanel
@@ -69,7 +69,8 @@ const valueRef = defineModel<UeElLinkSettingPanelValue>("value", { required: tru
  * 本地值引用，用于处理模型变更
  * @description 使用 useDetectModelChange 处理模型变更，支持自动同步和值转换
  */
-const { localValueRef, checkHasUnsyncedChanges, syncToParent } = useDetectModelChange(valueRef, {
+const { localValueRef, valueChange, checkHasUnsyncedChanges, syncToParent } = useDetectModelChange(valueRef, {
+    watchChange: true,
     autoUpdateParent: false,
     transformValue: (value) => {
         // NOTE: 如果类型为功能链接，且detail为image，则转换为弹窗链接
@@ -175,6 +176,7 @@ function handleConfirm() {
  * @description 检查是否存在未同步的改变，用于关闭弹窗时的保存提示
  */
 defineExpose({
+    valueChange,
     checkHasUnsyncedChanges,
 });
 </script>
