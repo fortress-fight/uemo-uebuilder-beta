@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-09 11:01:45
+ * @LastEditTime: 2025-04-12 17:07:16
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -72,9 +72,11 @@ const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
 
         case "hide":
             requestAnimationFrame(() => {
-                if (!isFocusInPopPanel.value) {
-                    showPopPanel.value = false;
+                // NOTE 如果 弹窗元素 聚焦，则将关闭逻辑交付给 弹窗元素 管理
+                if (isFocusInPopPanel.value) {
+                    return;
                 }
+                showPopPanel.value = false;
             });
             break;
     }
@@ -82,6 +84,9 @@ const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
 
 function getBubbleMenuPlugin() {
     if (!editor) return;
+    if (!props.pluginKey) {
+        throw new Error("pluginKey is required");
+    }
     return BubbleMenuPlugin({
         editor: editor,
         pluginKey: props.pluginKey,
@@ -93,11 +98,9 @@ function getBubbleMenuPlugin() {
 }
 
 function registerPlugin() {
-    requestAnimationFrame(() => {
-        const bubblePlugin = getBubbleMenuPlugin();
-        if (!bubblePlugin) return;
-        editor?.registerPlugin(bubblePlugin);
-    });
+    const bubblePlugin = getBubbleMenuPlugin();
+    if (!bubblePlugin) return;
+    editor?.registerPlugin(bubblePlugin);
 }
 
 watch(

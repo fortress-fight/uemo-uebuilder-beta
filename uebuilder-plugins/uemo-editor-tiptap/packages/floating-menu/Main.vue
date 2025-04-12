@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 16:10:13
+ * @LastEditTime: 2025-04-12 17:07:03
 -->
 <template>
     <UeElPopPanel
@@ -88,17 +88,6 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                             ["offset", { mainAxis: 10 }],
                             ["shift", { crossAxis: true, padding: 17 }],
                         ],
-                        // props.type === "easeFloatingMenu"
-                        //     ? [
-                        //           ["flip", { crossAxis: false }],
-                        //           ["offset", { mainAxis: 10 }],
-                        //           ["shift", { crossAxis: true, padding: 17 }],
-                        //       ]
-                        //     : [
-                        //           ["flip", { crossAxis: true }],
-                        //           ["offset", { mainAxis: 10 }],
-                        //           ["shift", { crossAxis: true, padding: 17 }],
-                        //       ],
                     },
                     refEl: {
                         getBoundingClientRect: refEl.getBoundingClientRect,
@@ -138,7 +127,7 @@ function getFloatingMenuPlugin() {
 function registerPlugin() {
     const floatingPlugin = getFloatingMenuPlugin();
     if (!floatingPlugin) return;
-    void (editor?.$doc && editor.registerPlugin(floatingPlugin));
+    editor?.registerPlugin(floatingPlugin);
 }
 
 watch(
