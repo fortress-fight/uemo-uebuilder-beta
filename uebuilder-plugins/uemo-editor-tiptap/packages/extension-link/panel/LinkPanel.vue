@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接编辑面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 15:40:14
+ * @LastEditTime: 2025-04-12 17:10:29
  * @Module: TipTap Link Extension
  * @Component: LinkPanel
  * @Features:
@@ -34,9 +34,9 @@ import type { UeElLinkSettingPanelValue } from "@stone/uemo-editor-element/packa
 import type { UeElLinkSettingPanelInstance } from "@stone/uemo-editor-element/packages/link-setting-panel";
 import type { Editor } from "@tiptap/core";
 
+import { isTextSelection } from "@tiptap/core";
+
 import { getLinkAttr } from "../utils/helper";
-import { TextSelection } from "@tiptap/pm/state";
-import { getMarkRange, isTextSelection } from "@tiptap/core";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 /**
@@ -99,22 +99,7 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 function handleStartEdit() {
     if (!editor) return;
 
-    const { state, schema, view } = editor;
-    const { selection } = state;
-
-    const { $from } = selection;
-
-    const linkMark = schema.marks.link;
-
-    const linkRange = getMarkRange($from, linkMark);
-
-    if (linkRange?.from && linkRange?.to) {
-        // 处理链接选区
-        const newSelection = TextSelection.create(view.state.doc, linkRange.from, linkRange.to);
-        view.dispatch(view.state.tr.setSelection(newSelection));
-
-        editor.chain().setEditingMark("link").run();
-    }
+    editor.chain().setMarkSelection("link").setEditingMark("link").run();
 }
 
 /**
