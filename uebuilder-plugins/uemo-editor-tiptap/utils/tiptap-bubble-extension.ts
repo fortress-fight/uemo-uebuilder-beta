@@ -31,6 +31,7 @@ import { Formatting } from "../packages/extension-formatting";
 import { TextDecoration } from "../packages/extension-text-decoration/src";
 import { Blockquote } from "../packages/extension-blockquote/src";
 import { Link } from "../packages/extension-link/src";
+import { EditingMark } from "../packages/extension-editing-mark";
 
 // #endregion
 
@@ -74,6 +75,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Link.configure({
             autolink: false,
         }),
+        EditingMark,
     ];
 
     return [...baseExtensions, ...customExtensions];
