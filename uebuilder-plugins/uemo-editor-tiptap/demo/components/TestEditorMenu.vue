@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 04:06:00
+ * @LastEditTime: 2025-04-16 11:11:01
 -->
 <template>
     <TestArea
@@ -11,17 +11,23 @@
         v-model:testValueSelect="testValueSelect"
         title="测试编辑工具栏"
     >
-        <UeTiptapEditorMenu v-bind="testValue">
-            <!--  -->
-        </UeTiptapEditorMenu>
+        <UeTiptapMenuBar :class="$style['editor-menu']">
+            <template v-for="(item, index) in testValue.menuItems" :key="item">
+                <UeTiptapMenuDivideLine v-if="item === '|'" />
+                <component v-else :is="MENU_BUTTON_MAP[item]" :key="index"></component>
+            </template>
+        </UeTiptapMenuBar>
     </TestArea>
 </template>
 <script lang="ts" setup>
 import TestArea from "~/demo/components/TestArea.vue";
+import { MENU_BUTTON_MAP } from "~/packages/editor-menu/utils/helper";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOptionTitle?: string; value?: any })[] = [];
+const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOptionTitle?: string; value?: any })[] = [
+    { menuItems: ["formatting", "|", "bold", "italic", "textDecoration", "blockquote", "link"] },
+];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {
