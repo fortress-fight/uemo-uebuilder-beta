@@ -7,6 +7,10 @@
     span[style*="--font-size"] {
         font-size: max(var(--min-font-size), calc(var(--font-size, 14px) * var(--font-scale-default, 1)));
     }
+    span[data-clip="text"] {
+        color: rgb(0 0 0 / 0);
+        background-clip: text;
+    }
     .text-12,
     .text-14,
     .text-16,
