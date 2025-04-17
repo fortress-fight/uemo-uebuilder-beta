@@ -1,14 +1,14 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 01:48:15
+ * @LastEditTime: 2025-04-18 02:15:33
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
 </template>
 <script lang="ts" setup>
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
-import { getDeviceExtensionStorage } from "../../../utils/tiptap-helper";
+import { getDeviceStorage } from "../../extension-device/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -17,7 +17,7 @@ const rootDomRef = useTemplateRef("rootDom");
 const currentValue = computed(() => {
     if (!editor) return "";
 
-    const isPc = getDeviceExtensionStorage(editor)?.device === "pc";
+    const isPc = getDeviceStorage(editor)?.device === "pc";
 
     if (isPc) {
         return editor?.getAttributes("paragraph").textAlign;

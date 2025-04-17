@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 12:28:03
+ * @LastEditTime: 2025-04-18 02:14:56
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -21,7 +21,7 @@ import type { BubbleMenuPluginProps } from "../extension-bubble-menu/src/bubble-
 
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { BubbleMenuPlugin } from "../extension-bubble-menu/src/bubble-menu-plugin";
-import { getDeviceExtensionStorage } from "../../utils/tiptap-helper";
+import { getDeviceStorage } from "../extension-device/helper";
 
 defineOptions({ name: "UeTiptapBubbleMenu", inheritAttrs: false });
 
@@ -48,7 +48,7 @@ const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
 
             showPopPanel.value = true;
 
-            const isPc = getDeviceExtensionStorage(editor)?.device === "pc";
+            const isPc = getDeviceStorage(editor)?.device === "pc";
 
             popPanelParams.value.panel = {
                 position: {

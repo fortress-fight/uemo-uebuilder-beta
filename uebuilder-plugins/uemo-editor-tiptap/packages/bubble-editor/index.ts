@@ -1,7 +1,7 @@
 /*
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-01 23:09:47
+ * @LastEditTime: 2025-04-18 02:11:38
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UeTiptapBubbleEditor.install = (app: App) => {
 };
 
 export interface UeTiptapBubbleEditorBaseProps {
-    device?: string;
+    device?: UE_TIPTAP_UNIT.Device;
     content: string;
 }
 export type UeTiptapBubbleEditorInstance = InstanceType<typeof UeTiptapBubbleEditor>;

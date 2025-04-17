@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 17:52:33
+ * @LastEditTime: 2025-04-18 02:11:46
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -78,10 +78,8 @@ const createEditor = () => {
 // 监听设备类型变化
 watch(
     () => props.device,
-    (value: string) => {
-        if (tiptapEditor.value?.storage.deviceExtension) {
-            tiptapEditor.value.storage.deviceExtension.device = value;
-        }
+    (value) => {
+        tiptapEditor.value?.commands.updateDevice(value);
     }
 );
 
