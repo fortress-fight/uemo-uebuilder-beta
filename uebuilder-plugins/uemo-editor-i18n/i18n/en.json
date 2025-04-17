@@ -94,6 +94,7 @@
     "UNIT_TARGET": "Target",
     "UNIT_FONT_SIZE": "Font Size",
     "UNIT_CUSTOM": "Custom",
+    "UNIT_TEXT_STYLE": "Text Style",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 16:03:37
+ * @LastEditTime: 2025-04-17 13:57:18
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
@@ -32,8 +32,9 @@ import type { ValuesOf } from "@tiptap/core";
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
+import FontSizePanel from "./sub-component/FontSizePanel.vue";
 
-defineOptions({ name: "UeTiptapEditorPanel" });
+defineOptions({ name: "UeTiptapEditorPanel", components: { FontSizePanel } });
 
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
@@ -64,6 +65,7 @@ const eventBus = mitt<{
 const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string> = {
     textDecoration: "UeElTextDecorationSettingPanel",
     link: "UeElLinkSettingPanel",
+    fontSize: "FontSizePanel",
 };
 
 /**
