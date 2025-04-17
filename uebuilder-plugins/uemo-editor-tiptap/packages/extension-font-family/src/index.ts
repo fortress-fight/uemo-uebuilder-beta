@@ -5,7 +5,7 @@ export type FontFamilyAttr = {
 };
 
 export function getFontFamilyAttrs(editor: Editor | undefined) {
-    return editor?.getAttributes("fontFamily") as FontFamilyAttr;
+    return editor?.getAttributes("textStyle") as FontFamilyAttr;
 }
 
 export * from "./font-family";

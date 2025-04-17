@@ -5,7 +5,7 @@ import TextDecorationButton from "../sub-component/TextDecorationButton.vue";
 import BlockquoteButton from "../sub-component/BlockquoteButton.vue";
 import LinkButton from "../sub-component/LinkButton.vue";
 import FontSizeButton from "../sub-component/FontSizeButton.vue";
-
+import FontFamilyButton from "../sub-component/FontFamilyButton.vue";
 export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>> = {
     bold: BoldButton,
     italic: ItalicButton,
@@ -14,4 +14,5 @@ export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>
     blockquote: BlockquoteButton,
     link: LinkButton,
     fontSize: FontSizeButton,
+    fontFamily: FontFamilyButton,
 };

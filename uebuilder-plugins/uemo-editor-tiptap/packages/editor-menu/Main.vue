@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 12:17:26
+ * @LastEditTime: 2025-04-17 19:36:33
 -->
 <template>
     <UeTiptapBubbleMenu pluginKey="editorMainMenu">
@@ -21,7 +21,17 @@ import { MENU_BUTTON_MAP } from "./utils/helper";
 defineOptions({ name: "UeTiptapEditorMenu" });
 
 const _props = withDefaults(defineProps<UeTiptapEditorMenuBaseProps>(), {
-    menuItems: () => ["formatting", "|", "bold", "italic", "textDecoration", "blockquote", "link", "fontSize"],
+    menuItems: () => [
+        "formatting",
+        "|",
+        "bold",
+        "italic",
+        "textDecoration",
+        "blockquote",
+        "link",
+        "fontSize",
+        "fontFamily",
+    ],
 });
 </script>
 <style lang="scss" module>
