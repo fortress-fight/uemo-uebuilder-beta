@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 02:35:55
+ * @LastEditTime: 2025-04-17 12:18:09
 -->
 <template>
     <button
@@ -17,10 +17,10 @@
         <div :class="$style['inner']" class="flex items-center justify-center">
             <UeElIcon v-if="menuInfo.buttonType === 'iconButton'" :name="icon || menuInfo.icon" />
             <span v-else-if="menuInfo.buttonType === 'textButton'" :class="$style['text-button']">
-                {{ currentValue }}
+                {{ text }}
             </span>
             <div v-else-if="menuInfo.buttonType === 'colorButton'" :class="$style['color-button']">
-                <div :class="$style['color-button--inner']" :style="{ background: currentValue || '' }"></div>
+                <div :class="$style['color-button--inner']" :style="{ background: text || '' }"></div>
             </div>
         </div>
     </button>
