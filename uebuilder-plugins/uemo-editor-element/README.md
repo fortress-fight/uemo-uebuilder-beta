@@ -8,10 +8,10 @@
 
 ## 特性
 
--   基于 Vue 3 的模块化组件设计
--   按需加载，优化打包体积
--   高度可定制化，满足不同 UI 需求
--   丰富的组件及完善的文档支持
+- 基于 Vue 3 的模块化组件设计
+- 按需加载，优化打包体积
+- 高度可定制化，满足不同 UI 需求
+- 丰富的组件及完善的文档支持
 
 ## 安装
 
@@ -36,6 +36,19 @@ const app = createApp(App);
 app.use(UeEditorElement, { plugin: {} });
 app.mount("#app");
 ```
+
+## 创建组件
+
+```bash
+yarn create-element
+```
+
+### 组件命名规则
+
+如果是原子组件，只需要按照功能命名即可
+如果是由原子组件创建的属性控件，被 `UeElControlGroup` 包裹，命名为 `<调整的目标属性>-setting`
+如果是被 `UeElSettingGroup` 包裹的，命名为 `<调整的目标属性>-group`
+如果是整个编辑面板，命名为 `<调整的目标属性>-setting`
 
 ## 文档与示例
 

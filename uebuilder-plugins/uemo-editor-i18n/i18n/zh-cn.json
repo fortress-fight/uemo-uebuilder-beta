@@ -91,6 +91,8 @@
     "UNIT_UPDATE_SUCCESS": "更新成功",
     "UNIT_WINDOW": "窗口",
     "UNIT_TARGET": "目标",
+    "UNIT_FONT_SIZE": "字号",
+    "UNIT_CUSTOM": "自定义",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

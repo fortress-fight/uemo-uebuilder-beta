@@ -92,6 +92,8 @@
     "UNIT_UPDATE_SUCCESS": "Updated",
     "UNIT_WINDOW": "Window",
     "UNIT_TARGET": "Target",
+    "UNIT_FONT_SIZE": "Font Size",
+    "UNIT_CUSTOM": "Custom",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
