@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 14:42:06
+ * @LastEditTime: 2025-04-17 19:34:46
 -->
 <template>
     <UeTiptapMenuButton
@@ -9,14 +9,12 @@
         type="fontSize"
         :class="$style['plugin-bold']"
         :text="currentFontSize || '字号'"
-        @trigger="changeFontSize"
+        @trigger="openFontSizePanel"
     />
 </template>
 <script lang="ts" setup>
 import { getFontSizeAttrs } from "../../extension-font-size";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
-
-defineOptions({ name: "BoldButton" });
 
 const { editor } = useInjectTiptapEditor();
 const rootDom = useTemplateRef("rootDom");
@@ -25,7 +23,7 @@ const currentFontSize = computed(() => {
     return getFontSizeAttrs(editor)?.fontSize || null;
 });
 
-function changeFontSize() {
+function openFontSizePanel() {
     const rect = rootDom.value?.getButtonRect();
 
     if (!editor || !rect) return;
