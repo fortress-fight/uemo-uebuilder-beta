@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 12:18:09
+ * @LastEditTime: 2025-04-17 23:57:09
 -->
 <template>
     <button
@@ -20,7 +20,7 @@
                 {{ text }}
             </span>
             <div v-else-if="menuInfo.buttonType === 'colorButton'" :class="$style['color-button']">
-                <div :class="$style['color-button--inner']" :style="{ background: text || '' }"></div>
+                <div :class="$style['color-button--inner']" :style="{ background: color || '' }"></div>
             </div>
         </div>
     </button>

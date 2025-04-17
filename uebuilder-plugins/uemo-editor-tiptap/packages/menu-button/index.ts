@@ -1,7 +1,7 @@
 /*
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-04-16 11:21:56
+ * @LastEditTime: 2025-04-17 23:57:07
  */
 import type { App } from "vue";
 
@@ -21,6 +21,7 @@ export interface UeTiptapMenuButtonBaseProps {
     title?: string;
     tip?: string;
     text?: string;
+    color?: string;
 }
 export type UeTiptapMenuButtonInstance = InstanceType<typeof UeTiptapMenuButton>;
 
