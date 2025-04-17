@@ -1,13 +1,12 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 19:43:43
+ * @LastEditTime: 2025-04-18 01:32:06
 -->
 <template>
     <UeTiptapMenuButton
         ref="rootDom"
         type="fontSize"
-        :class="$style['plugin-bold']"
         :text="currentFontFamily || '字体'"
         @trigger="openFontFamilyPanel"
     />
@@ -48,7 +47,5 @@ function openFontFamilyPanel() {
 }
 </script>
 <style lang="scss" module>
-.plugin-bold {
-    //
-}
+//
 </style>

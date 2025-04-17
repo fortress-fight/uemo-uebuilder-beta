@@ -1,16 +1,10 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 00:21:41
+ * @LastEditTime: 2025-04-18 01:32:22
 -->
 <template>
-    <UeTiptapMenuButton
-        ref="rootDom"
-        type="textColor"
-        :color="currentColor"
-        :class="$style['plugin-bold']"
-        @trigger="openColorPicker"
-    />
+    <UeTiptapMenuButton ref="rootDom" type="textColor" :color="currentColor" @trigger="openColorPicker" />
 </template>
 <script lang="ts" setup>
 import { getTextColorAttrs } from "../../extension-text-color/src";
@@ -50,7 +44,5 @@ function openColorPicker() {
 }
 </script>
 <style lang="scss" module>
-.plugin-bold {
-    //
-}
+//
 </style>

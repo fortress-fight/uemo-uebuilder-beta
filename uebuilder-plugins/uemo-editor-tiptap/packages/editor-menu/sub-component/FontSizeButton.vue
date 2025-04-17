@@ -1,16 +1,10 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 19:34:46
+ * @LastEditTime: 2025-04-18 01:32:12
 -->
 <template>
-    <UeTiptapMenuButton
-        ref="rootDom"
-        type="fontSize"
-        :class="$style['plugin-bold']"
-        :text="currentFontSize || '字号'"
-        @trigger="openFontSizePanel"
-    />
+    <UeTiptapMenuButton ref="rootDom" type="fontSize" :text="currentFontSize || '字号'" @trigger="openFontSizePanel" />
 </template>
 <script lang="ts" setup>
 import { getFontSizeAttrs } from "../../extension-font-size";
@@ -48,7 +42,5 @@ function openFontSizePanel() {
 }
 </script>
 <style lang="scss" module>
-.plugin-bold {
-    //
-}
+//
 </style>
