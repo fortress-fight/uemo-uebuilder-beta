@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 19:41:55
+ * @LastEditTime: 2025-04-18 00:07:28
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
@@ -34,8 +34,9 @@ import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
 import FontFamilyPanel from "./sub-component/FontFamilyPanel.vue";
+import TextColorPanel from "./sub-component/TextColorPanel.vue";
 
-defineOptions({ name: "UeTiptapEditorPanel", components: { FontSizePanel, FontFamilyPanel } });
+defineOptions({ name: "UeTiptapEditorPanel", components: { FontSizePanel, FontFamilyPanel, TextColorPanel } });
 
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
@@ -68,6 +69,7 @@ const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string>
     link: "UeElLinkSettingPanel",
     fontSize: "FontSizePanel",
     fontFamily: "FontFamilyPanel",
+    textColor: "TextColorPanel",
 };
 
 /**
