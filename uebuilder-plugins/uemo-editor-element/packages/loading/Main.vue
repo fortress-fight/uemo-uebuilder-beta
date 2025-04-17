@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 12:34:02
+ * @LastEditTime: 2025-04-17 19:49:07
 -->
 <template>
     <div
@@ -62,17 +62,20 @@ let tweenLoading: GSAPTween | null = null;
 function animateProgress() {
     isShow.value = true;
     clearAnimate();
-    if (progressInner.value && barInfo.value.fake) {
-        tweenLoading = gsap.fromTo(
-            progressInner.value,
-            { width: "0%" },
-            {
-                width: "98%",
-                ease: "power2.out",
-                duration: barInfo.value.duration,
-            }
-        );
-    }
+
+    requestAnimationFrame(() => {
+        if (progressInner.value && barInfo.value.fake) {
+            tweenLoading = gsap.fromTo(
+                progressInner.value,
+                { width: "0%" },
+                {
+                    width: "98%",
+                    ease: "power2.out",
+                    duration: barInfo.value.duration,
+                }
+            );
+        }
+    });
 }
 
 /**
