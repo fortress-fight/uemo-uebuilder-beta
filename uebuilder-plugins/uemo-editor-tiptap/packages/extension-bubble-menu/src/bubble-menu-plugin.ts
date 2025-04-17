@@ -5,7 +5,7 @@ import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { CellSelection } from "@tiptap/pm/tables";
 import { EditorView } from "@tiptap/pm/view";
 
-import { getAIExtensionStorage } from "../../../utils/tiptap-helper";
+import { getAIStorage } from "../../extension-ai/helper";
 
 /**
  * 不显示气泡菜单的节点名称
@@ -118,7 +118,7 @@ export class BubbleMenuView {
         const { empty } = selection;
 
         // 如果编辑器正在加载 AI 内容，则不显示气泡菜单
-        if (getAIExtensionStorage(this.editor)?.loading) return false;
+        if (getAIStorage(this.editor)?.loading) return false;
 
         // 如果正在拖动，则不显示气泡菜单
         if (this.dragging) return false;
