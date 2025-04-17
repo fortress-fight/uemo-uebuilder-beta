@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-16 11:11:01
+ * @LastEditTime: 2025-04-16 11:22:58
 -->
 <template>
     <TestArea
@@ -26,7 +26,7 @@ import { MENU_BUTTON_MAP } from "~/packages/editor-menu/utils/helper";
 // 测试数据
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOptionTitle?: string; value?: any })[] = [
-    { menuItems: ["formatting", "|", "bold", "italic", "textDecoration", "blockquote", "link"] },
+    { menuItems: ["formatting", "|", "bold", "italic", "textDecoration", "blockquote", "link", "fontSize"] },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
 

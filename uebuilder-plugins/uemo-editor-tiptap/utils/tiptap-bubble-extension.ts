@@ -32,6 +32,7 @@ import { TextDecoration } from "../packages/extension-text-decoration/src";
 import { Blockquote } from "../packages/extension-blockquote/src";
 import { Link } from "../packages/extension-link/src";
 import { EditingMark } from "../packages/extension-editing-mark";
+import { FontSize } from "../packages/extension-font-size";
 
 // #endregion
 
@@ -59,10 +60,10 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Italic,
         TextStyle,
         History,
-        // 自定义插件
         Formatting,
     ];
 
+    // 自定义插件
     const customExtensions = [
         EditorPanelExtension.configure({
             openAttrEditorPanel: param.openAttrEditorPanel,
@@ -76,6 +77,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             autolink: false,
         }),
         EditingMark,
+        FontSize,
     ];
 
     return [...baseExtensions, ...customExtensions];
