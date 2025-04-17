@@ -33,6 +33,7 @@ import { Blockquote } from "../packages/extension-blockquote/src";
 import { Link } from "../packages/extension-link/src";
 import { EditingMark } from "../packages/extension-editing-mark";
 import { FontSize } from "../packages/extension-font-size";
+import { FontFamily } from "../packages/extension-font-family/src";
 
 // #endregion
 
@@ -78,6 +79,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         }),
         EditingMark,
         FontSize,
+        FontFamily,
     ];
 
     return [...baseExtensions, ...customExtensions];
