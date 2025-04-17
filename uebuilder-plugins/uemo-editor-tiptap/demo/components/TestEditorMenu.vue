@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 19:37:37
+ * @LastEditTime: 2025-04-18 00:02:06
 -->
 <template>
     <TestArea
@@ -37,6 +37,7 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOption
             "link",
             "fontSize",
             "fontFamily",
+            "textColor",
         ],
     },
 ];
