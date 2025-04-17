@@ -7,6 +7,7 @@ import LinkButton from "../sub-component/LinkButton.vue";
 import FontSizeButton from "../sub-component/FontSizeButton.vue";
 import FontFamilyButton from "../sub-component/FontFamilyButton.vue";
 import TextColorButton from "../sub-component/TextColorButton.vue";
+import TextAlignButton from "../sub-component/TextAlignButton.vue";
 
 export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>> = {
     bold: BoldButton,
@@ -18,4 +19,5 @@ export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>
     fontSize: FontSizeButton,
     fontFamily: FontFamilyButton,
     textColor: TextColorButton,
+    textAlign: TextAlignButton,
 };

@@ -38,6 +38,7 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOption
             "fontSize",
             "fontFamily",
             "textColor",
+            "textAlign",
         ],
     },
 ];
