@@ -4,6 +4,8 @@ import type { LinkAttrs } from "../packages/extension-link/src";
 import type { FontSizeAttr } from "../packages/extension-font-size";
 import type { FontFamilyAttr } from "../packages/extension-font-family/src";
 import type { TextColorAttr } from "../packages/extension-text-color/src";
+import type { TextAlignAttr } from "../packages/extension-text-align/src";
+
 declare global {
     namespace UE_TIPTAP_EXTENSION {
         type TextDecorationAttr = TextDecorationAttrs;
@@ -15,6 +17,7 @@ declare global {
             fontSize: FontSizeAttr;
             fontFamily: FontFamilyAttr;
             textColor: TextColorAttr;
+            textAlign: TextAlignAttr;
         };
 
         type openAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;

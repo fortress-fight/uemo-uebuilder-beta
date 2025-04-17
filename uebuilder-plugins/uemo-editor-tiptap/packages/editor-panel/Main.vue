@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 00:07:28
+ * @LastEditTime: 2025-04-18 02:03:46
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
@@ -18,6 +18,7 @@
             v-bind="$attrs"
             :is="componentName"
             :value="valueRef"
+            @closePopPanel="openRef = false"
             @update:value="updateValue"
             @preview="preview"
         />
@@ -35,8 +36,12 @@ import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
 import FontFamilyPanel from "./sub-component/FontFamilyPanel.vue";
 import TextColorPanel from "./sub-component/TextColorPanel.vue";
+import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 
-defineOptions({ name: "UeTiptapEditorPanel", components: { FontSizePanel, FontFamilyPanel, TextColorPanel } });
+defineOptions({
+    name: "UeTiptapEditorPanel",
+    components: { FontSizePanel, FontFamilyPanel, TextColorPanel, TextAlignPanel },
+});
 
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
@@ -70,6 +75,7 @@ const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string>
     fontSize: "FontSizePanel",
     fontFamily: "FontFamilyPanel",
     textColor: "TextColorPanel",
+    textAlign: "TextAlignPanel",
 };
 
 /**

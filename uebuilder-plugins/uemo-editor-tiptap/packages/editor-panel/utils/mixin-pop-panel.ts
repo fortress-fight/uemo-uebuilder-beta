@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 00:01:12
+ * @LastEditTime: 2025-04-18 01:40:26
  */
 
 export function usePopPanelParam(
@@ -26,6 +26,23 @@ export function usePopPanelParam(
                             refEl: { getBoundingClientRect: () => rectRef.value as any },
                             options: {
                                 placement: "bottom-start",
+                                middleware: [
+                                    ["offset", { mainAxis: 6 }],
+                                    ["shift", { crossAxis: true, padding: 17 }],
+                                ],
+                            },
+                        },
+                    },
+                };
+
+            case "textAlign":
+                return {
+                    draggable: false,
+                    panel: {
+                        position: {
+                            refEl: { getBoundingClientRect: () => rectRef.value as any },
+                            options: {
+                                placement: "bottom",
                                 middleware: [
                                     ["offset", { mainAxis: 6 }],
                                     ["shift", { crossAxis: true, padding: 17 }],
