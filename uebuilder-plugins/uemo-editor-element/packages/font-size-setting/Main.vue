@@ -1,15 +1,10 @@
 <!--
  * @Description: 字号控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 11:45:50
+ * @LastEditTime: 2025-04-17 12:39:10
 -->
 <template>
-    <UeElControlGroup
-        :title="t('UNIT_FONT_SIZE')"
-        :class="$style['font-size-setting']"
-        class="w-full"
-        :col-count="selectedValue === '' ? 2 : 1"
-    >
+    <UeElControlGroup :class="$style['font-size-setting']" class="w-full" :col-count="selectedValue === '' ? 2 : 1">
         <UeElSelect v-model:value="selectedValue" :title="t('UNIT_FONT_SIZE')" :options="options" valueAlign="right" />
         <UeElNumberInput v-if="selectedValue === ''" v-bind="inputParam" v-model:value="valueRef" />
     </UeElControlGroup>
@@ -26,7 +21,7 @@ const _props = withDefaults(defineProps<UeElFontSizeSettingBaseProps>(), {});
 const valueRef = defineModel<string>("value", { required: true });
 const selectedValue = computed({
     get() {
-        if (valueRef.value.endsWith("vw")) {
+        if (!valueRef.value || valueRef.value.endsWith("vw")) {
             return "";
         }
         return valueRef.value;
