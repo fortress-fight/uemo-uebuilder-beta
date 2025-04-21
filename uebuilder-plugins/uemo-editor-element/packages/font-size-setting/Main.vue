@@ -1,11 +1,11 @@
 <!--
  * @Description: 字号控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 12:39:10
+ * @LastEditTime: 2025-04-22 01:26:03
 -->
 <template>
     <UeElControlGroup :class="$style['font-size-setting']" class="w-full" :col-count="selectedValue === '' ? 2 : 1">
-        <UeElSelect v-model:value="selectedValue" :title="t('UNIT_FONT_SIZE')" :options="options" valueAlign="right" />
+        <UeElSelect v-model:value="selectedValue" :title="t('UNIT_SIZE')" :options="options" valueAlign="right" />
         <UeElNumberInput v-if="selectedValue === ''" v-bind="inputParam" v-model:value="valueRef" />
     </UeElControlGroup>
 </template>
