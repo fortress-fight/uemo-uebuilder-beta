@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:03:54
+ * @LastEditTime: 2025-04-21 19:30:08
 -->
 <template>
     <UeTiptapBubbleMenu pluginKey="editorMainMenu">
@@ -34,6 +34,7 @@ const _props = withDefaults(defineProps<UeTiptapEditorMenuBaseProps>(), {
         "textColor",
         "textAlign",
         "lineHeight",
+        "letterSpacing",
     ],
 });
 </script>
