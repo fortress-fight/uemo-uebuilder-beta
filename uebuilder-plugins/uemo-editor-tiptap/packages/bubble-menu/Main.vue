@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 02:14:56
+ * @LastEditTime: 2025-04-18 11:55:12
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -36,6 +36,7 @@ const isFocusInPopPanel = ref<boolean>(false);
 const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
     zIndex: 99999,
     draggable: false,
+    autoClose: false,
 
     // NOTE 如何编辑器聚焦，就将关闭逻辑交付给编辑内部管理，否则就交给 autoClose 管理
     checkAllowClose: () => !editor?.isFocused,
@@ -90,7 +91,7 @@ function getBubbleMenuPlugin() {
     return BubbleMenuPlugin({
         editor: editor,
         pluginKey: props.pluginKey,
-        updateDelay: 0,
+        updateDelay: 1,
         shouldShow: props.shouldShow,
         controller: pluginController,
         onDestroy: () => (showPopPanel.value = false),

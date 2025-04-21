@@ -239,13 +239,23 @@ export class BubbleMenuView {
             return;
         }
 
-        if (this.updateDebounceTimer) {
-            clearTimeout(this.updateDebounceTimer);
-        }
+        if (this.updateDelay === 1) {
+            if (this.updateDebounceTimer) {
+                cancelAnimationFrame(this.updateDebounceTimer);
+            }
 
-        this.updateDebounceTimer = window.setTimeout(() => {
-            this.updateHandler(view, selectionChanged, docChanged, oldState);
-        }, this.updateDelay);
+            this.updateDebounceTimer = requestAnimationFrame(() => {
+                this.updateHandler(view, selectionChanged, docChanged, oldState);
+            });
+        } else {
+            if (this.updateDebounceTimer) {
+                clearTimeout(this.updateDebounceTimer);
+            }
+
+            this.updateDebounceTimer = window.setTimeout(() => {
+                this.updateHandler(view, selectionChanged, docChanged, oldState);
+            }, this.updateDelay);
+        }
     };
 
     /**
