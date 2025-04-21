@@ -92,6 +92,7 @@
     "UNIT_WINDOW": "窗口",
     "UNIT_TARGET": "目标",
     "UNIT_FONT_SIZE": "字号",
+    "UNIT_LETTER_SPACING": "字间距",
     "UNIT_CUSTOM": "自定义",
     "UNIT_TEXT_STYLE": "文字属性",
 
@@ -452,5 +453,8 @@
     "SCROLL_SETTING_TIP_2": "2. 运动偏移量是指，窗口起始位置和窗口结束位置的偏移距离。为正是向下移动，为负是向上移动。",
     "SCROLL_PANEL_TIP_TITLE": "预览说明",
 
-    "POP_PANEL_UPDATE_ERROR": "位置更新错误"
+    "POP_PANEL_UPDATE_ERROR": "位置更新错误",
+
+    "LETTER_SPACING_USE_DEFAULT": "使用默认字间距",
+    "FONT_SIZE_USE_DEFAULT": "使用默认字号"
 }

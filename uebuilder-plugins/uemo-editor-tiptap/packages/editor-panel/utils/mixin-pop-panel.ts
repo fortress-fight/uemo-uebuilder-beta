@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:45:22
+ * @LastEditTime: 2025-04-22 00:44:00
  */
 
 export function usePopPanelParam(
@@ -23,6 +23,7 @@ export function usePopPanelParam(
             case "textColor":
             case "fontFamily":
             case "fontSize":
+            case "letterSpacing":
             case "textDecoration":
                 return {
                     draggable: true,

@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:57:57
+ * @LastEditTime: 2025-04-22 00:42:46
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
@@ -38,10 +38,11 @@ import FontFamilyPanel from "./sub-component/FontFamilyPanel.vue";
 import TextColorPanel from "./sub-component/TextColorPanel.vue";
 import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
+import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 
 defineOptions({
     name: "UeTiptapEditorPanel",
-    components: { FontSizePanel, FontFamilyPanel, TextColorPanel, TextAlignPanel, LineHeightPanel },
+    components: { FontSizePanel, FontFamilyPanel, TextColorPanel, TextAlignPanel, LineHeightPanel, LetterSpacingPanel },
 });
 
 const { t } = useI18n();
@@ -78,6 +79,7 @@ const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string>
     textColor: "TextColorPanel",
     textAlign: "TextAlignPanel",
     lineHeight: "LineHeightPanel",
+    letterSpacing: "LetterSpacingPanel",
 };
 
 /**

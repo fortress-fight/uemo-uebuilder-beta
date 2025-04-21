@@ -1,7 +1,7 @@
 <!--
  * @Description: 斜体插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 19:31:58
+ * @LastEditTime: 2025-04-22 01:19:28
 -->
 <template>
     <UeTiptapMenuButton
@@ -31,7 +31,23 @@ function openLetterSpacingPanel() {
 
     if (!editor || !rect) return;
 
-    console.error("openLetterSpacingPanel -- 未实现: currentValue = ", currentValue.value);
+    editor?.commands.openAttrEditorPanel(
+        "letterSpacing",
+        { letterSpacing: currentValue.value || "" },
+        {
+            rect,
+            setData: (attr) => {
+                if (!attr.letterSpacing) {
+                    editor?.chain().unsetLetterSpacing().run();
+                } else {
+                    editor?.chain().setLetterSpacing(attr.letterSpacing).run();
+                }
+            },
+            focus: () => {
+                editor?.commands.focus();
+            },
+        }
+    );
 }
 </script>
 <style lang="scss" module>

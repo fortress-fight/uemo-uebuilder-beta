@@ -93,6 +93,7 @@
     "UNIT_WINDOW": "Window",
     "UNIT_TARGET": "Target",
     "UNIT_FONT_SIZE": "Font Size",
+    "UNIT_LETTER_SPACING": "Letter Spacing",
     "UNIT_CUSTOM": "Custom",
     "UNIT_TEXT_STYLE": "Text Style",
 
@@ -453,5 +454,8 @@
     "SCROLL_SETTING_TIP_2": "2. The movement offset is the offset distance between the starting position of the window and the ending position of the window. A positive value is downward movement, and a negative value is upward movement.",
     "SCROLL_PANEL_TIP_TITLE": "Preview Tips",
 
-    "POP_PANEL_UPDATE_ERROR": "Position update error"
+    "POP_PANEL_UPDATE_ERROR": "Position update error",
+
+    "LETTER_SPACING_USE_DEFAULT": "Use Default Letter Spacing",
+    "FONT_SIZE_USE_DEFAULT": "Use Default Font Size"
 }

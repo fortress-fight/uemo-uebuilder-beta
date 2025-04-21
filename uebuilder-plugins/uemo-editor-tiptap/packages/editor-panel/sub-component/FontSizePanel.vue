@@ -3,6 +3,10 @@
         :title="t('UNIT_TEXT_STYLE')"
         :class="$style['background-image-setting-panel']"
         ref="rootComponent"
+        actionMode="confirm"
+        :confirm="{ text: t('FONT_SIZE_USE_DEFAULT') }"
+        isOperationEnabled
+        @confirm="handleConfirm"
     >
         <UeElSettingGroup :title="t('UNIT_FONT_SIZE')">
             <template #body>
@@ -24,6 +28,10 @@ const fontSizeRef = computed({
         valueRef.value = { fontSize: value };
     },
 });
+
+function handleConfirm() {
+    valueRef.value = { fontSize: "" };
+}
 </script>
 <style lang="scss" module>
 .font-size-panel {

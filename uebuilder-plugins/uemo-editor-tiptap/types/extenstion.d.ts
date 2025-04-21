@@ -6,6 +6,8 @@ import type { FontFamilyAttr } from "../packages/extension-font-family/src";
 import type { TextColorAttr } from "../packages/extension-text-color/src";
 import type { TextAlignAttr } from "../packages/extension-text-align/src";
 import type { LineHeightAttr } from "../packages/extension-line-height/src";
+import type { LetterSpacingAttr } from "../packages/extension-letter-spacing/src";
+
 declare global {
     namespace UE_TIPTAP_EXTENSION {
         type TextDecorationAttr = TextDecorationAttrs;
@@ -19,6 +21,7 @@ declare global {
             textColor: TextColorAttr;
             textAlign: TextAlignAttr;
             lineHeight: LineHeightAttr;
+            letterSpacing: LetterSpacingAttr;
         };
 
         type openAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;
