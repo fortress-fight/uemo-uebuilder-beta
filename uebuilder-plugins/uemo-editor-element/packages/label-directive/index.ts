@@ -1,7 +1,7 @@
 /*
  * @Description: tippy 插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-06 02:44:49
+ * @LastEditTime: 2025-04-21 18:00:08
  */
 import type { App } from "vue";
 
@@ -14,6 +14,7 @@ export function install(app: App) {
         allowHTML: true,
         delay: [1000, null],
         theme: "ue-el-label",
+        zIndex: 999999,
     };
 
     app.use(VueTippy, {
