@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 02:11:46
+ * @LastEditTime: 2025-04-21 18:57:29
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -62,6 +62,7 @@ const createEditor = () => {
         content: props.content.replace(linkRegex, ""),
         extensions: createBubbleEditorExtension({
             openAttrEditorPanel: attrEditorPanel.value.openAttrEditorPanel,
+            closeAttrEditorPanel: attrEditorPanel.value.closeAttrEditorPanel,
         }),
         editorProps: {
             attributes: {

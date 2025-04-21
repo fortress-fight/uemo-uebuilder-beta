@@ -33,6 +33,7 @@ declare module "@tiptap/core" {
                 attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
                 param: AttrEditorPanelParam<T>
             ): ReturnType;
+            closeAttrEditorPanel: (type: keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap) => ReturnType;
         };
     }
 }
@@ -48,18 +49,36 @@ export type EditorPanelOptions = {
         attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
         param: AttrEditorPanelParam<T>
     ): void;
+    closeAttrEditorPanel: () => void;
 };
+
+/**
+ * 编辑器面板存储接口
+ */
+export interface editorPanelStorage {
+    /** 当前设备类型 */
+    lastEditorPanelType: keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap | undefined;
+}
 
 /**
  * 编辑器面板扩展
  * 提供打开属性编辑面板的命令
  */
-export const EditorPanelExtension = Extension.create<EditorPanelOptions>({
+export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorPanelStorage>({
     name: "editorPanelExtension",
 
     addOptions() {
         return {
             openAttrEditorPanel,
+            closeAttrEditorPanel: () => {
+                //
+            },
+        };
+    },
+
+    addStorage() {
+        return {
+            lastEditorPanelType: undefined as keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap | undefined,
         };
     },
 
@@ -68,8 +87,23 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions>({
             openAttrEditorPanel: (type, attr, param) => () => {
                 const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
 
+                this.storage.lastEditorPanelType = type;
+
                 // 调用属性处理器
                 handler(type, attr, param);
+                return true;
+            },
+
+            closeAttrEditorPanel: (type) => () => {
+                if (this.storage.lastEditorPanelType !== type) {
+                    return false;
+                }
+
+                const handler = this.options.closeAttrEditorPanel;
+
+                // 调用关闭处理器
+                handler();
+
                 return true;
             },
         };

@@ -42,6 +42,7 @@ import { LineHeight } from "../packages/extension-line-height/src";
 
 export type CreateBubbleEditorExtensionParam = {
     openAttrEditorPanel?: UE_TIPTAP_EXTENSION.openAttrEditorPanel<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>;
+    closeAttrEditorPanel?: () => void;
 };
 
 export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionParam = {}): Extensions {
@@ -71,6 +72,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
     const customExtensions = [
         EditorPanelExtension.configure({
             openAttrEditorPanel: param.openAttrEditorPanel,
+            closeAttrEditorPanel: param.closeAttrEditorPanel,
         }),
         deviceExtension,
         fontScaleExtension,

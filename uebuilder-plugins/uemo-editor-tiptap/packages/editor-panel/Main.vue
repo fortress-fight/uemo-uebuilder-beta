@@ -192,6 +192,9 @@ onUnmounted(() => {
 
 defineExpose({
     openAttrEditorPanel,
+    closeAttrEditorPanel: () => {
+        openRef.value = false;
+    },
 });
 </script>
 
