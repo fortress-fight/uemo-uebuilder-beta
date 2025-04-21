@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 10:48:44
+ * @LastEditTime: 2025-04-21 19:15:35
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -41,7 +41,7 @@ const currentButtonType = computed(() => {
 });
 
 function openTextAlignPanel() {
-    const rect = rootDomRef.value?.getButtonRect();
+    const rect = rootDomRef.value?.$el;
     if (!rect) return;
 
     editor?.commands.openAttrEditorPanel(
@@ -62,6 +62,10 @@ function openTextAlignPanel() {
         }
     );
 }
+
+onBeforeUnmount(() => {
+    editor?.commands.closeAttrEditorPanel("textAlign");
+});
 </script>
 <style lang="scss" module>
 //
