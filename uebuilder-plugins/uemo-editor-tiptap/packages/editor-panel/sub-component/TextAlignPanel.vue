@@ -26,12 +26,9 @@ const currentValue = computed({
         return valueRef.value?.textAlign || "";
     },
     set(value) {
+        emit("closePopPanel");
         valueRef.value = { textAlign: value };
     },
-});
-
-watch(currentValue, () => {
-    emit("closePopPanel");
 });
 </script>
 <style lang="scss" module>

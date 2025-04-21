@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 02:15:33
+ * @LastEditTime: 2025-04-18 10:48:44
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -51,9 +51,9 @@ function openTextAlignPanel() {
             rect,
             setData: ({ textAlign }) => {
                 if (textAlign) {
-                    editor.chain().setTextAlign(textAlign).run();
+                    editor.chain().focus().setTextAlign(textAlign).run();
                 } else {
-                    editor.chain().unsetTextAlign().run();
+                    editor.chain().focus().unsetTextAlign().run();
                 }
             },
             focus: () => {
