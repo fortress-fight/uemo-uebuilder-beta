@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 01:40:26
+ * @LastEditTime: 2025-04-21 18:45:22
  */
 
 export function usePopPanelParam(
@@ -14,6 +14,11 @@ export function usePopPanelParam(
     return computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
         if (!rectRef.value || !type.value) return {};
 
+        const refEl =
+            rectRef.value instanceof HTMLElement
+                ? rectRef.value
+                : { getBoundingClientRect: () => rectRef.value as any };
+
         switch (type.value) {
             case "textColor":
             case "fontFamily":
@@ -23,7 +28,7 @@ export function usePopPanelParam(
                     draggable: true,
                     panel: {
                         position: {
-                            refEl: { getBoundingClientRect: () => rectRef.value as any },
+                            refEl,
                             options: {
                                 placement: "bottom-start",
                                 middleware: [
@@ -36,11 +41,13 @@ export function usePopPanelParam(
                 };
 
             case "textAlign":
+            case "lineHeight":
                 return {
                     draggable: false,
                     panel: {
                         position: {
-                            refEl: { getBoundingClientRect: () => rectRef.value as any },
+                            refEl,
+                            autoUpdate: true,
                             options: {
                                 placement: "bottom",
                                 middleware: [
@@ -58,7 +65,7 @@ export function usePopPanelParam(
                     checkAllowClose: options.checkAllowClose,
                     panel: {
                         position: {
-                            refEl: { getBoundingClientRect: () => rectRef.value as any },
+                            refEl,
                             options: {
                                 placement: "bottom-start",
                                 middleware: [
