@@ -6,6 +6,13 @@
 import { Extension } from "@tiptap/core";
 import { openAttrEditorPanel } from "../utils/helper";
 
+type AttrEditorPanelParam<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap> = {
+    rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
+    setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
+    preview?: () => void; // 预览回调
+    focus: () => void; // 聚焦回调
+};
+
 /**
  * 属性编辑器面板处理器类型定义
  * @template T - 属性类型
@@ -14,12 +21,7 @@ import { openAttrEditorPanel } from "../utils/helper";
 export type AttrEditorPanelHandler<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, R = void> = (
     type: T,
     attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
-    param: {
-        rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
-        setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
-        preview?: () => void; // 预览回调
-        focus: () => void; // 聚焦回调
-    }
+    param: AttrEditorPanelParam<T>
 ) => R;
 
 // 扩展 Tiptap 命令接口
@@ -29,12 +31,7 @@ declare module "@tiptap/core" {
             openAttrEditorPanel<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>(
                 type: T,
                 attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
-                param: {
-                    rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
-                    setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
-                    preview?: () => void; // 预览回调
-                    focus: () => void; // 聚焦回调
-                }
+                param: AttrEditorPanelParam<T>
             ): ReturnType;
         };
     }
@@ -49,12 +46,7 @@ export type EditorPanelOptions = {
         this: void,
         type: T,
         attr: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T],
-        param: {
-            rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
-            setData: (data: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) => void; // 设置属性数据
-            preview?: () => void; // 预览回调
-            focus: () => void; // 聚焦回调
-        }
+        param: AttrEditorPanelParam<T>
     ): void;
 };
 

@@ -8,16 +8,18 @@ declare global {
 
         type OperItem = UeTiptapOperItem;
 
-        type PositionRect = {
-            width: number;
-            height: number;
-            x: number;
-            y: number;
-            left: number;
-            right: number;
-            top: number;
-            bottom: number;
-        };
+        type PositionRect =
+            | {
+                  width: number;
+                  height: number;
+                  x: number;
+                  y: number;
+                  left: number;
+                  right: number;
+                  top: number;
+                  bottom: number;
+              }
+            | HTMLElement;
     }
 }
 
