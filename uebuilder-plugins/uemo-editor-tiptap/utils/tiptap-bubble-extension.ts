@@ -37,6 +37,7 @@ import { FontFamily } from "../packages/extension-font-family/src";
 import { TextColor } from "../packages/extension-text-color/src";
 import { TextAlign } from "../packages/extension-text-align/src";
 import { LineHeight } from "../packages/extension-line-height/src";
+import { LetterSpacing } from "../packages/extension-letter-spacing/src";
 
 // #endregion
 
@@ -88,6 +89,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         TextColor,
         TextAlign,
         LineHeight,
+        LetterSpacing,
     ];
 
     return [...baseExtensions, ...customExtensions];
