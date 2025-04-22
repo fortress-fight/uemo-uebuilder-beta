@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 19:30:18
+ * @LastEditTime: 2025-04-22 22:54:54
 -->
 <template>
     <TestArea
@@ -41,6 +41,8 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapEditorMenuProps & { testOption
             "textAlign",
             "lineHeight",
             "letterSpacing",
+            "|",
+            "editorAI",
         ],
     },
 ];

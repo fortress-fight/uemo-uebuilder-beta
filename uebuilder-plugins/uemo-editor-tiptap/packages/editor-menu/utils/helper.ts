@@ -10,6 +10,7 @@ import TextColorButton from "../sub-component/TextColorButton.vue";
 import TextAlignButton from "../sub-component/TextAlignButton.vue";
 import LineHeightButton from "../sub-component/LineHeightButton.vue";
 import LetterSpacingButton from "../sub-component/LetterSpacingButton.vue";
+import EditorAIButton from "../sub-component/EditorAIButton.vue";
 
 export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>> = {
     bold: BoldButton,
@@ -24,4 +25,5 @@ export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>
     textAlign: TextAlignButton,
     lineHeight: LineHeightButton,
     letterSpacing: LetterSpacingButton,
+    editorAI: EditorAIButton,
 };
