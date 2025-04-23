@@ -17,6 +17,8 @@
 <script lang="ts" setup>
 const { t } = useI18n();
 
+const emit = defineEmits<{ (e: "closePopPanel"): void }>();
+
 const valueRef = defineModel<UE_TIPTAP_EXTENSION.AttrEditorPanelMap["letterSpacing"]>("value", { required: true });
 
 const inputParam = computed<Partial<UE_EL_COMPONENT.UeElNumberInputProps>>(() => ({
@@ -46,6 +48,7 @@ const letterSpacingRef = computed({
 
 function handleConfirm() {
     valueRef.value = { letterSpacing: "" };
+    emit("closePopPanel");
 }
 </script>
 <style lang="scss" module>

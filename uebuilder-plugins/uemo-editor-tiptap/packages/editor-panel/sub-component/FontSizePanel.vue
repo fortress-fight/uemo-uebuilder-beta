@@ -18,6 +18,8 @@
 <script lang="ts" setup>
 const { t } = useI18n();
 
+const emit = defineEmits<{ (e: "closePopPanel"): void }>();
+
 const valueRef = defineModel<{ fontSize: string }>("value", { required: true });
 
 const fontSizeRef = computed({
@@ -31,6 +33,7 @@ const fontSizeRef = computed({
 
 function handleConfirm() {
     valueRef.value = { fontSize: "" };
+    emit("closePopPanel");
 }
 </script>
 <style lang="scss" module>
