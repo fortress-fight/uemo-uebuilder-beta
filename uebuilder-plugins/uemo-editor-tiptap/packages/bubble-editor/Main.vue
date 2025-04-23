@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:57:29
+ * @LastEditTime: 2025-04-23 19:42:11
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -16,6 +16,7 @@ import type { UeTiptapBubbleEditorBaseProps } from "./index";
 import { Editor } from "@tiptap/vue-3";
 
 import { linkRegex } from "./utils/helper";
+import { useProvideTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { createBubbleEditorExtension } from "../../utils/tiptap-bubble-extension";
 
 import TiptapEditorContent from "./sub-components/TiptapEditorContent.vue";
@@ -34,8 +35,10 @@ const emit = defineEmits<{
     (e: "ready" | "update" | "create" | "destroy" | "blur" | "focus" | "selectionUpdate", editor: Editor): void;
 }>();
 
-const tiptapEditor = ref<Editor>();
+const tiptapEditor = shallowRef<Editor | undefined>();
 const attrEditorPanel = useTemplateRef("attrEditorPanel");
+
+useProvideTiptapEditor(tiptapEditor);
 
 /**
  * 初始化编辑器事件监听

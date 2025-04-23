@@ -63,8 +63,10 @@ function copyData() {
     }
 }
 
-const tiptapEditor = ref<Editor>();
+const tiptapEditor = shallowRef<Editor | undefined>();
 const content = ref("测试气泡工具栏控件");
+
+useProvideTiptapEditor(tiptapEditor);
 
 onMounted(() => {
     if (!prop.useEditor) return;
@@ -81,8 +83,6 @@ onMounted(() => {
             },
         },
     });
-
-    useProvideTiptapEditor(tiptapEditor.value);
 });
 onBeforeUnmount(() => {
     if (tiptapEditor.value?.isDestroyed) return;
