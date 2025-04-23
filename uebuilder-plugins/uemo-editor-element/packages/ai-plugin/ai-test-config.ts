@@ -1,32 +1,30 @@
-import type { UE_AI_CONFIG } from "@stone/uemo-editor-element/packages/ai-plugin";
+import type { UE_AI_CONFIG } from "./index";
 
 export const AI_CONFIG: UE_AI_CONFIG = {
     uid: "",
     // 是否支持 -- 是否显示 AI 控件
     allow: true,
     // 是否禁用 -- 支持但没有开启
-    disable: true,
+    disable: false,
     aiHelper: ["general"],
     findImageUse: ["findImage"],
     tiptapTextUse: ["translateText", "beautifyText", "simplifyText", "extendText"],
     plugin: [
         {
-            // d1a18f5f00ffa1d3dd
             name: "中英互译",
             type: "translateText",
             aiType: "translateText",
             icon: "icon-editor-ai-translate",
             url: "/ai-api/ai/Api/Platform/Ai/Chat",
-            key: "",
+            key: "d1a18f5f00ffa1d3dd",
         },
         {
-            // e8757e2f79a50f1a10
             name: "润色文字",
             type: "beautifyText",
             aiType: "beautifyText",
             icon: "icon-editor-ai-beautify",
             url: "/ai-api/ai/Api/Platform/Ai/Text",
-            key: "",
+            key: "e8757e2f79a50f1a10",
             defaultVars: {
                 TYPE: "更专业精确",
             },
@@ -39,49 +37,44 @@ export const AI_CONFIG: UE_AI_CONFIG = {
             ],
         },
         {
-            // c838c1b0030ba6ac4a
             name: "精简文字",
             type: "simplifyText",
             aiType: "simplifyText",
             icon: "icon-editor-ai-simplify",
             url: "/ai-api/ai/Api/Platform/Ai/Text",
-            key: "",
+            key: "c838c1b0030ba6ac4a",
         },
         {
-            // 00a9fe116257d00215
             name: "扩展文字",
             type: "extendText",
             aiType: "extendText",
             icon: "icon-editor-ai-extend",
             url: "/ai-api/ai/Api/Platform/Ai/Text",
-            key: "",
+            key: "00a9fe116257d00215",
         },
         {
-            // 061385fc7158c61e59
             name: "智能找图",
             type: "findImage",
             aiType: "findImage",
             icon: "icon-editor-ai",
             url: "/ai-api/ai/Api/Platform/Ai/Chat",
-            key: "",
+            key: "061385fc7158c61e59",
         },
         {
-            // f5cb2cf7c93df81799
             name: "广告文案",
             type: "helperChat",
             aiType: "helperChat",
             icon: "icon-editor-ai",
             url: "/ai-api/ai/Api/Platform/Ai/Text",
-            key: "",
+            key: "f5cb2cf7c93df81799",
         },
         {
-            // f5cb2cf7c93df81799
             name: "AI 助手",
             type: "general",
             aiType: "general",
             icon: "icon-editor-ai",
             url: "/ai-api/ai/Api/Platform/Ai/Text",
-            key: "",
+            key: "f5cb2cf7c93df81799",
         },
     ],
 };

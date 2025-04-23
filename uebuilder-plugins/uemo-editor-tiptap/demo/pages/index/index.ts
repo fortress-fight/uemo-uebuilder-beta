@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-04-01 01:01:03
+ * @LastEditTime: 2025-04-23 19:36:12
  */
 
 // SECTION - 样式文件
@@ -16,7 +16,7 @@ import UeTiptap from "@/index";
 
 import App from "./index.vue";
 import router from "../../router/index";
-import { AI_CONFIG } from "../../../utils/ai-config";
+import { AI_CONFIG } from "../../utils/ai-config";
 
 const app = createApp(App);
 
