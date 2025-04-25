@@ -22,6 +22,7 @@ declare global {
             textAlign: TextAlignAttr;
             lineHeight: LineHeightAttr;
             letterSpacing: LetterSpacingAttr;
+            editorAI: any;
         };
 
         type openAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;

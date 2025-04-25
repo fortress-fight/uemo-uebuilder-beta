@@ -1,14 +1,16 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-23 12:35:44
+ * @LastEditTime: 2025-04-23 12:36:58
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
+        <EditorAIPanel v-if="checkValueType('editorAI', typeRef, valueRef)" @closePopPanel="openRef = false" />
         <UeElLinkSettingPanel
-            v-if="checkValueType('link', typeRef, valueRef)"
+            v-else-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
             :value="valueRef"
+            @closePopPanel="openRef = false"
             @update:value="updateValue"
             @cancel="handleCancel"
             @confirm="handleConfirm"
@@ -39,10 +41,19 @@ import TextColorPanel from "./sub-component/TextColorPanel.vue";
 import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
+import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
 
 defineOptions({
     name: "UeTiptapEditorPanel",
-    components: { FontSizePanel, FontFamilyPanel, TextColorPanel, TextAlignPanel, LineHeightPanel, LetterSpacingPanel },
+    components: {
+        FontSizePanel,
+        FontFamilyPanel,
+        TextColorPanel,
+        TextAlignPanel,
+        LineHeightPanel,
+        LetterSpacingPanel,
+        EditorAIPanel,
+    },
 });
 
 const { t } = useI18n();
@@ -81,6 +92,7 @@ const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string>
     textAlign: "TextAlignPanel",
     lineHeight: "LineHeightPanel",
     letterSpacing: "LetterSpacingPanel",
+    editorAI: "EditorAIPanel",
 };
 
 /**

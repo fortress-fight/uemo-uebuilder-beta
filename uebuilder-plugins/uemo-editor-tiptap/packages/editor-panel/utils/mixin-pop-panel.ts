@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-22 00:44:00
+ * @LastEditTime: 2025-04-23 12:07:46
  */
 
 export function usePopPanelParam(
@@ -43,6 +43,7 @@ export function usePopPanelParam(
 
             case "textAlign":
             case "lineHeight":
+            case "editorAI":
                 return {
                     draggable: false,
                     panel: {
