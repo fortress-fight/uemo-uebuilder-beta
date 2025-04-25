@@ -1,14 +1,14 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 17:07:03
+ * @LastEditTime: 2025-04-23 00:40:01
 -->
 <template>
     <UeElPopPanel
         :class="$style['floating-menu']"
         v-model:open="showPopPanel"
         v-bind="popPanelParams"
-        :mask="!!disableCloseTip ? { color: 'rgba(0, 0, 0, 0)' } : undefined"
+        :mask="typeof disableCloseTip === 'string' ? { color: 'rgba(0, 0, 0, 0)' } : undefined"
     >
         <div
             tabindex="0"
@@ -57,7 +57,7 @@ const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
         // NOTE 如何编辑器聚焦，就将关闭逻辑交付给编辑内部管理，否则就交给 autoClose 管理
         if (editor?.isFocused) return false;
         if (typeof props.disableCloseTip === "string") {
-            instance?.proxy?.$ueElToast.warning(props.disableCloseTip);
+            void (props.disableCloseTip && instance?.proxy?.$ueElToast.warning(props.disableCloseTip));
             return false;
         }
         return true;
@@ -102,7 +102,7 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                     return;
                 }
                 if (typeof props.disableCloseTip === "string") {
-                    instance?.proxy?.$ueElToast.warning(props.disableCloseTip);
+                    void (props.disableCloseTip && instance?.proxy?.$ueElToast.warning(props.disableCloseTip));
                     return false;
                 }
                 showPopPanel.value = false;
