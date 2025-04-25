@@ -456,5 +456,8 @@
     "POP_PANEL_UPDATE_ERROR": "位置更新错误",
 
     "LETTER_SPACING_USE_DEFAULT": "使用默认字间距",
-    "FONT_SIZE_USE_DEFAULT": "使用默认字号"
+    "FONT_SIZE_USE_DEFAULT": "使用默认字号",
+
+    "AI_EDITING_TITLE": "AI正在为您生成...",
+    "AI_EDITING_CANCEL": "不需要了"
 }

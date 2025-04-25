@@ -457,5 +457,8 @@
     "POP_PANEL_UPDATE_ERROR": "Position update error",
 
     "LETTER_SPACING_USE_DEFAULT": "Use Default Letter Spacing",
-    "FONT_SIZE_USE_DEFAULT": "Use Default Font Size"
+    "FONT_SIZE_USE_DEFAULT": "Use Default Font Size",
+
+    "AI_EDITING_TITLE": "AI is generating...",
+    "AI_EDITING_CANCEL": "Cancel"
 }
