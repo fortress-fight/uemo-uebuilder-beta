@@ -118,7 +118,7 @@ export class BubbleMenuView {
         const { empty } = selection;
 
         // 如果编辑器正在加载 AI 内容，则不显示气泡菜单
-        if (getAIStorage(this.editor)?.loading) return false;
+        if (getAIStorage(this.editor)?.AIEditing) return false;
 
         // 如果正在拖动，则不显示气泡菜单
         if (this.dragging) return false;
