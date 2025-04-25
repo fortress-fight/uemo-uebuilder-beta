@@ -93,3 +93,11 @@
         editor.chain().setEditingMark("link").run();
     }
     ```
+
+9.  如何选中当前所在位置距离最近的指定节点
+
+    ```ts
+    import { findParentNode } from "@tiptap/core";
+
+    const paragraphRange = findParentNode((node) => node.type.name === "paragraph")(selection);
+    ```

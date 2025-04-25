@@ -459,5 +459,7 @@
     "FONT_SIZE_USE_DEFAULT": "使用默认字号",
 
     "AI_EDITING_TITLE": "AI正在为您生成...",
-    "AI_EDITING_CANCEL": "不需要了"
+    "AI_EDITING_CANCEL": "不需要了",
+    "AI_EDITING_NO_CONFIG_ERROR": "未开通AI编辑功能，请联系客服询问详情",
+    "AI_EDITING_NO_TEXT_ERROR": "请选择要处理的文字"
 }

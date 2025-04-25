@@ -1,4 +1,5 @@
 import type { Extensions } from "@tiptap/vue-3";
+import type { AIExtensionOptions } from "../packages/extension-ai";
 
 import $pageStyle from "../src/app.module.scss";
 
@@ -44,6 +45,7 @@ import { LetterSpacing } from "../packages/extension-letter-spacing/src";
 export type CreateBubbleEditorExtensionParam = {
     openAttrEditorPanel?: UE_TIPTAP_EXTENSION.openAttrEditorPanel<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>;
     closeAttrEditorPanel?: () => void;
+    AIExtension?: AIExtensionOptions;
 };
 
 export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionParam = {}): Extensions {
@@ -77,7 +79,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         }),
         deviceExtension,
         fontScaleExtension,
-        AIExtension,
+        AIExtension.configure(param.AIExtension),
         TextDecoration,
         Blockquote,
         Link.configure({

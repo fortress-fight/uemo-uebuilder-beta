@@ -460,5 +460,7 @@
     "FONT_SIZE_USE_DEFAULT": "Use Default Font Size",
 
     "AI_EDITING_TITLE": "AI is generating...",
-    "AI_EDITING_CANCEL": "Cancel"
+    "AI_EDITING_CANCEL": "Cancel",
+    "AI_EDITING_NO_CONFIG_ERROR": "AI editing disabled, please contact support",
+    "AI_EDITING_NO_TEXT_ERROR": "Please select the text to process"
 }
