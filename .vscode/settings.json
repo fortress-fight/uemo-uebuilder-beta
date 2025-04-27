@@ -147,7 +147,9 @@
     "i18n-ally.enabledFrameworks": ["vue"],
     "i18n-ally.theme.annotationMissing": "#acb2be",
 
-    "vue.server.hybridMode": false
+    "vue.server.hybridMode": false,
+
+    "eslint.workingDirectories": [{ "pattern": "./uebuilder-plugins/*/" }]
 
     // "http.proxy": "http://127.0.0.1:10809",
     // "http.proxyStrictSSL": false
