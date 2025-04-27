@@ -5,6 +5,11 @@
             <template v-for="(component, index) in testComponents" :key="index">
                 <component :is="component"></component>
             </template>
+            <template v-for="(component, index) in testRowComponents" :key="index">
+                <div :class="$style['row']">
+                    <component :is="component"></component>
+                </div>
+            </template>
         </div>
     </div>
 </template>
@@ -14,9 +19,12 @@ import TestMenuButton from "~/demo/components/TestMenuButton.vue";
 import TestMenuBar from "~/demo/components/TestMenuBar.vue";
 import TestEditorMenu from "~/demo/components/TestEditorMenu.vue";
 
-const unitTestComponents = [TestBubbleMenu, TestMenuButton, TestMenuBar, TestEditorMenu];
+const unitTestComponents = [TestBubbleMenu, TestMenuButton, TestMenuBar];
 
 const testComponents = [...unitTestComponents];
+
+const menuTestComponents = [TestEditorMenu];
+const testRowComponents = [...menuTestComponents];
 </script>
 <style lang="scss" module>
 .page-head {
