@@ -101,3 +101,42 @@
 
     const paragraphRange = findParentNode((node) => node.type.name === "paragraph")(selection);
     ```
+
+10. 转换指定内容，示例：自动转换行首的 > 为块引用例如：
+
+
+    appendTransaction 钩子会在每次事务（Transaction）应用后被调用，允许追加额外的事务。
+
+    ```ts
+    function createAutoBlockquotePlugin() {
+        return new Plugin({
+            appendTransaction: (transactions, oldState, newState) => {
+                const trs = [];
+                transactions.forEach((tr) => {
+                    if (tr.docChanged) {
+                        const newTr = newState.tr;
+                        newState.doc.descendants((node, pos) => {
+                            if (
+                                node.type.name === "paragraph" &&
+                                node.textContent.startsWith("> ") &&
+                                pos === 0 // 仅处理行首
+                            ) {
+                                // 创建块引用节点
+                                const blockquote = newState.schema.nodes.blockquote.create(
+                                    {},
+                                    newState.schema.nodes.paragraph.create(
+                                        {},
+                                        newState.schema.text(node.textContent.slice(2))
+                                    )
+                                );
+                                newTr.replaceWith(pos, pos + node.nodeSize, blockquote);
+                                trs.push(newTr);
+                            }
+                        });
+                    }
+                });
+                return trs.length > 0 ? trs : null;
+            },
+        });
+    }
+    ```
