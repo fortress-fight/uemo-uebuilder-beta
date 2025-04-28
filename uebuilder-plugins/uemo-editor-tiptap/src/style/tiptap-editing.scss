@@ -12,8 +12,14 @@ $project-name: app-editor;
         cursor: text;
 
         outline: none;
+        &.is-editor-empty {
+            //
+        }
         &[hight-light-caret] {
             caret-color: #999 !important;
+        }
+        &.has-focus {
+            opacity: 1;
         }
         *,
         *::before,
@@ -23,8 +29,32 @@ $project-name: app-editor;
         .drop-cursor {
             border-radius: 4px;
         }
-        &.has-focus {
-            opacity: 1;
+        .is-empty {
+            position: relative;
+            &.has-anchor::before {
+                display: block;
+                overflow: hidden;
+
+                max-width: 100%;
+                height: auto;
+                padding-right: 4px;
+                padding-left: 4px;
+
+                content: attr(data-placeholder);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            &::before {
+                position: absolute;
+
+                width: 100%;
+                height: 0;
+
+                content: "";
+                pointer-events: none;
+
+                color: #aeb8c2;
+            }
         }
     }
     .ue-editing-mark {
