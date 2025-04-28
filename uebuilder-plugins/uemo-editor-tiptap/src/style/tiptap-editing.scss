@@ -13,7 +13,7 @@ $project-name: app-editor;
 
         outline: none;
         &.is-editor-empty {
-            //
+            opacity: 1;
         }
         &[hight-light-caret] {
             caret-color: #999 !important;

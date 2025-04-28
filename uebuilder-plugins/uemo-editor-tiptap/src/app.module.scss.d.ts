@@ -1,8 +1,10 @@
 declare const styles: {
     readonly btn: string;
     readonly "drop-cursor": string;
+    readonly emoji: string;
     readonly "has-anchor": string;
     readonly "has-focus": string;
+    readonly "is-editor-empty": string;
     readonly "is-empty": string;
     readonly link: string;
     readonly "page-editor": string;
@@ -10,6 +12,5 @@ declare const styles: {
     readonly "text-decoration-svg-box": string;
     readonly "ue-editing-mark": string;
     readonly "ue-richtext-editor": string;
-    readonly "is-editor-empty": string;
 };
 export = styles;
