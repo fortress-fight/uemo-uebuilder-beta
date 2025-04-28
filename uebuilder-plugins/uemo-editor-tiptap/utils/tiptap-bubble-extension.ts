@@ -1,6 +1,7 @@
 import type { Extensions } from "@tiptap/vue-3";
 import type { AIExtensionOptions } from "../packages/extension-ai";
 
+import { i18n } from "../src/i18n";
 import $pageStyle from "../src/app.module.scss";
 
 // #region 导入基础扩展
@@ -40,6 +41,7 @@ import { TextAlign } from "../packages/extension-text-align/src";
 import { LineHeight } from "../packages/extension-line-height/src";
 import { LetterSpacing } from "../packages/extension-letter-spacing/src";
 import { SlashMenu } from "../packages/extension-slash-menu/src";
+import { Placeholder } from "../packages/extension-placeholder";
 
 // #endregion
 
@@ -94,6 +96,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         LineHeight,
         LetterSpacing,
         SlashMenu,
+        Placeholder.configure({
+            placeholder: i18n.global.t("PLACEHOLDER_TEXT"),
+        }),
     ];
 
     return [...baseExtensions, ...customExtensions];

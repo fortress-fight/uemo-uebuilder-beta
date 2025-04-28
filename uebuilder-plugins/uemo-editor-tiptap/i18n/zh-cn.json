@@ -1,6 +1,7 @@
 {
     "PLUGIN_AI_TOOL": "智能AI编辑工具",
     "NOT_FOUND_MODULE": "未找到指定模块",
+    "PLACEHOLDER_TEXT": "输入 '/' 添加更多内容",
 
     "NODE_TEXT": "文本",
     "NODE_TEXT_DESC": "Text",

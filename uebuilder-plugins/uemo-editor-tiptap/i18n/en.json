@@ -1,6 +1,7 @@
 {
     "PLUGIN_AI_TOOL": "AI Tool",
     "NOT_FOUND_MODULE": "Not Found Target Module",
+    "PLACEHOLDER_TEXT": "Input '/' to add more content",
 
     "NODE_TEXT": "Text",
     "NODE_TEXT_DESC": "Text",
