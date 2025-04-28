@@ -1,7 +1,7 @@
 <!--
  * @Description: Emoji 库面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:52:55
+ * @LastEditTime: 2025-04-29 01:40:19
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards">
@@ -28,7 +28,7 @@
                         v-for="(item, index) in emojiList"
                         :key="index"
                         :class="$style['emoji-item']"
-                        :data-active="select === item.emoji"
+                        :data-active="selectedIndex === index"
                         @click="selectItem(index)"
                     >
                         <div
@@ -96,12 +96,19 @@ const rowLen = 8;
 
 function onKeyDown(event: KeyboardEvent): boolean {
     if (loading.value) return false;
+
+    const eventKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Enter"];
+
+    if (!eventKeys.includes(event.key)) {
+        return false;
+    }
+
     if (selectedIndex.value === -1) {
         selectedIndex.value = 0;
         return true;
     }
 
-    const len = emojiData.value.length;
+    const len = emojiList.value.length;
     if (event.key === "ArrowLeft") {
         selectedIndex.value = (selectedIndex.value + len - 1) % len;
         return true;
@@ -130,17 +137,17 @@ function onKeyDown(event: KeyboardEvent): boolean {
     return false;
 }
 
-watch(
-    () => select.value,
-    (val) => {
-        selectedIndex.value = emojiList.value.findIndex((item: any) => item.emoji === val);
-    }
-);
+// watch(
+//     () => select.value,
+//     (val) => {
+//         selectedIndex.value = emojiList.value.findIndex((item: any) => item.emoji === val);
+//     }
+// );
 
-watch(
-    () => emojiList.value,
-    () => (selectedIndex.value = -1)
-);
+// watch(
+//     () => emojiList.value,
+//     () => (selectedIndex.value = -1)
+// );
 
 function selectItem(index: number) {
     if (loading.value) return false;
