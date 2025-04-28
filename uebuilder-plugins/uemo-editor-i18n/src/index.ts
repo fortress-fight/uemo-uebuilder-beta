@@ -4,7 +4,7 @@ import i18nEn from "../i18n/en.json";
 
 const i18n = createI18n({
     legacy: false,
-    locale: "zh-cn",
+    locale: localStorage.getItem("lang") || "zh-cn",
     globalInstall: true,
     fallbackLocale: "zh-cn",
     messages: { en: i18nEn, "zh-cn": i18nZhCn },

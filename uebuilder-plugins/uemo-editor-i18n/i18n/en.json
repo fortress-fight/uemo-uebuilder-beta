@@ -85,7 +85,6 @@
     "UNIT_CENTER_CENTER": "Center Center",
     "UNIT_CENTER_LEFT": "Center Left",
     "UNIT_CENTER_RIGHT": "Center Right",
-    "UNIT_HOVER": "Hover",
     "UNIT_STROKE_COLOR": "Stroke Color",
     "UNIT_FILL_COLOR": "Fill Color",
     "UNIT_PREVIEW_TITLE": "Preview Area",
@@ -96,6 +95,7 @@
     "UNIT_LETTER_SPACING": "Letter Spacing",
     "UNIT_CUSTOM": "Custom",
     "UNIT_TEXT_STYLE": "Text Style",
+    "UNIT_BASE": "Base",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
