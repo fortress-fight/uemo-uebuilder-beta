@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-01 15:51:38
+ * @LastEditTime: 2025-04-28 13:47:43
  */
 
 const getBaseConfig = require("@stone/uebuilder-vue-config");
@@ -27,6 +27,7 @@ module.exports = () => {
                 server: { type: "https" },
                 proxy: {
                     "/UeMaterial.Api": { target: "https://card.uemox.com:8081", changeOrigin: true },
+                    "/ai-api": { target: "https://www.uemo.net", changeOrigin: true },
                 },
                 client: {
                     overlay: { errors: true, warnings: false, runtimeErrors: false },
