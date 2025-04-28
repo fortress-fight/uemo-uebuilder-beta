@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-28 14:16:21
+ * @LastEditTime: 2025-04-29 02:24:19
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -147,7 +147,7 @@ const createEditor = (): Editor | undefined => {
     const { openAttrEditorPanel, closeAttrEditorPanel } = attrEditorPanel.value;
 
     const editor = new Editor({
-        injectCSS: false,
+        injectCSS: true,
         content: props.content.replace(linkRegex, ""),
         extensions: createBubbleEditorExtension({
             openAttrEditorPanel,
