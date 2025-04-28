@@ -6,7 +6,6 @@ import { VueRenderer } from "@tiptap/vue-3";
 
 import { slashMenuList } from "../data";
 import { isInTable, isInGridGroup } from "../../../utils/tiptap-utils";
-
 import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 
 /**
@@ -70,8 +69,8 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
             }
 
             switch (props.name) {
-                case "insertImage":
-                    //
+                case "insertEmoji":
+                    chain.insertEmoji({ text: ":" });
                     break;
 
                 default:
@@ -79,9 +78,6 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
             }
 
             chain.run();
-
-            // TODO: 实现命令处理逻辑
-            // commandManage[props.name]?.command({ editor, range });
         },
 
         items: ({ editor, query }) => {
