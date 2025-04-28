@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-25 13:37:09
+ * @LastEditTime: 2025-04-28 14:16:21
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -89,8 +89,7 @@ const handleAIRequest = async (type: string, text: string, param: any): Promise<
         executeCancel();
     }
 
-    const AI_CONFIG = instance?.proxy?.$ueElAI;
-    const pluginConfig = AI_CONFIG?.plugin.find((item) => item.type === type);
+    const pluginConfig = instance?.proxy?.$ueElTextAI?.(type);
 
     if (!pluginConfig) {
         instance?.proxy?.$ueElToast.error(t("AI_EDITING_NO_CONFIG_ERROR"));
