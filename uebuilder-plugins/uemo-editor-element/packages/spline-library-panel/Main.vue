@@ -1,7 +1,7 @@
 <!--
  * @Description: spline资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-16 01:34:03
+ * @LastEditTime: 2025-04-29 19:17:53
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName">
@@ -48,7 +48,7 @@ const prop = withDefaults(defineProps<UeElSplineLibraryPanelBaseProps>(), {});
 const emit = defineEmits<{ (e: "close"): void }>();
 const select = defineModel<string>("select", { required: false });
 
-const splineLibrary = ref(instance?.proxy?.$ueElResource.lottieLibrary);
+const splineLibrary = ref(instance?.proxy?.$ueElResource.splineLibrary);
 const defaultCardName = ref<string>(splineLibrary.value?.enable ? "splineLibList" : "splineLink");
 const libraryPanelParam = computed(() => {
     const param: UE_EL_COMPONENT.UeElLibraryPanelProps = {
