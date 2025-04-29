@@ -96,6 +96,10 @@
     "UNIT_CUSTOM": "Custom",
     "UNIT_TEXT_STYLE": "Text Style",
     "UNIT_BASE": "Base",
+    "UNIT_TEXT_LIBRARY": "Text Library",
+    "UNIT_COLOR_NORMAL": "Color",
+    "UNIT_COLOR_LIGHT": "Light",
+    "UNIT_COLOR_DARK": "Dark",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

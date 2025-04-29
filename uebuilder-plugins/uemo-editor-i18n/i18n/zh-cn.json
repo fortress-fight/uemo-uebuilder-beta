@@ -96,6 +96,10 @@
     "UNIT_CUSTOM": "自定义",
     "UNIT_TEXT_STYLE": "文字属性",
     "UNIT_BASE": "基础",
+    "UNIT_TEXT_LIBRARY": "文本库",
+    "UNIT_COLOR_NORMAL": "彩色",
+    "UNIT_COLOR_LIGHT": "浅色",
+    "UNIT_COLOR_DARK": "深色",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

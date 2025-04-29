@@ -23,6 +23,7 @@ import TestImageLibraryPanel from "~/demo/components/TestImageLibraryPanel.vue";
 import TestIconLibraryPanel from "~/demo/components/TestIconLibraryPanel.vue";
 import TestFontFamilyLibraryPanel from "~/demo/components/TestFontFamilyLibraryPanel.vue";
 import TestButtonLibraryPanel from "~/demo/components/TestButtonLibraryPanel.vue";
+import TestRichTextLibraryPanel from "~/demo/components/TestRichTextLibraryPanel.vue";
 
 const testComponents = [
     TestShapeLibraryPanel,
@@ -39,6 +40,7 @@ const testComponents = [
     TestImageLibraryPanel,
     TestFontFamilyLibraryPanel,
     TestButtonLibraryPanel,
+    TestRichTextLibraryPanel,
 ];
 </script>
 <style lang="scss" module>
