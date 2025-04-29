@@ -11,10 +11,10 @@ import { getAIStorage } from "../../extension-ai/helper";
  * 不显示气泡菜单的节点名称
  */
 const NO_MENU_NODE_NAME = [
+    "nodePlaceholder",
     "hrRule",
     "divideBlock",
     "image",
-    "emptyNodePlaceHolder",
     "gridGroup",
     "gridItem",
     "frame",

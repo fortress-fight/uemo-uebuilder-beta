@@ -2,6 +2,7 @@ declare const styles: {
     readonly btn: string;
     readonly "drop-cursor": string;
     readonly emoji: string;
+    readonly "empty-node": string;
     readonly "has-anchor": string;
     readonly "has-focus": string;
     readonly "is-editor-empty": string;

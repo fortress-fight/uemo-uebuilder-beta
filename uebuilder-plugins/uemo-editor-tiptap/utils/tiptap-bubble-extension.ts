@@ -43,6 +43,7 @@ import { LetterSpacing } from "../packages/extension-letter-spacing/src";
 import { SlashMenu } from "../packages/extension-slash-menu/src";
 import { Emoji } from "../packages/extension-emoji/src";
 import { Placeholder } from "../packages/extension-placeholder";
+import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
 
 // #endregion
 
@@ -101,6 +102,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Placeholder.configure({
             placeholder: i18n.global.t("PLACEHOLDER_TEXT"),
         }),
+        NodePlaceholder,
     ];
 
     return [...baseExtensions, ...customExtensions];

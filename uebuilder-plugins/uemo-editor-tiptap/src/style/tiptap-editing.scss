@@ -29,6 +29,9 @@ $project-name: app-editor;
         .drop-cursor {
             border-radius: 4px;
         }
+        .empty-node {
+            overflow: hidden;
+        }
         .is-empty {
             position: relative;
             &.has-anchor::before {

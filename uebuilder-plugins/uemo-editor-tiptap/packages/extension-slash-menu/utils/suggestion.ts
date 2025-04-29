@@ -69,6 +69,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
             }
 
             switch (props.name) {
+                case "insertText":
+                    chain.insetNodePlaceholder("TextPlaceholder");
+                    break;
                 case "insertEmoji":
                     chain.insertEmoji({ text: ":" });
                     break;

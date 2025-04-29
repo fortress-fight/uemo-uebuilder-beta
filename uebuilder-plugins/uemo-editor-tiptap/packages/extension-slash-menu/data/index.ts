@@ -12,7 +12,7 @@ export const slashMenuList: TYPE_SLASH_MENU[] = [
         title: i18n.global.t("UNIT_BASE"),
         key: "baseBlock",
         list: [
-            { title: "Text", name: "text" },
+            { title: "Text", name: "insertText" },
             { title: "Button", name: "insertButton" },
             { title: "Grid Group", name: "inertGridGroup" },
             { title: "Image", name: "addImage" },

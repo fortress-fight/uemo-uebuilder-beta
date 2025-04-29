@@ -14,7 +14,12 @@ type OperInfo = {
 const operManage = {
     // #region 文字相关操作
 
-    text: { tip: t("TIP_INSERT_TEXT"), title: t("NODE_TEXT"), subtitle: t("NODE_TEXT_DESC"), icon: "icon-editor-font" },
+    insertText: {
+        tip: t("TIP_INSERT_TEXT"),
+        title: t("NODE_TEXT"),
+        subtitle: t("NODE_TEXT_DESC"),
+        icon: "icon-editor-font",
+    },
     bold: { title: t("OPER_BOLD"), shortcut: "Mod+B", icon: "icon-editor-bold", buttonType: "iconButton" },
     italic: { title: t("OPER_ITALIC"), shortcut: "Mod+I", icon: "icon-editor-italic", buttonType: "iconButton" },
     textDecoration: { title: t("OPER_TEXT_DECORATION"), icon: "icon-editor-svg-line", buttonType: "iconButton" },
