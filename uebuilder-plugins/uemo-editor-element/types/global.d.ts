@@ -1,5 +1,6 @@
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceLottie as ResourceLottieType } from "@stone/uemo-editor-assets/resource/lottie";
+import type { ResourceRichText as ResourceRichTextType } from "@stone/uemo-editor-assets/resource/rich-text";
 import type {
     ResourceIcon as ResourceIconType,
     ResourceIconItem as ResourceIconItemType,
@@ -289,6 +290,11 @@ declare global {
         type ResourceLottie = ResourceLottieType;
 
         /**
+         * @description RichText 资源列表
+         */
+        type ResourceRichText = ResourceRichTextType;
+
+        /**
          * @description Icon 资源列表
          */
         type ResourceIcon = ResourceIconType;
@@ -352,10 +358,12 @@ declare global {
         type AI = UE_AI_CONFIG;
 
         type ResourceValue<T> = { enable: boolean; getData: () => Promise<T> };
+
         type Resource = {
             shapeLibrary: ResourceValue<UE_EL_UTIL.ResourceShape>;
             splineLibrary: ResourceValue<UE_EL_UTIL.ResourceSpline>;
             lottieLibrary: ResourceValue<UE_EL_UTIL.ResourceLottie>;
+            richTextLibrary: ResourceValue<UE_EL_UTIL.ResourceRichText>;
             iconLibrary: ResourceValue<UE_EL_UTIL.ResourceIcon>;
             videoLibrary: ResourceValue<UE_EL_UTIL.ResourceVideo>;
             imageLibrary: ResourceValue<UE_EL_UTIL.ResourceImage>;

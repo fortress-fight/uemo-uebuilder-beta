@@ -72,6 +72,32 @@ yarn create-element
 </UeElSettingGroup>
 ```
 
+### 如何填写新的资源面板
+
+1.  添加资源文件，例如：
+
+    `uebuilder-plugins/uemo-editor-assets/resource/**/index.ts`
+
+2.  扩展资源类型，文件位置：
+
+    `uebuilder-plugins/uemo-editor-element/types/global.d.ts`
+
+    资源类型：
+
+    `UE_PLUGIN_OPTIONS.Resource`
+
+3.  添加注册时参数支持，文件位置：
+
+    `uebuilder-plugins/uemo-editor-element/packages/resource-plugin/index.ts`
+
+    函数名：
+
+    `install`
+
+4.  更新初始化参数信息，文件位置：
+
+    `uebuilder-plugins/uemo-editor-element/demo/pages/index/index.ts`
+
 ## 贡献
 
 欢迎提交 issue 或 pull request 以改进此项目。
