@@ -1,15 +1,10 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-23 00:40:01
+ * @LastEditTime: 2025-04-29 19:02:00
 -->
 <template>
-    <UeElPopPanel
-        :class="$style['floating-menu']"
-        v-model:open="showPopPanel"
-        v-bind="popPanelParams"
-        :mask="typeof disableCloseTip === 'string' ? { color: 'rgba(0, 0, 0, 0)' } : undefined"
-    >
+    <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams" :mask="mask">
         <div
             tabindex="0"
             ref="popPanelRef"
@@ -41,6 +36,13 @@ const emit = defineEmits<{
 }>();
 
 const { editor } = useInjectTiptapEditor();
+
+const mask = computed(() => {
+    if (typeof props.disableCloseTip === "string") {
+        return { color: "rgba(0, 0, 0, 0)" };
+    }
+    return props.mask;
+});
 
 const showPopPanel = ref<boolean>(false);
 watch(showPopPanel, (isShow) => {
