@@ -2,7 +2,9 @@
     <UeElColorPickerPanel v-model:value="colorRef" type="mixin" />
 </template>
 <script lang="ts" setup>
-const valueRef = defineModel<UE_TIPTAP_EXTENSION.AttrEditorPanelMap["textColor"]>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["textColor"]>("value", {
+    required: true,
+});
 
 const colorRef = computed({
     get() {

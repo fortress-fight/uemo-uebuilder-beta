@@ -11,7 +11,9 @@
     </UeTiptapMenuBar>
 </template>
 <script lang="ts" setup>
-const valueRef = defineModel<{ textAlign: string }>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["textAlign"]>("value", {
+    required: true,
+});
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 

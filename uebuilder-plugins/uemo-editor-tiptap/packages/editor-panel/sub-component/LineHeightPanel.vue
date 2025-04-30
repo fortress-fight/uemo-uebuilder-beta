@@ -4,7 +4,9 @@
     </div>
 </template>
 <script lang="ts" setup>
-const valueRef = defineModel<UE_TIPTAP_EXTENSION.AttrEditorPanelMap["lineHeight"]>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["lineHeight"]>("value", {
+    required: true,
+});
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 

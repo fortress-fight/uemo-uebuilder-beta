@@ -1,11 +1,11 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-23 12:07:46
+ * @LastEditTime: 2025-04-30 15:07:07
  */
 
 export function usePopPanelParam(
-    type: Ref<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap | undefined>,
+    type: Ref<keyof UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"] | undefined>,
     rectRef: Ref<UE_TIPTAP_UNIT.PositionRect | undefined>,
     options: {
         checkAllowClose: UE_EL_COMPONENT.UeElPopPanelProps["checkAllowClose"];

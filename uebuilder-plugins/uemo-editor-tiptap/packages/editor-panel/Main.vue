@@ -1,18 +1,12 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 12:33:47
+ * @LastEditTime: 2025-04-30 15:05:45
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
-        <EditorAIPanel
-            v-if="checkValueType('editorAI', typeRef, valueRef)"
-            :value="valueRef"
-            @update:value="updateValue"
-            @closePopPanel="openRef = false"
-        />
         <UeElLinkSettingPanel
-            v-else-if="checkValueType('link', typeRef, valueRef)"
+            v-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
             :value="valueRef"
             @closePopPanel="openRef = false"
@@ -32,7 +26,7 @@
     </UeElPopPanel>
 </template>
 
-<script lang="ts" setup generic="T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap">
+<script lang="ts" setup generic="T extends keyof UE_TIPTAP_EXTENSION.EditorPanel['panelAttrsMap']">
 import type { UeElLinkSettingPanelInstance } from "@stone/uemo-editor-element/packages/link-setting-panel";
 import type { UeTiptapEditorPanelBaseProps } from "./index";
 import type { ValuesOf } from "@tiptap/core";
@@ -47,6 +41,8 @@ import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
+
+type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
 defineOptions({
     name: "UeTiptapEditorPanel",
@@ -67,9 +63,9 @@ const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
 /**
  * 组件状态
  */
-const typeRef = ref<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>();
+const typeRef = ref<keyof EditorPanelAttrsMap>();
 const openRef = ref<boolean>(false);
-const valueRef = ref<UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]>();
+const valueRef = ref<EditorPanelAttrsMap[T]>();
 const rectRef = ref<UE_TIPTAP_UNIT.PositionRect>();
 
 const linkPanelRef = useTemplateRef<UeElLinkSettingPanelInstance>("linkPanel");
@@ -82,13 +78,13 @@ const eventBus = mitt<{
     show: undefined;
     close: undefined;
     preview: undefined;
-    update: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T];
+    update: EditorPanelAttrsMap[T];
 }>();
 
 /**
  * 组件映射表
  */
-const componentMap: Record<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, string> = {
+const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     textDecoration: "UeElTextDecorationSettingPanel",
     link: "UeElLinkSettingPanel",
     fontSize: "FontSizePanel",
@@ -133,11 +129,11 @@ function preview() {
     eventBus.emit("preview");
 }
 
-function checkValueType<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>(
+function checkValueType<T extends keyof EditorPanelAttrsMap>(
     type: T,
-    name?: keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap,
-    value?: ValuesOf<UE_TIPTAP_EXTENSION.AttrEditorPanelMap>
-): value is UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T] {
+    name?: keyof EditorPanelAttrsMap,
+    value?: ValuesOf<EditorPanelAttrsMap>
+): value is EditorPanelAttrsMap[T] {
     return type === name;
 }
 
@@ -145,7 +141,7 @@ function checkValueType<T extends keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>(
  * 更新值事件处理
  * @param value - 新的属性值
  */
-function updateValue(value: UE_TIPTAP_EXTENSION.AttrEditorPanelMap[T]) {
+function updateValue(value: EditorPanelAttrsMap[T]) {
     // 如果类型为 textDecoration 且没有 svgName 则关闭弹窗
     if (typeRef.value && checkValueType("textDecoration", typeRef.value, value)) {
         if (!value.svgName) {
@@ -174,7 +170,7 @@ function cleanupEventListeners() {
 /**
  * 打开属性编辑器面板
  */
-const openAttrEditorPanel: UE_TIPTAP_EXTENSION.OpenAttrEditorPanel<T> = (type, attr, param) => {
+const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHandler"] = (type, attr, param) => {
     // 清理之前的事件监听
     cleanupEventListeners();
 

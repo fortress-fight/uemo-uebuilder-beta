@@ -19,7 +19,9 @@ const { t } = useI18n();
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 
-const valueRef = defineModel<UE_TIPTAP_EXTENSION.AttrEditorPanelMap["letterSpacing"]>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["letterSpacing"]>("value", {
+    required: true,
+});
 
 const inputParam = computed<Partial<UE_EL_COMPONENT.UeElNumberInputProps>>(() => ({
     limit: { em: [-10, 10], px: [-200, 200] },

@@ -7,7 +7,9 @@
 const instance = getCurrentInstance();
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
-const valueRef = defineModel<{ type: string }>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["editorAI"]>("value", {
+    required: true,
+});
 
 const AIOptions = computed<UE_EL_UTIL.SelectOption[]>(() => {
     const AI_CONFIG = instance?.proxy?.$ueElAI;

@@ -1,5 +1,4 @@
 import type { TextDecorationAttrs } from "../packages/extension-text-decoration/src";
-import type { AttrEditorPanelHandler } from "../packages/extension-editor-panel/src";
 import type { LinkAttrs } from "../packages/extension-link/src";
 import type { FontSizeAttrs } from "../packages/extension-font-size";
 import type { FontFamilyAttrs } from "../packages/extension-font-family/src";
@@ -7,21 +6,39 @@ import type { TextColorAttrs } from "../packages/extension-text-color/src";
 import type { TextAlignAttrs } from "../packages/extension-text-align/src";
 import type { LineHeightAttrs } from "../packages/extension-line-height/src";
 import type { LetterSpacingAttrs } from "../packages/extension-letter-spacing/src";
-
+import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/extension-editor-panel/src";
 declare global {
     namespace UE_TIPTAP_EXTENSION {
-        type AttrEditorPanelMap = {
-            textDecoration: TextDecorationAttrs;
-            link: LinkAttrs;
-            fontSize: FontSizeAttrs;
-            fontFamily: FontFamilyAttrs;
-            textColor: TextColorAttrs;
-            textAlign: TextAlignAttrs;
-            lineHeight: LineHeightAttrs;
-            letterSpacing: LetterSpacingAttrs;
-            editorAI: { type: string };
+        type TextDecoration = {
+            attrs: TextDecorationAttrs;
         };
-
-        type OpenAttrEditorPanel<T extends keyof AttrEditorPanelMap> = AttrEditorPanelHandler<T, void>;
+        type Link = {
+            attrs: LinkAttrs;
+        };
+        type FontSize = {
+            attrs: FontSizeAttrs;
+        };
+        type FontFamily = {
+            attrs: FontFamilyAttrs;
+        };
+        type TextColor = {
+            attrs: TextColorAttrs;
+        };
+        type TextAlign = {
+            attrs: TextAlignAttrs;
+        };
+        type LineHeight = {
+            attrs: LineHeightAttrs;
+        };
+        type LetterSpacing = {
+            attrs: LetterSpacingAttrs;
+        };
+        type EditorAI = {
+            attrs: { type: string };
+        };
+        type EditorPanel<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> = {
+            panelAttrsMap: EditorPanelAttrsMap;
+            openEditorPanelHandler: OpenEditorPanelHandler<T>;
+        };
     }
 }

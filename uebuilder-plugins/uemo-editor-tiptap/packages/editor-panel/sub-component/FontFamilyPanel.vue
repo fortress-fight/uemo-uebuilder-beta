@@ -2,9 +2,9 @@
     <UeElFontFamilyLibraryPanel ref="fontFamilyPanel" v-model:select="selectRef" />
 </template>
 <script lang="ts" setup>
-import type { FontFamilyAttr } from "../../extension-font-family/src";
-
-const valueRef = defineModel<FontFamilyAttr>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["fontFamily"]>("value", {
+    required: true,
+});
 
 const selectRef = computed({
     get() {

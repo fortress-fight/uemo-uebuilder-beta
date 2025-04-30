@@ -20,7 +20,9 @@ const { t } = useI18n();
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 
-const valueRef = defineModel<{ fontSize: string }>("value", { required: true });
+const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["fontSize"]>("value", {
+    required: true,
+});
 
 const fontSizeRef = computed({
     get() {

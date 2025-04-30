@@ -1,10 +1,6 @@
-import type { AttrEditorPanelHandler } from "../src";
+import type { EditorPanelHandler, EditorPanelAttrsMap } from "../src";
 
-export const openAttrEditorPanel: AttrEditorPanelHandler<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap, void> = (
-    type,
-    attr,
-    param
-) => {
+export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, void> = (type, attr, param) => {
     switch (type) {
         case "textDecoration":
             {
