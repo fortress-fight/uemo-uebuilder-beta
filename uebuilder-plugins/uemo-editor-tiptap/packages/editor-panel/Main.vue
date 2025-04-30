@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 11:19:11
+ * @LastEditTime: 2025-04-30 12:33:47
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
@@ -174,7 +174,7 @@ function cleanupEventListeners() {
 /**
  * 打开属性编辑器面板
  */
-const openAttrEditorPanel: UE_TIPTAP_EXTENSION.openAttrEditorPanel<T> = (type, attr, param) => {
+const openAttrEditorPanel: UE_TIPTAP_EXTENSION.OpenAttrEditorPanel<T> = (type, attr, param) => {
     // 清理之前的事件监听
     cleanupEventListeners();
 

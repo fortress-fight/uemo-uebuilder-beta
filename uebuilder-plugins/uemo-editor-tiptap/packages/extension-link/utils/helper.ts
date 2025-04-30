@@ -1,5 +1,5 @@
 import type { Editor } from "@tiptap/core";
-import type { LinkOptions } from "../src";
+import type { LinkOptions, LinkAttrs } from "../src";
 
 /**
  * 粘贴时自动链接的正则表达式
@@ -50,5 +50,5 @@ export function isAllowedUri(uri: string | undefined, protocols?: LinkOptions["p
 }
 
 export function getLinkAttr(editor: Editor) {
-    return editor.getAttributes("link") as UE_TIPTAP_EXTENSION.LinkAttr;
+    return editor.getAttributes("link") as LinkAttrs;
 }

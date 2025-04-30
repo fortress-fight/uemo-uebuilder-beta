@@ -1,11 +1,9 @@
 import type { Editor } from "@tiptap/core";
 
-export type FontFamilyAttr = {
-    fontFamily?: string | null;
-};
+export type FontFamilyAttrs = { fontFamily?: string | null };
 
 export function getFontFamilyAttrs(editor: Editor | undefined) {
-    return editor?.getAttributes("textStyle") as FontFamilyAttr;
+    return editor?.getAttributes("textStyle") as FontFamilyAttrs;
 }
 
 export * from "./font-family";

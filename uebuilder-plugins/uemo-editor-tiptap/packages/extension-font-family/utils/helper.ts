@@ -1,4 +1,4 @@
-import type { FontFamilyAttr } from "../src/index";
+import type { FontFamilyAttrs } from "../src";
 
 /**
  * 从元素中解析字体家族
@@ -29,7 +29,7 @@ export const parseFontFamilyFromElement = (el: HTMLElement): string | undefined 
  * @param attributes - 字体家族属性
  * @returns HTML属性对象
  */
-export const renderFontFamilyAttributes = (attributes: FontFamilyAttr): Record<string, string> => {
+export const renderFontFamilyAttributes = (attributes: FontFamilyAttrs): Record<string, string> => {
     if (!attributes.fontFamily) {
         return {};
     }

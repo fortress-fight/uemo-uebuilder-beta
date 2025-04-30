@@ -1,11 +1,11 @@
 /*
  * @Description: 行高扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:11:40
+ * @LastEditTime: 2025-04-30 12:46:34
  */
 
 import type { Attribute } from "@tiptap/core";
-import type { LineHeightAttr } from "./index";
+import type { LineHeightAttrs } from "./index";
 
 import "@tiptap/extension-text-style";
 
@@ -52,9 +52,9 @@ export const LineHeight = Extension.create<LineHeightOptions>({
                     lineHeight: {
                         default: null,
                         parseHTML: (element) => parseLineHeightFromElement(element),
-                        renderHTML: (attributes) => renderLineHeightAttributes(attributes as LineHeightAttr),
+                        renderHTML: (attributes) => renderLineHeightAttributes(attributes as LineHeightAttrs),
                     } as Attribute,
-                } as Record<keyof LineHeightAttr, Attribute>,
+                } as Record<keyof LineHeightAttrs, Attribute>,
             },
         ];
     },

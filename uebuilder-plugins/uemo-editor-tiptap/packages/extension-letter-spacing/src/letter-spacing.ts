@@ -5,7 +5,7 @@
  */
 
 import type { Attribute } from "@tiptap/core";
-import type { LetterSpacingAttr } from "./index";
+import type { LetterSpacingAttrs } from "./index";
 
 import "@tiptap/extension-text-style";
 import { Extension } from "@tiptap/core";
@@ -81,7 +81,7 @@ export const LetterSpacing = Extension.create<LetterSpacingOptions>({
                             };
                         },
                     },
-                } as Record<keyof LetterSpacingAttr, Attribute>,
+                } as Record<keyof LetterSpacingAttrs, Attribute>,
             },
         ];
     },

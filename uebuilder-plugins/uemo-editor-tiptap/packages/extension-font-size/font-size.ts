@@ -1,5 +1,5 @@
 import type { Attribute } from "@tiptap/core";
-import type { FontSizeAttr } from "./index";
+import type { FontSizeAttrs } from "./index";
 
 import "@tiptap/extension-text-style";
 import { Extension } from "@tiptap/core";
@@ -52,11 +52,11 @@ export const FontSize = Extension.create<FontSizeOptions>({
                     fontSize: {
                         default: null,
                         parseHTML: (el) => getFontSizeFromElement(el),
-                        renderHTML: (attributes: FontSizeAttr) => {
+                        renderHTML: (attributes: FontSizeAttrs) => {
                             return renderFontSizeAttributes(attributes.fontSize || "");
                         },
                     },
-                } as Record<AllKeys<FontSizeAttr>, Attribute>,
+                } as Record<AllKeys<FontSizeAttrs>, Attribute>,
             },
         ];
     },

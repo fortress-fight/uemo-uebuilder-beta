@@ -1,6 +1,6 @@
 import type { Editor } from "@tiptap/core";
-import type { deviceStorage } from "./index";
+import type { DeviceStorage } from "./index";
 
-export const getDeviceStorage = (editor: Editor): deviceStorage | undefined => {
+export const getDeviceStorage = (editor: Editor): DeviceStorage | undefined => {
     return editor.storage.deviceExtension;
 };

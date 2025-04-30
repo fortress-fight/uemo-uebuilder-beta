@@ -1,10 +1,10 @@
 /*
  * @Description: 文本对齐扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 01:20:12
+ * @LastEditTime: 2025-04-30 12:47:51
  */
 import type { Attribute } from "@tiptap/core";
-import type { TextAlignAttr } from "./index";
+import type { TextAlignAttrs } from "./index";
 import type { TextAlignOptions } from "../utils/helper";
 
 import {
@@ -63,13 +63,13 @@ export const TextAlign = Extension.create<TextAlignOptions>({
                         default: this.options.defaultAlignment,
                         parseHTML: (element) => parseTextAlignFromElement(element, this.options),
                         renderHTML: (attributes) =>
-                            renderTextAlignAttributes(attributes as TextAlignAttr, this.options.defaultAlignment),
+                            renderTextAlignAttributes(attributes as TextAlignAttrs, this.options.defaultAlignment),
                     } as Attribute,
                     moTextAlign: {
                         parseHTML: (element) => parseMoTextAlignFromElement(element),
-                        renderHTML: (attributes) => renderMoTextAlignAttributes(attributes as TextAlignAttr),
+                        renderHTML: (attributes) => renderMoTextAlignAttributes(attributes as TextAlignAttrs),
                     } as Attribute,
-                } as Record<keyof TextAlignAttr, Attribute>,
+                } as Record<keyof TextAlignAttrs, Attribute>,
             },
         ];
     },

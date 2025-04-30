@@ -1,4 +1,4 @@
-import type { TextAlignAttr } from "../src";
+import type { TextAlignAttrs } from "../src";
 
 /**
  * 文本对齐扩展的配置选项
@@ -36,7 +36,7 @@ export const parseMoTextAlignFromElement = (element: HTMLElement): string => {
  * @returns HTML属性对象
  */
 export const renderTextAlignAttributes = (
-    attributes: TextAlignAttr,
+    attributes: TextAlignAttrs,
     defaultAlignment: string
 ): Record<string, string> => {
     if (attributes.textAlign === defaultAlignment) {
@@ -53,7 +53,7 @@ export const renderTextAlignAttributes = (
  * @param attributes - 文本对齐属性
  * @returns HTML属性对象
  */
-export const renderMoTextAlignAttributes = (attributes: TextAlignAttr): Record<string, string> => {
+export const renderMoTextAlignAttributes = (attributes: TextAlignAttrs): Record<string, string> => {
     if (!attributes.moTextAlign || attributes.moTextAlign === attributes.textAlign) {
         return {};
     }

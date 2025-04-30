@@ -48,7 +48,7 @@ import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
 // #endregion
 
 export type CreateBubbleEditorExtensionParam = {
-    openAttrEditorPanel?: UE_TIPTAP_EXTENSION.openAttrEditorPanel<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>;
+    openAttrEditorPanel?: UE_TIPTAP_EXTENSION.OpenAttrEditorPanel<keyof UE_TIPTAP_EXTENSION.AttrEditorPanelMap>;
     closeAttrEditorPanel?: () => void;
     AIExtension?: AIExtensionOptions;
 };

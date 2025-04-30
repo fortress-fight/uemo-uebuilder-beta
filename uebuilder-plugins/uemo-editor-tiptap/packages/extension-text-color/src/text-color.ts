@@ -1,10 +1,10 @@
 /*
  * @Description: 文本颜色扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 00:28:41
+ * @LastEditTime: 2025-04-30 12:48:04
  */
 import type { Attribute } from "@tiptap/core";
-import type { TextColorAttr } from "./index";
+import type { TextColorAttrs } from "./index";
 
 import { parseColorFromElement, renderColorAttributes } from "../utils/helper";
 
@@ -60,9 +60,9 @@ export const TextColor = Extension.create<TextColorOptions>({
                     color: {
                         default: this.options.defaultColor,
                         parseHTML: (element) => parseColorFromElement(element),
-                        renderHTML: (attributes) => renderColorAttributes(attributes as TextColorAttr),
+                        renderHTML: (attributes) => renderColorAttributes(attributes as TextColorAttrs),
                     } as Attribute,
-                } as Record<keyof TextColorAttr, Attribute>,
+                } as Record<keyof TextColorAttrs, Attribute>,
             },
         ];
     },

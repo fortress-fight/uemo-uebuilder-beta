@@ -19,7 +19,7 @@ declare module "@tiptap/core" {
 /**
  * 设备存储接口
  */
-export interface deviceStorage {
+export interface DeviceStorage {
     /** 当前设备类型 */
     device: UE_TIPTAP_UNIT.Device;
 }
@@ -33,7 +33,7 @@ export const deviceExtension = Extension.create<
         /** 默认设备类型 */
         defaultDevice: UE_TIPTAP_UNIT.Device;
     },
-    deviceStorage
+    DeviceStorage
 >({
     name: "deviceExtension",
 
@@ -49,7 +49,7 @@ export const deviceExtension = Extension.create<
 
     /**
      * 添加存储
-     * @returns {deviceStorage} 设备存储对象
+     * @returns {DeviceStorage} 设备存储对象
      */
     addStorage() {
         return {

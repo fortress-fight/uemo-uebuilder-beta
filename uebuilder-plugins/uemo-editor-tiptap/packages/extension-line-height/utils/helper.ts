@@ -1,10 +1,10 @@
 /*
  * @Description: 行高扩展辅助函数
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:20:13
+ * @LastEditTime: 2025-04-30 12:49:07
  */
 import type { Editor } from "@tiptap/core";
-import type { LineHeightAttr } from "../src";
+import type { LineHeightAttrs } from "../src";
 
 /**
  * 从元素中解析行高值
@@ -40,7 +40,7 @@ export const parseLineHeightFromElement = (element: HTMLElement): string | null 
  * @param attributes - 行高属性
  * @returns HTML属性对象
  */
-export const renderLineHeightAttributes = (attributes: LineHeightAttr): Record<string, string> => {
+export const renderLineHeightAttributes = (attributes: LineHeightAttrs): Record<string, string> => {
     if (!attributes.lineHeight) {
         return {};
     }
@@ -50,6 +50,6 @@ export const renderLineHeightAttributes = (attributes: LineHeightAttr): Record<s
     };
 };
 
-export function getLineHeightAttr(editor: Editor): LineHeightAttr {
+export function getLineHeightAttr(editor: Editor): LineHeightAttrs {
     return editor?.getAttributes("textStyle");
 }

@@ -1,4 +1,4 @@
-import type { TextColorAttr } from "../src";
+import type { TextColorAttrs } from "../src";
 
 /**
  * 从元素中解析颜色值
@@ -20,7 +20,7 @@ export const parseColorFromElement = (element: HTMLElement): string | undefined 
  * @param attributes - 颜色属性
  * @returns HTML属性对象
  */
-export const renderColorAttributes = (attributes: TextColorAttr): Record<string, string> => {
+export const renderColorAttributes = (attributes: TextColorAttrs): Record<string, string> => {
     if (!attributes.color) {
         return {};
     }

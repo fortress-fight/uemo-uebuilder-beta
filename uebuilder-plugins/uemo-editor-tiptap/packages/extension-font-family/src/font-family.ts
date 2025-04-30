@@ -1,5 +1,5 @@
 import type { Attribute } from "@tiptap/core";
-import type { FontFamilyAttr } from "./index";
+import type { FontFamilyAttrs } from "./index";
 
 import { parseFontFamilyFromElement, renderFontFamilyAttributes } from "../utils/helper";
 
@@ -55,7 +55,7 @@ export const FontFamily = Extension.create<FontFamilyOptions>({
                         parseHTML: (el) => parseFontFamilyFromElement(el),
                         renderHTML: (attributes) => renderFontFamilyAttributes(attributes),
                     },
-                } as Record<keyof FontFamilyAttr, Attribute>,
+                } as Record<keyof FontFamilyAttrs, Attribute>,
             },
         ];
     },

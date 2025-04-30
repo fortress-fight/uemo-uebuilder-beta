@@ -1,11 +1,9 @@
 import type { Editor } from "@tiptap/core";
 
-export type FontSizeAttr = {
-    fontSize?: string | null;
-};
+export type FontSizeAttrs = { fontSize?: string | null };
 
 export function getFontSizeAttrs(editor: Editor | undefined) {
-    return editor?.getAttributes("textStyle") as FontSizeAttr;
+    return editor?.getAttributes("textStyle") as FontSizeAttrs;
 }
 
 export * from "./font-size";

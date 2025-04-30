@@ -1,16 +1,14 @@
 /*
  * @Description: 文本颜色扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 00:32:34
+ * @LastEditTime: 2025-04-30 14:00:04
  */
 import type { Editor } from "@tiptap/core";
 
 /**
  * 文本颜色属性
  */
-export type TextColorAttr = {
-    color?: string | null;
-};
+export type TextColorAttrs = { color?: string | null };
 
 /**
  * 获取文本颜色属性
@@ -20,7 +18,7 @@ export type TextColorAttr = {
 export function getTextColorAttrs(editor: Editor | undefined) {
     if (!editor) return "";
 
-    const textStyle = editor.getAttributes("textStyle") as TextColorAttr;
+    const textStyle = editor.getAttributes("textStyle") as TextColorAttrs;
 
     const currentColor = textStyle.color || "";
     if (currentColor.includes("gradient")) {
