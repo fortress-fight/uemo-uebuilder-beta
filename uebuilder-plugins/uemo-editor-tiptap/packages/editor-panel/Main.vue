@@ -1,11 +1,16 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-23 12:36:58
+ * @LastEditTime: 2025-04-30 11:19:11
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
-        <EditorAIPanel v-if="checkValueType('editorAI', typeRef, valueRef)" @closePopPanel="openRef = false" />
+        <EditorAIPanel
+            v-if="checkValueType('editorAI', typeRef, valueRef)"
+            :value="valueRef"
+            @update:value="updateValue"
+            @closePopPanel="openRef = false"
+        />
         <UeElLinkSettingPanel
             v-else-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"

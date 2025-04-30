@@ -4,12 +4,10 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
-
-const { editor } = useInjectTiptapEditor();
 const instance = getCurrentInstance();
 
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
+const valueRef = defineModel<{ type: string }>("value", { required: true });
 
 const AIOptions = computed<UE_EL_UTIL.SelectOption[]>(() => {
     const AI_CONFIG = instance?.proxy?.$ueElAI;
@@ -29,10 +27,7 @@ const AIOptions = computed<UE_EL_UTIL.SelectOption[]>(() => {
 });
 
 function triggerAction(type: string | number) {
-    if (!editor) return;
-
-    editor?.chain().focus().triggerAIEditing(String(type)).run();
-
+    valueRef.value = { type: String(type) };
     emit("closePopPanel");
 }
 </script>

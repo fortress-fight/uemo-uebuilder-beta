@@ -1,7 +1,7 @@
 <!--
  * @Description: AI 编辑器按钮组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-25 13:02:08
+ * @LastEditTime: 2025-04-30 10:50:35
 -->
 <template>
     <UeTiptapMenuButton
@@ -49,11 +49,11 @@ function openEditorAIPanel(): void {
 
     editor.commands.openAttrEditorPanel(
         "editorAI",
-        {},
+        { type: "" },
         {
             rect,
-            setData: () => {
-                // NOTE AI 无需处理数据
+            setData: (data: { type: string }) => {
+                editor?.chain().focus().triggerAIEditing(data.type).run();
             },
             focus: () => {
                 editor.commands.focus();
