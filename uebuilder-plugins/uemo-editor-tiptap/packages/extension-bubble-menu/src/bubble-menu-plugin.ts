@@ -336,9 +336,9 @@ export class BubbleMenuView {
     hide() {
         // NOTE 调用方式
         // this.editor.setOptions({ showMenu: true });
-        if (this.editor.options.showMenu) {
-            return true;
-        }
+        // if (this.editor.options.showMenu) {
+        //     return true;
+        // }
 
         this.controller?.("hide");
     }
