@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 23:57:09
+ * @LastEditTime: 2025-05-06 11:59:24
 -->
 <template>
     <button
@@ -29,7 +29,7 @@
 import type { UeTiptapMenuButtonBaseProps } from "./index";
 
 import { operMap } from "../../utils/tiptap-oper-manage";
-import formatKeyboardShortcut from "../../utils/tiptap-helper";
+import { formatKeyboardShortcut } from "../../utils/tiptap-helper";
 
 defineOptions({ name: "UeTiptapMenuButton" });
 

@@ -1,7 +1,7 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 02:20:21
+ * @LastEditTime: 2025-05-06 12:00:40
  */
 
 /**
@@ -17,7 +17,7 @@ const isAppleOS = () =>
  * @param {string} shortcut - 快捷键
  * @returns {string} 格式化后的快捷键
  */
-export default function formatKeyboardShortcut(shortcut?: string) {
+export function formatKeyboardShortcut(shortcut?: string) {
     if (!shortcut) return;
     if (isAppleOS()) {
         return shortcut.replace("Mod", "⌘");
