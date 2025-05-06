@@ -1,6 +1,6 @@
-import type { BUTTON_ITEM_PARAM } from "./type";
+import type { ButtonItemAttrs } from "@stone/uemo-editor-tiptap/packages/extension-button/src";
 
-export type ResourceButtonItem = { id: string; attrs: BUTTON_ITEM_PARAM };
+export type ResourceButtonItem = { id: string; attrs: ButtonItemAttrs };
 export type ResourceButton = Record<string, { name: string; options: ResourceButtonItem[] }>;
 
 const btnLib: ResourceButton = {
