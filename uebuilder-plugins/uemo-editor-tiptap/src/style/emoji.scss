@@ -1,10 +1,5 @@
 .page-editor {
     .emoji {
-        /* stylelint-disable-next-line selector-class-pattern */
-        &:global(.ProseMirror-selectednode) {
-            z-index: 50;
-
-            outline: 2px solid var(--theme-layout-component);
-        }
+        //
     }
 }

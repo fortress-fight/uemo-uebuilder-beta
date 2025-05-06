@@ -1,5 +1,19 @@
 declare const styles: {
     readonly btn: string;
+    readonly "btn--inner-wrapper": string;
+    readonly "btn-after-icon": string;
+    readonly "btn-after-lottie-icon": string;
+    readonly "btn-after-svg-icon": string;
+    readonly "btn-back-3d": string;
+    readonly "btn-before-icon": string;
+    readonly "btn-before-lottie-icon": string;
+    readonly "btn-before-svg-icon": string;
+    readonly "btn-front-3d": string;
+    readonly "btn-icon": string;
+    readonly "btn-list": string;
+    readonly "btn-row": string;
+    readonly "btn-text": string;
+    readonly "button-view": string;
     readonly "drop-cursor": string;
     readonly emoji: string;
     readonly "empty-node": string;
@@ -9,6 +23,9 @@ declare const styles: {
     readonly "is-empty": string;
     readonly link: string;
     readonly "page-editor": string;
+    readonly rubberBand: string;
+    readonly shakeX: string;
+    readonly "state-hover": string;
     readonly "text-decoration-svg": string;
     readonly "text-decoration-svg-box": string;
     readonly "ue-editing-mark": string;

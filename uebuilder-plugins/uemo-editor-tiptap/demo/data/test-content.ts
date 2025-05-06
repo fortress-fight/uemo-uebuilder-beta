@@ -24,4 +24,19 @@ export const testTextContent = {
             同时，我们也需要注意链接的安全性，避免点击不明来源的链接，保护个人信息安全。正确使用链接，让互联网成为我们获取知识的得力助手。
         </p>
     `,
+    buttonData: `
+        <div class="btn-row-c58e4" style="--btn-row-gap: 1em">
+            <div class="btn-list-a1de5">
+                <div
+                    class="btn-ece02"
+                    target="_target"
+                    data-theme="custom"
+                    data-link-type="link"
+                    style="--padding: 8px 30px;--color: #ffffff;--hover-box-shadow: 0 5px 10px 0 rgba(69, 0, 143, 0.3);--border-radius: 100px;--background: linear-gradient(135deg, rgb(100, 80, 220) 0%, rgb(164, 135, 255) 100%);--hover-background: linear-gradient(135deg, rgb(255, 108, 171) 0%, #7366ff 100%);"
+                >
+                    <div class="btn-text-d97c4">BUTTON</div>
+                </div>
+            </div>
+        </div>
+    `,
 };

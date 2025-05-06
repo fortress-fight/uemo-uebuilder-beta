@@ -45,6 +45,8 @@ import { Emoji } from "../packages/extension-emoji/src";
 import { Placeholder } from "../packages/extension-placeholder";
 import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
 
+import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
+
 // #endregion
 
 export type CreateBubbleEditorExtensionParam = {
@@ -103,6 +105,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             placeholder: i18n.global.t("PLACEHOLDER_TEXT"),
         }),
         NodePlaceholder,
+
+        ButtonItem,
+        ButtonRow,
     ];
 
     return [...baseExtensions, ...customExtensions];

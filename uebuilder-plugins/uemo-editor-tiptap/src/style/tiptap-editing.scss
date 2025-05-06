@@ -59,6 +59,18 @@ $project-name: app-editor;
                 color: #aeb8c2;
             }
         }
+        .emoji,
+        .btn-row {
+            cursor: pointer;
+            &.has-focus {
+                /* stylelint-disable-next-line selector-class-pattern */
+                &:global(.ProseMirror-selectednode) {
+                    z-index: 50;
+
+                    outline: 2px solid var(--theme-layout-component);
+                }
+            }
+        }
     }
     .ue-editing-mark {
         display: inline-block !important;
