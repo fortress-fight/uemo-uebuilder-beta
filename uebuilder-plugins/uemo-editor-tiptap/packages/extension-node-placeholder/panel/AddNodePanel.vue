@@ -7,10 +7,21 @@
         :mask="{ color: 'rgba(0, 0, 0, 0)' }"
         @endEdit="handleEndEdit"
     >
-        <UeElRichTextLibraryPanel :class="$style['node-placeholder-panel']" @update:select="handleUpdateSelect" />
+        <UeElRichTextLibraryPanel
+            v-if="nodeName === 'TextPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertTextContent"
+        />
+        <UeElButtonLibraryPanel
+            v-if="nodeName === 'ButtonPlaceholder'"
+            @update:select="insertButtonContent"
+            :class="$style['node-placeholder-panel']"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
+import type { ButtonItemAttrs } from "@stone/uemo-editor-tiptap/packages/extension-button/src";
+
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 const { editor } = useInjectTiptapEditor();
@@ -23,10 +34,20 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
     return isNodePlaceholder;
 };
 
-const handleUpdateSelect = (value?: string) => {
+const nodeName = computed(() => {
+    return editor?.getAttributes("nodePlaceholder").nodeName;
+});
+
+const insertTextContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertContent(value).run();
+};
+
+const insertButtonContent = (value?: ButtonItemAttrs) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertButton(value).run();
 };
 
 const handleEndEdit = () => {
