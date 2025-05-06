@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2024-11-26 16:19:24
+ * @LastEditTime: 2025-05-06 09:13:16
  */
 
 const createVueCli = require("@stone/stone-vue-config");
@@ -15,7 +15,7 @@ const envShortName =
 
 function getCssModulesConfig() {
     const encodeKey = "ue-builder-v4-";
-    const appStyleRegexp = /app\.scss$/;
+    const appStyleRegexp = /app(\.module)?\.scss$/;
 
     return {
         localIdentName: process.env.NODE_ENV == "production" ? "[hash:hex:5]" : "[name]-[local]-[hash:hex:5]",
