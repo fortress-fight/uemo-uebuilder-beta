@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 11:55:12
+ * @LastEditTime: 2025-05-07 11:21:02
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -27,6 +27,7 @@ defineOptions({ name: "UeTiptapBubbleMenu", inheritAttrs: false });
 
 const props = withDefaults(defineProps<UeTiptapBubbleMenuBaseProps>(), {
     shouldShow: null,
+    isNodeMenu: false,
 });
 const { editor } = useInjectTiptapEditor();
 
@@ -54,15 +55,25 @@ const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
             popPanelParams.value.panel = {
                 position: {
                     autoUpdate: true,
-                    options: {
-                        strategy: "fixed",
-                        placement: "top-start",
-                        middleware: [
-                            ["flip", { crossAxis: false }],
-                            ["offset", isPc ? { crossAxis: -37, mainAxis: 10 } : { mainAxis: 10 }],
-                            ["shift", { crossAxis: true, padding: 17 }],
-                        ],
-                    },
+                    options: props.isNodeMenu
+                        ? {
+                              strategy: "fixed",
+                              placement: "top",
+                              middleware: [
+                                  ["flip", { crossAxis: false }],
+                                  ["offset", { mainAxis: 10 }],
+                                  ["shift", { crossAxis: true, padding: 17 }],
+                              ],
+                          }
+                        : {
+                              strategy: "fixed",
+                              placement: "top-start",
+                              middleware: [
+                                  ["flip", { crossAxis: false }],
+                                  ["offset", isPc ? { crossAxis: -37, mainAxis: 10 } : { mainAxis: 10 }],
+                                  ["shift", { crossAxis: true, padding: 17 }],
+                              ],
+                          },
                     refEl: {
                         getBoundingClientRect: refEl.getBoundingClientRect,
                     },
