@@ -27,3 +27,11 @@ export const MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>
     letterSpacing: LetterSpacingButton,
     editorAI: EditorAIButton,
 };
+
+export const nodeMenuMap: Record<string, (UE_TIPTAP_UNIT.OperItem | "|")[]> = {
+    shareRow: ["fontSize", "textAlign"],
+    buttonRow: ["formatting", "|", "bold", "italic", "fontSize", "fontFamily", "textAlign", "lineHeight"],
+    loopText: ["formatting", "|", "bold", "italic", "fontSize", "fontFamily", "textColor", "textAlign", "lineHeight"],
+    effectText: ["formatting", "|", "bold", "italic", "fontSize", "fontFamily", "textColor", "textAlign", "lineHeight"],
+    counterNumber: ["formatting", "|", "bold", "italic", "fontSize", "fontFamily", "textColor", "textAlign"],
+};

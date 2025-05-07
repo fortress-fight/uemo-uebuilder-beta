@@ -1,12 +1,13 @@
 <!--
  * @Description: 斜体插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-03 00:28:38
+ * @LastEditTime: 2025-05-07 10:22:00
 -->
 <template>
     <UeTiptapMenuButton type="italic" :active="isItalic" :class="$style['plugin-italic']" @trigger="triggerItalic" />
 </template>
 <script lang="ts" setup>
+import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 defineOptions({ name: "ItalicButton" });
@@ -14,9 +15,9 @@ defineOptions({ name: "ItalicButton" });
 const { editor } = useInjectTiptapEditor();
 
 const isItalic = computed(() => {
-    // if (isButtonRow(editor)) {
-    //     return editor?.getAttributes("buttonRow").fontStyle === "italic";
-    // }
+    if (isButtonRow(editor)) {
+        return getButtonRowAttrs(editor)?.fontStyle === "italic";
+    }
     // if (isLoopText(editor)) {
     //     return editor?.getAttributes("loopText").fontStyle === "italic";
     // }
@@ -30,9 +31,13 @@ const isItalic = computed(() => {
 });
 
 function triggerItalic() {
-    // if (isButtonRow(editor)) {
-    //     return editor?.chain().focus().toggleButtonRowItalic().run();
-    // }
+    if (isButtonRow(editor)) {
+        return editor
+            ?.chain()
+            .focus()
+            .updateButtonRowAttrs({ fontStyle: isItalic.value ? "" : "italic" })
+            .run();
+    }
     // if (isLoopText(editor)) {
     //     return editor?.chain().focus().toggleLoopTextItalic().run();
     // }

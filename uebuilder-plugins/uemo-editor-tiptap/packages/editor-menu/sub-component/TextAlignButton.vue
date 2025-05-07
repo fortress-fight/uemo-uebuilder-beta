@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 19:15:35
+ * @LastEditTime: 2025-05-07 10:38:59
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getDeviceStorage } from "../../extension-device/helper";
+import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -18,6 +19,10 @@ const currentValue = computed(() => {
     if (!editor) return "";
 
     const isPc = getDeviceStorage(editor)?.device === "pc";
+
+    if (isButtonRow(editor)) {
+        return isPc ? getButtonRowAttrs(editor)?.align : getButtonRowAttrs(editor)?.moAlign;
+    }
 
     if (isPc) {
         return editor?.getAttributes("paragraph").textAlign;
@@ -40,6 +45,32 @@ const currentButtonType = computed(() => {
     }
 });
 
+function triggerTextAlign(textAlign?: string | null) {
+    if (!editor) return;
+
+    const isPc = getDeviceStorage(editor)?.device === "pc";
+
+    if (isButtonRow(editor)) {
+        const chain = editor?.chain().focus();
+
+        chain.updateButtonRowAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
+
+        return chain.run();
+    }
+
+    if (textAlign) {
+        const chain = editor?.chain().focus();
+        if (isPc) {
+            chain.setTextAlign(textAlign);
+        } else {
+            chain.setMoTextAlign(textAlign);
+        }
+        return chain.run();
+    } else {
+        editor?.chain().focus().unsetTextAlign().run();
+    }
+}
+
 function openTextAlignPanel() {
     const rect = rootDomRef.value?.$el;
     if (!rect) return;
@@ -50,11 +81,7 @@ function openTextAlignPanel() {
         {
             rect,
             setData: ({ textAlign }) => {
-                if (textAlign) {
-                    editor.chain().focus().setTextAlign(textAlign).run();
-                } else {
-                    editor.chain().focus().unsetTextAlign().run();
-                }
+                triggerTextAlign(textAlign);
             },
             focus: () => {
                 editor?.commands.focus();

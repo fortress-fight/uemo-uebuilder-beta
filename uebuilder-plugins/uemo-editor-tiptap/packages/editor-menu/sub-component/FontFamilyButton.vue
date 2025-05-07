@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 01:32:06
+ * @LastEditTime: 2025-05-07 10:27:01
 -->
 <template>
     <UeTiptapMenuButton
@@ -14,13 +14,33 @@
 <script lang="ts" setup>
 import { getFontFamilyAttrs } from "../../extension-font-family/src";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
+import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 const rootDom = useTemplateRef("rootDom");
 
 const currentFontFamily = computed(() => {
+    if (isButtonRow(editor)) {
+        return getButtonRowAttrs(editor)?.fontFamily || null;
+    }
+
     return getFontFamilyAttrs(editor)?.fontFamily || null;
 });
+
+function updateFontFamily(fontFamily?: string | null) {
+    if (isButtonRow(editor)) {
+        return editor
+            ?.chain()
+            .updateButtonRowAttrs({ fontFamily: fontFamily || "" })
+            .run();
+    }
+
+    if (!fontFamily) {
+        editor?.chain().unsetFontFamily().run();
+    } else {
+        editor?.chain().setFontFamily(fontFamily).run();
+    }
+}
 
 function openFontFamilyPanel() {
     const rect = rootDom.value?.getButtonRect();
@@ -32,12 +52,8 @@ function openFontFamilyPanel() {
         { fontFamily: currentFontFamily.value || "" },
         {
             rect,
-            setData: (attr) => {
-                if (!attr.fontFamily) {
-                    editor?.chain().unsetFontFamily().run();
-                } else {
-                    editor?.chain().setFontFamily(attr.fontFamily).run();
-                }
+            setData: ({ fontFamily }) => {
+                updateFontFamily(fontFamily);
             },
             focus: () => {
                 editor?.commands.focus();

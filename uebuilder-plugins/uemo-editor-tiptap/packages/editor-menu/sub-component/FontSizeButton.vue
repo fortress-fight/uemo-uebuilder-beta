@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-22 00:44:40
+ * @LastEditTime: 2025-05-07 10:27:32
 -->
 <template>
     <UeTiptapMenuButton
@@ -13,6 +13,7 @@
 </template>
 <script lang="ts" setup>
 import { getFontSizeAttrs } from "../../extension-font-size";
+import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 const { editor } = useInjectTiptapEditor();
@@ -21,8 +22,27 @@ const rootDom = useTemplateRef("rootDom");
 const { t } = useI18n();
 
 const currentFontSize = computed(() => {
+    if (isButtonRow(editor)) {
+        return getButtonRowAttrs(editor)?.fontSize || null;
+    }
+
     return getFontSizeAttrs(editor)?.fontSize || null;
 });
+
+function updateFontSize(fontSize?: string | null) {
+    if (isButtonRow(editor)) {
+        return editor
+            ?.chain()
+            .updateButtonRowAttrs({ fontSize: fontSize || "" })
+            .run();
+    }
+
+    if (!fontSize) {
+        editor?.chain().unsetFontSize().run();
+    } else {
+        editor?.chain().setFontSize(fontSize).run();
+    }
+}
 
 function openFontSizePanel() {
     const rect = rootDom.value?.getButtonRect();
@@ -34,12 +54,8 @@ function openFontSizePanel() {
         { fontSize: currentFontSize.value || "" },
         {
             rect,
-            setData: (attr) => {
-                if (!attr.fontSize) {
-                    editor?.chain().unsetFontSize().run();
-                } else {
-                    editor?.chain().setFontSize(attr.fontSize).run();
-                }
+            setData: ({ fontSize }) => {
+                updateFontSize(fontSize);
             },
             focus: () => {
                 editor?.commands.focus();

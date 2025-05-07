@@ -10,19 +10,48 @@
 <script lang="ts" setup>
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getLineHeightAttr } from "../../extension-line-height/utils/helper";
+import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
 const rootDom = useTemplateRef("rootDom");
 
 const hasLineHeight = computed(() => {
-    return editor?.isActive("lineHeight");
+    if (!editor) return false;
+
+    if (isButtonRow(editor)) {
+        return !!getButtonRowAttrs(editor)?.lineHeight;
+    }
+
+    return editor.isActive("lineHeight");
 });
 
 const currentValue = computed(() => {
     if (!editor) return "";
+    if (isButtonRow(editor)) {
+        return getButtonRowAttrs(editor)?.lineHeight || "";
+    }
+
     return getLineHeightAttr(editor).lineHeight || "";
 });
+
+function triggerLineHeight(lineHeight?: string | null) {
+    if (!editor) return;
+
+    if (isButtonRow(editor)) {
+        const chain = editor?.chain().focus();
+
+        chain.updateButtonRowAttrs({ lineHeight: lineHeight || "" });
+
+        return chain.run();
+    }
+
+    if (lineHeight) {
+        editor.chain().focus().setLineHeight(lineHeight).run();
+    } else {
+        editor.chain().focus().unsetLineHeight().run();
+    }
+}
 
 function openLineHeightPanel() {
     const rect = rootDom.value?.$el as HTMLElement;
@@ -35,11 +64,7 @@ function openLineHeightPanel() {
         {
             rect,
             setData: ({ lineHeight }) => {
-                if (lineHeight) {
-                    editor.chain().focus().setLineHeight(lineHeight).run();
-                } else {
-                    editor.chain().focus().unsetLineHeight().run();
-                }
+                triggerLineHeight(lineHeight);
             },
             focus: () => {
                 editor?.commands.focus();
