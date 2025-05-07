@@ -55,9 +55,9 @@ const storage = multer.diskStorage({
 // 添加文件类型过滤器，例如只允许图片上传
 const upload = multer({
     storage: storage,
-    limits: {
-        fileSize: 10240 * 1024, // 限制文件大小
-    },
+    // limits: {
+    //     fileSize: 10240 * 1024, // 限制文件大小
+    // },
     // 修改文件过滤器，允许图片、svg、lottie 和 splinecode 类型
     fileFilter: (_req, file, cb) => {
         const ext = getExtension(file).toLowerCase();
@@ -143,6 +143,7 @@ app.get("/service/history", (req, res) => {
 });
 
 app.post("/service", upload.single("Filedata"), (req, res) => {
+    // eslint-disable-next-line no-console
     console.log("Uploaded file:", req.file);
     res.status(200).json({
         url: req.file.path,
@@ -156,5 +157,6 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(9005, () => {
+    // eslint-disable-next-line no-console
     console.log("Working on port 9005");
 });

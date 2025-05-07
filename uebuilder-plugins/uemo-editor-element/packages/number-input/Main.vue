@@ -1,10 +1,11 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-28 01:10:18
+ * @LastEditTime: 2025-04-17 11:32:01
 -->
 <template>
     <UeElTextInput
+        tabindex="0"
         ref="textInput"
         :class="$style['num-input']"
         :value="showValue"
@@ -13,6 +14,8 @@
         :rules="inputRules"
         :label="label"
         :padding-size="paddingSize"
+        @focusin="onFocus"
+        @blur="onBlur"
         @keydown="inputKeyDown"
         @confirm="inputConfirm"
     >
@@ -42,9 +45,10 @@
 
 <script lang="ts" setup>
 import type { UeElNumberInputBaseProps } from "./index";
+import type { UeElTextInputInstance } from "../text-input";
+
 import { numDiv, numClamp, numAddWithStep } from "@stone/uemo-editor-utils/lib/number";
 import NumberInputDragger from "./sub-components/Dragger.vue";
-import { computed, ref } from "vue";
 
 // 组件名称定义
 defineOptions({ name: "UeElNumberInput" });
@@ -64,6 +68,8 @@ const valueRef = defineModel<string | number>("value", { required: false });
 // 常量定义
 const UNIT_REGEX = /([-+]?\d*\.?\d+)(px|fr|%|em|rem|vh|vw|vmin|vmax|ex|ch|cm|mm|in|pt|pc|deg)?/;
 const ARROW_KEYS = ["ArrowUp", "ArrowDown"] as const;
+
+const textInputRef = useTemplateRef<UeElTextInputInstance>("textInput");
 
 /**
  * 解析数值字符串
@@ -105,8 +111,19 @@ const unitValue = computed({
     set: (value) => changeUnit(value ?? ""),
 });
 
+const isNumInputFocus = ref(false);
+
+function onFocus() {
+    isNumInputFocus.value = true;
+}
+function onBlur(ev: FocusEvent) {
+    if (ev.relatedTarget === textInputRef.value?.$el) return;
+    isNumInputFocus.value = false;
+}
+
 const showUnitSelect = computed(() => {
-    return props.units?.length && !props.hideUnit && typeof parsedValue.value.num !== "undefined";
+    const isAllowShowValue = typeof parsedValue.value.num !== "undefined" || parsedValue.value.rawValue === "";
+    return props.units?.length && !props.hideUnit && (isAllowShowValue || isNumInputFocus.value);
 });
 
 // 输入规则

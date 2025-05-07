@@ -13,7 +13,9 @@
         "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore"
     },
     "devDependencies": {
-        "@stone/stylelint-config-base": "4.0.0"
+        "@stone/stylelint-config-base": "4.0.0",
+        "@stone/uemo-editor-type": "4.0.0",
+        "@stone/uemo-editor-tiptap": "4.0.0"
     },
     "volta": {
         "node": "20.14.0",

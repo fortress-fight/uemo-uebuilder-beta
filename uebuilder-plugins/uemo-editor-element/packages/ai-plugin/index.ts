@@ -35,4 +35,13 @@ export function install(app: App, param?: UE_AI_CONFIG) {
     }
 
     app.config.globalProperties.$ueElImageAI = getAiFindImageConfig(param);
+
+    // NOTE 获取 AI 文本的配置
+    function getAITextConfig(type: string) {
+        if (!param?.allow) return undefined;
+        if (param.disable || !param?.plugin) return false;
+        return param.plugin.find((item) => item.type === type);
+    }
+
+    app.config.globalProperties.$ueElTextAI = getAITextConfig;
 }

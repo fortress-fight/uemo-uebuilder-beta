@@ -49,7 +49,6 @@
 <script lang="ts" setup>
 import type { UeAIPluginParams } from "../index";
 
-import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { guid } from "@stone/uemo-editor-utils/lib/guid";
 import { UE_ENGINE } from "@stone/uemo-editor-utils/lib/ue-ai";
 
@@ -60,9 +59,23 @@ const instance = getCurrentInstance();
 const prop = withDefaults(defineProps<{ config: UeAIPluginParams }>(), {});
 const emit = defineEmits<{ (ev: "submit", data: string): void; (ev: "scrollTo", pos: "top" | "bottom"): void }>();
 
-const axiosMitt = mitt<{ cancelAxios: undefined }>();
 const loading = ref<boolean>();
 const tipItem = computed(() => [t("IMAGE_AI_TIP_1"), t("IMAGE_AI_TIP_2"), t("IMAGE_AI_TIP_3")]);
+
+// 使用 ref 管理取消函数
+const cancelTask = ref<(() => void) | null>(null);
+
+// 清理取消函数
+const cleanupCancelTask = () => {
+    cancelTask.value = null;
+};
+
+// 执行取消操作
+const executeCancel = () => {
+    cancelTask.value?.();
+    cleanupCancelTask();
+    loading.value = false;
+};
 
 // #region 对话框逻辑
 /**
@@ -88,8 +101,15 @@ watch(
 let sessionId = guid(21);
 const ueEngin = new UE_ENGINE();
 const inputText = ref<string>("");
+
 async function submitMsg(text: string) {
     if (loading.value || !text) return;
+
+    // 如果已有请求在进行，先取消
+    if (cancelTask.value) {
+        executeCancel();
+    }
+
     loading.value = true;
     chatList.value.push({ type: "user", msg: text });
     inputText.value = "";
@@ -99,8 +119,15 @@ async function submitMsg(text: string) {
         text,
     });
 
+    // 保存取消函数
+    cancelTask.value = cancel;
+
     try {
         const res = await fire<string | { imgs: string[] }>();
+
+        // 请求成功后清理取消函数
+        cleanupCancelTask();
+
         if (typeof res.data === "string") {
             if (res.data) {
                 chatList.value.push({ type: "ai", msg: res.data });
@@ -122,24 +149,20 @@ async function submitMsg(text: string) {
     } finally {
         loading.value = false;
     }
-
-    axiosMitt.on("cancelAxios", cancel);
 }
 
 function cancelApi() {
-    axiosMitt.emit("cancelAxios");
-    loading.value = false;
+    executeCancel();
 }
 
 function resetChat() {
-    cancelApi();
+    executeCancel();
     chatList.value = [];
     sessionId = guid(21);
 }
 
 onBeforeUnmount(() => {
-    cancelApi();
-    axiosMitt.all.clear();
+    executeCancel();
 });
 // #endregion
 </script>

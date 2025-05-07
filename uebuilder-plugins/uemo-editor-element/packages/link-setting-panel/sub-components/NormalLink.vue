@@ -6,6 +6,7 @@
                 theme="enterText"
                 :value="linkAddress"
                 :placeholder="t('LINK_ADDRESS_INPUT_TIP')"
+                :required="true"
                 @confirm="linkAddress = $event"
             />
         </template>

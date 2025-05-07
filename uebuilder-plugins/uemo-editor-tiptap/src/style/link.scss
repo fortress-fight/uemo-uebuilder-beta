@@ -1,0 +1,17 @@
+.page-editor {
+    a {
+        color: #333;
+        span {
+            text-decoration: underline;
+        }
+    }
+    .link {
+        /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+        :not(:has(span)) {
+            text-decoration: underline;
+        }
+    }
+    .btn {
+        --color: inherit;
+    }
+}

@@ -91,6 +91,15 @@
     "UNIT_UPDATE_SUCCESS": "更新成功",
     "UNIT_WINDOW": "窗口",
     "UNIT_TARGET": "目标",
+    "UNIT_FONT_SIZE": "字号",
+    "UNIT_LETTER_SPACING": "字间距",
+    "UNIT_CUSTOM": "自定义",
+    "UNIT_TEXT_STYLE": "文字属性",
+    "UNIT_BASE": "基础",
+    "UNIT_TEXT_LIBRARY": "文本库",
+    "UNIT_COLOR_NORMAL": "彩色",
+    "UNIT_COLOR_LIGHT": "浅色",
+    "UNIT_COLOR_DARK": "深色",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -447,5 +456,15 @@
 
     "SCROLL_SETTING_TIP_1": "1. 当<span style=\"color: #ff740e\">黄色线</span>对齐的时候，表示过渡开始；当<span style=\"color: #2c48ff\">蓝色线</span>对齐的时候，表示过渡结束。",
     "SCROLL_SETTING_TIP_2": "2. 运动偏移量是指，窗口起始位置和窗口结束位置的偏移距离。为正是向下移动，为负是向上移动。",
-    "SCROLL_PANEL_TIP_TITLE": "预览说明"
+    "SCROLL_PANEL_TIP_TITLE": "预览说明",
+
+    "POP_PANEL_UPDATE_ERROR": "位置更新错误",
+
+    "LETTER_SPACING_USE_DEFAULT": "使用默认字间距",
+    "FONT_SIZE_USE_DEFAULT": "使用默认字号",
+
+    "AI_EDITING_TITLE": "AI正在为您生成...",
+    "AI_EDITING_CANCEL": "不需要了",
+    "AI_EDITING_NO_CONFIG_ERROR": "未开通AI编辑功能，请联系客服询问详情",
+    "AI_EDITING_NO_TEXT_ERROR": "请选择要处理的文字"
 }

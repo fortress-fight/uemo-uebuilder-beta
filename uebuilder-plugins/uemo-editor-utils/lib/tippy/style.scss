@@ -13,6 +13,9 @@ body {
     .tippy-box {
         font-size: 12px;
 
+        white-space: initial;
+
+        color: inherit;
         border-radius: var(--ue-border-radius--lv1);
     }
     .tippy-box[data-placement^="top"] > .tippy-arrow::before {

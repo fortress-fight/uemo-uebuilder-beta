@@ -18,6 +18,9 @@ declare module "vue" {
         // 图片 AI
         $ueElImageAI?: UE_AI_PLUGIN | false | undefined;
 
+        // 文本 AI
+        $ueElTextAI?: (type: string) => UE_AI_PLUGIN | false | undefined;
+
         // 链接
         $ueElLink?: UE_PLUGIN_OPTIONS.Link;
 

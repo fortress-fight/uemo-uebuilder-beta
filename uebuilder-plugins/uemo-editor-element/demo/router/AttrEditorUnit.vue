@@ -43,6 +43,7 @@ import TestScrollEffectSettingGroup from "~/demo/components/TestScrollEffectSett
 import TestButtonStyleSetting from "~/demo/components/TestButtonStyleSetting.vue";
 import TestBackgroundVideoSettingPanel from "~/demo/components/TestBackgroundVideoSettingPanel.vue";
 import TestBackgroundSettingGroup from "~/demo/components/TestBackgroundSettingGroup.vue";
+import TestFontSizeSetting from "~/demo/components/TestFontSizeSetting.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -53,6 +54,7 @@ const testComponents = [
     TestMarginSetting,
     TestPaddingSetting,
     TestRadiusSetting,
+    TestFontSizeSetting,
     TestBoxShadowSetting,
     TestBorderSetting,
     TestButtonStyleSetting,

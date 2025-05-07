@@ -23,7 +23,9 @@ export interface UE_EL_OPTIONS {
 
 export default {
     install: (app: App, options: UE_EL_OPTIONS) => {
-        app.use(i18n);
+        if (!app.config.globalProperties.$i18n) {
+            app.use(i18n);
+        }
 
         app.component("InlineSvg", InlineSvg);
 

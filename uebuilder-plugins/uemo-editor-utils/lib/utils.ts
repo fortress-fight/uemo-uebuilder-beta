@@ -76,6 +76,12 @@ export const isImageReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(jpg|jpeg|png|gif
 /** 下载文件类型 */
 export const isDownloadFileReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(pdf|doc|docx|xls|xlsx|ppt|pptx|gif|png|jpg))/g;
 
+/** 邮箱类型 */
+export const isEmailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** 电话号码类型 */
+export const isTelNumberReg = /^(?:(0\d{2,3}-)?\d{7,8}|1[3-9]\d{9})$/;
+
 /**
  * 检查链接是否为网站链接
  * @param link 链接

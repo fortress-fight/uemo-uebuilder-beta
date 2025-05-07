@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-28 01:18:29
+ * @LastEditTime: 2025-04-12 16:00:00
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -20,8 +20,13 @@
             @leave="onLeave"
             @after-leave="onAfterLeave"
         >
-            <div v-if="openModel" :data-root-id="rootId" :class="$style['layer--pop-panel']">
-                <div v-if="maskLayerParams" :class="$style['dialog-mask']" @click="maskClick"></div>
+            <div
+                v-if="openModel"
+                :data-root-id="rootId"
+                :class="$style['layer--pop-panel']"
+                :style="{ zIndex: zIndex }"
+            >
+                <div v-if="maskLayerParams" ref="maskLayer" :class="$style['dialog-mask']" @click="maskClick"></div>
                 <div
                     ref="dialogBox"
                     :class="$style['dialog-box']"
@@ -50,6 +55,8 @@ import { defaultCalcPosParam, UeElProvideDialogCalcPosHandler, UeElProvideDialog
 
 defineOptions({ name: "UeElPopPanel" });
 
+const { t } = useI18n();
+
 const instance = getCurrentInstance();
 
 // #region 组件配置和状态
@@ -67,6 +74,7 @@ const emit = defineEmits<{
 const cssModule = useCssModule();
 const openModel = defineModel<boolean>("open", { default: false });
 const dialogBoxRef = useTemplateRef("dialogBox");
+const maskLayerRef = useTemplateRef("maskLayer");
 
 /**
  * 事件管理器，用于清理自动更新位置的监听器
@@ -109,6 +117,14 @@ async function updateDialogPos(): Promise<void> {
 
     gsap.set(dialogBox, { top: y, left: x });
 }
+
+watch(
+    () => props.panel,
+    () => {
+        updateDialogPos().catch(() => instance?.proxy?.$ueElToast.error(t("POP_PANEL_UPDATE_ERROR")));
+    },
+    { deep: true }
+);
 
 // #endregion
 
@@ -226,6 +242,11 @@ provide("UeElPopPanelRootId", currentId);
  * 处理弹窗关闭
  */
 function closeModal(e: Event) {
+    // 如果点击的是遮罩层，则将关闭逻辑交付给 maskLayerRef 的 click 事件
+    if (e.target === maskLayerRef.value) {
+        return;
+    }
+
     if (!props.autoClose) return;
 
     const triggerRootId = $(e.target!).closest("[data-root-id]").data("root-id");
@@ -234,6 +255,7 @@ function closeModal(e: Event) {
     if (currentId === triggerRootId) return;
 
     const allowClose = props.checkAllowClose?.();
+
     if (allowClose === false) return;
     if (typeof allowClose === "string") {
         instance?.proxy?.$ueElToast.error(allowClose);
@@ -249,7 +271,13 @@ function maskClick() {
     if (!props.autoClose) return;
 
     const allowClose = props.checkAllowClose?.();
+
     if (allowClose === false) return;
+    if (typeof allowClose === "string") {
+        instance?.proxy?.$ueElToast.error(allowClose);
+        return;
+    }
+
     openModel.value = false;
 }
 // #endregion
@@ -276,10 +304,15 @@ provide(UeElProvideDialogCloseHandler, () => {
 
 // #region 生命周期
 onBeforeUnmount(() => {
+    openModel.value = false;
     eventBus.emit("clearUploadControl");
     eventBus.all.clear();
 });
 // #endregion
+
+defineExpose({
+    updateDialogPos,
+});
 </script>
 
 <style lang="scss" module>

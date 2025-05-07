@@ -1,0 +1,19 @@
+// @type
+@import "./style/tiptap-editing";
+@import "./style/text-decoration";
+@import "./style/blockquote";
+@import "./style/link";
+@import "./style/font-style";
+@import "./style/emoji";
+@import "./style/button";
+.page-editor {
+    font-size: 14px;
+    line-height: 1.6;
+
+    word-wrap: break-word;
+
+    font-feature-settings: "liga" 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: none;
+}

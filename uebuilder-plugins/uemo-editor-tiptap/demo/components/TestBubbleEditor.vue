@@ -1,0 +1,64 @@
+<!--
+ * @Description: 测试气泡模式编辑器
+ * @Author: F-Stone
+ * @LastEditTime: 2025-05-06 08:54:54
+-->
+<template>
+    <TestArea
+        :class="$style['test-area']"
+        :testValue="previewData"
+        :testValueList="testValueList"
+        v-model:testValueSelect="testValueSelect"
+        title="测试气泡模式编辑器"
+    >
+        <UeTiptapBubbleEditor v-bind="testValue" @update="handleUpdate" @ready="handleUpdate">
+            <!--  -->
+        </UeTiptapBubbleEditor>
+    </TestArea>
+</template>
+<script lang="ts" setup>
+import type { Editor } from "@tiptap/vue-3";
+
+import TestArea from "~/demo/components/TestArea.vue";
+import { testTextContent } from "~/demo/data/test-content";
+// 测试数据
+const testValueSelect = ref<number>(0);
+const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOptionTitle?: string })[] = [
+    {
+        testOptionTitle: "按钮",
+        content: testTextContent.buttonData,
+    },
+    {
+        testOptionTitle: "链接",
+        content: testTextContent.linkData,
+    },
+    {
+        testOptionTitle: "默认",
+        content: testTextContent.data,
+    },
+];
+const testValue = ref(testValueList[testValueSelect.value]);
+
+watch(testValueSelect, (newValue) => {
+    testValue.value = testValueList[newValue];
+});
+
+const previewData = ref<{
+    html: string;
+    json: ReturnType<Editor["getJSON"]>;
+}>({
+    html: "",
+    json: {},
+});
+
+function handleUpdate(editor: Editor) {
+    if (!editor) return;
+    previewData.value.html = editor.getHTML();
+    previewData.value.json = editor.getJSON();
+}
+</script>
+<style lang="scss" module>
+.test-area {
+    // init
+}
+</style>
