@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-05 19:17:35
+ * @LastEditTime: 2025-05-07 10:18:11
  */
 import type { Attribute } from "@tiptap/core";
 import type { ButtonRowAttrs } from "./index";
@@ -14,6 +14,10 @@ import $pageStyle from "../../../src/app.module.scss";
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         buttonRow: {
+            /**
+             * 更新按钮行属性
+             */
+            updateButtonRowAttrs: (attrs: Partial<ButtonRowAttrs>) => ReturnType;
             /**
              * 移除相关样式
              */
@@ -264,6 +268,12 @@ export const ButtonRow = Node.create<ButtonRowOptions>({
 
     addCommands() {
         return {
+            updateButtonRowAttrs:
+                (attrs: Partial<ButtonRowAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
             unsetButtonRowStyle:
                 () =>
                 ({ chain }) => {
