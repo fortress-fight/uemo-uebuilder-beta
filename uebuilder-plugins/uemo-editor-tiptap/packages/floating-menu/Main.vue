@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-29 19:02:00
+ * @LastEditTime: 2025-05-08 19:10:53
 -->
 <template>
     <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams" :mask="mask">
@@ -121,6 +121,7 @@ function getFloatingMenuPlugin() {
     return FloatingMenuPlugin({
         editor,
         pluginKey: props.pluginKey,
+        updateDelay: 1,
         shouldShow: props.shouldShow,
         controller: pluginController,
     });
