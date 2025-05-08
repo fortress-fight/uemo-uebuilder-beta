@@ -1,14 +1,14 @@
 <!--
  * @Description: tiptap 按钮组编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 16:10:51
+ * @LastEditTime: 2025-05-08 18:45:48
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-row']" :title="t('UNIT_BUTTON_ROW')">
         <!-- 属性组 -->
         <UeElSettingGroup :title="t('UNIT_ATTR')">
             <template #body>
-                <UeElControlGroup :col-count="2">
+                <UeElControlGroup>
                     <UeElSelect v-model:value="dir" :title="t('UNIT_LAYOUT')" :options="dirOptions" />
                 </UeElControlGroup>
             </template>

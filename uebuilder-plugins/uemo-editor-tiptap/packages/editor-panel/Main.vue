@@ -1,10 +1,10 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 15:05:45
+ * @LastEditTime: 2025-05-08 17:23:55
 -->
 <template>
-    <UeElPopPanel v-model:open="openRef" @onHide="onHide" v-bind="popPanelParams">
+    <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" @onHide="onHide">
         <UeElLinkSettingPanel
             v-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
@@ -41,6 +41,7 @@ import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
+import TiptapButtonRow from "@stone/uemo-editor-panel/packages/tiptap-button-row/Main.vue";
 
 type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
@@ -54,6 +55,7 @@ defineOptions({
         LineHeightPanel,
         LetterSpacingPanel,
         EditorAIPanel,
+        TiptapButtonRow,
     },
 });
 
@@ -94,6 +96,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     lineHeight: "LineHeightPanel",
     letterSpacing: "LetterSpacingPanel",
     editorAI: "EditorAIPanel",
+    buttonRow: "TiptapButtonRow",
 };
 
 /**
@@ -195,7 +198,7 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     });
 
     eventBus.on("close", () => {
-        //
+        param.close?.();
     });
 };
 

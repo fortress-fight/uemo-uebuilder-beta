@@ -21,6 +21,14 @@ export interface FloatingMenuPluginProps {
     editor: Editor;
 
     /**
+     * 菜单更新前的延迟时间（毫秒）
+     * 可用于防止性能问题
+     * @type {number}
+     * @default 250
+     */
+    updateDelay?: number;
+
+    /**
      * 决定是否显示菜单的判断函数
      * @param {Object} props - 包含编辑器状态的属性对象
      * @returns {boolean} 是否显示菜单
@@ -60,10 +68,11 @@ export type FloatingMenuViewProps = FloatingMenuPluginProps & {
  */
 export class FloatingMenuView {
     public editor: Editor;
-
     public view: EditorView;
-
     public preventHide = false;
+    public updateDelay: number;
+    private updateDebounceTimer: number | undefined;
+    public dragging = false;
 
     public controller?: FloatingMenuPluginProps["controller"];
 
@@ -89,6 +98,9 @@ export class FloatingMenuView {
         const { $anchor, empty } = selection;
         const isRootDepth = $anchor.depth === 1;
 
+        // 如果正在拖动，则不显示气泡菜单
+        if (this.dragging) return false;
+
         const isEmptyTextBlock =
             $anchor.parent.isTextblock &&
             !$anchor.parent.type.spec.code &&
@@ -104,16 +116,23 @@ export class FloatingMenuView {
     };
 
     constructor(public param: FloatingMenuViewProps) {
-        const { editor, view, shouldShow, controller, onInit } = param;
+        const { editor, view, updateDelay = 250, shouldShow, controller, onInit } = param;
 
         this.editor = editor;
         this.view = view;
+        this.updateDelay = updateDelay;
         this.controller = controller;
 
         // 如果传入了自定义的 shouldShow 方法,则覆盖默认的显示逻辑
         if (shouldShow) {
-            this.shouldShow = shouldShow;
+            this.shouldShow = (...props) => {
+                if (this.dragging) return false;
+                return shouldShow(...props);
+            };
         }
+
+        this.view.dom.addEventListener("pointerdown", this.pointerdownHandler);
+        this.view.dom.addEventListener("dragstart", this.dragstartHandler);
 
         // 添加鼠标按下事件监听器,用于阻止菜单隐藏
         this.editor.on("focus", this.focusHandler);
@@ -121,6 +140,10 @@ export class FloatingMenuView {
 
         onInit?.(this);
     }
+
+    dragstartHandler = () => {
+        this.hide();
+    };
 
     focusHandler = () => {
         // we use `setTimeout` to make sure `selection` is already updated
@@ -139,18 +162,80 @@ export class FloatingMenuView {
         this.blurHandler({ event });
     };
 
+    dragendHandler = () => {
+        this.dragging = false;
+        this.update(this.view);
+        document.body.removeEventListener("pointerup", this.dragendHandler);
+    };
+    pointerdownHandler = () => {
+        this.dragging = true;
+        document.body.removeEventListener("pointerup", this.dragendHandler);
+        document.body.addEventListener("pointerup", this.dragendHandler);
+    };
+
     /**
-     * 更新浮动菜单的状态和位置
+     * 更新气泡菜单的位置和状态
      * @param {EditorView} view - 编辑器视图
-     * @param {EditorState} [oldState] - 更新前的编辑器状态
+     * @param {boolean} selectionChanged - 选择是否改变
+     * @param {boolean} docChanged - 文档是否改变
+     * @param {EditorState} [oldState] - 上一个编辑器状态
      */
     update(view: EditorView, oldState?: EditorState) {
         const { state } = view;
-        const { doc, selection } = state;
-        const { from, to } = selection;
-        const isSame = oldState && oldState.doc.eq(doc) && oldState.selection.eq(selection);
+        const hasValidSelection = state.selection.from !== state.selection.to;
 
-        if (isSame) {
+        if (this.updateDelay > 0 && hasValidSelection) {
+            this.handleDebouncedUpdate(view, oldState);
+            return;
+        }
+
+        const selectionChanged = !oldState?.selection.eq(view.state.selection);
+        const docChanged = !oldState?.doc.eq(view.state.doc);
+
+        this.updateHandler(view, selectionChanged, docChanged, oldState);
+    }
+
+    handleDebouncedUpdate = (view: EditorView, oldState?: EditorState) => {
+        const selectionChanged = !oldState?.selection.eq(view.state.selection);
+        const docChanged = !oldState?.doc.eq(view.state.doc);
+
+        if (!selectionChanged && !docChanged) {
+            return;
+        }
+
+        if (this.updateDelay === 1) {
+            if (this.updateDebounceTimer) {
+                cancelAnimationFrame(this.updateDebounceTimer);
+            }
+
+            this.updateDebounceTimer = requestAnimationFrame(() => {
+                this.updateHandler(view, selectionChanged, docChanged, oldState);
+            });
+        } else {
+            if (this.updateDebounceTimer) {
+                clearTimeout(this.updateDebounceTimer);
+            }
+
+            this.updateDebounceTimer = window.setTimeout(() => {
+                this.updateHandler(view, selectionChanged, docChanged, oldState);
+            }, this.updateDelay);
+        }
+    };
+
+    /**
+     * 更新浮动菜单的位置和状态
+     * @param {EditorView} view - 编辑器视图
+     * @param {boolean} selectionChanged - 选择是否改变
+     * @param {boolean} docChanged - 文档是否改变
+     * @param {EditorState} [oldState] - 上一个编辑器状态
+     */
+    updateHandler = (view: EditorView, selectionChanged: boolean, docChanged: boolean, oldState?: EditorState) => {
+        const { state, composing } = view;
+        const { selection } = state;
+        const { from, to } = selection;
+        const isSame = !selectionChanged && !docChanged;
+
+        if (composing || isSame) {
             return;
         }
 
@@ -172,7 +257,7 @@ export class FloatingMenuView {
                 getBoundingClientRect: () => posToDOMRect(view, from, to),
             });
         }
-    }
+    };
 
     show(refEl: ReferenceElement) {
         this.controller?.("show", refEl);
@@ -184,6 +269,11 @@ export class FloatingMenuView {
 
     destroy() {
         this.param.onDestroy?.(this);
+
+        this.view.dom.removeEventListener("dragstart", this.dragstartHandler);
+        this.view.dom.removeEventListener("pointerdown", this.pointerdownHandler);
+
+        document.body.removeEventListener("pointerup", this.dragendHandler);
 
         this.controller?.("hide");
 

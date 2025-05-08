@@ -8,6 +8,7 @@
 </template>
 <script lang="ts" setup>
 import { isNodeSelection } from "@tiptap/core";
+import { getEditorPanelExtensionStorage } from "../../../packages/extension-editor-panel/utils/helper";
 
 defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
 
@@ -30,7 +31,7 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const isButtonRow = isNodeSelection(selection) && selection.node.type.name === "buttonRow";
 
-    const isEditing = editor?.getAttributes("buttonRow").isEditing;
+    const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "buttonRow";
 
     return !isEditing && isButtonRow && view.hasFocus();
 };

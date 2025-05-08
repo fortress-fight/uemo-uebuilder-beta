@@ -106,6 +106,7 @@ export class BubbleMenuView {
     public updateDelay: number;
     private updateDebounceTimer: number | undefined;
     public dragging = false;
+
     public controller?: BubbleMenuPluginProps["controller"];
 
     /**
@@ -298,21 +299,25 @@ export class BubbleMenuView {
         if (this.editor.isFocused) {
             this.show({
                 getBoundingClientRect: () => {
-                    if (isNodeSelection(state.selection)) {
-                        let node = view.nodeDOM(from) as HTMLElement;
+                    const selection = state.selection;
+                    if (isNodeSelection(selection)) {
+                        const node = view.nodeDOM(from) as HTMLElement;
 
                         if (node) {
-                            const nodeViewWrapper = node.dataset.nodeViewWrapper
-                                ? node
-                                : node.querySelector("[data-node-view-wrapper]");
+                            return node.getBoundingClientRect();
+                            // const nodeViewWrapper = node.dataset.nodeViewWrapper
+                            //     ? node
+                            //     : node.querySelector("[data-node-view-wrapper]");
 
-                            if (nodeViewWrapper) {
-                                node = nodeViewWrapper.firstChild as HTMLElement;
-                            }
+                            // if (nodeViewWrapper) {
+                            //     node = nodeViewWrapper.firstChild as HTMLElement;
+                            // }
 
-                            if (node) {
-                                return node.getBoundingClientRect();
-                            }
+                            // console.log("node", node);
+
+                            // if (node) {
+                            //     return node.getBoundingClientRect();
+                            // }
                         }
                     }
 

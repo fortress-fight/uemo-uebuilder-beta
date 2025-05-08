@@ -1,11 +1,10 @@
 import type { Editor } from "@tiptap/core";
+import type { EditorView } from "@tiptap/pm/view";
 import type { EditorState, Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
 import { isInTable } from "@tiptap/pm/tables";
-import { isNodeSelection } from "@tiptap/core";
-
-import { isInButtonRow, getButtonRow } from "../packages/extension-button/utils/helper";
+import { isNodeSelection, posToDOMRect } from "@tiptap/core";
 
 /**
  * 判断是否在网格组中
@@ -66,51 +65,24 @@ export function getTableNode(selection: Selection) {
 }
 
 /**
- * 在指定位置插入新行
- * @param editor - 编辑器实例
- * @param pos - 插入位置，"before" 表示在目标前插入，"after" 表示在目标后插入
- * @returns 是否插入成功
+ * 获取选区矩形
  */
-export function insertNewLine(editor: Editor, pos: "before" | "after"): boolean {
-    const targetPosInfo = getTargetPositionInfo(editor);
-
-    if (!targetPosInfo) return false;
-
-    const targetPos = pos === "before" ? targetPosInfo.start : targetPosInfo.end;
-    editor.chain().focus().insertContentAt(targetPos, { type: "paragraph" }).run();
-
-    return true;
-}
-
-/**
- * 获取目标位置信息
- */
-function getTargetPositionInfo(editor: Editor): { start: number; end: number } | null {
-    const { selection } = editor.view.state;
-
-    if (isInButtonRow(editor.state)) {
-        const buttonRow = getButtonRow(editor);
-        if (buttonRow) {
-            return {
-                start: buttonRow.pos,
-                end: buttonRow.pos + buttonRow.node.nodeSize,
-            };
-        }
+export function getSelectionRect(view: EditorView, selection: Selection) {
+    const { from, to } = selection;
+    if (typeof from === "undefined" || typeof to === "undefined") {
+        return null;
     }
 
-    if (isNodeSelection(selection)) {
-        return {
-            start: selection.$from.pos,
-            end: selection.$to.pos,
-        };
-    }
+    const rect = posToDOMRect(view, from, to) as Exclude<UE_TIPTAP_UNIT.PositionRect, HTMLElement>;
 
-    if (isInTable(editor.state)) {
-        const { tableNode, start, end } = getTableNode(selection);
-        if (tableNode && typeof start !== "undefined" && typeof end !== "undefined") {
-            return { start, end };
-        }
-    }
-
-    return null;
+    return {
+        top: rect.top,
+        left: rect.left,
+        right: rect.right,
+        bottom: rect.bottom,
+        x: rect.x,
+        y: rect.y,
+        width: rect.width,
+        height: rect.height,
+    };
 }

@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 14:36:13
+ * @LastEditTime: 2025-05-08 17:23:12
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
@@ -9,6 +9,7 @@ export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
     setData: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
     preview?: () => void; // 预览回调
     focus: () => void; // 聚焦回调
+    close?: () => void; // 关闭回调
 };
 
 /**
@@ -32,6 +33,7 @@ export type EditorPanelAttrsMap = {
     lineHeight: UE_TIPTAP_EXTENSION.LineHeight["attrs"];
     letterSpacing: UE_TIPTAP_EXTENSION.LetterSpacing["attrs"];
     editorAI: UE_TIPTAP_EXTENSION.EditorAI["attrs"];
+    buttonRow: UE_TIPTAP_EXTENSION.ButtonRow["attrs"];
 };
 
 export type OpenEditorPanelHandler<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> =

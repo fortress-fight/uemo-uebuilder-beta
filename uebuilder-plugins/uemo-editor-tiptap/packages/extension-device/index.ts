@@ -28,7 +28,7 @@ export interface DeviceStorage {
  * 设备设置扩展
  * 用于管理编辑器的设备类型和字体缩放
  */
-export const deviceExtension = Extension.create<
+export const DeviceExtension = Extension.create<
     {
         /** 默认设备类型 */
         defaultDevice: UE_TIPTAP_UNIT.Device;

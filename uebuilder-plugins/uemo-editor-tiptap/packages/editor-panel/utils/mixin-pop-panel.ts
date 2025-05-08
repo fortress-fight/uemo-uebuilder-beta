@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 15:07:07
+ * @LastEditTime: 2025-05-08 17:18:41
  */
 
 export function usePopPanelParam(
@@ -60,6 +60,7 @@ export function usePopPanelParam(
                         },
                     },
                 };
+
             case "link":
                 return {
                     draggable: true,
@@ -78,6 +79,25 @@ export function usePopPanelParam(
                         },
                     },
                 };
+
+            case "buttonRow":
+                return {
+                    draggable: true,
+                    checkAllowClose: options.checkAllowClose,
+                    panel: {
+                        position: {
+                            refEl,
+                            options: {
+                                placement: "right-start",
+                                middleware: [
+                                    ["offset", { mainAxis: 6 }],
+                                    ["shift", { crossAxis: true, padding: 17 }],
+                                ],
+                            },
+                        },
+                    },
+                };
+
             default:
                 return {};
         }

@@ -104,6 +104,7 @@
 
 10. 转换指定内容，示例：自动转换行首的 > 为块引用例如：
 
+
     appendTransaction 钩子会在每次事务（Transaction）应用后被调用，允许追加额外的事务。
 
     ```ts
@@ -138,4 +139,33 @@
             },
         });
     }
+    ```
+
+11. 强制触发编辑器更新 (存在性能问题，不建议频繁使用)
+
+
+    ```ts
+    editor.view.updateState(editor.view.state);
+    ```
+
+12. 派发空事件触发编辑器更新
+
+    ```ts
+    // 获取编辑器视图（EditorView）
+    const editorView = editor.view;
+
+    // 创建空事务
+    const tr = editorView.state.tr;
+
+    // 添加一个空步骤（可选，但明确事务意图）
+    tr.setMeta("manualUpdate", true);
+
+    // 派发事务
+    editorView.dispatch(tr);
+    ```
+
+13. 获取指定位置的的 Node
+
+    ```ts
+    state.doc.nodeAt(selection.from);
     ```

@@ -1,6 +1,4 @@
 export type ButtonRowAttrs = {
-    isEditing?: boolean;
-
     dir: string;
     gap: string;
     width: string;
