@@ -8,7 +8,10 @@
     <RouterView />
 </template>
 <script lang="ts" setup>
-const linkList = ref([{ path: "/", text: "当前编辑" }]);
+const linkList = ref([
+    { path: "/", text: "当前编辑" },
+    { path: "/tiptap-editor-panel", text: "Tiptap 编辑面板" },
+]);
 
 const { locale } = useI18n();
 const langOptions = ref([
