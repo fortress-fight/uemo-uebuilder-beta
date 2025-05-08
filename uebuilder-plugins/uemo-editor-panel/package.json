@@ -53,6 +53,7 @@
         "vuedraggable": "^2.24.3"
     },
     "devDependencies": {
+        "@stone/uemo-editor-tiptap": "4.0.0",
         "@stone/uemo-editor-element": "4.0.0",
         "@stone/eslint-plugin-base": "4.0.0",
         "@stone/stylelint-config-base": "4.0.0",

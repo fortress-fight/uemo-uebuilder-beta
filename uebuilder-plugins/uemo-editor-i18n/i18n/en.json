@@ -26,6 +26,7 @@
     "UNIT_ADD": "Add {text}",
     "UNIT_SELECT": "Select {text}",
     "UNIT_BUTTON": "Button",
+    "UNIT_BUTTON_ROW": "Button Group",
     "UNIT_VIDEO": "Video",
     "UNIT_IMAGE": "Image",
     "UNIT_ICON": "Icon",
@@ -100,6 +101,8 @@
     "UNIT_COLOR_NORMAL": "Color",
     "UNIT_COLOR_LIGHT": "Light",
     "UNIT_COLOR_DARK": "Dark",
+    "UNIT_LAYOUT": "Layout",
+    "UNIT_FILL": "Fill",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -466,5 +469,7 @@
     "AI_EDITING_TITLE": "AI is generating...",
     "AI_EDITING_CANCEL": "Cancel",
     "AI_EDITING_NO_CONFIG_ERROR": "AI editing disabled, please contact support",
-    "AI_EDITING_NO_TEXT_ERROR": "Please select the text to process"
+    "AI_EDITING_NO_TEXT_ERROR": "Please select the text to process",
+
+    "FILL_MODE_TIP": "Enable Fill Mode"
 }
