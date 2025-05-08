@@ -10,8 +10,8 @@ export type ButtonRowAttrs = {
     fontWeight?: boolean;
     lineHeight?: string;
     fontStyle?: string;
-    align?: string;
-    moAlign?: string;
+    align?: "left" | "center" | "right";
+    moAlign?: "left" | "center" | "right";
 };
 
 export type ButtonItemIconAttrs = { source: string; name: string; color?: string; size?: string; space?: string };

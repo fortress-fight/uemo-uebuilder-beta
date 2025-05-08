@@ -7,6 +7,8 @@ import type { TextAlignAttrs } from "../packages/extension-text-align/src";
 import type { LineHeightAttrs } from "../packages/extension-line-height/src";
 import type { LetterSpacingAttrs } from "../packages/extension-letter-spacing/src";
 import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/extension-editor-panel/src";
+import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-button/src";
+
 declare global {
     namespace UE_TIPTAP_EXTENSION {
         type TextDecoration = {
@@ -39,6 +41,12 @@ declare global {
         type EditorPanel<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> = {
             panelAttrsMap: EditorPanelAttrsMap;
             openEditorPanelHandler: OpenEditorPanelHandler<T>;
+        };
+        type ButtonRow = {
+            attrs: ButtonRowAttrs;
+        };
+        type ButtonItem = {
+            attrs: ButtonItemAttrs;
         };
     }
 }
