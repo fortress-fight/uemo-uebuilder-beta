@@ -1,19 +1,23 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 10:18:11
+ * @LastEditTime: 2025-05-08 18:24:36
  */
 import type { Attribute } from "@tiptap/core";
 import type { ButtonRowAttrs } from "./index";
 
 import { mergeAttributes, Node } from "@tiptap/core";
-import { Plugin } from "@tiptap/pm/state";
 
 import $pageStyle from "../../../src/app.module.scss";
+import { getButtonRowAttrs } from "../utils/helper";
 
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         buttonRow: {
+            /**
+             * 打开按钮行编辑器面板
+             */
+            openButtonRowEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
             /**
              * 更新按钮行属性
              */
@@ -67,7 +71,6 @@ export const ButtonRow = Node.create<ButtonRowOptions>({
 
     addAttributes() {
         return {
-            isEditing: { default: false },
             dir: {
                 default: undefined,
                 parseHTML: (element) => {
@@ -260,14 +263,30 @@ export const ButtonRow = Node.create<ButtonRowOptions>({
         ];
     },
 
-    addProseMirrorPlugins() {
-        const plugins: Plugin[] = [];
-
-        return plugins;
-    },
-
     addCommands() {
         return {
+            openButtonRowEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ editor, chain }) => {
+                    const currentAttr = getButtonRowAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("buttonRow", currentAttr, {
+                            rect,
+                            setData: (attr) => {
+                                editor.commands.updateButtonRowAttrs(attr);
+                            },
+                            focus: () => {
+                                editor.commands.focus();
+                            },
+                            close: () => {
+                                editor.commands.closeAttrEditorPanel("buttonRow");
+                            },
+                        })
+                        .run();
+                },
+
             updateButtonRowAttrs:
                 (attrs: Partial<ButtonRowAttrs>) =>
                 ({ chain }) => {
