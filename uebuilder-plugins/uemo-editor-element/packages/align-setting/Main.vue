@@ -1,7 +1,7 @@
 <!--
  * @Description: 对齐方式设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 03:13:50
+ * @LastEditTime: 2025-05-08 11:02:58
 -->
 <template>
     <UeElControlGroup :class="$style['align-setting']" oper-type="none" :data-disable="disable ? '' : undefined">
@@ -168,6 +168,8 @@ function handleAlignChange(type: "x" | "y", value: UE_EL_UTIL.ALIGN_X | UE_EL_UT
         }
     }
     .align-group {
+        width: fit-content;
+
         gap: var(--ue-control-row-space);
     }
     .button {

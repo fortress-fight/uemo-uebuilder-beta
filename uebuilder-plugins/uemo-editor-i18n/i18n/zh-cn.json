@@ -26,6 +26,7 @@
     "UNIT_ADD": "添加{text}",
     "UNIT_SELECT": "选择{text}",
     "UNIT_BUTTON": "按钮",
+    "UNIT_BUTTON_ROW": "按钮组",
     "UNIT_VIDEO": "视频",
     "UNIT_IMAGE": "图片",
     "UNIT_ICON": "图标",
@@ -100,6 +101,8 @@
     "UNIT_COLOR_NORMAL": "彩色",
     "UNIT_COLOR_LIGHT": "浅色",
     "UNIT_COLOR_DARK": "深色",
+    "UNIT_LAYOUT": "排版",
+    "UNIT_FILL": "填充",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -466,5 +469,7 @@
     "AI_EDITING_TITLE": "AI正在为您生成...",
     "AI_EDITING_CANCEL": "不需要了",
     "AI_EDITING_NO_CONFIG_ERROR": "未开通AI编辑功能，请联系客服询问详情",
-    "AI_EDITING_NO_TEXT_ERROR": "请选择要处理的文字"
+    "AI_EDITING_NO_TEXT_ERROR": "请选择要处理的文字",
+
+    "FILL_MODE_TIP": "是否开启填充模式"
 }

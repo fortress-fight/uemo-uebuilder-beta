@@ -14,7 +14,6 @@ import TestSelectOption from "~/demo/components/TestSelectOption.vue";
 import TestLoading from "~/demo/components/TestLoading.vue";
 import TestTipGroup from "~/demo/components/TestTipGroup.vue";
 import TestControlGroup from "~/demo/components/TestControlGroup.vue";
-import TestEditorGroup from "~/demo/components/TestEditorGroup.vue";
 import TestSettingGroup from "~/demo/components/TestSettingGroup.vue";
 import TestSettingBar from "~/demo/components/TestSettingBar.vue";
 import TestColorPicker from "~/demo/components/TestColorPicker.vue";
@@ -24,7 +23,7 @@ import TestGirdLayoutUtil from "~/demo/components/TestGirdLayoutUtil.vue";
 import TestResourcePreview from "~/demo/components/TestResourcePreview.vue";
 import TestDraggable from "~/demo/components/TestDraggable.vue";
 
-const containerComponents = [TestSettingBar, TestControlGroup, TestEditorGroup, TestSettingGroup];
+const containerComponents = [TestSettingBar, TestControlGroup, TestSettingGroup];
 const unitTestComponents = [
     TestIcon,
     TestSelectOption,

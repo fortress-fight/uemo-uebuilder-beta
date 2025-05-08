@@ -1,44 +1,46 @@
 <!--
  * @Description: 按钮图标属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:03:17
+ * @LastEditTime: 2025-05-07 19:38:08
 -->
 <template>
-    <UeElEditorGroup :class="$style['button-icon-setting']" is-first is-last>
-        <UeElControlGroup :col-count="3">
-            <UeElButton
-                v-bind="item"
-                v-for="(item, index) in iconTypeButtons"
-                :class="$style['oper-btn']"
-                :key="index"
-                :theme="selectedIconType === item.value ? 'fillText' : 'strokeText'"
-                @trigger="handleIconTypeSelect(item.value)"
-            />
-        </UeElControlGroup>
-        <UeElControlGroup :col-count="1">
-            <UeElResourceSetting v-if="selectedIconType === 'static'" type="icon" v-model:value="iconInfo" />
-            <UeElResourceSetting
-                v-if="selectedIconType === 'lottie'"
-                type="lottie"
-                v-model:value="lottieInfo"
-                :library-attrs="{ type: 'icon' }"
-            />
-            <UeElResourceSetting v-if="selectedIconType === 'svg'" type="svg" v-model:value="svgInfo" />
-        </UeElControlGroup>
-        <UeElControlGroup
-            :col-count="2"
-            :title="t('BUTTON_ICON_ATTR')"
-            v-if="localValueRef?.source && currentSourceType === selectedIconType"
-        >
-            <UeElNumberInput v-bind="iconSizeInputParam" v-model:value="iconSize" />
-            <UeElNumberInput v-bind="iconSpaceInputParam" v-model:value="iconSpace" />
-            <UeElCheckBox
-                v-if="selectedIconType === 'svg'"
-                :text="t('BUTTON_ICON_ATTR_FOLLOW_TEXT')"
-                v-model:value="iconColorIsCurrentColor"
-            />
-        </UeElControlGroup>
-    </UeElEditorGroup>
+    <UeElSettingGroup :class="$style['button-icon-setting']" is-first is-last>
+        <template #body>
+            <UeElControlGroup :col-count="3">
+                <UeElButton
+                    v-bind="item"
+                    v-for="(item, index) in iconTypeButtons"
+                    :class="$style['oper-btn']"
+                    :key="index"
+                    :theme="selectedIconType === item.value ? 'fillText' : 'strokeText'"
+                    @trigger="handleIconTypeSelect(item.value)"
+                />
+            </UeElControlGroup>
+            <UeElControlGroup :col-count="1">
+                <UeElResourceSetting v-if="selectedIconType === 'static'" type="icon" v-model:value="iconInfo" />
+                <UeElResourceSetting
+                    v-if="selectedIconType === 'lottie'"
+                    type="lottie"
+                    v-model:value="lottieInfo"
+                    :library-attrs="{ type: 'icon' }"
+                />
+                <UeElResourceSetting v-if="selectedIconType === 'svg'" type="svg" v-model:value="svgInfo" />
+            </UeElControlGroup>
+            <UeElControlGroup
+                :col-count="2"
+                :title="t('BUTTON_ICON_ATTR')"
+                v-if="localValueRef?.source && currentSourceType === selectedIconType"
+            >
+                <UeElNumberInput v-bind="iconSizeInputParam" v-model:value="iconSize" />
+                <UeElNumberInput v-bind="iconSpaceInputParam" v-model:value="iconSpace" />
+                <UeElCheckBox
+                    v-if="selectedIconType === 'svg'"
+                    :text="t('BUTTON_ICON_ATTR_FOLLOW_TEXT')"
+                    v-model:value="iconColorIsCurrentColor"
+                />
+            </UeElControlGroup>
+        </template>
+    </UeElSettingGroup>
 </template>
 
 <script lang="ts" setup>

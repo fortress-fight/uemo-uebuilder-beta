@@ -1,19 +1,19 @@
 <template>
-    <UeElEditorGroup :class="$style['color-group']">
-        <div class="grid grid-cols-9" :class="$style['color-list']">
-            <button
-                v-for="(item, index) in colors"
-                :key="index"
-                :class="$style['color-item']"
-                :style="{ '--bg': item }"
-                @click="emit('submit', item)"
-            ></button>
-        </div>
-    </UeElEditorGroup>
+    <UeElSettingGroup :class="$style['color-group']">
+        <template #body>
+            <div class="grid grid-cols-9" :class="$style['color-list']">
+                <button
+                    v-for="(item, index) in colors"
+                    :key="index"
+                    :class="$style['color-item']"
+                    :style="{ '--bg': item }"
+                    @click="emit('submit', item)"
+                ></button>
+            </div>
+        </template>
+    </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
-import UeElEditorGroup from "../../editor-group";
-
 const _prop = withDefaults(defineProps<{ colors?: string[] }>(), { colors: () => [] });
 const emit = defineEmits<{ (e: "submit", value: string): void }>();
 </script>

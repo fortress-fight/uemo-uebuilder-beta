@@ -1,7 +1,7 @@
 /*
  * @Description: 组件注册
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 15:32:50
+ * @LastEditTime: 2025-05-07 19:48:56
  */
 import UeElAlignItemSetting, { UeElAlignItemSettingBaseProps } from "../packages/align-item-setting";
 import UeElAlignSetting, { UeElAlignSettingBaseProps } from "../packages/align-setting";
@@ -54,7 +54,6 @@ import UeElContextmenu, { UeElContextmenuBaseProps } from "../packages/contextme
 import UeElDraggable, { UeElDraggableBaseProps } from "../packages/draggable";
 import UeElControlGroup, { UeElControlGroupBaseProps } from "../packages/control-group";
 import UeElEmojiLibraryPanel, { UeElEmojiLibraryPanelBaseProps } from "../packages/emoji-library-panel";
-import UeElEditorGroup, { UeElEditorGroupBaseProps } from "../packages/editor-group";
 import UeElEditorPanel, { UeElEditorPanelBaseProps } from "../packages/editor-panel";
 import UeElEmptyPanel, { UeElEmptyPanelBaseProps } from "../packages/empty-panel";
 import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../packages/enter-animate-setting";
@@ -153,7 +152,6 @@ declare module "vue" {
         UeElDraggable: typeof UeElDraggable;
         UeElControlGroup: typeof UeElControlGroup;
         UeElEmojiLibraryPanel: typeof UeElEmojiLibraryPanel;
-        UeElEditorGroup: typeof UeElEditorGroup;
         UeElEditorPanel: typeof UeElEditorPanel;
         UeElEmptyPanel: typeof UeElEmptyPanel;
         UeElEnterAnimateSetting: typeof UeElEnterAnimateSetting;
@@ -246,7 +244,6 @@ declare global {
         interface UeElDraggableProps extends UeElDraggableBaseProps {}
         interface UeElControlGroupProps extends UeElControlGroupBaseProps {}
         interface UeElEmojiLibraryPanelProps extends UeElEmojiLibraryPanelBaseProps {}
-        interface UeElEditorGroupProps extends UeElEditorGroupBaseProps {}
         interface UeElEditorPanelProps extends UeElEditorPanelBaseProps {}
         interface UeElEmptyPanelProps extends UeElEmptyPanelBaseProps {}
         interface UeElEnterAnimateSettingProps extends UeElEnterAnimateSettingBaseProps {}

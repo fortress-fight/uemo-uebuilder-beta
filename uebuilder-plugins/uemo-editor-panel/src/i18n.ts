@@ -1,0 +1,9 @@
+import { i18n as i18nGlobal } from "@stone/uemo-editor-i18n";
+
+import zhCn from "../i18n/zh-cn.json";
+import en from "../i18n/en.json";
+
+i18nGlobal.global.mergeLocaleMessage("zh-cn", zhCn);
+i18nGlobal.global.mergeLocaleMessage("en", en);
+
+export const i18n = i18nGlobal;

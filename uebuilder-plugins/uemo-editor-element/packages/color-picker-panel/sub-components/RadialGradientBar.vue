@@ -1,36 +1,40 @@
 <template>
-    <UeElEditorGroup>
-        <ColorPointBar
-            type="radial"
-            ref="colorPointBar"
-            :points="currentColorPoints"
-            :editor-point-id="editorColorPointId"
-            @update:points="currentColorPoints = $event"
-            @update-editor-point-id="editorColorPointId = $event"
-        />
-        <UeElControlGroup
-            oper-type="remove"
-            :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
-            :col-count="1"
-            @remove="removeCurrentPoint"
-        >
-            <UeElNumberInput v-bind="positionParam" v-model:value="editorColorPointPosition" :hide-unit="true" />
-        </UeElControlGroup>
-    </UeElEditorGroup>
+    <UeElSettingGroup>
+        <template #body>
+            <ColorPointBar
+                type="radial"
+                ref="colorPointBar"
+                :points="currentColorPoints"
+                :editor-point-id="editorColorPointId"
+                @update:points="currentColorPoints = $event"
+                @update-editor-point-id="editorColorPointId = $event"
+            />
+            <UeElControlGroup
+                oper-type="remove"
+                :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
+                :col-count="1"
+                @remove="removeCurrentPoint"
+            >
+                <UeElNumberInput v-bind="positionParam" v-model:value="editorColorPointPosition" :hide-unit="true" />
+            </UeElControlGroup>
+        </template>
+    </UeElSettingGroup>
     <UeElColorPicker
         ref="colorPicker"
         v-model:value="editorColorPointColor"
         :class="$style['color-picker']"
         :pure-color="pureColor"
     />
-    <UeElEditorGroup>
-        <UeElControlGroup oper-type="none" :hideOper="true" :col-count="2">
-            <UeElNumberInput v-bind="xPosParam" v-model:value="currentXPos" />
-            <UeElNumberInput v-bind="yPosParam" v-model:value="currentYPos" />
-            <UeElNumberInput v-bind="widthParam" v-model:value="currentWidth" />
-            <UeElNumberInput v-bind="heightParam" v-model:value="currentHeight" />
-        </UeElControlGroup>
-    </UeElEditorGroup>
+    <UeElSettingGroup>
+        <template #body>
+            <UeElControlGroup oper-type="none" :hideOper="true" :col-count="2">
+                <UeElNumberInput v-bind="xPosParam" v-model:value="currentXPos" />
+                <UeElNumberInput v-bind="yPosParam" v-model:value="currentYPos" />
+                <UeElNumberInput v-bind="widthParam" v-model:value="currentWidth" />
+                <UeElNumberInput v-bind="heightParam" v-model:value="currentHeight" />
+            </UeElControlGroup>
+        </template>
+    </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
 import type { GradientPoint } from "../index";

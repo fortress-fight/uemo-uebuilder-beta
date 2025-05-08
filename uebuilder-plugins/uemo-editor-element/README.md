@@ -60,14 +60,11 @@ yarn create-element
 <!-- 一个完整组 | 可以在头部添加操作器 -->
 <UeElSettingGroup title="动画" is-last>
     <template #body>
-        <!-- 控件容器 | 可以在右侧添加操作按钮 -->
-        <UeElEditorGroup>
-            <!-- 控件分栏容器 -->
-            <UeElControlGroup>
-                <!-- 控件 -->
-                <UeElColorSetting v-model:value="color" />
-            </UeElControlGroup>
-        </UeElEditorGroup>
+        <!-- 控件分栏容器 | 可以在右侧添加操作按钮  -->
+        <UeElControlGroup>
+            <!-- 控件 -->
+            <UeElColorSetting v-model:value="color" />
+        </UeElControlGroup>
     </template>
 </UeElSettingGroup>
 ```
