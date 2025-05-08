@@ -26,8 +26,8 @@ import Italic from "@tiptap/extension-italic";
 // #region 导入设备扩展
 
 import { EditorPanelExtension } from "../packages/extension-editor-panel/src";
-import { deviceExtension } from "../packages/extension-device";
-import { fontScaleExtension } from "../packages/extension-font-scale";
+import { DeviceExtension } from "../packages/extension-device";
+import { FontScaleExtension } from "../packages/extension-font-scale";
 import { AIExtension } from "../packages/extension-ai";
 import { Formatting } from "../packages/extension-formatting";
 import { TextDecoration } from "../packages/extension-text-decoration/src";
@@ -44,7 +44,7 @@ import { SlashMenu } from "../packages/extension-slash-menu/src";
 import { Emoji } from "../packages/extension-emoji/src";
 import { Placeholder } from "../packages/extension-placeholder";
 import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
-
+import { NewLine } from "../packages/extension-new-line/src";
 import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
 
 // #endregion
@@ -84,8 +84,8 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             openAttrEditorPanel: param.openAttrEditorPanel,
             closeAttrEditorPanel: param.closeAttrEditorPanel,
         }),
-        deviceExtension,
-        fontScaleExtension,
+        DeviceExtension,
+        FontScaleExtension,
         AIExtension.configure(param.AIExtension),
         TextDecoration,
         Blockquote,
@@ -105,7 +105,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             placeholder: i18n.global.t("PLACEHOLDER_TEXT"),
         }),
         NodePlaceholder,
-
+        NewLine,
         ButtonItem,
         ButtonRow,
     ];

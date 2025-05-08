@@ -33,7 +33,7 @@ const fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle = (
  * 设备设置扩展
  * 用于管理编辑器的设备类型和字体缩放
  */
-export const fontScaleExtension = Extension.create<{
+export const FontScaleExtension = Extension.create<{
     /** 字体缩放处理函数 */
     fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle;
 }>({
