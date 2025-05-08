@@ -1,7 +1,7 @@
 <!--
  * @Description: Tab 卡片
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:21:28
+ * @LastEditTime: 2025-05-09 02:10:31
 -->
 <template>
     <div
@@ -198,7 +198,7 @@ defineExpose({ tabTo, updateSize, activeCardName });
         cursor: pointer;
         transition: color 0.36s ease;
         text-align: center;
-        &[data-active] {
+        &[data-active="true"] {
             color: color(var(--ue-font-color--deeper));
         }
     }
@@ -229,7 +229,7 @@ defineExpose({ tabTo, updateSize, activeCardName });
     transform: translate3d(0, 0, 0);
 
     will-change: left;
-    &[data-active] {
+    &[data-active="true"] {
         position: relative;
         left: 0;
     }
