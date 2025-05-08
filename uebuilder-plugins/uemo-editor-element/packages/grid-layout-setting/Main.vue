@@ -1,34 +1,36 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-21 01:50:35
+ * @LastEditTime: 2025-05-07 19:48:39
 -->
 <template>
-    <UeElEditorGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
-        <PreviewBox
-            :data="valueRef"
-            :mode="previewBoxMode"
-            :z-index="zIndexData"
-            @change="handleChange"
-            @changeZIndex="handleChangeZIndex"
-            @swap="handleSwap"
-        />
-        <!-- 底部控制按钮组 -->
-        <UeElControlGroup :col-count="enableZIndexMode ? 2 : 1">
-            <UeElButton v-bind="layoutButtonParam" @trigger="openGridLibraryPanel" />
-            <UeElButton v-if="enableZIndexMode" v-bind="zIndexButtonParam" @trigger="toggleZIndexMode" />
-        </UeElControlGroup>
-        <!-- 布局库弹窗面板 -->
-        <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
-            <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
-        </UeElPopPanel>
-    </UeElEditorGroup>
+    <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
+        <template #body>
+            <PreviewBox
+                :data="valueRef"
+                :mode="previewBoxMode"
+                :z-index="zIndexData"
+                @change="handleChange"
+                @changeZIndex="handleChangeZIndex"
+                @swap="handleSwap"
+            />
+            <!-- 底部控制按钮组 -->
+            <UeElControlGroup :col-count="enableZIndexMode ? 2 : 1">
+                <UeElButton v-bind="layoutButtonParam" @trigger="openGridLibraryPanel" />
+                <UeElButton v-if="enableZIndexMode" v-bind="zIndexButtonParam" @trigger="toggleZIndexMode" />
+            </UeElControlGroup>
+            <!-- 布局库弹窗面板 -->
+            <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
+                <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
+            </UeElPopPanel>
+        </template>
+    </UeElSettingGroup>
 </template>
 
 <script lang="ts" setup>
 import type { UeElGridLayoutSettingBaseProps } from "./index";
 
-import UeElEditorGroup from "../editor-group";
+import UeElSettingGroup from "../setting-group";
 import { getPopPanelParams } from "../pop-panel/utils/helper";
 import PreviewBox from "./sub-components/PreviewLayoutBox.vue";
 
@@ -67,7 +69,7 @@ const zIndexData = defineModel<string>("zIndex", { required: false });
 /**
  * 组件引用
  */
-const rootComponentRef = useTemplateRef<InstanceType<typeof UeElEditorGroup>>("rootComponent");
+const rootComponentRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("rootComponent");
 
 /**
  * 组件状态管理

@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 01:34:36
+ * @LastEditTime: 2025-05-07 19:48:03
 -->
 <template>
     <UeElEditorPanel
@@ -71,7 +71,7 @@ import type { UeElBackgroundImageSettingPanelBaseProps, UeElBackgroundImageSetti
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 import UeElEditorPanel from "../editor-panel";
-import UeElEditorGroup from "../editor-group";
+import UeElSettingGroup from "../setting-group";
 
 defineOptions({ name: "UeElBackgroundImageSettingPanel" });
 
@@ -89,7 +89,7 @@ const valueRef = defineModel<UeElBackgroundImageSettingPanelValue>("value", { re
 /**
  * 组件引用
  */
-const resourceSettingRef = useTemplateRef<InstanceType<typeof UeElEditorGroup>>("resourceSettingRef");
+const resourceSettingRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("resourceSettingRef");
 
 /**
  * 操作列表配置

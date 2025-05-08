@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/4/29 19:08:28
+ * @LastEditTime: 2025-05-07 19:48:46
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -38,7 +38,6 @@ import UeElContextmenu from "../packages/contextmenu";
 import UeElDraggable from "../packages/draggable";
 import UeElControlGroup from "../packages/control-group";
 import UeElEmojiLibraryPanel from "../packages/emoji-library-panel";
-import UeElEditorGroup from "../packages/editor-group";
 import UeElEditorPanel from "../packages/editor-panel";
 import UeElEmptyPanel from "../packages/empty-panel";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
@@ -128,7 +127,6 @@ export const components = [
     UeElDraggable,
     UeElControlGroup,
     UeElEmojiLibraryPanel,
-    UeElEditorGroup,
     UeElEditorPanel,
     UeElEmptyPanel,
     UeElEnterAnimateSetting,
