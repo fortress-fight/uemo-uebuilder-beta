@@ -1,3 +1,4 @@
+import type { Editor } from "@tiptap/core";
 import type { EditorPanelHandler, EditorPanelAttrsMap } from "../src";
 
 export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, void> = (type, attr, param) => {
@@ -19,4 +20,12 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
         default:
             break;
     }
+};
+
+export const getEditorPanelExtensionStorage = (
+    editor: Editor
+): {
+    lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
+} => {
+    return editor.storage.editorPanelExtension;
 };

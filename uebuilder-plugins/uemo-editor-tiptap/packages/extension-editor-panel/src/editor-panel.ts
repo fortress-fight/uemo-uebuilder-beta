@@ -5,7 +5,9 @@
 
 import type { EditorPanelAttrsMap, EditorPanelParam } from "../src";
 
-import { Extension } from "@tiptap/core";
+import { Extension, isNodeSelection, findParentNodeClosestToPos } from "@tiptap/core";
+import { Plugin, PluginKey } from "@tiptap/pm/state";
+
 import { openAttrEditorPanel } from "../utils/helper";
 
 // 扩展 Tiptap 命令接口
@@ -44,6 +46,8 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
+const HansEditorPanelNodes = ["buttonRow", "buttonItem"];
+
 /**
  * 编辑器面板扩展
  * 提供打开属性编辑面板的命令
@@ -66,15 +70,57 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
         };
     },
 
+    addProseMirrorPlugins() {
+        const plugins: Plugin[] = [
+            new Plugin({
+                key: new PluginKey("triggerEditorPanelOpen"),
+                props: {
+                    handleDOMEvents: {
+                        dblclick: (view, event) => {
+                            const selection = view.state.selection;
+
+                            if (!(event.target instanceof HTMLElement) || !isNodeSelection(selection)) {
+                                return;
+                            }
+
+                            let nodeName: undefined | string = selection.node.type.name;
+
+                            if (!HansEditorPanelNodes.includes(nodeName)) {
+                                nodeName = findParentNodeClosestToPos(selection.ranges[0].$from, (node) => {
+                                    return HansEditorPanelNodes.includes(node.type.name);
+                                })?.node.type.name;
+                            }
+
+                            switch (nodeName) {
+                                case "buttonRow":
+                                    this.editor
+                                        .chain()
+                                        .openButtonRowEditorPanel(event.target.getBoundingClientRect())
+                                        .run();
+                                    return false;
+
+                                default:
+                                    return;
+                            }
+                        },
+                    },
+                },
+            }),
+        ];
+
+        return plugins;
+    },
+
     addCommands() {
         return {
             openAttrEditorPanel: (type, attr, param) => () => {
                 const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
 
-                this.storage.lastEditorPanelType = type;
-
                 // 调用属性处理器
                 handler(type, attr, param);
+
+                this.storage.lastEditorPanelType = type;
+
                 return true;
             },
 
@@ -87,6 +133,8 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                 // 调用关闭处理器
                 handler();
+
+                this.storage.lastEditorPanelType = undefined;
 
                 return true;
             },
