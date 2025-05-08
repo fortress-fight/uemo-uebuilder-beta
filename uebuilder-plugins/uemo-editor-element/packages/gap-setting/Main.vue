@@ -1,7 +1,7 @@
 <!--
  * @Description: 间隔设置
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 03:00:41
+ * @LastEditTime: 2025-05-08 10:40:26
 -->
 <template>
     <div :class="$style['gap-setting']" :data-disable="disable" class="grid" :data-col-2="dir === 'xy'">
@@ -99,7 +99,7 @@ function changeGap(value: string[]) {
 
         opacity: 0.5;
     }
-    &[data-col-2] {
+    &[data-col-2="true"] {
         grid-template-columns: 1fr 1fr;
     }
 }
