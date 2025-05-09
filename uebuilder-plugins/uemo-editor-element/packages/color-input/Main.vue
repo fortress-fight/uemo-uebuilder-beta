@@ -1,7 +1,7 @@
 <!--
  * @Description: 颜色输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-25 11:51:42
+ * @LastEditTime: 2025-05-09 13:53:49
 -->
 <template>
     <UeElTextInput
@@ -43,7 +43,7 @@
     <div
         v-else-if="colorType === 'linearGradient' || colorType === 'radialGradient'"
         ref="gradientRootRef"
-        :title="t('UNIT_LINEAR_GRADIENT')"
+        :title="colorType === 'linearGradient' ? t('UNIT_LINEAR_GRADIENT') : t('UNIT_RADIAL_GRADIENT')"
         :class="$style['gradient-color-input']"
     >
         <div :class="$style['setting-bar']" class="flex cursor-pointer items-center" @click="triggerColorInput">
@@ -54,7 +54,9 @@
             >
                 <div :class="$style['inner-box']" :style="{ '--background': useValue }"></div>
             </div>
-            <div :class="$style['title']">{{ t("UNIT_LINEAR_GRADIENT") }}</div>
+            <div :class="$style['title']">
+                {{ colorType === "linearGradient" ? t("UNIT_LINEAR_GRADIENT") : t("UNIT_RADIAL_GRADIENT") }}
+            </div>
         </div>
         <UeElNumberInput
             v-if="independentOpacityControl"
@@ -248,8 +250,7 @@ defineExpose({ rootDomRef });
 
     border: 1px solid var(--text-border-color);
     border-radius: var(--ue-border-radius--lv1);
-
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    // grid-template-columns: auto minmax(0, 1fr) auto;
     .setting-bar {
         font-size: 12px;
         line-height: 26px;
@@ -258,7 +259,7 @@ defineExpose({ rootDomRef });
         min-width: 0;
         padding: var(--text-input-padding);
 
-        cursor: default;
+        cursor: pointer;
 
         color: color(var(--ue-font-color--deeper));
         border-width: 0;
