@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 13:20:26
+ * @LastEditTime: 2025-05-09 17:42:50
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -37,7 +37,10 @@
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('UNIT_BUTTON') + t('UNIT_STYLE')">
                     <template #body>
-                        <UeElButtonStyleSetting v-model:value="buttonStyle" />
+                        <UeElButtonStyleSetting
+                            v-model:value="buttonStyle"
+                            @changeHoverState="handleChangeHoverState"
+                        />
                     </template>
                 </UeElSettingGroup>
             </template>
@@ -53,7 +56,10 @@ import type { UeEditorPanelTiptapButtonItemBaseProps } from "./index";
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeEditorPanelTiptapButtonItem" });
+
 const _props = withDefaults(defineProps<UeEditorPanelTiptapButtonItemBaseProps>(), {});
+const emit = defineEmits<{ (e: "preview", state: "hover" | "leave"): void }>();
+
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.ButtonItem["attrs"]>("value", { required: true });
 
 const { t } = useI18n();
@@ -246,6 +252,10 @@ const buttonStyle = useDefineObjectModel<
 );
 
 // #endregion
+
+function handleChangeHoverState(isHover: boolean) {
+    emit("preview", isHover ? "hover" : "leave");
+}
 </script>
 <style lang="scss" module>
 .tiptap-button-item {

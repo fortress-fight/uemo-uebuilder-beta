@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 02:17:18
+ * @LastEditTime: 2025-05-09 18:02:17
 -->
 <template>
     <TestArea
@@ -28,8 +28,6 @@ const testValueList: (UE_EDITOR_PANEL_COMPONENT.UeEditorPanelTiptapButtonItemPro
     {
         value: {
             text: "按钮",
-            transition: "1",
-            previewHover: "0",
 
             link: "",
             linkTarget: "_blank",
