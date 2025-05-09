@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮样式设置控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-31 01:33:06
+ * @LastEditTime: 2025-05-09 03:58:21
 -->
 <template>
     <UeElControlGroup :class="$style['button-style-setting']" :col-count="2" ref="controlGroup">
@@ -35,6 +35,7 @@
 import type { UeElButtonStyleSettingBaseProps } from "./index";
 import type { UeElButtonStyleSettingPanelValue } from "../button-style-setting-panel";
 
+import { useDefineObjectModel } from "../../utils/model-mixin";
 import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import UeElControlGroup from "../control-group";
 
@@ -57,12 +58,29 @@ const currentEditorValueRef = computed({
     },
     set: (value) => {
         if (currentEditorType.value === "normal") {
-            valueRef.value.normal = value;
+            normalStyle.value = value;
         } else {
-            valueRef.value.hover = value;
+            hoverStyle.value = value;
         }
     },
 });
+
+const normalStyle = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.normal || {},
+    set: (value, modelValue) => {
+        modelValue.normal = value;
+        return modelValue;
+    },
+});
+
+const hoverStyle = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.hover || {},
+    set: (value, modelValue) => {
+        modelValue.hover = value;
+        return modelValue;
+    },
+});
+
 const buttonStyleSettingPanelOpen = ref(false);
 function openButtonStylePanel(type: "normal" | "hover") {
     currentEditorType.value = type;
