@@ -150,6 +150,7 @@
 
 12. 派发空事件触发编辑器更新
 
+
     ```ts
     // 获取编辑器视图（EditorView）
     const editorView = editor.view;
@@ -166,6 +167,50 @@
 
 13. 获取指定位置的的 Node
 
+
     ```ts
     state.doc.nodeAt(selection.from);
+    ```
+
+14. 获取选区内 DOM 节点
+
+
+    ```ts
+    const { view, state } = editor;
+    const { from } = state.selection;
+
+    // 获取位置处的 DOM 节点（node 和 offset）
+    const domInfo = view.domAtPos(from);
+    const domNode = domInfo.node as HTMLElement;
+    const offset = domInfo.offset;
+
+    // 获取块级节点（如 paragraph）的 DOM
+    const nodeDom = view.nodeDOM(from);
+    ```
+
+15. 获取整个选区对应的 DOM 节点范围
+
+
+    ```ts
+    const selection = window.getSelection();
+
+    if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const domStartNode = range.startContainer;
+        const domEndNode = range.endContainer;
+
+        console.log('DOM 选区范围：', domStartNode, domEndNode);
+    }
+    ```
+
+16. 获取节点对应的 Rect
+
+
+    ```ts
+    import { posToDOMRect } from "@tiptap/core";
+
+    const { view } = editor;
+    const { from, to } = state.selection;
+
+    posToDOMRect(view, from, to);
     ```
