@@ -103,6 +103,11 @@
     "UNIT_COLOR_DARK": "深色",
     "UNIT_LAYOUT": "排版",
     "UNIT_FILL": "填充",
+    "UNIT_CONTENT": "内容",
+    "UNIT_DESIGN": "设计",
+    "UNIT_TEXT": "文字",
+    "UNIT_BEFORE_POSITION": "前置",
+    "UNIT_AFTER_POSITION": "后置",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -136,6 +141,7 @@
     "MARGIN_SETTING_B": "下外间距",
     "MARGIN_SETTING_L": "左外间距",
 
+    "PADDING_SETTING_TITLE": "内间距",
     "PADDING_SETTING_TB": "上下内间距",
     "PADDING_SETTING_LR": "左右内间距",
     "PADDING_SETTING_T": "上内间距",

@@ -103,6 +103,11 @@
     "UNIT_COLOR_DARK": "Dark",
     "UNIT_LAYOUT": "Layout",
     "UNIT_FILL": "Fill",
+    "UNIT_CONTENT": "Content",
+    "UNIT_DESIGN": "Design",
+    "UNIT_TEXT": "Text",
+    "UNIT_BEFORE_POSITION": "Before",
+    "UNIT_AFTER_POSITION": "After",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -136,6 +141,7 @@
     "MARGIN_SETTING_B": "Bottom Margin",
     "MARGIN_SETTING_L": "Left Margin",
 
+    "PADDING_SETTING_TITLE": "Padding",
     "PADDING_SETTING_TB": "Top and Bottom Padding",
     "PADDING_SETTING_LR": "Left and Right Padding",
     "PADDING_SETTING_T": "Top Padding",

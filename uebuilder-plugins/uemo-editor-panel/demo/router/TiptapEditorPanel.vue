@@ -10,8 +10,9 @@
 </template>
 <script lang="ts" setup>
 import TestEditorPanelTiptapButtonRow from "~/demo/components/TestEditorPanelTiptapButtonRow.vue";
+import TestEditorPanelTiptapButtonItem from "~/demo/components/TestEditorPanelTiptapButtonItem.vue";
 
-const tiptapEditorPanelComponents = [TestEditorPanelTiptapButtonRow];
+const tiptapEditorPanelComponents = [TestEditorPanelTiptapButtonRow, TestEditorPanelTiptapButtonItem];
 </script>
 <style lang="scss" module>
 .page-head {
