@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-31 01:33:33
+ * @LastEditTime: 2025-05-09 03:22:10
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
@@ -79,7 +79,9 @@ const resourceButtonConfig = computed(() => {
     return {
         button: {
             icon: { name: "icon-button-normal", size: 16 },
-            text: hasAttr ? t("UNIT_SELECT", { text: t("UNIT_BUTTON") }) : t("UNIT_ADD", { text: t("UNIT_BUTTON") }),
+            text: hasAttr
+                ? t("UNIT_SELECT", { text: t("UNIT_BUTTON") })
+                : t("UNIT_REPLACE", { text: t("UNIT_BUTTON") }),
         },
         video: {
             icon: { name: "icon-app-video", size: 16 },

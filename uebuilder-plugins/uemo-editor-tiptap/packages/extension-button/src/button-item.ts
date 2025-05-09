@@ -40,8 +40,8 @@ export const ButtonItem = Node.create<ButtonOptions>({
     addAttributes() {
         return {
             text: { default: "BUTTON" },
-            padding: { default: "" },
-            theme: { default: "" },
+            padding: { default: undefined },
+            theme: { default: undefined },
             beforeSvgIcon: { default: undefined },
             afterSvgIcon: { default: undefined },
             animation: { default: undefined },
@@ -52,26 +52,26 @@ export const ButtonItem = Node.create<ButtonOptions>({
             previewHover: { default: "0" },
 
             // hover 变化的属性
-            radius: { default: "" },
-            hoverRadius: { default: "" },
+            radius: { default: undefined },
+            hoverRadius: { default: undefined },
 
-            color: { default: "" },
-            hoverColor: { default: "" },
+            color: { default: undefined },
+            hoverColor: { default: undefined },
 
-            background: { default: "" },
-            hoverBackground: { default: "" },
+            background: { default: undefined },
+            hoverBackground: { default: undefined },
 
-            borderColor: { default: "" },
-            hoverBorderColor: { default: "" },
+            borderColor: { default: undefined },
+            hoverBorderColor: { default: undefined },
 
-            borderWidth: { default: "" },
-            hoverBorderWidth: { default: "" },
+            borderWidth: { default: undefined },
+            hoverBorderWidth: { default: undefined },
 
-            borderStyle: { default: "" },
-            hoverBorderStyle: { default: "" },
+            borderStyle: { default: undefined },
+            hoverBorderStyle: { default: undefined },
 
-            shadow: { default: "" },
-            hoverShadow: { default: "" },
+            shadow: { default: undefined },
+            hoverShadow: { default: undefined },
 
             /**
              * 链接相关

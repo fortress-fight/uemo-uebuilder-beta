@@ -1,35 +1,37 @@
 <!--
  * @Description: 按钮样式属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 16:57:05
+ * @LastEditTime: 2025-05-09 03:57:09
 -->
 <template>
     <UeElEditorPanel :class="$style['button-style-setting-panel']" :title="title || t('UNIT_BUTTON')">
-        <UeElButtonHoverEffectSetting is-first v-if="mode === 'hover'" v-model:value="valueRef.animation" />
+        <UeElButtonHoverEffectSetting is-first v-if="mode === 'hover'" v-model:value="animation" />
         <template v-if="isRotateTheme || isOutlineTheme">
             <UeElColorSettingGroup
                 :is-first="mode !== 'hover'"
-                v-model:value="valueRef.background"
+                v-model:value="background"
                 :title="t('UNIT_MAIN_COLOR')"
             />
-            <UeElColorSettingGroup v-model:value="valueRef.color" :title="t('UNIT_SECONDARY_COLOR')" />
-            <UeElBoxShadowSettingGroup is-last v-if="isRotateTheme" v-model:value="valueRef.shadow" />
+            <UeElColorSettingGroup v-model:value="color" :title="t('UNIT_SECONDARY_COLOR')" />
+            <UeElBoxShadowSettingGroup is-last v-if="isRotateTheme" v-model:value="shadow" />
         </template>
         <template v-else>
             <UeElColorSettingGroup
                 :is-first="mode !== 'hover'"
-                v-model:value="valueRef.background"
+                v-model:value="background"
                 :title="t('UNIT_BACKGROUND_COLOR')"
             />
-            <UeElColorSettingGroup v-model:value="valueRef.color" :title="t('UNIT_FONT_COLOR')" />
-            <UeElRadiusSettingGroup v-model:value="valueRef.radius" />
-            <UeElBorderSettingGroup v-model:value="valueRef.border" />
-            <UeElBoxShadowSettingGroup is-last v-model:value="valueRef.shadow" />
+            <UeElColorSettingGroup v-model:value="color" :title="t('UNIT_FONT_COLOR')" />
+            <UeElRadiusSettingGroup v-model:value="radius" />
+            <UeElBorderSettingGroup v-model:value="border" />
+            <UeElBoxShadowSettingGroup is-last v-model:value="shadow" />
         </template>
     </UeElEditorPanel>
 </template>
 <script lang="ts" setup>
 import type { UeElButtonStyleSettingPanelBaseProps, UeElButtonStyleSettingPanelValue } from "./index";
+
+import { useDefineObjectModel } from "../../utils/model-mixin";
 
 defineOptions({ name: "UeElButtonStyleSettingPanel" });
 
@@ -42,6 +44,54 @@ const valueRef = defineModel<UeElButtonStyleSettingPanelValue>("value", { requir
 
 const isRotateTheme = computed(() => props.theme.startsWith("rotate"));
 const isOutlineTheme = computed(() => props.theme.startsWith("outline"));
+
+const animation = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.animation,
+    set: (value, modelValue) => {
+        modelValue.animation = value;
+        return modelValue;
+    },
+});
+
+const background = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.background,
+    set: (value, modelValue) => {
+        modelValue.background = value;
+        return modelValue;
+    },
+});
+
+const color = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.color,
+    set: (value, modelValue) => {
+        modelValue.color = value;
+        return modelValue;
+    },
+});
+
+const radius = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.radius,
+    set: (value, modelValue) => {
+        modelValue.radius = value;
+        return modelValue;
+    },
+});
+
+const border = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.border,
+    set: (value, modelValue) => {
+        modelValue.border = value;
+        return modelValue;
+    },
+});
+
+const shadow = useDefineObjectModel(valueRef, {
+    get: (modelValue) => modelValue.shadow,
+    set: (value, modelValue) => {
+        modelValue.shadow = value;
+        return modelValue;
+    },
+});
 </script>
 <style lang="scss" module>
 .button-style-setting-panel {

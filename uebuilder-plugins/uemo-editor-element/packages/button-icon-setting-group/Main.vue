@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮图标属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 14:32:59
+ * @LastEditTime: 2025-05-09 03:16:49
 -->
 <template>
     <UeElSettingGroup :class="$style['calender-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
@@ -27,7 +27,7 @@ const { t } = useI18n();
 
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
     return {
-        title: t("BUTTON_ICON_TITLE"),
+        title: props.title || t("BUTTON_ICON_TITLE"),
         oper: !valueRef.value ? [{ id: "add", type: "add" }] : [{ id: "remove", type: "remove" }],
     };
 });

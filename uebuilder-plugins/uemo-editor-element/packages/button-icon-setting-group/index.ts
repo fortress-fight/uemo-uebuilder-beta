@@ -1,7 +1,7 @@
 /*
  * @Description: 按钮图标属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 14:32:27
+ * @LastEditTime: 2025-05-09 03:16:58
  */
 import type { App } from "vue";
 import type { UeElButtonIconSettingValue } from "../button-icon-setting";
@@ -14,6 +14,7 @@ UeElButtonIconSettingGroup.install = (app: App) => {
 };
 
 export interface UeElButtonIconSettingGroupBaseProps {
+    title?: string;
     disabled?: boolean;
     defaultValue?: UeElButtonIconSettingValue;
 }

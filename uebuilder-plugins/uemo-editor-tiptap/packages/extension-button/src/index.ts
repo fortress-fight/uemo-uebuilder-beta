@@ -17,37 +17,37 @@ export type ButtonItemIconAttrs = { source: string; name: string; color?: string
 export type ButtonItemAttrs = {
     beforeSvgIcon?: ButtonItemIconAttrs;
     afterSvgIcon?: ButtonItemIconAttrs;
-    animation: string;
+    animation?: string;
 
-    theme: string;
+    theme?: string;
     text: string;
     transition: string;
     previewHover: string;
 
-    padding: string;
-    radius: string;
-    hoverRadius: string;
+    padding?: string;
+    radius?: string;
+    hoverRadius?: string;
 
-    color: string;
-    hoverColor: string;
+    color?: string;
+    hoverColor?: string;
 
-    background: string;
-    hoverBackground: string;
+    background?: string;
+    hoverBackground?: string;
 
-    borderColor: string;
-    hoverBorderColor: string;
-    borderWidth: string;
-    hoverBorderWidth: string;
-    borderStyle: string;
-    hoverBorderStyle: string;
+    borderColor?: string;
+    hoverBorderColor?: string;
+    borderWidth?: string;
+    hoverBorderWidth?: string;
+    borderStyle?: string;
+    hoverBorderStyle?: string;
 
-    shadow: string;
-    hoverShadow: string;
+    shadow?: string;
+    hoverShadow?: string;
 
     link: string;
     linkTarget: string;
-    linkType: string;
-    linkDetail: string;
+    linkType?: string;
+    linkDetail?: string;
     linkPopLayer?: { width?: string };
     triggerMethod?: string;
 };

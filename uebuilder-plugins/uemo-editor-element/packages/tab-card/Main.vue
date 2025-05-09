@@ -1,7 +1,7 @@
 <!--
  * @Description: Tab 卡片
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 11:21:28
+ * @LastEditTime: 2025-05-09 03:07:22
 -->
 <template>
     <div
@@ -109,7 +109,10 @@ function tabCard(name: string, duration = 0.36) {
     const activeCardDom = cardItems?.find((item) => item.dataset.name === name);
     const lastCardDom = cardItems?.find((item) => item.dataset.name === lastCardName.value);
     const cardListDom = cardListRef.value;
+
     if (!activeCardDom || !cardListDom) return;
+
+    gsap.set(cardListDom, { height: cardListDom?.offsetHeight });
 
     const tl = gsap.timeline({
         onStart() {
@@ -119,8 +122,7 @@ function tabCard(name: string, duration = 0.36) {
         onUpdate: () => emit("changing"),
         onComplete() {
             gsap.set(activeCardDom, { position: "relative" });
-            gsap.set(cardListDom, { height: undefined });
-            emit("changeEnd", name);
+            gsap.set(cardListDom, { height: "auto" });
         },
         defaults: { duration, ease: "easeOutQuart" },
     });
@@ -198,7 +200,7 @@ defineExpose({ tabTo, updateSize, activeCardName });
         cursor: pointer;
         transition: color 0.36s ease;
         text-align: center;
-        &[data-active] {
+        &[data-active="true"] {
             color: color(var(--ue-font-color--deeper));
         }
     }
@@ -225,11 +227,12 @@ defineExpose({ tabTo, updateSize, activeCardName });
     width: 100%;
     min-height: var(--ue-el-tab-panel-min-height);
     max-height: var(--ue-el-tab-panel-max-height);
+    padding-top: var(--ue-editor-row-space--lv3);
 
     transform: translate3d(0, 0, 0);
 
     will-change: left;
-    &[data-active] {
+    &[data-active="true"] {
         position: relative;
         left: 0;
     }
