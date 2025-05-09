@@ -9,7 +9,7 @@ type PopPanelMode = "editorPanel" | "centerPanel";
  * 默认的位置配置
  */
 const DEFAULT_POSITION_CONFIG: EnhancedComputePositionConfig = {
-    placement: "left-start",
+    placement: "right-start",
     middleware: [
         ["flip", { crossAxis: false }],
         ["offset", { mainAxis: 10 }],
