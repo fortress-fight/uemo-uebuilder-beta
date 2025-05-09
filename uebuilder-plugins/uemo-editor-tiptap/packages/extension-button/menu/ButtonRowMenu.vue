@@ -7,8 +7,8 @@
     />
 </template>
 <script lang="ts" setup>
-import { isNodeSelection } from "@tiptap/core";
-import { getEditorPanelExtensionStorage } from "../../../packages/extension-editor-panel/utils/helper";
+import { isButtonRow } from "../utils/helper";
+import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
 defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
 
@@ -24,16 +24,12 @@ const menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[] = [
     "deleteNode",
 ];
 
-const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = ({ editor, view, state }) => {
+const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = ({ editor, view }) => {
     if (!editor) return false;
-
-    const { selection } = state;
-
-    const isButtonRow = isNodeSelection(selection) && selection.node.type.name === "buttonRow";
 
     const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "buttonRow";
 
-    return !isEditing && isButtonRow && view.hasFocus();
+    return !isEditing && isButtonRow(editor) && view.hasFocus();
 };
 </script>
 <style lang="scss" module>

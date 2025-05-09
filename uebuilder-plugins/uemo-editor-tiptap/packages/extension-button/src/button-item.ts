@@ -2,13 +2,13 @@ import type { ButtonItemAttrs } from "./index";
 
 import { VueNodeViewRenderer } from "@tiptap/vue-3";
 import { Node, type Attribute } from "@tiptap/core";
-import { Plugin } from "@tiptap/pm/state";
 
 import ButtonItemView from "../view/ButtonItem.vue";
 
 import $pageStyle from "../../../src/app.module.scss";
 
 import { buttonRender } from "../utils/render";
+import { getButtonItemAttrs } from "../utils/helper";
 import { parseButtonAttr, parseCkButtonAttr } from "../utils/parse";
 export interface ButtonOptions {
     HTMLAttributes: Record<string, any>;
@@ -16,8 +16,21 @@ export interface ButtonOptions {
 
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
-        button: {
+        buttonItem: {
+            /**
+             * 插入按钮
+             */
             insertButton: (value: ButtonItemAttrs) => ReturnType;
+
+            /**
+             * 打开按钮行编辑器面板
+             */
+            openButtonItemEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
+            /**
+             * 更新按钮属性
+             */
+            updateButtonItemAttrs: (attrs: Partial<ButtonItemAttrs>) => ReturnType;
         };
     }
 }
@@ -122,12 +135,6 @@ export const ButtonItem = Node.create<ButtonOptions>({
         return VueNodeViewRenderer(ButtonItemView);
     },
 
-    addProseMirrorPlugins() {
-        const plugins: Plugin[] = [];
-
-        return plugins;
-    },
-
     addCommands() {
         return {
             insertButton:
@@ -137,6 +144,34 @@ export const ButtonItem = Node.create<ButtonOptions>({
                         type: this.name,
                         attrs,
                     });
+                },
+
+            openButtonItemEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ editor, chain }) => {
+                    const currentAttr = getButtonItemAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("buttonItem", currentAttr, {
+                            rect,
+                            setData: (attr) => {
+                                editor.commands.updateButtonItemAttrs(attr);
+                            },
+                            focus: () => {
+                                editor.commands.focus();
+                            },
+                            close: () => {
+                                editor.commands.closeAttrEditorPanel("buttonItem");
+                            },
+                        })
+                        .run();
+                },
+
+            updateButtonItemAttrs:
+                (attrs: Partial<ButtonItemAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
                 },
         };
     },

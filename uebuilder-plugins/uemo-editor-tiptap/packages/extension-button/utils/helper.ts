@@ -1,12 +1,16 @@
 import type { Editor } from "@tiptap/core";
 import type { EditorState, Selection, NodeSelection } from "@tiptap/pm/state";
 
-import type { ButtonRowAttrs } from "../src";
+import type { ButtonRowAttrs, ButtonItemAttrs } from "../src";
 
 import { isNodeSelection, findParentNode } from "@tiptap/core";
 
 export function getButtonRowAttrs(editor?: Editor) {
     return editor?.getAttributes("buttonRow") as ButtonRowAttrs;
+}
+
+export function getButtonItemAttrs(editor?: Editor) {
+    return editor?.getAttributes("buttonItem") as ButtonItemAttrs;
 }
 
 /**
@@ -27,8 +31,9 @@ export function isInButtonRow(state: EditorState) {
  */
 export function isButtonRow(editor?: Editor) {
     const selection = editor?.state.selection;
+    if (!selection) return false;
 
-    return selection && isNodeSelection(selection) && selection.node.type.name === "buttonRow";
+    return isNodeSelection(selection) && selection.node.type.name === "buttonRow";
 }
 
 /**
