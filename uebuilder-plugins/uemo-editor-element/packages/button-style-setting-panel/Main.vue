@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮样式属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 03:57:09
+ * @LastEditTime: 2025-05-09 13:46:27
 -->
 <template>
     <UeElEditorPanel :class="$style['button-style-setting-panel']" :title="title || t('UNIT_BUTTON')">
@@ -20,6 +20,7 @@
                 :is-first="mode !== 'hover'"
                 v-model:value="background"
                 :title="t('UNIT_BACKGROUND_COLOR')"
+                type="mixin"
             />
             <UeElColorSettingGroup v-model:value="color" :title="t('UNIT_FONT_COLOR')" />
             <UeElRadiusSettingGroup v-model:value="radius" />
