@@ -25,6 +25,17 @@ declare module "@tiptap/core" {
         // NOTE 不知道为什么，如果把这个声明放在 editing-mark 扩展中，执行 yarn editor-panel-ui 会报错，只要换一个位置就可以
         editingMark: {
             /**
+             * Set an editingmark mark
+             * @example editor.commands.setEditingMark()
+             */
+            setEditingMark: (type: "link" | "text") => ReturnType;
+            /**
+             * Unset an editingmark mark
+             * @example editor.commands.unsetEditingMark()
+             */
+            unsetEditingMark: () => ReturnType;
+
+            /**
              * Set the selection to the mark
              * @example editor.commands.setMarkSelection()
              */
