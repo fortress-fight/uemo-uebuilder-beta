@@ -1,10 +1,10 @@
 <!--
  * @Description: 按钮图标属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 19:38:08
+ * @LastEditTime: 2025-05-09 13:33:56
 -->
 <template>
-    <UeElSettingGroup :class="$style['button-icon-setting']" is-first is-last>
+    <UeElSettingGroup :class="$style['button-icon-setting']" is-first is-last is-sub>
         <template #body>
             <UeElControlGroup :col-count="3">
                 <UeElButton

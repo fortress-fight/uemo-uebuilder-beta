@@ -1,7 +1,7 @@
 /*
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 00:19:49
+ * @LastEditTime: 2025-05-09 13:34:07
  */
 import type { App } from "vue";
 
@@ -26,6 +26,7 @@ export interface UeElSettingGroupBaseProps {
     title?: string;
     isLast?: boolean;
     isFirst?: boolean;
+    isSub?: boolean;
     disable?: boolean;
 }
 export type UeElSettingGroupInstance = InstanceType<typeof UeElSettingGroup>;

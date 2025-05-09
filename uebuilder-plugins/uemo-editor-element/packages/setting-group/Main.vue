@@ -1,11 +1,14 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-25 12:13:32
+ * @LastEditTime: 2025-05-09 13:34:47
 -->
 <template>
     <div
-        :class="[$style['editor-setting-group'], { [$style['is-first']]: isFirst, [$style['is-last']]: isLast }]"
+        :class="[
+            $style['editor-setting-group'],
+            { [$style['is-first']]: isFirst, [$style['is-last']]: isLast, [$style['is-sub']]: isSub },
+        ]"
         class="relative"
         :data-disable="disable"
         :data-active="!!$slots.body"
@@ -148,6 +151,14 @@ provide(settingGroupPopPanelPropsKey, popPanelProps);
     //         // display: none;
     //     }
     // }
+    &.is-sub {
+        .group-body {
+            padding: 0;
+        }
+        &::after {
+            display: none;
+        }
+    }
     &::after {
         position: absolute;
         bottom: 0;
