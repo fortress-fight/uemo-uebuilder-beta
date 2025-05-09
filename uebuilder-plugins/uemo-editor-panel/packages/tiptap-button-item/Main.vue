@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 17:42:50
+ * @LastEditTime: 2025-05-09 19:01:46
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -27,7 +27,7 @@
             <template v-slot:design>
                 <UeElSettingGroup>
                     <template #body>
-                        <UeElResourceSetting type="button" />
+                        <UeElResourceSetting @update:value="replaceButton" type="button" />
                     </template>
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('PADDING_SETTING_TITLE')">
@@ -252,6 +252,12 @@ const buttonStyle = useDefineObjectModel<
 );
 
 // #endregion
+
+function replaceButton(value: UE_TIPTAP_EXTENSION.ButtonItem["attrs"] | undefined) {
+    if (!value) return;
+
+    valueModel.value = value;
+}
 
 function handleChangeHoverState(isHover: boolean) {
     emit("preview", isHover ? "hover" : "leave");
