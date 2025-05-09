@@ -1,7 +1,7 @@
 <!--
  * @Description: 按钮样式设置控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 03:58:21
+ * @LastEditTime: 2025-05-09 17:41:44
 -->
 <template>
     <UeElControlGroup :class="$style['button-style-setting']" :col-count="2" ref="controlGroup">
@@ -43,6 +43,7 @@ defineOptions({ name: "UeElButtonStyleSetting" });
 
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeElButtonStyleSettingBaseProps>(), {});
+const emit = defineEmits<{ (e: "changeHoverState", value: boolean): void }>();
 
 const controlGroupRef = useTemplateRef<InstanceType<typeof UeElControlGroup>>("controlGroup");
 const hoverStateRef = defineModel<boolean>("hoverState");
@@ -87,9 +88,15 @@ function openButtonStylePanel(type: "normal" | "hover") {
     buttonStyleSettingPanelOpen.value = true;
 }
 
-watch([buttonStyleSettingPanelOpen, currentEditorType], ([open, type]) => {
-    hoverStateRef.value = open && type === "hover";
-});
+watch(
+    () => {
+        return buttonStyleSettingPanelOpen.value && currentEditorType.value === "hover";
+    },
+    (isHover) => {
+        hoverStateRef.value = isHover;
+        emit("changeHoverState", isHover);
+    }
+);
 
 /**
  * 弹窗位置配置
