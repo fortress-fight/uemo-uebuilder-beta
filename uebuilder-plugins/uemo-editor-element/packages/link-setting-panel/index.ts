@@ -1,7 +1,7 @@
 /*
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:04:57
+ * @LastEditTime: 2025-05-09 13:11:28
  */
 import type { App } from "vue";
 
@@ -22,7 +22,7 @@ export type UeElLinkSettingPanelValue =
     | {
           type: "function";
           link: string;
-          detail: "anchor" | "download";
+          detail: "anchor" | "download" | "";
           triggerArea?: string;
       }
     | {
