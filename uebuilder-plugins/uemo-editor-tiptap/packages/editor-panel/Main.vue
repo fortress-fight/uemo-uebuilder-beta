@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 17:23:55
+ * @LastEditTime: 2025-05-09 11:37:30
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" @onHide="onHide">
@@ -32,6 +32,8 @@ import type { UeTiptapEditorPanelBaseProps } from "./index";
 import type { ValuesOf } from "@tiptap/core";
 
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
+import TiptapButtonRow from "@stone/uemo-editor-panel/packages/tiptap-button-row/Main.vue";
+import TiptapButtonItem from "@stone/uemo-editor-panel/packages/tiptap-button-item/Main.vue";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
@@ -41,7 +43,6 @@ import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
-import TiptapButtonRow from "@stone/uemo-editor-panel/packages/tiptap-button-row/Main.vue";
 
 type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
@@ -56,6 +57,7 @@ defineOptions({
         LetterSpacingPanel,
         EditorAIPanel,
         TiptapButtonRow,
+        TiptapButtonItem,
     },
 });
 
@@ -97,6 +99,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     letterSpacing: "LetterSpacingPanel",
     editorAI: "EditorAIPanel",
     buttonRow: "TiptapButtonRow",
+    buttonItem: "TiptapButtonItem",
 };
 
 /**

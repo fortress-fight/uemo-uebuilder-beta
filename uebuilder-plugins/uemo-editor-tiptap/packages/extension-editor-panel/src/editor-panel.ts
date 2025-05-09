@@ -5,8 +5,8 @@
 
 import type { EditorPanelAttrsMap, EditorPanelParam } from "../src";
 
-import { Extension, isNodeSelection, findParentNodeClosestToPos } from "@tiptap/core";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
+import { Extension, isNodeSelection, findParentNodeClosestToPos, posToDOMRect } from "@tiptap/core";
 
 import { openAttrEditorPanel } from "../utils/helper";
 
@@ -96,6 +96,15 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                 key: new PluginKey("triggerEditorPanelOpen"),
                 props: {
                     handleDOMEvents: {
+                        click: (_view, event) => {
+                            const target = event.target as HTMLElement;
+
+                            const isLink = target.tagName.toLowerCase() === "a" || target.closest(`a`);
+
+                            if (isLink) {
+                                event.preventDefault();
+                            }
+                        },
                         dblclick: (view, event) => {
                             const selection = view.state.selection;
 
@@ -111,12 +120,15 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                 })?.node.type.name;
                             }
 
+                            const domRect = posToDOMRect(view, selection.from, selection.to);
+
                             switch (nodeName) {
                                 case "buttonRow":
-                                    this.editor
-                                        .chain()
-                                        .openButtonRowEditorPanel(event.target.getBoundingClientRect())
-                                        .run();
+                                    this.editor.chain().openButtonRowEditorPanel(domRect).run();
+                                    return false;
+
+                                case "buttonItem":
+                                    this.editor.chain().openButtonItemEditorPanel(domRect).run();
                                     return false;
 
                                 default:

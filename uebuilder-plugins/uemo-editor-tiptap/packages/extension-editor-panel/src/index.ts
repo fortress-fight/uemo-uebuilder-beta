@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 17:23:12
+ * @LastEditTime: 2025-05-09 11:38:23
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
@@ -34,6 +34,7 @@ export type EditorPanelAttrsMap = {
     letterSpacing: UE_TIPTAP_EXTENSION.LetterSpacing["attrs"];
     editorAI: UE_TIPTAP_EXTENSION.EditorAI["attrs"];
     buttonRow: UE_TIPTAP_EXTENSION.ButtonRow["attrs"];
+    buttonItem: UE_TIPTAP_EXTENSION.ButtonItem["attrs"];
 };
 
 export type OpenEditorPanelHandler<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> =
