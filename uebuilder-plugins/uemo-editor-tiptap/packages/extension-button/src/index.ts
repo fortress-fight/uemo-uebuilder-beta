@@ -21,8 +21,6 @@ export type ButtonItemAttrs = {
 
     theme?: string;
     text: string;
-    transition: string;
-    previewHover: string;
 
     padding?: string;
     radius?: string;

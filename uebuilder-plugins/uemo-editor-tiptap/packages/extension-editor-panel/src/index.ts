@@ -1,13 +1,13 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 11:38:23
+ * @LastEditTime: 2025-05-09 17:46:37
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
     rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
     setData: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
-    preview?: () => void; // 预览回调
+    preview?: (param?: any) => void; // 预览回调
     focus: () => void; // 聚焦回调
     close?: () => void; // 关闭回调
 };

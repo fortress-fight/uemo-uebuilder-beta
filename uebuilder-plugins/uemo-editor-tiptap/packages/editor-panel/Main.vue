@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 11:37:30
+ * @LastEditTime: 2025-05-09 17:48:21
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" @onHide="onHide">
@@ -81,7 +81,7 @@ const eventBus = mitt<{
     focus: undefined;
     show: undefined;
     close: undefined;
-    preview: undefined;
+    preview: any;
     update: EditorPanelAttrsMap[T];
 }>();
 
@@ -131,8 +131,8 @@ const popPanelParams = usePopPanelParam(typeRef, rectRef, {
 /**
  * 预览事件处理
  */
-function preview() {
-    eventBus.emit("preview");
+function preview(param: any) {
+    eventBus.emit("preview", param);
 }
 
 function checkValueType<T extends keyof EditorPanelAttrsMap>(
@@ -192,8 +192,8 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
         param.setData(value);
     });
 
-    eventBus.on("preview", () => {
-        param.preview?.();
+    eventBus.on("preview", (data) => {
+        param.preview?.(data);
     });
 
     eventBus.on("focus", () => {
