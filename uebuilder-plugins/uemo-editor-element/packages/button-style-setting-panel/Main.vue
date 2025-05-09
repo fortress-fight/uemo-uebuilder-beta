@@ -1,10 +1,10 @@
 <!--
  * @Description: 按钮样式属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 13:46:27
+ * @LastEditTime: 2025-05-09 14:52:18
 -->
 <template>
-    <UeElEditorPanel :class="$style['button-style-setting-panel']" :title="title || t('UNIT_BUTTON')">
+    <UeElEditorPanel :class="$style['button-style-setting-panel']" :title="title || t('UNIT_BUTTON') + t('UNIT_STYLE')">
         <UeElButtonHoverEffectSetting is-first v-if="mode === 'hover'" v-model:value="animation" />
         <template v-if="isRotateTheme || isOutlineTheme">
             <UeElColorSettingGroup
