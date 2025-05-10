@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 19:01:46
+ * @LastEditTime: 2025-05-10 11:47:14
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -10,7 +10,7 @@
                 <UeElSettingGroup :title="t('UNIT_TEXT')">
                     <template #body>
                         <UeElControlGroup>
-                            <UeElTextInput :value="text" @confirm="text = $event" />
+                            <UeElTextInput required autoTrim :value="text" @confirm="text = $event" />
                         </UeElControlGroup>
                     </template>
                 </UeElSettingGroup>
