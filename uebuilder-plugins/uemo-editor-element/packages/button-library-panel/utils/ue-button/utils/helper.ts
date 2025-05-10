@@ -18,24 +18,38 @@ export function initHoverEvent(button: HTMLElement) {
 
     if ($(button).attr("data-trigger-method")) return;
 
+    function hover() {
+        ButtonEventEventBus.emit($(button), "ue.button.hover");
+    }
+
+    function leave() {
+        ButtonEventEventBus.emit($(button), "ue.button.leave");
+    }
+
+    $(button).on(enterEventName + ".hover", hover);
+    $(button).on(leaveEventName + ".hover", leave);
+
     const controller = {
         hover: () => {
-            ButtonEventEventBus.emit($(button), "ue.button.hover");
+            $(button).addClass($pageStyle["state-hover"]);
         },
         leave: () => {
-            ButtonEventEventBus.emit($(button), "ue.button.leave");
+            $(button).removeClass($pageStyle["state-hover"]);
         },
         destroy: () => {
-            $(button).off(enterEventName + ".hover", controller.hover);
-            $(button).off(leaveEventName + ".hover", controller.leave);
+            $(button).removeClass($pageStyle["state-hover"]);
 
+            $(button).off(enterEventName + ".hover", hover);
+            $(button).off(leaveEventName + ".hover", leave);
+
+            ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.hover);
+            ButtonEventEventBus.unbind($(button), "ue.button.leave", controller.leave);
             ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
-    $(button).on(enterEventName + ".hover", controller.hover);
-    $(button).on(leaveEventName + ".hover", controller.leave);
-
+    ButtonEventEventBus.bind($(button), "ue.button.hover", controller.hover);
+    ButtonEventEventBus.bind($(button), "ue.button.leave", controller.leave);
     ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }
 

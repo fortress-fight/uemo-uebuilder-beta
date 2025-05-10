@@ -72,7 +72,12 @@ export async function initBackgroundHoverEffect(button: HTMLElement) {
             gsap.fromTo(
                 button,
                 { background: bgColor, color: color },
-                { background: hoverBgColor, color: hoverColor, duration: 0.3 }
+                {
+                    background: hoverBgColor,
+                    color: hoverColor,
+                    duration: 0.3,
+                    clearProps: "background,color",
+                }
             );
         },
         leave: () => {
