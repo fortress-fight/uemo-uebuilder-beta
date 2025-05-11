@@ -17,6 +17,11 @@
             @update:select="insertButtonContent"
             :class="$style['node-placeholder-panel']"
         />
+        <UeElImageLibraryPanel
+            v-if="nodeName === 'ImagePlaceholder'"
+            @update:select="insertImageContent"
+            :class="$style['node-placeholder-panel']"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -48,6 +53,12 @@ const insertButtonContent = (value?: ButtonItemAttrs) => {
     if (!value) return;
 
     editor?.chain().focus().insertButton(value).run();
+};
+
+const insertImageContent = (value?: string) => {
+    if (!value) return;
+
+    // editor?.chain().focus().insertImage(value).run();
 };
 
 const handleEndEdit = () => {

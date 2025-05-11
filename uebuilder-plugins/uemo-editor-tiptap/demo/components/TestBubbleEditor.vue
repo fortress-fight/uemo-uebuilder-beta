@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-06 08:54:54
+ * @LastEditTime: 2025-05-12 01:01:27
 -->
 <template>
     <TestArea
@@ -25,16 +25,16 @@ import { testTextContent } from "~/demo/data/test-content";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOptionTitle?: string })[] = [
     {
+        testOptionTitle: "默认",
+        content: testTextContent.data,
+    },
+    {
         testOptionTitle: "按钮",
         content: testTextContent.buttonData,
     },
     {
         testOptionTitle: "链接",
         content: testTextContent.linkData,
-    },
-    {
-        testOptionTitle: "默认",
-        content: testTextContent.data,
     },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
