@@ -8,8 +8,8 @@
     </div>
 </template>
 <script lang="ts" setup>
-import $pageStyle from "../utils/ue-button/app.module.scss";
-import ButtonDom from "./ButtonDom.vue";
+import $pageStyle from "@stone/uemo-editor-page/src/style/app.module.scss";
+import ButtonDom from "@stone/uemo-editor-page/packages/button/ButtonDom.vue";
 
 defineOptions({ name: "UeElPreviewButton" });
 
