@@ -12,8 +12,8 @@ export const placeholderMap = {
         icon: operMap.insertButton.icon,
     },
     GridPlaceholder: {
-        title: operMap.inertGridGroup.tip,
-        icon: operMap.inertGridGroup.icon,
+        title: operMap.insertGridGroup.tip,
+        icon: operMap.insertGridGroup.icon,
     },
     SplinePlaceholder: {
         title: operMap.insertSpline.tip,
@@ -48,7 +48,7 @@ export const placeholderMap = {
         icon: operMap.insertMapFrame.icon,
     },
     ImagePlaceholder: {
-        title: operMap.addImage.tip,
-        icon: operMap.addImage.icon,
+        title: operMap.insertImage.tip,
+        icon: operMap.insertImage.icon,
     },
 } as const;

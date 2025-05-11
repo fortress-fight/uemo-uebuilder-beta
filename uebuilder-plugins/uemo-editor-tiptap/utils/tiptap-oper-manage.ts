@@ -261,7 +261,7 @@ const operManage = {
 
     // #region 分隔线
 
-    hrRule: {
+    insertHrRule: {
         title: t("NODE_HR"),
         subtitle: t("NODE_HR_DESC"),
         tip: t("TIP_INSERT_HR"),
@@ -274,7 +274,7 @@ const operManage = {
 
     // #region 网格相关
 
-    inertGridGroup: {
+    insertGridGroup: {
         title: t("NODE_GRID"),
         subtitle: t("NODE_GRID_DESC"),
         tip: t("TIP_INSERT_GRID"),
@@ -286,7 +286,7 @@ const operManage = {
 
     // #region 图片相关
 
-    addImage: {
+    insertImage: {
         title: t("NODE_IMAGE"),
         subtitle: t("NODE_IMAGE_DESC"),
         tip: t("TIP_INSERT_IMAGE"),

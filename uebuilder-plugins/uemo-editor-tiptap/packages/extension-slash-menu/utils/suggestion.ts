@@ -18,11 +18,11 @@ import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 function filterMenuItem(editor: Editor, item: { title: string; name: string }): boolean {
     const { state } = editor.view;
 
-    if (isInTable(state) && ["inertTable", "inertGridGroup"].includes(item.name)) {
+    if (isInTable(state) && ["inertTable", "insertGridGroup"].includes(item.name)) {
         return false;
     }
 
-    if (isInGridGroup(state) && ["inertGridGroup", "inertTable"].includes(item.name)) {
+    if (isInGridGroup(state) && ["insertGridGroup", "inertTable"].includes(item.name)) {
         return false;
     }
 

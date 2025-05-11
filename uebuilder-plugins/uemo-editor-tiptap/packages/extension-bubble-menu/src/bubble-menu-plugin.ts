@@ -12,7 +12,7 @@ import { getAIStorage } from "../../extension-ai/helper";
  */
 const NO_MENU_NODE_NAME = [
     "nodePlaceholder",
-    "hrRule",
+    "insertHrRule",
     "divideBlock",
     "image",
     "gridGroup",
