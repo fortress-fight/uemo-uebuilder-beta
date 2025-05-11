@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-10 11:47:14
+ * @LastEditTime: 2025-05-10 19:47:04
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -27,7 +27,7 @@
             <template v-slot:design>
                 <UeElSettingGroup>
                     <template #body>
-                        <UeElResourceSetting @update:value="replaceButton" type="button" />
+                        <UeElResourceSetting @update:value="replaceButton" :removable="false" type="button" />
                     </template>
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('PADDING_SETTING_TITLE')">
