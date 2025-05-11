@@ -194,12 +194,11 @@ export const ButtonItem = Node.create<ButtonOptions>({
 
                     if (!(dom instanceof HTMLElement)) return false;
 
+                    const buttonDom = dom.children[0];
                     if (state === "hover") {
-                        const buttonDom = dom.children[0];
-                        $(buttonDom).trigger("ue.button.hover");
+                        $(buttonDom).trigger("ue.button.pointerenter");
                     } else {
-                        const buttonDom = dom.children[0];
-                        $(buttonDom).trigger("ue.button.leave");
+                        $(buttonDom).trigger("ue.button.pointerleave");
                     }
 
                     return true;
