@@ -14,7 +14,7 @@ import type { ButtonItemAttrs } from "../src";
 
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
-import ButtonDom from "@stone/uemo-editor-element/packages/button-library-panel/sub-components/ButtonDom.vue";
+import ButtonDom from "@stone/uemo-editor-page/packages/button/ButtonDom.vue";
 
 import pageStyle from "../../../src/app.module.scss";
 
