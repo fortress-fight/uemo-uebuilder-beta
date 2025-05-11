@@ -4,40 +4,16 @@
         ref="rootDom"
         :class="[$style['preview-button'], $pageStyle['page-editor']]"
     >
-        <component ref="button" :class="$style['button']" :data="data" :is="componentName" />
+        <ButtonDom ref="button" :class="$style['button']" :data="data" />
     </div>
 </template>
 <script lang="ts" setup>
 import $pageStyle from "../utils/ue-button/app.module.scss";
-import ButtonNormal from "./ButtonNormal.vue";
-import ButtonRotate from "./ButtonRotate.vue";
-import { ueElButton } from "../utils/ue-button";
+import ButtonDom from "./ButtonDom.vue";
 
-defineOptions({ name: "UeElPreviewButton", components: { ButtonNormal, ButtonRotate } });
+defineOptions({ name: "UeElPreviewButton" });
 
-const props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();
-const buttonRef = useTemplateRef<InstanceType<typeof ButtonNormal>>("button");
-
-const componentName = computed(() => {
-    switch ((props.data.theme || "").split("-")[0]) {
-        case "rotate": {
-            return "ButtonRotate";
-        }
-
-        default:
-            return "ButtonNormal";
-    }
-});
-
-onMounted(() => {
-    if (!(buttonRef.value?.$el instanceof HTMLElement)) return;
-
-    const { kill } = ueElButton.initButton([buttonRef.value.$el]);
-
-    onBeforeUnmount(() => {
-        kill();
-    });
-});
+const _props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();
 </script>
 <style lang="scss" module>
 .preview-button {

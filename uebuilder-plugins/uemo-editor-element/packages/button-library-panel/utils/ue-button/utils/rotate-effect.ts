@@ -21,14 +21,12 @@ export function initRotateEffect(button: HTMLElement) {
         },
         destroy: () => {
             ButtonEventEventBus.unbind($(button), "ue.button.resize", updateOriginX);
-            ButtonEventEventBus.unbind($(button), "ue.button.play", controller.play);
             ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.play);
             ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
 
     ButtonEventEventBus.bind($(button), "ue.button.resize", updateOriginX);
-    ButtonEventEventBus.bind($(button), "ue.button.play", controller.play);
     ButtonEventEventBus.bind($(button), "ue.button.hover", controller.play);
     ButtonEventEventBus.bind($(button), "ue.button.destroy", controller.destroy);
 }

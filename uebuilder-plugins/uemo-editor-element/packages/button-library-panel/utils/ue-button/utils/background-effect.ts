@@ -39,60 +39,56 @@ export async function initBackgroundHoverEffect(button: HTMLElement) {
      */
     const getPropertyValue = () => {
         // 初始化颜色
-        const color = btnStyle.getPropertyValue("--color");
         const bgColor = toLinearGradient(getBackgroundColor());
-        const hoverColor = btnStyle.getPropertyValue("--hover-color") || color;
         const hoverBgColor = toLinearGradient(getHoverBackgroundColor()) || bgColor;
 
         // 判断是否需要动画过渡
         const needsAnimation = bgColor.includes("linear-gradient") || hoverBgColor?.includes("linear-gradient");
+        const transition = needsAnimation ? "0.26s ease, background 0s" : undefined;
 
         // 设置过渡效果
-        $(button).css(
-            "transition",
-            needsAnimation ? "0.26s ease, background 0s, color 0s" : "0.26s ease, background 0s"
-        );
+        if (transition) {
+            $(button).css("transition", transition);
+        }
 
         return {
-            color,
             bgColor,
-            hoverColor,
             hoverBgColor,
-            needsAnimation,
+            transition,
         };
     };
 
     // 创建动画控制器
     const controller = {
         hover: () => {
-            const { color, bgColor, hoverColor, hoverBgColor, needsAnimation } = getPropertyValue();
+            const { bgColor, hoverBgColor, transition } = getPropertyValue();
 
-            if (!needsAnimation) return;
+            if (!transition) return;
 
             gsap.fromTo(
                 button,
-                { background: bgColor, color: color },
+                { background: bgColor, transition },
                 {
                     background: hoverBgColor,
-                    color: hoverColor,
                     duration: 0.3,
-                    clearProps: "background,color",
+                    clearProps: "background,transition",
+                    overwrite: "auto",
                 }
             );
         },
         leave: () => {
-            const { color, bgColor, hoverColor, hoverBgColor, needsAnimation } = getPropertyValue();
+            const { bgColor, hoverBgColor, transition } = getPropertyValue();
 
-            if (!needsAnimation) return;
+            if (!transition) return;
 
             gsap.fromTo(
                 button,
-                { background: hoverBgColor, color: hoverColor },
+                { background: hoverBgColor, transition },
                 {
                     background: bgColor,
-                    color: color,
                     duration: 0.3,
-                    clearProps: "background,color",
+                    overwrite: "auto",
+                    clearProps: "background,transition",
                 }
             );
         },

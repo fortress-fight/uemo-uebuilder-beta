@@ -16,37 +16,48 @@ export function initHoverEvent(button: HTMLElement) {
     const enterEventName = isMobile ? "touchstart" : "pointerenter";
     const leaveEventName = isMobile ? "touchend" : "pointerleave";
 
+    // 如果指定了触发方式，则不进行初始化
     if ($(button).attr("data-trigger-method")) return;
 
-    function hover() {
-        ButtonEventEventBus.emit($(button), "ue.button.hover");
-    }
-
-    function leave() {
-        ButtonEventEventBus.emit($(button), "ue.button.leave");
-    }
-
-    $(button).on(enterEventName + ".hover", hover);
-    $(button).on(leaveEventName + ".hover", leave);
-
+    let hasHover = false;
     const controller = {
-        hover: () => {
+        pointerenter: () => {
+            hasHover = true;
             $(button).addClass($pageStyle["state-hover"]);
+            ButtonEventEventBus.emit($(button), "ue.button.hover");
+        },
+        pointerleave: () => {
+            if (!hasHover) return;
+            hasHover = false;
+            $(button).removeClass($pageStyle["state-hover"]);
+            ButtonEventEventBus.emit($(button), "ue.button.leave");
+        },
+        hover: () => {
+            //
         },
         leave: () => {
-            $(button).removeClass($pageStyle["state-hover"]);
+            //
         },
         destroy: () => {
             $(button).removeClass($pageStyle["state-hover"]);
 
-            $(button).off(enterEventName + ".hover", hover);
-            $(button).off(leaveEventName + ".hover", leave);
+            $(button).off(enterEventName + ".hover", controller.pointerenter);
+            $(button).off(leaveEventName + ".leave", controller.pointerleave);
+
+            ButtonEventEventBus.unbind($(button), "ue.button.pointerenter", controller.pointerenter);
+            ButtonEventEventBus.unbind($(button), "ue.button.pointerleave", controller.pointerleave);
 
             ButtonEventEventBus.unbind($(button), "ue.button.hover", controller.hover);
             ButtonEventEventBus.unbind($(button), "ue.button.leave", controller.leave);
             ButtonEventEventBus.unbind($(button), "ue.button.destroy", controller.destroy);
         },
     };
+
+    $(button).on(enterEventName + ".hover", controller.pointerenter);
+    $(button).on(leaveEventName + ".leave", controller.pointerleave);
+
+    ButtonEventEventBus.bind($(button), "ue.button.pointerenter", controller.pointerenter);
+    ButtonEventEventBus.bind($(button), "ue.button.pointerleave", controller.pointerleave);
 
     ButtonEventEventBus.bind($(button), "ue.button.hover", controller.hover);
     ButtonEventEventBus.bind($(button), "ue.button.leave", controller.leave);
