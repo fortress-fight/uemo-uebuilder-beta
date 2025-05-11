@@ -35,6 +35,7 @@
     "dependencies": {
         "@inquirer/prompts": "^3.3.0",
         "@stone/uemo-editor-element": "4.0.0",
+        "@stone/uemo-editor-tiptap": "4.0.0",
         "@stone/uemo-editor-panel": "4.0.0",
         "@stone/uemo-share-icon-font": "4.0.0",
         "@stone/vue-cli-service": "4.0.0",
