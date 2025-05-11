@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 13:34:47
+ * @LastEditTime: 2025-05-11 10:23:40
 -->
 <template>
     <div
@@ -69,7 +69,7 @@ import { getPopPanelParams } from "../pop-panel/utils/helper";
 import { settingGroupPopPanelPropsKey } from "./index";
 
 defineOptions({ name: "UeElSettingGroup" });
-const _prop = withDefaults(defineProps<UeElSettingGroupBaseProps>(), {
+const props = withDefaults(defineProps<UeElSettingGroupBaseProps>(), {
     disable: false,
 });
 const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
@@ -89,7 +89,9 @@ const popPanelProps = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(()
     return getPopPanelParams("editorPanel", rootDomRef.value);
 });
 
-provide(settingGroupPopPanelPropsKey, popPanelProps);
+const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
+
+provide(settingGroupPopPanelPropsKey, props.isSub ? injectSettingGroupPopPanelProps : popPanelProps);
 </script>
 <style lang="scss" module>
 .editor-setting-group {
