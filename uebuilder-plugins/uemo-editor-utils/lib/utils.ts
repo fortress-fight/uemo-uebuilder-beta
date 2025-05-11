@@ -113,7 +113,7 @@ export function loadScript(dom: HTMLElement, param: { title: string; source: str
     return new Promise<{ id: string; source: string }>((res, rej) => {
         if (!source || !dom) return rej(new Error("load script error: source or dom is null"));
 
-        if (document.querySelector("#" + useId)) {
+        if (document.querySelector(`[src="${source}"]`)) {
             return res({ id: useId, source: param.source });
         }
 
