@@ -343,6 +343,31 @@ declare global {
          * @description Lottie 库类型
          */
         type LottieLibraryType = "icon" | "normal";
+
+        /**
+         * @description 链接设置值
+         */
+        type LinkValue =
+            | {
+                  type: "link";
+                  link: string;
+                  target: "_blank" | "_self";
+                  triggerArea?: string;
+              }
+            | {
+                  type: "function";
+                  link: string;
+                  detail: "anchor" | "download" | "";
+                  triggerArea?: string;
+              }
+            | {
+                  type: "frame";
+                  link: string;
+                  triggerArea?: string;
+                  popLayer?: {
+                      width?: string;
+                  };
+              };
     }
 
     namespace UE_PLUGIN_OPTIONS {
