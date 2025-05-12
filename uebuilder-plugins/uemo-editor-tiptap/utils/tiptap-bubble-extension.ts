@@ -46,6 +46,7 @@ import { Placeholder } from "../packages/extension-placeholder";
 import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
 import { NewLine } from "../packages/extension-new-line/src";
 import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
+import { Image } from "../packages/extension-image/src";
 
 // #endregion
 
@@ -108,6 +109,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         NewLine,
         ButtonItem,
         ButtonRow,
+        Image,
     ];
 
     return [...baseExtensions, ...customExtensions];

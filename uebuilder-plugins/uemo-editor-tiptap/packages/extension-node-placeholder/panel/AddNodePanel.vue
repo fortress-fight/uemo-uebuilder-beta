@@ -60,7 +60,7 @@ const insertButtonContent = (value?: ButtonItemAttrs) => {
 const insertImageContent = (value?: string) => {
     if (!value) return;
 
-    // editor?.chain().focus().insertImage(value).run();
+    editor?.chain().focus().insertImage(value).run();
 };
 
 const handleEndEdit = () => {
