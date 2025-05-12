@@ -78,7 +78,7 @@ export function initLottieIcon(button: HTMLElement) {
     function handleLottie(lottieDom: DotLottiePlayer, action: "hover" | "ready" | "reset") {
         if (!lottieDom) return;
 
-        const lottieItem = lottieDom.getLottie();
+        const lottieItem = lottieDom.getLottie?.();
         if (!lottieItem) return;
 
         switch (action) {
