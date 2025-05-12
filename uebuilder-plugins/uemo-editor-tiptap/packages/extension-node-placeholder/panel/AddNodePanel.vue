@@ -27,6 +27,8 @@
 <script lang="ts" setup>
 import type { ButtonItemAttrs } from "@stone/uemo-editor-tiptap/packages/extension-button/src";
 
+import { isNodeSelection } from "@tiptap/core";
+
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 const { editor } = useInjectTiptapEditor();
@@ -62,7 +64,12 @@ const insertImageContent = (value?: string) => {
 };
 
 const handleEndEdit = () => {
-    editor?.chain().focus().deleteSelection().run();
+    const selection = editor?.state.selection;
+    if (isNodeSelection(selection)) {
+        if (selection.node.type.name === "nodePlaceholder") {
+            editor?.chain().focus().deleteSelection().run();
+        }
+    }
 };
 </script>
 <style lang="scss" module>
