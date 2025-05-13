@@ -1,7 +1,8 @@
 import type { TYPE_NODE_PLACEHOLDER } from "../data";
+import type { NodePlaceholderAttrs } from "../src";
 
+import { Node, type Attribute } from "@tiptap/core";
 import { VueNodeViewRenderer } from "@tiptap/vue-3";
-import { Node } from "@tiptap/core";
 
 import $pageStyle from "../../../src/app.module.scss";
 
@@ -40,7 +41,9 @@ export const NodePlaceholder = Node.create<NodePlaceholderOptions>({
                 getAttrs: (el) => {
                     if (el instanceof HTMLElement) {
                         return {
+                            nodeId: el.getAttribute("data-node-id"),
                             nodeName: el.getAttribute("data-node-name"),
+                            nodeLoading: el.getAttribute("data-node-loading"),
                         };
                     }
                     return {};
@@ -50,7 +53,11 @@ export const NodePlaceholder = Node.create<NodePlaceholderOptions>({
     },
 
     addAttributes() {
-        return { nodeName: { default: null } };
+        return {
+            nodeId: { default: null },
+            nodeName: { default: null },
+            nodeLoading: { default: false },
+        } as Record<keyof NodePlaceholderAttrs, Attribute>;
     },
 
     renderHTML() {

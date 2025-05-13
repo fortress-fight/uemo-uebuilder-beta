@@ -1,7 +1,7 @@
 <!--
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-04-29 18:44:16
+ * @LastEditTime: 2025-05-13 16:16:16
 -->
 <template>
     <node-view-wrapper
@@ -11,16 +11,22 @@
         :class="$style['node-placeholder-wrapper']"
         data-drag-handle
     >
-        <div ref="rootDom" :class="$style['tiptap-node-placeholder']" class="w-full" :show="showPanel">
+        <div ref="rootDom" :class="$style['tiptap-node-placeholder']" class="w-full">
             <div :class="$style['btn--add-node']" class="flex items-center">
-                <UeElIcon v-if="info.icon" class="mr-2" :name="info.icon" />
+                <UeElIcon
+                    v-if="nodeAttrs.nodeLoading"
+                    :class="$style['loading-ic']"
+                    class="mr-2"
+                    name="icon-app-loading"
+                />
+                <UeElIcon v-else-if="info.icon" class="mr-2" :name="info.icon" />
                 <span class="block">{{ info.title }}</span>
             </div>
         </div>
     </node-view-wrapper>
 </template>
 <script lang="ts" setup>
-import type { TYPE_NODE_PLACEHOLDER } from "../data";
+import type { NodePlaceholderAttrs } from "../src";
 
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
@@ -28,14 +34,24 @@ import { placeholderMap } from "../data";
 
 const prop = defineProps(nodeViewProps);
 
-const showPanel = computed(() => prop.selected);
-const nodeAttrs = computed(() => prop.node.attrs as { nodeName: TYPE_NODE_PLACEHOLDER });
+const nodeAttrs = computed(() => prop.node.attrs as NodePlaceholderAttrs);
 
 const info = computed(() => {
     return placeholderMap[nodeAttrs.value.nodeName] || { title: "未知节点", icon: "icon-unknown" };
 });
 </script>
 <style lang="scss" module>
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .node-placeholder-wrapper {
     cursor: pointer;
     &[data-placeholder] {
@@ -68,6 +84,9 @@ const info = computed(() => {
         &:hover {
             background-color: #ececec;
         }
+    }
+    .loading-ic {
+        animation: rotate 2s infinite linear;
     }
 }
 </style>

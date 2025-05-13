@@ -38,11 +38,15 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const isNodePlaceholder = editor.isActive("nodePlaceholder");
 
-    return isNodePlaceholder;
+    return isNodePlaceholder && !nodeLoading.value;
 };
 
 const nodeName = computed(() => {
     return editor?.getAttributes("nodePlaceholder").nodeName;
+});
+
+const nodeLoading = computed(() => {
+    return editor?.getAttributes("nodePlaceholder").nodeLoading;
 });
 
 const insertTextContent = (value?: string) => {
