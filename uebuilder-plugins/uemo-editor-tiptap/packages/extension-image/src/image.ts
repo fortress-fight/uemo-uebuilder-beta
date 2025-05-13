@@ -1,7 +1,9 @@
 import type { ImageAttrs } from "./index";
 
 import { VueNodeViewRenderer } from "@tiptap/vue-3";
-import { Node, type Attribute } from "@tiptap/core";
+import { Node, type Attribute, nodeInputRule, nodePasteRule } from "@tiptap/core";
+
+import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import ImageView from "../view/Image.vue";
 
@@ -11,10 +13,20 @@ export interface ImageOptions {
     HTMLAttributes: Record<string, any>;
 }
 
+export const markdownImageReg = /(?:^|\s)(!\[(.+|:?)]\((\S+)(?:(?:\s+)["'](\S+)["'])?\))$/;
+
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         image: {
+            /**
+             * 插入图片
+             */
             insertImage: (src: string) => ReturnType;
+
+            /**
+             * 替换图片
+             */
+            updateImageAttrs: (attrs: Partial<ImageAttrs>) => ReturnType;
         };
     }
 }
@@ -110,7 +122,45 @@ export const Image = Node.create<ImageOptions>({
 
         if (!src) return ["p"];
 
-        return ["div"];
+        return ["img", HTMLAttributes];
+    },
+
+    addInputRules() {
+        return [
+            nodeInputRule({
+                find: markdownImageReg,
+                type: this.type,
+                getAttributes: (match) => {
+                    const [, , alt, src, title] = match;
+
+                    return { src, alt, title };
+                },
+            }),
+        ];
+    },
+    addPasteRules() {
+        return [
+            nodePasteRule({
+                find: (text: string) => {
+                    if (isImageReg.test(text)) {
+                        const match = isImageReg.exec(text);
+                        if (!match) return null;
+                        return [
+                            {
+                                index: 0,
+                                text: match.input,
+                                data: { src: match.input },
+                            },
+                        ];
+                    }
+                    return null;
+                },
+                type: this.type,
+                getAttributes: (match) => {
+                    return { src: match.input };
+                },
+            }),
+        ];
     },
 
     addCommands() {
@@ -122,6 +172,12 @@ export const Image = Node.create<ImageOptions>({
                         type: this.name,
                         attrs: { src },
                     });
+                },
+
+            updateImageAttrs:
+                (attrs: Partial<ImageAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
                 },
         };
     },

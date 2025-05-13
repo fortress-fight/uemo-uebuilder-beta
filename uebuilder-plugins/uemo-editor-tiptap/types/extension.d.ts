@@ -8,6 +8,7 @@ import type { LineHeightAttrs } from "../packages/extension-line-height/src";
 import type { LetterSpacingAttrs } from "../packages/extension-letter-spacing/src";
 import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/extension-editor-panel/src";
 import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-button/src";
+import type { ImageAttrs } from "../packages/extension-image/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -47,6 +48,9 @@ declare global {
         };
         type ButtonItem = {
             attrs: ButtonItemAttrs;
+        };
+        type Image = {
+            attrs: ImageAttrs;
         };
     }
 }

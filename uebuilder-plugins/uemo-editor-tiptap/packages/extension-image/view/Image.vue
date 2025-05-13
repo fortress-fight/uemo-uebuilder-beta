@@ -3,7 +3,7 @@
         :class="pageStyle.img_wrapper"
         :style="{ 'text-align': attrs.align }"
         class="drag-handle"
-        contenteditable="false"
+        :contenteditable="true"
         draggable="true"
         data-drag-handle
         :data-image-effect="attrs.imageEffect?.type"

@@ -39,4 +39,19 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    imageData: `
+        <img
+            src="https://images.unsplash.com/photo-1498429089284-41f8cf3ffd39?ixid=M3wxNzk2NDF8MHwxfHNlYXJjaHw2fHxXYWxscGFwZXJ8emgtSGFuc3wxfHx8fDE3NDcxMDMwNTJ8MA&amp;ixlib=rb-4.1.0&amp;w=1200"
+            style=""
+            imagemask=""
+            align="left"
+            pos=""
+            background=""
+            width=""
+            height=""
+            radius=""
+            shadow=""
+            uploadprogress=""
+        />
+    `,
 };
