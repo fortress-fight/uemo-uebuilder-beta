@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 19:10:53
+ * @LastEditTime: 2025-05-13 17:12:53
 -->
 <template>
     <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams" :mask="mask">
@@ -20,6 +20,7 @@
 import type { FloatingMenuPluginProps } from "../extension-floating-menu/src/index";
 import type { UeTiptapFloatingMenuBaseProps } from "./index";
 
+import { limitShift } from "@stone/uemo-editor-utils/lib/floating-ui";
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { FloatingMenuPlugin } from "../extension-floating-menu/src";
 
@@ -88,7 +89,7 @@ const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) =>
                         middleware: [
                             ["flip", { crossAxis: true, padding: 17 }],
                             ["offset", { mainAxis: 10 }],
-                            ["shift", { crossAxis: true, padding: 17 }],
+                            ["shift", { crossAxis: true, padding: 17, limiter: limitShift() }],
                         ],
                     },
                     refEl: {

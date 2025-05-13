@@ -1,7 +1,7 @@
 import type { ReferenceElement, FloatingElement } from "@floating-ui/dom";
 import type { ExtendedMiddlewareItem, EnhancedComputePositionConfig, ExtendedMiddleware } from "./type";
 
-import { computePosition, shift, offset, size, flip } from "@floating-ui/dom";
+import { computePosition, shift, offset, size, flip, limitShift } from "@floating-ui/dom";
 
 export * from "@floating-ui/dom";
 export type { EnhancedComputePositionConfig };
@@ -52,3 +52,5 @@ export function computeFloatingPosition(
     const calcOptions = options ? { ...options, middleware: useMiddleArea } : undefined;
     return computePosition(reference, floating, calcOptions);
 }
+
+export { limitShift };
