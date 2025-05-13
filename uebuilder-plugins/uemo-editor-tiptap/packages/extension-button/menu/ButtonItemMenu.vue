@@ -1,7 +1,7 @@
 <template>
     <UeTiptapEditorFloatMenu
         plugin-key="buttonItemMenu"
-        title="按钮"
+        :title="t('UNIT_BUTTON')"
         :menu-items="menuItems"
         :should-show="shouldShow"
     />
@@ -11,6 +11,8 @@ import { isButtonItemNode } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
 defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
+
+const { t } = useI18n();
 
 const menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[] = [
     "editor",
