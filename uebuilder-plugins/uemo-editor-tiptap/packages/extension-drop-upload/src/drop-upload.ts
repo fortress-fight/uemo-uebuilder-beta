@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 16:34:58
+ * @LastEditTime: 2025-05-13 17:29:43
  */
 import type { EditorView } from "@tiptap/pm/view";
 
@@ -26,7 +26,7 @@ export const DropUpload = Extension.create<{
     addProseMirrorPlugins() {
         const plugins: Plugin[] = [
             new Plugin({
-                key: new PluginKey("dropImage"),
+                key: new PluginKey("dropUpload"),
                 props: {
                     handleDrop: (view: EditorView, event: Event) => {
                         if (!(event instanceof DragEvent) || !this.options.createUploadHandler || !event.dataTransfer) {
