@@ -1,7 +1,7 @@
 /*
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-03-27 12:24:46
+ * @LastEditTime: 2025-05-13 14:34:10
  */
 import type { App } from "vue";
 
@@ -31,6 +31,8 @@ export type UeElLoadingBaseProps = {
         progress?: string;
         /** 动画持续时间 */
         duration?: number;
+        /** 进度条尺寸 */
+        className?: string;
     };
     /** 圆形加载配置 */
     circle?: {

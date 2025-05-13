@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 19:49:07
+ * @LastEditTime: 2025-05-13 14:33:51
 -->
 <template>
     <div
@@ -10,7 +10,7 @@
         class="flex justify-center items-center"
         :style="{ '--bg': bg, '--color': color }"
     >
-        <div v-if="type === 'bar'" :class="$style['loading-box--bar']">
+        <div v-if="type === 'bar'" :class="[$style['loading-box--bar'], barInfo.className]">
             <span v-if="barInfo.message !== false" :class="$style['loading-message']">
                 {{ barInfo.message || t("LOADING_TIP") }}
             </span>
@@ -192,7 +192,7 @@ defineExpose({
     border-radius: 5px;
     .loading-message {
         position: absolute;
-        bottom: calc(100% + 10px);
+        bottom: calc(100% + var(--height));
 
         width: 100%;
 
