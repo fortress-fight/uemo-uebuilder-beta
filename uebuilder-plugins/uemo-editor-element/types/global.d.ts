@@ -1,3 +1,5 @@
+import type { CancelTokenSource } from "@stone/uemo-editor-utils/lib/axios";
+
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceLottie as ResourceLottieType } from "@stone/uemo-editor-assets/resource/lottie";
 import type { ResourceRichText as ResourceRichTextType } from "@stone/uemo-editor-assets/resource/rich-text";
@@ -215,9 +217,12 @@ declare global {
          */
         export type UploadHandler = (config: { uploadConfig?: UploadConfig }) => {
             config?: UploadConfig;
+            cancelSource: CancelTokenSource;
+            createCancelSource: () => CancelTokenSource;
             fire: (
                 file: File,
                 param: {
+                    cancelSource?: CancelTokenSource;
                     uploadProgress?: (progress: string) => void;
                 }
             ) => Promise<string>;

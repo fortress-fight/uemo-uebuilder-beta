@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
+import type { AxiosInstance, CancelTokenSource } from "@stone/uemo-editor-utils/lib/axios";
 
 import { i18n } from "../../../src/i18n";
 
@@ -20,6 +20,7 @@ export function imageUpload(
     axiosInstance: AxiosInstance | undefined,
     uploadConfig: UE_EL_UTIL.UploadConfig,
     param: {
+        cancelSource?: CancelTokenSource;
         onProgress?: (progress: string) => void;
     }
 ) {

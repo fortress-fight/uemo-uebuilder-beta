@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
+import type { AxiosInstance, CancelTokenSource } from "@stone/uemo-editor-utils/lib/axios";
 
 import { _get } from "@stone/uemo-editor-utils/lib/lodash";
 import { i18n } from "../../../src/i18n";
@@ -19,7 +19,7 @@ export function normalUpload(
     file: File,
     axiosInstance: AxiosInstance | undefined,
     uploadConfig: UE_EL_UTIL.UploadConfig,
-    param: { onProgress?: (progress: string) => void }
+    param: { cancelSource?: CancelTokenSource; onProgress?: (progress: string) => void }
 ): Promise<string> {
     const { uploadPath, resourceLink, uploadName, uploadFileQueryPath, uploadData, withCredentials } = uploadConfig;
 
@@ -49,30 +49,41 @@ export function normalUpload(
     };
 
     // 发送上传请求
-    return instance.post(uploadPath, formData).then(
-        (response) => {
-            if (!response) {
+    return instance
+        .post(uploadPath, formData, {
+            cancelToken: param.cancelSource?.token,
+        })
+        .then(
+            (response) => {
+                if (!response) {
+                    return Promise.reject(
+                        new UeElError(UeElErrorCode.UPLOAD_NETWORK_ERROR, {
+                            message: t("ERROR_UPLOAD_NETWORK_ERROR"),
+                        })
+                    );
+                }
+
+                if (typeof response === "object") {
+                    const imagePath = _get(response, uploadFileQueryPath).replace("\\", "/");
+                    return Promise.resolve(resourceLink + imagePath);
+                } else {
+                    return Promise.resolve(resourceLink + (response as string));
+                }
+            },
+            (error) => {
+                if (error.code === "ERR_CANCELED") {
+                    return Promise.reject(
+                        new UeElError(UeElErrorCode.UPLOAD_CANCELED, {
+                            message: t("ERROR_UPLOAD_CANCELED"),
+                        })
+                    );
+                }
                 return Promise.reject(
-                    new UeElError(UeElErrorCode.UPLOAD_NETWORK_ERROR, {
-                        message: t("ERROR_UPLOAD_NETWORK_ERROR"),
+                    new UeElError(UeElErrorCode.UPLOAD_FAILED, {
+                        message: t("ERROR_UPLOAD_FAILED"),
                     })
                 );
             }
-
-            if (typeof response === "object") {
-                const imagePath = _get(response, uploadFileQueryPath).replace("\\", "/");
-                return Promise.resolve(resourceLink + imagePath);
-            } else {
-                return Promise.resolve(resourceLink + (response as string));
-            }
-        },
-        () => {
-            return Promise.reject(
-                new UeElError(UeElErrorCode.UPLOAD_FAILED, {
-                    message: t("ERROR_UPLOAD_FAILED"),
-                })
-            );
-        }
-    );
+        );
 }
 // #endregion
