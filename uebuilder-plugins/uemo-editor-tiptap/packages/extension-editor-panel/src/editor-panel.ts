@@ -14,6 +14,7 @@ import { openAttrEditorPanel } from "../utils/helper";
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         editorPanelExtension: {
+            showToast: (type: "success" | "error", message: string) => ReturnType;
             openAttrEditorPanel<T extends keyof EditorPanelAttrsMap>(
                 type: T,
                 attr: EditorPanelAttrsMap[T],
@@ -48,6 +49,7 @@ declare module "@tiptap/core" {
  * 编辑器面板配置选项
  */
 export type EditorPanelOptions = {
+    showToast: (type: "success" | "error", message: string) => void;
     openAttrEditorPanel<T extends keyof EditorPanelAttrsMap>(
         // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
         this: void,
@@ -77,6 +79,9 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
     addOptions() {
         return {
+            showToast: () => {
+                //
+            },
             openAttrEditorPanel,
             closeAttrEditorPanel: () => {
                 //
@@ -145,6 +150,14 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
     addCommands() {
         return {
+            showToast: (type, message) => () => {
+                const handler = this.options.showToast;
+
+                handler(type, message);
+
+                return true;
+            },
+
             openAttrEditorPanel: (type, attr, param) => () => {
                 const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
 
