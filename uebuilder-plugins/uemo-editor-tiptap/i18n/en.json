@@ -111,5 +111,6 @@
     "TIP_INSERT_TABLE": "Insert Table",
     "TIP_INSERT_GRID": "Insert Grid",
     "TIP_INSERT_IMAGE": "Insert Image",
-    "TIP_INSERT_HR": "Insert Divider"
+    "TIP_INSERT_HR": "Insert Divider",
+    "TIP_MAX_UPLOAD_IMAGE_COUNT": "Max {count} images can be uploaded at a time"
 }
