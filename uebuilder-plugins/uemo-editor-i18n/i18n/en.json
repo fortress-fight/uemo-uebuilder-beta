@@ -112,6 +112,7 @@
     "UNIT_FIXED_RATIO": "Fixed Ratio",
     "UNIT_CUSTOM_RATIO": "Custom Ratio",
     "UNIT_CUSTOM_HEIGHT": "Custom Height",
+    "UNIT_MASK": "Mask",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

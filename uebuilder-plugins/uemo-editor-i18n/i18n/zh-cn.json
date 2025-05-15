@@ -112,6 +112,7 @@
     "UNIT_FIXED_RATIO": "固定比例",
     "UNIT_CUSTOM_RATIO": "自定比例",
     "UNIT_CUSTOM_HEIGHT": "自定高度",
+    "UNIT_MASK": "遮罩",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
