@@ -1,18 +1,14 @@
 <template>
     <UeElSettingGroup :title="t('SCROLL_IMAGE_PARALLAX_SETTING_MODE')">
-        <template #body>
-            <UeElSelect
-                v-model:value="scrollHeightType"
-                :options="options"
-                :title="t('SCROLL_IMAGE_PARALLAX_SETTING_MODE')"
-            />
-        </template>
+        <UeElSelect
+            v-model:value="scrollHeightType"
+            :options="options"
+            :title="t('SCROLL_IMAGE_PARALLAX_SETTING_MODE')"
+        />
     </UeElSettingGroup>
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
-        <template #body>
-            <UeElTipGroup v-bind="tipMessage" />
-        </template>
+        <UeElTipGroup v-bind="tipMessage" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

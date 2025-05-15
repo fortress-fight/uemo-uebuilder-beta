@@ -8,9 +8,7 @@
         @confirm="handleConfirm"
     >
         <UeElSettingGroup :title="t('UNIT_LETTER_SPACING')">
-            <template #body>
-                <UeElNumberInput v-bind="inputParam" v-model:value="letterSpacingRef" />
-            </template>
+            <UeElNumberInput v-bind="inputParam" v-model:value="letterSpacingRef" />
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

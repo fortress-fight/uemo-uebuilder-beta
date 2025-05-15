@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图片控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 19:48:03
+ * @LastEditTime: 2025-05-15 11:07:10
 -->
 <template>
     <UeElEditorPanel
@@ -11,49 +11,39 @@
     >
         <!-- 图片资源设置 -->
         <UeElSettingGroup is-first ref="resourceSettingRef">
-            <template #body>
-                <UeElResourceSetting type="image" :removable="false" v-model:value="valueRef.image">
-                    <template v-if="valueRef.image" #operGroup="{ openPopPanel }">
-                        <div :class="$style['oper-bar']" class="w-full grid grid-cols-3">
-                            <template v-for="item in operList" :key="item.type">
-                                <UeElButton
-                                    v-if="item.type === 'replace'"
-                                    v-bind="item.buttonProps"
-                                    @trigger="openPopPanel"
-                                />
-                                <UeElSelect
-                                    v-else-if="item.type === 'size'"
-                                    v-model:value="size"
-                                    :options="sizeOptions"
-                                >
-                                    <template #info>
-                                        <UeElButton v-bind="item.buttonProps" />
-                                    </template>
-                                </UeElSelect>
-                                <UeElSelect v-else v-model:value="adjust" :options="adjustOptions">
-                                    <template #info>
-                                        <UeElButton v-bind="item.buttonProps" />
-                                    </template>
-                                </UeElSelect>
-                            </template>
-                        </div>
-                    </template>
-                </UeElResourceSetting>
-            </template>
+            <UeElResourceSetting type="image" :removable="false" v-model:value="valueRef.image">
+                <template v-if="valueRef.image" #operGroup="{ openPopPanel }">
+                    <div :class="$style['oper-bar']" class="w-full grid grid-cols-3">
+                        <template v-for="item in operList" :key="item.type">
+                            <UeElButton
+                                v-if="item.type === 'replace'"
+                                v-bind="item.buttonProps"
+                                @trigger="openPopPanel"
+                            />
+                            <UeElSelect v-else-if="item.type === 'size'" v-model:value="size" :options="sizeOptions">
+                                <template #info>
+                                    <UeElButton v-bind="item.buttonProps" />
+                                </template>
+                            </UeElSelect>
+                            <UeElSelect v-else v-model:value="adjust" :options="adjustOptions">
+                                <template #info>
+                                    <UeElButton v-bind="item.buttonProps" />
+                                </template>
+                            </UeElSelect>
+                        </template>
+                    </div>
+                </template>
+            </UeElResourceSetting>
         </UeElSettingGroup>
 
         <!-- 对齐方式设置 -->
         <UeElSettingGroup>
-            <template #body>
-                <UeElAlignSetting v-model:value="valueRef.align" />
-            </template>
+            <UeElAlignSetting v-model:value="valueRef.align" />
         </UeElSettingGroup>
 
         <!-- 偏移设置 -->
         <UeElSettingGroup is-last>
-            <template #body>
-                <UeElTranslateSetting v-model:value="valueRef.translate" />
-            </template>
+            <UeElTranslateSetting v-model:value="valueRef.translate" />
         </UeElSettingGroup>
 
         <!-- 滚动效果设置 -->

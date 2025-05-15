@@ -1,25 +1,21 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 16:44:52
+ * @LastEditTime: 2025-05-15 11:14:10
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting-panel']" :title="t('TEXT_DECORATION_TITLE')">
         <!-- 文字样式资源设置 -->
         <UeElSettingGroup is-first>
-            <template #body>
-                <UeElResourceSetting type="textDecoration" v-model:value="svgName" />
-            </template>
+            <UeElResourceSetting type="textDecoration" v-model:value="svgName" />
         </UeElSettingGroup>
 
         <!-- 描边设置 -->
         <UeElSettingGroup :title="t('UNIT_STROKE')">
-            <template #body>
-                <UeElControlGroup :col-count="2">
-                    <UeElNumberInput v-model:value="width" v-bind="widthInputProps" />
-                    <UeElSelect v-model:value="pointer" v-bind="pointerSelectProps" />
-                </UeElControlGroup>
-            </template>
+            <UeElControlGroup :col-count="2">
+                <UeElNumberInput v-model:value="width" v-bind="widthInputProps" />
+                <UeElSelect v-model:value="pointer" v-bind="pointerSelectProps" />
+            </UeElControlGroup>
         </UeElSettingGroup>
 
         <!-- 颜色设置 -->
@@ -27,7 +23,7 @@
 
         <!-- 动画设置 -->
         <UeElSettingGroup v-bind="animateSettingGroup" is-last @trigger="handleTrigger">
-            <template #body v-if="animate">
+            <template v-if="animate">
                 <UeElControlGroup :col-count="2">
                     <UeElNumberInput v-model:value="duration" v-bind="durationInputProps" />
                     <UeElNumberInput v-model:value="delay" v-bind="delayInputProps" />

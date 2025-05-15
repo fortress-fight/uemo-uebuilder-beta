@@ -1,13 +1,11 @@
 <!--
  * @Description: 日历控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:59:04
+ * @LastEditTime: 2025-05-15 11:10:40
 -->
 <template>
     <UeElSettingGroup :class="$style['calender-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <template v-if="!!valueRef" #body>
-            <UeElCalenderSetting v-model:value="valueRef" />
-        </template>
+        <UeElCalenderSetting v-if="!!valueRef" v-model:value="valueRef" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

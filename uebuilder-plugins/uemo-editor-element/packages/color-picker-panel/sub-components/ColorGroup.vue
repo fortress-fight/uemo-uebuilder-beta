@@ -1,16 +1,14 @@
 <template>
     <UeElSettingGroup :class="$style['color-group']">
-        <template #body>
-            <div class="grid grid-cols-9" :class="$style['color-list']">
-                <button
-                    v-for="(item, index) in colors"
-                    :key="index"
-                    :class="$style['color-item']"
-                    :style="{ '--bg': item }"
-                    @click="emit('submit', item)"
-                ></button>
-            </div>
-        </template>
+        <div class="grid grid-cols-9" :class="$style['color-list']">
+            <button
+                v-for="(item, index) in colors"
+                :key="index"
+                :class="$style['color-item']"
+                :style="{ '--bg': item }"
+                @click="emit('submit', item)"
+            ></button>
+        </div>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

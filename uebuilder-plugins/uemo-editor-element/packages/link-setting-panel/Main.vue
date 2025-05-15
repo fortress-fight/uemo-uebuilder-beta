@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-11 17:57:55
+ * @LastEditTime: 2025-05-15 11:12:19
 -->
 <template>
     <UeElEditorPanel
@@ -14,35 +14,27 @@
     >
         <!-- 链接类型 -->
         <UeElSettingGroup :title="t('LINK_TYPE_TITLE')" is-first>
-            <template #body>
-                <UeElSelect v-model:value="linkType" :title="t('UNIT_TYPE')" :options="linkTypeOptions" />
-            </template>
+            <UeElSelect v-model:value="linkType" :title="t('UNIT_TYPE')" :options="linkTypeOptions" />
         </UeElSettingGroup>
 
         <!-- 弹窗链接 -->
         <FrameLink v-if="localValueRef.type === 'frame'" v-model:value="localValueRef">
             <UeElSettingGroup v-if="enableTriggerArea" :title="t('LINK_TARGET_AREA')">
-                <template #body>
-                    <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
-                </template>
+                <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
             </UeElSettingGroup>
         </FrameLink>
 
         <!-- 功能链接 -->
         <FunctionLink v-else-if="localValueRef.type === 'function'" v-model:value="localValueRef">
             <UeElSettingGroup v-if="enableTriggerArea" :title="t('LINK_TARGET_AREA')">
-                <template #body>
-                    <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
-                </template>
+                <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
             </UeElSettingGroup>
         </FunctionLink>
 
         <!-- 网址链接 -->
         <NormalLink v-else-if="localValueRef.type === 'link'" v-model:value="localValueRef">
             <UeElSettingGroup v-if="enableTriggerArea" :title="t('LINK_TARGET_AREA')">
-                <template #body>
-                    <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
-                </template>
+                <UeElSelect :title="t('UNIT_AREA')" :options="triggerOptions" v-model:value="triggerArea" />
             </UeElSettingGroup>
         </NormalLink>
     </UeElEditorPanel>

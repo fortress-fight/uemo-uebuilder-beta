@@ -1,13 +1,11 @@
 <!--
  * @Description: 按钮hover效果属性控制
  * @Author: F-Stone
- * @LastEditTime: 2025-03-19 02:27:25
+ * @LastEditTime: 2025-05-15 11:09:40
 -->
 <template>
     <UeElSettingGroup :class="$style['calender-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <template v-if="!!valueRef" #body>
-            <UeElResourceSetting type="buttonHoverEffect" v-model:value="valueRef" />
-        </template>
+        <UeElResourceSetting v-if="!!valueRef" type="buttonHoverEffect" v-model:value="valueRef" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

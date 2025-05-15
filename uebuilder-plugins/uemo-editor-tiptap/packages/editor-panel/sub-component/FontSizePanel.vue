@@ -9,9 +9,7 @@
         @confirm="handleConfirm"
     >
         <UeElSettingGroup :title="t('UNIT_FONT_SIZE')">
-            <template #body>
-                <UeElFontSizeSetting v-model:value="fontSizeRef" />
-            </template>
+            <UeElFontSizeSetting v-model:value="fontSizeRef" />
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

@@ -1,38 +1,30 @@
 <!--
  * @Description: tiptap 按钮组编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 18:45:48
+ * @LastEditTime: 2025-05-15 11:14:51
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-row']" :title="t('UNIT_BUTTON_ROW')">
         <!-- 属性组 -->
         <UeElSettingGroup :title="t('UNIT_ATTR')">
-            <template #body>
-                <UeElControlGroup>
-                    <UeElSelect v-model:value="dir" :title="t('UNIT_LAYOUT')" :options="dirOptions" />
-                </UeElControlGroup>
-            </template>
+            <UeElControlGroup>
+                <UeElSelect v-model:value="dir" :title="t('UNIT_LAYOUT')" :options="dirOptions" />
+            </UeElControlGroup>
         </UeElSettingGroup>
         <UeElSettingGroup :title="t('UNIT_SPACE')">
-            <template #body>
-                <UeElControlGroup>
-                    <UeElGapSetting v-model:value="gap" />
-                </UeElControlGroup>
-            </template>
+            <UeElControlGroup>
+                <UeElGapSetting v-model:value="gap" />
+            </UeElControlGroup>
         </UeElSettingGroup>
         <UeElSettingGroup>
-            <template #body>
-                <UeElControlGroup>
-                    <UeElAlignSetting v-model:value="align" type="x" />
-                </UeElControlGroup>
-            </template>
+            <UeElControlGroup>
+                <UeElAlignSetting v-model:value="align" type="x" />
+            </UeElControlGroup>
         </UeElSettingGroup>
         <UeElSettingGroup :title="t('UNIT_FILL')">
-            <template #body>
-                <UeElControlGroup>
-                    <UeElCheckBox v-model:value="fill" :text="t('FILL_MODE_TIP')" />
-                </UeElControlGroup>
-            </template>
+            <UeElControlGroup>
+                <UeElCheckBox v-model:value="fill" :text="t('FILL_MODE_TIP')" />
+            </UeElControlGroup>
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

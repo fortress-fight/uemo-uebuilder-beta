@@ -1,13 +1,11 @@
 <!--
  * @Description: 按钮图标属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 03:16:49
+ * @LastEditTime: 2025-05-15 11:09:56
 -->
 <template>
     <UeElSettingGroup :class="$style['calender-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <template v-if="!!valueRef" #body>
-            <UeElButtonIconSetting v-model:value="valueRef" />
-        </template>
+        <UeElButtonIconSetting v-if="!!valueRef" v-model:value="valueRef" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

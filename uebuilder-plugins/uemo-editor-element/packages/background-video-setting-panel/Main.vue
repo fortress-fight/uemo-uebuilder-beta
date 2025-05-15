@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景视频控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 03:13:07
+ * @LastEditTime: 2025-05-15 11:08:35
 -->
 <template>
     <UeElEditorPanel
@@ -10,9 +10,7 @@
     >
         <!-- 视频资源设置 -->
         <UeElSettingGroup is-first>
-            <template #body>
-                <UeElResourceSetting type="video" :removable="false" v-model:value="videoSource" />
-            </template>
+            <UeElResourceSetting type="video" :removable="false" v-model:value="videoSource" />
         </UeElSettingGroup>
 
         <!-- 滚动效果设置 -->

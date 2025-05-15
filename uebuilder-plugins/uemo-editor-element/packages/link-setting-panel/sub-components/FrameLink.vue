@@ -1,49 +1,43 @@
 <!--
  * @Description: 弹窗链接设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 01:08:39
+ * @LastEditTime: 2025-05-15 11:11:36
 -->
 <template>
     <UeElSettingGroup :class="$style['frame-link']" :title="t('LINK_FRAME_CONTENT_TITLE')">
-        <template #body>
-            <UeElControlGroup :col-count="3">
-                <UeElButton
-                    v-for="(item, index) in linkTypeOptions"
-                    :key="index"
-                    :theme="linkType === item.value ? 'fillText' : 'strokeText'"
-                    :icon="{ name: item.icon, size: 16 }"
-                    :text="item.text"
-                    :class="$style['oper-btn']"
-                    @trigger="handleLinkTypeChange(item.value)"
-                />
-            </UeElControlGroup>
-            <UeElTextInput
-                v-if="linkType === 'link'"
-                :auto-trim="true"
-                theme="enterText"
-                :value="normalLink"
-                :placeholder="t('LINK_VIDEO_INPUT_TIP')"
-                @confirm="handleNormalLinkChange"
+        <UeElControlGroup :col-count="3">
+            <UeElButton
+                v-for="(item, index) in linkTypeOptions"
+                :key="index"
+                :theme="linkType === item.value ? 'fillText' : 'strokeText'"
+                :icon="{ name: item.icon, size: 16 }"
+                :text="item.text"
+                :class="$style['oper-btn']"
+                @trigger="handleLinkTypeChange(item.value)"
             />
-            <UeElResourceSetting type="image" v-if="linkType === 'image'" v-model:value="imageLink" />
-            <UeElResourceSetting type="video" v-if="linkType === 'video'" v-model:value="videoLink" />
-        </template>
+        </UeElControlGroup>
+        <UeElTextInput
+            v-if="linkType === 'link'"
+            :auto-trim="true"
+            theme="enterText"
+            :value="normalLink"
+            :placeholder="t('LINK_VIDEO_INPUT_TIP')"
+            @confirm="handleNormalLinkChange"
+        />
+        <UeElResourceSetting type="image" v-if="linkType === 'image'" v-model:value="imageLink" />
+        <UeElResourceSetting type="video" v-if="linkType === 'video'" v-model:value="videoLink" />
     </UeElSettingGroup>
 
     <!-- 弹窗设置 -->
     <UeElSettingGroup :title="t('LINK_FRAME_SETTING_TITLE')">
-        <template #body>
-            <UeElNumberInput v-bind="widthInputProps" v-model:value="popLayerWidth" />
-        </template>
+        <UeElNumberInput v-bind="widthInputProps" v-model:value="popLayerWidth" />
     </UeElSettingGroup>
 
     <slot />
 
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')">
-        <template #body>
-            <UeElTipGroup v-bind="tipMessage" />
-        </template>
+        <UeElTipGroup v-bind="tipMessage" />
     </UeElSettingGroup>
 </template>
 

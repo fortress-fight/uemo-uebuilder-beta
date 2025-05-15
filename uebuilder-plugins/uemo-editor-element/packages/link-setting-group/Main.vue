@@ -1,13 +1,11 @@
 <!--
  * @Description: 链接属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:34:28
+ * @LastEditTime: 2025-05-15 11:11:27
 -->
 <template>
     <UeElSettingGroup :class="$style['link-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <template v-if="!!valueRef" #body>
-            <UeElLinkSetting v-model:value="valueRef" />
-        </template>
+        <UeElLinkSetting v-if="!!valueRef" v-model:value="valueRef" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

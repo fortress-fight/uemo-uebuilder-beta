@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 02:23:47
+ * @LastEditTime: 2025-05-15 11:15:35
 -->
 <template>
     <UeElSettingGroup
@@ -9,19 +9,17 @@
         v-bind="settingGroupParams"
         @trigger="settingGroupTrigger"
     >
-        <template v-if="sortBgList.length" #body>
-            <UeElDraggable v-model:value="sortBgList" class="grid gap-1" ref="draggerListGroupRef">
-                <BackgroundItem v-for="item in sortBgList" :key="item.id" @remove="removeBackground(item.id)">
-                    <BackgroundColor v-if="isColorItem(item)" v-model:value="item.value" />
-                    <BackgroundImage v-else-if="isImageItem(item)" v-model:value="item.value" />
-                    <BackgroundShape v-else-if="isShapeItem(item)" v-model:value="item.value" />
-                    <BackgroundSpline v-else-if="isSplineItem(item)" v-model:value="item.value" />
-                    <BackgroundVideo v-else-if="isVideoItem(item)" v-model:value="item.value" />
-                    <BackgroundBlur v-else-if="isBlurItem(item)" v-model:value="item.value" />
-                    <BackgroundSvg v-else-if="isSvgItem(item)" v-model:value="item.value" />
-                </BackgroundItem>
-            </UeElDraggable>
-        </template>
+        <UeElDraggable v-if="sortBgList.length" v-model:value="sortBgList" class="grid gap-1" ref="draggerListGroupRef">
+            <BackgroundItem v-for="item in sortBgList" :key="item.id" @remove="removeBackground(item.id)">
+                <BackgroundColor v-if="isColorItem(item)" v-model:value="item.value" />
+                <BackgroundImage v-else-if="isImageItem(item)" v-model:value="item.value" />
+                <BackgroundShape v-else-if="isShapeItem(item)" v-model:value="item.value" />
+                <BackgroundSpline v-else-if="isSplineItem(item)" v-model:value="item.value" />
+                <BackgroundVideo v-else-if="isVideoItem(item)" v-model:value="item.value" />
+                <BackgroundBlur v-else-if="isBlurItem(item)" v-model:value="item.value" />
+                <BackgroundSvg v-else-if="isSvgItem(item)" v-model:value="item.value" />
+            </BackgroundItem>
+        </UeElDraggable>
     </UeElSettingGroup>
 </template>
 
@@ -110,11 +108,14 @@ const { backgroundTypeInfo, backgroundTypeParam } = useBackgroundData();
  * @returns {Partial<Record<TYPE_BG_TYPE, number>>} 类型数量映射对象
  */
 const bgLayerCountMap = computed(() => {
-    return (valueRef.value || []).reduce((acc, item) => {
-        const type = item.type;
-        acc[type] = (acc[type] || 0) + 1;
-        return acc;
-    }, {} as Partial<Record<TYPE_BG_TYPE, number>>);
+    return (valueRef.value || []).reduce(
+        (acc, item) => {
+            const type = item.type;
+            acc[type] = (acc[type] || 0) + 1;
+            return acc;
+        },
+        {} as Partial<Record<TYPE_BG_TYPE, number>>
+    );
 });
 
 /**

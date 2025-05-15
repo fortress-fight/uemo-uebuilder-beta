@@ -1,16 +1,14 @@
 <template>
     <UeElSettingGroup v-bind="settingGroup" @trigger="handleTrigger">
-        <template #body v-if="isActive">
-            <UeElControlGroup v-if="isActive" :col-count="triggerMode !== 'enter-leaver' ? 2 : 1">
-                <UeElNumberInput v-bind="inputParam" v-model:value="startPosDis" :title="{ text: t('UNIT_START') }" />
-                <UeElNumberInput
-                    v-if="triggerMode !== 'enter-leaver'"
-                    v-bind="inputParam"
-                    v-model:value="endPosDis"
-                    :title="{ text: t('UNIT_END') }"
-                />
-            </UeElControlGroup>
-        </template>
+        <UeElControlGroup v-if="isActive" :col-count="triggerMode !== 'enter-leaver' ? 2 : 1">
+            <UeElNumberInput v-bind="inputParam" v-model:value="startPosDis" :title="{ text: t('UNIT_START') }" />
+            <UeElNumberInput
+                v-if="triggerMode !== 'enter-leaver'"
+                v-bind="inputParam"
+                v-model:value="endPosDis"
+                :title="{ text: t('UNIT_END') }"
+            />
+        </UeElControlGroup>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

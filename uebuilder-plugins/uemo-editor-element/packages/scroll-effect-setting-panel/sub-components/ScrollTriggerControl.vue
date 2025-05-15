@@ -1,39 +1,37 @@
 <template>
     <UeElSettingGroup :class="$style['scroll-trigger-mode']" :title="t('SCROLL_EFFECT_MODE')">
-        <template #body>
-            <UeElControlGroup :col-count="showFiled.length > 2 && isAutoPlay ? 2 : 1">
-                <UeElSelect
-                    v-model:value="triggerMode"
-                    :disable="testFiledDisable('mode')"
-                    :title="t('UNIT_MODE')"
-                    :options="modeOption"
+        <UeElControlGroup :col-count="showFiled.length > 2 && isAutoPlay ? 2 : 1">
+            <UeElSelect
+                v-model:value="triggerMode"
+                :disable="testFiledDisable('mode')"
+                :title="t('UNIT_MODE')"
+                :options="modeOption"
+            />
+            <template v-if="isAutoPlay">
+                <UeElNumberInput
+                    v-if="showFiled.includes('delay')"
+                    v-bind="timeInputParam"
+                    v-model:value="delay"
+                    :disable="testFiledDisable('delay')"
+                    :title="{ text: t('SCROLL_EFFECT_TRIGGER_DELAY') }"
                 />
-                <template v-if="isAutoPlay">
-                    <UeElNumberInput
-                        v-if="showFiled.includes('delay')"
-                        v-bind="timeInputParam"
-                        v-model:value="delay"
-                        :disable="testFiledDisable('delay')"
-                        :title="{ text: t('SCROLL_EFFECT_TRIGGER_DELAY') }"
-                    />
-                    <UeElNumberInput
-                        v-if="showFiled.includes('duration')"
-                        v-bind="timeInputParam"
-                        v-model:value="duration"
-                        :disable="testFiledDisable('duration')"
-                        :title="{ text: t('SCROLL_EFFECT_TRIGGER_DURATION') }"
-                    />
-                    <UeElSelect
-                        v-if="showFiled.includes('ease') && false"
-                        v-model:value="ease"
-                        :title="t('SCROLL_EFFECT_TRIGGER_EASE')"
-                        :class="$style['ease-control']"
-                        :disable="testFiledDisable('ease')"
-                        :options="easeOptions"
-                    />
-                </template>
-            </UeElControlGroup>
-        </template>
+                <UeElNumberInput
+                    v-if="showFiled.includes('duration')"
+                    v-bind="timeInputParam"
+                    v-model:value="duration"
+                    :disable="testFiledDisable('duration')"
+                    :title="{ text: t('SCROLL_EFFECT_TRIGGER_DURATION') }"
+                />
+                <UeElSelect
+                    v-if="showFiled.includes('ease') && false"
+                    v-model:value="ease"
+                    :title="t('SCROLL_EFFECT_TRIGGER_EASE')"
+                    :class="$style['ease-control']"
+                    :disable="testFiledDisable('ease')"
+                    :options="easeOptions"
+                />
+            </template>
+        </UeElControlGroup>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

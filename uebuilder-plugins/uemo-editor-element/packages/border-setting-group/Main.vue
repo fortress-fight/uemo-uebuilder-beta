@@ -1,13 +1,11 @@
 <!--
  * @Description: 边框控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-03 02:30:03
+ * @LastEditTime: 2025-05-15 11:10:22
 -->
 <template>
     <UeElSettingGroup :class="$style['border-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <template v-if="!!valueRef" #body>
-            <UeElBorderSetting v-model:value="valueRef" />
-        </template>
+        <UeElBorderSetting v-if="!!valueRef" v-model:value="valueRef" />
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>
