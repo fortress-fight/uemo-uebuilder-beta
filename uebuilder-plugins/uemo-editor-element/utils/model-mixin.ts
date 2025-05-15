@@ -117,11 +117,11 @@ export function useDetectModelChange<T>(valueRef: ModelRef<T>, options: DetectMo
  * });
  *
  */
-export function useDefineObjectModel<T extends Record<string, any>, R>(
+export function useDefineObjectModel<T extends Record<string, any> | undefined, R>(
     valueRef: ModelRef<T>,
     param: {
         get: (modelValue: T) => R;
-        set: (value: R, modelValue: T) => T | undefined;
+        set: (value: R, modelValue: NonNullable<T>) => T | undefined;
     },
     options?: { deep?: boolean }
 ): WritableComputedRef<R, R> {
@@ -143,7 +143,11 @@ export function useDefineObjectModel<T extends Record<string, any>, R>(
         },
         set(newValue) {
             try {
-                const currentValue = deep ? _cloneDeep(rawValue.value) : { ...rawValue.value };
+                const currentValue = rawValue.value
+                    ? deep
+                        ? _cloneDeep(rawValue.value)
+                        : { ...rawValue.value }
+                    : ({} as NonNullable<T>);
 
                 const result = param.set(newValue, currentValue);
                 if (typeof result !== "undefined") {

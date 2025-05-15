@@ -108,6 +108,10 @@
     "UNIT_TEXT": "Text",
     "UNIT_BEFORE_POSITION": "Before",
     "UNIT_AFTER_POSITION": "After",
+    "UNIT_RATIO": "Ratio",
+    "UNIT_FIXED_RATIO": "Fixed Ratio",
+    "UNIT_CUSTOM_RATIO": "Custom Ratio",
+    "UNIT_CUSTOM_HEIGHT": "Custom Height",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
