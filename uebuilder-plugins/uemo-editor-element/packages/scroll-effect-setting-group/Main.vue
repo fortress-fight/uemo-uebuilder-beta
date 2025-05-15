@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:16:14
+ * @LastEditTime: 2025-03-31 01:34:15
 -->
 <template>
     <UeElSettingGroup
@@ -10,7 +10,7 @@
         @trigger="handleTrigger"
         ref="rootComponentRef"
     >
-        <template v-if="!!valueRef && valueRef.type">
+        <template v-if="!!valueRef && valueRef.type" #body>
             <UeElSelect v-model:value="effectType" :title="t('UNIT_MODE')" :options="enableEffectOptions" />
             <UeElControlGroup :col-count="2">
                 <UeElButton

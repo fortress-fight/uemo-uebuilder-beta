@@ -1,11 +1,13 @@
 <!--
  * @Description: 颜色控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:11:02
+ * @LastEditTime: 2025-03-22 01:19:47
 -->
 <template>
     <UeElSettingGroup :class="$style['color-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <UeElColorSetting v-if="!!valueRef" v-model:value="valueRef" :type="type" />
+        <template v-if="!!valueRef" #body>
+            <UeElColorSetting v-model:value="valueRef" :type="type" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

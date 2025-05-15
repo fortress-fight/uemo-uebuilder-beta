@@ -4,39 +4,45 @@
         v-if="linkDetail === 'anchor'"
         :title="t('LINK_TYPE', { type: t('LINK_ANCHOR') })"
     >
-        <UeElSelect
-            :title="t('LINK_ANCHOR')"
-            :placeholder="t('LINK_ANCHOR_PLACEHOLDER')"
-            :no-option-tip="t('LINK_ANCHOR_EMPTY_TIP')"
-            :options="anchorOptions"
-            v-model:value="link"
-        />
-        <UeElButton
-            v-if="anchorLink"
-            :text="t('LINK_ANCHOR_COPY_TIP')"
-            theme="strokeText"
-            @trigger="copyAnchorLink(anchorLink)"
-        />
+        <template #body>
+            <UeElSelect
+                :title="t('LINK_ANCHOR')"
+                :placeholder="t('LINK_ANCHOR_PLACEHOLDER')"
+                :no-option-tip="t('LINK_ANCHOR_EMPTY_TIP')"
+                :options="anchorOptions"
+                v-model:value="link"
+            />
+            <UeElButton
+                v-if="anchorLink"
+                :text="t('LINK_ANCHOR_COPY_TIP')"
+                theme="strokeText"
+                @trigger="copyAnchorLink(anchorLink)"
+            />
+        </template>
     </UeElSettingGroup>
     <UeElSettingGroup
         :class="$style['function-link']"
         v-else-if="linkDetail === 'download'"
         :title="t('LINK_FILE_TITLE')"
     >
-        <UeElTextInput
-            :auto-trim="true"
-            theme="enterText"
-            :value="linkAddress"
-            :placeholder="t('LINK_FILE_INPUT_TIP')"
-            @confirm="linkAddress = $event"
-        />
+        <template #body>
+            <UeElTextInput
+                :auto-trim="true"
+                theme="enterText"
+                :value="linkAddress"
+                :placeholder="t('LINK_FILE_INPUT_TIP')"
+                @confirm="linkAddress = $event"
+            />
+        </template>
     </UeElSettingGroup>
 
     <slot />
 
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')">
-        <UeElTipGroup :tips="tipMessage" />
+        <template #body>
+            <UeElTipGroup :tips="tipMessage" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

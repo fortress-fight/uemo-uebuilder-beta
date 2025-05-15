@@ -10,38 +10,40 @@
                         :class="$style['slash-menu-group']"
                         :title="group.title"
                     >
-                        <div :class="$style['menu-list']" class="grid">
-                            <button
-                                v-for="item in group.list"
-                                ref="btns"
-                                :key="item.name"
-                                :class="$style['menu-item']"
-                                class="flex items-center"
-                                :data-active="selectName === item.name"
-                                @click="handleItemSelect(item.name)"
-                            >
-                                <template v-if="operMap[item.name]">
-                                    <div class="flex items-center justify-center" :class="$style['icon']">
-                                        <UeElIcon
-                                            v-if="operMap[item.name].icon"
-                                            :name="operMap[item.name].icon || ''"
-                                        />
-                                    </div>
-                                    <div :class="$style['intro']">
-                                        <div :class="$style['title']">
-                                            <span class="text">
-                                                {{ operMap[item.name].title }}
-                                            </span>
+                        <template #body>
+                            <div :class="$style['menu-list']" class="grid">
+                                <button
+                                    v-for="item in group.list"
+                                    ref="btns"
+                                    :key="item.name"
+                                    :class="$style['menu-item']"
+                                    class="flex items-center"
+                                    :data-active="selectName === item.name"
+                                    @click="handleItemSelect(item.name)"
+                                >
+                                    <template v-if="operMap[item.name]">
+                                        <div class="flex items-center justify-center" :class="$style['icon']">
+                                            <UeElIcon
+                                                v-if="operMap[item.name].icon"
+                                                :name="operMap[item.name].icon || ''"
+                                            />
                                         </div>
-                                        <div :class="$style['subtitle']">
-                                            <span class="text">
-                                                {{ operMap[item.name].subtitle }}
-                                            </span>
+                                        <div :class="$style['intro']">
+                                            <div :class="$style['title']">
+                                                <span class="text">
+                                                    {{ operMap[item.name].title }}
+                                                </span>
+                                            </div>
+                                            <div :class="$style['subtitle']">
+                                                <span class="text">
+                                                    {{ operMap[item.name].subtitle }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </template>
-                            </button>
-                        </div>
+                                    </template>
+                                </button>
+                            </div>
+                        </template>
                     </UeElSettingGroup>
                 </template>
                 <div v-else :class="$style['empty-panel']">{{ t("NOT_FOUND_MODULE") }}</div>

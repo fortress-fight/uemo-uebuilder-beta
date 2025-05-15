@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景SVG控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:08:15
+ * @LastEditTime: 2025-03-31 01:32:59
 -->
 <template>
     <UeElEditorPanel
@@ -10,33 +10,41 @@
     >
         <!-- SVG 资源设置 -->
         <UeElSettingGroup is-first>
-            <UeElResourceSetting type="svg" :removable="false" v-model:value="svgSource">
-                <template v-if="svgSource" #operGroup="{ openPopPanel }">
-                    <div :class="$style['oper-bar']" class="w-full grid grid-cols-2">
-                        <UeElButton v-bind="replaceButtonProps" @trigger="openPopPanel" />
-                        <UeElSelect v-model:value="adjust" :options="adjustOptions">
-                            <template #info>
-                                <UeElButton v-bind="adjustButtonProps" />
-                            </template>
-                        </UeElSelect>
-                    </div>
-                </template>
-            </UeElResourceSetting>
+            <template #body>
+                <UeElResourceSetting type="svg" :removable="false" v-model:value="svgSource">
+                    <template v-if="svgSource" #operGroup="{ openPopPanel }">
+                        <div :class="$style['oper-bar']" class="w-full grid grid-cols-2">
+                            <UeElButton v-bind="replaceButtonProps" @trigger="openPopPanel" />
+                            <UeElSelect v-model:value="adjust" :options="adjustOptions">
+                                <template #info>
+                                    <UeElButton v-bind="adjustButtonProps" />
+                                </template>
+                            </UeElSelect>
+                        </div>
+                    </template>
+                </UeElResourceSetting>
+            </template>
         </UeElSettingGroup>
 
         <!-- 对齐方式设置 -->
         <UeElSettingGroup>
-            <UeElAlignSetting v-model:value="align" />
+            <template #body>
+                <UeElAlignSetting v-model:value="align" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 尺寸设置 -->
         <UeElSettingGroup v-bind="widthSettingGroup" @trigger="handleWidthTrigger">
-            <UeElNumberInput v-if="width" v-bind="widthInputParam" v-model:value="width" :label="t('UNIT_WIDTH')" />
+            <template #body v-if="width">
+                <UeElNumberInput v-bind="widthInputParam" v-model:value="width" :label="t('UNIT_WIDTH')" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 偏移设置 -->
         <UeElSettingGroup>
-            <UeElTranslateSetting v-model:value="translate" />
+            <template #body>
+                <UeElTranslateSetting v-model:value="translate" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 描边颜色设置 -->

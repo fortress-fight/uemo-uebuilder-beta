@@ -1,16 +1,22 @@
 <template>
     <ScrollSetting v-model:value="valueRef">
         <UeElSettingGroup :title="t('SCROLL_SCALE_SETTING_TITLE')">
-            <UeElControlGroup :col-count="2">
-                <UeElNumberInput v-bind="inputParam" v-model:value="startScale" :title="{ text: t('UNIT_START') }" />
-                <UeElNumberInput v-bind="inputParam" v-model:value="endScale" :title="{ text: t('UNIT_END') }" />
-                <UeElCheckBox
-                    v-if="isImage"
-                    :class="$style['scale-overflow']"
-                    v-model:value="overflow"
-                    :text="t('SCROLL_SCALE_SETTING_SCALE_OVERFLOW')"
-                />
-            </UeElControlGroup>
+            <template #body>
+                <UeElControlGroup :col-count="2">
+                    <UeElNumberInput
+                        v-bind="inputParam"
+                        v-model:value="startScale"
+                        :title="{ text: t('UNIT_START') }"
+                    />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="endScale" :title="{ text: t('UNIT_END') }" />
+                    <UeElCheckBox
+                        v-if="isImage"
+                        :class="$style['scale-overflow']"
+                        v-model:value="overflow"
+                        :text="t('SCROLL_SCALE_SETTING_SCALE_OVERFLOW')"
+                    />
+                </UeElControlGroup>
+            </template>
         </UeElSettingGroup>
     </ScrollSetting>
 </template>

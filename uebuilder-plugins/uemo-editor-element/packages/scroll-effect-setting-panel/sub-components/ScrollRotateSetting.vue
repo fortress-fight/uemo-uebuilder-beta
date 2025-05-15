@@ -1,20 +1,28 @@
 <template>
     <ScrollSetting v-model:value="valueRef">
         <UeElSettingGroup :title="t('SCROLL_ROTATE_ATTRS')">
-            <UeElSelect
-                v-model:value="axis"
-                :title="t('SCROLL_ROTATE_AXIS')"
-                :options="rotateAxisOptions"
-                :show-value-icon="true"
-                value-align="right"
-            />
-            <UeElSelect v-model:value="axisPos" :title="t('SCROLL_ROTATE_AXIS_POS')" v-bind="axisPosSelectParam" />
+            <template #body>
+                <UeElSelect
+                    v-model:value="axis"
+                    :title="t('SCROLL_ROTATE_AXIS')"
+                    :options="rotateAxisOptions"
+                    :show-value-icon="true"
+                    value-align="right"
+                />
+                <UeElSelect v-model:value="axisPos" :title="t('SCROLL_ROTATE_AXIS_POS')" v-bind="axisPosSelectParam" />
+            </template>
         </UeElSettingGroup>
         <UeElSettingGroup :title="t('SCROLL_ROTATE_ANGLE')">
-            <UeElControlGroup v-if="value" :col-count="2">
-                <UeElNumberInput v-bind="inputParam" v-model:value="startAngle" :title="{ text: t('UNIT_START') }" />
-                <UeElNumberInput v-bind="inputParam" v-model:value="endAngle" :title="{ text: t('UNIT_END') }" />
-            </UeElControlGroup>
+            <template #body>
+                <UeElControlGroup v-if="value" :col-count="2">
+                    <UeElNumberInput
+                        v-bind="inputParam"
+                        v-model:value="startAngle"
+                        :title="{ text: t('UNIT_START') }"
+                    />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="endAngle" :title="{ text: t('UNIT_END') }" />
+                </UeElControlGroup>
+            </template>
         </UeElSettingGroup>
     </ScrollSetting>
 </template>

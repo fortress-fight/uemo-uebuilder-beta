@@ -1,10 +1,14 @@
 <template>
     <UeElSettingGroup :title="t('SCROLL_FIXED_Y_OFFSET')">
-        <UeElNumberInput v-bind="moveYInputParam" v-model:value="moveY" />
+        <template #body>
+            <UeElNumberInput v-bind="moveYInputParam" v-model:value="moveY" />
+        </template>
     </UeElSettingGroup>
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
-        <UeElTipGroup v-bind="tipMessage" />
+        <template #body>
+            <UeElTipGroup v-bind="tipMessage" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

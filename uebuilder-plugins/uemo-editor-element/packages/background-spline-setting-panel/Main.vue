@@ -1,7 +1,7 @@
 <!--
  * @Description: Spline背景设置控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:07:53
+ * @LastEditTime: 2025-03-23 01:05:31
 -->
 <template>
     <UeElEditorPanel
@@ -10,17 +10,23 @@
     >
         <!-- Spline资源设置 -->
         <UeElSettingGroup is-first>
-            <UeElResourceSetting type="spline" :removable="false" v-model:value="splineSource" />
+            <template #body>
+                <UeElResourceSetting type="spline" :removable="false" v-model:value="splineSource" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 滚动效果设置 -->
         <UeElSettingGroup :title="t('SCROLL_EFFECT_TITLE')">
-            <UeElSelect v-model:value="scrollEffect" v-bind="effectOptions" />
+            <template #body>
+                <UeElSelect v-model:value="scrollEffect" v-bind="effectOptions" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 提示信息 -->
         <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
-            <UeElTipGroup v-bind="tipMessage" />
+            <template #body>
+                <UeElTipGroup v-bind="tipMessage" />
+            </template>
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

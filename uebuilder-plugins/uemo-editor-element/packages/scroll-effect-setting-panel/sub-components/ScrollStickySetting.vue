@@ -1,10 +1,14 @@
 <template>
     <UeElSettingGroup :title="t('SCROLL_STICKY_SETTING_PADDING')">
-        <UeElPaddingSetting v-bind="paddingInputParam" v-model:value="padding" />
+        <template #body>
+            <UeElPaddingSetting v-bind="paddingInputParam" v-model:value="padding" />
+        </template>
     </UeElSettingGroup>
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
-        <UeElTipGroup v-bind="tipMessage" />
+        <template #body>
+            <UeElTipGroup v-bind="tipMessage" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

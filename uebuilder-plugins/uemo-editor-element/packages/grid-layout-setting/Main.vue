@@ -1,27 +1,29 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:11:21
+ * @LastEditTime: 2025-05-07 19:48:39
 -->
 <template>
     <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
-        <PreviewBox
-            :data="valueRef"
-            :mode="previewBoxMode"
-            :z-index="zIndexData"
-            @change="handleChange"
-            @changeZIndex="handleChangeZIndex"
-            @swap="handleSwap"
-        />
-        <!-- 底部控制按钮组 -->
-        <UeElControlGroup :col-count="enableZIndexMode ? 2 : 1">
-            <UeElButton v-bind="layoutButtonParam" @trigger="openGridLibraryPanel" />
-            <UeElButton v-if="enableZIndexMode" v-bind="zIndexButtonParam" @trigger="toggleZIndexMode" />
-        </UeElControlGroup>
-        <!-- 布局库弹窗面板 -->
-        <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
-            <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
-        </UeElPopPanel>
+        <template #body>
+            <PreviewBox
+                :data="valueRef"
+                :mode="previewBoxMode"
+                :z-index="zIndexData"
+                @change="handleChange"
+                @changeZIndex="handleChangeZIndex"
+                @swap="handleSwap"
+            />
+            <!-- 底部控制按钮组 -->
+            <UeElControlGroup :col-count="enableZIndexMode ? 2 : 1">
+                <UeElButton v-bind="layoutButtonParam" @trigger="openGridLibraryPanel" />
+                <UeElButton v-if="enableZIndexMode" v-bind="zIndexButtonParam" @trigger="toggleZIndexMode" />
+            </UeElControlGroup>
+            <!-- 布局库弹窗面板 -->
+            <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
+                <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
+            </UeElPopPanel>
+        </template>
     </UeElSettingGroup>
 </template>
 

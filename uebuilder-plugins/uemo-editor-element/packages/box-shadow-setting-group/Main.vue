@@ -1,11 +1,13 @@
 <!--
  * @Description: 投影控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:10:15
+ * @LastEditTime: 2025-03-03 02:52:27
 -->
 <template>
     <UeElSettingGroup :class="$style['box-shadow-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <UeElBoxShadowSetting v-if="!!valueRef" v-model:value="valueRef" />
+        <template v-if="!!valueRef" #body>
+            <UeElBoxShadowSetting v-model:value="valueRef" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

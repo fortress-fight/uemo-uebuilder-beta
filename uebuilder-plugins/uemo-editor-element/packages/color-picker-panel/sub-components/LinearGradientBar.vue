@@ -1,32 +1,34 @@
 <template>
     <UeElSettingGroup>
-        <ColorPointBar
-            type="linear"
-            ref="colorPointBar"
-            :points="currentColorPoints"
-            :editor-point-id="editorColorPointId"
-            @update:points="currentColorPoints = $event"
-            @update-editor-point-id="editorColorPointId = $event"
-        />
-        <UeElControlGroup
-            oper-type="remove"
-            :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
-            :col-count="2"
-            @remove="removeCurrentPoint"
-        >
-            <UeElNumberInput
-                v-bind="positionParam"
-                v-model:value="editorColorPointPosition"
-                :class="$style['position-input']"
-                :hide-unit="true"
+        <template #body>
+            <ColorPointBar
+                type="linear"
+                ref="colorPointBar"
+                :points="currentColorPoints"
+                :editor-point-id="editorColorPointId"
+                @update:points="currentColorPoints = $event"
+                @update-editor-point-id="editorColorPointId = $event"
             />
-            <UeElNumberInput
-                v-bind="angleInputParam"
-                v-model:value="currentAngle"
-                :class="$style['position-input']"
-                :hide-unit="true"
-            />
-        </UeElControlGroup>
+            <UeElControlGroup
+                oper-type="remove"
+                :oper-type-tip="t('COLOR_PICKER_REMOVE_POINT')"
+                :col-count="2"
+                @remove="removeCurrentPoint"
+            >
+                <UeElNumberInput
+                    v-bind="positionParam"
+                    v-model:value="editorColorPointPosition"
+                    :class="$style['position-input']"
+                    :hide-unit="true"
+                />
+                <UeElNumberInput
+                    v-bind="angleInputParam"
+                    v-model:value="currentAngle"
+                    :class="$style['position-input']"
+                    :hide-unit="true"
+                />
+            </UeElControlGroup>
+        </template>
     </UeElSettingGroup>
     <UeElColorPicker
         ref="colorPicker"

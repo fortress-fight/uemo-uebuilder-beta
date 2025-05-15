@@ -1,14 +1,16 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:13:59
+ * @LastEditTime: 2025-03-30 01:33:41
 -->
 <template>
     <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
         <component :is="controlComponent" v-model:value="optionsRef" :is-image="isImage" />
         <!-- 提示信息 -->
         <UeElSettingGroup :title="t('SCROLL_PANEL_TIP_TITLE')" v-if="tipMessage.length > 0">
-            <UeElTipGroup :tips="tipMessage" />
+            <template #body>
+                <UeElTipGroup :tips="tipMessage" />
+            </template>
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

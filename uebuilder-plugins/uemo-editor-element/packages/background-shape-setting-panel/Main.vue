@@ -1,7 +1,7 @@
 <!--
  * @Description: 背景图形控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:07:36
+ * @LastEditTime: 2025-03-23 01:05:03
 -->
 <template>
     <UeElEditorPanel
@@ -11,7 +11,9 @@
     >
         <!-- 图形资源设置 -->
         <UeElSettingGroup is-first>
-            <UeElResourceSetting type="shape" :removable="false" v-model:value="valueRef.name" />
+            <template #body>
+                <UeElResourceSetting type="shape" :removable="false" v-model:value="valueRef.name" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 颜色设置 -->
@@ -19,17 +21,23 @@
 
         <!-- 位置设置 -->
         <UeElSettingGroup :title="t('UNIT_POSITION')">
-            <UeElSelect v-model:value="position" :options="positionOptions" />
+            <template #body>
+                <UeElSelect v-model:value="position" :options="positionOptions" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 高度设置 -->
         <UeElSettingGroup :title="t('UNIT_HEIGHT')">
-            <UeElNumberInput v-model:value="valueRef.height" v-bind="heightNumInputParam" />
+            <template #body>
+                <UeElNumberInput v-model:value="valueRef.height" v-bind="heightNumInputParam" />
+            </template>
         </UeElSettingGroup>
 
         <!-- 翻转设置 -->
         <UeElSettingGroup is-last :title="t('UNIT_OTHER')">
-            <UeElCheckBox v-model:value="valueRef.mirroring" :text="t('SHAPE_MIRRORING')" />
+            <template #body>
+                <UeElCheckBox v-model:value="valueRef.mirroring" :text="t('SHAPE_MIRRORING')" />
+            </template>
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

@@ -5,16 +5,23 @@
 <template>
     <UeElEditorPanel :class="$style['size-adjust']" :title="t('GRID_LAYOUT_SETTING_ADJUST_SIZE')">
         <UeElSettingGroup is-first is-last :title="t('UNIT_ATTR')">
-            <UeElControlGroup :col-count="sizeType === 'auto' ? 1 : 2" :class="$style['grid-layout-setting']">
-                <UeElSelect v-model:value="sizeType" class="w-full" :title="t('UNIT_MODE')" :options="typeOptions" />
-                <UeElNumberInput
-                    v-bind="inputParam"
-                    v-model:value="girdSize"
-                    v-if="sizeType !== 'auto'"
-                    :title="{ icon: { name: 'icon-kuandu' } }"
-                    :label="t('UNIT_SIZE')"
-                />
-            </UeElControlGroup>
+            <template #body>
+                <UeElControlGroup :col-count="sizeType === 'auto' ? 1 : 2" :class="$style['grid-layout-setting']">
+                    <UeElSelect
+                        v-model:value="sizeType"
+                        class="w-full"
+                        :title="t('UNIT_MODE')"
+                        :options="typeOptions"
+                    />
+                    <UeElNumberInput
+                        v-bind="inputParam"
+                        v-model:value="girdSize"
+                        v-if="sizeType !== 'auto'"
+                        :title="{ icon: { name: 'icon-kuandu' } }"
+                        :label="t('UNIT_SIZE')"
+                    />
+                </UeElControlGroup>
+            </template>
         </UeElSettingGroup>
     </UeElEditorPanel>
 </template>

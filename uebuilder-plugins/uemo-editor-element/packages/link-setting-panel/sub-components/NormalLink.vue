@@ -1,16 +1,20 @@
 <template>
     <UeElSettingGroup :title="t('LINK_ADDRESS')">
-        <UeElTextInput
-            :auto-trim="true"
-            theme="enterText"
-            :value="linkAddress"
-            :placeholder="t('LINK_ADDRESS_INPUT_TIP')"
-            :required="true"
-            @confirm="linkAddress = $event"
-        />
+        <template #body>
+            <UeElTextInput
+                :auto-trim="true"
+                theme="enterText"
+                :value="linkAddress"
+                :placeholder="t('LINK_ADDRESS_INPUT_TIP')"
+                :required="true"
+                @confirm="linkAddress = $event"
+            />
+        </template>
     </UeElSettingGroup>
     <UeElSettingGroup :title="t('LINK_TARGET_TITLE')">
-        <UeElCheckBox :text="t('LINK_TARGET')" v-model:value="linkTarget" />
+        <template #body>
+            <UeElCheckBox :text="t('LINK_TARGET')" v-model:value="linkTarget" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

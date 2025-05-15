@@ -1,48 +1,50 @@
 <!--
  * @Description: 颜色选择器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:10:47
+ * @LastEditTime: 2025-05-07 19:38:23
 -->
 <template>
     <UeElSettingGroup :class="$style['color-panel']">
-        <div ref="colorBox" :class="$style['color-box']">
-            <div :class="$style['mask--white']"></div>
-            <div :class="$style['mask--black']"></div>
-            <div ref="colorRing" class="flex items-center justify-center" :class="$style['color-ring']">
-                <div class="flex-grow-0 flex-shrink-0" :class="$style['color-ring--inner']"></div>
-            </div>
-        </div>
-        <div ref="colorBar" :class="$style['color-bar']" class="flex items-center">
-            <div ref="colorBarInner" :class="$style['color-bar--inner']" class="relative"></div>
-        </div>
-        <div :class="$style['color-input']" class="grid items-center">
-            <UeElColorInput
-                :class="$style['new-color-input']"
-                :value="value"
-                @update:value="updateHSV($event)"
-                :pure-color="pureColor"
-            />
-            <div
-                v-if="enableColorPicker"
-                :class="$style['btn-box']"
-                class="flex items-center justify-center"
-                :title="t('COLOR_PICKER_EYE_DROPPER')"
-                @click="openSystemColorPicker"
-            >
-                <UeElIcon name="icon-dropper" :class="$style['ic']" />
-            </div>
-            <div :class="$style['btn-box']" class="flex justify-center items-center" @click="useOldVal">
-                <div :class="$style['older-color-item']">
-                    <div
-                        :class="$style['inner']"
-                        :style="{
-                            opacity: oldColorOpacity * 100 + '%',
-                            backgroundColor: oldColor,
-                        }"
-                    ></div>
+        <template #body>
+            <div ref="colorBox" :class="$style['color-box']">
+                <div :class="$style['mask--white']"></div>
+                <div :class="$style['mask--black']"></div>
+                <div ref="colorRing" class="flex items-center justify-center" :class="$style['color-ring']">
+                    <div class="flex-grow-0 flex-shrink-0" :class="$style['color-ring--inner']"></div>
                 </div>
             </div>
-        </div>
+            <div ref="colorBar" :class="$style['color-bar']" class="flex items-center">
+                <div ref="colorBarInner" :class="$style['color-bar--inner']" class="relative"></div>
+            </div>
+            <div :class="$style['color-input']" class="grid items-center">
+                <UeElColorInput
+                    :class="$style['new-color-input']"
+                    :value="value"
+                    @update:value="updateHSV($event)"
+                    :pure-color="pureColor"
+                />
+                <div
+                    v-if="enableColorPicker"
+                    :class="$style['btn-box']"
+                    class="flex items-center justify-center"
+                    :title="t('COLOR_PICKER_EYE_DROPPER')"
+                    @click="openSystemColorPicker"
+                >
+                    <UeElIcon name="icon-dropper" :class="$style['ic']" />
+                </div>
+                <div :class="$style['btn-box']" class="flex justify-center items-center" @click="useOldVal">
+                    <div :class="$style['older-color-item']">
+                        <div
+                            :class="$style['inner']"
+                            :style="{
+                                opacity: oldColorOpacity * 100 + '%',
+                                backgroundColor: oldColor,
+                            }"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 控制器组容器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:39:01
+ * @LastEditTime: 2025-05-11 10:23:40
 -->
 <template>
     <div
@@ -11,7 +11,7 @@
         ]"
         class="relative"
         :data-disable="disable"
-        :data-active="!!slots.default"
+        :data-active="!!$slots.body"
         :data-header-exists="!!title"
         ref="rootDomRef"
     >
@@ -57,8 +57,8 @@
                 </slot>
             </div>
         </div>
-        <div v-if="slots.default" :class="$style['group-body']" class="grid">
-            <slot />
+        <div v-if="$slots.body" :class="$style['group-body']" class="grid">
+            <slot name="body"></slot>
         </div>
     </div>
 </template>
@@ -78,8 +78,6 @@ const emit = defineEmits<{ (e: "trigger", id: string, value: any): void }>();
  * 组件引用
  */
 const rootDomRef = useTemplateRef("rootDomRef");
-
-const slots = defineSlots<{ default?(): any; oper?(): any }>();
 
 /**
  * 弹窗面板配置

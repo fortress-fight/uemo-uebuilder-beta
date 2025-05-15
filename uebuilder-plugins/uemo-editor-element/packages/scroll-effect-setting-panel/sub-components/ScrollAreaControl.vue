@@ -1,22 +1,24 @@
 <template>
     <UeElSettingGroup :class="$style['scroll-area']" :title="t('SCROLL_AREA_DISTANCE_SETTING_TITLE')">
-        <UeElControlGroup :col-count="1">
-            <UeElSelect
-                v-model:value="startPos"
-                :title="t('UNIT_START')"
-                :options="startPosOptions"
-                :show-value-icon="true"
-                value-align="right"
-            />
-            <UeElSelect
-                v-if="triggerMode !== 'enter-leaver'"
-                v-model:value="endPos"
-                :title="t('UNIT_END')"
-                :options="endPosOptions"
-                :show-value-icon="true"
-                value-align="right"
-            />
-        </UeElControlGroup>
+        <template #body>
+            <UeElControlGroup :col-count="1">
+                <UeElSelect
+                    v-model:value="startPos"
+                    :title="t('UNIT_START')"
+                    :options="startPosOptions"
+                    :show-value-icon="true"
+                    value-align="right"
+                />
+                <UeElSelect
+                    v-if="triggerMode !== 'enter-leaver'"
+                    v-model:value="endPos"
+                    :title="t('UNIT_END')"
+                    :options="endPosOptions"
+                    :show-value-icon="true"
+                    value-align="right"
+                />
+            </UeElControlGroup>
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

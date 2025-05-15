@@ -1,10 +1,14 @@
 <template>
     <UeElSettingGroup :title="t('SCROLL_PARALLAX_SETTING_SPEED')">
-        <UeElNumberInput v-bind="speedInputParam" v-model:value="speed" />
+        <template #body>
+            <UeElNumberInput v-bind="speedInputParam" v-model:value="speed" />
+        </template>
     </UeElSettingGroup>
     <!-- 提示信息 -->
     <UeElSettingGroup :title="t('UNIT_TIP')" is-last>
-        <UeElTipGroup v-bind="tipMessage" />
+        <template #body>
+            <UeElTipGroup v-bind="tipMessage" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

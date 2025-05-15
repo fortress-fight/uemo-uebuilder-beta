@@ -1,16 +1,20 @@
 <template>
     <ScrollSetting v-model:value="valueRef">
         <UeElSettingGroup :title="t('SCROLL_TRANSLATE_SETTING_X')">
-            <UeElControlGroup :col-count="2">
-                <UeElNumberInput v-bind="inputParam" v-model:value="xStart" :title="{ text: t('UNIT_START') }" />
-                <UeElNumberInput v-bind="inputParam" v-model:value="xEnd" :title="{ text: t('UNIT_END') }" />
-            </UeElControlGroup>
+            <template #body>
+                <UeElControlGroup :col-count="2">
+                    <UeElNumberInput v-bind="inputParam" v-model:value="xStart" :title="{ text: t('UNIT_START') }" />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="xEnd" :title="{ text: t('UNIT_END') }" />
+                </UeElControlGroup>
+            </template>
         </UeElSettingGroup>
         <UeElSettingGroup :title="t('SCROLL_TRANSLATE_SETTING_Y')">
-            <UeElControlGroup :col-count="2">
-                <UeElNumberInput v-bind="inputParam" v-model:value="yStart" :title="{ text: t('UNIT_START') }" />
-                <UeElNumberInput v-bind="inputParam" v-model:value="yEnd" :title="{ text: t('UNIT_END') }" />
-            </UeElControlGroup>
+            <template #body>
+                <UeElControlGroup :col-count="2">
+                    <UeElNumberInput v-bind="inputParam" v-model:value="yStart" :title="{ text: t('UNIT_START') }" />
+                    <UeElNumberInput v-bind="inputParam" v-model:value="yEnd" :title="{ text: t('UNIT_END') }" />
+                </UeElControlGroup>
+            </template>
         </UeElSettingGroup>
     </ScrollSetting>
 </template>

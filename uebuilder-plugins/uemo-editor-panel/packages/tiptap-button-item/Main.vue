@@ -1,16 +1,18 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:14:34
+ * @LastEditTime: 2025-05-10 19:47:04
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
         <UeElTabCard v-bind="tabCardParam">
             <template v-slot:content>
                 <UeElSettingGroup :title="t('UNIT_TEXT')">
-                    <UeElControlGroup>
-                        <UeElTextInput required autoTrim :value="text" @confirm="text = $event" />
-                    </UeElControlGroup>
+                    <template #body>
+                        <UeElControlGroup>
+                            <UeElTextInput required autoTrim :value="text" @confirm="text = $event" />
+                        </UeElControlGroup>
+                    </template>
                 </UeElSettingGroup>
                 <UeElLinkSettingGroup v-model:value="link" />
                 <UeElButtonIconSettingGroup
@@ -24,13 +26,22 @@
             </template>
             <template v-slot:design>
                 <UeElSettingGroup>
-                    <UeElResourceSetting @update:value="replaceButton" :removable="false" type="button" />
+                    <template #body>
+                        <UeElResourceSetting @update:value="replaceButton" :removable="false" type="button" />
+                    </template>
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('PADDING_SETTING_TITLE')">
-                    <UeElPaddingSetting v-model:value="padding" />
+                    <template #body>
+                        <UeElPaddingSetting v-model:value="padding" />
+                    </template>
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('UNIT_BUTTON') + t('UNIT_STYLE')">
-                    <UeElButtonStyleSetting v-model:value="buttonStyle" @changeHoverState="handleChangeHoverState" />
+                    <template #body>
+                        <UeElButtonStyleSetting
+                            v-model:value="buttonStyle"
+                            @changeHoverState="handleChangeHoverState"
+                        />
+                    </template>
                 </UeElSettingGroup>
             </template>
         </UeElTabCard>

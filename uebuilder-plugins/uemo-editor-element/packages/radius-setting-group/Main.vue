@@ -1,11 +1,13 @@
 <!--
  * @Description: 圆角控制器组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:12:29
+ * @LastEditTime: 2025-03-03 02:47:50
 -->
 <template>
     <UeElSettingGroup :class="$style['border-radius-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
-        <UeElRadiusSetting v-if="!!valueRef" v-model:value="valueRef" />
+        <template v-if="!!valueRef" #body>
+            <UeElRadiusSetting v-model:value="valueRef" />
+        </template>
     </UeElSettingGroup>
 </template>
 <script lang="ts" setup>

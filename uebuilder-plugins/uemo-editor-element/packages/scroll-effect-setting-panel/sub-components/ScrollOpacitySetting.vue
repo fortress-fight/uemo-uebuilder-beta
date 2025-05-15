@@ -2,14 +2,20 @@
     <ScrollSetting v-model:value="valueRef">
         <template #opacity>
             <UeElSettingGroup :title="t('SCROLL_EFFECT_SETTING_OPTION_TITLE')">
-                <UeElControlGroup :col-count="2">
-                    <UeElNumberInput
-                        v-bind="inputParam"
-                        v-model:value="startOpacity"
-                        :title="{ text: t('UNIT_START') }"
-                    />
-                    <UeElNumberInput v-bind="inputParam" v-model:value="endOpacity" :title="{ text: t('UNIT_END') }" />
-                </UeElControlGroup>
+                <template #body>
+                    <UeElControlGroup :col-count="2">
+                        <UeElNumberInput
+                            v-bind="inputParam"
+                            v-model:value="startOpacity"
+                            :title="{ text: t('UNIT_START') }"
+                        />
+                        <UeElNumberInput
+                            v-bind="inputParam"
+                            v-model:value="endOpacity"
+                            :title="{ text: t('UNIT_END') }"
+                        />
+                    </UeElControlGroup>
+                </template>
             </UeElSettingGroup>
         </template>
     </ScrollSetting>
