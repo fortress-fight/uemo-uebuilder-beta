@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 19:48:46
+ * @LastEditTime: 2025/5/15 11:50:54
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -24,21 +24,21 @@ import UeElButtonIconSettingGroup from "../packages/button-icon-setting-group";
 import UeElButtonLibraryPanel from "../packages/button-library-panel";
 import UeElButtonStyleSetting from "../packages/button-style-setting";
 import UeElButtonStyleSettingPanel from "../packages/button-style-setting-panel";
+import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
 import UeElCheckBox from "../packages/check-box";
-import UeElCalenderPicker from "../packages/calender-picker";
+import UeElColorInput from "../packages/color-input";
 import UeElColorPicker from "../packages/color-picker";
 import UeElColorPickerPanel from "../packages/color-picker-panel";
-import UeElColorInput from "../packages/color-input";
 import UeElColorSetting from "../packages/color-setting";
 import UeElColorSettingGroup from "../packages/color-setting-group";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElContextmenu from "../packages/contextmenu";
-import UeElDraggable from "../packages/draggable";
 import UeElControlGroup from "../packages/control-group";
-import UeElEmojiLibraryPanel from "../packages/emoji-library-panel";
+import UeElDraggable from "../packages/draggable";
 import UeElEditorPanel from "../packages/editor-panel";
+import UeElEmojiLibraryPanel from "../packages/emoji-library-panel";
 import UeElEmptyPanel from "../packages/empty-panel";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElFileUploadButton from "../packages/file-upload-button";
@@ -57,28 +57,29 @@ import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElLibraryPanel from "../packages/library-panel";
 import UeElLinkSetting from "../packages/link-setting";
 import UeElLinkSettingGroup from "../packages/link-setting-group";
+import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElLinkSettingPanel from "../packages/link-setting-panel";
 import UeElLoading from "../packages/loading";
-import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElMarginSetting from "../packages/margin-setting";
 import UeElMiniEditorPanel from "../packages/mini-editor-panel";
-import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
+import UeElNumberInput from "../packages/number-input";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
-import UeElResourcePreview from "../packages/resource-preview";
 import UeElResourceSetting from "../packages/resource-setting";
 import UeElRichTextLibraryPanel from "../packages/rich-text-library-panel";
-import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
+import UeElResourcePreview from "../packages/resource-preview";
 import UeElScrollEffectSettingGroup from "../packages/scroll-effect-setting-group";
+import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
 import UeElSelectOption from "../packages/select-option";
 import UeElSelect from "../packages/select";
 import UeElSettingBar from "../packages/setting-bar";
-import UeElSettingGroup from "../packages/setting-group";
 import UeElShapeLibraryPanel from "../packages/shape-library-panel";
 import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
+import UeElSettingGroup from "../packages/setting-group";
+import UeElSizeSettingGroup from "../packages/size-setting-group";
 import UeElSplineLibraryPanel from "../packages/spline-library-panel";
 import UeElSvgLibraryPanel from "../packages/svg-library-panel";
 import UeElTabCard from "../packages/tab-card";
@@ -113,21 +114,21 @@ export const components = [
     UeElButtonLibraryPanel,
     UeElButtonStyleSetting,
     UeElButtonStyleSettingPanel,
+    UeElCalenderPicker,
     UeElCalenderSetting,
     UeElCalenderSettingGroup,
     UeElCheckBox,
-    UeElCalenderPicker,
+    UeElColorInput,
     UeElColorPicker,
     UeElColorPickerPanel,
-    UeElColorInput,
     UeElColorSetting,
     UeElColorSettingGroup,
     UeElConfirmPanel,
     UeElContextmenu,
-    UeElDraggable,
     UeElControlGroup,
-    UeElEmojiLibraryPanel,
+    UeElDraggable,
     UeElEditorPanel,
+    UeElEmojiLibraryPanel,
     UeElEmptyPanel,
     UeElEnterAnimateSetting,
     UeElFileUploadButton,
@@ -146,28 +147,29 @@ export const components = [
     UeElLibraryPanel,
     UeElLinkSetting,
     UeElLinkSettingGroup,
+    UeElLottieLibraryPanel,
     UeElLinkSettingPanel,
     UeElLoading,
-    UeElLottieLibraryPanel,
     UeElMarginSetting,
     UeElMiniEditorPanel,
-    UeElNumberInput,
     UeElOnOff,
+    UeElNumberInput,
     UeElPaddingSetting,
     UeElPopPanel,
     UeElRadiusSetting,
     UeElRadiusSettingGroup,
-    UeElResourcePreview,
     UeElResourceSetting,
     UeElRichTextLibraryPanel,
-    UeElScrollEffectSettingPanel,
+    UeElResourcePreview,
     UeElScrollEffectSettingGroup,
+    UeElScrollEffectSettingPanel,
     UeElSelectOption,
     UeElSelect,
     UeElSettingBar,
-    UeElSettingGroup,
     UeElShapeLibraryPanel,
     UeElShareIconLibraryPanel,
+    UeElSettingGroup,
+    UeElSizeSettingGroup,
     UeElSplineLibraryPanel,
     UeElSvgLibraryPanel,
     UeElTabCard,
