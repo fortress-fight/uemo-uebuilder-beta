@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 11:15:03
+ * @LastEditTime: 2025-05-10 19:47:04
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -10,18 +10,24 @@
                 <UeElSettingGroup :title="t('UNIT_TEXT')">
                     <template #body>
                         <UeElControlGroup>
-                            <UeElTextInput :value="text" @confirm="text = $event" />
+                            <UeElTextInput required autoTrim :value="text" @confirm="text = $event" />
                         </UeElControlGroup>
                     </template>
                 </UeElSettingGroup>
-                <UeElLinkSettingGroup />
-                <UeElButtonIconSettingGroup :title="t('UNIT_BEFORE_POSITION') + t('UNIT_ICON')" />
-                <UeElButtonIconSettingGroup :title="t('UNIT_AFTER_POSITION') + t('UNIT_ICON')" />
+                <UeElLinkSettingGroup v-model:value="link" />
+                <UeElButtonIconSettingGroup
+                    :title="t('UNIT_BEFORE_POSITION') + t('UNIT_ICON')"
+                    v-model:value="beforeSvgIcon"
+                />
+                <UeElButtonIconSettingGroup
+                    :title="t('UNIT_AFTER_POSITION') + t('UNIT_ICON')"
+                    v-model:value="afterSvgIcon"
+                />
             </template>
             <template v-slot:design>
                 <UeElSettingGroup>
                     <template #body>
-                        <UeElResourceSetting type="button" />
+                        <UeElResourceSetting @update:value="replaceButton" :removable="false" type="button" />
                     </template>
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('PADDING_SETTING_TITLE')">
@@ -31,7 +37,10 @@
                 </UeElSettingGroup>
                 <UeElSettingGroup :title="t('UNIT_BUTTON') + t('UNIT_STYLE')">
                     <template #body>
-                        <UeElButtonStyleSetting v-model:value="buttonStyle" />
+                        <UeElButtonStyleSetting
+                            v-model:value="buttonStyle"
+                            @changeHoverState="handleChangeHoverState"
+                        />
                     </template>
                 </UeElSettingGroup>
             </template>
@@ -40,13 +49,17 @@
 </template>
 <script lang="ts" setup>
 import type { UeElButtonStyleSettingPanelValue } from "@stone/uemo-editor-element/packages/button-style-setting-panel";
+import type { UeElLinkSettingPanelValue } from "@stone/uemo-editor-element/packages/link-setting-panel";
 
 import type { UeEditorPanelTiptapButtonItemBaseProps } from "./index";
 
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeEditorPanelTiptapButtonItem" });
+
 const _props = withDefaults(defineProps<UeEditorPanelTiptapButtonItemBaseProps>(), {});
+const emit = defineEmits<{ (e: "preview", state: "hover" | "leave"): void }>();
+
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.ButtonItem["attrs"]>("value", { required: true });
 
 const { t } = useI18n();
@@ -67,6 +80,82 @@ const text = useDefineObjectModel(valueModel, {
     get: (modelValue) => modelValue.text || "",
     set: (value, modelValue) => {
         modelValue.text = value;
+        return modelValue;
+    },
+});
+
+// #endregion
+
+// #region link
+
+function parseLink(value: UE_TIPTAP_EXTENSION.ButtonItem["attrs"]): UeElLinkSettingPanelValue | undefined {
+    if (!value.link) return undefined;
+    switch (value.linkType) {
+        case "frame":
+            return {
+                type: value.linkType,
+                link: value.link,
+                triggerArea: value.triggerMethod,
+                popLayer: value.linkPopLayer,
+            };
+        case "function":
+            return {
+                type: value.linkType,
+                link: value.link,
+                detail: value.linkDetail as "anchor" | "download",
+                triggerArea: value.triggerMethod,
+            };
+        case "link":
+            return {
+                type: value.linkType,
+                link: value.link,
+                target: value.linkTarget as "_blank" | "_self",
+                triggerArea: value.triggerMethod,
+            };
+        default:
+            return undefined;
+    }
+}
+
+const link = useDefineObjectModel(valueModel, {
+    get: (modelValue) => parseLink(modelValue),
+    set: (value, modelValue) => {
+        modelValue.link = value?.link || "";
+        modelValue.linkType = value?.type || undefined;
+        if (value?.type === "link") {
+            modelValue.linkTarget = value?.target || undefined;
+        }
+        if (value?.type === "function") {
+            modelValue.linkDetail = value?.detail || undefined;
+        }
+        if (value?.type === "frame") {
+            modelValue.linkPopLayer = value?.popLayer || undefined;
+        }
+        modelValue.triggerMethod = value?.triggerArea;
+        return modelValue;
+    },
+});
+
+// #endregion
+
+// #region beforeSvgIcon
+
+const beforeSvgIcon = useDefineObjectModel(valueModel, {
+    get: (modelValue) => modelValue.beforeSvgIcon,
+    set: (value, modelValue) => {
+        modelValue.beforeSvgIcon = value;
+        return modelValue;
+    },
+});
+
+// #endregion
+
+// #region afterSvgIcon
+
+const afterSvgIcon = useDefineObjectModel(valueModel, {
+    get: (modelValue) => modelValue.afterSvgIcon,
+    set: (value, modelValue) => {
+        modelValue.afterSvgIcon = value;
         return modelValue;
     },
 });
@@ -163,6 +252,16 @@ const buttonStyle = useDefineObjectModel<
 );
 
 // #endregion
+
+function replaceButton(value: UE_TIPTAP_EXTENSION.ButtonItem["attrs"] | undefined) {
+    if (!value) return;
+
+    valueModel.value = value;
+}
+
+function handleChangeHoverState(isHover: boolean) {
+    emit("preview", isHover ? "hover" : "leave");
+}
 </script>
 <style lang="scss" module>
 .tiptap-button-item {

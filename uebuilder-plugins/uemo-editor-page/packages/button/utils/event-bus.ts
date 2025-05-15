@@ -1,9 +1,10 @@
 interface ButtonEvent {
     "ue.button": any;
+    "ue.button.pointerenter": never;
+    "ue.button.pointerleave": never;
     "ue.button.resize": never;
     "ue.button.hover": never;
     "ue.button.leave": never;
-    "ue.button.play": never;
     "ue.button.destroy": never;
 }
 

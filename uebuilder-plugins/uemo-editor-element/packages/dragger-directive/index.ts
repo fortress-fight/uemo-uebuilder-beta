@@ -1,7 +1,7 @@
 /*
  * @Description: 拖拽行为指令
  * @Author: F-Stone
- * @LastEditTime: 2025-03-18 23:38:36
+ * @LastEditTime: 2025-05-11 10:58:08
  */
 
 import type { App, DirectiveBinding } from "vue";
@@ -60,6 +60,7 @@ function createDragger(el: HTMLElement): DraggerControl {
         padding: 17,
         mask: true,
         elastic: true,
+        elasticBack: false,
         initPos: false,
         trigger: "[data-dragger-target]",
         excludeTrigger: "[data-dragger-disable]",

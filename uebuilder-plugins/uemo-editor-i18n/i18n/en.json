@@ -258,6 +258,7 @@
     "ERROR_UPLOAD_NOT_ALLOW_IMAGE": "Image upload is not enabled, please contact the customer service for details",
     "ERROR_UPLOAD_NETWORK_ERROR": "Please check the network",
     "ERROR_UPLOAD_FAILED": "Upload failed",
+    "ERROR_UPLOAD_CANCELED": "Upload canceled",
     "ERROR_UPLOAD_NOT_SELECTED": "No file selected",
     "ERROR_UPLOAD_NOT_CONFIG": "No upload configuration, please contact the customer service for details",
     "ERROR_UPLOAD_NOT_ALLOW_VIDEO": "Video upload is not enabled, please contact the customer service for details",

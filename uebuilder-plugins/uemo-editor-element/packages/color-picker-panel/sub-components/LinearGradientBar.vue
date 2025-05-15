@@ -92,9 +92,11 @@ const useValue = computed({
 });
 watch(
     () => {
-        return `linear-gradient(${currentAngle.value}, ${colorPointBar.value?.calcPointerStyle(
-            currentColorPoints.value
-        )})`;
+        const colorInfo = colorPointBar.value?.calcPointerStyle(currentColorPoints.value);
+
+        if (!colorInfo) return useValue.value;
+
+        return `linear-gradient(${currentAngle.value}, ${colorInfo})`;
     },
     (value) => {
         useValue.value = value;

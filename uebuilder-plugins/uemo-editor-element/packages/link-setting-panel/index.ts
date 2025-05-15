@@ -1,7 +1,7 @@
 /*
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:04:57
+ * @LastEditTime: 2025-05-12 01:26:06
  */
 import type { App } from "vue";
 
@@ -12,27 +12,7 @@ UeElLinkSettingPanel.install = (app: App) => {
     app.component(UeElLinkSettingPanel.name, UeElLinkSettingPanel);
 };
 
-export type UeElLinkSettingPanelValue =
-    | {
-          type: "link";
-          link: string;
-          target: "_blank" | "_self";
-          triggerArea?: string;
-      }
-    | {
-          type: "function";
-          link: string;
-          detail: "anchor" | "download";
-          triggerArea?: string;
-      }
-    | {
-          type: "frame";
-          link: string;
-          triggerArea?: string;
-          popLayer?: {
-              width?: string;
-          };
-      };
+export type UeElLinkSettingPanelValue = UE_EL_UTIL.LinkValue;
 
 export interface UeElLinkSettingPanelBaseProps {
     title?: string;

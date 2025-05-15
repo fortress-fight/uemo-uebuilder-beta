@@ -59,7 +59,7 @@ defineOptions({ name: "UeElResourceSetting" });
 /**
  * 组件属性定义
  */
-const props = withDefaults(defineProps<UeElResourceSettingBaseProps>(), { removable: true });
+const props = withDefaults(defineProps<UeElResourceSettingBaseProps<T>>(), { removable: true });
 const emit = defineEmits<{
     (e: "trigger", params: UeElResourceSettingEmitParams[UeElResourceSettingType]): void;
 }>();

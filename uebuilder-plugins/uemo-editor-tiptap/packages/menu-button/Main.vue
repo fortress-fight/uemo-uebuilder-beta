@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单按钮
  * @Author: F-Stone
- * @LastEditTime: 2025-05-06 11:59:24
+ * @LastEditTime: 2025-05-13 14:16:21
 -->
 <template>
     <button
@@ -23,6 +23,7 @@
                 <div :class="$style['color-button--inner']" :style="{ background: color || '' }"></div>
             </div>
         </div>
+        <slot></slot>
     </button>
 </template>
 <script lang="ts" setup>
@@ -94,6 +95,8 @@ defineExpose({
     font-size: 13px;
     line-height: 15px;
 
+    position: relative;
+
     padding: 5px;
 
     color: color(var(--ue-font-color--deeper));
@@ -111,6 +114,8 @@ defineExpose({
         }
     }
     .inner {
+        position: relative;
+
         overflow: hidden;
 
         min-width: 26px;

@@ -159,7 +159,7 @@ export class Dragger {
                 : gsap.utils.clamp(this.bounds.minY, this.bounds.maxY, numRound(currentY)),
         };
 
-        const duration = option?.immediate || !this.options.elastic ? 0 : 0.36;
+        const duration = option?.immediate || !this.options.elasticBack ? 0 : 0.36;
         this.animateToPosition(targetPosition, duration, option?.onEnd);
     }
 

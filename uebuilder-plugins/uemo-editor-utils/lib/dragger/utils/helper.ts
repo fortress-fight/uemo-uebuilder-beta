@@ -5,6 +5,7 @@ export type Bounce = { top: number; left: number; width: number; height: number 
 export type DraggerOption = {
     type?: "x" | "y" | "xy";
     elastic?: boolean;
+    elasticBack?: boolean;
     initPos?: boolean;
     bounds?: { top: number; left: number; width: number; height: number } | HTMLElement;
     trigger?: Element | null | Element[] | string | { box: HTMLElement; el: string };

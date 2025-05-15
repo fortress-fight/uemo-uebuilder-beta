@@ -1,3 +1,8 @@
+/*
+ * @Description: 按钮样式
+ * @Author: F-Stone
+ * @LastEditTime: 2025-05-11 16:04:37
+ */
 @mixin btn-hover() {
     color: var(--hover-color, var(--color));
     border-width: var(--hover-border-width, var(--border-width));
@@ -111,8 +116,7 @@
         }
         &[data-animation="moveUp"] {
             transition: 0.26s ease;
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 transform: translateY(-0.4em);
             }
         }
@@ -120,8 +124,7 @@
             animation-duration: 0.6s;
 
             animation-fill-mode: forwards;
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 animation-name: rubberBand;
             }
         }
@@ -129,15 +132,13 @@
             animation-duration: 0.6s;
 
             animation-fill-mode: forwards;
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 animation-name: shakeX;
             }
         }
         &[data-animation="scale"] {
             transition: 0.26s ease;
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 transform: scale3d(1.05, 1.05, 1.05);
             }
         }
@@ -154,8 +155,7 @@
                 transition: 0.26s ease;
                 transform: translateX(var(--move-x));
             }
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 .btn-text {
                     transform: translateX(0);
                 }
@@ -202,6 +202,7 @@
 
             padding: var(--padding);
 
+            /* stylelint-disable-next-line prettier/prettier */
             transition:
                 0.26s ease,
                 background 0s;
@@ -224,8 +225,7 @@
         }
         &[data-theme|="custom"],
         &[data-theme|="wave"] {
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 @include btn-hover;
             }
         }
@@ -239,8 +239,7 @@
             cursor: pointer;
             user-select: none;
             white-space: nowrap;
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 .btn-front-3d {
                     transform: rotateX(0deg);
                 }
@@ -353,8 +352,7 @@
                     background: var(--color);
                 }
             }
-            &.state-hover,
-            &:hover {
+            &.state-hover {
                 color: var(--hover-color);
                 border-color: var(--hover-color);
                 .btn-icon {

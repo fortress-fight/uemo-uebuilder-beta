@@ -1,0 +1,23 @@
+/*
+ * @Description: 按钮样式
+ * @Author: F-Stone
+ * @LastEditTime: 2025-05-11 16:03:12
+ */
+// @type
+@import "@stone/uemo-editor-tiptap/src/style/text-decoration";
+@import "@stone/uemo-editor-tiptap/src/style/blockquote";
+@import "@stone/uemo-editor-tiptap/src/style/link";
+@import "@stone/uemo-editor-tiptap/src/style/font-style";
+@import "@stone/uemo-editor-tiptap/src/style/emoji";
+@import "@stone/uemo-editor-tiptap/src/style/button";
+.page-editor {
+    font-size: 14px;
+    line-height: 1.6;
+
+    word-wrap: break-word;
+
+    font-feature-settings: "liga" 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variant-ligatures: none;
+}

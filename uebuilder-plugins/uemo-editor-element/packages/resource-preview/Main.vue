@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 14:11:41
+ * @LastEditTime: 2025-05-11 09:46:49
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -197,14 +197,14 @@ function handlePointerEnter(): void {
  * 处理鼠标离开事件
  */
 function handlePointerLeave(): void {
-    if (props.type === "lottie") {
-        const lottieDom = dotlottieRef.value;
-        if (!lottieDom) return;
-        const lottieItem = lottieDom.getLottie();
-        if (lottieItem) {
-            lottieItem.pause();
-        }
-    }
+    // if (props.type === "lottie") {
+    //     const lottieDom = dotlottieRef.value;
+    //     if (!lottieDom) return;
+    //     const lottieItem = lottieDom.getLottie();
+    //     if (lottieItem) {
+    //         lottieItem.pause();
+    //     }
+    // }
 }
 
 watchEffect(() => {

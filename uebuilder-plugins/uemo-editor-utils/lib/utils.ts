@@ -71,7 +71,7 @@ export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
 export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 
 /** image类型 */
-export const isImageReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(jpg|jpeg|png|gif|webp))/;
+export const isImageReg = /^(https?:\/\/(?:images\.unsplash\.com|[^\s"'()]+?\.(?:jpg|jpeg|png|gif|webp))(?:\?[^\s"'()]*)?)/;
 
 /** 下载文件类型 */
 export const isDownloadFileReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(pdf|doc|docx|xls|xlsx|ppt|pptx|gif|png|jpg))/g;
@@ -113,7 +113,7 @@ export function loadScript(dom: HTMLElement, param: { title: string; source: str
     return new Promise<{ id: string; source: string }>((res, rej) => {
         if (!source || !dom) return rej(new Error("load script error: source or dom is null"));
 
-        if (document.querySelector("#" + useId)) {
+        if (document.querySelector(`[src="${source}"]`)) {
             return res({ id: useId, source: param.source });
         }
 

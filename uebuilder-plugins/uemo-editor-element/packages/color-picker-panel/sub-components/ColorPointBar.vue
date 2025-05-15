@@ -169,7 +169,7 @@ defineExpose({ removePoint, changePosition, calcPointerStyle });
 
     width: calc(100% - 20px);
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 26px;
     margin-bottom: 10px;
     .shadow-pointer {
         position: absolute;

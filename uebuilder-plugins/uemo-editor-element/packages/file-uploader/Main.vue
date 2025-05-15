@@ -1,7 +1,7 @@
 <!--
  * @Description: 文件上传
  * @Author: F-Stone
- * @LastEditTime: 2025-03-06 19:36:57
+ * @LastEditTime: 2025-05-13 15:06:34
 -->
 <template>
     <div :class="$style['file-uploader']" class="cursor-pointer" @click="fireUpload">
@@ -162,6 +162,10 @@ function uploadFile(file: File) {
         uploadFileHand(file);
     }
 }
+
+onBeforeUnmount(() => {
+    uploadHandler?.cancelSource.cancel();
+});
 
 defineExpose({
     uploadFile,

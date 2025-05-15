@@ -34,6 +34,7 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
+        "@stone/uemo-editor-page": "4.0.0",
         "@stone/uemo-editor-i18n": "4.0.0",
         "@stone/vue-cli-service": "^4.0.0",
         "@stone/uemo-share-icon-font": "4.0.0",

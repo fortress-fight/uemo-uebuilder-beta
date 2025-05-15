@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-29 02:24:19
+ * @LastEditTime: 2025-05-13 16:41:49
 -->
 <template>
     <div :class="$style['bubble-editor']">
@@ -141,6 +141,7 @@ const handleAIRequest = async (type: string, text: string, param: any): Promise<
  * 创建编辑器实例
  * @returns {Editor} Tiptap 编辑器实例
  */
+const uploadImageHandler = instance?.proxy?.$ueFileUpload({ uploadConfig: undefined });
 const createEditor = (): Editor | undefined => {
     if (!attrEditorPanel.value) return;
 
@@ -150,8 +151,12 @@ const createEditor = (): Editor | undefined => {
         injectCSS: true,
         content: props.content.replace(linkRegex, ""),
         extensions: createBubbleEditorExtension({
+            showToast: (type: "success" | "error", message: string) => {
+                instance?.proxy?.$ueElToast[type](message);
+            },
             openAttrEditorPanel,
             closeAttrEditorPanel,
+            createUploadHandler: () => uploadImageHandler,
             AIExtension: {
                 AIHandler: {
                     fire: handleAIRequest,

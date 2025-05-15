@@ -19,6 +19,10 @@ declare const styles: {
     readonly "empty-node": string;
     readonly "has-anchor": string;
     readonly "has-focus": string;
+    readonly "image-parallax": string;
+    readonly image_box: string;
+    readonly image_item: string;
+    readonly img_wrapper: string;
     readonly "is-editor-empty": string;
     readonly "is-empty": string;
     readonly link: string;

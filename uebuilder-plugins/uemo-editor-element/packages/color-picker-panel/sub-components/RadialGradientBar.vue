@@ -121,9 +121,11 @@ const useValue = computed({
 });
 watch(
     () => {
-        return `radial-gradient(${currentWidth.value} ${currentHeight.value} ellipse at ${currentXPos.value} ${
-            currentYPos.value
-        }, ${colorPointBar.value?.calcPointerStyle(currentColorPoints.value)})`;
+        const colorInfo = colorPointBar.value?.calcPointerStyle(currentColorPoints.value);
+
+        if (!colorInfo) return useValue.value;
+
+        return `radial-gradient(${currentWidth.value} ${currentHeight.value} ellipse at ${currentXPos.value} ${currentYPos.value}, ${colorInfo})`;
     },
     (value) => {
         useValue.value = value;

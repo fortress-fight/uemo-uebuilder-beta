@@ -1,3 +1,5 @@
+import type { CancelTokenSource } from "@stone/uemo-editor-utils/lib/axios";
+
 import type { ResourceSpline as ResourceSplineType } from "@stone/uemo-editor-assets/resource/spline";
 import type { ResourceLottie as ResourceLottieType } from "@stone/uemo-editor-assets/resource/lottie";
 import type { ResourceRichText as ResourceRichTextType } from "@stone/uemo-editor-assets/resource/rich-text";
@@ -215,9 +217,12 @@ declare global {
          */
         export type UploadHandler = (config: { uploadConfig?: UploadConfig }) => {
             config?: UploadConfig;
+            cancelSource: CancelTokenSource;
+            createCancelSource: () => CancelTokenSource;
             fire: (
                 file: File,
                 param: {
+                    cancelSource?: CancelTokenSource;
                     uploadProgress?: (progress: string) => void;
                 }
             ) => Promise<string>;
@@ -343,6 +348,31 @@ declare global {
          * @description Lottie 库类型
          */
         type LottieLibraryType = "icon" | "normal";
+
+        /**
+         * @description 链接设置值
+         */
+        type LinkValue =
+            | {
+                  type: "link";
+                  link: string;
+                  target: "_blank" | "_self";
+                  triggerArea?: string;
+              }
+            | {
+                  type: "function";
+                  link: string;
+                  detail: "anchor" | "download" | "";
+                  triggerArea?: string;
+              }
+            | {
+                  type: "frame";
+                  link: string;
+                  triggerArea?: string;
+                  popLayer?: {
+                      width?: string;
+                  };
+              };
     }
 
     namespace UE_PLUGIN_OPTIONS {

@@ -5,8 +5,9 @@
     <AILoadingPanel />
     <AddNodePanel />
 
-    <ButtonRowMenu />
-    <ButtonItemMenu />
+    <UeTiptapButtonRowMenu />
+    <UeTiptapButtonItemMenu />
+    <UeTiptapImageMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -15,8 +16,9 @@ import { EditorContent } from "@tiptap/vue-3";
 import LinkPanel from "../../extension-link/panel/LinkPanel.vue";
 import AILoadingPanel from "../../extension-ai/panel/AILoadingPanel.vue";
 import AddNodePanel from "../../extension-node-placeholder/panel/AddNodePanel.vue";
-import ButtonRowMenu from "../../extension-button/menu/ButtonRowMenu.vue";
-import ButtonItemMenu from "../../extension-button/menu/ButtonItemMenu.vue";
+import UeTiptapButtonRowMenu from "../../extension-button/menu/ButtonRowMenu.vue";
+import UeTiptapButtonItemMenu from "../../extension-button/menu/ButtonItemMenu.vue";
+import UeTiptapImageMenu from "../../extension-image/menu/ImageMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

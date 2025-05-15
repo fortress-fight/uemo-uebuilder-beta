@@ -24,6 +24,9 @@ function openBtnRowEditorPanel() {
         case "buttonRow":
             editor.chain().openButtonRowEditorPanel(rect).run();
             break;
+        case "buttonItem":
+            editor.chain().openButtonItemEditorPanel(rect).run();
+            break;
         default:
             return;
     }

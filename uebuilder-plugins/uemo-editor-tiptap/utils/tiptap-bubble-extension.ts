@@ -46,13 +46,17 @@ import { Placeholder } from "../packages/extension-placeholder";
 import { NodePlaceholder } from "../packages/extension-node-placeholder/src";
 import { NewLine } from "../packages/extension-new-line/src";
 import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
+import { Image } from "../packages/extension-image/src";
+import { DropUpload } from "../packages/extension-drop-upload/src";
 
 // #endregion
 
 export type CreateBubbleEditorExtensionParam = {
+    showToast?: (type: "success" | "error", message: string) => void;
     openAttrEditorPanel?: UE_TIPTAP_EXTENSION.EditorPanel["openEditorPanelHandler"];
     closeAttrEditorPanel?: () => void;
     AIExtension?: AIExtensionOptions;
+    createUploadHandler?: () => ReturnType<UE_EL_UTIL.UploadHandler> | undefined;
 };
 
 export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionParam = {}): Extensions {
@@ -81,6 +85,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
     // 自定义插件
     const customExtensions = [
         EditorPanelExtension.configure({
+            showToast: param.showToast,
             openAttrEditorPanel: param.openAttrEditorPanel,
             closeAttrEditorPanel: param.closeAttrEditorPanel,
         }),
@@ -108,6 +113,10 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         NewLine,
         ButtonItem,
         ButtonRow,
+        Image,
+        DropUpload.configure({
+            createUploadHandler: param.createUploadHandler,
+        }),
     ];
 
     return [...baseExtensions, ...customExtensions];

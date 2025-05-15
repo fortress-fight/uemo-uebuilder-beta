@@ -4,13 +4,15 @@
         loop="false"
         lottietype="btnIcon"
         mode="normal"
-        ref="iconDom"
+        ref="dotlottieRef"
         :class="[
             pos == 'before' ? $pageStyle['btn-before-lottie-icon'] : $pageStyle['btn-after-lottie-icon'],
             $pageStyle['btn-icon'],
         ]"
         :src="source"
         :style="dotLottieStyle"
+        :key="source"
+        @ready="handleReady"
     />
     <ue-svg-viewer
         v-else-if="source?.endsWith('.svg')"
@@ -36,13 +38,12 @@
 </template>
 <script lang="ts" setup>
 import type { DotLottiePlayer } from "@stone/uemo-editor-utils/lib/lottie";
-import type { UeElButtonIconProps } from "../index";
+import type { UeElButtonIconProps } from "./types";
 
-import $pageStyle from "../utils/ue-button/app.module.scss";
+import $pageStyle from "@stone/uemo-editor-page/src/style/app.module.scss";
 
 const prop = defineProps<UeElButtonIconProps>();
-
-const iconDom = useTemplateRef<DotLottiePlayer>("iconDom");
+const dotlottieRef = useTemplateRef<DotLottiePlayer>("dotlottieRef");
 
 const dotLottieStyle = computed(() => ({
     "--lottie-player-path-fill": "currentColor",
@@ -53,6 +54,15 @@ const dotLottieStyle = computed(() => ({
 
 function isLottie(source: string) {
     return (source || "").endsWith(".lottie");
+}
+
+function handleReady() {
+    const lottieDom = dotlottieRef.value;
+    const lottieItem = lottieDom?.getLottie();
+    if (lottieItem) {
+        lottieItem.autoplay = true;
+        lottieItem.loop = false;
+    }
 }
 </script>
 <style lang="scss" module>

@@ -111,5 +111,6 @@
     "TIP_INSERT_TABLE": "插入表格",
     "TIP_INSERT_GRID": "插入网格",
     "TIP_INSERT_IMAGE": "插入图片",
-    "TIP_INSERT_HR": "插入分隔线"
+    "TIP_INSERT_HR": "插入分隔线",
+    "TIP_MAX_UPLOAD_IMAGE_COUNT": "最多只能同时上传{count}张图片"
 }

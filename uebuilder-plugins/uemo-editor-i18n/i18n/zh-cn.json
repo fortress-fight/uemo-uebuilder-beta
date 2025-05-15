@@ -258,6 +258,7 @@
     "ERROR_UPLOAD_NOT_ALLOW_IMAGE": "未开通图片上传功能，请联系客服询问详情",
     "ERROR_UPLOAD_NETWORK_ERROR": "请检查网络",
     "ERROR_UPLOAD_FAILED": "上传失败",
+    "ERROR_UPLOAD_CANCELED": "上传取消",
     "ERROR_UPLOAD_NOT_SELECTED": "未选择上传文件",
     "ERROR_UPLOAD_NOT_CONFIG": "未配置上传功能，请联系客服询问详情",
     "ERROR_UPLOAD_NOT_ALLOW_VIDEO": "未开通视频上传功能，请联系客服询问详情",

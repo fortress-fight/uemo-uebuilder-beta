@@ -1,4 +1,4 @@
-import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
+import type { AxiosInstance, CancelTokenSource } from "@stone/uemo-editor-utils/lib/axios";
 
 import { normalUpload } from "./normal-upload";
 import { checkFileSize } from "./helper";
@@ -15,6 +15,7 @@ export function assetUpload(
     axiosInstance: AxiosInstance | undefined,
     uploadConfig: UE_EL_UTIL.UploadConfig,
     param: {
+        cancelSource?: CancelTokenSource;
         onProgress?: (progress: string) => void;
     }
 ) {

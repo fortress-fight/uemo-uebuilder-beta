@@ -3,10 +3,8 @@
         ref="button"
         :class="[$pageStyle.btn]"
         :as="data.link ? 'a' : 'div'"
-        :data-hover-active="data.previewHover === '1'"
         :data-link-detail="data.linkDetail"
         :data-link-type="data.linkType"
-        :data-remove-transition="data.transition === '0'"
         :data-text-empty="data.text?.length == 0"
         :data-theme="data.theme"
         :href="data.link"
@@ -36,11 +34,12 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UeElButtonIconProps } from "../index";
+import type { UeElButtonIconProps } from "./types";
 
 import { _pickBy, _debounce } from "@stone/uemo-editor-utils/lib/lodash";
-import $pageStyle from "../utils/ue-button/app.module.scss";
-import { getBoxStyle } from "../utils/ue-button/utils/get-box-style";
+import $pageStyle from "@stone/uemo-editor-page/src/style/app.module.scss";
+
+import { getBoxStyle } from "./utils/get-box-style";
 import ButtonIcon from "./ButtonIcon.vue";
 
 const props = defineProps<{ data: UE_EL_UTIL.ResourceButtonItem["attrs"] }>();

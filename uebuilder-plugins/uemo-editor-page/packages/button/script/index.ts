@@ -1,7 +1,8 @@
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
-import { ButtonEventEventBus } from "./utils/event-bus";
-import { buttonCreator } from "./utils/create-button";
+
+import { ButtonEventEventBus } from "../utils/event-bus";
+import { buttonCreator } from "../utils/create-button";
 
 /**
  * 按钮管理器类

@@ -1,5 +1,6 @@
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 
+import { axios } from "@stone/uemo-editor-utils/lib/axios";
 import { isVideoType, isImageType } from "@stone/uemo-editor-utils/lib/utils";
 
 import { transferUploadConfig } from "./helper";
@@ -23,9 +24,14 @@ export function createUploadHandler(
 ): UE_EL_UTIL.UploadHandler {
     return (config) => {
         const uploadConfig = config.uploadConfig || defaultUploadConfig;
+        const cancelSource = axios.CancelToken.source();
 
         return {
             config: uploadConfig,
+            cancelSource,
+            createCancelSource: () => {
+                return axios.CancelToken.source();
+            },
             fire: (file: File, param) => {
                 if (!file) {
                     const errorMsg = t("ERROR_UPLOAD_NOT_SELECTED");
@@ -38,6 +44,7 @@ export function createUploadHandler(
                 }
 
                 const newConfig = transferUploadConfig(uploadConfig);
+                const uploadCancelSource = param.cancelSource || cancelSource;
 
                 // 成功处理
                 const successHandler = (res: string) => {
@@ -50,23 +57,23 @@ export function createUploadHandler(
                 };
 
                 if (isVideoType(file.type)) {
-                    return videoUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                        successHandler,
-                        errorHandler
-                    );
+                    return videoUpload(file, axiosInstance, newConfig, {
+                        cancelSource: uploadCancelSource,
+                        onProgress: param.uploadProgress,
+                    }).then(successHandler, errorHandler);
                 }
 
                 if (isImageType(file.type)) {
-                    return imageUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                        successHandler,
-                        errorHandler
-                    );
+                    return imageUpload(file, axiosInstance, newConfig, {
+                        cancelSource: uploadCancelSource,
+                        onProgress: param.uploadProgress,
+                    }).then(successHandler, errorHandler);
                 }
 
-                return assetUpload(file, axiosInstance, newConfig, { onProgress: param.uploadProgress }).then(
-                    successHandler,
-                    errorHandler
-                );
+                return assetUpload(file, axiosInstance, newConfig, {
+                    cancelSource: uploadCancelSource,
+                    onProgress: param.uploadProgress,
+                }).then(successHandler, errorHandler);
             },
         };
     };
