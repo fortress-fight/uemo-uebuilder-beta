@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试Tiptap 图片编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 10:45:05
+ * @LastEditTime: 2025-05-15 15:35:54
 -->
 <template>
     <TestArea
@@ -11,7 +11,7 @@
         v-model:testValueSelect="testValueSelect"
         title="测试Tiptap 图片编辑面板"
     >
-        <UeEditorPanelTiptapImage v-bind="testValue">
+        <UeEditorPanelTiptapImage v-bind="testValue" v-model:value="testValue.value">
             <!--  -->
         </UeEditorPanelTiptapImage>
     </TestArea>

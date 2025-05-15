@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 图片编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 11:03:49
+ * @LastEditTime: 2025-05-15 15:34:15
 -->
 <template>
     <UeElEditorPanel :title="t('UNIT_IMAGE')">
@@ -22,6 +22,7 @@
                     </template>
                 </UeElSettingGroup>
                 <UeElLinkSettingGroup v-model:value="link" />
+                <UeElSizeSettingGroup v-model:value="size" />
                 <UeElColorSettingGroup title="遮罩" v-model:value="maskColor" type="color" />
                 <UeElSettingGroup title="SEO">
                     <template #body>
@@ -80,6 +81,27 @@ const align = useDefineObjectModel(valueModel, {
     get: (modelValue) => modelValue.align || "left",
     set: (value, modelValue) => {
         modelValue.align = value;
+        return modelValue;
+    },
+});
+
+const size = useDefineObjectModel(valueModel, {
+    get: (modelValue) => {
+        if (!modelValue.sizeMode) return undefined;
+
+        return {
+            mode: modelValue.sizeMode,
+            width: modelValue.width,
+            height: modelValue.height,
+            ratio: modelValue.ratio,
+        };
+    },
+    set: (value, modelValue) => {
+        modelValue.sizeMode = value?.mode;
+        modelValue.width = value?.width;
+        modelValue.height = value?.height;
+        modelValue.ratio = value?.ratio;
+
         return modelValue;
     },
 });
