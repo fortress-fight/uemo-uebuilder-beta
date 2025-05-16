@@ -13,9 +13,9 @@
             </UeElControlGroup>
         </template>
     </UeElSettingGroup>
-    <UeElLinkSettingGroup v-model:value="link" />
     <UeElSizeSettingGroup v-model:value="size" />
     <UeElColorSettingGroup :title="t('UNIT_MASK')" v-model:value="maskColor" type="color" />
+    <UeElLinkSettingGroup v-model:value="link" />
     <UeElSettingGroup title="SEO" is-last>
         <template #body>
             <UeElControlGroup>
