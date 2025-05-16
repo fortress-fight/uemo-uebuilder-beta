@@ -6,8 +6,12 @@ import { Node, type Attribute, nodeInputRule, nodePasteRule } from "@tiptap/core
 import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import ImageView from "../view/Image.vue";
-import { getImageAttrs } from "../utils/helper";
 
+import { imageRender } from "../utils/render";
+import { getImageAttrs } from "../utils/helper";
+import { parseCkImage, parseImage } from "../utils/parse";
+
+import $pageStyle from "../../../src/app.module.scss";
 export interface ImageOptions {
     inline: boolean;
     allowBase64: boolean;
@@ -97,15 +101,27 @@ export const Image = Node.create<ImageOptions>({
             imageLink: { default: undefined },
 
             /**
-             * 上传相关
+             * 移动端相关
              */
-            uploadProgress: { default: "" },
             md: { default: {} },
         } as Record<keyof ImageAttrs, Attribute>;
     },
 
     parseHTML() {
         return [
+            {
+                tag: "div." + $pageStyle.img_wrapper,
+                getAttrs: (el): ImageAttrs => {
+                    return parseImage(el);
+                },
+            },
+            {
+                // 这里转换的是有 CK-Editor 带来的属性
+                tag: "figure.ue-image",
+                getAttrs: (el): ImageAttrs => {
+                    return parseCkImage(el);
+                },
+            },
             {
                 tag: this.options.allowBase64 ? "img[src]" : 'img[src]:not([src^="data:"])',
                 getAttrs: (el): ImageAttrs => {
@@ -124,11 +140,11 @@ export const Image = Node.create<ImageOptions>({
 
     renderHTML({ HTMLAttributes }) {
         const imageAttr = HTMLAttributes as ImageAttrs;
-        const { src } = imageAttr;
+        const { src: src } = imageAttr;
 
         if (!src) return ["p"];
 
-        return ["img", HTMLAttributes];
+        return imageRender(imageAttr);
     },
 
     addInputRules() {

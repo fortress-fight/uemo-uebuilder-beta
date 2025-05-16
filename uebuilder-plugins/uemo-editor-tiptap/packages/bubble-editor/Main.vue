@@ -1,10 +1,10 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 16:41:49
+ * @LastEditTime: 2025-05-16 14:56:57
 -->
 <template>
-    <div :class="$style['bubble-editor']">
+    <div :class="$style['bubble-editor']" v-bind="$attrs">
         <TiptapEditorContent v-if="tiptapEditor" :editor="tiptapEditor" />
     </div>
     <UeTiptapEditorPanel ref="attrEditorPanel" />
@@ -25,7 +25,6 @@ import $pageStyle from "../../src/app.module.scss";
 
 defineOptions({
     name: "UeTiptapBubbleEditor",
-    inheritAttrs: false,
 });
 
 const { t } = useI18n();

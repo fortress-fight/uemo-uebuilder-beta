@@ -1,7 +1,7 @@
 /*
  * @Description: 图片属性
  * @Author: F-Stone
- * @LastEditTime: 2025-05-12 01:38:49
+ * @LastEditTime: 2025-05-16 14:09:17
  */
 
 export type ImageAttrs = {
@@ -25,7 +25,6 @@ export type ImageAttrs = {
     imageLink?: UE_EL_UTIL.LinkValue;
     background?: string;
     forbidImageGallery?: boolean;
-    uploadProgress?: string;
     style?: string;
     md?: {
         sizeMode?: "ratio" | "customRatio" | "height";

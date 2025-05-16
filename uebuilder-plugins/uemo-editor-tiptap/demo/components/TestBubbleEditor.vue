@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 10:26:00
+ * @LastEditTime: 2025-05-16 14:55:22
 -->
 <template>
     <TestArea
@@ -11,7 +11,12 @@
         v-model:testValueSelect="testValueSelect"
         title="测试气泡模式编辑器"
     >
-        <UeTiptapBubbleEditor v-bind="testValue" @update="handleUpdate" @ready="handleUpdate">
+        <UeTiptapBubbleEditor
+            :class="$style['bubble-editor']"
+            v-bind="testValue"
+            @update="handleUpdate"
+            @ready="handleUpdate"
+        >
             <!--  -->
         </UeTiptapBubbleEditor>
     </TestArea>
@@ -63,6 +68,8 @@ function handleUpdate(editor: Editor) {
 </script>
 <style lang="scss" module>
 .test-area {
-    // init
+    .bubble-editor {
+        width: 500px;
+    }
 }
 </style>
