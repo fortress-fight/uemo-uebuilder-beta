@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 10:27:32
+ * @LastEditTime: 2025-05-16 19:20:17
 -->
 <template>
     <UeTiptapMenuButton
@@ -54,11 +54,8 @@ function openFontSizePanel() {
         { fontSize: currentFontSize.value || "" },
         {
             rect,
-            setData: ({ fontSize }) => {
+            updateAttrs: ({ fontSize }) => {
                 updateFontSize(fontSize);
-            },
-            focus: () => {
-                editor?.commands.focus();
             },
         }
     );

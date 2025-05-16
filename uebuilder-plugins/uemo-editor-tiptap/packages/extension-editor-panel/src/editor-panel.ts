@@ -162,16 +162,28 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                 return true;
             },
 
-            openAttrEditorPanel: (type, attr, param) => () => {
-                const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
+            openAttrEditorPanel:
+                (type, attr, param) =>
+                ({ editor }) => {
+                    const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
 
-                // 调用属性处理器
-                handler(type, attr, param);
+                    // 调用属性处理器
+                    handler(type, attr, {
+                        ...param,
+                        focus: () => {
+                            editor.commands.focus();
+                            param.focus?.();
+                        },
+                        close: () => {
+                            editor.commands.closeAttrEditorPanel(type);
+                            param.close?.();
+                        },
+                    });
 
-                this.storage.lastEditorPanelType = type;
+                    this.storage.lastEditorPanelType = type;
 
-                return true;
-            },
+                    return true;
+                },
 
             closeAttrEditorPanel: (type) => () => {
                 if (this.storage.lastEditorPanelType !== type) {

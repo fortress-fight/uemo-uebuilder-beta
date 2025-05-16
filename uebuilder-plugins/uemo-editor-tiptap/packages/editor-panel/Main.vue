@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 10:23:34
+ * @LastEditTime: 2025-05-18 19:44:59
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" @onHide="onHide">
@@ -10,7 +10,7 @@
             ref="linkPanel"
             :value="valueRef"
             @closePopPanel="openRef = false"
-            @update:value="updateValue"
+            @update:value="updateLinkValue"
             @cancel="handleCancel"
             @confirm="handleConfirm"
         />
@@ -162,6 +162,8 @@ function updateValue(value: EditorPanelAttrsMap[T]) {
     eventBus.emit("update", value);
 }
 
+const updateLinkValue = updateValue as (value: EditorPanelAttrsMap["link"]) => void;
+
 /**
  * 隐藏事件处理
  */
@@ -192,15 +194,15 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     // 设置事件监听
     eventBus.on("update", (value) => {
         valueRef.value = value;
-        param.setData(value);
+        param.updateAttrs(value);
     });
 
     eventBus.on("preview", (data) => {
-        param.preview?.(data);
+        param.fire?.("preview", data);
     });
 
     eventBus.on("focus", () => {
-        param.focus();
+        param.focus?.();
     });
 
     eventBus.on("close", () => {

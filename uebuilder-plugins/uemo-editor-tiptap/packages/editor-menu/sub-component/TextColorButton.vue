@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-18 01:32:22
+ * @LastEditTime: 2025-05-16 19:20:30
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" type="textColor" :color="currentColor" @trigger="openColorPicker" />
@@ -29,15 +29,12 @@ function openColorPicker() {
         { color: currentColor.value || "" },
         {
             rect,
-            setData: ({ color }) => {
+            updateAttrs: ({ color }) => {
                 if (color) {
                     editor.chain().setColor(color).run();
                 } else {
                     editor.chain().unsetColor().run();
                 }
-            },
-            focus: () => {
-                editor?.commands.focus();
             },
         }
     );

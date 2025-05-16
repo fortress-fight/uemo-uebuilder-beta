@@ -7,14 +7,14 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
             {
                 const newValue = prompt("请输入划线提醒的属性", JSON.stringify(attr));
                 if (!newValue) return;
-                param.setData(JSON.parse(newValue));
+                param.updateAttrs(JSON.parse(newValue));
             }
             break;
         case "link":
             {
                 const newValue = prompt("请输入链接的属性", JSON.stringify(attr));
                 if (!newValue) return;
-                param.setData(JSON.parse(newValue));
+                param.updateAttrs(JSON.parse(newValue));
             }
             break;
         default:

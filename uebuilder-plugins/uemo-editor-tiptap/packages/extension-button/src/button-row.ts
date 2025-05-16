@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 18:24:36
+ * @LastEditTime: 2025-05-16 19:20:45
  */
 import type { Attribute } from "@tiptap/core";
 import type { ButtonRowAttrs } from "./index";
@@ -274,14 +274,8 @@ export const ButtonRow = Node.create<ButtonRowOptions>({
                         .focus()
                         .openAttrEditorPanel("buttonRow", currentAttr, {
                             rect,
-                            setData: (attr) => {
+                            updateAttrs: (attr) => {
                                 editor.commands.updateButtonRowAttrs(attr);
-                            },
-                            focus: () => {
-                                editor.commands.focus();
-                            },
-                            close: () => {
-                                editor.commands.closeAttrEditorPanel("buttonRow");
                             },
                         })
                         .run();

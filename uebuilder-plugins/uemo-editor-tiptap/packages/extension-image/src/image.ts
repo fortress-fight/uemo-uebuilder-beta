@@ -211,14 +211,8 @@ export const Image = Node.create<ImageOptions>({
                         .focus()
                         .openAttrEditorPanel("image", currentAttr, {
                             rect,
-                            setData: (attr) => {
+                            updateAttrs: (attr) => {
                                 editor.commands.updateImageAttrs(attr);
-                            },
-                            focus: () => {
-                                editor.commands.focus();
-                            },
-                            close: () => {
-                                editor.commands.closeAttrEditorPanel("image");
                             },
                         })
                         .run();
