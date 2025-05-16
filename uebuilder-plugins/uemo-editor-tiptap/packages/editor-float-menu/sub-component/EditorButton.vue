@@ -27,6 +27,9 @@ function openBtnRowEditorPanel() {
         case "buttonItem":
             editor.chain().openButtonItemEditorPanel(rect).run();
             break;
+        case "image":
+            editor.chain().openImageEditorPanel(rect).run();
+            break;
         default:
             return;
     }

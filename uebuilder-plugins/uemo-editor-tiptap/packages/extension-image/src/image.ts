@@ -6,6 +6,7 @@ import { Node, type Attribute, nodeInputRule, nodePasteRule } from "@tiptap/core
 import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import ImageView from "../view/Image.vue";
+import { getImageAttrs } from "../utils/helper";
 
 export interface ImageOptions {
     inline: boolean;
@@ -22,6 +23,11 @@ declare module "@tiptap/core" {
              * 插入图片
              */
             insertImage: (src: string) => ReturnType;
+
+            /**
+             * 打开图片编辑器面板
+             */
+            openImageEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
 
             /**
              * 替换图片
@@ -178,6 +184,28 @@ export const Image = Node.create<ImageOptions>({
                 (attrs: Partial<ImageAttrs>) =>
                 ({ chain }) => {
                     return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openImageEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getImageAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("image", currentAttr, {
+                            rect,
+                            setData: (attr) => {
+                                editor.commands.updateImageAttrs(attr);
+                            },
+                            focus: () => {
+                                editor.commands.focus();
+                            },
+                            close: () => {
+                                editor.commands.closeAttrEditorPanel("image");
+                            },
+                        })
+                        .run();
                 },
         };
     },

@@ -68,7 +68,7 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem"];
+const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image"];
 
 /**
  * 编辑器面板扩展
@@ -134,6 +134,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "buttonItem":
                                     this.editor.chain().openButtonItemEditorPanel(domRect).run();
+                                    return false;
+
+                                case "image":
+                                    this.editor.chain().openImageEditorPanel(domRect).run();
                                     return false;
 
                                 default:
