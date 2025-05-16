@@ -2,7 +2,7 @@
     <UeElSettingGroup>
         <template #body>
             <UeElControlGroup>
-                <UeElResourceSetting type="image" v-model:value="src" />
+                <UeElResourceSetting type="image" v-model:value="src" :removable="false" />
             </UeElControlGroup>
         </template>
     </UeElSettingGroup>
