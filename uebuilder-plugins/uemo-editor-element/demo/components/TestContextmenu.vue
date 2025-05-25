@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-25 10:47:28
+ * @LastEditTime: 2025-05-25 19:25:09
 -->
 <template>
     <TestArea
@@ -64,9 +64,9 @@ const testValueList: (UE_EL_COMPONENT.UeElContextmenuProps & { testOptionTitle?:
             [{ type: "copyAttrs", text: "复制属性", hotkey: "⌘+C", enable: true }],
             [{ type: "themeChange", text: "主题样式调节", hotkey: "", enable: false }],
         ],
-        trigger: (data: UE_EL_COMPONENT.UeElContextmenuProps["list"][number][number]) => {
+        trigger: (type: string, data: { detail: UE_EL_COMPONENT.UeElContextmenuProps["list"][number][number] }) => {
             // eslint-disable-next-line no-console
-            console.log("data", data);
+            console.log("data", type, data);
         },
     },
 ];

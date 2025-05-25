@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-25 10:45:10
+ * @LastEditTime: 2025-05-25 19:24:47
 -->
 <template>
     <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
@@ -18,7 +18,7 @@
                     :disable="!item.enable"
                     :class="$style['oper-item']"
                     class="flex justify-between items-center"
-                    @click="trigger(item)"
+                    @click="triggerEvent"
                     @setOpenMap="setOpenPath(`${level}-${groupKey}-${index}`)"
                 >
                     <div :class="$style['text']">{{ item.text }}</div>
@@ -43,7 +43,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UeElContextmenuBaseProps } from "./index";
+import type { UeElContextmenuBaseProps, UeElContextmenuItem } from "./index";
 
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { eventBus } from "./sub-component/event-bus";
@@ -58,6 +58,11 @@ const contextMenuPanels = useTemplateRef("contextMenuPanels");
 const openPath = ref<string>("");
 function setOpenPath(data: string) {
     openPath.value = data;
+}
+
+function triggerEvent(item: UeElContextmenuItem) {
+    if (!item.type) return;
+    prop.trigger(item.type, { detail: item });
 }
 
 function openPopupPanel(ev: PointerEvent) {
