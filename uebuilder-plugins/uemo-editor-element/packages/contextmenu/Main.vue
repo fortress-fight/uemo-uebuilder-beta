@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 18:53:49
+ * @LastEditTime: 2025-05-25 10:45:10
 -->
 <template>
     <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
@@ -18,7 +18,7 @@
                     :disable="!item.enable"
                     :class="$style['oper-item']"
                     class="flex justify-between items-center"
-                    @click="fireTrigger(item)"
+                    @click="trigger(item)"
                     @setOpenMap="setOpenPath(`${level}-${groupKey}-${index}`)"
                 >
                     <div :class="$style['text']">{{ item.text }}</div>
@@ -33,8 +33,8 @@
                             v-if="item.subList && item.subList.length > 0"
                             :class="$style['contextmenu-sub-menu']"
                             :list="item.subList"
+                            :trigger="trigger"
                             :level="slotProps.level + 1"
-                            @trigger="fireTrigger"
                         />
                     </template>
                 </ContextmenuPanel>
@@ -43,7 +43,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UeElContextmenuBaseProps, UeElContextmenuItem } from "./index";
+import type { UeElContextmenuBaseProps } from "./index";
 
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { eventBus } from "./sub-component/event-bus";
@@ -52,19 +52,12 @@ import UeElContextmenu from "./Main.vue";
 
 defineOptions({ name: "UeElContextmenu" });
 const prop = withDefaults(defineProps<UeElContextmenuBaseProps>(), { list: () => [], level: 0 });
-const emit = defineEmits<{
-    (ev: "trigger", type: { type: string; enable: boolean; text: string; param: any }): void;
-}>();
+
 const contextMenuPanels = useTemplateRef("contextMenuPanels");
 
 const openPath = ref<string>("");
 function setOpenPath(data: string) {
     openPath.value = data;
-}
-
-function fireTrigger(item: UeElContextmenuItem) {
-    if (!item.type) return;
-    emit("trigger", { type: item.type, enable: item.enable, text: item.text, param: item.param });
 }
 
 function openPopupPanel(ev: PointerEvent) {
