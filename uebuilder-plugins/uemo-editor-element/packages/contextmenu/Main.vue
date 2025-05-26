@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-25 19:24:47
+ * @LastEditTime: 2025-05-26 11:57:53
 -->
 <template>
     <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
@@ -18,7 +18,7 @@
                     :disable="!item.enable"
                     :class="$style['oper-item']"
                     class="flex justify-between items-center"
-                    @click="triggerEvent"
+                    @click="triggerEvent(item)"
                     @setOpenMap="setOpenPath(`${level}-${groupKey}-${index}`)"
                 >
                     <div :class="$style['text']">{{ item.text }}</div>
