@@ -110,3 +110,11 @@ export function getNodeDom(editor: Editor) {
 
     return node;
 }
+
+/**
+ * 获取扩展选项
+ */
+export function getExtensionOptions(editor: Editor, name: string) {
+    const extension = editor.extensionManager.extensions.find((extension) => extension.name === name);
+    return extension?.options || undefined;
+}
