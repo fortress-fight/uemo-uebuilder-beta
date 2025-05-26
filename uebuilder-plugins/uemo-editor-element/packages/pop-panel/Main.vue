@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 16:56:05
+ * @LastEditTime: 2025-05-26 15:37:35
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -113,6 +113,11 @@ async function updateDialogPos(): Promise<void> {
     }
 
     const { refEl, options = defaultCalcPosParam } = position;
+
+    if (refEl instanceof HTMLElement && !document.body.contains(refEl)) {
+        return;
+    }
+
     const { x, y } = await computeFloatingPosition(refEl, dialogBox, dialogPosHandler(options));
 
     gsap.set(dialogBox, { top: y, left: x });
