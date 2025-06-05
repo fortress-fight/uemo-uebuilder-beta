@@ -1,7 +1,7 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 15:23:55
+ * @LastEditTime: 2025-06-05 13:54:18
  */
 
 /**
@@ -80,4 +80,13 @@ export function transformLinkData(data?: TypeLinkValue) {
         return { type, link, triggerArea, target: data.target, detail: undefined };
     }
     return {};
+}
+
+/**
+ * 首字母大写
+ * @param str 字符串
+ * @returns 首字母大写后的字符串
+ */
+export function capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }

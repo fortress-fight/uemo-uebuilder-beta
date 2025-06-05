@@ -4,6 +4,7 @@ import type { EditorState, Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
 import { isInTable } from "@tiptap/pm/tables";
+import { NodeSelection } from "@tiptap/pm/state";
 import { isNodeSelection, posToDOMRect } from "@tiptap/core";
 
 /**
@@ -117,4 +118,15 @@ export function getNodeDom(editor: Editor) {
 export function getExtensionOptions(editor: Editor, name: string) {
     const extension = editor.extensionManager.extensions.find((extension) => extension.name === name);
     return extension?.options || undefined;
+}
+
+/**
+ * 获取选中的节点名称
+ */
+export function getNodeName(editor: Editor) {
+    const { selection } = editor.state;
+    if (selection instanceof NodeSelection) {
+        return selection.node.type.name;
+    }
+    return undefined;
 }
