@@ -112,5 +112,14 @@
     "TIP_INSERT_GRID": "Insert Grid",
     "TIP_INSERT_IMAGE": "Insert Image",
     "TIP_INSERT_HR": "Insert Divider",
-    "TIP_MAX_UPLOAD_IMAGE_COUNT": "Max {count} images can be uploaded at a time"
+    "TIP_MAX_UPLOAD_IMAGE_COUNT": "Max {count} images can be uploaded at a time",
+    "TIP_COPY_ATTRS_TITLE": "Copy Attributes",
+    "TIP_PASTE_ATTRS_TITLE": "Paste Attributes",
+    "TIP_COPY_ATTRS_SUCCESS": "Copy Attributes Success",
+    "TIP_COPY_ATTRS_FAILED": "Copy Attributes Failed",
+    "TIP_PASTE_ATTRS_SUCCESS": "Paste Attributes Success",
+    "TIP_PASTE_ATTRS_FAILED": "Paste Attributes Failed",
+    "TIP_PASTE_ATTRS_ALL": "Paste All Attributes",
+    "TIP_PASTE_ATTRS_DESIGN": "Paste Design Attributes",
+    "TIP_PASTE_ATTRS_EFFECT": "Paste Effect Attributes"
 }

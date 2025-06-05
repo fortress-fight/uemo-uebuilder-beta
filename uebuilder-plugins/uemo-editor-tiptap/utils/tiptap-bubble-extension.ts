@@ -48,6 +48,7 @@ import { NewLine } from "../packages/extension-new-line/src";
 import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
 import { Image } from "../packages/extension-image/src";
 import { DropUpload } from "../packages/extension-drop-upload/src";
+import { CopyAttrsExtension } from "../packages/extension-copy-attrs/src";
 
 // #endregion
 
@@ -117,6 +118,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         DropUpload.configure({
             createUploadHandler: param.createUploadHandler,
         }),
+        CopyAttrsExtension,
     ];
 
     return [...baseExtensions, ...customExtensions];
