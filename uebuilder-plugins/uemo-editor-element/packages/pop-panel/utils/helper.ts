@@ -5,6 +5,11 @@ import type { EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib
  */
 type PopPanelMode = "editorPanel" | "centerPanel";
 
+/*
+ * 弹窗面板的根ID
+ */
+export const UeElPopPanelRootId = Symbol() as InjectionKey<ComputedRef<string>>;
+
 /**
  * 默认的位置配置
  */

@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 17:57:47
+ * @LastEditTime: 2025-06-05 11:20:06
  */
 import type { App } from "vue";
 import type { ReferenceElement, EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib/floating-ui";
@@ -28,6 +28,7 @@ export const defaultCalcPosParam: EnhancedComputePositionConfig = {
 };
 
 export interface UeElPopPanelBaseProps {
+    id?: string;
     zIndex?: number;
     immediate?: boolean;
     autoClose?: boolean;

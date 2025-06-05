@@ -1,7 +1,7 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-26 11:57:53
+ * @LastEditTime: 2025-06-05 12:01:51
 -->
 <template>
     <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
@@ -62,7 +62,7 @@ function setOpenPath(data: string) {
 
 function triggerEvent(item: UeElContextmenuItem) {
     if (!item.type) return;
-    prop.trigger(item.type, { detail: item });
+    prop.trigger(item.type, { detail: isReactive(item) ? toRaw(item) : item });
 }
 
 function openPopupPanel(ev: PointerEvent) {
