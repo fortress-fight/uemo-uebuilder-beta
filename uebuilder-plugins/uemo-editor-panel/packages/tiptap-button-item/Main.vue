@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-10 19:47:04
+ * @LastEditTime: 2025-05-23 18:14:24
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -58,7 +58,7 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 defineOptions({ name: "UeEditorPanelTiptapButtonItem" });
 
 const _props = withDefaults(defineProps<UeEditorPanelTiptapButtonItemBaseProps>(), {});
-const emit = defineEmits<{ (e: "preview", state: "hover" | "leave"): void }>();
+const emit = defineEmits<{ (e: "fire", data: { type: "preview"; param?: "hover" | "leave" }): void }>();
 
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.ButtonItem["attrs"]>("value", { required: true });
 
@@ -260,7 +260,7 @@ function replaceButton(value: UE_TIPTAP_EXTENSION.ButtonItem["attrs"] | undefine
 }
 
 function handleChangeHoverState(isHover: boolean) {
-    emit("preview", isHover ? "hover" : "leave");
+    emit("fire", { type: "preview", param: isHover ? "hover" : "leave" });
 }
 </script>
 <style lang="scss" module>

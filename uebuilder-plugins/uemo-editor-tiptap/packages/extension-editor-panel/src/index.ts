@@ -1,15 +1,16 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-05-18 19:43:36
+ * @LastEditTime: 2025-06-05 11:47:01
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
+    popId?: string;
     rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
     props?: Record<string, any>; // 面板属性
 
     updateAttrs: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
-    fire?: (type: "preview", param?: any) => void; // 预览回调
+    fire?(type: string, param?: any): void; // 触发事件回调
     focus?: () => void; // 聚焦回调
     close?: () => void; // 关闭回调
 };
@@ -38,6 +39,7 @@ export type EditorPanelAttrsMap = {
     buttonRow: UE_TIPTAP_EXTENSION.ButtonRow["attrs"];
     buttonItem: UE_TIPTAP_EXTENSION.ButtonItem["attrs"];
     image: UE_TIPTAP_EXTENSION.Image["attrs"];
+    moreOper: null;
 };
 
 export type OpenEditorPanelHandler<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> =

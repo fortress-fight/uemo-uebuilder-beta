@@ -1,10 +1,10 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-18 19:44:59
+ * @LastEditTime: 2025-06-05 13:42:37
 -->
 <template>
-    <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" @onHide="onHide">
+    <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
         <UeElLinkSettingPanel
             v-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
@@ -16,12 +16,12 @@
         />
         <component
             v-else
-            v-bind="$attrs"
+            v-bind="{ ...$attrs, ...injectPropsRef }"
             :is="componentName"
             :value="valueRef"
             @closePopPanel="closePopPanel"
             @update:value="updateValue"
-            @preview="preview"
+            @fire="triggerCommand"
         />
     </UeElPopPanel>
 </template>
@@ -44,6 +44,7 @@ import TextAlignPanel from "./sub-component/TextAlignPanel.vue";
 import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
+import MoreOperPanel from "./sub-component/MoreOperPanel.vue";
 
 type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
@@ -56,6 +57,7 @@ defineOptions({
         TextAlignPanel,
         LineHeightPanel,
         LetterSpacingPanel,
+        MoreOperPanel,
         EditorAIPanel,
         TiptapButtonRow,
         TiptapButtonItem,
@@ -72,6 +74,7 @@ const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
 const typeRef = ref<keyof EditorPanelAttrsMap>();
 const openRef = ref<boolean>(false);
 const valueRef = ref<EditorPanelAttrsMap[T]>();
+const injectPropsRef = ref<Record<string, any>>({});
 const rectRef = ref<UE_TIPTAP_UNIT.PositionRect>();
 
 const linkPanelRef = useTemplateRef<UeElLinkSettingPanelInstance>("linkPanel");
@@ -83,7 +86,7 @@ const eventBus = mitt<{
     focus: undefined;
     show: undefined;
     close: undefined;
-    preview: any;
+    fire: { type: string; param?: any };
     update: EditorPanelAttrsMap[T];
 }>();
 
@@ -103,6 +106,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     buttonRow: "TiptapButtonRow",
     buttonItem: "TiptapButtonItem",
     image: "TiptapImage",
+    moreOper: "MoreOperPanel",
 };
 
 /**
@@ -134,8 +138,8 @@ const popPanelParams = usePopPanelParam(typeRef, rectRef, {
 /**
  * 预览事件处理
  */
-function preview(param: any) {
-    eventBus.emit("preview", param);
+function triggerCommand(data: { type: string; param?: any }) {
+    eventBus.emit("fire", data);
 }
 
 function checkValueType<T extends keyof EditorPanelAttrsMap>(
@@ -181,7 +185,10 @@ function cleanupEventListeners() {
 /**
  * 打开属性编辑器面板
  */
+const popId = ref<string | undefined>();
 const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHandler"] = (type, attr, param) => {
+    popId.value = param.popId;
+
     // 清理之前的事件监听
     cleanupEventListeners();
 
@@ -190,15 +197,17 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     valueRef.value = attr;
     openRef.value = true;
     rectRef.value = param.rect;
-
+    if (param.props) {
+        injectPropsRef.value = param.props;
+    }
     // 设置事件监听
     eventBus.on("update", (value) => {
         valueRef.value = value;
         param.updateAttrs(value);
     });
 
-    eventBus.on("preview", (data) => {
-        param.fire?.("preview", data);
+    eventBus.on("fire", (data) => {
+        param.fire?.(data.type, data.param);
     });
 
     eventBus.on("focus", () => {
@@ -231,7 +240,7 @@ onUnmounted(() => {
 defineExpose({
     openAttrEditorPanel,
     closeAttrEditorPanel: () => {
-        openRef.value = false;
+        closePopPanel();
     },
 });
 </script>
