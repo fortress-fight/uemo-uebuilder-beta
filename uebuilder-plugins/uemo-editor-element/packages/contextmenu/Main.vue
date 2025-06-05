@@ -1,10 +1,10 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-05 12:01:51
+ * @LastEditTime: 2025-06-05 14:36:18
 -->
 <template>
-    <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
+    <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="checkPopupPanel">
         <div :class="$style['inner-wrapper']">
             <div v-for="(group, groupKey) in list" :key="groupKey" :class="$style['contextmenu-group']">
                 <ContextmenuPanel
@@ -65,7 +65,7 @@ function triggerEvent(item: UeElContextmenuItem) {
     prop.trigger(item.type, { detail: isReactive(item) ? toRaw(item) : item });
 }
 
-function openPopupPanel(ev: PointerEvent) {
+function checkPopupPanel(ev: PointerEvent) {
     // 如果不是顶层菜单,直接返回
     if (prop.level !== 0) return;
 
