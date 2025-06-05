@@ -1,7 +1,7 @@
 /*
  * @Description: uemo 接口拦截器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-13 01:59:24
+ * @LastEditTime: 2025-06-05 11:41:12
  */
 import type { UEEngineAxiosInstance, AxiosRequestConfig } from "./utils/type";
 import type { RequestParams, StreamRequestParams } from "./utils/helper";
@@ -264,7 +264,7 @@ export class UE_ENGINE {
                 try {
                     requestCtrl.abort();
                 } catch (err) {
-                    console.log("CANCEL STEAM AJAX ERR:", err);
+                    console.error("CANCEL STEAM AJAX ERR:", err);
                 }
             },
         };
