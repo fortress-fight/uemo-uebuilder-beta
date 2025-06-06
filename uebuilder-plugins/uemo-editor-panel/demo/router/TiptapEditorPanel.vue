@@ -11,8 +11,15 @@
 <script lang="ts" setup>
 import TestEditorPanelTiptapButtonRow from "~/demo/components/TestEditorPanelTiptapButtonRow.vue";
 import TestEditorPanelTiptapButtonItem from "~/demo/components/TestEditorPanelTiptapButtonItem.vue";
+import TestEditorPanelTiptapImage from "~/demo/components/TestEditorPanelTiptapImage.vue";
+import TestEditorPanelTiptapSvgIcon from "~/demo/components/TestEditorPanelTiptapSvgIcon.vue";
 
-const tiptapEditorPanelComponents = [TestEditorPanelTiptapButtonRow, TestEditorPanelTiptapButtonItem];
+const tiptapEditorPanelComponents = [
+    TestEditorPanelTiptapButtonRow,
+    TestEditorPanelTiptapButtonItem,
+    TestEditorPanelTiptapImage,
+    TestEditorPanelTiptapSvgIcon,
+];
 </script>
 <style lang="scss" module>
 .page-head {
