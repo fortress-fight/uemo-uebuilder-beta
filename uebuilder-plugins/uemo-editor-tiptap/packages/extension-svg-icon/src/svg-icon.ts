@@ -2,11 +2,15 @@ import type { SvgIconAttrs } from "./index";
 import type { Attribute } from "@tiptap/core";
 
 import { Node } from "@tiptap/core";
+import { VueNodeViewRenderer } from "@tiptap/vue-3";
 
-import $pageStyle from "../../../src/app.module.scss";
+import SvgIconView from "../view/SvgIcon.vue";
+
 import { parseSvgIcon } from "../utils/parse";
 import { svgIconRender } from "../utils/render";
 import { getSvgIconAttrs } from "../utils/helper";
+
+import $pageStyle from "../../../src/app.module.scss";
 
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
@@ -42,7 +46,7 @@ export const SvgIcon = Node.create<SvgIconOptions>({
     addOptions() {
         return {
             allowCopyAttrsType: {
-                design: ["align", "width", "padding", "background", "border", "radius", "shadow"],
+                design: ["color", "align", "width", "padding", "background", "border", "radius", "shadow"],
             },
         };
     },
@@ -62,6 +66,10 @@ export const SvgIcon = Node.create<SvgIconOptions>({
             radius: { default: "" },
             background: { default: "" },
         } as Record<keyof SvgIconAttrs, Attribute>;
+    },
+
+    addNodeView() {
+        return VueNodeViewRenderer(SvgIconView);
     },
 
     parseHTML() {

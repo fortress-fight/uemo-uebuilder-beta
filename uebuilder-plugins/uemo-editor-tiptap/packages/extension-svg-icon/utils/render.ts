@@ -1,7 +1,7 @@
 /*
  * @Description: svgIcon 渲染
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 14:37:25
+ * @LastEditTime: 2025-06-06 17:27:19
  */
 
 import type { SvgIconAttrs } from "../src";
@@ -17,7 +17,7 @@ import { resolveBorderStyle } from "../../../utils/tiptap-helper";
  * @param attrs
  * @returns
  */
-export function getSvgIconStyle(attrs: SvgIconAttrs) {
+export function getSvgIconBoxStyle(attrs: SvgIconAttrs) {
     const { border, color } = attrs || {};
 
     const { borderWidth, borderColor, borderStyle } = resolveBorderStyle(border);
@@ -54,7 +54,7 @@ export function svgIconRender(svgIconAttr: SvgIconAttrs): DOMOutputSpec {
         { class: $pageStyle["svg-icon-wrapper"], style: align ? `text-align:` + align : null },
         [
             "div",
-            { class: $pageStyle["svg-icon-box"], style: getSvgIconStyle(svgIconAttr) },
+            { class: $pageStyle["svg-icon-box"], style: getSvgIconBoxStyle(svgIconAttr) },
             [
                 "iconpark-icon",
                 { class: $pageStyle["svg-icon-viewer"], "data-source": source, width: "100%", height: "100%", name },
