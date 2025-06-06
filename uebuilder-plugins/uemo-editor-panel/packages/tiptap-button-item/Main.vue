@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-23 18:14:24
+ * @LastEditTime: 2025-06-06 16:15:34
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -30,11 +30,7 @@
                         <UeElResourceSetting @update:value="replaceButton" :removable="false" type="button" />
                     </template>
                 </UeElSettingGroup>
-                <UeElSettingGroup :title="t('PADDING_SETTING_TITLE')">
-                    <template #body>
-                        <UeElPaddingSetting v-model:value="padding" />
-                    </template>
-                </UeElSettingGroup>
+                <UeElPaddingSettingGroup v-model:value="padding" v-bind="paddingInputProps" />
                 <UeElSettingGroup :title="t('UNIT_BUTTON') + t('UNIT_STYLE')">
                     <template #body>
                         <UeElButtonStyleSetting
@@ -159,6 +155,16 @@ const afterSvgIcon = useDefineObjectModel(valueModel, {
         return modelValue;
     },
 });
+
+const paddingInputProps = computed<UE_EL_COMPONENT.UeElPaddingSettingGroupProps>(() => ({
+    paddingSettingProps: {
+        units: [
+            { text: "px", value: "px", default: 0 },
+            { text: "em", value: "em", default: 0, step: 0.1 },
+        ],
+        limit: { px: [0, 500], em: [0, 10] },
+    },
+}));
 
 // #endregion
 
