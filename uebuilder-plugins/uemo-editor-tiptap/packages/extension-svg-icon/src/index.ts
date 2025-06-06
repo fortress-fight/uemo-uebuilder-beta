@@ -1,7 +1,7 @@
 /*
  * @Description: SvgIcon 扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 14:14:48
+ * @LastEditTime: 2025-06-06 15:19:32
  */
 
 export type SvgIconAttrs = {
@@ -10,7 +10,7 @@ export type SvgIconAttrs = {
 
     // 内容信息
     color: string;
-    align?: string;
+    align?: UE_EL_UTIL.ALIGN_X;
     width?: string;
     padding?: string;
 

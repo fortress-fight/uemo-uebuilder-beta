@@ -53,4 +53,7 @@ export const testTextContent = {
             shadow=""
         />
     `,
+    svgIconData: `
+        <div class=\"svg-icon-wrapper-bb7c1\" style=\"text-align:center\"><div class=\"svg-icon-box-f2008\" style=\"width:100px;height:100px;\"><iconpark-icon class=\"svg-icon-viewer-ed4be\" data-source=\"https://static.jsmo.xin/uebuilder/public-resource/svg-icon/icon-park/base/base.js\" width=\"100%\" height=\"100%\" name=\"config\"></iconpark-icon></div></div>
+    `,
 };

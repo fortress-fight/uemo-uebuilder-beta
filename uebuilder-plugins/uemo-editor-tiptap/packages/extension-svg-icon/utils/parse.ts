@@ -22,7 +22,7 @@ export function parseSvgIcon(svgIcon: HTMLElement): SvgIconAttrs | false {
         name: svgIconViewerDom?.getAttribute("name") || "",
         source: svgIconViewerDom?.getAttribute("data-source") || "",
 
-        align: svgIconStyle.textAlign,
+        align: svgIconStyle.textAlign as UE_EL_UTIL.ALIGN_X,
         color: svgIconBoxStyle.color,
         radius: svgIconBoxStyle.borderRadius,
         width: svgIconBoxStyle.width,

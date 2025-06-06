@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 14:55:22
+ * @LastEditTime: 2025-06-06 16:54:31
 -->
 <template>
     <TestArea
@@ -44,6 +44,10 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOpti
     {
         testOptionTitle: "链接",
         content: testTextContent.linkData,
+    },
+    {
+        testOptionTitle: "图标",
+        content: testTextContent.svgIconData,
     },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
