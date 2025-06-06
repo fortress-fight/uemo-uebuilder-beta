@@ -1,10 +1,10 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/5/15 11:50:54
+ * @LastEditTime: 2025/6/6 15:41:56
  */
-import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
+import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElBackgroundImageSettingPanel from "../packages/background-image-setting-panel";
 import UeElBackgroundSettingGroup from "../packages/background-setting-group";
 import UeElBackgroundShapeSettingPanel from "../packages/background-shape-setting-panel";
@@ -37,8 +37,8 @@ import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
 import UeElDraggable from "../packages/draggable";
-import UeElEditorPanel from "../packages/editor-panel";
 import UeElEmojiLibraryPanel from "../packages/emoji-library-panel";
+import UeElEditorPanel from "../packages/editor-panel";
 import UeElEmptyPanel from "../packages/empty-panel";
 import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElFileUploadButton from "../packages/file-upload-button";
@@ -57,28 +57,28 @@ import UeElJustifyContentSetting from "../packages/justify-content-setting";
 import UeElLibraryPanel from "../packages/library-panel";
 import UeElLinkSetting from "../packages/link-setting";
 import UeElLinkSettingGroup from "../packages/link-setting-group";
-import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElLinkSettingPanel from "../packages/link-setting-panel";
 import UeElLoading from "../packages/loading";
+import UeElLottieLibraryPanel from "../packages/lottie-library-panel";
 import UeElMarginSetting from "../packages/margin-setting";
 import UeElMiniEditorPanel from "../packages/mini-editor-panel";
-import UeElOnOff from "../packages/on-off";
 import UeElNumberInput from "../packages/number-input";
+import UeElOnOff from "../packages/on-off";
 import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
 import UeElRadiusSettingGroup from "../packages/radius-setting-group";
+import UeElResourcePreview from "../packages/resource-preview";
 import UeElResourceSetting from "../packages/resource-setting";
 import UeElRichTextLibraryPanel from "../packages/rich-text-library-panel";
-import UeElResourcePreview from "../packages/resource-preview";
 import UeElScrollEffectSettingGroup from "../packages/scroll-effect-setting-group";
 import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
-import UeElSelectOption from "../packages/select-option";
 import UeElSelect from "../packages/select";
+import UeElSelectOption from "../packages/select-option";
 import UeElSettingBar from "../packages/setting-bar";
+import UeElSettingGroup from "../packages/setting-group";
 import UeElShapeLibraryPanel from "../packages/shape-library-panel";
 import UeElShareIconLibraryPanel from "../packages/share-icon-library-panel";
-import UeElSettingGroup from "../packages/setting-group";
 import UeElSizeSettingGroup from "../packages/size-setting-group";
 import UeElSplineLibraryPanel from "../packages/spline-library-panel";
 import UeElSvgLibraryPanel from "../packages/svg-library-panel";
@@ -91,10 +91,11 @@ import UeElTipGroup from "../packages/tip-group";
 import UeElTranslateSetting from "../packages/translate-setting";
 import UeElVideoLibraryPanel from "../packages/video-library-panel";
 import UeElVideoPanel from "../packages/video-panel";
+import UeElWidthSettingGroup from "../packages/width-setting-group";
 
 export const components = [
-    UeElAlignItemSetting,
     UeElAlignSetting,
+    UeElAlignItemSetting,
     UeElBackgroundImageSettingPanel,
     UeElBackgroundSettingGroup,
     UeElBackgroundShapeSettingPanel,
@@ -127,8 +128,8 @@ export const components = [
     UeElContextmenu,
     UeElControlGroup,
     UeElDraggable,
-    UeElEditorPanel,
     UeElEmojiLibraryPanel,
+    UeElEditorPanel,
     UeElEmptyPanel,
     UeElEnterAnimateSetting,
     UeElFileUploadButton,
@@ -147,28 +148,28 @@ export const components = [
     UeElLibraryPanel,
     UeElLinkSetting,
     UeElLinkSettingGroup,
-    UeElLottieLibraryPanel,
     UeElLinkSettingPanel,
     UeElLoading,
+    UeElLottieLibraryPanel,
     UeElMarginSetting,
     UeElMiniEditorPanel,
-    UeElOnOff,
     UeElNumberInput,
+    UeElOnOff,
     UeElPaddingSetting,
     UeElPopPanel,
     UeElRadiusSetting,
     UeElRadiusSettingGroup,
+    UeElResourcePreview,
     UeElResourceSetting,
     UeElRichTextLibraryPanel,
-    UeElResourcePreview,
     UeElScrollEffectSettingGroup,
     UeElScrollEffectSettingPanel,
-    UeElSelectOption,
     UeElSelect,
+    UeElSelectOption,
     UeElSettingBar,
+    UeElSettingGroup,
     UeElShapeLibraryPanel,
     UeElShareIconLibraryPanel,
-    UeElSettingGroup,
     UeElSizeSettingGroup,
     UeElSplineLibraryPanel,
     UeElSvgLibraryPanel,
@@ -181,4 +182,5 @@ export const components = [
     UeElTranslateSetting,
     UeElVideoLibraryPanel,
     UeElVideoPanel,
+    UeElWidthSettingGroup,
 ];

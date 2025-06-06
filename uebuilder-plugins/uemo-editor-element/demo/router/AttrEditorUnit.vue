@@ -22,6 +22,7 @@ import TestBorderSetting from "~/demo/components/TestBorderSetting.vue";
 import TestColorSettingGroup from "~/demo/components/TestColorSettingGroup.vue";
 import TestBorderSettingGroup from "~/demo/components/TestBorderSettingGroup.vue";
 import TestRadiusSettingGroup from "~/demo/components/TestRadiusSettingGroup.vue";
+import TestWidthSettingGroup from "~/demo/components/TestWidthSettingGroup.vue";
 import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGroup.vue";
 import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
 import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
@@ -62,6 +63,7 @@ const testComponents = [
     TestColorSettingGroup,
     TestBorderSettingGroup,
     TestRadiusSettingGroup,
+    TestWidthSettingGroup,
     TestBoxShadowSettingGroup,
     TestCalenderSettingGroup,
     TestButtonIconSettingGroup,
