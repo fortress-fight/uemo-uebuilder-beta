@@ -37,5 +37,8 @@ declare const styles: {
     readonly "svg-icon-box": string;
     readonly "svg-icon-viewer": string;
     readonly "svg-icon-wrapper": string;
+    readonly frame: string;
+    readonly "frame-body": string;
+    readonly "frame-box": string;
 };
 export = styles;

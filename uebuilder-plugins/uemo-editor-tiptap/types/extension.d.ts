@@ -10,6 +10,7 @@ import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/ex
 import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-button/src";
 import type { ImageAttrs } from "../packages/extension-image/src";
 import type { SvgIconAttrs } from "../packages/extension-svg-icon/src";
+import type { FrameAttrs } from "../packages/extension-frame/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -55,6 +56,9 @@ declare global {
         };
         type SvgIcon = {
             attrs: SvgIconAttrs;
+        };
+        type Frame = {
+            attrs: FrameAttrs;
         };
     }
 }

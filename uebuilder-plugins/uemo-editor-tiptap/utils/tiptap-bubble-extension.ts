@@ -50,6 +50,7 @@ import { Image } from "../packages/extension-image/src";
 import { DropUpload } from "../packages/extension-drop-upload/src";
 import { CopyAttrsExtension } from "../packages/extension-copy-attrs/src";
 import { SvgIcon } from "../packages/extension-svg-icon/src";
+import { Frame } from "../packages/extension-frame/src";
 
 // #endregion
 
@@ -121,6 +122,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         }),
         CopyAttrsExtension,
         SvgIcon,
+        Frame.configure({
+            mapUrl: "https://static.jsmo.xin/uebuilder/v4/plugins/map/gaode-map.html",
+        }),
     ];
 
     return [...baseExtensions, ...customExtensions];

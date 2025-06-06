@@ -54,6 +54,43 @@ export const testTextContent = {
         />
     `,
     svgIconData: `
-        <div class=\"svg-icon-wrapper-bb7c1\" style=\"text-align:center\"><div class=\"svg-icon-box-f2008\" style=\"width:100px;height:100px;\"><iconpark-icon class=\"svg-icon-viewer-ed4be\" data-source=\"https://static.jsmo.xin/uebuilder/public-resource/svg-icon/icon-park/base/base.js\" width=\"100%\" height=\"100%\" name=\"config\"></iconpark-icon></div></div>
+        <div class="svg-icon-wrapper-bb7c1" style="text-align:center">
+            <div class="svg-icon-box-f2008" style="width:100px;height:100px;">
+                <iconpark-icon
+                    class="svg-icon-viewer-ed4be"
+                    data-source="https://static.jsmo.xin/uebuilder/public-resource/svg-icon/icon-park/base/base.js"
+                    width="100%"
+                    height="100%"
+                    name="config"
+                ></iconpark-icon>
+            </div>
+        </div>
+    `,
+    videoFrameData: `
+        <div class="frame-f74df" data-type="video" data-frame-ratio="auto">
+            <div class="frame-box-da610" style="" data-play-mode="pop">
+                <video
+                    class="frame-body-c2417"
+                    src="https://videos.pexels.com/video-files/4779866/4779866-hd_1920_1080_30fps.mp4"
+                ></video>
+            </div>
+        </div>
+    `,
+    mapFrameData: `
+        <div class="frame-f74df" data-type="map" data-frame-ratio="1-1">
+            <div class="frame-box-da610" style="--frame-ratio:100%;">
+                <iframe
+                    class="frame-body-c2417"
+                    src="https://static.jsmo.xin/uebuilder/v4/plugins/map/gaode-map.html?time=1749233571283#%7B%22title%22%3A%22%E8%AF%B7%E8%BE%93%E5%85%A5%E6%A0%87%E9%A2%98%22%2C%22position%22%3A%22116.25%2C40.25%22%2C%22scale%22%3Afalse%7D"
+                ></iframe>
+            </div>
+        </div>
+    `,
+    webFrameData: `
+        <div class="frame-f74df" data-type="web" data-frame-ratio="1-1">
+            <div class="frame-box-da610" style="--frame-ratio:100%;">
+                <iframe class="frame-body-c2417" src="https://www.baidu.com"></iframe>
+            </div>
+        </div>
     `,
 };

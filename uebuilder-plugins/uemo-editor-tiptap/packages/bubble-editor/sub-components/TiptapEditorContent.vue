@@ -9,6 +9,7 @@
     <UeTiptapButtonItemMenu />
     <UeTiptapImageMenu />
     <UeTiptapSvgIconMenu />
+    <UeTiptapFrameMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -21,6 +22,7 @@ import UeTiptapButtonRowMenu from "../../extension-button/menu/ButtonRowMenu.vue
 import UeTiptapButtonItemMenu from "../../extension-button/menu/ButtonItemMenu.vue";
 import UeTiptapImageMenu from "../../extension-image/menu/ImageMenu.vue";
 import UeTiptapSvgIconMenu from "../../extension-svg-icon/menu/SvgIconMenu.vue";
+import UeTiptapFrameMenu from "../../extension-frame/menu/FrameMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

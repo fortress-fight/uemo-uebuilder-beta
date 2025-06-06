@@ -27,6 +27,23 @@
             @update:select="insertSvgIconContent"
             :class="$style['node-placeholder-panel']"
         />
+        <UeElVideoLibraryPanel
+            v-if="nodeName === 'VideoPlaceholder'"
+            @update:select="insertVideoContent"
+            :class="$style['node-placeholder-panel']"
+        />
+        <UeElMapSettingPanel
+            v-if="nodeName === 'MapPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @confirm="insertMapContent"
+            @cancel="handleEndEdit"
+        />
+        <UeElWebSettingPanel
+            v-if="nodeName === 'WebPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @confirm="insertWebContent"
+            @cancel="handleEndEdit"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -76,6 +93,24 @@ const insertSvgIconContent = (value?: { name: string; source: string }) => {
     if (!value) return;
 
     editor?.chain().focus().insertSvgIcon(value).run();
+};
+
+const insertVideoContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertVideoFrame(value).run();
+};
+
+const insertMapContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertMapFrame(value).run();
+};
+
+const insertWebContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertWebFrame(value).run();
 };
 
 const handleEndEdit = () => {
