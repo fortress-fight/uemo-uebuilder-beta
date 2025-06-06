@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 10:56:32
+ * @LastEditTime: 2025-06-07 01:13:13
 -->
 <template>
     <div
@@ -174,7 +174,7 @@ function confirm() {
                     return;
                 }
             } else if (rule.pattern && !rule.pattern.test(processedValue)) {
-                instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
+                instance?.proxy?.$ueElToast.error(rule.message || t("INPUT_TIP_FORMAT_ERROR"));
                 isValid.value = false;
                 return;
             }
