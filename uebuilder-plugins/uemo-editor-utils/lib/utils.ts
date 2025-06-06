@@ -61,6 +61,12 @@ export function isImageType(type: string) {
     return IMAGE_TYPES.includes(type);
 }
 
+/** 是否为网页链接 */
+export const isWebReg = /^(https?:)?(\/\/)?([\da-z.-]+)\.([\da-z.-]+)(\/[^\s]*)?$/i;
+
+/** 是否为地图坐标 */
+export const isMapPosReg = /^[+-]?\d{1,3}.\d+,\s*[+-]?\d{1,3}.\d+$/;
+
 /** spline类型 */
 export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;
 
@@ -71,7 +77,8 @@ export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
 export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 
 /** image类型 */
-export const isImageReg = /^(https?:\/\/(?:images\.unsplash\.com|[^\s"'()]+?\.(?:jpg|jpeg|png|gif|webp))(?:\?[^\s"'()]*)?)/;
+export const isImageReg =
+    /^(https?:\/\/(?:images\.unsplash\.com|[^\s"'()]+?\.(?:jpg|jpeg|png|gif|webp))(?:\?[^\s"'()]*)?)/;
 
 /** 下载文件类型 */
 export const isDownloadFileReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(pdf|doc|docx|xls|xlsx|ppt|pptx|gif|png|jpg))/g;

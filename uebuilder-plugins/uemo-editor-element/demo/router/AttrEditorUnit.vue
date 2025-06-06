@@ -47,6 +47,8 @@ import TestBackgroundVideoSettingPanel from "~/demo/components/TestBackgroundVid
 import TestBackgroundSettingGroup from "~/demo/components/TestBackgroundSettingGroup.vue";
 import TestFontSizeSetting from "~/demo/components/TestFontSizeSetting.vue";
 import TestSizeSettingGroup from "~/demo/components/TestSizeSettingGroup.vue";
+import TestMapSettingPanel from "~/demo/components/TestMapSettingPanel.vue";
+import TestWebSettingPanel from "~/demo/components/TestWebSettingPanel.vue";
 
 const testComponents = [
     TestAlignSetting,
@@ -87,6 +89,8 @@ const testComponents = [
     TestLinkSettingPanel,
     TestBackgroundImageSettingPanel,
     TestBackgroundVideoSettingPanel,
+    TestMapSettingPanel,
+    TestWebSettingPanel,
 ];
 </script>
 <style lang="scss" module>

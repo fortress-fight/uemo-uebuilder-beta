@@ -28,6 +28,10 @@
     "UNIT_BUTTON": "按钮",
     "UNIT_BUTTON_ROW": "按钮组",
     "UNIT_VIDEO": "视频",
+    "UNIT_MAP": "地图",
+    "UNIT_MAP_COORDINATES": "地图坐标",
+    "UNIT_WEB": "网页",
+    "UNIT_FRAME": "框架",
     "UNIT_IMAGE": "图片",
     "UNIT_ICON": "图标",
     "UNIT_SHARE_ICON": "分享图标",
@@ -483,5 +487,11 @@
     "AI_EDITING_NO_CONFIG_ERROR": "未开通AI编辑功能，请联系客服询问详情",
     "AI_EDITING_NO_TEXT_ERROR": "请选择要处理的文字",
 
-    "FILL_MODE_TIP": "是否开启填充模式"
+    "FILL_MODE_TIP": "是否开启填充模式",
+
+    "MAP_COORDINATES_INPUT_TIP": "坐标格式：120.123456,30.123456",
+    "MAP_COORDINATES_TIP": "1.<a href=\"https://lbs.amap.com/tools/picker\" target=\"_blank\">获取地图位置</a>",
+
+    "WEB_URL": "链接地址",
+    "WEB_URL_INPUT_TIP": "请输入正确的链接地址"
 }

@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestPaddingSettingGroup.vue";
+import TestComponent from "~/demo/components/TestWebSettingPanel.vue";
 </script>
 <style lang="scss" module>
 .test-group {

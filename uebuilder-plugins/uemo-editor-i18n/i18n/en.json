@@ -28,6 +28,10 @@
     "UNIT_BUTTON": "Button",
     "UNIT_BUTTON_ROW": "Button Group",
     "UNIT_VIDEO": "Video",
+    "UNIT_MAP": "Map",
+    "UNIT_MAP_COORDINATES": "Map Coordinates",
+    "UNIT_WEB": "Web",
+    "UNIT_FRAME": "Frame",
     "UNIT_IMAGE": "Image",
     "UNIT_ICON": "Icon",
     "UNIT_SHARE_ICON": "Share Icon",
@@ -483,5 +487,11 @@
     "AI_EDITING_NO_CONFIG_ERROR": "AI editing disabled, please contact support",
     "AI_EDITING_NO_TEXT_ERROR": "Please select the text to process",
 
-    "FILL_MODE_TIP": "Enable Fill Mode"
+    "FILL_MODE_TIP": "Enable Fill Mode",
+
+    "MAP_COORDINATES_INPUT_TIP": "Coordinates Format: 120.123456,30.123456",
+    "MAP_COORDINATES_TIP": "1.<a href=\"https://lbs.amap.com/tools/picker\" target=\"_blank\">Get map position</a>",
+
+    "WEB_URL": "Web URL",
+    "WEB_URL_INPUT_TIP": "Please enter the correct link address"
 }
