@@ -5,6 +5,7 @@ import { _pickBy } from "@stone/uemo-editor-utils/lib/lodash";
 import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import $pageStyle from "../../../src/app.module.scss";
+import { parseBorderStyle } from "../../../utils/tiptap-helper";
 
 // #region 解析图片元素，获取图片属性
 
@@ -52,24 +53,11 @@ export function parseCkLink(link: HTMLElement | null): Partial<UE_EL_UTIL.LinkVa
  */
 export function parseCkImageBox(imgBox: HTMLElement): Partial<ImageAttrs> {
     if (!imgBox) return {};
-    const {
-        borderRadius: radius,
-        boxShadow: shadow,
-        borderStyle,
-        borderColor,
-        borderWidth,
-        backgroundPosition: pos,
-    } = imgBox.style;
+    const { borderRadius: radius, boxShadow: shadow, backgroundPosition: pos } = imgBox.style;
     return {
         radius,
         shadow,
-        border: borderWidth
-            ? {
-                  style: borderStyle,
-                  color: borderColor,
-                  width: borderWidth,
-              }
-            : undefined,
+        border: parseBorderStyle(imgBox.style),
         pos,
     };
 }
@@ -170,13 +158,7 @@ export function parseImageItem(imageItem: HTMLElement): Partial<ImageAttrs> {
         width: imageItemStyle.getPropertyValue("--width") || imageItemStyle.width,
         background: imageItemStyle.background || imageItemStyle.backgroundColor,
         shadow: imageItemStyle.boxShadow,
-        border: imageItemStyle.borderWidth
-            ? {
-                  style: imageItemStyle.borderStyle,
-                  color: imageItemStyle.borderColor,
-                  width: imageItemStyle.borderWidth,
-              }
-            : undefined,
+        border: parseBorderStyle(imageItemStyle),
         radius: radius,
         imageMask: imageItemStyle.getPropertyValue("--mask-color"),
         height: imageItemStyle.getPropertyValue("--height"),

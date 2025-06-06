@@ -1,7 +1,7 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-06-05 13:54:18
+ * @LastEditTime: 2025-06-06 19:47:34
  */
 
 /**
@@ -34,6 +34,22 @@ export function formatKeyboardShortcut(shortcut?: string) {
 export function resolveBorderStyle(border?: { width: string; color: string; style: string }) {
     const { width: borderWidth, color: borderColor, style: borderStyle } = border || {};
     return { borderWidth, borderColor, borderStyle };
+}
+
+/**
+ * 解析边框样式
+ * @param boxStyle 边框样式
+ * @returns 边框样式
+ */
+export function parseBorderStyle(boxStyle: CSSStyleDeclaration): UE_EL_UTIL.BorderValue | undefined {
+    const { borderStyle, borderColor, borderWidth } = boxStyle;
+    return borderWidth
+        ? {
+              style: borderStyle,
+              color: borderColor,
+              width: borderWidth,
+          }
+        : undefined;
 }
 
 type TypeLinkValue =

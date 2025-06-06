@@ -1,6 +1,7 @@
 import type { SvgIconAttrs } from "../src";
 
 import $pageStyle from "../../../src/app.module.scss";
+import { parseBorderStyle } from "../../../utils/tiptap-helper";
 
 /**
  * 解析图片元素样式
@@ -26,13 +27,7 @@ export function parseSvgIcon(svgIcon: HTMLElement): SvgIconAttrs | false {
         color: svgIconBoxStyle.color || "#333",
         radius: svgIconBoxStyle.borderRadius,
         width: svgIconBoxStyle.width,
-        border: svgIconBoxStyle.borderWidth
-            ? {
-                  style: svgIconBoxStyle.borderStyle,
-                  color: svgIconBoxStyle.borderColor,
-                  width: svgIconBoxStyle.borderWidth,
-              }
-            : undefined,
+        border: parseBorderStyle(svgIconBoxStyle),
         shadow: svgIconBoxStyle.boxShadow,
         padding: svgIconBoxStyle.padding,
         background: svgIconBoxStyle.background,
