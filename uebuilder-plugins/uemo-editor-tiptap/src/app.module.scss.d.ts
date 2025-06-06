@@ -34,5 +34,8 @@ declare const styles: {
     readonly "text-decoration-svg-box": string;
     readonly "ue-editing-mark": string;
     readonly "ue-richtext-editor": string;
+    readonly "svg-icon-box": string;
+    readonly "svg-icon-viewer": string;
+    readonly "svg-icon-wrapper": string;
 };
 export = styles;

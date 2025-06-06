@@ -87,13 +87,14 @@ export const Image = Node.create<ImageOptions>({
             imageMask: { default: "" },
             align: { default: "left" },
             pos: { default: "" },
-            background: { default: "" },
             width: { default: "" },
             height: { default: "" },
             sizeMode: { default: undefined },
-            radius: { default: "" },
-            shadow: { default: "" },
+
             border: { default: undefined },
+            shadow: { default: "" },
+            radius: { default: "" },
+            background: { default: "" },
 
             /**
              * 链接相关

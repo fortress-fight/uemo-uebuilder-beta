@@ -22,6 +22,11 @@
             @update:select="insertImageContent"
             :class="$style['node-placeholder-panel']"
         />
+        <UeElIconLibraryPanel
+            v-if="nodeName === 'SvgIconPlaceholder'"
+            @update:select="insertSvgIconContent"
+            :class="$style['node-placeholder-panel']"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -65,6 +70,12 @@ const insertImageContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertImage(value).run();
+};
+
+const insertSvgIconContent = (value?: { name: string; source: string }) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSvgIcon(value).run();
 };
 
 const handleEndEdit = () => {

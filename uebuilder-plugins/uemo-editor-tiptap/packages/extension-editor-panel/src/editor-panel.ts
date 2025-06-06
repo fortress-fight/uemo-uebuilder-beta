@@ -140,6 +140,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                     this.editor.chain().openImageEditorPanel(domRect).run();
                                     return false;
 
+                                case "svgIcon":
+                                    this.editor.chain().openSvgIconEditorPanel(domRect).run();
+                                    return false;
+
                                 default:
                                     return;
                             }

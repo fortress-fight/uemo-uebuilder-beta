@@ -60,7 +60,8 @@ $project-name: app-editor;
             }
         }
         .emoji,
-        .btn-row {
+        .svg-icon-wrapper,
+        .img_wrapper {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */

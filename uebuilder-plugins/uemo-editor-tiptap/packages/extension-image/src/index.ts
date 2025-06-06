@@ -1,7 +1,7 @@
 /*
  * @Description: 图片属性
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 14:09:17
+ * @LastEditTime: 2025-06-06 14:13:23
  */
 
 export type ImageAttrs = {
@@ -18,12 +18,15 @@ export type ImageAttrs = {
     imgH?: string;
     pos?: string;
     align?: UE_EL_UTIL.ALIGN_X;
-    shadow?: string;
     imageMask?: string;
-    radius?: string;
+
+    // 设计属性
     border?: UE_EL_UTIL.BorderValue;
-    imageLink?: UE_EL_UTIL.LinkValue;
+    shadow?: string;
+    radius?: string;
     background?: string;
+
+    imageLink?: UE_EL_UTIL.LinkValue;
     forbidImageGallery?: boolean;
     style?: string;
     md?: {

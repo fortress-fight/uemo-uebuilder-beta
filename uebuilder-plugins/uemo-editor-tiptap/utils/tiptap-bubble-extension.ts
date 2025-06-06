@@ -49,6 +49,7 @@ import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
 import { Image } from "../packages/extension-image/src";
 import { DropUpload } from "../packages/extension-drop-upload/src";
 import { CopyAttrsExtension } from "../packages/extension-copy-attrs/src";
+import { SvgIcon } from "../packages/extension-svg-icon/src";
 
 // #endregion
 
@@ -119,6 +120,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             createUploadHandler: param.createUploadHandler,
         }),
         CopyAttrsExtension,
+        SvgIcon,
     ];
 
     return [...baseExtensions, ...customExtensions];

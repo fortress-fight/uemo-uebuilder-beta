@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-05 13:42:37
+ * @LastEditTime: 2025-06-06 15:11:54
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -106,6 +106,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     buttonRow: "TiptapButtonRow",
     buttonItem: "TiptapButtonItem",
     image: "TiptapImage",
+    svgIcon: "TiptapSvgIcon",
     moreOper: "MoreOperPanel",
 };
 

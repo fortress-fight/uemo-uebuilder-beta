@@ -30,6 +30,9 @@ function openBtnRowEditorPanel() {
         case "image":
             editor.chain().openImageEditorPanel(rect).run();
             break;
+        case "svgIcon":
+            editor.chain().openSvgIconEditorPanel(rect).run();
+            break;
         default:
             return;
     }

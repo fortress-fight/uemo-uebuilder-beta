@@ -1,0 +1,21 @@
+/*
+ * @Description: svg-icon 样式
+ * @Author: F-Stone
+ * @LastEditTime: 2025-06-06 14:20:00
+ */
+.page-editor {
+    .svg-icon-wrapper {
+        position: relative;
+    }
+    .svg-icon-viewer {
+        width: 100%;
+
+        vertical-align: top;
+    }
+    .svg-icon-box {
+        display: inline-block;
+
+        width: 100%;
+        max-width: 100%;
+    }
+}

@@ -78,6 +78,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertImage":
                     chain.insetNodePlaceholder("ImagePlaceholder");
                     break;
+                case "insertSvgIcon":
+                    chain.insetNodePlaceholder("SvgIconPlaceholder");
+                    break;
                 case "insertEmoji":
                     chain.insertEmoji({ text: ":" });
                     break;

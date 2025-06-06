@@ -17,6 +17,34 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
                 param.updateAttrs(JSON.parse(newValue));
             }
             break;
+        case "svgIcon":
+            {
+                const newValue = prompt("请输入 svgIcon 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "image":
+            {
+                const newValue = prompt("请输入图片的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "buttonRow":
+            {
+                const newValue = prompt("请输入按钮行的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "buttonItem":
+            {
+                const newValue = prompt("请输入按钮项的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
         default:
             break;
     }

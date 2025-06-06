@@ -3,7 +3,7 @@
         class="drag-handle"
         data-drag-handle
         draggable="true"
-        :class="[$style['node-view'], pageStyle.img_wrapper]"
+        :class="[$style['node-view'], pageStyle.img_wrapper, { 'ProseMirror-selectednode': !!selected }]"
         :contenteditable="contenteditable"
         :data-image-effect="attrs.imageEffect?.type"
         :style="{ 'text-align': attrs.align }"

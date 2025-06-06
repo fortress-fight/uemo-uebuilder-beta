@@ -9,6 +9,7 @@ import type { LetterSpacingAttrs } from "../packages/extension-letter-spacing/sr
 import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/extension-editor-panel/src";
 import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-button/src";
 import type { ImageAttrs } from "../packages/extension-image/src";
+import type { SvgIconAttrs } from "../packages/extension-svg-icon/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -51,6 +52,9 @@ declare global {
         };
         type Image = {
             attrs: ImageAttrs;
+        };
+        type SvgIcon = {
+            attrs: SvgIconAttrs;
         };
     }
 }
