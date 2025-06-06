@@ -121,5 +121,6 @@
     "TIP_PASTE_ATTRS_FAILED": "Paste Attributes Failed",
     "TIP_PASTE_ATTRS_ALL": "Paste All Attributes",
     "TIP_PASTE_ATTRS_DESIGN": "Paste Design Attributes",
-    "TIP_PASTE_ATTRS_EFFECT": "Paste Effect Attributes"
+    "TIP_PASTE_ATTRS_EFFECT": "Paste Effect Attributes",
+    "TIP_LINK_SETTING_PANEL_CLOSE_TIP": "Link setting not saved, please save link setting"
 }

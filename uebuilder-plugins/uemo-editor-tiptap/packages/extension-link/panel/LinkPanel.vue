@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接编辑面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-12 17:10:29
+ * @LastEditTime: 2025-06-07 00:43:09
  * @Module: TipTap Link Extension
  * @Component: LinkPanel
  * @Features:
@@ -39,6 +39,8 @@ import { isTextSelection } from "@tiptap/core";
 import { getLinkAttr } from "../utils/helper";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
+const { t } = useI18n();
+
 /**
  * 组件状态和引用
  */
@@ -53,7 +55,7 @@ const panelClosing = ref<boolean>(false);
 
 const linkPanelRef = useTemplateRef<UeElLinkSettingPanelInstance>("linkPanelRef");
 const disableCloseTip = computed<string | undefined>(() => {
-    return linkPanelRef?.value?.valueChange ? "链接设置未保存，请保存链接设置" : undefined;
+    return linkPanelRef?.value?.valueChange ? t("TIP_LINK_SETTING_PANEL_CLOSE_TIP") : undefined;
 });
 
 const checkIsEmptyTextBlock = (editor: Editor) => {

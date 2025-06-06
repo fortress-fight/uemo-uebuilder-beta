@@ -121,5 +121,6 @@
     "TIP_PASTE_ATTRS_FAILED": "粘贴属性失败",
     "TIP_PASTE_ATTRS_ALL": "粘贴所有属性",
     "TIP_PASTE_ATTRS_DESIGN": "粘贴设计属性",
-    "TIP_PASTE_ATTRS_EFFECT": "粘贴动效属性"
+    "TIP_PASTE_ATTRS_EFFECT": "粘贴动效属性",
+    "TIP_LINK_SETTING_PANEL_CLOSE_TIP": "链接设置未保存，请保存链接设置"
 }
