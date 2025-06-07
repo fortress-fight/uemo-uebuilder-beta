@@ -26,6 +26,7 @@ import TestPaddingSettingGroup from "~/demo/components/TestPaddingSettingGroup.v
 import TestWidthSettingGroup from "~/demo/components/TestWidthSettingGroup.vue";
 import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGroup.vue";
 import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
+import TestRatioSettingGroup from "~/demo/components/TestRatioSettingGroup.vue";
 import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
 import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
 import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
@@ -70,6 +71,7 @@ const testComponents = [
     TestWidthSettingGroup,
     TestBoxShadowSettingGroup,
     TestCalenderSettingGroup,
+    TestRatioSettingGroup,
     TestButtonIconSettingGroup,
     TestLinkSettingGroup,
     TestScrollEffectSettingGroup,

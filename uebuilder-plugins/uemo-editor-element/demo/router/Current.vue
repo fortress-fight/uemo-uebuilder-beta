@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestWebSettingPanel.vue";
+import TestComponent from "~/demo/components/TestRatioSettingGroup.vue";
 </script>
 <style lang="scss" module>
 .test-group {
