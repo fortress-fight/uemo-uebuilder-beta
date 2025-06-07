@@ -117,12 +117,19 @@
     "UNIT_CUSTOM_RATIO": "自定比例",
     "UNIT_CUSTOM_HEIGHT": "自定高度",
     "UNIT_MASK": "遮罩",
+    "UNIT_SETTING": "设置",
+    "UNIT_LANGUAGE": "语言",
+    "UNIT_LANG_ZH_CN": "中文",
+    "UNIT_LANG_EN": "英文",
+    "UNIT_MARK": "标记",
+    "UNIT_OPERATION": "操作",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
 
     "INPUT_TIP_NOT_EMPTY": "输入不能为空",
     "INPUT_TIP_FORMAT_ERROR": "输入格式错误",
+    "INPUT_PLACEHOLDER": "请输入{text}",
 
     "CONFIRM": "确认",
     "CANCEL": "取消",
@@ -298,6 +305,11 @@
     "VIDEO_QUALITY_HD": "高清",
     "VIDEO_QUALITY_HLS": "超清",
     "VIDEO_PEXELS_ERROR": "获取视频列表失败",
+    "VIDEO_POSTER": "视频封面",
+    "VIDEO_INLINE_PLAY": "点击播放",
+    "VIDEO_POP_PLAY": "弹窗播放",
+    "VIDEO_AUTO_PLAY": "自动播放",
+    "VIDEO_PLAY_MODE": "播放模式",
 
     "IMAGE_LIBRARY_TITLE": "图库",
     "IMAGE_LIBRARY_LINK_TIP": "请输入图片链接",
@@ -491,6 +503,14 @@
 
     "MAP_COORDINATES_INPUT_TIP": "坐标格式：120.123456,30.123456",
     "MAP_COORDINATES_TIP": "1.<a href=\"https://lbs.amap.com/tools/picker\" target=\"_blank\">获取地图位置</a>",
+    "MAP_GET_COORDINATES_TIP": "获取地图位置",
+    "MAP_TITLE": "地图标题",
+    "MAP_DESCRIPTION": "地图描述",
+    "MAP_SCALE": "鼠标缩放",
+    "MAP_DRAG": "鼠标拖拽",
+    "MAP_SCALE_BTNS": "缩放按钮",
+    "MAP_MARK_MODE1": "图标",
+    "MAP_MARK_MODE2": "光点",
 
     "WEB_URL": "链接地址",
     "WEB_URL_INPUT_TIP": "请输入正确的链接地址"

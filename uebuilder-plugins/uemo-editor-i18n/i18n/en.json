@@ -117,12 +117,19 @@
     "UNIT_CUSTOM_RATIO": "Custom Ratio",
     "UNIT_CUSTOM_HEIGHT": "Custom Height",
     "UNIT_MASK": "Mask",
+    "UNIT_SETTING": "Setting",
+    "UNIT_LANGUAGE": "Language",
+    "UNIT_LANG_ZH_CN": "Chinese",
+    "UNIT_LANG_EN": "English",
+    "UNIT_MARK": "Mark",
+    "UNIT_OPERATION": "Operation",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
 
     "INPUT_TIP_NOT_EMPTY": "Input is required",
     "INPUT_TIP_FORMAT_ERROR": "Invalid Input Format",
+    "INPUT_PLACEHOLDER": "Please enter {text}",
 
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
@@ -298,6 +305,11 @@
     "VIDEO_QUALITY_HD": "HD",
     "VIDEO_QUALITY_HLS": "HLS",
     "VIDEO_PEXELS_ERROR": "Failed to get video list",
+    "VIDEO_POSTER": "Video Poster",
+    "VIDEO_INLINE_PLAY": "Inline Play",
+    "VIDEO_POP_PLAY": "Pop Play",
+    "VIDEO_AUTO_PLAY": "Auto Play",
+    "VIDEO_PLAY_MODE": "Play Mode",
 
     "IMAGE_LIBRARY_TITLE": "Image",
     "IMAGE_LIBRARY_LINK_TIP": "Please enter the image link",
@@ -491,6 +503,14 @@
 
     "MAP_COORDINATES_INPUT_TIP": "Coordinates Format: 120.123456,30.123456",
     "MAP_COORDINATES_TIP": "1.<a href=\"https://lbs.amap.com/tools/picker\" target=\"_blank\">Get map position</a>",
+    "MAP_GET_COORDINATES_TIP": "Get map position",
+    "MAP_TITLE": "Map Title",
+    "MAP_DESCRIPTION": "Map Description",
+    "MAP_SCALE": "Mouse Scroll",
+    "MAP_DRAG": "Mouse Drag",
+    "MAP_SCALE_BTNS": "Scale Buttons",
+    "MAP_MARK_MODE1": "Icon",
+    "MAP_MARK_MODE2": "Dot",
 
     "WEB_URL": "Web URL",
     "WEB_URL_INPUT_TIP": "Please enter the correct link address"
