@@ -122,9 +122,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         }),
         CopyAttrsExtension,
         SvgIcon,
-        Frame.configure({
-            mapUrl: "https://static.jsmo.xin/uebuilder/v4/plugins/map/gaode-map.html",
-        }),
+        Frame,
     ];
 
     return [...baseExtensions, ...customExtensions];

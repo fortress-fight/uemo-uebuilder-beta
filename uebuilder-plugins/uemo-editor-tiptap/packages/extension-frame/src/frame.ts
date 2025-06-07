@@ -26,22 +26,37 @@ declare module "@tiptap/core" {
              * 插入 Map
              */
             insertMapFrame: (src: string) => ReturnType;
+
+            /**
+             * 更新地图 URL
+             */
+            updateMapUrl: (mapUrl: string) => ReturnType;
         };
     }
 }
 
-export interface FrameOptions {
+/**
+ * 地图存储接口
+ */
+export interface FrameStorage {
+    /** 当前设备类型 */
     mapUrl: string;
 }
 
-export const Frame = Node.create<FrameOptions>({
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface FrameOptions {}
+
+export const Frame = Node.create<FrameOptions, FrameStorage>({
     name: "frame",
     group: "block",
     draggable: true,
 
+    addStorage() {
+        return { mapUrl: "" };
+    },
+
     addOptions() {
         return {
-            mapUrl: "",
             allowCopyAttrsType: {
                 design: ["ratio", "align", "width", "height", "border", "shadow", "radius", "background"],
                 effect: ["playMode"],
@@ -112,7 +127,7 @@ export const Frame = Node.create<FrameOptions>({
 
     renderHTML({ HTMLAttributes }) {
         const frameAttr = HTMLAttributes as FrameAttrs;
-        return frameRender(frameAttr, this.options);
+        return frameRender(frameAttr, this.storage);
     },
 
     addCommands() {
@@ -141,6 +156,10 @@ export const Frame = Node.create<FrameOptions>({
                         attrs: { type: "map", mapPosition, ratio: "1-1" },
                     });
                 },
+            updateMapUrl: (mapUrl: string) => () => {
+                this.storage.mapUrl = mapUrl;
+                return true;
+            },
         };
     },
 });

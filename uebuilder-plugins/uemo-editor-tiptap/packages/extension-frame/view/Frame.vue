@@ -43,11 +43,12 @@ import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 import { createMd5 } from "@stone/uemo-editor-utils/lib/md5";
 
 import { parseFrameStyle } from "../utils/render";
+import { getFrameStorage } from "../utils/helper";
 
 const props = defineProps(nodeViewProps);
 const frameAttrs = computed(() => props.node.attrs as FrameAttrs);
 
-const option = computed(() => props.extension.options);
+const frameStorage = computed(() => getFrameStorage(props.editor));
 const isAutoPlay = computed(() => {
     if (frameAttrs.value.type === "video") {
         return frameAttrs.value.playMode === "auto";
@@ -76,7 +77,7 @@ const frameLink = computed<string>(() => {
                         })
                     );
 
-                    frameLink = option.value.mapUrl + "?" + "time=" + createMd5(mapParam) + "#" + mapParam;
+                    frameLink = frameStorage.value?.mapUrl + "?" + "time=" + createMd5(mapParam) + "#" + mapParam;
                 }
             }
             break;

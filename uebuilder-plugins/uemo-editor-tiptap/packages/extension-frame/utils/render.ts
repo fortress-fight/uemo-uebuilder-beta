@@ -1,6 +1,6 @@
 import type { DOMOutputSpec } from "@tiptap/pm/model";
 
-import type { FrameAttrs, MapFrameAttrs, FrameOptions } from "../src";
+import type { FrameAttrs, MapFrameAttrs, FrameStorage } from "../src";
 
 import { _pickBy } from "@stone/uemo-editor-utils/lib/lodash";
 import { attrToStyle } from "@stone/uemo-editor-utils/lib/utils";
@@ -45,11 +45,11 @@ export function parseFrameStyle(attrs: FrameAttrs): string {
 /**
  * 生成地图 iframe 的 URL
  * @param attrs 地图属性
- * @param options 框架配置
+ * @param storage 框架配置
  * @returns 完整的地图 iframe URL
  */
-function getMapUrl(attrs: MapFrameAttrs, options: FrameOptions): string {
-    const baseUrl = options.mapUrl;
+function getMapUrl(attrs: MapFrameAttrs, storage: FrameStorage): string {
+    const baseUrl = storage.mapUrl;
     const { mapTitle, mapDescription, mapPosition, mapTheme, mapScale, mapDrag, mapBtns, mapLang, pointerTheme } =
         attrs;
     if (!mapPosition) return "";
@@ -73,14 +73,14 @@ function getMapUrl(attrs: MapFrameAttrs, options: FrameOptions): string {
 /**
  * 渲染 frame 节点为 DOMOutputSpec
  * @param attrs 框架属性
- * @param options 框架配置
+ * @param storage 框架配置
  * @returns DOMOutputSpec
  */
-export function frameRender(attrs: FrameAttrs, options: FrameOptions): DOMOutputSpec {
+export function frameRender(attrs: FrameAttrs, storage: FrameStorage): DOMOutputSpec {
     const { type, align, src, ratio } = attrs;
     // 地图类型
     if (type === "map") {
-        const frameSrc = getMapUrl(attrs, options);
+        const frameSrc = getMapUrl(attrs, storage);
         if (!frameSrc) return ["p"];
 
         return [

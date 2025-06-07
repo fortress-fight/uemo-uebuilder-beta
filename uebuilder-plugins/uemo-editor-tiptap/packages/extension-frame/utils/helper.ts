@@ -1,10 +1,10 @@
 /*
  * @Description: 辅助函数
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 23:03:37
+ * @LastEditTime: 2025-06-07 12:52:47
  */
 
-import type { MapFrameAttrs, FrameBaseAttrs, FrameAttrs } from "../src";
+import type { FrameStorage, MapFrameAttrs, FrameBaseAttrs, FrameAttrs } from "../src";
 import type { Editor } from "@tiptap/core";
 import type { Selection, NodeSelection } from "@tiptap/pm/state";
 import { isNodeSelection, findParentNode } from "@tiptap/core";
@@ -84,6 +84,16 @@ export function getFrame(editor?: Editor) {
     return findParentNode((node) => node.type.name === "frame")(selection);
 }
 
+/**
+ * 获取 frame 属性
+ */
 export function getFrameAttrs(editor?: Editor) {
     return editor?.getAttributes("frame") as FrameAttrs;
 }
+
+/**
+ * 获取 frame 存储
+ */
+export const getFrameStorage = (editor: Editor): FrameStorage | undefined => {
+    return editor.storage.frame;
+};
