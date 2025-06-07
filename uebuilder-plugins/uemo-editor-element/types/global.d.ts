@@ -19,6 +19,7 @@ import type {
     ResourceButton as ResourceButtonType,
     ResourceButtonItem as ResourceButtonItemType,
 } from "@stone/uemo-editor-assets/resource/button";
+import type { ResourceMap as ResourceMapType } from "@stone/uemo-editor-assets/resource/map";
 
 import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
@@ -339,6 +340,11 @@ declare global {
         type ResourceSvgAttrs = { source: string; data?: SvgFileUploadData };
 
         /**
+         * @description Map 资源列表
+         */
+        type ResourceMap = ResourceMapType;
+
+        /**
          * @description 文件上传信息
          */
         type FileUploadInfo = { url: string; data: SvgFileUploadData };
@@ -402,6 +408,7 @@ declare global {
                 getUsedFontFamily?: () => Promise<{ name: string; src: string }[]>;
             };
             buttonLibrary: ResourceValue<UE_EL_UTIL.ResourceButton>;
+            mapLibrary: ResourceValue<UE_EL_UTIL.ResourceMap>;
         };
 
         type LinkAnchor = { name: string; src: string };
