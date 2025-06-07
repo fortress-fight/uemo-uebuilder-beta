@@ -1,7 +1,7 @@
 /*
  * @Description: 辅助函数
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 12:52:47
+ * @LastEditTime: 2025-06-07 18:29:16
  */
 
 import type { FrameStorage, MapFrameAttrs, FrameBaseAttrs, FrameAttrs } from "../src";
@@ -33,7 +33,10 @@ export function parseMapSrc(src: string, scale?: boolean): Omit<MapFrameAttrs, k
         } as const;
     } catch (error) {
         console.error(error);
-        return {};
+        return {
+            mapTitle: "请输入标题",
+            mapPosition: "116.404269,39.912943",
+        };
     }
 }
 
