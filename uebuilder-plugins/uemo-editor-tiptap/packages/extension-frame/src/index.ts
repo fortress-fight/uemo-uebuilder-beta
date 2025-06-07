@@ -1,17 +1,18 @@
 /*
  * @Description: 视频节点
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 18:25:34
+ * @LastEditTime: 2025-06-07 18:07:44
  */
 
 export interface FrameBaseAttrs {
     type: string;
-    src: string;
+    src?: string;
 
     ratio?: string;
     align?: UE_EL_UTIL.ALIGN_X;
     width?: string;
     height?: string;
+    sizeMode?: "ratio" | "customRatio" | "height";
 
     // 设计属性
     border?: UE_EL_UTIL.BorderValue;
@@ -30,9 +31,9 @@ export interface VideoFrameAttrs extends FrameBaseAttrs {
 export interface MapFrameAttrs extends FrameBaseAttrs {
     type: "map";
 
-    mapTitle?: string;
+    mapTitle: string;
     mapDescription?: string;
-    mapPosition?: string;
+    mapPosition: string;
     mapTheme?: string;
     mapScale?: boolean;
     mapBtns?: string[];

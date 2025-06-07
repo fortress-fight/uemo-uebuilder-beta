@@ -1,7 +1,7 @@
 /*
  * @Description: Frame 解析配置
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 19:48:23
+ * @LastEditTime: 2025-06-07 16:24:31
  */
 import type { FrameAttrs, VideoFrameAttrs, WebFrameAttrs, MapFrameAttrs } from "../src";
 
@@ -32,10 +32,14 @@ export function parseVideoFrame(el: HTMLElement): VideoFrameAttrs | false {
         return (frameBoxDom.getAttribute("data-play-mode") || "pop") as "pop" | "inline" | "auto";
     }
 
+    const ratio = el.getAttribute("data-frame-ratio") || "";
+    const sizeMode = el.getAttribute("data-size-mode") as FrameAttrs["sizeMode"];
+
     return {
         type: "video",
         src,
-        ratio: el.getAttribute("data-frame-ratio") || "",
+        ratio,
+        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,
 
         border: parseBorderStyle(boxStyle),
@@ -63,11 +67,14 @@ export function parseWebFrame(el: HTMLElement): WebFrameAttrs | false {
     if (!src) return false;
 
     const boxStyle = frameBox.style;
+    const ratio = el.getAttribute("data-frame-ratio") || "";
+    const sizeMode = el.getAttribute("data-size-mode") as FrameAttrs["sizeMode"];
     return {
         type: "web",
         src,
+        ratio,
+        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
 
-        ratio: el.getAttribute("data-frame-ratio") || "",
         radius: boxStyle.borderRadius,
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,
         border: parseBorderStyle(boxStyle),
@@ -92,12 +99,15 @@ export function parseMapFrame(el: HTMLElement): MapFrameAttrs | false {
     if (!src) return false;
 
     const boxStyle = frameBoxDom.style;
+    const ratio = el.getAttribute("data-frame-ratio") || "";
+    const sizeMode = el.getAttribute("data-size-mode") as FrameAttrs["sizeMode"];
 
     return {
         type: "map",
         src,
+        ratio,
+        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
 
-        ratio: el.getAttribute("data-frame-ratio") || "",
         radius: boxStyle.borderRadius,
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,
         border: parseBorderStyle(boxStyle),

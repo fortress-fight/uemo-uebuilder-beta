@@ -9,20 +9,42 @@ import $pageStyle from "../../../src/app.module.scss";
 import { resolveBorderStyle } from "../../../utils/tiptap-helper";
 
 /**
- * 解析框架节点的样式属性为 style 字符串
- * @param attrs 框架属性
- * @returns style 字符串
+ * 计算框架比例
+ * @param ratio 比例字符串
+ * @param width 宽度
+ * @param height 高度
+ * @returns 百分比字符串
  */
-export function parseFrameStyle(attrs: FrameAttrs): string {
-    const { borderWidth, borderColor, borderStyle } = resolveBorderStyle(attrs.border);
-    const ratioMap: Record<string, string> = {
+function calcFrameRatio(ratio?: string, width?: string, height?: string) {
+    if (!ratio || ratio === "auto") {
+        if (width && height) {
+            return (parseInt(height) / parseInt(width)) * 100 + "%";
+        }
+        return null;
+    }
+    const defaultRatio: Record<string, string> = {
         "1-1": "100%",
         "3-4": "133.3333%",
         "4-3": "75%",
         "16-9": "56.25%",
         "9-16": "177.7777%",
     };
-    const ratio: string = ratioMap[attrs.ratio! || "auto"] || "";
+    if (defaultRatio[ratio]) {
+        return defaultRatio[ratio];
+    }
+
+    const [w, h] = ratio.split("-");
+    return (Number(h) / Number(w)) * 100 + "%";
+}
+
+/**
+ * 解析框架节点的样式属性为 style 字符串
+ * @param attrs 框架属性
+ * @returns style 字符串
+ */
+export function parseFrameStyle(attrs: FrameAttrs): string {
+    const { borderWidth, borderColor, borderStyle } = resolveBorderStyle(attrs.border);
+    const ratio: string = calcFrameRatio(attrs.ratio, attrs.width, attrs.height) || "";
     const calcBorder = borderWidth
         ? {
               "border-style": borderStyle,
@@ -88,6 +110,7 @@ export function frameRender(attrs: FrameAttrs, storage: FrameStorage): DOMOutput
             {
                 class: $pageStyle.frame,
                 "data-type": type,
+                "data-size-mode": attrs.sizeMode,
                 "data-frame-ratio": ratio || null,
                 style: align ? `text-align:${align}` : null,
             },
@@ -106,6 +129,7 @@ export function frameRender(attrs: FrameAttrs, storage: FrameStorage): DOMOutput
             {
                 class: $pageStyle.frame,
                 "data-type": type,
+                "data-size-mode": attrs.sizeMode,
                 "data-frame-ratio": ratio || null,
                 style: align ? `text-align:${align}` : null,
             },
@@ -132,6 +156,7 @@ export function frameRender(attrs: FrameAttrs, storage: FrameStorage): DOMOutput
             {
                 class: $pageStyle.frame,
                 "data-type": type,
+                "data-size-mode": attrs.sizeMode,
                 "data-frame-ratio": ratio || null,
                 style: align ? `text-align:${align}` : null,
             },

@@ -72,6 +72,7 @@ export const Frame = Node.create<FrameOptions, FrameStorage>({
             align: { default: undefined },
             width: { default: undefined },
             height: { default: undefined },
+            sizeMode: { default: undefined },
             border: { default: undefined },
             shadow: { default: undefined },
             radius: { default: undefined },
