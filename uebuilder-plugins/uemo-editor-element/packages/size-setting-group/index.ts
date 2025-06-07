@@ -1,7 +1,7 @@
 /*
  * @Description: 尺寸调节组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 15:27:26
+ * @LastEditTime: 2025-06-07 18:19:40
  */
 import type { App } from "vue";
 
@@ -14,9 +14,10 @@ UeElSizeSettingGroup.install = (app: App) => {
 
 export interface UeElSizeSettingGroupBaseProps {
     disabled?: boolean;
+    widthInputProps?: UE_EL_COMPONENT.UeElNumberInputProps;
 }
 export interface UeElSizeSettingGroupValue {
-    mode?: "ratio" | "height" | "customRatio";
+    mode?: "ratio" | "height" | "customRatio" | "auto";
     width?: string;
     ratio?: string;
     height?: string;

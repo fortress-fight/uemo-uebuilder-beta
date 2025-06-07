@@ -1,14 +1,14 @@
 <!--
  * @Description: 尺寸调节组
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 15:27:33
+ * @LastEditTime: 2025-06-07 18:19:07
 -->
 <template>
     <UeElSettingGroup :class="$style['size-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
         <template #body v-if="valueRef">
             <UeElControlGroup :col-count="2">
                 <UeElSelect v-bind="sizeModeOptions" v-model:value="sizeMode" />
-                <UeElNumberInput v-bind="widthInputProps" v-model:value="width" />
+                <UeElNumberInput v-bind="widthInputProps" :title="{ text: t('UNIT_WIDTH') }" v-model:value="width" />
             </UeElControlGroup>
             <UeElControlGroup v-if="sizeMode === 'ratio'">
                 <UeElSelect v-bind="ratioOptions" v-model:value="ratio" />
@@ -29,7 +29,15 @@ import type { UeElSizeSettingGroupBaseProps, UeElSizeSettingGroupValue } from ".
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeElSizeSettingGroup" });
-const _props = withDefaults(defineProps<UeElSizeSettingGroupBaseProps>(), {});
+const _props = withDefaults(defineProps<UeElSizeSettingGroupBaseProps>(), {
+    widthInputProps: () => ({
+        limit: { px: [20, Infinity], "%": [5, 100] },
+        units: [
+            { value: "px", text: "px", default: 200 },
+            { value: "%", text: "%", default: 100 },
+        ],
+    }),
+});
 
 const valueRef = defineModel<UeElSizeSettingGroupValue>("value", {
     required: false,
@@ -50,6 +58,7 @@ const sizeModeOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => {
     return {
         title: t("UNIT_MODE"),
         options: [
+            { value: "auto", text: t("UNIT_DEFAULT") },
             { value: "ratio", text: t("UNIT_FIXED_RATIO") },
             { value: "customRatio", text: t("UNIT_CUSTOM_RATIO") },
             { value: "height", text: t("UNIT_CUSTOM_HEIGHT") },
@@ -58,13 +67,15 @@ const sizeModeOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => {
 });
 
 const sizeMode = useDefineObjectModel(valueRef, {
-    get: (modelValue) => modelValue?.mode || "ratio",
+    get: (modelValue) => modelValue?.mode || (ratio.value ? "ratio" : "auto"),
     set: (value, modelValue) => {
         switch (value) {
-            case "ratio":
-                modelValue = { mode: value, height: undefined, ratio: "auto" };
+            case "auto":
+                modelValue = { mode: value, height: undefined, ratio: undefined };
                 break;
-
+            case "ratio":
+                modelValue = { mode: value, height: undefined, ratio: "1-1" };
+                break;
             case "height":
                 modelValue = { mode: value, height: "200px", ratio: undefined };
                 break;
@@ -84,15 +95,6 @@ const sizeMode = useDefineObjectModel(valueRef, {
 
 // #region width
 
-const widthInputProps: UE_EL_COMPONENT.UeElNumberInputProps = {
-    limit: { px: [20, Infinity], "%": [5, 100] },
-    units: [
-        { value: "px", text: "px", default: 200 },
-        { value: "%", text: "%", default: 100 },
-    ],
-    title: { text: t("UNIT_WIDTH") },
-};
-
 const width = useDefineObjectModel(valueRef, {
     get: (modelValue) => modelValue?.width || "100%",
     set: (value, modelValue) => {
@@ -109,7 +111,6 @@ const ratioOptions = computed<UE_EL_COMPONENT.UeElSelectProps>(() => {
     return {
         title: t("UNIT_RATIO"),
         options: [
-            { value: "auto", text: "无" },
             { value: "1-1", text: "1:1" },
             { value: "3-4", text: "3:4" },
             { value: "4-3", text: "4:3" },
@@ -178,7 +179,7 @@ const hRatio = useDefineObjectModel(valueRef, {
 const handleTrigger = (id: string) => {
     switch (id) {
         case "add":
-            valueRef.value = { width: "100%", ratio: "auto", mode: "ratio", height: undefined };
+            valueRef.value = { width: "100%", mode: "auto", height: undefined };
             break;
 
         case "remove":
