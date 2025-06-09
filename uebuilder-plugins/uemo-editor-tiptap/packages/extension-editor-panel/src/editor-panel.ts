@@ -68,7 +68,7 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon"];
+const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame"];
 
 /**
  * 编辑器面板扩展
@@ -144,7 +144,14 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                     this.editor.chain().openSvgIconEditorPanel(domRect).run();
                                     return false;
 
+                                case "frame":
+                                    this.editor.chain().openFrameEditorPanel(domRect).run();
+                                    return false;
+
                                 default:
+                                    console.error(
+                                        `${nodeName} 不支持打开属性编辑面板, 请检查是否在 HansEditorPanelNodes 中添加了该节点`
+                                    );
                                     return;
                             }
                         },

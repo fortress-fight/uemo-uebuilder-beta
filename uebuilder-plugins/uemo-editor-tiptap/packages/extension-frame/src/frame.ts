@@ -7,6 +7,7 @@ import { VueNodeViewRenderer } from "@tiptap/vue-3";
 import FrameView from "../view/Frame.vue";
 
 import { frameRender } from "../utils/render";
+import { getFrameAttrs } from "../utils/helper";
 import { parseFrame, parseVideoFrame, parseWebFrame, parseMapFrame } from "../utils/parse";
 
 import $pageStyle from "../../../src/app.module.scss";
@@ -31,6 +32,16 @@ declare module "@tiptap/core" {
              * 更新地图 URL
              */
             updateMapUrl: (mapUrl: string) => ReturnType;
+
+            /**
+             * 更新 frame 属性
+             */
+            updateFrameAttrs: (attrs: Partial<FrameAttrs>) => ReturnType;
+
+            /**
+             * 打开 frame 编辑器面板
+             */
+            openFrameEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
         };
     }
 }
@@ -161,6 +172,28 @@ export const Frame = Node.create<FrameOptions, FrameStorage>({
                 this.storage.mapUrl = mapUrl;
                 return true;
             },
+
+            updateFrameAttrs:
+                (attrs: Partial<FrameAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openFrameEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getFrameAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("frame", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateFrameAttrs(attr);
+                            },
+                        })
+                        .run();
+                },
         };
     },
 });

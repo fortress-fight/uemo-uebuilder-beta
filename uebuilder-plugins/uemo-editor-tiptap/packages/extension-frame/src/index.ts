@@ -1,7 +1,7 @@
 /*
  * @Description: 视频节点
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 18:07:44
+ * @LastEditTime: 2025-06-09 00:36:41
  */
 
 export interface FrameBaseAttrs {
@@ -12,7 +12,7 @@ export interface FrameBaseAttrs {
     align?: UE_EL_UTIL.ALIGN_X;
     width?: string;
     height?: string;
-    sizeMode?: "ratio" | "customRatio" | "height";
+    sizeMode?: "ratio" | "customRatio" | "height" | "auto";
 
     // 设计属性
     border?: UE_EL_UTIL.BorderValue;

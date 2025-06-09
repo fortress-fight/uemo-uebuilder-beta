@@ -1,13 +1,22 @@
 /*
  * @Description: Frame 解析配置
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 16:24:31
+ * @LastEditTime: 2025-06-09 00:41:07
  */
 import type { FrameAttrs, VideoFrameAttrs, WebFrameAttrs, MapFrameAttrs } from "../src";
 
 import $pageStyle from "../../../src/app.module.scss";
 import { parseMapSrc, parseMapConfig } from "./helper";
 import { parseBorderStyle } from "../../../utils/tiptap-helper";
+
+// NOTE 修复之前 ratio 带来的问题：
+// 之前 ratio 存在 auto，目前被排除。 现在 ratio 为 auto 时，sizeMode 为 auto，否则为 ratio
+function getSizeModeValue(ratio: string): FrameAttrs["sizeMode"] {
+    if (!ratio) return undefined;
+    if (ratio === "auto") return "auto";
+
+    return "ratio";
+}
 
 /**
  * 解析视频配置
@@ -39,7 +48,7 @@ export function parseVideoFrame(el: HTMLElement): VideoFrameAttrs | false {
         type: "video",
         src,
         ratio,
-        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
+        sizeMode: sizeMode || getSizeModeValue(ratio),
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,
 
         border: parseBorderStyle(boxStyle),
@@ -73,7 +82,7 @@ export function parseWebFrame(el: HTMLElement): WebFrameAttrs | false {
         type: "web",
         src,
         ratio,
-        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
+        sizeMode: sizeMode || getSizeModeValue(ratio),
 
         radius: boxStyle.borderRadius,
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,
@@ -106,7 +115,7 @@ export function parseMapFrame(el: HTMLElement): MapFrameAttrs | false {
         type: "map",
         src,
         ratio,
-        sizeMode: sizeMode || (ratio ? ("ratio" as const) : undefined),
+        sizeMode: sizeMode || getSizeModeValue(ratio),
 
         radius: boxStyle.borderRadius,
         align: el.style.textAlign as UE_EL_UTIL.ALIGN_X,

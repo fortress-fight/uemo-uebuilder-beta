@@ -33,6 +33,9 @@ function openBtnRowEditorPanel() {
         case "svgIcon":
             editor.chain().openSvgIconEditorPanel(rect).run();
             break;
+        case "frame":
+            editor.chain().openFrameEditorPanel(rect).run();
+            break;
         default:
             return;
     }
