@@ -11,6 +11,7 @@ import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-butt
 import type { ImageAttrs } from "../packages/extension-image/src";
 import type { SvgIconAttrs } from "../packages/extension-svg-icon/src";
 import type { FrameAttrs, VideoFrameAttrs, MapFrameAttrs, WebFrameAttrs } from "../packages/extension-frame/src";
+import type { SvgViewerAttrs } from "../packages/extension-svg-view/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -69,6 +70,9 @@ declare global {
         };
         type Frame = {
             attrs: FrameAttrs;
+        };
+        type SvgView = {
+            attrs: SvgViewerAttrs;
         };
     }
 }

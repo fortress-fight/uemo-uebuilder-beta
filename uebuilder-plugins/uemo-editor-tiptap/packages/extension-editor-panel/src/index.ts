@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 23:04:20
+ * @LastEditTime: 2025-06-12 00:18:28
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
@@ -41,6 +41,7 @@ export type EditorPanelAttrsMap = {
     image: UE_TIPTAP_EXTENSION.Image["attrs"];
     svgIcon: UE_TIPTAP_EXTENSION.SvgIcon["attrs"];
     frame: UE_TIPTAP_EXTENSION.Frame["attrs"];
+    svgView: UE_TIPTAP_EXTENSION.SvgView["attrs"];
     moreOper: null;
 };
 

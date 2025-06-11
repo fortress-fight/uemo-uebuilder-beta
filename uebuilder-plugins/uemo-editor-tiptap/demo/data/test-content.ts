@@ -93,4 +93,20 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    svgViewData: `
+        <div class="svg-viewer-wrapper-dc236">
+            <div class="svg-viewer-box-b6f38" style="--svg-w:32;--svg-h:32;--width:100px;">
+                <div style="padding: var(--padding); width: 100%;">
+                    <div class="svg-viewer-inner-d38c5">
+                        <ue-svg-viewer
+                            class="svg-viewer-a0437"
+                            src="http://127.0.0.1:9005/uploads/1749658744495.svg"
+                            fill-color=""
+                            stroke-color=""
+                        ></ue-svg-viewer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
 };
