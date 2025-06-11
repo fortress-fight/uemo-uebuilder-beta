@@ -51,6 +51,7 @@ import { DropUpload } from "../packages/extension-drop-upload/src";
 import { CopyAttrsExtension } from "../packages/extension-copy-attrs/src";
 import { SvgIcon } from "../packages/extension-svg-icon/src";
 import { Frame } from "../packages/extension-frame/src";
+import { SvgView } from "../packages/extension-svg-view/src";
 
 // #endregion
 
@@ -123,6 +124,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         CopyAttrsExtension,
         SvgIcon,
         Frame,
+        SvgView,
     ];
 
     return [...baseExtensions, ...customExtensions];

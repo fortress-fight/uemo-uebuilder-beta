@@ -44,6 +44,11 @@
             @confirm="insertWebContent"
             @cancel="handleEndEdit"
         />
+        <UeElSvgLibraryPanel
+            v-if="nodeName === 'SvgViewerPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertSvgViewerContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -111,6 +116,12 @@ const insertWebContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertWebFrame(value).run();
+};
+
+const insertSvgViewerContent = (value?: UE_EL_UTIL.ResourceSvgAttrs) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSvgViewer(value).run();
 };
 
 const handleEndEdit = () => {

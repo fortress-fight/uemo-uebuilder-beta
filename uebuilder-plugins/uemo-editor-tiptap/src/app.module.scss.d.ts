@@ -40,5 +40,9 @@ declare const styles: {
     readonly frame: string;
     readonly "frame-body": string;
     readonly "frame-box": string;
+    readonly "svg-viewer": string;
+    readonly "svg-viewer-box": string;
+    readonly "svg-viewer-inner": string;
+    readonly "svg-viewer-wrapper": string;
 };
 export = styles;

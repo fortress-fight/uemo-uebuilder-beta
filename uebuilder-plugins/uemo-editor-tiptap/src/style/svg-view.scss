@@ -1,0 +1,175 @@
+.page-editor {
+    .svg-viewer-wrapper {
+        position: relative;
+        &[data-ratio] {
+            //
+        }
+    }
+    .svg-viewer-box {
+        display: inline-block;
+
+        width: var(--width, 100%);
+    }
+    .svg-viewer-box[style*="--svg-h"][style*="--svg-w"] {
+        position: relative;
+
+        display: inline-flex;
+        overflow: hidden;
+
+        width: 100%;
+        width: var(--width, 100%);
+        max-width: 100%;
+        // height: var(--svg-viewer-h);
+
+        transform: translate3d(0, 0, 0);
+        vertical-align: top;
+        .svg-viewer-inner {
+            position: relative;
+            &::after {
+                position: relative;
+
+                display: block;
+
+                width: 100%;
+                min-height: 12px;
+                padding-top: calc(var(--svg-h) / var(--svg-w) * 100%);
+
+                content: "";
+                pointer-events: none;
+            }
+            & > .svg-viewer {
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .svg-viewer-box:not([style*="--svg-h"][style="--svg-w"]) {
+        position: relative;
+
+        display: inline-flex;
+        overflow: hidden;
+
+        width: 100%;
+        width: var(--width, 100%);
+        max-width: 100%;
+
+        transform: translate3d(0, 0, 0);
+        vertical-align: top;
+        .svg-viewer-inner,
+        .svg-viewer {
+            width: 100%;
+        }
+    }
+}
+
+// !SECTION
+.page-editor .svg-viewer-wrapper[data-effect="scroll"] {
+    position: relative;
+    .svg-viewer-inner {
+        --ue-scroll-property: calc(
+            var(--scroll-start) + var(--scroll-progress, 0) * (var(--scroll-end) - var(--scroll-start))
+        );
+        --ue-scroll-opacity: calc(
+            var(--scroll-opacity-start) + var(--scroll-progress, 0) *
+                (var(--scroll-opacity-end) - var(--scroll-opacity-start))
+        );
+    }
+    &[data-scroll-effect-param*="opacity"] {
+        .svg-viewer-inner {
+            opacity: var(--ue-scroll-property);
+        }
+    }
+    &[data-scroll-effect-param*="rotate"] {
+        .svg-viewer-box {
+            overflow: visible;
+
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+        .svg-viewer-inner {
+            opacity: var(--ue-scroll-opacity);
+
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            &[data-axis^="x-"] {
+                transform: rotateX(var(--ue-scroll-property));
+            }
+            &[data-axis^="y-"] {
+                transform: rotateY(var(--ue-scroll-property));
+            }
+            &[data-axis^="z-"] {
+                transform: rotateZ(var(--ue-scroll-property));
+            }
+            &[data-axis$="-t"] {
+                transform-origin: top;
+            }
+            &[data-axis$="-b"] {
+                transform-origin: bottom;
+            }
+            &[data-axis$="-l"] {
+                transform-origin: left;
+            }
+            &[data-axis$="-r"] {
+                transform-origin: right;
+            }
+            &[data-axis$="-tl"] {
+                transform-origin: top left;
+            }
+            &[data-axis$="-tc"] {
+                transform-origin: top center;
+            }
+            &[data-axis$="-tr"] {
+                transform-origin: top right;
+            }
+            &[data-axis$="-cl"] {
+                transform-origin: center left;
+            }
+            &[data-axis$="-cc"] {
+                transform-origin: center center;
+            }
+            &[data-axis$="-cr"] {
+                transform-origin: center right;
+            }
+            &[data-axis$="-bl"] {
+                transform-origin: bottom left;
+            }
+            &[data-axis$="-bc"] {
+                transform-origin: bottom center;
+            }
+            &[data-axis$="-br"] {
+                transform-origin: bottom right;
+            }
+        }
+    }
+    &[data-scroll-effect-param*="translate"] {
+        .svg-viewer-inner {
+            transform: translate3d(
+                calc(var(--scroll-x-start) + var(--scroll-progress, 0) * (var(--scroll-x-end) - var(--scroll-x-start))),
+                calc(var(--scroll-y-start) + var(--scroll-progress, 0) * (var(--scroll-y-end) - var(--scroll-y-start))),
+                0
+            );
+
+            opacity: var(--ue-scroll-opacity);
+        }
+    }
+    &[data-scroll-effect-param*="scale"] {
+        .svg-viewer-inner {
+            transform: scale(var(--ue-scroll-property));
+
+            opacity: var(--ue-scroll-opacity);
+        }
+    }
+}
+@include media-breakpoint-down(md) {
+    .page-editor {
+        .svg-viewer-box,
+        .svg-viewer-box[style*="--svg-h"][style*="--svg-w"],
+        .svg-viewer-box:not([style*="--svg-h"][style="--svg-w"]) {
+            width: var(--md-width, var(--width, 100%));
+        }
+    }
+}

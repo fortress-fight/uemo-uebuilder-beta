@@ -20,6 +20,12 @@ declare global {
                   bottom: number;
               }
             | HTMLElement;
+
+        /**
+         * @description 滚动效果参数
+         */
+        type SCROLL_EFFECT_OPTION = Record<string, string | undefined>;
+        type SCROLL_EFFECT_VALUE = { type: string; options?: SCROLL_EFFECT_OPTION };
     }
 }
 
