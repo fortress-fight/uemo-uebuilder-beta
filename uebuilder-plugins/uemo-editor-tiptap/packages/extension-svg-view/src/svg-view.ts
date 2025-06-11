@@ -8,6 +8,7 @@ import SvgViewView from "../view/SvgView.vue";
 
 import { parseSvgView } from "../utils/parse";
 import { svgViewRender } from "../utils/render";
+import { getSvgViewAttrs } from "../utils/helper";
 import $pageStyle from "../../../src/app.module.scss";
 
 declare module "@tiptap/core" {
@@ -17,6 +18,16 @@ declare module "@tiptap/core" {
              * 插入 svgView
              */
             insertSvgViewer: (attrs: InsertSvgViewerData) => ReturnType;
+
+            /**
+             * 打开 svgView 编辑器面板
+             */
+            openSvgViewEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
+            /**
+             * 替换 svgView
+             */
+            updateSvgViewAttrs: (attrs: Partial<SvgViewerAttrs>) => ReturnType;
         };
     }
 }
@@ -94,6 +105,28 @@ export const SvgView = Node.create<SvgIconOptions>({
                             url: attrs.source,
                         },
                     });
+                },
+
+            updateSvgViewAttrs:
+                (attrs: Partial<SvgViewerAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openSvgViewEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getSvgViewAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("svgView", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateSvgViewAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
         };
     },

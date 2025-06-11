@@ -68,7 +68,7 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame"];
+const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame", "svgView"];
 
 /**
  * 编辑器面板扩展
@@ -146,6 +146,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "frame":
                                     this.editor.chain().openFrameEditorPanel(domRect).run();
+                                    return false;
+
+                                case "svgView":
+                                    this.editor.chain().openSvgViewEditorPanel(domRect).run();
                                     return false;
 
                                 default:
