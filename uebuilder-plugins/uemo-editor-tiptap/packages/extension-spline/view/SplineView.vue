@@ -77,11 +77,14 @@ watch(
         const splineDom = splineView.value;
 
         // @ts-expect-error
-        splineDom?._spline?.stop();
-        // @ts-expect-error
-        splineDom?._spline?.load(url);
+        const splineCtrl: any = splineDom?._spline;
+        if (!splineCtrl) return;
 
-        loading.value = false;
+        splineCtrl.stop();
+        splineCtrl.load(url).then(() => {
+            splineCtrl.play();
+            loading.value = false;
+        });
     }
 );
 
