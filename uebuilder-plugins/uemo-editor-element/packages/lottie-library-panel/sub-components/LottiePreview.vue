@@ -48,7 +48,7 @@ function pointerenter() {
     const lottieDom = dotlottieRef.value;
     if (!lottieDom) return;
     $(lottieDom).data("playerDir", 1);
-    const lottieItem = lottieDom.getLottie();
+    const lottieItem = lottieDom?.getLottie?.();
     if (lottieItem) {
         lottieItem.setDirection(1);
         lottieItem.play();

@@ -1,7 +1,7 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-15 10:48:59
+ * @LastEditTime: 2025-06-14 01:07:47
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
@@ -195,7 +195,7 @@ function handlePointerEnter(): void {
         const lottieDom = dotlottieRef.value;
         if (!lottieDom) return;
         lottieDom.dataset.playerDir = "1";
-        const lottieItem = lottieDom.getLottie();
+        const lottieItem = lottieDom.getLottie?.();
         if (lottieItem) {
             lottieItem.setDirection(1);
             lottieItem.play();
