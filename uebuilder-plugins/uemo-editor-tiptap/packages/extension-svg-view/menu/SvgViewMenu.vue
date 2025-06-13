@@ -10,7 +10,7 @@
 import { isSvgViewNode } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
+defineOptions({ name: "UeTiptapSvgViewMenu", inheritAttrs: false });
 
 const menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[] = [
     "editor",

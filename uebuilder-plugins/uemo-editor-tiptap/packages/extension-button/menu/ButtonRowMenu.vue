@@ -10,7 +10,7 @@
 import { isButtonRow } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
+defineOptions({ name: "UeTiptapButtonRowMenu", inheritAttrs: false });
 
 const { t } = useI18n();
 

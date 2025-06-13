@@ -12,7 +12,7 @@ import type { FrameAttrs } from "../src";
 import { isFrameNode } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-defineOptions({ name: "UeTiptapButtonItemMenu", inheritAttrs: false });
+defineOptions({ name: "UeTiptapFrameMenu", inheritAttrs: false });
 
 const { t } = useI18n();
 
