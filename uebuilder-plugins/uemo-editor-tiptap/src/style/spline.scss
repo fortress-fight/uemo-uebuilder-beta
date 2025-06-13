@@ -1,0 +1,40 @@
+/*
+ * @Description: tiptap -- spline
+ * @Author: F-Stone
+ * @LastEditTime: 2025-06-13 09:47:22
+ */
+.page-editor {
+    .spline-wrapper {
+        position: relative;
+    }
+    .spline-box {
+        position: relative;
+
+        display: inline-flex;
+        overflow: hidden;
+
+        width: 100%;
+        max-width: 100%;
+
+        transform: translate3d(0, 0, 0);
+        vertical-align: top;
+        &::after {
+            display: block;
+
+            width: 100%;
+            min-height: 100px;
+            padding-top: var(--spline-ratio, calc(var(--spline-h) / var(--spline-w) * 100%));
+
+            content: "";
+            pointer-events: none;
+        }
+    }
+    .spline-viewer {
+        position: absolute;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+}

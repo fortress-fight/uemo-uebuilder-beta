@@ -49,6 +49,11 @@
             :class="$style['node-placeholder-panel']"
             @update:select="insertSvgViewerContent"
         />
+        <UeElSplineLibraryPanel
+            v-if="nodeName === 'SplinePlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertSplineContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -122,6 +127,12 @@ const insertSvgViewerContent = (value?: UE_EL_UTIL.ResourceSvgAttrs) => {
     if (!value) return;
 
     editor?.chain().focus().insertSvgViewer(value).run();
+};
+
+const insertSplineContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSpline(value).run();
 };
 
 const handleEndEdit = () => {

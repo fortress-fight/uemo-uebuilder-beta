@@ -44,5 +44,8 @@ declare const styles: {
     readonly "svg-viewer-box": string;
     readonly "svg-viewer-inner": string;
     readonly "svg-viewer-wrapper": string;
+    readonly "spline-box": string;
+    readonly "spline-viewer": string;
+    readonly "spline-wrapper": string;
 };
 export = styles;

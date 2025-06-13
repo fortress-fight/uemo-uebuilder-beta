@@ -59,6 +59,13 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
                 param.updateAttrs(JSON.parse(newValue));
             }
             break;
+        case "spline":
+            {
+                const newValue = prompt("请输入 spline 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
         default:
             break;
     }

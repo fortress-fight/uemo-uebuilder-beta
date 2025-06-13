@@ -96,6 +96,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertSvgViewer":
                     chain.insetNodePlaceholder("SvgViewerPlaceholder");
                     break;
+                case "insertSpline":
+                    chain.insetNodePlaceholder("SplinePlaceholder");
+                    break;
 
                 default:
                     break;
