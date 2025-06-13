@@ -29,7 +29,7 @@ import { getSvgIconBoxStyle } from "../utils/render";
 
 import pageStyle from "../../../src/app.module.scss";
 
-defineOptions({ name: "UeElTiptapImage" });
+defineOptions({ name: "UeElTiptapSvgIconView" });
 
 const contenteditable = ref(false);
 

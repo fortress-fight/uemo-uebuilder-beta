@@ -6,9 +6,11 @@
         :data-type="frameAttrs.type || undefined"
         :data-frame-ratio="frameAttrs.ratio || false"
         class="drag-handle"
-        contenteditable="false"
+        :contenteditable="contenteditable"
         draggable="true"
         data-drag-handle
+        @dragenter="contenteditable = true"
+        @drop="contenteditable = false"
     >
         <div
             v-if="frameLink"
@@ -45,8 +47,12 @@ import { createMd5 } from "@stone/uemo-editor-utils/lib/md5";
 import { parseFrameStyle } from "../utils/render";
 import { getFrameStorage } from "../utils/helper";
 
+defineOptions({ name: "UeElTiptapFrameView" });
+
 const props = defineProps(nodeViewProps);
 const frameAttrs = computed(() => props.node.attrs as FrameAttrs);
+
+const contenteditable = ref(false);
 
 const frameStorage = computed(() => getFrameStorage(props.editor));
 const isAutoPlay = computed(() => {

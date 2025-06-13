@@ -1,13 +1,15 @@
 <template>
     <node-view-wrapper
+        class="drag-handle"
+        data-drag-handle
+        draggable="true"
         :style="{ textAlign: svgViewAttrs.align }"
         :class="[pageStyle['svg-viewer-wrapper'], { 'ProseMirror-selectednode': !!selected }]"
         :data-ratio="svgViewAttrs.ratio || false"
         :data-scroll-effect-param="svgViewAttrs.scrollEffect ? JSON.stringify(svgViewAttrs.scrollEffect) : undefined"
-        class="drag-handle"
-        contenteditable="false"
-        draggable="true"
-        data-drag-handle
+        :contenteditable="contenteditable"
+        @dragenter="contenteditable = true"
+        @drop="contenteditable = false"
     >
         <div :style="boxStyle" :class="pageStyle['svg-viewer-box']">
             <div :style="{ width: '100%', padding: svgViewAttrs.padding }">
@@ -33,10 +35,14 @@ import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
 import { getSvgViewerStyle } from "../utils/render";
 
-const prop = defineProps(nodeViewProps);
+defineOptions({ name: "UeElTiptapSvgView" });
+
+const contenteditable = ref(false);
+
+const props = defineProps(nodeViewProps);
 
 const svgViewAttrs = computed(() => {
-    return prop.node.attrs as SvgViewerAttrs;
+    return props.node.attrs as SvgViewerAttrs;
 });
 
 const boxStyle = computed(() => {

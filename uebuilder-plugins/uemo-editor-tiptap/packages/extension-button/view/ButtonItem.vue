@@ -1,11 +1,5 @@
 <template>
-    <NodeViewWrapper
-        :class="[pageStyle['button-view']]"
-        class="drag-handle"
-        contenteditable="false"
-        draggable="true"
-        data-drag-handle
-    >
+    <NodeViewWrapper :class="[pageStyle['button-view']]" draggable="false" contenteditable="false">
         <ButtonDom ref="button" :class="$style['button']" :data="attrs" />
     </NodeViewWrapper>
 </template>
