@@ -62,7 +62,7 @@ export const Spline = Node.create<SplineOptions>({
     parseHTML() {
         return [
             {
-                tag: "div." + $pageStyle["svg-icon-wrapper"],
+                tag: "div." + $pageStyle["spline-wrapper"],
                 getAttrs: (el): SplineAttrs | false => {
                     return parseSpline(el);
                 },
