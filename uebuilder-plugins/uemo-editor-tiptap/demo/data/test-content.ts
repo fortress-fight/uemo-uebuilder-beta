@@ -109,4 +109,18 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    splineData: `
+        <div
+            class="spline-wrapper-d6e31"
+            data-url="https://static.jsmo.xin/uebuilder/public-resource/spline/zujian/spline003.splinecode"
+        >
+            <div class="spline-box-f217a" style="--spline-w:300;--spline-h:300;">
+                <div
+                    loading="auto"
+                    class="spline-viewer-e851b"
+                    data-url="https://static.jsmo.xin/uebuilder/public-resource/spline/zujian/spline003.splinecode"
+                ></div>
+            </div>
+        </div>
+    `,
 };
