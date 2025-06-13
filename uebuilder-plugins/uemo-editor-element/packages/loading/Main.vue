@@ -1,7 +1,7 @@
 <!--
  * @Description: 加载Loading
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 14:33:51
+ * @LastEditTime: 2025-06-13 10:51:17
 -->
 <template>
     <div
@@ -192,7 +192,7 @@ defineExpose({
     border-radius: 5px;
     .loading-message {
         position: absolute;
-        bottom: calc(100% + var(--height));
+        bottom: calc(100% + var(--height, 10px));
 
         width: 100%;
 

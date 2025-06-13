@@ -1,8 +1,8 @@
 <template>
     <node-view-wrapper
         class="drag-handle"
-        data-drag-handle
-        draggable="true"
+        :data-drag-handle="isEditing ? undefined : true"
+        :draggable="isEditing ? false : true"
         :class="[pageStyle['spline-wrapper'], { 'ProseMirror-selectednode': !!selected }]"
         :style="{ textAlign: attrs.align }"
         :contenteditable="contenteditable"
@@ -11,18 +11,16 @@
         :data-ratio="attrs.ratio || false"
     >
         <div :style="boxStyle" :class="pageStyle['spline-box']">
-            <div v-if="isEditing">
-                <spline-viewer
-                    v-if="attrs.url"
-                    ref="splineView"
-                    :class="pageStyle['spline-viewer']"
-                    loading="auto"
-                    :style="splineViewerStyle"
-                    :url="attrs.url"
-                    @load-start="onLoadStart"
-                    @load-complete="onLoadComplete"
-                />
-            </div>
+            <spline-viewer
+                v-if="isEditing && attrs.url"
+                ref="splineView"
+                :class="pageStyle['spline-viewer']"
+                loading="auto"
+                :style="splineViewerStyle"
+                :url="attrs.url"
+                @load-start="onLoadStart"
+                @load-complete="onLoadComplete"
+            />
             <div v-else :class="$style['spline-viewer-placeholder']"></div>
             <UeElLoading v-if="loading" />
         </div>

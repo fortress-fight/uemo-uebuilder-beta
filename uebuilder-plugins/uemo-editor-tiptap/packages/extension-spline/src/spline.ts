@@ -8,6 +8,7 @@ import SplineView from "../view/SplineView.vue";
 
 import { parseSpline } from "../utils/parse";
 import { splineRender } from "../utils/render";
+import { getSplineAttrs } from "../utils/helper";
 
 import $pageStyle from "../../../src/app.module.scss";
 
@@ -15,9 +16,19 @@ declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         spline: {
             /**
-             * 插入 svgIcon
+             * 插入 Spline
              */
             insertSpline: (attrs: string) => ReturnType;
+
+            /**
+             * 打开 Spline 编辑器面板
+             */
+            openSplineEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
+            /**
+             * 替换 Spline
+             */
+            updateSplineAttrs: (attrs: Partial<SplineAttrs>) => ReturnType;
         };
     }
 }
@@ -86,6 +97,28 @@ export const Spline = Node.create<SplineOptions>({
                 ({ commands }) => {
                     if (!url) return false;
                     return commands.insertContent({ type: this.name, attrs: { url } });
+                },
+
+            updateSplineAttrs:
+                (attrs: Partial<SplineAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openSplineEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getSplineAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("spline", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateSplineAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
         };
     },

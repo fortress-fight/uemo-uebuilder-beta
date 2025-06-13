@@ -39,6 +39,9 @@ function openBtnRowEditorPanel() {
         case "svgView":
             editor.chain().openSvgViewEditorPanel(rect).run();
             break;
+        case "spline":
+            editor.chain().openSplineEditorPanel(rect).run();
+            break;
         default:
             return;
     }

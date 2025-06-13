@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-12 00:47:56
+ * @LastEditTime: 2025-06-13 10:47:54
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -38,6 +38,7 @@ import TiptapImage from "@stone/uemo-editor-panel/packages/tiptap-image/Main.vue
 import TiptapSvgIcon from "@stone/uemo-editor-panel/packages/tiptap-svg-icon/Main.vue";
 import TiptapFrame from "@stone/uemo-editor-panel/packages/tiptap-frame/Main.vue";
 import TiptapSvgView from "@stone/uemo-editor-panel/packages/tiptap-svg-view/Main.vue";
+import TiptapSpline from "@stone/uemo-editor-panel/packages/tiptap-spline/Main.vue";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
@@ -68,6 +69,7 @@ defineOptions({
         TiptapSvgIcon,
         TiptapFrame,
         TiptapSvgView,
+        TiptapSpline,
     },
 });
 
@@ -116,6 +118,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     moreOper: "MoreOperPanel",
     frame: "TiptapFrame",
     svgView: "TiptapSvgView",
+    spline: "TiptapSpline",
 };
 
 /**
