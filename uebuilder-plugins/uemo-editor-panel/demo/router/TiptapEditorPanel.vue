@@ -13,12 +13,16 @@ import TestEditorPanelTiptapButtonRow from "~/demo/components/TestEditorPanelTip
 import TestEditorPanelTiptapButtonItem from "~/demo/components/TestEditorPanelTiptapButtonItem.vue";
 import TestEditorPanelTiptapImage from "~/demo/components/TestEditorPanelTiptapImage.vue";
 import TestEditorPanelTiptapSvgIcon from "~/demo/components/TestEditorPanelTiptapSvgIcon.vue";
+import TestEditorPanelTiptapSvgView from "~/demo/components/TestEditorPanelTiptapSvgView.vue";
+import TestEditorPanelTiptapSpline from "~/demo/components/TestEditorPanelTiptapSpline.vue";
 
 const tiptapEditorPanelComponents = [
     TestEditorPanelTiptapButtonRow,
     TestEditorPanelTiptapButtonItem,
     TestEditorPanelTiptapImage,
     TestEditorPanelTiptapSvgIcon,
+    TestEditorPanelTiptapSvgView,
+    TestEditorPanelTiptapSpline,
 ];
 </script>
 <style lang="scss" module>

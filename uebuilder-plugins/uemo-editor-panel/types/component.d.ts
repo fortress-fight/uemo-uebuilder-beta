@@ -5,18 +5,20 @@
  */
 import UeEditorPanelTiptapButtonItem, { UeEditorPanelTiptapButtonItemBaseProps } from "../packages/tiptap-button-item";
 import UeEditorPanelTiptapButtonRow, { UeEditorPanelTiptapButtonRowBaseProps } from "../packages/tiptap-button-row";
+import UeEditorPanelTiptapSpline, { UeEditorPanelTiptapSplineBaseProps } from "../packages/tiptap-spline";
+import UeEditorPanelTiptapImage, { UeEditorPanelTiptapImageBaseProps } from "../packages/tiptap-image";
 import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapSvgIcon, { UeEditorPanelTiptapSvgIconBaseProps } from "../packages/tiptap-svg-icon";
-import UeEditorPanelTiptapImage, { UeEditorPanelTiptapImageBaseProps } from "../packages/tiptap-image";
 import UeEditorPanelTiptapSvgView, { UeEditorPanelTiptapSvgViewBaseProps } from "../packages/tiptap-svg-view";
 
 declare module "vue" {
     export interface GlobalComponents {
         UeEditorPanelTiptapButtonItem: typeof UeEditorPanelTiptapButtonItem;
         UeEditorPanelTiptapButtonRow: typeof UeEditorPanelTiptapButtonRow;
+        UeEditorPanelTiptapSpline: typeof UeEditorPanelTiptapSpline;
+        UeEditorPanelTiptapImage: typeof UeEditorPanelTiptapImage;
         UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapSvgIcon: typeof UeEditorPanelTiptapSvgIcon;
-        UeEditorPanelTiptapImage: typeof UeEditorPanelTiptapImage;
         UeEditorPanelTiptapSvgView: typeof UeEditorPanelTiptapSvgView;
     }
 }
@@ -25,9 +27,10 @@ declare global {
     namespace UE_EDITOR_PANEL_COMPONENT {
         interface UeEditorPanelTiptapButtonItemProps extends UeEditorPanelTiptapButtonItemBaseProps {}
         interface UeEditorPanelTiptapButtonRowProps extends UeEditorPanelTiptapButtonRowBaseProps {}
+        interface UeEditorPanelTiptapSplineProps extends UeEditorPanelTiptapSplineBaseProps {}
+        interface UeEditorPanelTiptapImageProps extends UeEditorPanelTiptapImageBaseProps {}
         interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapSvgIconProps extends UeEditorPanelTiptapSvgIconBaseProps {}
-        interface UeEditorPanelTiptapImageProps extends UeEditorPanelTiptapImageBaseProps {}
         interface UeEditorPanelTiptapSvgViewProps extends UeEditorPanelTiptapSvgViewBaseProps {}
     }
 }
