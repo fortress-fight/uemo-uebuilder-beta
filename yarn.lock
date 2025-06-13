@@ -2899,6 +2899,13 @@
   resolved "https://registry.npmmirror.com/@soda/get-current-script/-/get-current-script-1.0.2.tgz#a53515db25d8038374381b73af20bb4f2e508d87"
   integrity sha512-T7VNNlYVM1SgQ+VsMYhnDkcGmWhQdL0bDyGm5TlQ3GBXnJscEClUUOKduWTmm2zCnvNLC1hc3JpuXjs/nFOc5w==
 
+"@splinetool/viewer@^1.10.4":
+  version "1.10.4"
+  resolved "https://registry.yarnpkg.com/@splinetool/viewer/-/viewer-1.10.4.tgz#87d1f46e9af3f810d173430653b050bd135837ee"
+  integrity sha512-ia5nL9MaeDuBjJbx5Bqzq2AnnLHlFGb5vBcgJhedrMc/WjsVcknZi44Ktt5duRFRi3y8E8wOuSQIf0sKZiGXRw==
+  dependencies:
+    lit "^2.2.4"
+
 "@stylistic/stylelint-plugin@^3.0.1":
   version "3.1.1"
   resolved "https://registry.npmmirror.com/@stylistic/stylelint-plugin/-/stylelint-plugin-3.1.1.tgz#2503ef353d50bbdf495db4bb1b87ca7f639f16d6"
@@ -10358,7 +10365,7 @@ lit-html@^3.2.0:
   dependencies:
     "@types/trusted-types" "^2.0.2"
 
-lit@^2.7.5:
+lit@^2.2.4, lit@^2.7.5:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/lit/-/lit-2.8.0.tgz#4d838ae03059bf9cafa06e5c61d8acc0081e974e"
   integrity sha512-4Sc3OFX9QHOJaHbmTMk28SYgVxLN3ePDjg7hofEft2zWlehFL3LiAuapWc4U/kYwMYJSh2hTCPZ6/LIC7ii0MA==
