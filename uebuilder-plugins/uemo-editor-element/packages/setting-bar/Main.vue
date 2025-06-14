@@ -1,7 +1,7 @@
 <!--
  * @Description: 设置工具条
  * @Author: F-Stone
- * @LastEditTime: 2025-03-01 17:10:53
+ * @LastEditTime: 2025-06-14 14:59:13
 -->
 <template>
     <div
@@ -21,11 +21,13 @@
                     </span>
                     <div
                         :class="$style['info']"
-                        class="flex-auto flex items-center min-w-0"
+                        class="flex-auto flex items-center min-w-0 whitespace-nowrap"
                         :data-text-align="infoAlign"
                     >
                         <UeElIcon v-if="iconParam" :class="$style['ic']" v-bind="iconParam" />
-                        <span v-if="typeof infoText === 'string'">{{ infoText }}</span>
+                        <span :title="infoText" :class="$style['text']" v-if="typeof infoText === 'string'">{{
+                            infoText
+                        }}</span>
                         <span v-else :class="$style['placeholder']">{{ placeholder || label }}</span>
                     </div>
                 </div>
@@ -115,6 +117,9 @@ function triggerSetting() {
     .info {
         &[data-text-align="right"] {
             justify-content: flex-end;
+        }
+        .text {
+            @include ellipse(1);
         }
         .ic {
             margin-right: var(--ue-editor-row-space--lv1);
