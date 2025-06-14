@@ -1,7 +1,7 @@
 <!--
  * @Description: 数字输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-04-17 11:32:01
+ * @LastEditTime: 2025-06-14 14:43:48
 -->
 <template>
     <UeElTextInput
@@ -211,7 +211,7 @@ const changeNumber = (value: string | number): void => {
  */
 const changeUnit = (unit: string): void => {
     const unitOption = props.units?.find((item) => item.value === unit);
-    const limit = parsedValue.value.limit;
+    const limit = Array.isArray(props.limit) ? props.limit : props.limit?.[unit];
 
     if (unitOption?.default !== undefined) {
         updateValue(unitOption.default, unit, limit);
