@@ -42,6 +42,9 @@ function openBtnRowEditorPanel() {
         case "spline":
             editor.chain().openSplineEditorPanel(rect).run();
             break;
+        case "lottie":
+            editor.chain().openLottieEditorPanel(rect).run();
+            break;
         default:
             return;
     }

@@ -64,6 +64,7 @@ $project-name: app-editor;
         .frame,
         .svg-viewer-wrapper,
         .spline-wrapper,
+        .lottie-wrapper,
         .img_wrapper {
             cursor: pointer;
             &.has-focus {

@@ -68,7 +68,7 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame", "svgView", "spline"];
+const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame", "svgView", "spline", "lottie"];
 
 /**
  * 编辑器面板扩展
@@ -154,6 +154,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "spline":
                                     this.editor.chain().openSplineEditorPanel(domRect).run();
+                                    return false;
+
+                                case "lottie":
+                                    this.editor.chain().openLottieEditorPanel(domRect).run();
                                     return false;
 
                                 default:

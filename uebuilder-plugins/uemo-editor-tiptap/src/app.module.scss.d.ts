@@ -47,5 +47,8 @@ declare const styles: {
     readonly "spline-box": string;
     readonly "spline-viewer": string;
     readonly "spline-wrapper": string;
+    readonly "lottie-box": string;
+    readonly "lottie-viewer": string;
+    readonly "lottie-wrapper": string;
 };
 export = styles;

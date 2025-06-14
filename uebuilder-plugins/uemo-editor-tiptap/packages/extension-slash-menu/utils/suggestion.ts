@@ -99,6 +99,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertSpline":
                     chain.insetNodePlaceholder("SplinePlaceholder");
                     break;
+                case "insertLottie":
+                    chain.insetNodePlaceholder("LottiePlaceholder");
+                    break;
 
                 default:
                     break;

@@ -12,6 +12,7 @@
     <UeTiptapFrameMenu />
     <UeTiptapSvgViewMenu />
     <UeTiptapSplineMenu />
+    <UeTiptapLottieMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -27,6 +28,7 @@ import UeTiptapSvgIconMenu from "../../extension-svg-icon/menu/SvgIconMenu.vue";
 import UeTiptapFrameMenu from "../../extension-frame/menu/FrameMenu.vue";
 import UeTiptapSvgViewMenu from "../../extension-svg-view/menu/SvgViewMenu.vue";
 import UeTiptapSplineMenu from "../../extension-spline/menu/SplineMenu.vue";
+import UeTiptapLottieMenu from "../../extension-lottie/menu/LottieMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

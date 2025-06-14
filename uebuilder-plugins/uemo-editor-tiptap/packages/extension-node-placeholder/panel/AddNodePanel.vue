@@ -54,6 +54,11 @@
             :class="$style['node-placeholder-panel']"
             @update:select="insertSplineContent"
         />
+        <UeElLottieLibraryPanel
+            v-if="nodeName === 'LottiePlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertLottieContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -133,6 +138,12 @@ const insertSplineContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertSpline(value).run();
+};
+
+const insertLottieContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertLottie(value).run();
 };
 
 const handleEndEdit = () => {

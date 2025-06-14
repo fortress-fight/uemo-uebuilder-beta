@@ -53,6 +53,7 @@ import { SvgIcon } from "../packages/extension-svg-icon/src";
 import { Frame } from "../packages/extension-frame/src";
 import { SvgView } from "../packages/extension-svg-view/src";
 import { Spline } from "../packages/extension-spline/src";
+import { Lottie } from "../packages/extension-lottie/src";
 
 // #endregion
 
@@ -127,6 +128,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Frame,
         SvgView,
         Spline,
+        Lottie,
     ];
 
     return [...baseExtensions, ...customExtensions];

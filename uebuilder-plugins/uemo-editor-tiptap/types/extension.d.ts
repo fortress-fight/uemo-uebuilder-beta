@@ -13,6 +13,7 @@ import type { SvgIconAttrs } from "../packages/extension-svg-icon/src";
 import type { FrameAttrs, VideoFrameAttrs, MapFrameAttrs, WebFrameAttrs } from "../packages/extension-frame/src";
 import type { SvgViewerAttrs } from "../packages/extension-svg-view/src";
 import type { SplineAttrs } from "../packages/extension-spline/src";
+import type { LottieAttrs } from "../packages/extension-lottie/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -77,6 +78,9 @@ declare global {
         };
         type Spline = {
             attrs: SplineAttrs;
+        };
+        type Lottie = {
+            attrs: LottieAttrs;
         };
     }
 }

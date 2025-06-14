@@ -123,4 +123,22 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    lottieData: `
+        <div
+            class="lottie-wrapper-acffe"
+            data-url="https://static.jsmo.xin/uebuilder/public-resource/lottie/lottiefiles006.lottie"
+            data-trigger="hover"
+        >
+            <div class="lottie-box-c820d" style="width:300px;--lottie-w:1200;--lottie-h:1200;">
+                <div class="lottie-viewer-b3011" style="">
+                    <dotlottie-player
+                        mode="normal"
+                        loop="false"
+                        src="https://static.jsmo.xin/uebuilder/public-resource/lottie/lottiefiles006.lottie"
+                        style=""
+                    ></dotlottie-player>
+                </div>
+            </div>
+        </div>
+    `,
 };

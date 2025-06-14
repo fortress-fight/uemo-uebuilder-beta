@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-06-12 00:48:47
+ * @LastEditTime: 2025-06-14 01:20:06
  */
 
 export function usePopPanelParam(
@@ -105,6 +105,8 @@ export function usePopPanelParam(
             case "svgIcon":
             case "frame":
             case "svgView":
+            case "spline":
+            case "lottie":
                 return {
                     draggable: true,
                     checkAllowClose: options.checkAllowClose,
