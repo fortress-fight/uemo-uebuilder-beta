@@ -15,6 +15,7 @@ import TestEditorPanelTiptapImage from "~/demo/components/TestEditorPanelTiptapI
 import TestEditorPanelTiptapSvgIcon from "~/demo/components/TestEditorPanelTiptapSvgIcon.vue";
 import TestEditorPanelTiptapSvgView from "~/demo/components/TestEditorPanelTiptapSvgView.vue";
 import TestEditorPanelTiptapSpline from "~/demo/components/TestEditorPanelTiptapSpline.vue";
+import TestEditorPanelTiptapLottie from "~/demo/components/TestEditorPanelTiptapLottie.vue";
 
 const tiptapEditorPanelComponents = [
     TestEditorPanelTiptapButtonRow,
@@ -23,6 +24,7 @@ const tiptapEditorPanelComponents = [
     TestEditorPanelTiptapSvgIcon,
     TestEditorPanelTiptapSvgView,
     TestEditorPanelTiptapSpline,
+    TestEditorPanelTiptapLottie,
 ];
 </script>
 <style lang="scss" module>
