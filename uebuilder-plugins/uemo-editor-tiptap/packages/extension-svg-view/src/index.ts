@@ -1,10 +1,9 @@
 /*
  * @Description: svgView 扩展
  * @Author: F-Stone
- * @LastEditTime: 2025-06-11 23:50:41
+ * @LastEditTime: 2025-06-16 00:29:25
  */
 export type SvgViewerAttrs = {
-    isEditing?: boolean;
     url?: string;
 
     ratio?: string;
