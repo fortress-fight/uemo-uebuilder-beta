@@ -5,7 +5,9 @@ import type { TYPE_SLASH_MENU } from "../data";
 import { VueRenderer } from "@tiptap/vue-3";
 
 import { slashMenuList } from "../data";
-import { isInTable, isInGridGroup } from "../../../utils/tiptap-utils";
+import { isInTable } from "../../../utils/tiptap-utils";
+import { isInGridGroup } from "../../extension-grid/utils/helper";
+
 import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 
 /**
@@ -101,6 +103,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                     break;
                 case "insertLottie":
                     chain.insetNodePlaceholder("LottiePlaceholder");
+                    break;
+                case "insertGridGroup":
+                    chain.insetNodePlaceholder("GridGroupPlaceholder");
                     break;
 
                 default:

@@ -51,4 +51,8 @@ export const placeholderMap = {
         title: operMap.insertImage.tip,
         icon: operMap.insertImage.icon,
     },
+    GridGroupPlaceholder: {
+        title: operMap.insertGridGroup.tip,
+        icon: operMap.insertGridGroup.icon,
+    },
 } as const;

@@ -59,6 +59,11 @@
             :class="$style['node-placeholder-panel']"
             @update:select="insertLottieContent"
         />
+        <UeElGridLayoutLibraryPanel
+            v-if="nodeName === 'GridGroupPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertGridGroupContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -144,6 +149,12 @@ const insertLottieContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertLottie(value).run();
+};
+
+const insertGridGroupContent = (value?: string) => {
+    if (!value) return;
+
+    // editor?.chain().focus().insertGridGroup(value).run();
 };
 
 const handleEndEdit = () => {
