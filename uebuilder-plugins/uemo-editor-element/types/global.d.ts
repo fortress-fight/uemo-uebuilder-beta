@@ -26,7 +26,7 @@ import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 import type { TOAST_OPTIONS } from "../packages/toast-plugin";
 import type { UeElError as UeError } from "../utils/error";
 import type { UE_AI_CONFIG } from "../packages/ai-plugin";
-import type { UE_EL_BACKGROUND_PARAM_MAP } from "../packages/background-setting-group";
+import type { UE_EL_BACKGROUND_PARAM_MAP, BACKGROUND_VALUE, TYPE_BG_TYPE } from "../packages/background-setting-group";
 
 declare global {
     namespace UE_EL {
@@ -111,6 +111,14 @@ declare global {
          * @description 边框参数
          */
         type BorderValue = { width: string; color: string; style: string };
+
+        type BackgroundValue = BACKGROUND_VALUE<TYPE_BG_TYPE>;
+        type BackgroundColorValue = BACKGROUND_VALUE<"color">;
+        type BackgroundImageValue = BACKGROUND_VALUE<"image">;
+        type BackgroundSvgValue = BACKGROUND_VALUE<"svg">;
+        type BackgroundVideoValue = BACKGROUND_VALUE<"video">;
+        type BackgroundSplineValue = BACKGROUND_VALUE<"spline">;
+        type BackgroundBlurValue = BACKGROUND_VALUE<"blur">;
 
         /**
          * @description 上传配置旧版
