@@ -1,4 +1,5 @@
 import { guid } from "./guid";
+import { _isEqual } from "./lodash";
 
 /**
  * 获取文件大小描述
@@ -152,4 +153,14 @@ export function attrToStyle(attr: Record<string, string | undefined>): string {
         }
         return styles;
     }, "");
+}
+
+/**
+ * 忽略默认值
+ * @param obj 对象
+ * @param defaultObj 默认对象
+ * @returns 忽略默认值后的对象
+ */
+export function omitDefaultKey(obj: Record<string, any>, defaultObj: Record<string, any>) {
+    return Object.fromEntries(Object.entries(obj).filter(([key, value]) => !_isEqual(value, defaultObj[key])));
 }

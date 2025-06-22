@@ -1,7 +1,7 @@
 /*
  * @Description: 网格布局工具
  * @Author: F-Stone
- * @LastEditTime: 2025-03-20 13:53:09
+ * @LastEditTime: 2025-06-15 23:58:59
  */
 
 /**
@@ -63,4 +63,15 @@ export function getGridCss(gridInfo: GridInfo) {
     const subColInfo = subColInfoArr.join(",").replaceAll(" ", "");
 
     return `${rowInfo},${colInfo}:${subColInfo}`;
+}
+
+/**
+ * 获取行网格区域
+ * @param length 长度
+ * @param auto 是否自动
+ * @returns 行网格区域
+ */
+export function getGridArea(length: number, auto = false) {
+    const arr = new Array(length).fill(auto ? "auto" : 1);
+    return arr.join("-") + ",1:" + arr.map((_, index) => `${index + 1}/1/${index + 2}/2`).join(",");
 }
