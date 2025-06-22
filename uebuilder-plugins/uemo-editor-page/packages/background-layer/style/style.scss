@@ -1,0 +1,434 @@
+// SECTION 背景组件
+.background-layer-group {
+    @include ab-cover;
+    overflow: hidden;
+
+    pointer-events: none;
+
+    // transform: translate3d(0, 0, 0);
+    .layer-page_bg {
+        &:not([data-viewport="xxl"]) {
+            display: none;
+        }
+    }
+    &[data-type="layout-row"] .layer-page_bg {
+        // border-radius: var(--layout-row-radius);
+    }
+    &[data-type="layout-col"] .layer-page_bg {
+        // border-radius: var(--layout-col-radius);
+    }
+}
+.layer-page_bg {
+    @include ab-cover;
+    overflow: hidden;
+    .bg-box {
+        @include ab-cover;
+    }
+    .color-bg {
+        width: 100%;
+        min-height: 100%;
+    }
+    .blur-bg {
+        width: 100%;
+        height: 100%;
+    }
+}
+.gradient-border-layer-group {
+    @include ab-cover;
+    overflow: hidden;
+    .layer-gradient-border {
+        @include ab-cover;
+        overflow: hidden;
+        &:not([data-viewport="xxl"]) {
+            display: none;
+        }
+    }
+}
+.layer-page_bg .video-bg {
+    width: 100%;
+    height: 100%;
+    .bg-layer--inner {
+        width: 100%;
+        height: 100%;
+    }
+    video {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+// !SECTION
+.layer-page_bg .image-bg {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    .bg-layer--inner {
+        width: 100%;
+        min-height: 100%;
+
+        background-repeat: no-repeat;
+        background-position: calc(var(--bg-x, 0)) calc(var(--bg-y, 0));
+    }
+}
+.layer-page_bg .svg-bg {
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+    .bg-layer--inner {
+        width: 100%;
+        height: 100%;
+    }
+    &[data-align-x="top"] {
+        align-items: flex-start;
+    }
+    &[data-align-x="center"] {
+        align-items: center;
+    }
+    &[data-align-x="bottom"] {
+        align-items: flex-end;
+    }
+    &[data-align-y="left"] {
+        justify-content: flex-start;
+    }
+    &[data-align-y="center"] {
+        justify-content: center;
+    }
+    &[data-align-y="right"] {
+        justify-content: flex-end;
+    }
+    .svg-bg--box {
+        flex: 0 0 auto;
+    }
+    ue-svg-viewer {
+        //
+    }
+}
+.layer-page_bg .spline-bg {
+    position: relative;
+    z-index: 0;
+
+    display: flex;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    &[data-effect="sticky"] {
+        align-items: flex-start;
+        .spline-bg--box {
+            height: 100vh;
+        }
+    }
+    .spline-bg--box {
+        position: relative;
+
+        display: inline-flex;
+        overflow: hidden;
+
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+
+        transform: translate3d(0, 0, 0);
+        vertical-align: top;
+
+        object-fit: cover;
+        // &::after {
+        //     display: block;
+
+        //     width: 100%;
+        //     min-height: 100px;
+        //     padding-top: calc(var(--spline-h) / var(--spline-w) * 100%);
+
+        //     content: "";
+        //     pointer-events: none;
+        // }
+        spline-viewer {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    // &[data-effect="fixed"] {
+    //     align-items: flex-start;
+    //     .spline-bg--box {
+    //         top: -100vh;
+
+    //         height: 100vh;
+    //     }
+    // }
+}
+.layer-page_bg .shape-bg {
+    @include ab-cover;
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+    &[data-pos="top"] {
+        align-items: flex-start;
+        .shape-viewer {
+            transform: rotate(180deg);
+        }
+    }
+    &[data-mirroring] {
+        transform: rotateY(180deg);
+    }
+    .shape-bg--box {
+        display: flex;
+
+        width: 100%;
+
+        justify-content: center;
+    }
+    .shape-viewer {
+        position: relative;
+
+        width: 100%;
+        height: var(--shape-height, 200px);
+        svg {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            fill: var(--shape-color, #999);
+        }
+    }
+}
+.layer-page_bg .bg-layer[data-effect="scroll"] {
+    position: relative;
+    .bg-layer--inner {
+        @include ab-cover;
+        --ue-scroll-property: calc(
+            var(--scroll-start) + var(--scroll-progress, 0) * (var(--scroll-end) - var(--scroll-start))
+        );
+        --ue-scroll-opacity: calc(
+            var(--scroll-opacity-start) + var(--scroll-progress, 0) *
+                (var(--scroll-opacity-end) - var(--scroll-opacity-start))
+        );
+    }
+    &[data-scroll-effect*="opacity"] {
+        .bg-layer--inner {
+            opacity: var(--ue-scroll-property);
+        }
+    }
+    &[data-scroll-effect*="rotate"] {
+        overflow: visible;
+
+        perspective: 1200px;
+        transform-style: preserve-3d;
+        .bg-layer--inner {
+            opacity: var(--ue-scroll-opacity);
+
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            &[data-axis^="x-"] {
+                transform: rotateX(var(--ue-scroll-property));
+            }
+            &[data-axis^="y-"] {
+                transform: rotateY(var(--ue-scroll-property));
+            }
+            &[data-axis^="z-"] {
+                transform: rotateZ(var(--ue-scroll-property));
+            }
+            &[data-axis$="-t"] {
+                transform-origin: top;
+            }
+            &[data-axis$="-b"] {
+                transform-origin: bottom;
+            }
+            &[data-axis$="-l"] {
+                transform-origin: left;
+            }
+            &[data-axis$="-r"] {
+                transform-origin: right;
+            }
+            &[data-axis$="-tl"] {
+                transform-origin: top left;
+            }
+            &[data-axis$="-tc"] {
+                transform-origin: top center;
+            }
+            &[data-axis$="-tr"] {
+                transform-origin: top right;
+            }
+            &[data-axis$="-cl"] {
+                transform-origin: center left;
+            }
+            &[data-axis$="-cc"] {
+                transform-origin: center center;
+            }
+            &[data-axis$="-cr"] {
+                transform-origin: center right;
+            }
+            &[data-axis$="-bl"] {
+                transform-origin: bottom left;
+            }
+            &[data-axis$="-bc"] {
+                transform-origin: bottom center;
+            }
+            &[data-axis$="-br"] {
+                transform-origin: bottom right;
+            }
+        }
+    }
+    &[data-scroll-effect*="translate"] {
+        .bg-layer--inner {
+            --move-x: calc(
+                var(--scroll-x-start) + var(--scroll-progress, 0) * (var(--scroll-x-end) - var(--scroll-x-start))
+            );
+            --move-y: calc(
+                var(--scroll-y-start) + var(--scroll-progress, 0) * (var(--scroll-y-end) - var(--scroll-y-start))
+            );
+            opacity: var(--ue-scroll-opacity);
+        }
+        &.image-bg {
+            .bg-layer--inner {
+                background-position: calc(var(--bg-x, 0) + var(--move-x)) calc(var(--bg-y, 0) + var(--move-y));
+            }
+        }
+        &:not(.image-bg) {
+            .bg-layer--inner {
+                transform: translate3d(var(--move-x), var(--move-y), 0);
+            }
+        }
+    }
+    &[data-scroll-effect*="scale"] {
+        .bg-layer--inner {
+            transform: scale(var(--ue-scroll-property));
+
+            opacity: var(--ue-scroll-opacity);
+        }
+    }
+}
+.layer-page_bg .bg-layer[data-effect="normal"] {
+    position: relative;
+    .bg-layer--inner {
+        @include ab-cover;
+        --ue-hover-property: calc(
+            var(--hover-start) + var(--hover-progress, 0) * (var(--hover-end) - var(--hover-start))
+        );
+        --ue-hover-opacity: calc(
+            var(--hover-opacity-start) + var(--hover-progress, 0) *
+                (var(--hover-opacity-end) - var(--hover-opacity-start))
+        );
+        align-items: flex-start;
+    }
+    &[data-hover-effect*="opacity"] {
+        .bg-layer--hover-effect {
+            opacity: var(--ue-hover-property);
+        }
+    }
+    &[data-hover-effect*="rotate"] {
+        overflow: visible;
+
+        perspective: 1200px;
+        transform-style: preserve-3d;
+        .bg-layer--hover-effect {
+            opacity: var(--ue-hover-opacity);
+
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            &[data-axis^="x-"] {
+                transform: rotateX(var(--ue-hover-property));
+            }
+            &[data-axis^="y-"] {
+                transform: rotateY(var(--ue-hover-property));
+            }
+            &[data-axis^="z-"] {
+                transform: rotateZ(var(--ue-hover-property));
+            }
+            &[data-axis$="-t"] {
+                transform-origin: top;
+            }
+            &[data-axis$="-b"] {
+                transform-origin: bottom;
+            }
+            &[data-axis$="-l"] {
+                transform-origin: left;
+            }
+            &[data-axis$="-r"] {
+                transform-origin: right;
+            }
+            &[data-axis$="-tl"] {
+                transform-origin: top left;
+            }
+            &[data-axis$="-tc"] {
+                transform-origin: top center;
+            }
+            &[data-axis$="-tr"] {
+                transform-origin: top right;
+            }
+            &[data-axis$="-cl"] {
+                transform-origin: center left;
+            }
+            &[data-axis$="-cc"] {
+                transform-origin: center center;
+            }
+            &[data-axis$="-cr"] {
+                transform-origin: center right;
+            }
+            &[data-axis$="-bl"] {
+                transform-origin: bottom left;
+            }
+            &[data-axis$="-bc"] {
+                transform-origin: bottom center;
+            }
+            &[data-axis$="-br"] {
+                transform-origin: bottom right;
+            }
+        }
+    }
+    &[data-hover-effect*="translate"] {
+        .bg-layer--hover-effect {
+            transform: translate3d(
+                calc(
+                    var(--hover-x-start, 0px) + var(--hover-progress, 0) *
+                        (var(--hover-x-end, 0px) - var(--hover-x-start, 0px))
+                ),
+                calc(
+                    var(--hover-y-start, 0px) + var(--hover-progress, 0) *
+                        (var(--hover-y-end, -100px) - var(--hover-y-start, 0px))
+                ),
+                0
+            );
+
+            opacity: var(--ue-hover-opacity);
+        }
+    }
+    &[data-hover-effect*="scale"] {
+        .bg-layer--hover-effect {
+            transform: scale(var(--ue-hover-property));
+
+            opacity: var(--ue-hover-opacity);
+        }
+    }
+}
+@include media-breakpoint-down(md) {
+    .background-layer-group {
+        &[data-type="grid-group"],
+        &[data-type="grid-item"] {
+            .layer-page_bg {
+                &:not([data-md-show="1"]) {
+                    display: none;
+                }
+                &[data-md-show="1"] {
+                    display: block;
+                }
+            }
+        }
+    }
+}
