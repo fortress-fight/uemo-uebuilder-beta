@@ -1,0 +1,71 @@
+/*
+ * @Description: tiptap -- 网格相关
+ * @Author: F-Stone
+ * @LastEditTime: 2025-06-15 23:21:30
+ */
+.page-editor {
+    .grid-layer {
+        position: relative;
+
+        display: flex;
+        &[data-align-x="center"] {
+            justify-content: center;
+        }
+        &[data-align-x="right"] {
+            justify-content: flex-end;
+        }
+        &[data-align-y="center"] {
+            .grid-item {
+                align-items: center;
+            }
+        }
+        &[data-align-y="bottom"] {
+            .grid-item {
+                align-items: flex-end;
+            }
+        }
+        .grid-layer--inner {
+            position: relative;
+            z-index: 10;
+
+            display: grid;
+
+            width: 100%;
+            max-width: 100%;
+
+            gap: 10px;
+
+            grid-template-columns: var(--grid-template-columns);
+            grid-template-rows: var(--grid-template-rows);
+        }
+    }
+    .grid-item {
+        position: relative;
+
+        display: flex;
+
+        min-width: 22px;
+        min-height: 22px;
+        padding: var(--grid-layer-item-padding, 0);
+    }
+    .grid-item--inner {
+        position: relative;
+        z-index: 10;
+
+        width: 100%;
+    }
+    @include media-breakpoint-down(md) {
+        .grid-layer {
+            .grid-layer--inner {
+                gap: var(--md-grid-layer-gap, 10px) !important;
+                grid-template-columns: var(--md-grid-template-columns, initial) !important;
+                grid-template-rows: var(--md-grid-template-rows, initial) !important;
+            }
+        }
+        .grid-item {
+            padding: var(--md-grid-layer-item-padding, var(--grid-layer-item-padding, 0));
+
+            grid-area: var(--md-grid-layer-item-area, initial) !important;
+        }
+    }
+}

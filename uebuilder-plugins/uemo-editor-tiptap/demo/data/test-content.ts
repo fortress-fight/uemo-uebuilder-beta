@@ -141,4 +141,37 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    gridGroupData: `
+        <div
+            class="grid-layer-cb854"
+            data-config='{"grid":"1-1,1-1-1:1/1/3/2,1/2/2/4,2/2/3/4","width":"100%","gap":"10px","padding":"0px","mdGap":"10px","mdGrid":"auto-auto-auto,1:1/1/2/2,2/1/3/2,3/1/4/2"}'
+        >
+            <div
+                class="grid-layer--inner-ef909"
+                style="--grid-template-columns:1fr 1fr 1fr;--grid-template-rows:1fr 1fr;--md-grid-template-columns:1fr;--md-grid-template-rows:auto auto auto;gap:10px;--md-grid-layer-gap:10px;padding:0px;width:100%;"
+            >
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"1/1/3/2","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:1/1/3/2;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                </div>
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"1/2/2/4","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:1/2/2/4;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                </div>
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"2/2/3/4","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:2/2/3/4;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                </div>
+            </div>
+        </div>
+    `,
 };

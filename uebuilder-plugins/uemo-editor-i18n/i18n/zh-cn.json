@@ -134,6 +134,8 @@
     "UNIT_HOVER": "鼠标移入",
     "UNIT_AUTO_PLAY": "自动播放",
     "UNIT_SCROLL_IN": "进入窗口",
+    "UNIT_GRID_GROUP": "网格组",
+    "UNIT_GRID_ITEM": "网格项",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

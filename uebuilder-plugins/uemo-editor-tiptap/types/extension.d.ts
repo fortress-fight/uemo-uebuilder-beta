@@ -14,6 +14,8 @@ import type { FrameAttrs, VideoFrameAttrs, MapFrameAttrs, WebFrameAttrs } from "
 import type { SvgViewerAttrs } from "../packages/extension-svg-view/src";
 import type { SplineAttrs } from "../packages/extension-spline/src";
 import type { LottieAttrs } from "../packages/extension-lottie/src";
+import type { GridGroupAttrs } from "../packages/extension-grid/src";
+import type { GridItemAttrs } from "../packages/extension-grid/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -81,6 +83,12 @@ declare global {
         };
         type Lottie = {
             attrs: LottieAttrs;
+        };
+        type GridGroup = {
+            attrs: GridGroupAttrs;
+        };
+        type GridItem = {
+            attrs: GridItemAttrs;
         };
     }
 }

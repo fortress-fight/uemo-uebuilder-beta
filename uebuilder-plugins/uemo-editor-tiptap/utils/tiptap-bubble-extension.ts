@@ -2,6 +2,7 @@ import type { Extensions } from "@tiptap/vue-3";
 import type { AIExtensionOptions } from "../packages/extension-ai";
 
 import { i18n } from "../src/i18n";
+
 import $pageStyle from "../src/app.module.scss";
 
 // #region 导入基础扩展
@@ -54,6 +55,7 @@ import { Frame } from "../packages/extension-frame/src";
 import { SvgView } from "../packages/extension-svg-view/src";
 import { Spline } from "../packages/extension-spline/src";
 import { Lottie } from "../packages/extension-lottie/src";
+import { GridGroup, GridItem } from "../packages/extension-grid/src";
 
 // #endregion
 
@@ -129,6 +131,8 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         SvgView,
         Spline,
         Lottie,
+        GridGroup,
+        GridItem,
     ];
 
     return [...baseExtensions, ...customExtensions];

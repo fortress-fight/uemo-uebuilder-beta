@@ -154,7 +154,7 @@ const insertLottieContent = (value?: string) => {
 const insertGridGroupContent = (value?: string) => {
     if (!value) return;
 
-    // editor?.chain().focus().insertGridGroup(value).run();
+    editor?.chain().focus().insertGridGroup(value).run();
 };
 
 const handleEndEdit = () => {

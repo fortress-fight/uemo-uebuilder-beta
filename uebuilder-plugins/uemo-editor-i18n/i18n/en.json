@@ -134,6 +134,8 @@
     "UNIT_HOVER": "Hover",
     "UNIT_AUTO_PLAY": "Auto Play",
     "UNIT_SCROLL_IN": "Scroll In",
+    "UNIT_GRID_GROUP": "Grid Group",
+    "UNIT_GRID_ITEM": "Grid",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

@@ -65,6 +65,7 @@ $project-name: app-editor;
         .svg-viewer-wrapper,
         .spline-wrapper,
         .lottie-wrapper,
+        .grid-layer,
         .img_wrapper {
             cursor: pointer;
             &.has-focus {
@@ -74,6 +75,36 @@ $project-name: app-editor;
 
                     outline: 2px solid var(--theme-layout-component);
                 }
+            }
+        }
+        .grid-layer {
+            &[data-focus-in="true"] {
+                .grid-item {
+                    --u-border-color: var(--theme-layout-component);
+                }
+            }
+            &.has-focus {
+                /* stylelint-disable-next-line selector-class-pattern */
+                &:global(.ProseMirror-selectednode) {
+                    .grid-item {
+                        --u-border-color: var(--theme-layout-component);
+                        position: relative;
+                    }
+                }
+            }
+        }
+        .grid-item {
+            &.has-focus {
+                --u-border-color: transparent !important;
+                z-index: 50;
+
+                outline: 2px solid var(--theme-layout-component);
+            }
+            &::before {
+                @include ab-cover;
+                content: "";
+
+                border: 1px dashed var(--u-border-color);
             }
         }
     }

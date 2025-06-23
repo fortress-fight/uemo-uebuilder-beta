@@ -1,4 +1,7 @@
 // @type
+@import "@stone/uemo-editor-page/packages/background-layer/style/style";
+
+// #endregion
 @import "./style/tiptap-editing";
 @import "./style/text-decoration";
 @import "./style/blockquote";
@@ -12,6 +15,7 @@
 @import "./style/svg-view";
 @import "./style/spline";
 @import "./style/lottie";
+@import "./style/grid";
 .page-editor {
     font-size: 14px;
     line-height: 1.6;
