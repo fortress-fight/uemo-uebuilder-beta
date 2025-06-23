@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 17:12:53
+ * @LastEditTime: 2025-06-23 00:34:54
 -->
 <template>
     <UeElPopPanel :class="$style['floating-menu']" v-model:open="showPopPanel" v-bind="popPanelParams" :mask="mask">
@@ -75,28 +75,33 @@ watch(isFocusInPopPanel, (isFocus) => {
 });
 
 const pluginController: FloatingMenuPluginProps["controller"] = (type, refEl) => {
+    if (props.floatingProps?.refEl) {
+        refEl = props.floatingProps.refEl;
+    }
     switch (type) {
         case "show":
             if (!refEl?.getBoundingClientRect || !editor) return;
 
-            showPopPanel.value = true;
+            requestAnimationFrame(() => {
+                showPopPanel.value = true;
 
-            popPanelParams.value.panel = {
-                position: {
-                    autoUpdate: true,
-                    options: {
-                        strategy: "fixed",
-                        middleware: [
-                            ["flip", { crossAxis: true, padding: 17 }],
-                            ["offset", { mainAxis: 10 }],
-                            ["shift", { crossAxis: true, padding: 17, limiter: limitShift() }],
-                        ],
+                popPanelParams.value.panel = {
+                    position: {
+                        autoUpdate: true,
+                        options: {
+                            strategy: "fixed",
+                            middleware: [
+                                ["flip", { crossAxis: true, padding: 17 }],
+                                ["offset", { mainAxis: 10 }],
+                                ["shift", { crossAxis: true, padding: 17, limiter: limitShift() }],
+                            ],
+                        },
+                        refEl: {
+                            getBoundingClientRect: refEl.getBoundingClientRect,
+                        },
                     },
-                    refEl: {
-                        getBoundingClientRect: refEl.getBoundingClientRect,
-                    },
-                },
-            };
+                };
+            });
             break;
         case "hide":
             requestAnimationFrame(() => {
