@@ -33,11 +33,11 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const { selection } = state;
 
-    const isButtonItem = isImageNode(selection);
+    const isImage = isImageNode(selection);
 
     const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "image";
 
-    return !isEditing && isButtonItem && view.hasFocus();
+    return !isEditing && isImage && view.hasFocus();
 };
 </script>
 <style lang="scss" module>
