@@ -1,7 +1,7 @@
 /*
  * @Description: 浮动编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-05-06 11:46:30
+ * @LastEditTime: 2025-06-23 00:46:36
  */
 import type { App } from "vue";
 
@@ -15,6 +15,7 @@ UeTiptapEditorFloatMenu.install = (app: App) => {
 export interface UeTiptapEditorFloatMenuBaseProps {
     pluginKey: string;
     title: string;
+    nodeName?: string;
     menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[];
     disableMenuItems?: (UE_TIPTAP_UNIT.OperItem | "|")[];
     shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"];

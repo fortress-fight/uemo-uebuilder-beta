@@ -12,9 +12,10 @@ import { getExtensionOptions } from "../../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 const { editor } = useInjectTiptapEditor();
-const { t } = useI18n();
-
+const props = defineProps<{ nodeName?: string }>();
 const rootDom = useTemplateRef("rootDom");
+
+const { t } = useI18n();
 
 const rootId = inject(
     UeElPopPanelRootId,
@@ -24,6 +25,8 @@ const rootId = inject(
 const selectNodeName = computed(() => {
     const state = editor?.state;
     if (!state) return undefined;
+
+    if (props.nodeName) return props.nodeName;
 
     const { selection } = state;
 
@@ -35,8 +38,10 @@ const selectNodeName = computed(() => {
 
 function getOperListLib(): TYPE_OPER_MENU_ITEM[][] {
     const nodeName = selectNodeName.value;
+
     if (!nodeName || !editor) return [];
     const { allowCopyAttrsType } = getExtensionOptions(editor, nodeName) || {};
+
     const copyAttrsSubList: TYPE_OPER_MENU_ITEM[][] = [];
 
     if (allowCopyAttrsType) {
