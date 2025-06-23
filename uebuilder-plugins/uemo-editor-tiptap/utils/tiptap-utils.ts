@@ -1,24 +1,11 @@
 import type { Editor } from "@tiptap/core";
 import type { EditorView } from "@tiptap/pm/view";
-import type { EditorState, Selection } from "@tiptap/pm/state";
+import type { Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
 import { isInTable } from "@tiptap/pm/tables";
-import { NodeSelection } from "@tiptap/pm/state";
-import { isNodeSelection, posToDOMRect } from "@tiptap/core";
-
-/**
- * 判断是否在网格组中
- */
-export function isInGridGroup(state: EditorState): boolean {
-    const $head = state.selection.$head;
-    for (let d = $head.depth; d > 0; d--) {
-        if ($head.node(d).type.name == "gridGroup") {
-            return true;
-        }
-    }
-    return false;
-}
+import { TextSelection, NodeSelection } from "@tiptap/pm/state";
+import { isNodeSelection, posToDOMRect, isTextSelection } from "@tiptap/core";
 
 /**
  * 判断是否存在父节点
@@ -129,4 +116,26 @@ export function getNodeName(editor: Editor) {
         return selection.node.type.name;
     }
     return undefined;
+}
+
+/**
+ * 判断是否为空文本块
+ */
+export function isEmptyTextBlock(editor: Editor, selection: Selection) {
+    const { from, to } = selection;
+    return !editor.state.doc.textBetween(from, to).length && isTextSelection(editor.state.selection);
+}
+
+/**
+ * 选中节点内部
+ */
+export function selectNodeInner(editor: Editor, pos: number, node: ProsemirrorNode) {
+    const { view, state } = editor;
+    const { tr, doc } = state;
+
+    const selection = TextSelection.create(doc, pos, pos + node.nodeSize);
+    view.dispatch(tr.setSelection(selection));
+    // const newTr = tr.setSelection(selection).scrollIntoView();
+
+    return true;
 }
