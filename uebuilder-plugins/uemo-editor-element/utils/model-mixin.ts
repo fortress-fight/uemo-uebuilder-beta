@@ -178,3 +178,22 @@ export function useDefineObjectModuleProxy<T extends Record<string, any>>(valueR
         }
     };
 }
+
+/**
+ * 定义一个对象模型的计算属性，用于处理复杂对象的双向绑定
+ * @template T - 源对象类型，必须是键值对对象
+ * @param valueRef - 父组件传入的模型引用
+ * @returns 一个函数，用于设置对象的属性值
+ */
+export function useDefineObjectModuleCustomProxy<T extends Record<string, any>>(valueRef: ModelRef<T>) {
+    return (handler: (value: T) => T, deep = false) => {
+        const rawValue = toRaw(valueRef.value);
+        const currentValue = deep ? _cloneDeep(rawValue) : { ...rawValue };
+
+        const result = handler(currentValue);
+
+        if (typeof result !== "undefined") {
+            valueRef.value = result;
+        }
+    };
+}

@@ -3,7 +3,7 @@
  * @Author: F-Stone
 -->
 <template>
-    <UeElControlGroup :class="$style['grid-layout-preview-box']">
+    <UeElControlGroup :class="$style['grid-layout-preview-box']" ref="rootComponent">
         <div class="box-inner relative">
             <!-- 顶部控制栏 -->
             <div class="grid absolute w-full" :class="$style['top-bar']" :style="gridStyle.rowStyle">
@@ -59,7 +59,8 @@
 
 <script lang="ts" setup>
 import { getGridInfo, getGridCss } from "@stone/uemo-editor-utils/lib/css-grid";
-import { getPopPanelParams } from "../../pop-panel/utils/helper";
+import { usePopPanelParam } from "../../../utils/pop-panel-mixin";
+
 import UeElControlGroup from "../../control-group";
 import SizeAdjust from "./LayoutSizeControlPanel.vue";
 import ReplaceLayout from "./ReplaceLayoutPanel.vue";
@@ -82,6 +83,8 @@ const emit = defineEmits<{
     (e: "changeZIndex" | "change", value: string): void;
     (e: "swap", value: { origin: number; target: number }): void;
 }>();
+
+const rootComponentRef = useTemplateRef<InstanceType<typeof UeElControlGroup>>("rootComponent");
 
 /**
  * 组件状态管理
@@ -146,12 +149,7 @@ const gridSize = computed(() => gridColArr.value[gridSizeAdjustIndex.value]);
 /**
  * 弹窗位置配置计算属性
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (!popPanelRelateDom.value) return undefined;
-    return getPopPanelParams("editorPanel", popPanelRelateDom.value, {
-        placement: "right-start",
-    });
-});
+const popPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$el));
 
 /**
  * 数组元素交换工具函数
@@ -199,6 +197,8 @@ function handleReplaceLayoutTrigger(data: { ev: MouseEvent; index: number }) {
         origin: lastTriggerGridItemIndex.value,
         target: data.index,
     });
+
+    replaceLayoutPanelOpen.value = false;
 }
 
 /**

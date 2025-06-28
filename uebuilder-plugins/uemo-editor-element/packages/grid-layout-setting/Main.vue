@@ -1,13 +1,13 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 19:48:39
+ * @LastEditTime: 2025-06-29 02:46:36
 -->
 <template>
     <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
         <template #body>
             <PreviewBox
-                :data="valueRef"
+                :data="valueModel"
                 :mode="previewBoxMode"
                 :z-index="zIndexData"
                 @change="handleChange"
@@ -21,7 +21,15 @@
             </UeElControlGroup>
             <!-- 布局库弹窗面板 -->
             <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
-                <UeElGridLayoutLibraryPanel v-model:select="valueRef" />
+                <UeElGridLayoutLibraryPanel v-model:select="gridLayout" />
+            </UeElPopPanel>
+            <UeElPopPanel v-model:open="layoutSelectPanelOpen" v-bind="popPanelParams">
+                <SelectLayoutPanel
+                    :value="valueModel"
+                    :select-count="selectCount"
+                    @cancel="closeLayoutSelectPanel"
+                    @confirm="handleLayoutSelectConfirm"
+                />
             </UeElPopPanel>
         </template>
     </UeElSettingGroup>
@@ -30,11 +38,16 @@
 <script lang="ts" setup>
 import type { UeElGridLayoutSettingBaseProps } from "./index";
 
+import { getGridInfo } from "@stone/uemo-editor-utils/lib/css-grid";
+
 import UeElSettingGroup from "../setting-group";
-import { getPopPanelParams } from "../pop-panel/utils/helper";
+import { usePopPanelParam } from "../../utils/pop-panel-mixin";
 import PreviewBox from "./sub-components/PreviewLayoutBox.vue";
+import SelectLayoutPanel from "./sub-components/SelectLayoutPanel.vue";
 
 defineOptions({ name: "UeElGridLayoutSetting" });
+
+const instance = getCurrentInstance();
 
 /**
  * 组件接口定义
@@ -63,8 +76,51 @@ const emit = defineEmits<EmitEvents>();
 /**
  * 组件数据模型
  */
-const valueRef = defineModel<string>("value", { required: true });
+const valueModel = defineModel<string>("value", { required: true });
 const zIndexData = defineModel<string>("zIndex", { required: false });
+
+const gridLayout = computed({
+    get: () => {
+        return valueModel.value;
+    },
+    set: (value) => {
+        const newGridLen = getGridInfo(value).subColInfo.length;
+        const currentGridLen = getGridInfo(valueModel.value).subColInfo.length;
+
+        if (newGridLen < currentGridLen) {
+            openLayoutSelectPanel(value, newGridLen, currentGridLen);
+        } else {
+            valueModel.value = value;
+            emit("change", { grid: value, reset: true, lengthChange: newGridLen !== currentGridLen });
+        }
+    },
+});
+
+const selectCount = ref<number>(0);
+const newGridLayout = ref<string>("");
+function openLayoutSelectPanel(value: string, newGridLen: number, localGridLen: number) {
+    newGridLayout.value = value;
+    selectCount.value = localGridLen - newGridLen;
+    popPanelOpen.value = false;
+    layoutSelectPanelOpen.value = true;
+}
+function closeLayoutSelectPanel() {
+    layoutSelectPanelOpen.value = false;
+    popPanelOpen.value = true;
+}
+function handleLayoutSelectConfirm(value: number[]) {
+    if (value.length != selectCount.value) {
+        instance?.proxy?.$ueElToast.error(`请选择需要移除的结构，还差 ${selectCount.value - value.length} 个`);
+    } else {
+        emit("change", {
+            grid: newGridLayout.value,
+            reset: true,
+            lengthChange: true,
+            removeIndexList: value,
+        });
+        closeLayoutSelectPanel();
+    }
+}
 
 /**
  * 组件引用
@@ -77,6 +133,7 @@ const rootComponentRef = useTemplateRef<InstanceType<typeof UeElSettingGroup>>("
  */
 const isZIndexMode = ref(false);
 const popPanelOpen = ref(false);
+const layoutSelectPanelOpen = ref(false);
 
 /**
  * 布局按钮参数计算属性
@@ -111,16 +168,13 @@ const previewBoxMode = computed(() => {
  * 弹窗位置配置计算属性
  * @returns {UE_EL_COMPONENT.UeElPopPanelProps} 弹窗配置对象
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    if (!rootComponentRef.value?.$el) return undefined;
-    return getPopPanelParams("editorPanel", rootComponentRef.value.$el);
-});
+const popPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$el));
 
 /**
  * 事件处理函数
  */
 const handleChange = (value: string) => {
-    valueRef.value = value;
+    valueModel.value = value;
 };
 
 const handleChangeZIndex = (value: string) => {
