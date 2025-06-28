@@ -1,7 +1,7 @@
 <!--
  * @Description: tiptap 按钮组编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-05-08 18:45:48
+ * @LastEditTime: 2025-06-29 02:56:58
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-row']" :title="t('UNIT_BUTTON_ROW')">
@@ -13,13 +13,7 @@
                 </UeElControlGroup>
             </template>
         </UeElSettingGroup>
-        <UeElSettingGroup :title="t('UNIT_SPACE')">
-            <template #body>
-                <UeElControlGroup>
-                    <UeElGapSetting v-model:value="gap" />
-                </UeElControlGroup>
-            </template>
-        </UeElSettingGroup>
+        <UeElGapSettingGroup v-model:value="gap" />
         <UeElSettingGroup>
             <template #body>
                 <UeElControlGroup>
