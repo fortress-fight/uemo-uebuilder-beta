@@ -19,6 +19,7 @@ import TestRadiusSetting from "~/demo/components/TestRadiusSetting.vue";
 import TestEnterAnimateSetting from "~/demo/components/TestEnterAnimateSetting.vue";
 import TestBoxShadowSetting from "~/demo/components/TestBoxShadowSetting.vue";
 import TestBorderSetting from "~/demo/components/TestBorderSetting.vue";
+import TestOverflowSetting from "~/demo/components/TestOverflowSetting.vue";
 import TestColorSettingGroup from "~/demo/components/TestColorSettingGroup.vue";
 import TestBorderSettingGroup from "~/demo/components/TestBorderSettingGroup.vue";
 import TestRadiusSettingGroup from "~/demo/components/TestRadiusSettingGroup.vue";
@@ -27,6 +28,7 @@ import TestWidthSettingGroup from "~/demo/components/TestWidthSettingGroup.vue";
 import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGroup.vue";
 import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
 import TestRatioSettingGroup from "~/demo/components/TestRatioSettingGroup.vue";
+import TestGapSettingGroup from "~/demo/components/TestGapSettingGroup.vue";
 import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
 import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
 import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
@@ -63,6 +65,7 @@ const testComponents = [
     TestFontSizeSetting,
     TestBoxShadowSetting,
     TestBorderSetting,
+    TestOverflowSetting,
     TestButtonStyleSetting,
     TestColorSettingGroup,
     TestBorderSettingGroup,
@@ -72,6 +75,7 @@ const testComponents = [
     TestBoxShadowSettingGroup,
     TestCalenderSettingGroup,
     TestRatioSettingGroup,
+    TestGapSettingGroup,
     TestButtonIconSettingGroup,
     TestLinkSettingGroup,
     TestScrollEffectSettingGroup,
