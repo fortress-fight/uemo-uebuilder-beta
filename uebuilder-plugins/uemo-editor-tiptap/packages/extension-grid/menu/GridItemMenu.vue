@@ -20,8 +20,9 @@ const { t } = useI18n();
 const menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[] = [
     "editor",
     "|",
-    "insertNewLineBefore",
-    "insertNewLineAfter",
+    "copyNode",
+    "replaceNode",
+    "|",
     "selectParent",
     "|",
     "deleteNode",

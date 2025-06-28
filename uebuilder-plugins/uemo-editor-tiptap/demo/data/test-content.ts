@@ -155,21 +155,21 @@ export const testTextContent = {
                     data-config='{"overflow":"hidden","gridArea":"1/1/3/2","padding":"0px","radius":"","shadow":""}'
                     style="grid-area:1/1/3/2;--grid-layer-item-padding:0px;overflow:hidden;"
                 >
-                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                    <div class="grid-item--inner-ae340"><p>Placeholder1</p></div>
                 </div>
                 <div
                     class="grid-item-af6e7"
                     data-config='{"overflow":"hidden","gridArea":"1/2/2/4","padding":"0px","radius":"","shadow":""}'
                     style="grid-area:1/2/2/4;--grid-layer-item-padding:0px;overflow:hidden;"
                 >
-                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                    <div class="grid-item--inner-ae340"><p>Placeholder2</p></div>
                 </div>
                 <div
                     class="grid-item-af6e7"
                     data-config='{"overflow":"hidden","gridArea":"2/2/3/4","padding":"0px","radius":"","shadow":""}'
                     style="grid-area:2/2/3/4;--grid-layer-item-padding:0px;overflow:hidden;"
                 >
-                    <div class="grid-item--inner-ae340"><p>Placeholder</p></div>
+                    <div class="grid-item--inner-ae340"><p>Placeholder3</p></div>
                 </div>
             </div>
         </div>
