@@ -75,6 +75,8 @@
     "UNIT_PREVIEW_VIDEO": "Preview Video",
     "UNIT_COPY_SUCCESS": "Copy Success",
     "UNIT_COPY_FAILED": "Copy Failed",
+    "UNIT_REPLACE_SUCCESS": "Replace Success",
+    "UNIT_REPLACE_FAILED": "Replace Failed",
     "UNIT_AREA": "Area",
     "UNIT_TYPE": "Type",
     "UNIT_START": "Start",

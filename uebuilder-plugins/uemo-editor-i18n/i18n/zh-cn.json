@@ -75,6 +75,8 @@
     "UNIT_PREVIEW_VIDEO": "预览视频",
     "UNIT_COPY_SUCCESS": "复制成功",
     "UNIT_COPY_FAILED": "复制失败",
+    "UNIT_REPLACE_SUCCESS": "替换成功",
+    "UNIT_REPLACE_FAILED": "替换失败",
     "UNIT_AREA": "区域",
     "UNIT_TYPE": "类型",
     "UNIT_START": "开始",
