@@ -138,6 +138,7 @@
     "UNIT_SCROLL_IN": "Scroll In",
     "UNIT_GRID_GROUP": "Grid Group",
     "UNIT_GRID_ITEM": "Grid",
+    "UNIT_OVERFLOW": "Overflow",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -528,5 +529,7 @@
     "MAP_MARK_MODE2": "Dot",
 
     "WEB_URL": "Web URL",
-    "WEB_URL_INPUT_TIP": "Please enter the correct link address"
+    "WEB_URL_INPUT_TIP": "Please enter the correct link address",
+
+    "OVERFLOW_MODE_TIP": "Whether to crop content exceeding the boundary"
 }

@@ -40,7 +40,7 @@
     "UNIT_FONT_FAMILY": "字体",
     "UNIT_INTERACTION_EFFECT": "交互效果",
     "UNIT_SIZE": "尺寸",
-    "UNIT_SPACE": "间距",
+    "UNIT_SPACE": "间隔",
     "UNIT_TIP": "使用说明",
     "UNIT_MODE": "模式",
     "UNIT_ATTR": "属性",
@@ -138,6 +138,7 @@
     "UNIT_SCROLL_IN": "进入窗口",
     "UNIT_GRID_GROUP": "网格组",
     "UNIT_GRID_ITEM": "网格项",
+    "UNIT_OVERFLOW": "裁切",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -528,5 +529,7 @@
     "MAP_MARK_MODE2": "光点",
 
     "WEB_URL": "链接地址",
-    "WEB_URL_INPUT_TIP": "请输入正确的链接地址"
+    "WEB_URL_INPUT_TIP": "请输入正确的链接地址",
+
+    "OVERFLOW_MODE_TIP": "是否裁切超出边界的内容"
 }
