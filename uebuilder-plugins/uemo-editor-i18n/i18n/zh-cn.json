@@ -390,6 +390,10 @@
     "GRID_LAYOUT_SETTING_REPLACE": "更换版型",
     "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "调节层级",
     "GRID_LAYOUT_SETTING_COMPLETE": "完成调节",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT": "选择移除的结构",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_TIP": "1. 调节后的排版比之前少，请选择需要移除的结构",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_1": "请选择需要移除的结构，还差 {count} 个",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_2": "最多只能选择 {count} 个",
 
     "SCROLL_EFFECT_TITLE": "滚动效果",
 

@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 02:46:36
+ * @LastEditTime: 2025-06-29 03:23:22
 -->
 <template>
     <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
@@ -110,7 +110,9 @@ function closeLayoutSelectPanel() {
 }
 function handleLayoutSelectConfirm(value: number[]) {
     if (value.length != selectCount.value) {
-        instance?.proxy?.$ueElToast.error(`请选择需要移除的结构，还差 ${selectCount.value - value.length} 个`);
+        instance?.proxy?.$ueElToast.error(
+            t("GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_1", { count: selectCount.value - value.length })
+        );
     } else {
         emit("change", {
             grid: newGridLayout.value,

@@ -390,6 +390,10 @@
     "GRID_LAYOUT_SETTING_REPLACE": "Replace Layout",
     "GRID_LAYOUT_SETTING_ADJUST_Z_INDEX": "Adjust Z Index",
     "GRID_LAYOUT_SETTING_COMPLETE": "Complete Adjustment",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT": "Select Layout to Remove",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_TIP": "1. The adjusted layout has fewer items than before, please select the structure to remove",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_1": "Please select {count} more items to remove",
+    "GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_2": "Maximum {count} items allowed",
 
     "SCROLL_EFFECT_TITLE": "Scroll Effect",
 

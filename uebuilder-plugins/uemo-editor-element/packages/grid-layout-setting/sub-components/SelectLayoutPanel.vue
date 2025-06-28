@@ -3,7 +3,7 @@
         :is-operation-enabled="true"
         action-mode="confirmWithCancel"
         :class="$style['grid-layout-area-setting']"
-        title="选择移除的结构"
+        :title="t('GRID_LAYOUT_SETTING_SELECT_LAYOUT')"
         @confirm="emit('confirm', selectList)"
         @cancel="emit('cancel')"
     >
@@ -32,7 +32,7 @@ const emit = defineEmits<{ (e: "confirm", data: number[]): void; (e: "cancel"): 
 
 const selectList = ref<number[]>([]);
 
-const tips = ["1. 调节后的排版比之前少，请选择需要移除的结构"];
+const tips = [t("GRID_LAYOUT_SETTING_SELECT_LAYOUT_TIP")];
 
 const instance = getCurrentInstance();
 function selectChange(value: { ev: MouseEvent; index: number }) {
@@ -46,7 +46,7 @@ function selectChange(value: { ev: MouseEvent; index: number }) {
         return;
     }
 
-    instance?.proxy?.$ueElToast.error(`最多只能选择 ${prop.selectCount} 个`);
+    instance?.proxy?.$ueElToast.error(t("GRID_LAYOUT_SETTING_SELECT_LAYOUT_ERROR_2", { count: prop.selectCount }));
     return;
 }
 </script>
