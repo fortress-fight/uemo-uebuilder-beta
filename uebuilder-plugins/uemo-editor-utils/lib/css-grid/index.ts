@@ -1,8 +1,10 @@
 /*
  * @Description: 网格布局工具
  * @Author: F-Stone
- * @LastEditTime: 2025-06-15 23:58:59
+ * @LastEditTime: 2025-06-29 17:52:20
  */
+
+import { numMod } from "@stone/uemo-editor-utils/lib/number";
 
 /**
  * 网格布局信息
@@ -75,3 +77,53 @@ export function getGridArea(length: number, auto = false) {
     const arr = new Array(length).fill(auto ? "auto" : 1);
     return arr.join("-") + ",1:" + arr.map((_, index) => `${index + 1}/1/${index + 2}/2`).join(",");
 }
+
+// #region 用于转换 Grid 分栏信息，将具体的数值转换为比例
+
+function gcd(a: number, b: number): number {
+    if (b === 0) {
+        return a;
+    } else {
+        return gcd(b, numMod(a, b));
+    }
+}
+
+// 求多个数的最大公约数
+function gcdOfArray(arr: number[]) {
+    if (arr.length === 1) {
+        return arr[0];
+    }
+
+    let result = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        result = gcd(result, arr[i]);
+    }
+    return result;
+}
+
+/**
+ * 转换网格分栏信息，将具体的数值转换为比例
+ * @param ratio 网格分栏信息
+ * @returns 转换后的网格分栏信息
+ */
+export function convertGridRatio(ratio: string) {
+    if (ratio.includes("px")) return ratio;
+    const arr = ratio.split("-").map((item) => {
+        if (item === "auto") {
+            return NaN;
+        }
+        return Number(item);
+    });
+    const gcdNum = gcdOfArray(arr.filter((item) => !isNaN(item)));
+    const result = arr
+        .map((item) => {
+            if (isNaN(item)) {
+                return "auto";
+            }
+            return item / gcdNum;
+        })
+        .join("-");
+    return result;
+}
+
+// #endregion
