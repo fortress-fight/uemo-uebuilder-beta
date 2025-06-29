@@ -17,7 +17,12 @@ import { getGridInfo, getGridArea } from "@stone/uemo-editor-utils/lib/css-grid"
 const emit = defineEmits<{
     (
         e: "fire",
-        data: { type: "swap"; param: { origin: number; target: number } } | { type: "remove"; param: number[] }
+        data:
+            | { type: "swap"; param: { origin: number; target: number } }
+            | {
+                  type: "remove";
+                  param: { grid: string; mdGrid: string; list: number[] };
+              }
     ): void;
 }>();
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.GridGroup["attrs"]>("value", { required: true });
@@ -35,13 +40,14 @@ const grid = useDefineObjectModel(valueModel, {
 function gridChange(value: { grid: string; reset: boolean; lengthChange: boolean; removeIndexList?: number[] }) {
     if (value.lengthChange) {
         const { subColInfo } = getGridInfo(value.grid);
-
-        changeValue((modelValue) => {
-            modelValue.grid = value.grid;
-            modelValue.mdGrid = getGridArea(subColInfo.length, true);
-            return modelValue;
+        emit("fire", {
+            type: "remove",
+            param: {
+                grid: value.grid,
+                mdGrid: getGridArea(subColInfo.length, true),
+                list: value.removeIndexList || [],
+            },
         });
-        emit("fire", { type: "remove", param: value.removeIndexList || [] });
     } else if (value.reset) {
         changeValue((modelValue) => {
             modelValue.grid = value.grid;

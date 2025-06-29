@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格组编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 02:19:54
+ * @LastEditTime: 2025-06-29 16:24:09
 -->
 <template>
     <UeElEditorPanel :title="t('UNIT_GRID_GROUP')">
@@ -26,7 +26,12 @@ const _props = withDefaults(defineProps<UeEditorPanelTiptapGridGroupBaseProps>()
 const emit = defineEmits<{
     (
         e: "fire",
-        data: { type: "swap"; param: { origin: number; target: number } } | { type: "remove"; param: number[] }
+        data:
+            | { type: "swap"; param: { origin: number; target: number } }
+            | {
+                  type: "remove";
+                  param: { grid: string; mdGrid: string; list: number[] };
+              }
     ): void;
 }>();
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.GridGroup["attrs"]>("value", { required: true });
