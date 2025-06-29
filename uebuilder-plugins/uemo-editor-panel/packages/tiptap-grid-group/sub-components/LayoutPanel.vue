@@ -1,5 +1,5 @@
 <template>
-    <UeElGridLayoutSetting :with-replace="true" :value="grid" @change="gridChange" @swap="swapLayout" />
+    <UeElGridLayoutSetting :with-replace="true" :value="grid" @change="gridChange" />
     <UeElSettingGroup>
         <template #body>
             <UeElAlignSetting v-model:value="align" type="xy" />
@@ -17,12 +17,10 @@ import { getGridInfo, getGridArea } from "@stone/uemo-editor-utils/lib/css-grid"
 const emit = defineEmits<{
     (
         e: "fire",
-        data:
-            | { type: "swap"; param: { origin: number; target: number } }
-            | {
-                  type: "remove";
-                  param: { grid: string; mdGrid: string; list: number[] };
-              }
+        data: {
+            type: "remove";
+            param: { grid: string; mdGrid: string; list: number[] };
+        }
     ): void;
 }>();
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.GridGroup["attrs"]>("value", { required: true });
@@ -38,7 +36,7 @@ const grid = useDefineObjectModel(valueModel, {
 });
 
 function gridChange(value: { grid: string; reset: boolean; lengthChange: boolean; removeIndexList?: number[] }) {
-    if (value.lengthChange) {
+    if (value.removeIndexList) {
         const { subColInfo } = getGridInfo(value.grid);
         emit("fire", {
             type: "remove",
@@ -48,19 +46,24 @@ function gridChange(value: { grid: string; reset: boolean; lengthChange: boolean
                 list: value.removeIndexList || [],
             },
         });
-    } else if (value.reset) {
         changeValue((modelValue) => {
             modelValue.grid = value.grid;
-            modelValue.gap = "20px";
+            modelValue.mdGrid = getGridArea(subColInfo.length, true);
+            return modelValue;
+        });
+    } else if (value.reset) {
+        changeValue((modelValue) => {
+            const currentGridInfo = getGridInfo(modelValue.grid);
+            const newGridInfo = getGridInfo(value.grid);
+            modelValue.grid = value.grid;
+            if (newGridInfo.subColInfo.length != currentGridInfo.subColInfo.length) {
+                modelValue.gap = "20px";
+            }
             return modelValue;
         });
     } else {
         grid.value = value.grid;
     }
-}
-
-function swapLayout(param: { origin: number; target: number }) {
-    emit("fire", { type: "swap", param });
 }
 
 // #region design
