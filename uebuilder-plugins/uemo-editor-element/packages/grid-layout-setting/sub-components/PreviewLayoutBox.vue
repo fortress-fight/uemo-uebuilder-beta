@@ -81,7 +81,6 @@ const { t } = useI18n();
 const props = withDefaults(defineProps<Props>(), { mode: "normal" });
 const emit = defineEmits<{
     (e: "changeZIndex" | "change", value: string): void;
-    (e: "swap", value: { origin: number; target: number }): void;
 }>();
 
 const rootComponentRef = useTemplateRef<InstanceType<typeof UeElControlGroup>>("rootComponent");
@@ -182,21 +181,15 @@ function handleSubitemTrigger(data: { ev: MouseEvent; index: number }) {
         replaceLayoutPanelOpen.value = true;
         popPanelRelateDom.value = data.ev.currentTarget as HTMLElement;
         lastTriggerGridItemIndex.value = index;
+        return;
     }
 }
 
 function handleReplaceLayoutTrigger(data: { ev: MouseEvent; index: number }) {
     const { subColInfo, rowTemplate, colTemplate } = getGridInfo(props.data);
 
-    if (props.mode === "replace") {
-        const subGridArr = swapArrayElements(subColInfo, lastTriggerGridItemIndex.value, data.index);
-        emit("change", getGridCss({ rowTemplate, colTemplate, subColInfo: subGridArr }));
-    }
-
-    emit("swap", {
-        origin: lastTriggerGridItemIndex.value,
-        target: data.index,
-    });
+    const subGridArr = swapArrayElements(subColInfo, lastTriggerGridItemIndex.value, data.index);
+    emit("change", getGridCss({ rowTemplate, colTemplate, subColInfo: subGridArr }));
 
     replaceLayoutPanelOpen.value = false;
 }

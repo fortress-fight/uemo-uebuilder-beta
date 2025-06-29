@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 18:30:38
+ * @LastEditTime: 2025-06-30 01:27:30
 -->
 <template>
     <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
@@ -12,7 +12,6 @@
                 :z-index="zIndexData"
                 @change="handleChange"
                 @changeZIndex="handleChangeZIndex"
-                @swap="handleSwap"
             />
             <!-- 底部控制按钮组 -->
             <UeElControlGroup :col-count="enableZIndexMode ? 2 : 1">
@@ -54,7 +53,6 @@ const instance = getCurrentInstance();
  */
 interface EmitEvents {
     (e: "input", value: string): void;
-    (e: "swap", value: { origin: number; target: number }): void;
     (
         e: "change",
         value: {
@@ -181,10 +179,6 @@ const handleChange = (value: string) => {
 
 const handleChangeZIndex = (value: string) => {
     zIndexData.value = value;
-};
-
-const handleSwap = (value: { origin: number; target: number }) => {
-    emit("swap", value);
 };
 
 /**
