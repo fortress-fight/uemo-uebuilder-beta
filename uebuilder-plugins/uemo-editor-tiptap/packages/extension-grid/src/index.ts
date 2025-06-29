@@ -12,7 +12,6 @@ export type GridGroupAttrs = {
     mdGrid?: string;
     mdGap?: string;
     overflow?: string;
-    removeIndexList?: number[];
     mdBackground?: UE_EL_UTIL.BackgroundValue[];
 };
 

@@ -68,7 +68,18 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem", "image", "svgIcon", "frame", "svgView", "spline", "lottie"];
+const HansEditorPanelNodes = [
+    "buttonRow",
+    "buttonItem",
+    "image",
+    "svgIcon",
+    "frame",
+    "svgView",
+    "spline",
+    "lottie",
+    "gridGroup",
+    "gridItem",
+];
 
 /**
  * 编辑器面板扩展

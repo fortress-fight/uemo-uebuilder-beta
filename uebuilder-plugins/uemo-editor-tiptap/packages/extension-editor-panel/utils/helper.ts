@@ -73,6 +73,20 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
                 param.updateAttrs(JSON.parse(newValue));
             }
             break;
+        case "gridGroup":
+            {
+                const newValue = prompt("请输入 gridGroup 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "gridItem":
+            {
+                const newValue = prompt("请输入 gridItem 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
         default:
             break;
     }

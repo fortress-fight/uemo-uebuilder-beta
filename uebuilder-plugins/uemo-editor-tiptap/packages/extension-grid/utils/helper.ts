@@ -1,16 +1,18 @@
 /*
  * @Description: grid 工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-06-23 02:09:16
+ * @LastEditTime: 2025-06-30 01:45:35
  */
 
 import type { Editor } from "@tiptap/core";
 import type { Slice } from "@tiptap/pm/model";
 import type { EditorView } from "@tiptap/pm/view";
-import type { Selection, NodeSelection, EditorState } from "@tiptap/pm/state";
+import type { Selection, EditorState } from "@tiptap/pm/state";
 
-import type { GridGroupAttrs } from "../src";
+import type { GridGroupAttrs, GridItemAttrs } from "../src";
 
+import { NodeSelection } from "@tiptap/pm/state";
+import { Node as ProseMirrorNode } from "@tiptap/pm/model";
 import { isNodeSelection, findParentNode } from "@tiptap/core";
 
 /**
@@ -104,6 +106,17 @@ export function getClosestGridItem(editor: Editor) {
     return findParentNode((node) => node.type.name === "gridItem")(selection);
 }
 
+/**
+ * 获取 grid 属性
+ */
+export function getGridItemAttrs(editor?: Editor) {
+    return editor?.getAttributes("gridItem") as GridItemAttrs;
+}
+
+/**
+ * 处理 dom 插入
+ * 禁止在网格项中插入 gridItem 和 tableCell 节点
+ */
 export function dealDomInsetHandler(view: EditorView, slice: Slice) {
     const { state } = view;
 
@@ -133,4 +146,57 @@ export function dealDomInsetHandler(view: EditorView, slice: Slice) {
     }
 
     return false;
+}
+
+/**
+ * 交换网格项
+ */
+export function swapGridItem(editor: Editor, origin: number, target: number) {
+    const view = editor.view;
+    const tr = view.state.tr;
+    const { doc } = tr;
+
+    const gridGroupInfo = getClosestGridGroup(editor);
+    if (!gridGroupInfo) return;
+
+    const { node, start } = gridGroupInfo;
+
+    const currentNodeJSON = node.toJSON();
+    const targetGridItem = currentNodeJSON.content[target];
+    const originGridItem = currentNodeJSON.content[origin];
+
+    const newContent = currentNodeJSON.content.map((item: any, index: number) => {
+        if (index === origin) {
+            return {
+                type: targetGridItem.type,
+                attrs: {
+                    ...targetGridItem.attrs,
+                    gridArea: originGridItem.attrs.gridArea,
+                    mdGridArea: originGridItem.attrs.mdGridArea,
+                },
+                content: targetGridItem.content,
+            };
+        } else if (index === target) {
+            return {
+                type: originGridItem.type,
+                attrs: {
+                    ...originGridItem.attrs,
+                    gridArea: targetGridItem.attrs.gridArea,
+                    mdGridArea: targetGridItem.attrs.mdGridArea,
+                },
+                content: originGridItem.content,
+            };
+        } else {
+            return item;
+        }
+    });
+
+    const newNode = ProseMirrorNode.fromJSON(editor.schema, {
+        type: currentNodeJSON.type,
+        attrs: currentNodeJSON.attrs,
+        content: newContent,
+    });
+
+    tr.setSelection(NodeSelection.create(doc, start)).replaceSelectionWith(newNode);
+    view.dispatch(tr);
 }

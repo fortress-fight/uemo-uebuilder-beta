@@ -11,7 +11,7 @@ import GridItemView from "../view/GridItemView.vue";
 
 import { parseGridItem } from "../utils/parse";
 import { gridItemRender } from "../utils/render";
-import { dealDomInsetHandler } from "../utils/helper";
+import { dealDomInsetHandler, getGridItemAttrs } from "../utils/helper";
 
 import $pageStyle from "../../../src/app.module.scss";
 
@@ -22,6 +22,16 @@ declare module "@tiptap/core" {
              * 插入网格
              */
             insertGrid: (value: string) => ReturnType;
+
+            /**
+             * 更新网格单元属性
+             */
+            updateGridItemAttrs: (attrs: Partial<GridItemAttrs>) => ReturnType;
+
+            /**
+             * 打开网格单元编辑器面板
+             */
+            openGridItemEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
         };
     }
 }
@@ -83,30 +93,6 @@ export const GridItem = Node.create<GridItemOptions>({
     renderHTML({ HTMLAttributes }) {
         const gridAttrs = HTMLAttributes as GridItemAttrs;
         return gridItemRender(gridAttrs);
-    },
-
-    addCommands() {
-        return {
-            insertGrid:
-                (grid: string) =>
-                ({ commands }) => {
-                    if (!grid) return false;
-
-                    const gridItemInfo = grid.split(":")[1].split(",");
-                    const content = gridItemInfo.map((item) => {
-                        return {
-                            type: "gridItem",
-                            attrs: { gridArea: item },
-                            content: [{ type: "paragraph" }],
-                        };
-                    });
-
-                    // NOTE 移动端网格区域, 需要添加一个默认值
-                    const mdGrid = getGridArea(gridItemInfo.length, true);
-
-                    return commands.insertContent({ type: this.name, attrs: { grid, content, mdGrid } });
-                },
-        };
     },
 
     addProseMirrorPlugins() {
@@ -179,5 +165,51 @@ export const GridItem = Node.create<GridItemOptions>({
         ];
 
         return plugins;
+    },
+
+    addCommands() {
+        return {
+            insertGrid:
+                (grid: string) =>
+                ({ commands }) => {
+                    if (!grid) return false;
+
+                    const gridItemInfo = grid.split(":")[1].split(",");
+                    const content = gridItemInfo.map((item) => {
+                        return {
+                            type: "gridItem",
+                            attrs: { gridArea: item },
+                            content: [{ type: "paragraph" }],
+                        };
+                    });
+
+                    // NOTE 移动端网格区域, 需要添加一个默认值
+                    const mdGrid = getGridArea(gridItemInfo.length, true);
+
+                    return commands.insertContent({ type: this.name, attrs: { grid, content, mdGrid } });
+                },
+
+            updateGridItemAttrs:
+                (attrs: Partial<GridItemAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openGridItemEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getGridItemAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("gridItem", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateGridItemAttrs(attr);
+                            },
+                        })
+                        .run();
+                },
+        };
     },
 });
