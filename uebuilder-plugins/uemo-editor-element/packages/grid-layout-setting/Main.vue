@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格布局属性控制器组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 03:23:22
+ * @LastEditTime: 2025-06-29 18:30:38
 -->
 <template>
     <UeElSettingGroup :class="$style['grid-layout-setting']" ref="rootComponent" is-first is-last>
@@ -176,7 +176,7 @@ const popPanelParams = usePopPanelParam(computed(() => rootComponentRef.value?.$
  * 事件处理函数
  */
 const handleChange = (value: string) => {
-    valueModel.value = value;
+    gridLayout.value = value;
 };
 
 const handleChangeZIndex = (value: string) => {
