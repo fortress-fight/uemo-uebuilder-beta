@@ -8,7 +8,7 @@
     />
 </template>
 <script lang="ts" setup>
-import { isInGridGroup, isGridItemNode } from "../utils/helper";
+import { isInGridItem, isGridItemNode } from "../utils/helper";
 import { isEmptyTextBlock } from "../../../utils/tiptap-utils";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 import { isSuggestionActive } from "../../extension-suggestion/utils/helper";
@@ -43,7 +43,7 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const isSelectNode = !isEditing && isGridItem && hasFocus;
     const shouldShow =
-        hasFocus && isInGridGroup(state) && isEmptyTextBlock(editor, selection) && !isSuggestionActive(editor);
+        hasFocus && isInGridItem(state) && isEmptyTextBlock(editor, selection) && !isSuggestionActive(editor);
 
     return isSelectNode || shouldShow;
 };
