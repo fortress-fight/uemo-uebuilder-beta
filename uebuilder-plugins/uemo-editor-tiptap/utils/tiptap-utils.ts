@@ -7,6 +7,8 @@ import { isInTable } from "@tiptap/pm/tables";
 import { TextSelection, NodeSelection } from "@tiptap/pm/state";
 import { isNodeSelection, posToDOMRect, isTextSelection } from "@tiptap/core";
 
+import { isInGridItem } from "../packages/extension-grid/utils/helper";
+
 /**
  * 判断是否存在父节点
  */
@@ -16,6 +18,10 @@ export function hasParentNode(editor: Editor) {
         const { from } = selection;
         const parent = editor.state.doc.resolve(from).parent;
         if (parent && parent.type.name != "doc") {
+            return true;
+        }
+    } else {
+        if (isInGridItem(editor.state)) {
             return true;
         }
     }
@@ -133,9 +139,23 @@ export function selectNodeInner(editor: Editor, pos: number, node: ProsemirrorNo
     const { view, state } = editor;
     const { tr, doc } = state;
 
-    const selection = TextSelection.create(doc, pos, pos + node.nodeSize);
+    const from = pos + 1;
+    const to = pos + node.nodeSize - 1;
+
+    // 检查内容是否能选中
+    const selection = TextSelection.between(doc.resolve(from), doc.resolve(to));
     view.dispatch(tr.setSelection(selection));
-    // const newTr = tr.setSelection(selection).scrollIntoView();
 
     return true;
+}
+
+/**
+ * 选中节点
+ */
+export function selectNode(editor: Editor, pos: number) {
+    const { view, state } = editor;
+    const { tr, doc } = state;
+
+    const selection = NodeSelection.create(doc, pos);
+    view.dispatch(tr.setSelection(selection));
 }
