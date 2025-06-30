@@ -138,6 +138,7 @@
     "UNIT_SCROLL_IN": "进入窗口",
     "UNIT_GRID_GROUP": "网格组",
     "UNIT_GRID_ITEM": "网格项",
+    "UNIT_DIVIDER_BLOCK": "分隔块",
     "UNIT_OVERFLOW": "裁切",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
