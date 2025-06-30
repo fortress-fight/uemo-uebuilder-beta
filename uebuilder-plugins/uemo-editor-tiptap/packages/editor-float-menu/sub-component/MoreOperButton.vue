@@ -90,7 +90,7 @@ function getOperListLib(): TYPE_OPER_MENU_ITEM[][] {
                 type: "copyAttrs",
                 text: t("TIP_COPY_ATTRS_TITLE"),
                 enable: (nodeAttrs?: Record<string, any>) => {
-                    if (!nodeAttrs) return false;
+                    if (!nodeAttrs || !allowCopyAttrsType) return false;
                     return true;
                 },
             },
