@@ -11,6 +11,7 @@
         :data-align-y="attrs.alignY"
         :data-select="selected"
         :data-focus-in="focusIn"
+        :data-editing="isEditing"
         :data-select-self="selectedSelf"
     >
         <NodeViewContent :class="pageStyle['grid-layer--inner']" :style="getGridGroupStyle(attrs)" />
@@ -21,9 +22,12 @@ import type { GridGroupAttrs } from "../src";
 
 import { nodeViewProps, NodeViewWrapper, NodeViewContent } from "@tiptap/vue-3";
 
-import { getGridGroupStyle } from "../utils/render";
-import { isGridGroupNode, isInGridGroup, isInGridItem } from "../utils/helper";
 import pageStyle from "../../../src/app.module.scss";
+
+import { isNodeSelection } from "@tiptap/core";
+import { getGridGroupStyle } from "../utils/render";
+import { isGridGroupNode, isInGridGroup, isInGridItem, getClosestGridGroup } from "../utils/helper";
+import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
 defineOptions({ name: "UeElTiptapGridGroup" });
 
@@ -37,11 +41,25 @@ const viewClassName = computed(() => {
 });
 
 const selectedSelf = computed(() => {
-    return isGridGroupNode(props.editor.state.selection) && props.selected;
+    const selection = props.editor.state.selection;
+
+    if (!isNodeSelection(selection)) {
+        return false;
+    }
+
+    return selection.from === props.getPos() && isGridGroupNode(selection) && props.selected;
 });
 
 const focusIn = computed(() => {
+    const gridGroup = getClosestGridGroup(props.editor);
+    if (gridGroup?.pos !== props.getPos()) {
+        return false;
+    }
     return isInGridGroup(props.editor.state) && isInGridItem(props.editor.state) && props.editor.isFocused;
+});
+
+const isEditing = computed(() => {
+    return selectedSelf.value && getEditorPanelExtensionStorage(props.editor).lastEditorPanelType === "gridGroup";
 });
 </script>
 <style lang="scss" module>

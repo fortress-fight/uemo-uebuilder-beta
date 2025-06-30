@@ -65,7 +65,6 @@ $project-name: app-editor;
         .svg-viewer-wrapper,
         .spline-wrapper,
         .lottie-wrapper,
-        .grid-layer,
         .img_wrapper {
             cursor: pointer;
             &.has-focus {
@@ -78,18 +77,23 @@ $project-name: app-editor;
             }
         }
         .grid-layer {
-            &[data-focus-in="true"] {
-                .grid-item {
-                    --u-border-color: var(--theme-layout-component);
-                }
-            }
+            cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */
                 &:global(.ProseMirror-selectednode) {
+                    z-index: 50;
+
+                    outline: 2px solid var(--theme-layout-component);
                     .grid-item {
                         --u-border-color: var(--theme-layout-component);
                         position: relative;
                     }
+                }
+            }
+            &[data-editing="true"],
+            &[data-focus-in="true"] {
+                .grid-item {
+                    --u-border-color: var(--theme-layout-component);
                 }
             }
         }
@@ -99,6 +103,9 @@ $project-name: app-editor;
                 z-index: 50;
 
                 outline: 2px solid var(--theme-layout-component);
+            }
+            &[data-editing="true"] {
+                outline-style: dashed;
             }
             &::before {
                 @include ab-cover;

@@ -149,11 +149,7 @@ export const GridGroup = Node.create<GridGroupOptions>({
 
                     const gridItemInfo = grid.split(":")[1].split(",");
                     const content = gridItemInfo.map((item) => {
-                        return {
-                            type: "gridItem",
-                            attrs: { gridArea: item },
-                            content: [{ type: "paragraph", content: [{ type: "text", text: "Placeholder" }] }],
-                        };
+                        return { type: "gridItem", attrs: { gridArea: item }, content: [{ type: "paragraph" }] };
                     });
 
                     // NOTE 移动端网格区域, 需要添加一个默认值
@@ -264,12 +260,7 @@ export const GridGroup = Node.create<GridGroupOptions>({
                                 return {
                                     type: "gridItem",
                                     attrs: { gridArea: item, mdGridArea: newMdGrid[index] },
-                                    content: [
-                                        {
-                                            type: "paragraph",
-                                            content: [{ type: "text", text: "Placeholder" }],
-                                        },
-                                    ],
+                                    content: [{ type: "paragraph" }],
                                 };
                             });
 
