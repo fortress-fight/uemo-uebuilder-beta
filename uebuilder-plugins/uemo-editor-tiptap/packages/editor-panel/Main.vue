@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 16:28:15
+ * @LastEditTime: 2025-06-30 02:37:31
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -32,6 +32,8 @@ import type { UeTiptapEditorPanelBaseProps } from "./index";
 import type { ValuesOf } from "@tiptap/core";
 
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
+import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
+
 import TiptapButtonRow from "@stone/uemo-editor-panel/packages/tiptap-button-row/Main.vue";
 import TiptapButtonItem from "@stone/uemo-editor-panel/packages/tiptap-button-item/Main.vue";
 import TiptapImage from "@stone/uemo-editor-panel/packages/tiptap-image/Main.vue";
@@ -221,10 +223,26 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     if (param.props) {
         injectPropsRef.value = param.props;
     }
+
+    const delayFocus = _debounce(
+        () => {
+            const activeElement = document.activeElement;
+            if (activeElement && activeElement.tagName === "INPUT") {
+                return;
+            }
+
+            param.focus?.();
+        },
+        1000,
+        { leading: false }
+    );
+
     // 设置事件监听
     eventBus.on("update", (value) => {
         valueRef.value = value;
         param.updateAttrs(value);
+
+        delayFocus();
     });
 
     eventBus.on("fire", (data) => {
