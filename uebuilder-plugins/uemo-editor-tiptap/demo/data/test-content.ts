@@ -174,4 +174,7 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    divideBlockData: `
+        <div class="editor-divide-block-a1327" style="--divide-block-size: 10px; --divide-block-md-size: 50px"></div>
+    `,
 };

@@ -107,6 +107,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertGridGroup":
                     chain.insetNodePlaceholder("GridGroupPlaceholder");
                     break;
+                case "insertDividerBlock":
+                    chain.insertDivideBlock({ size: "10px" });
+                    break;
 
                 default:
                     break;

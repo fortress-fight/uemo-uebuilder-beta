@@ -65,7 +65,8 @@ $project-name: app-editor;
         .svg-viewer-wrapper,
         .spline-wrapper,
         .lottie-wrapper,
-        .img_wrapper {
+        .img_wrapper,
+        .editor-divide-block {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */
@@ -112,6 +113,13 @@ $project-name: app-editor;
                 content: "";
 
                 border: 1px dashed var(--u-border-color);
+            }
+        }
+        .editor-divide-block {
+            cursor: pointer;
+            &:hover,
+            &[data-editing="true"] {
+                background: rgb(35 131 226 / 0.14);
             }
         }
     }

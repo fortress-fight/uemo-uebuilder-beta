@@ -56,6 +56,7 @@ import { SvgView } from "../packages/extension-svg-view/src";
 import { Spline } from "../packages/extension-spline/src";
 import { Lottie } from "../packages/extension-lottie/src";
 import { GridGroup, GridItem } from "../packages/extension-grid/src";
+import { DividerBlock } from "../packages/extension-divider-block/src";
 
 // #endregion
 
@@ -133,6 +134,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Lottie,
         GridGroup,
         GridItem,
+        DividerBlock,
     ];
 
     return [...baseExtensions, ...customExtensions];

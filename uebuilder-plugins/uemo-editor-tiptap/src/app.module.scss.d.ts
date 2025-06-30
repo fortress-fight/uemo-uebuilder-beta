@@ -74,5 +74,7 @@ declare const styles: {
     readonly "svg-bg--box": string;
     readonly "video-bg": string;
     readonly "bg-box": string;
+
+    readonly "editor-divide-block": string;
 };
 export = styles;
