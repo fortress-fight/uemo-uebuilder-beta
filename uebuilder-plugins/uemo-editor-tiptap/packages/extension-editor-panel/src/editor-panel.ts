@@ -79,6 +79,7 @@ const HansEditorPanelNodes = [
     "lottie",
     "gridGroup",
     "gridItem",
+    "dividerBlock",
 ];
 
 /**
@@ -169,6 +170,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "lottie":
                                     this.editor.chain().openLottieEditorPanel(domRect).run();
+                                    return false;
+
+                                case "dividerBlock":
+                                    this.editor.chain().openDividerBlockEditorPanel(domRect).run();
                                     return false;
 
                                 default:

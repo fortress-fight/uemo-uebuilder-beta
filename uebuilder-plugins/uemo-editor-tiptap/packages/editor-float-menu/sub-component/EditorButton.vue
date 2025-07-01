@@ -74,6 +74,9 @@ function openBtnRowEditorPanel() {
         case "gridItem":
             editor.chain().openGridItemEditorPanel(rect).run();
             break;
+        case "dividerBlock":
+            editor.chain().openDividerBlockEditorPanel(rect).run();
+            break;
         default:
             return;
     }
