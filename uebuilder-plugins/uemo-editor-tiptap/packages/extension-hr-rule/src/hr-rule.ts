@@ -52,7 +52,6 @@ export const HrRule = Node.create<HrRuleOptions>({
             type: { default: "line" },
             height: { default: "40px" },
             mdHeight: { default: "40px" },
-            isEditing: { default: false },
             color: { default: "rgba(211, 211, 211, 0.4)" },
             lineType: { default: "solid" },
         } as Record<keyof HrRuleAttrs, Attribute>;

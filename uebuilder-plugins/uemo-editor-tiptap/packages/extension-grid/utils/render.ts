@@ -72,7 +72,7 @@ export function gridItemRender(attrs: GridItemAttrs): DOMOutputSpec {
         "div",
         {
             class: $pageStyle["grid-item"],
-            "data-config": JSON.stringify(_omit(attrs, ["isEditing"])),
+            "data-config": JSON.stringify(attrs),
             style: getGridItemStyle(attrs),
         },
         ...children,
