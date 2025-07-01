@@ -77,6 +77,9 @@ function openBtnRowEditorPanel() {
         case "dividerBlock":
             editor.chain().openDividerBlockEditorPanel(rect).run();
             break;
+        case "hrRule":
+            editor.chain().openHrRuleEditorPanel(rect).run();
+            break;
         default:
             return;
     }

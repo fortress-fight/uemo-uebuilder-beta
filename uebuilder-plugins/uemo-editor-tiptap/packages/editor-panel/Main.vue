@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 01:08:43
+ * @LastEditTime: 2025-07-02 02:30:39
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -45,6 +45,7 @@ import TiptapLottie from "@stone/uemo-editor-panel/packages/tiptap-lottie/Main.v
 import TiptapGridGroup from "@stone/uemo-editor-panel/packages/tiptap-grid-group/Main.vue";
 import TiptapGridItem from "@stone/uemo-editor-panel/packages/tiptap-grid-item/Main.vue";
 import TiptapDividerBlock from "@stone/uemo-editor-panel/packages/tiptap-divider-block/Main.vue";
+import TiptapHrRule from "@stone/uemo-editor-panel/packages/tiptap-hr-rule/Main.vue";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
@@ -80,6 +81,7 @@ defineOptions({
         TiptapGridGroup,
         TiptapGridItem,
         TiptapDividerBlock,
+        TiptapHrRule,
     },
 });
 
@@ -133,6 +135,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     gridGroup: "TiptapGridGroup",
     gridItem: "TiptapGridItem",
     dividerBlock: "TiptapDividerBlock",
+    hrRule: "TiptapHrRule",
 };
 
 /**

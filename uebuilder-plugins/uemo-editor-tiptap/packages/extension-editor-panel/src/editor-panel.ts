@@ -80,6 +80,7 @@ const HansEditorPanelNodes = [
     "gridGroup",
     "gridItem",
     "dividerBlock",
+    "hrRule",
 ];
 
 /**
@@ -174,6 +175,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "dividerBlock":
                                     this.editor.chain().openDividerBlockEditorPanel(domRect).run();
+                                    return false;
+
+                                case "hrRule":
+                                    this.editor.chain().openHrRuleEditorPanel(domRect).run();
                                     return false;
 
                                 default:

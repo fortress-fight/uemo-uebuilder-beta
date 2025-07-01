@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 01:08:32
+ * @LastEditTime: 2025-07-02 02:30:30
  */
 
 export function usePopPanelParam(
@@ -110,6 +110,7 @@ export function usePopPanelParam(
             case "gridGroup":
             case "gridItem":
             case "dividerBlock":
+            case "hrRule":
                 return {
                     draggable: true,
                     checkAllowClose: options.checkAllowClose,

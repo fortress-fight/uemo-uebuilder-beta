@@ -2,6 +2,9 @@ import type { Attribute } from "@tiptap/core";
 import type { HrRuleAttrs } from "./index";
 
 import { Node } from "@tiptap/core";
+import { VueNodeViewRenderer } from "@tiptap/vue-3";
+
+import HrRuleView from "../view/HrRuleView.vue";
 
 import { customInputRule, getHrRuleAttrs } from "../utils/helper";
 import { parseHrRule, parseNormalHrRule } from "../utils/parse";
@@ -75,6 +78,10 @@ export const HrRule = Node.create<HrRuleOptions>({
         ];
     },
 
+    addNodeView() {
+        return VueNodeViewRenderer(HrRuleView);
+    },
+
     renderHTML({ HTMLAttributes }) {
         return renderHrRule(HTMLAttributes as HrRuleAttrs);
     },
@@ -104,25 +111,26 @@ export const HrRule = Node.create<HrRuleOptions>({
 
     addCommands() {
         return {
+            updateHrRuleAttrs:
+                (param) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, param).run();
+                },
+
             openHrRuleEditorPanel:
                 (rect) =>
                 ({ chain, editor }) => {
                     const currentAttr = getHrRuleAttrs(this.editor);
 
-                    // eslint-disable-next-line
-                    console.log("currentAttr", currentAttr, rect, chain, editor);
-
-                    // return chain()
-                    //     .focus()
-                    //     .openAttrEditorPanel("hrRule", currentAttr, {
-                    //         rect,
-                    //         updateAttrs: (attr) => {
-                    //             editor.commands.updateHrRuleAttrs(attr);
-                    //         },
-                    //     })
-                    //     .run();
-
-                    return true;
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("hrRule", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateHrRuleAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
 
             insertHrRule:

@@ -7,7 +7,7 @@
         draggable="true"
         :data-select="props.selected"
         :data-editing="isEditing"
-        :style="renderHrRule(attrs)"
+        :style="getHrRuleStyle(attrs)"
     >
         <div :class="pageStyle['editor-hr--inner']"></div>
     </NodeViewWrapper>
@@ -17,7 +17,7 @@ import type { HrRuleAttrs } from "../src";
 
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
-import { renderHrRule } from "../utils/render";
+import { getHrRuleStyle } from "../utils/render";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
 import pageStyle from "../../../src/app.module.scss";
