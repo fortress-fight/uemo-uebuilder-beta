@@ -68,7 +68,18 @@ export interface editorPanelStorage {
     lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
 }
 
-const HansEditorPanelNodes = ["buttonRow", "buttonItem"];
+const HansEditorPanelNodes = [
+    "buttonRow",
+    "buttonItem",
+    "image",
+    "svgIcon",
+    "frame",
+    "svgView",
+    "spline",
+    "lottie",
+    "gridGroup",
+    "gridItem",
+];
 
 /**
  * 编辑器面板扩展
@@ -136,7 +147,34 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                     this.editor.chain().openButtonItemEditorPanel(domRect).run();
                                     return false;
 
+                                case "image":
+                                    this.editor.chain().openImageEditorPanel(domRect).run();
+                                    return false;
+
+                                case "svgIcon":
+                                    this.editor.chain().openSvgIconEditorPanel(domRect).run();
+                                    return false;
+
+                                case "frame":
+                                    this.editor.chain().openFrameEditorPanel(domRect).run();
+                                    return false;
+
+                                case "svgView":
+                                    this.editor.chain().openSvgViewEditorPanel(domRect).run();
+                                    return false;
+
+                                case "spline":
+                                    this.editor.chain().openSplineEditorPanel(domRect).run();
+                                    return false;
+
+                                case "lottie":
+                                    this.editor.chain().openLottieEditorPanel(domRect).run();
+                                    return false;
+
                                 default:
+                                    console.error(
+                                        `${nodeName} 不支持打开属性编辑面板, 请检查是否在 HansEditorPanelNodes 中添加了该节点`
+                                    );
                                     return;
                             }
                         },
@@ -158,16 +196,28 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                 return true;
             },
 
-            openAttrEditorPanel: (type, attr, param) => () => {
-                const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
+            openAttrEditorPanel:
+                (type, attr, param) =>
+                ({ editor }) => {
+                    const handler = this.options.openAttrEditorPanel || openAttrEditorPanel;
 
-                // 调用属性处理器
-                handler(type, attr, param);
+                    // 调用属性处理器
+                    handler(type, attr, {
+                        ...param,
+                        focus: () => {
+                            editor.commands.focus();
+                            param.focus?.();
+                        },
+                        close: () => {
+                            editor.commands.closeAttrEditorPanel(type);
+                            param.close?.();
+                        },
+                    });
 
-                this.storage.lastEditorPanelType = type;
+                    this.storage.lastEditorPanelType = type;
 
-                return true;
-            },
+                    return true;
+                },
 
             closeAttrEditorPanel: (type) => () => {
                 if (this.storage.lastEditorPanelType !== type) {

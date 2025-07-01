@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-11 17:57:55
+ * @LastEditTime: 2025-06-06 23:07:58
 -->
 <template>
     <UeElEditorPanel
@@ -161,7 +161,7 @@ function handleConfirm() {
     const type = localValueRef.value.type;
     const detail = type === "function" ? localValueRef.value.detail : undefined;
 
-    const result = checkLink(type, { detail, link });
+    const result = checkLink(type, { detail: detail || undefined, link });
     if (result !== true) {
         instance?.proxy?.$ueElToast.error(result);
         return;

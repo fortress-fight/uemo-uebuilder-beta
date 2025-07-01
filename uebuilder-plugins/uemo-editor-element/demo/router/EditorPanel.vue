@@ -25,6 +25,9 @@ import TestLibraryPanel from "~/demo/components/TestLibraryPanel.vue";
 import TestEmptyPanel from "~/demo/components/TestEmptyPanel.vue";
 import TestMiniEditorPanel from "~/demo/components/TestMiniEditorPanel.vue";
 import TestBrowserMockupPanel from "~/demo/components/TestBrowserMockupPanel.vue";
+import TestEditorPanelTiptapGridGroup from "~/demo/components/TestEditorPanelTiptapGridGroup.vue";
+import TestEditorPanelTiptapGridItem from "~/demo/components/TestEditorPanelTiptapGridItem.vue";
+
 const testComponents = [
     TestCalenderPicker,
     TestConfirmPanel,
@@ -36,6 +39,8 @@ const testComponents = [
     TestLibraryPanel,
     TestEmptyPanel,
     TestBrowserMockupPanel,
+    TestEditorPanelTiptapGridGroup,
+    TestEditorPanelTiptapGridItem,
 ];
 
 const rowTestComponents = [TestMiniEditorPanel];

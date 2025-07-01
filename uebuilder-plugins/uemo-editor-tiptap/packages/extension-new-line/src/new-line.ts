@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 00:21:48
+ * @LastEditTime: 2025-06-12 01:01:29
  */
 import { isNodeSelection, Node } from "@tiptap/core";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
@@ -33,17 +33,39 @@ export const NewLine = Node.create({
                 props: {
                     handleDOMEvents: {
                         keydown: (view, event) => {
-                            const isEnter = event instanceof KeyboardEvent && event.keyCode === 13;
+                            const isEnter =
+                                event instanceof KeyboardEvent &&
+                                (event.keyCode === 13 || event.key === "Enter") &&
+                                !event.shiftKey;
 
-                            if (!isEnter || !isNodeSelection(view.state.selection)) return false;
+                            // Shift + Alt + Enter，兼容 macOS 的 Option/Alt 和 Command/Meta
+                            const isShiftAltEnter =
+                                event instanceof KeyboardEvent &&
+                                (event.keyCode === 13 || event.key === "Enter") &&
+                                event.shiftKey &&
+                                (event.altKey || event.metaKey);
 
-                            const insertSuccess = this.editor.chain().insertNewLine("after").run();
+                            if (!isNodeSelection(view.state.selection)) return false;
 
-                            if (insertSuccess) {
-                                event.preventDefault();
+                            if (isShiftAltEnter) {
+                                // 向上插入新行
+                                const insertSuccess = this.editor.chain().insertNewLine("before").run();
+                                if (insertSuccess) {
+                                    event.preventDefault();
+                                }
+                                return true;
                             }
 
-                            return true;
+                            if (isEnter) {
+                                // 向下插入新行
+                                const insertSuccess = this.editor.chain().insertNewLine("after").run();
+                                if (insertSuccess) {
+                                    event.preventDefault();
+                                }
+                                return true;
+                            }
+
+                            return false;
                         },
                     },
                 },

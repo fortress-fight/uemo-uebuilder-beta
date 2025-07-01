@@ -1,0 +1,21 @@
+declare const styles: {
+    readonly "background-layer-group": string;
+    readonly "bg-layer": string;
+    readonly "bg-layer--hover-effect": string;
+    readonly "bg-layer--inner": string;
+    readonly "blur-bg": string;
+    readonly "color-bg": string;
+    readonly "gradient-border-layer-group": string;
+    readonly "image-bg": string;
+    readonly "layer-gradient-border": string;
+    readonly "layer-page_bg": string;
+    readonly "shape-bg": string;
+    readonly "shape-bg--box": string;
+    readonly "shape-viewer": string;
+    readonly "spline-bg": string;
+    readonly "spline-bg--box": string;
+    readonly "svg-bg": string;
+    readonly "svg-bg--box": string;
+    readonly "video-bg": string;
+};
+export = styles;

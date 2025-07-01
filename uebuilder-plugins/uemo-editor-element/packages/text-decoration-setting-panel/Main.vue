@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字装饰效果控制组件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-04 16:44:52
+ * @LastEditTime: 2025-05-23 18:09:34
 -->
 <template>
     <UeElEditorPanel :class="$style['text-decoration-setting-panel']" :title="t('TEXT_DECORATION_TITLE')">
@@ -39,7 +39,7 @@
                     theme="strokeText"
                     :icon="{ name: 'icon-app-play', size: 16 }"
                     :class="$style['oper-btn']"
-                    @trigger="emit('preview')"
+                    @trigger="emit('fire', { type: 'preview' })"
                 />
             </template>
         </UeElSettingGroup>
@@ -68,7 +68,7 @@ const DEFAULT_EASE = "power4.out";
 const { t } = useI18n();
 const _props = withDefaults(defineProps<UeElTextDecorationSettingPanelBaseProps>(), {});
 const valueRef = defineModel<UeElTextDecorationSettingPanelValue>("value", { required: true });
-const emit = defineEmits<{ (e: "preview"): void }>();
+const emit = defineEmits<{ (e: "fire", data: { type: "preview" }): void }>();
 
 /**
  * 输入控件配置

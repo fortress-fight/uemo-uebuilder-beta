@@ -2,6 +2,7 @@ import type { Extensions } from "@tiptap/vue-3";
 import type { AIExtensionOptions } from "../packages/extension-ai";
 
 import { i18n } from "../src/i18n";
+
 import $pageStyle from "../src/app.module.scss";
 
 // #region 导入基础扩展
@@ -48,6 +49,14 @@ import { NewLine } from "../packages/extension-new-line/src";
 import { ButtonItem, ButtonRow } from "../packages/extension-button/src";
 import { Image } from "../packages/extension-image/src";
 import { DropUpload } from "../packages/extension-drop-upload/src";
+import { CopyAttrsExtension } from "../packages/extension-copy-attrs/src";
+import { SvgIcon } from "../packages/extension-svg-icon/src";
+import { Frame } from "../packages/extension-frame/src";
+import { SvgView } from "../packages/extension-svg-view/src";
+import { Spline } from "../packages/extension-spline/src";
+import { Lottie } from "../packages/extension-lottie/src";
+import { GridGroup, GridItem } from "../packages/extension-grid/src";
+import { DividerBlock } from "../packages/extension-divider-block/src";
 
 // #endregion
 
@@ -117,6 +126,15 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         DropUpload.configure({
             createUploadHandler: param.createUploadHandler,
         }),
+        CopyAttrsExtension,
+        SvgIcon,
+        Frame,
+        SvgView,
+        Spline,
+        Lottie,
+        GridGroup,
+        GridItem,
+        DividerBlock,
     ];
 
     return [...baseExtensions, ...customExtensions];

@@ -1,7 +1,7 @@
 /*
  * @Description: 浮动编辑工具栏按钮映射
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 10:36:18
+ * @LastEditTime: 2025-06-28 16:33:00
  */
 
 import EditorButton from "../sub-component/EditorButton.vue";
@@ -12,6 +12,8 @@ import DeleteNode from "../sub-component/DeleteNodeButton.vue";
 import AddButton from "../sub-component/AddButton.vue";
 import MoreOper from "../sub-component/MoreOperButton.vue";
 import ReplaceImage from "../sub-component/ReplaceImageButton.vue";
+import CopyNode from "../sub-component/CopyNodeButton.vue";
+import ReplaceNode from "../sub-component/ReplaceNodeButton.vue";
 
 export const FLOAT_MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Component>> = {
     editor: EditorButton,
@@ -22,4 +24,6 @@ export const FLOAT_MENU_BUTTON_MAP: Partial<Record<UE_TIPTAP_UNIT.OperItem, Comp
     add: AddButton,
     moreOper: MoreOper,
     replaceImage: ReplaceImage,
+    copyNode: CopyNode,
+    replaceNode: ReplaceNode,
 };

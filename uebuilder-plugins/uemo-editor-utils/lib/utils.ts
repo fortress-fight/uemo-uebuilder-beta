@@ -1,4 +1,5 @@
 import { guid } from "./guid";
+import { _isEqual } from "./lodash";
 
 /**
  * 获取文件大小描述
@@ -61,6 +62,12 @@ export function isImageType(type: string) {
     return IMAGE_TYPES.includes(type);
 }
 
+/** 是否为网页链接 */
+export const isWebReg = /^(https?:)?(\/\/)?([\da-z.-]+)\.([\da-z.-]+)(\/[^\s]*)?$/i;
+
+/** 是否为地图坐标 */
+export const isMapPosReg = /^[+-]?\d{1,3}.\d+,\s*[+-]?\d{1,3}.\d+$/;
+
 /** spline类型 */
 export const isSplineReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(splinecode))$/;
 
@@ -71,7 +78,8 @@ export const isLottieReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(lottie))$/;
 export const isVideoReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(mp4))$/;
 
 /** image类型 */
-export const isImageReg = /^(https?:\/\/(?:images\.unsplash\.com|[^\s"'()]+?\.(?:jpg|jpeg|png|gif|webp))(?:\?[^\s"'()]*)?)/;
+export const isImageReg =
+    /^(https?:\/\/(?:images\.unsplash\.com|[^\s"'()]+?\.(?:jpg|jpeg|png|gif|webp))(?:\?[^\s"'()]*)?)/;
 
 /** 下载文件类型 */
 export const isDownloadFileReg = /^(http(s?):\/\/)?([^\s]+\/)([^\s]+\.(pdf|doc|docx|xls|xlsx|ppt|pptx|gif|png|jpg))/g;
@@ -145,4 +153,14 @@ export function attrToStyle(attr: Record<string, string | undefined>): string {
         }
         return styles;
     }, "");
+}
+
+/**
+ * 忽略默认值
+ * @param obj 对象
+ * @param defaultObj 默认对象
+ * @returns 忽略默认值后的对象
+ */
+export function omitDefaultKey(obj: Record<string, any>, defaultObj: Record<string, any>) {
+    return Object.fromEntries(Object.entries(obj).filter(([key, value]) => !_isEqual(value, defaultObj[key])));
 }

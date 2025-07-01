@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-04-30 00:55:50
+ * @LastEditTime: 2025-06-07 12:02:53
  */
 
 // SECTION - 样式文件
@@ -113,6 +113,10 @@ app.use(UeEl, {
             buttonLibrary: {
                 enable: true,
                 getData: () => import("@stone/uemo-editor-assets/resource/button").then((res) => res.default),
+            },
+            mapLibrary: {
+                enable: true,
+                getData: () => import("@stone/uemo-editor-assets/resource/map").then((res) => res.default),
             },
         },
     },

@@ -158,19 +158,16 @@ export const ButtonItem = Node.create<ButtonOptions>({
                         .focus()
                         .openAttrEditorPanel("buttonItem", currentAttr, {
                             rect,
-                            setData: (attr) => {
+                            updateAttrs: (attr) => {
                                 editor.commands.updateButtonItemAttrs(attr);
                             },
-                            preview: (state: "hover" | "leave") => {
+                            fire: (type: "preview", state: "hover" | "leave") => {
+                                if (type !== "preview") return;
                                 requestAnimationFrame(() => {
                                     editor.commands.previewButtonEffect(state);
                                 });
                             },
-                            focus: () => {
-                                editor.commands.focus();
-                            },
                             close: () => {
-                                editor.commands.closeAttrEditorPanel("buttonItem");
                                 requestAnimationFrame(() => {
                                     editor.commands.previewButtonEffect("leave");
                                 });

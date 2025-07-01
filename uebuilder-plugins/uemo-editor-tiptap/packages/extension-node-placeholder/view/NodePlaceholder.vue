@@ -1,16 +1,10 @@
 <!--
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 16:16:16
+ * @LastEditTime: 2025-06-13 09:36:09
 -->
 <template>
-    <node-view-wrapper
-        class="drag-handle"
-        contenteditable="false"
-        draggable="true"
-        :class="$style['node-placeholder-wrapper']"
-        data-drag-handle
-    >
+    <node-view-wrapper draggable="false" contenteditable="false" :class="$style['node-placeholder-wrapper']">
         <div ref="rootDom" :class="$style['tiptap-node-placeholder']" class="w-full">
             <div :class="$style['btn--add-node']" class="flex items-center">
                 <UeElIcon

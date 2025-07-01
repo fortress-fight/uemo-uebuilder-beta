@@ -5,7 +5,9 @@ import type { TYPE_SLASH_MENU } from "../data";
 import { VueRenderer } from "@tiptap/vue-3";
 
 import { slashMenuList } from "../data";
-import { isInTable, isInGridGroup } from "../../../utils/tiptap-utils";
+import { isInTable } from "../../../utils/tiptap-utils";
+import { isInGridGroup } from "../../extension-grid/utils/helper";
+
 import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 
 /**
@@ -78,8 +80,35 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertImage":
                     chain.insetNodePlaceholder("ImagePlaceholder");
                     break;
+                case "insertSvgIcon":
+                    chain.insetNodePlaceholder("SvgIconPlaceholder");
+                    break;
                 case "insertEmoji":
                     chain.insertEmoji({ text: ":" });
+                    break;
+                case "insertVideoFrame":
+                    chain.insetNodePlaceholder("VideoPlaceholder");
+                    break;
+                case "insertMapFrame":
+                    chain.insetNodePlaceholder("MapPlaceholder");
+                    break;
+                case "insertWebFrame":
+                    chain.insetNodePlaceholder("WebPlaceholder");
+                    break;
+                case "insertSvgViewer":
+                    chain.insetNodePlaceholder("SvgViewerPlaceholder");
+                    break;
+                case "insertSpline":
+                    chain.insetNodePlaceholder("SplinePlaceholder");
+                    break;
+                case "insertLottie":
+                    chain.insetNodePlaceholder("LottiePlaceholder");
+                    break;
+                case "insertGridGroup":
+                    chain.insetNodePlaceholder("GridGroupPlaceholder");
+                    break;
+                case "insertDividerBlock":
+                    chain.insertDivideBlock({ size: "10px" });
                     break;
 
                 default:

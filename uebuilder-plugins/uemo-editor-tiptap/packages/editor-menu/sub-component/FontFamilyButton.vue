@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 10:27:01
+ * @LastEditTime: 2025-05-16 19:20:13
 -->
 <template>
     <UeTiptapMenuButton
@@ -52,11 +52,8 @@ function openFontFamilyPanel() {
         { fontFamily: currentFontFamily.value || "" },
         {
             rect,
-            setData: ({ fontFamily }) => {
+            updateAttrs: ({ fontFamily }) => {
                 updateFontFamily(fontFamily);
-            },
-            focus: () => {
-                editor?.commands.focus();
             },
         }
     );

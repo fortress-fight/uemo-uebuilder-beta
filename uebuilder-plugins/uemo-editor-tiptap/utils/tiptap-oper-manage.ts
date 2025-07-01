@@ -182,9 +182,9 @@ const operManage = {
     // #region 基础控件
 
     add: { title: t("OPER_ADD"), icon: "icon-editor-add", buttonType: "iconButton" },
-    copy: { title: t("OPER_COPY"), icon: "icon-editor-copy", buttonType: "iconButton" },
+    copyNode: { title: t("OPER_COPY"), icon: "icon-editor-copy", buttonType: "iconButton" },
     editor: { title: t("OPER_EDIT"), icon: "icon-editor-image-setting", buttonType: "iconButton" },
-    replace: { title: t("OPER_REPLACE"), buttonType: "textButton" },
+    replaceNode: { title: t("OPER_REPLACE"), icon: "icon-editor-paste", buttonType: "iconButton" },
     deleteNode: { title: t("OPER_DELETE"), icon: "icon-editor-trash", buttonType: "iconButton" },
     formatting: { title: t("OPER_FORMATTING"), icon: "icon-editor-remove-style", buttonType: "iconButton" },
     delete: { title: t("OPER_DELETE"), icon: "icon-editor-trash" },

@@ -8,6 +8,14 @@
     <UeTiptapButtonRowMenu />
     <UeTiptapButtonItemMenu />
     <UeTiptapImageMenu />
+    <UeTiptapSvgIconMenu />
+    <UeTiptapFrameMenu />
+    <UeTiptapSvgViewMenu />
+    <UeTiptapSplineMenu />
+    <UeTiptapLottieMenu />
+    <UeTiptapGridGroupMenu />
+    <UeTiptapGridItemMenu />
+    <UeTiptapDividerBlockMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -19,6 +27,14 @@ import AddNodePanel from "../../extension-node-placeholder/panel/AddNodePanel.vu
 import UeTiptapButtonRowMenu from "../../extension-button/menu/ButtonRowMenu.vue";
 import UeTiptapButtonItemMenu from "../../extension-button/menu/ButtonItemMenu.vue";
 import UeTiptapImageMenu from "../../extension-image/menu/ImageMenu.vue";
+import UeTiptapSvgIconMenu from "../../extension-svg-icon/menu/SvgIconMenu.vue";
+import UeTiptapFrameMenu from "../../extension-frame/menu/FrameMenu.vue";
+import UeTiptapSvgViewMenu from "../../extension-svg-view/menu/SvgViewMenu.vue";
+import UeTiptapSplineMenu from "../../extension-spline/menu/SplineMenu.vue";
+import UeTiptapLottieMenu from "../../extension-lottie/menu/LottieMenu.vue";
+import UeTiptapGridGroupMenu from "../../extension-grid/menu/GridGroupMenu.vue";
+import UeTiptapGridItemMenu from "../../extension-grid/menu/GridItemMenu.vue";
+import UeTiptapDividerBlockMenu from "../../extension-divider-block/menu/DividerBlockMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

@@ -1,23 +1,13 @@
 import type { Editor } from "@tiptap/core";
 import type { EditorView } from "@tiptap/pm/view";
-import type { EditorState, Selection } from "@tiptap/pm/state";
+import type { Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
 import { isInTable } from "@tiptap/pm/tables";
-import { isNodeSelection, posToDOMRect } from "@tiptap/core";
+import { TextSelection, NodeSelection } from "@tiptap/pm/state";
+import { isNodeSelection, posToDOMRect, isTextSelection } from "@tiptap/core";
 
-/**
- * 判断是否在网格组中
- */
-export function isInGridGroup(state: EditorState): boolean {
-    const $head = state.selection.$head;
-    for (let d = $head.depth; d > 0; d--) {
-        if ($head.node(d).type.name == "gridGroup") {
-            return true;
-        }
-    }
-    return false;
-}
+import { isInGridItem } from "../packages/extension-grid/utils/helper";
 
 /**
  * 判断是否存在父节点
@@ -28,6 +18,10 @@ export function hasParentNode(editor: Editor) {
         const { from } = selection;
         const parent = editor.state.doc.resolve(from).parent;
         if (parent && parent.type.name != "doc") {
+            return true;
+        }
+    } else {
+        if (isInGridItem(editor.state)) {
             return true;
         }
     }
@@ -109,4 +103,59 @@ export function getNodeDom(editor: Editor) {
     }
 
     return node;
+}
+
+/**
+ * 获取扩展选项
+ */
+export function getExtensionOptions(editor: Editor, name: string) {
+    const extension = editor.extensionManager.extensions.find((extension) => extension.name === name);
+    return extension?.options || undefined;
+}
+
+/**
+ * 获取选中的节点名称
+ */
+export function getNodeName(editor: Editor) {
+    const { selection } = editor.state;
+    if (selection instanceof NodeSelection) {
+        return selection.node.type.name;
+    }
+    return undefined;
+}
+
+/**
+ * 判断是否为空文本块
+ */
+export function isEmptyTextBlock(editor: Editor, selection: Selection) {
+    const { from, to } = selection;
+    return !editor.state.doc.textBetween(from, to).length && isTextSelection(editor.state.selection);
+}
+
+/**
+ * 选中节点内部
+ */
+export function selectNodeInner(editor: Editor, pos: number, node: ProsemirrorNode) {
+    const { view, state } = editor;
+    const { tr, doc } = state;
+
+    const from = pos + 1;
+    const to = pos + node.nodeSize - 1;
+
+    // 检查内容是否能选中
+    const selection = TextSelection.between(doc.resolve(from), doc.resolve(to));
+    view.dispatch(tr.setSelection(selection));
+
+    return true;
+}
+
+/**
+ * 选中节点
+ */
+export function selectNode(editor: Editor, pos: number) {
+    const { view, state } = editor;
+    const { tr, doc } = state;
+
+    const selection = NodeSelection.create(doc, pos);
+    view.dispatch(tr.setSelection(selection));
 }

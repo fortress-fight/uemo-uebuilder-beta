@@ -1,24 +1,19 @@
 <template>
     <div ref="referenceRef" :class="$style['floating-container']" @pointerenter="openPopupPanel">
         <slot />
-        <Teleport to="body">
-            <Transition :css="false" @enter="onEnter">
-                <div
-                    v-if="subPopupPanelExists && showPopPanelStatus"
-                    ref="floatingRef"
-                    :class="[$style['floating-pop-panel'], $style['floating-pop-panel--open']]"
-                    :style="popPanelStyle"
-                    @pointerleave="closePopupPanel($event)"
-                >
-                    <slot name="popPanel" :level="prop.level" />
-                </div>
-            </Transition>
-        </Teleport>
+        <UeElPopPanel :open="subPopupPanelExists && showPopPanelStatus" v-bind="popPanelParams">
+            <div
+                ref="floatingRef"
+                :class="[$style['floating-pop-panel'], $style['floating-pop-panel--open']]"
+                :style="popPanelStyle"
+                @pointerleave="closePopupPanel($event)"
+            >
+                <slot name="popPanel" :level="prop.level" />
+            </div>
+        </UeElPopPanel>
     </div>
 </template>
 <script lang="ts" setup>
-import { computeFloatingPosition } from "@stone/uemo-editor-utils/lib/floating-ui";
-import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
 import { eventBus } from "./event-bus";
@@ -54,26 +49,27 @@ function closePopupPanel(ev: MouseEvent) {
     eventBus.emit("closeAll");
 }
 
-function onEnter(_el: Element, done: () => void) {
-    const floatingDom = floatingRef.value;
-    const referenceDom = referenceRef.value;
-
-    if (!referenceDom || !floatingDom) return;
-
-    computeFloatingPosition(referenceDom, floatingDom, {
-        placement: "right-start",
-        middleware: [
-            ["flip", { crossAxis: false }],
-            ["shift", { crossAxis: true, padding: 17 }],
-            ["offset", { crossAxis: -3 }],
-        ],
-    })
-        .then((param) => {
-            gsap.set(floatingDom, { top: `${param.y}px`, left: `${param.x}px` });
-            done();
-        })
-        .catch((err) => console.error(err));
-}
+/**
+ * 弹窗参数
+ */
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => {
+    return {
+        draggable: false,
+        panel: {
+            position: {
+                refEl: referenceRef.value as Element,
+                autoUpdate: true,
+                options: {
+                    placement: "right-start",
+                    middleware: [
+                        ["shift", { crossAxis: true, padding: 17 }],
+                        ["offset", { crossAxis: -10, mainAxis: 0 }],
+                    ],
+                },
+            },
+        },
+    };
+});
 
 defineExpose({
     floatingRef,
@@ -86,12 +82,12 @@ defineExpose({
 .floating-pop-panel {
     display: none;
 
-    border: 3px solid transparent;
+    border: 6px solid transparent;
+    border-top-width: 0;
+    border-bottom-width: 0;
     &.floating-pop-panel--open {
-        position: absolute;
+        position: relative;
         z-index: 100001;
-        top: 0;
-        left: 0;
 
         display: block;
     }

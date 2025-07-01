@@ -1,1 +1,10 @@
-{}
+{
+    "IMAGE_ALT_PLACEHOLDER": "Please enter the image description",
+    "IMAGE_EFFECT_TIP": "To ensure the smoothness of editing, the effect can only be viewed in the preview state",
+    "IMAGE_GALLERY_TITLE": "Gallery Display",
+    "IMAGE_GALLERY_TIP": "Show in gallery",
+    "IMAGE_HOVER_TITLE": "Hover Effect",
+    "IMAGE_HOVER_ZOOM_OUT": "Zoom Out",
+    "IMAGE_HOVER_ZOOM_IN": "Zoom In",
+    "IMAGE_HOVER_IMAGE_SCALE": "Container Shrink Image Scale"
+}

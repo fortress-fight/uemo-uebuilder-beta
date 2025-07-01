@@ -301,7 +301,7 @@ export const Link = Mark.create<LinkOptions>({
 
                     commands.openAttrEditorPanel("link", linkAttr, {
                         rect,
-                        setData: (attr) => {
+                        updateAttrs: (attr) => {
                             editor.chain().setMarkSelection("link").run();
 
                             if (!attr.link) {
@@ -312,9 +312,6 @@ export const Link = Mark.create<LinkOptions>({
                                     .setLink(attr as MakeRequired<LinkAttrs, "link">)
                                     .run();
                             }
-                        },
-                        focus: () => {
-                            commands.focus();
                         },
                     });
                     return true;

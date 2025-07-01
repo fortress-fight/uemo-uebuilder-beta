@@ -50,5 +50,6 @@ export function install(app: App, param: UE_PLUGIN_OPTIONS.Resource) {
         shareIconLibrary: createCache(param.shareIconLibrary),
         fontFamilyLibrary: createCache(param.fontFamilyLibrary),
         buttonLibrary: createCache(param.buttonLibrary),
+        mapLibrary: createCache(param.mapLibrary),
     };
 }

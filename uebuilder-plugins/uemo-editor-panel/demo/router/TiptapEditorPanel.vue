@@ -11,8 +11,29 @@
 <script lang="ts" setup>
 import TestEditorPanelTiptapButtonRow from "~/demo/components/TestEditorPanelTiptapButtonRow.vue";
 import TestEditorPanelTiptapButtonItem from "~/demo/components/TestEditorPanelTiptapButtonItem.vue";
+import TestEditorPanelTiptapImage from "~/demo/components/TestEditorPanelTiptapImage.vue";
+import TestEditorPanelTiptapSvgIcon from "~/demo/components/TestEditorPanelTiptapSvgIcon.vue";
+import TestEditorPanelTiptapSvgView from "~/demo/components/TestEditorPanelTiptapSvgView.vue";
+import TestEditorPanelTiptapSpline from "~/demo/components/TestEditorPanelTiptapSpline.vue";
+import TestEditorPanelTiptapLottie from "~/demo/components/TestEditorPanelTiptapLottie.vue";
+import TestEditorPanelTiptapFrame from "~/demo/components/TestEditorPanelTiptapFrame.vue";
+import TestEditorPanelTiptapGridGroup from "~/demo/components/TestEditorPanelTiptapGridGroup.vue";
+import TestEditorPanelTiptapGridItem from "~/demo/components/TestEditorPanelTiptapGridItem.vue";
+import TestEditorPanelTiptapDividerBlock from "~/demo/components/TestEditorPanelTiptapDividerBlock.vue";
 
-const tiptapEditorPanelComponents = [TestEditorPanelTiptapButtonRow, TestEditorPanelTiptapButtonItem];
+const tiptapEditorPanelComponents = [
+    TestEditorPanelTiptapButtonRow,
+    TestEditorPanelTiptapButtonItem,
+    TestEditorPanelTiptapImage,
+    TestEditorPanelTiptapSvgIcon,
+    TestEditorPanelTiptapSvgView,
+    TestEditorPanelTiptapSpline,
+    TestEditorPanelTiptapLottie,
+    TestEditorPanelTiptapFrame,
+    TestEditorPanelTiptapGridGroup,
+    TestEditorPanelTiptapGridItem,
+    TestEditorPanelTiptapDividerBlock,
+];
 </script>
 <style lang="scss" module>
 .page-head {

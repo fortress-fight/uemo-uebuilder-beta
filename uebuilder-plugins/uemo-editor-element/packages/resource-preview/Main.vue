@@ -1,11 +1,16 @@
 <!--
  * @Description: 资源文件预览组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-11 09:46:49
+ * @LastEditTime: 2025-06-14 01:07:47
 -->
 <template>
     <div :class="$style['resource-preview']" class="flex items-center justify-center">
-        <div v-if="!attrs" :class="$style['empty-placeholder']" class="flex items-center justify-center">
+        <div
+            v-if="!attrs"
+            :class="$style['empty-placeholder']"
+            class="flex items-center justify-center"
+            @click="handlerTriggerEmptyClick"
+        >
             <UeElIcon v-if="ueElIconParam" v-bind="ueElIconParam" />
         </div>
         <div
@@ -77,10 +82,15 @@ defineOptions({ name: "UeElResourcePreview" });
 const props = withDefaults(defineProps<UeElResourcePreviewBaseProps<T>>(), {});
 const emit = defineEmits<{
     (e: "trigger", params: ResourcePreviewEmitsParams[UeElResourcePreviewType]): void;
+    (e: "emptyClick"): void;
 }>();
 
 function handleTrigger(params: ResourcePreviewEmitsParams["image"]): void {
     emit("trigger", params);
+}
+
+function handlerTriggerEmptyClick(): void {
+    emit("emptyClick");
 }
 
 // 常量定义
@@ -185,7 +195,7 @@ function handlePointerEnter(): void {
         const lottieDom = dotlottieRef.value;
         if (!lottieDom) return;
         lottieDom.dataset.playerDir = "1";
-        const lottieItem = lottieDom.getLottie();
+        const lottieItem = lottieDom.getLottie?.();
         if (lottieItem) {
             lottieItem.setDirection(1);
             lottieItem.play();
@@ -249,6 +259,8 @@ watchEffect(() => {
     @include ab-cover;
     width: 100%;
     height: 130px;
+
+    cursor: pointer;
 
     border-radius: var(--ue-border-radius--lv1);
     background-color: #fff;

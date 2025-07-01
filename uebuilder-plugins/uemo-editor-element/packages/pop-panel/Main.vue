@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 16:56:05
+ * @LastEditTime: 2025-06-05 11:30:46
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -52,6 +52,7 @@ import { guid } from "@stone/uemo-editor-utils/lib/guid";
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
 import { defaultCalcPosParam, UeElProvideDialogCalcPosHandler, UeElProvideDialogCloseHandler } from "./index";
+import { UeElPopPanelRootId } from "./utils/helper";
 
 defineOptions({ name: "UeElPopPanel" });
 
@@ -61,6 +62,7 @@ const instance = getCurrentInstance();
 
 // #region 组件配置和状态
 const props = withDefaults(defineProps<UeElPopPanelBaseProps>(), {
+    id: "",
     immediate: true,
     autoClose: true,
     draggable: false,
@@ -113,6 +115,11 @@ async function updateDialogPos(): Promise<void> {
     }
 
     const { refEl, options = defaultCalcPosParam } = position;
+
+    if (refEl instanceof HTMLElement && !document.body.contains(refEl)) {
+        return;
+    }
+
     const { x, y } = await computeFloatingPosition(refEl, dialogBox, dialogPosHandler(options));
 
     gsap.set(dialogBox, { top: y, left: x });
@@ -233,10 +240,15 @@ function onAfterLeave(_el: Element) {
 // #endregion
 
 // #region ID管理和关闭处理
-const rootId = inject<string>("UeElPopPanelRootId", "");
-const currentId = rootId ? rootId + "-" + guid() : guid();
+const rootId = inject(
+    UeElPopPanelRootId,
+    computed(() => props.id || "")
+);
+const currentId = computed(() => {
+    return rootId.value ? rootId.value + "-" + guid() : guid();
+});
 
-provide("UeElPopPanelRootId", currentId);
+provide(UeElPopPanelRootId, currentId);
 
 /**
  * 处理弹窗关闭
@@ -255,10 +267,10 @@ function closeModal(e: Event) {
     // NOTE 如果当前弹窗的ID与第一次打开的弹窗的ID相同，则不关闭，这种情况发生在弹窗嵌套时
     const isRootPopPanel = !triggerRootId;
     if (!isRootPopPanel) {
-        const isSameRootId = currentId === triggerRootId;
+        const isSameRootId = currentId.value === triggerRootId;
         if (isSameRootId) return;
 
-        const isSubPopPanel = currentId.includes(triggerRootId);
+        const isSubPopPanel = currentId.value.includes(triggerRootId);
         if (!isSubPopPanel) return;
     }
 

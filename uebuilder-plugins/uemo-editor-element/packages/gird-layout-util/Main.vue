@@ -1,7 +1,7 @@
 <!--
  * @Description: 网格结构工具
  * @Author: F-Stone
- * @LastEditTime: 2025-04-02 23:13:59
+ * @LastEditTime: 2025-06-29 02:44:40
 -->
 <template>
     <div
@@ -24,13 +24,15 @@
             @click="subitemTrigger($event, index)"
         >
             <UeElIcon v-if="item.disable" :class="$style['ic']" :size="22" name="icon-disable" />
-            <div v-else-if="type === 'zIndexMode' && gridItemZIndexArray" :class="$style['z-index-control']">
-                <span :class="$style['text']">
-                    {{ gridItemZIndexArray.length - gridItemZIndexArray[index] + 1 }}
-                </span>
-                <UeElIcon :class="$style['ic']" name="icon-app-to-top" />
-            </div>
-            <UeElIcon v-else-if="icon" :class="$style['ic']" :size="15" :name="icon" />
+            <template v-else-if="gridSubs.length > 1">
+                <div v-if="type === 'zIndexMode' && gridItemZIndexArray" :class="$style['z-index-control']">
+                    <span :class="$style['text']">
+                        {{ gridItemZIndexArray.length - gridItemZIndexArray[index] + 1 }}
+                    </span>
+                    <UeElIcon :class="$style['ic']" name="icon-app-to-top" />
+                </div>
+                <UeElIcon v-else-if="icon" :class="$style['ic']" :size="15" :name="icon" />
+            </template>
         </div>
     </div>
 </template>
@@ -56,6 +58,7 @@ const gridSubs = computed(() =>
 );
 
 const subLabel = computed(() => {
+    if (gridSubs.value.length === 1) return "";
     if (prop.type === "replace") return t("GRID_LAYOUT_REPLACE");
     if (prop.type === "zIndexMode") return t("GRID_LAYOUT_SETTING_TOP");
     return undefined;
@@ -100,6 +103,7 @@ function gridSubItemStyle(gridArea?: string) {
  * @param index
  */
 function subitemTrigger(ev: MouseEvent, index: number) {
+    if (gridSubs.value.length === 1) return;
     if (prop.disableGridItemIndex?.includes(index)) return;
     emit("subitemTrigger", { ev, index });
 }
@@ -137,7 +141,7 @@ function subitemTrigger(ev: MouseEvent, index: number) {
 
                 opacity: 0;
             }
-            &[data-select],
+            &[data-select="true"],
             &:hover {
                 border-color: color(var(--ue-color--active));
                 background-color: color(var(--ue-color--active));
@@ -163,7 +167,7 @@ function subitemTrigger(ev: MouseEvent, index: number) {
                     color: color(var(--ue-color--error));
                 }
             }
-            &[data-select] {
+            &[data-select="true"] {
                 border-color: color(var(--ue-color--error));
                 background-color: color(var(--ue-color--error));
                 .ic {
@@ -182,7 +186,7 @@ function subitemTrigger(ev: MouseEvent, index: number) {
                 color: color(var(--ue-font-color--deeper));
             }
         }
-        &[data-active] {
+        &[data-active="true"] {
             .order {
                 color: #fff !important;
             }

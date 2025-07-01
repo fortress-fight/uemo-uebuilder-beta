@@ -51,7 +51,130 @@ export const testTextContent = {
             height=""
             radius=""
             shadow=""
-            uploadprogress=""
         />
+    `,
+    svgIconData: `
+        <div class="svg-icon-wrapper-bb7c1" style="text-align:center">
+            <div class="svg-icon-box-f2008" style="width:100px;height:100px;">
+                <iconpark-icon
+                    class="svg-icon-viewer-ed4be"
+                    data-source="https://static.jsmo.xin/uebuilder/public-resource/svg-icon/icon-park/base/base.js"
+                    width="100%"
+                    height="100%"
+                    name="config"
+                ></iconpark-icon>
+            </div>
+        </div>
+    `,
+    videoFrameData: `
+        <div class="frame-f74df" data-type="video" data-frame-ratio="auto">
+            <div class="frame-box-da610" style="" data-play-mode="pop">
+                <video
+                    class="frame-body-c2417"
+                    src="https://videos.pexels.com/video-files/4779866/4779866-hd_1920_1080_30fps.mp4"
+                ></video>
+            </div>
+        </div>
+    `,
+    mapFrameData: `
+        <div class="frame-f74df" data-type="map" data-frame-ratio="1-1">
+            <div class="frame-box-da610" style="--frame-ratio:100%;">
+                <iframe
+                    class="frame-body-c2417"
+                    src="https://static.jsmo.xin/uebuilder/v4/plugins/map/gaode-map.html?time=1749233571283#%7B%22title%22%3A%22%E8%AF%B7%E8%BE%93%E5%85%A5%E6%A0%87%E9%A2%98%22%2C%22position%22%3A%22116.25%2C40.25%22%2C%22scale%22%3Afalse%7D"
+                ></iframe>
+            </div>
+        </div>
+    `,
+    webFrameData: `
+        <div class="frame-f74df" data-type="web" data-frame-ratio="1-1">
+            <div class="frame-box-da610" style="--frame-ratio:100%;">
+                <iframe class="frame-body-c2417" src="https://www.baidu.com"></iframe>
+            </div>
+        </div>
+    `,
+    svgViewData: `
+        <div class="svg-viewer-wrapper-dc236">
+            <div class="svg-viewer-box-b6f38" style="--svg-w:32;--svg-h:32;--width:100px;">
+                <div style="padding: var(--padding); width: 100%;">
+                    <div class="svg-viewer-inner-d38c5">
+                        <ue-svg-viewer
+                            class="svg-viewer-a0437"
+                            src="http://127.0.0.1:9005/uploads/1749658744495.svg"
+                            fill-color=""
+                            stroke-color=""
+                        ></ue-svg-viewer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
+    splineData: `
+        <div
+            class="spline-wrapper-d6e31"
+            data-url="https://static.jsmo.xin/uebuilder/public-resource/spline/zujian/spline003.splinecode"
+        >
+            <div class="spline-box-f217a" style="--spline-w:300;--spline-h:300;">
+                <div
+                    loading="auto"
+                    class="spline-viewer-e851b"
+                    data-url="https://static.jsmo.xin/uebuilder/public-resource/spline/zujian/spline003.splinecode"
+                ></div>
+            </div>
+        </div>
+    `,
+    lottieData: `
+        <div
+            class="lottie-wrapper-acffe"
+            data-url="https://static.jsmo.xin/uebuilder/public-resource/lottie/lottiefiles006.lottie"
+            data-trigger="hover"
+        >
+            <div class="lottie-box-c820d" style="width:300px;--lottie-w:1200;--lottie-h:1200;">
+                <div class="lottie-viewer-b3011" style="">
+                    <dotlottie-player
+                        mode="normal"
+                        loop="false"
+                        src="https://static.jsmo.xin/uebuilder/public-resource/lottie/lottiefiles006.lottie"
+                        style=""
+                    ></dotlottie-player>
+                </div>
+            </div>
+        </div>
+    `,
+    gridGroupData: `
+        <div
+            class="grid-layer-cb854"
+            data-config='{"grid":"1-1,1-1-1:1/1/3/2,1/2/2/4,2/2/3/4","width":"100%","gap":"10px","padding":"0px","mdGap":"10px","mdGrid":"auto-auto-auto,1:1/1/2/2,2/1/3/2,3/1/4/2"}'
+        >
+            <div
+                class="grid-layer--inner-ef909"
+                style="--grid-template-columns:1fr 1fr 1fr;--grid-template-rows:1fr 1fr;--md-grid-template-columns:1fr;--md-grid-template-rows:auto auto auto;gap:10px;--md-grid-layer-gap:10px;padding:0px;width:100%;"
+            >
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"1/1/3/2","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:1/1/3/2;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder1</p></div>
+                </div>
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"1/2/2/4","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:1/2/2/4;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder2</p></div>
+                </div>
+                <div
+                    class="grid-item-af6e7"
+                    data-config='{"overflow":"hidden","gridArea":"2/2/3/4","padding":"0px","radius":"","shadow":""}'
+                    style="grid-area:2/2/3/4;--grid-layer-item-padding:0px;overflow:hidden;"
+                >
+                    <div class="grid-item--inner-ae340"><p>Placeholder3</p></div>
+                </div>
+            </div>
+        </div>
+    `,
+    divideBlockData: `
+        <div class="editor-divide-block-a1327" style="--divide-block-size: 10px; --divide-block-md-size: 50px"></div>
     `,
 };

@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 10:26:00
+ * @LastEditTime: 2025-07-01 01:48:45
 -->
 <template>
     <TestArea
@@ -11,7 +11,12 @@
         v-model:testValueSelect="testValueSelect"
         title="测试气泡模式编辑器"
     >
-        <UeTiptapBubbleEditor v-bind="testValue" @update="handleUpdate" @ready="handleUpdate">
+        <UeTiptapBubbleEditor
+            :class="$style['bubble-editor']"
+            v-bind="testValue"
+            @update="handleUpdate"
+            @ready="handleUpdate"
+        >
             <!--  -->
         </UeTiptapBubbleEditor>
     </TestArea>
@@ -25,8 +30,28 @@ import { testTextContent } from "~/demo/data/test-content";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOptionTitle?: string })[] = [
     {
-        testOptionTitle: "图片",
-        content: testTextContent.imageData,
+        testOptionTitle: "分割线",
+        content: testTextContent.divideBlockData,
+    },
+    {
+        testOptionTitle: "网格",
+        content: testTextContent.gridGroupData,
+    },
+    {
+        testOptionTitle: "Lottie",
+        content: testTextContent.lottieData,
+    },
+    {
+        testOptionTitle: "Spline",
+        content: testTextContent.splineData,
+    },
+    {
+        testOptionTitle: "SVG",
+        content: testTextContent.svgViewData,
+    },
+    {
+        testOptionTitle: "视频",
+        content: testTextContent.videoFrameData,
     },
     {
         testOptionTitle: "默认",
@@ -39,6 +64,14 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOpti
     {
         testOptionTitle: "链接",
         content: testTextContent.linkData,
+    },
+    {
+        testOptionTitle: "图片",
+        content: testTextContent.imageData,
+    },
+    {
+        testOptionTitle: "图标",
+        content: testTextContent.svgIconData,
     },
 ];
 const testValue = ref(testValueList[testValueSelect.value]);
@@ -63,6 +96,8 @@ function handleUpdate(editor: Editor) {
 </script>
 <style lang="scss" module>
 .test-area {
-    // init
+    .bubble-editor {
+        width: 500px;
+    }
 }
 </style>

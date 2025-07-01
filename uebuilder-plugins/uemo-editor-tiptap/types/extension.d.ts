@@ -9,6 +9,14 @@ import type { LetterSpacingAttrs } from "../packages/extension-letter-spacing/sr
 import type { EditorPanelAttrsMap, OpenEditorPanelHandler } from "../packages/extension-editor-panel/src";
 import type { ButtonRowAttrs, ButtonItemAttrs } from "../packages/extension-button/src";
 import type { ImageAttrs } from "../packages/extension-image/src";
+import type { SvgIconAttrs } from "../packages/extension-svg-icon/src";
+import type { FrameAttrs, VideoFrameAttrs, MapFrameAttrs, WebFrameAttrs } from "../packages/extension-frame/src";
+import type { SvgViewerAttrs } from "../packages/extension-svg-view/src";
+import type { SplineAttrs } from "../packages/extension-spline/src";
+import type { LottieAttrs } from "../packages/extension-lottie/src";
+import type { GridGroupAttrs } from "../packages/extension-grid/src";
+import type { GridItemAttrs } from "../packages/extension-grid/src";
+import type { DividerBlockAttrs } from "../packages/extension-divider-block/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -51,6 +59,40 @@ declare global {
         };
         type Image = {
             attrs: ImageAttrs;
+        };
+        type SvgIcon = {
+            attrs: SvgIconAttrs;
+        };
+
+        type VideoFrame = {
+            attrs: VideoFrameAttrs;
+        };
+        type MapFrame = {
+            attrs: MapFrameAttrs;
+        };
+        type WebFrame = {
+            attrs: WebFrameAttrs;
+        };
+        type Frame = {
+            attrs: FrameAttrs;
+        };
+        type SvgView = {
+            attrs: SvgViewerAttrs;
+        };
+        type Spline = {
+            attrs: SplineAttrs;
+        };
+        type Lottie = {
+            attrs: LottieAttrs;
+        };
+        type GridGroup = {
+            attrs: GridGroupAttrs;
+        };
+        type GridItem = {
+            attrs: GridItemAttrs;
+        };
+        type DividerBlock = {
+            attrs: DividerBlockAttrs;
         };
     }
 }

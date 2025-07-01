@@ -7,6 +7,11 @@ import { isImageReg } from "@stone/uemo-editor-utils/lib/utils";
 
 import ImageView from "../view/Image.vue";
 
+import { imageRender } from "../utils/render";
+import { getImageAttrs } from "../utils/helper";
+import { parseCkImage, parseImage } from "../utils/parse";
+
+import $pageStyle from "../../../src/app.module.scss";
 export interface ImageOptions {
     inline: boolean;
     allowBase64: boolean;
@@ -22,6 +27,11 @@ declare module "@tiptap/core" {
              * 插入图片
              */
             insertImage: (src: string) => ReturnType;
+
+            /**
+             * 打开图片编辑器面板
+             */
+            openImageEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
 
             /**
              * 替换图片
@@ -77,13 +87,14 @@ export const Image = Node.create<ImageOptions>({
             imageMask: { default: "" },
             align: { default: "left" },
             pos: { default: "" },
-            background: { default: "" },
             width: { default: "" },
             height: { default: "" },
             sizeMode: { default: undefined },
-            radius: { default: "" },
-            shadow: { default: "" },
+
             border: { default: undefined },
+            shadow: { default: "" },
+            radius: { default: "" },
+            background: { default: "" },
 
             /**
              * 链接相关
@@ -91,15 +102,27 @@ export const Image = Node.create<ImageOptions>({
             imageLink: { default: undefined },
 
             /**
-             * 上传相关
+             * 移动端相关
              */
-            uploadProgress: { default: "" },
             md: { default: {} },
         } as Record<keyof ImageAttrs, Attribute>;
     },
 
     parseHTML() {
         return [
+            {
+                tag: "div." + $pageStyle.img_wrapper,
+                getAttrs: (el): ImageAttrs => {
+                    return parseImage(el);
+                },
+            },
+            {
+                // 这里转换的是有 CK-Editor 带来的属性
+                tag: "figure.ue-image",
+                getAttrs: (el): ImageAttrs => {
+                    return parseCkImage(el);
+                },
+            },
             {
                 tag: this.options.allowBase64 ? "img[src]" : 'img[src]:not([src^="data:"])',
                 getAttrs: (el): ImageAttrs => {
@@ -118,11 +141,11 @@ export const Image = Node.create<ImageOptions>({
 
     renderHTML({ HTMLAttributes }) {
         const imageAttr = HTMLAttributes as ImageAttrs;
-        const { src } = imageAttr;
+        const { src: src } = imageAttr;
 
         if (!src) return ["p"];
 
-        return ["img", HTMLAttributes];
+        return imageRender(imageAttr);
     },
 
     addInputRules() {
@@ -178,6 +201,22 @@ export const Image = Node.create<ImageOptions>({
                 (attrs: Partial<ImageAttrs>) =>
                 ({ chain }) => {
                     return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openImageEditorPanel:
+                (rect: UE_TIPTAP_UNIT.PositionRect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getImageAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("image", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateImageAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
         };
     },

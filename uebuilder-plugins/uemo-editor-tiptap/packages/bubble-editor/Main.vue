@@ -1,10 +1,10 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 16:41:49
+ * @LastEditTime: 2025-06-07 13:01:03
 -->
 <template>
-    <div :class="$style['bubble-editor']">
+    <div :class="$style['bubble-editor']" v-bind="$attrs">
         <TiptapEditorContent v-if="tiptapEditor" :editor="tiptapEditor" />
     </div>
     <UeTiptapEditorPanel ref="attrEditorPanel" />
@@ -25,7 +25,6 @@ import $pageStyle from "../../src/app.module.scss";
 
 defineOptions({
     name: "UeTiptapBubbleEditor",
-    inheritAttrs: false,
 });
 
 const { t } = useI18n();
@@ -137,6 +136,17 @@ const handleAIRequest = async (type: string, text: string, param: any): Promise<
     }
 };
 
+const mapLibrary = ref<UE_EL_UTIL.ResourceMap | undefined>(undefined);
+const getMapLibrary = async () => {
+    try {
+        const res = await instance?.proxy?.$ueElResource.mapLibrary.getData();
+
+        mapLibrary.value = res;
+    } catch (error) {
+        throw error;
+    }
+};
+
 /**
  * 创建编辑器实例
  * @returns {Editor} Tiptap 编辑器实例
@@ -181,6 +191,19 @@ watch(
     () => props.device,
     (value) => tiptapEditor.value?.commands.updateDevice(value)
 );
+
+watch(
+    () => mapLibrary.value,
+    (value) => {
+        tiptapEditor.value?.commands.updateMapUrl(value?.mapUrl || "");
+    }
+);
+
+onBeforeMount(() => {
+    getMapLibrary().catch((error) => {
+        instance?.proxy?.$ueElError(error);
+    });
+});
 
 onMounted(() => {
     tiptapEditor.value = createEditor();

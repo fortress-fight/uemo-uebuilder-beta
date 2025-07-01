@@ -60,7 +60,13 @@ $project-name: app-editor;
             }
         }
         .emoji,
-        .btn-row {
+        .svg-icon-wrapper,
+        .frame,
+        .svg-viewer-wrapper,
+        .spline-wrapper,
+        .lottie-wrapper,
+        .img_wrapper,
+        .editor-divide-block {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */
@@ -69,6 +75,51 @@ $project-name: app-editor;
 
                     outline: 2px solid var(--theme-layout-component);
                 }
+            }
+        }
+        .grid-layer {
+            cursor: pointer;
+            &.has-focus {
+                /* stylelint-disable-next-line selector-class-pattern */
+                &:global(.ProseMirror-selectednode) {
+                    z-index: 50;
+
+                    outline: 2px solid var(--theme-layout-component);
+                    .grid-item {
+                        --u-border-color: var(--theme-layout-component);
+                        position: relative;
+                    }
+                }
+            }
+            &[data-editing="true"],
+            &[data-focus-in="true"] {
+                .grid-item {
+                    --u-border-color: var(--theme-layout-component);
+                }
+            }
+        }
+        .grid-item {
+            &.has-focus {
+                --u-border-color: transparent !important;
+                z-index: 50;
+
+                outline: 2px solid var(--theme-layout-component);
+            }
+            &[data-editing="true"] {
+                outline-style: dashed;
+            }
+            &::before {
+                @include ab-cover;
+                content: "";
+
+                border: 1px dashed var(--u-border-color);
+            }
+        }
+        .editor-divide-block {
+            cursor: pointer;
+            &:hover,
+            &[data-editing="true"] {
+                background: rgb(35 131 226 / 0.14);
             }
         }
     }

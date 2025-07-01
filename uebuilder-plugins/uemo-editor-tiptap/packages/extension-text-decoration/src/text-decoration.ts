@@ -151,7 +151,7 @@ export const TextDecoration = Mark.create<TextDecorationOptions>({
 
                     commands.openAttrEditorPanel("textDecoration", textDecorationAttr, {
                         rect,
-                        setData: (attr) => {
+                        updateAttrs: (attr) => {
                             editor.chain().setMarkSelection("textDecoration").run();
 
                             if (!attr.svgName) {
@@ -160,13 +160,11 @@ export const TextDecoration = Mark.create<TextDecorationOptions>({
                                 editor.chain().setTextDecoration(attr).run();
                             }
                         },
-                        preview: () => {
+                        fire: (type: "preview") => {
+                            if (type !== "preview") return;
                             requestAnimationFrame(() => {
                                 editor.chain().setMeta("addToHistory", false).playTextDecorationAnimate();
                             });
-                        },
-                        focus: () => {
-                            commands.focus();
                         },
                     });
                     return true;

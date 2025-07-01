@@ -1,14 +1,17 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-05-13 10:30:46
+ * @LastEditTime: 2025-07-01 02:11:04
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
+    popId?: string;
     rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
-    setData: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
-    preview?: (param?: any) => void; // 预览回调
-    focus: () => void; // 聚焦回调
+    props?: Record<string, any>; // 面板属性
+
+    updateAttrs: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
+    fire?(type: string, param?: any): void; // 触发事件回调
+    focus?: () => void; // 聚焦回调
     close?: () => void; // 关闭回调
 };
 
@@ -19,7 +22,7 @@ export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
  */
 export type EditorPanelHandler<T extends keyof EditorPanelAttrsMap, R = void> = (
     type: T,
-    attr: EditorPanelAttrsMap[T],
+    data: EditorPanelAttrsMap[T],
     param: EditorPanelParam<T>
 ) => R;
 
@@ -36,6 +39,15 @@ export type EditorPanelAttrsMap = {
     buttonRow: UE_TIPTAP_EXTENSION.ButtonRow["attrs"];
     buttonItem: UE_TIPTAP_EXTENSION.ButtonItem["attrs"];
     image: UE_TIPTAP_EXTENSION.Image["attrs"];
+    svgIcon: UE_TIPTAP_EXTENSION.SvgIcon["attrs"];
+    frame: UE_TIPTAP_EXTENSION.Frame["attrs"];
+    svgView: UE_TIPTAP_EXTENSION.SvgView["attrs"];
+    spline: UE_TIPTAP_EXTENSION.Spline["attrs"];
+    lottie: UE_TIPTAP_EXTENSION.Lottie["attrs"];
+    gridGroup: UE_TIPTAP_EXTENSION.GridGroup["attrs"];
+    gridItem: UE_TIPTAP_EXTENSION.GridItem["attrs"];
+    dividerBlock: UE_TIPTAP_EXTENSION.DividerBlock["attrs"];
+    moreOper: null;
 };
 
 export type OpenEditorPanelHandler<T extends keyof EditorPanelAttrsMap = keyof EditorPanelAttrsMap> =

@@ -1,7 +1,7 @@
 /*
  * @Description: 背景属性控制组
  * @Author: F-Stone
- * @LastEditTime: 2025-03-26 00:21:53
+ * @LastEditTime: 2025-06-16 00:06:08
  */
 import type { App } from "vue";
 import type { UeElScrollEffectSettingPanelValue } from "../scroll-effect-setting-panel";
@@ -18,6 +18,12 @@ export type TYPE_BG_TYPE_PARAM = {
     [key in TYPE_BG_TYPE]: { limit: number; data: UE_EL_BACKGROUND_PARAM_MAP[key] };
 };
 
+/**
+ * @description 移入效果参数
+ */
+type HOVER_EFFECT_OPTION = Record<string, string | undefined>;
+type HOVER_EFFECT_VALUE = { type: string; options?: HOVER_EFFECT_OPTION };
+
 export type UE_EL_BACKGROUND_PARAM_MAP = {
     color: string | { color: string; opacity?: number };
     image: {
@@ -30,6 +36,7 @@ export type UE_EL_BACKGROUND_PARAM_MAP = {
         opacity?: number;
         size?: "repeat" | "cover" | "normal" | "contain";
         scrollEffect?: UeElScrollEffectSettingPanelValue;
+        hoverEffect?: HOVER_EFFECT_VALUE | undefined;
     };
     video: {
         video: string;
@@ -69,6 +76,7 @@ export type UE_EL_BACKGROUND_PARAM_MAP = {
         natureHeight?: number;
 
         scrollEffect?: UeElScrollEffectSettingPanelValue;
+        hoverEffect?: HOVER_EFFECT_VALUE | undefined;
     };
 };
 

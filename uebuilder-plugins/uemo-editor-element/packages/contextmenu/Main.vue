@@ -1,10 +1,10 @@
 <!--
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 18:53:49
+ * @LastEditTime: 2025-06-05 14:36:18
 -->
 <template>
-    <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="openPopupPanel">
+    <div ref="rootDom" :class="$style['contextmenu']" @pointerleave="checkPopupPanel">
         <div :class="$style['inner-wrapper']">
             <div v-for="(group, groupKey) in list" :key="groupKey" :class="$style['contextmenu-group']">
                 <ContextmenuPanel
@@ -18,7 +18,7 @@
                     :disable="!item.enable"
                     :class="$style['oper-item']"
                     class="flex justify-between items-center"
-                    @click="fireTrigger(item)"
+                    @click="triggerEvent(item)"
                     @setOpenMap="setOpenPath(`${level}-${groupKey}-${index}`)"
                 >
                     <div :class="$style['text']">{{ item.text }}</div>
@@ -33,8 +33,8 @@
                             v-if="item.subList && item.subList.length > 0"
                             :class="$style['contextmenu-sub-menu']"
                             :list="item.subList"
+                            :trigger="trigger"
                             :level="slotProps.level + 1"
-                            @trigger="fireTrigger"
                         />
                     </template>
                 </ContextmenuPanel>
@@ -52,9 +52,7 @@ import UeElContextmenu from "./Main.vue";
 
 defineOptions({ name: "UeElContextmenu" });
 const prop = withDefaults(defineProps<UeElContextmenuBaseProps>(), { list: () => [], level: 0 });
-const emit = defineEmits<{
-    (ev: "trigger", type: { type: string; enable: boolean; text: string; param: any }): void;
-}>();
+
 const contextMenuPanels = useTemplateRef("contextMenuPanels");
 
 const openPath = ref<string>("");
@@ -62,12 +60,12 @@ function setOpenPath(data: string) {
     openPath.value = data;
 }
 
-function fireTrigger(item: UeElContextmenuItem) {
+function triggerEvent(item: UeElContextmenuItem) {
     if (!item.type) return;
-    emit("trigger", { type: item.type, enable: item.enable, text: item.text, param: item.param });
+    prop.trigger(item.type, { detail: isReactive(item) ? toRaw(item) : item });
 }
 
-function openPopupPanel(ev: PointerEvent) {
+function checkPopupPanel(ev: PointerEvent) {
     // 如果不是顶层菜单,直接返回
     if (prop.level !== 0) return;
 

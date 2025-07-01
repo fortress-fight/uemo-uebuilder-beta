@@ -4,21 +4,44 @@
 <script lang="ts" setup>
 import { isNodeSelection } from "@tiptap/core";
 
-import { getSelectionRect } from "../../../utils/tiptap-utils";
+import { getSelectionRect, selectNode } from "../../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
+import { getClosestGridItem } from "../../extension-grid/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
+const props = defineProps<{ nodeName?: string }>();
 
 function openBtnRowEditorPanel() {
     if (!editor) return;
 
     const { view, state } = editor;
+    let nodeName: string | undefined;
+    let rect: ReturnType<typeof getSelectionRect> | undefined;
 
-    const rect = getSelectionRect(view, state.selection);
+    if (props.nodeName) {
+        nodeName = props.nodeName;
 
-    if (!rect || !isNodeSelection(state.selection)) return;
+        switch (nodeName) {
+            case "gridItem":
+                const gridItemInfo = getClosestGridItem(editor);
+                if (!gridItemInfo) return;
 
-    const nodeName = state.selection.node.type.name;
+                const { pos } = gridItemInfo;
+                selectNode(editor, pos);
+
+                rect = getSelectionRect(view, editor.state.selection);
+                break;
+            default:
+                return;
+        }
+    } else {
+        if (!isNodeSelection(state.selection)) return;
+
+        rect = getSelectionRect(view, state.selection);
+        nodeName = state.selection.node.type.name;
+    }
+
+    if (!rect) return;
 
     switch (nodeName) {
         case "buttonRow":
@@ -26,6 +49,30 @@ function openBtnRowEditorPanel() {
             break;
         case "buttonItem":
             editor.chain().openButtonItemEditorPanel(rect).run();
+            break;
+        case "image":
+            editor.chain().openImageEditorPanel(rect).run();
+            break;
+        case "svgIcon":
+            editor.chain().openSvgIconEditorPanel(rect).run();
+            break;
+        case "frame":
+            editor.chain().openFrameEditorPanel(rect).run();
+            break;
+        case "svgView":
+            editor.chain().openSvgViewEditorPanel(rect).run();
+            break;
+        case "spline":
+            editor.chain().openSplineEditorPanel(rect).run();
+            break;
+        case "lottie":
+            editor.chain().openLottieEditorPanel(rect).run();
+            break;
+        case "gridGroup":
+            editor.chain().openGridGroupEditorPanel(rect).run();
+            break;
+        case "gridItem":
+            editor.chain().openGridItemEditorPanel(rect).run();
             break;
         default:
             return;

@@ -1,0 +1,21 @@
+.page-editor {
+    .editor-divide-block {
+        min-height: 10px;
+        &::after {
+            display: block;
+
+            padding-top: var(--divide-block-size);
+
+            content: "";
+        }
+    }
+}
+@include media-breakpoint-down(md) {
+    .page-editor {
+        .editor-divide-block {
+            &::after {
+                padding-top: var(--divide-block-md-size, 50px);
+            }
+        }
+    }
+}

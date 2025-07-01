@@ -63,11 +63,8 @@ function openLineHeightPanel() {
         { lineHeight: currentValue.value || "" },
         {
             rect,
-            setData: ({ lineHeight }) => {
+            updateAttrs: ({ lineHeight }) => {
                 triggerLineHeight(lineHeight);
-            },
-            focus: () => {
-                editor?.commands.focus();
             },
         }
     );

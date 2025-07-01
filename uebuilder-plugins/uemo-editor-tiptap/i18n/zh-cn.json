@@ -112,5 +112,15 @@
     "TIP_INSERT_GRID": "插入网格",
     "TIP_INSERT_IMAGE": "插入图片",
     "TIP_INSERT_HR": "插入分隔线",
-    "TIP_MAX_UPLOAD_IMAGE_COUNT": "最多只能同时上传{count}张图片"
+    "TIP_MAX_UPLOAD_IMAGE_COUNT": "最多只能同时上传{count}张图片",
+    "TIP_COPY_ATTRS_TITLE": "复制属性",
+    "TIP_PASTE_ATTRS_TITLE": "粘贴属性",
+    "TIP_COPY_ATTRS_SUCCESS": "复制属性成功",
+    "TIP_COPY_ATTRS_FAILED": "复制属性失败",
+    "TIP_PASTE_ATTRS_SUCCESS": "粘贴属性成功",
+    "TIP_PASTE_ATTRS_FAILED": "粘贴属性失败",
+    "TIP_PASTE_ATTRS_ALL": "粘贴所有属性",
+    "TIP_PASTE_ATTRS_DESIGN": "粘贴设计属性",
+    "TIP_PASTE_ATTRS_EFFECT": "粘贴动效属性",
+    "TIP_LINK_SETTING_PANEL_CLOSE_TIP": "链接设置未保存，请保存链接设置"
 }

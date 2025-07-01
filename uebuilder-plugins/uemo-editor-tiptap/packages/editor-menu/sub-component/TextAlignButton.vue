@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 10:38:59
+ * @LastEditTime: 2025-05-16 19:23:21
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -52,8 +52,8 @@ function triggerTextAlign(textAlign?: string | null) {
 
     if (isButtonRow(editor)) {
         const chain = editor?.chain().focus();
-
-        chain.updateButtonRowAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
+        const buttonAlign = (textAlign || undefined) as UE_TIPTAP_EXTENSION.ButtonRow["attrs"]["align"];
+        chain.updateButtonRowAttrs(isPc ? { align: buttonAlign } : { moAlign: buttonAlign });
 
         return chain.run();
     }
@@ -80,11 +80,8 @@ function openTextAlignPanel() {
         { textAlign: currentValue.value || "" },
         {
             rect,
-            setData: ({ textAlign }) => {
+            updateAttrs: ({ textAlign }) => {
                 triggerTextAlign(textAlign);
-            },
-            focus: () => {
-                editor?.commands.focus();
             },
         }
     );

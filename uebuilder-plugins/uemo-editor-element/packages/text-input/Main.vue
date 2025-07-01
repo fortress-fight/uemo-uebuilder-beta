@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-25 11:40:40
+ * @LastEditTime: 2025-06-07 01:13:13
 -->
 <template>
     <div
@@ -12,6 +12,7 @@
         :data-disable="disable"
         :data-has-slot="hasSlotComponent"
         :data-theme="theme"
+        :data-is-empty="value === ''"
     >
         <div :class="$style['before-group']" class="flex">
             <slot name="before"></slot>
@@ -173,7 +174,7 @@ function confirm() {
                     return;
                 }
             } else if (rule.pattern && !rule.pattern.test(processedValue)) {
-                instance?.proxy?.$ueElToast.error(t("INPUT_TIP_FORMAT_ERROR"));
+                instance?.proxy?.$ueElToast.error(rule.message || t("INPUT_TIP_FORMAT_ERROR"));
                 isValid.value = false;
                 return;
             }
@@ -237,6 +238,7 @@ defineExpose({
 
         opacity: 0.5;
     }
+    &[data-is-empty="true"],
     &:hover {
         --text-border-color: #{color(var(--ue-border-color))};
     }

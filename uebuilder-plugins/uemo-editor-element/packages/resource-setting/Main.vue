@@ -1,12 +1,16 @@
 <!--
  * @Description: 资源设置组件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 03:22:10
+ * @LastEditTime: 2025-05-15 10:49:29
 -->
 <template>
     <UeElControlGroup :class="$style['resource-setting-panel']" ref="rootDom" class="w-full grid">
         <template v-if="isResourcePreviewAttrs(previewComponentAttrs)">
-            <UeElResourcePreview v-bind="previewComponentAttrs" @trigger="handleTrigger" />
+            <UeElResourcePreview
+                v-bind="previewComponentAttrs"
+                @trigger="handleTrigger"
+                @emptyClick="handleEmptyClick"
+            />
         </template>
         <div class="flex gap-2 w-full" :class="$style['resource-setting']">
             <slot name="operGroup" :openPopPanel="openPopPanel" :handleRemove="handleRemove">
@@ -183,6 +187,10 @@ function handleResourceSelect(value?: UeElResourceSettingValue[T]): void {
 
 function handleTrigger(params: { type: "focus"; data: { pos: string } }): void {
     emit("trigger", params);
+}
+
+function handleEmptyClick(): void {
+    openPopPanel();
 }
 
 /**

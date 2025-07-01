@@ -22,6 +22,48 @@
             @update:select="insertImageContent"
             :class="$style['node-placeholder-panel']"
         />
+        <UeElIconLibraryPanel
+            v-if="nodeName === 'SvgIconPlaceholder'"
+            @update:select="insertSvgIconContent"
+            :class="$style['node-placeholder-panel']"
+        />
+        <UeElVideoLibraryPanel
+            v-if="nodeName === 'VideoPlaceholder'"
+            @update:select="insertVideoContent"
+            :class="$style['node-placeholder-panel']"
+        />
+        <UeElMapSettingPanel
+            v-if="nodeName === 'MapPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @confirm="insertMapContent"
+            @cancel="handleEndEdit"
+        />
+        <UeElWebSettingPanel
+            v-if="nodeName === 'WebPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @confirm="insertWebContent"
+            @cancel="handleEndEdit"
+        />
+        <UeElSvgLibraryPanel
+            v-if="nodeName === 'SvgViewerPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertSvgViewerContent"
+        />
+        <UeElSplineLibraryPanel
+            v-if="nodeName === 'SplinePlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertSplineContent"
+        />
+        <UeElLottieLibraryPanel
+            v-if="nodeName === 'LottiePlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertLottieContent"
+        />
+        <UeElGridLayoutLibraryPanel
+            v-if="nodeName === 'GridGroupPlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @update:select="insertGridGroupContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -65,6 +107,54 @@ const insertImageContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertImage(value).run();
+};
+
+const insertSvgIconContent = (value?: { name: string; source: string }) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSvgIcon(value).run();
+};
+
+const insertVideoContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertVideoFrame(value).run();
+};
+
+const insertMapContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertMapFrame(value).run();
+};
+
+const insertWebContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertWebFrame(value).run();
+};
+
+const insertSvgViewerContent = (value?: UE_EL_UTIL.ResourceSvgAttrs) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSvgViewer(value).run();
+};
+
+const insertSplineContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertSpline(value).run();
+};
+
+const insertLottieContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertLottie(value).run();
+};
+
+const insertGridGroupContent = (value?: string) => {
+    if (!value) return;
+
+    editor?.chain().focus().insertGridGroup(value).run();
 };
 
 const handleEndEdit = () => {

@@ -1,7 +1,7 @@
 /*
  * @Description: 菜单组件
  * @Author: F-Stone
- * @LastEditTime: 2025-02-27 17:11:45
+ * @LastEditTime: 2025-05-25 19:23:43
  */
 import type { App } from "vue";
 
@@ -25,6 +25,7 @@ export interface UeElContextmenuBaseProps {
     list: UeElContextmenuItem[][];
     level?: number;
     parentId?: string;
+    trigger: (type: string, data: { detail: UeElContextmenuItem }) => void;
 }
 export type UeElContextmenuInstance = InstanceType<typeof UeElContextmenu>;
 

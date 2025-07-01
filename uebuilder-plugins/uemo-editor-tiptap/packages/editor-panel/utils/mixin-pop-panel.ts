@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-05-09 11:38:44
+ * @LastEditTime: 2025-06-29 16:32:35
  */
 
 export function usePopPanelParam(
@@ -61,6 +61,25 @@ export function usePopPanelParam(
                     },
                 };
 
+            case "moreOper":
+                return {
+                    draggable: false,
+                    panel: {
+                        position: {
+                            refEl,
+                            autoUpdate: true,
+                            options: {
+                                placement: "bottom-end",
+                                middleware: [
+                                    ["flip", { crossAxis: false }],
+                                    ["offset", { mainAxis: 6 }],
+                                    ["shift", { crossAxis: true, padding: 17 }],
+                                ],
+                            },
+                        },
+                    },
+                };
+
             case "link":
                 return {
                     draggable: true,
@@ -82,6 +101,14 @@ export function usePopPanelParam(
 
             case "buttonRow":
             case "buttonItem":
+            case "image":
+            case "svgIcon":
+            case "frame":
+            case "svgView":
+            case "spline":
+            case "lottie":
+            case "gridGroup":
+            case "gridItem":
                 return {
                     draggable: true,
                     checkAllowClose: options.checkAllowClose,
