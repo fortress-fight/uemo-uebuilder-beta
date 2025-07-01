@@ -141,6 +141,7 @@
     "UNIT_DIVIDER_BLOCK": "分隔块",
     "UNIT_HR_RULE": "分割线",
     "UNIT_OVERFLOW": "裁切",
+    "UNIT_LINE": "线条",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

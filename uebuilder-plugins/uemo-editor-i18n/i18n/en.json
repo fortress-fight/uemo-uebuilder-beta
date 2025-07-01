@@ -141,6 +141,7 @@
     "UNIT_DIVIDER_BLOCK": "Divider Block",
     "UNIT_HR_RULE": "Hr",
     "UNIT_OVERFLOW": "Overflow",
+    "UNIT_LINE": "Line",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
