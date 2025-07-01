@@ -1,16 +1,16 @@
 <template>
     <UeTiptapEditorFloatMenu
-        plugin-key="dividerBlockMenu"
-        :title="t('UNIT_DIVIDER_BLOCK')"
+        plugin-key="hrRuleMenu"
+        :title="t('UNIT_HR_RULE')"
         :menu-items="menuItems"
         :should-show="shouldShow"
     />
 </template>
 <script lang="ts" setup>
-import { isDividerBlockNode } from "../utils/helper";
+import { isHrRuleNode } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-defineOptions({ name: "UeTiptapDividerBlockMenu", inheritAttrs: false });
+defineOptions({ name: "UeTiptapHrRuleMenu", inheritAttrs: false });
 
 const { t } = useI18n();
 
@@ -31,10 +31,10 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
 
     const { selection } = state;
 
-    const isDividerBlock = isDividerBlockNode(selection);
-    const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "dividerBlock";
+    const isHrRule = isHrRuleNode(selection);
+    const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "hrRule";
 
-    return !isEditing && isDividerBlock && view.hasFocus();
+    return !isEditing && isHrRule && view.hasFocus();
 };
 </script>
 <style lang="scss" module>

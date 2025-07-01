@@ -177,4 +177,12 @@ export const testTextContent = {
     divideBlockData: `
         <div class="editor-divide-block-a1327" style="--divide-block-size: 10px; --divide-block-md-size: 50px"></div>
     `,
+    hrRuleData: `
+        <div
+            class="editor-hr-dbe3e"
+            style="--hr-rule-size:40px;--hr-rule-md-size:40px;--hr-rule-border-color:rgba(211, 211, 211, 0.4);--hr-rule-border-style:solid;"
+        >
+            <div class="editor-hr--inner-cfa07"></div>
+        </div>
+    `,
 };

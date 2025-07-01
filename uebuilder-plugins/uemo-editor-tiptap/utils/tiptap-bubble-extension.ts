@@ -57,6 +57,7 @@ import { Spline } from "../packages/extension-spline/src";
 import { Lottie } from "../packages/extension-lottie/src";
 import { GridGroup, GridItem } from "../packages/extension-grid/src";
 import { DividerBlock } from "../packages/extension-divider-block/src";
+import { HrRule } from "../packages/extension-hr-rule/src";
 
 // #endregion
 
@@ -135,6 +136,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         GridGroup,
         GridItem,
         DividerBlock,
+        HrRule,
     ];
 
     return [...baseExtensions, ...customExtensions];

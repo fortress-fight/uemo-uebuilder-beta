@@ -17,6 +17,7 @@ import type { LottieAttrs } from "../packages/extension-lottie/src";
 import type { GridGroupAttrs } from "../packages/extension-grid/src";
 import type { GridItemAttrs } from "../packages/extension-grid/src";
 import type { DividerBlockAttrs } from "../packages/extension-divider-block/src";
+import type { HrRuleAttrs } from "../packages/extension-hr-rule/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -93,6 +94,9 @@ declare global {
         };
         type DividerBlock = {
             attrs: DividerBlockAttrs;
+        };
+        type HrRule = {
+            attrs: HrRuleAttrs;
         };
     }
 }

@@ -110,6 +110,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertDividerBlock":
                     chain.insertDivideBlock({ size: "10px" });
                     break;
+                case "insertHrRule":
+                    chain.insertHrRule({});
+                    break;
 
                 default:
                     break;

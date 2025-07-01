@@ -76,5 +76,8 @@ declare const styles: {
     readonly "bg-box": string;
 
     readonly "editor-divide-block": string;
+
+    readonly "editor-hr": string;
+    readonly "editor-hr--inner": string;
 };
 export = styles;

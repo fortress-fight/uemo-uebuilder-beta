@@ -66,6 +66,7 @@ $project-name: app-editor;
         .spline-wrapper,
         .lottie-wrapper,
         .img_wrapper,
+        .editor-hr,
         .editor-divide-block {
             cursor: pointer;
             &.has-focus {
@@ -115,6 +116,7 @@ $project-name: app-editor;
                 border: 1px dashed var(--u-border-color);
             }
         }
+        .editor-hr,
         .editor-divide-block {
             cursor: pointer;
             &:hover,

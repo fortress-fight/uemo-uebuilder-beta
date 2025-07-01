@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-01 01:48:45
+ * @LastEditTime: 2025-07-02 01:56:23
 -->
 <template>
     <TestArea
@@ -31,6 +31,10 @@ const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOptionTitle?: string })[] = [
     {
         testOptionTitle: "分割线",
+        content: testTextContent.hrRuleData,
+    },
+    {
+        testOptionTitle: "分割块",
         content: testTextContent.divideBlockData,
     },
     {

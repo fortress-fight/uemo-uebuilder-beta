@@ -16,6 +16,7 @@
     <UeTiptapGridGroupMenu />
     <UeTiptapGridItemMenu />
     <UeTiptapDividerBlockMenu />
+    <UeTiptapHrRuleMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -35,6 +36,7 @@ import UeTiptapLottieMenu from "../../extension-lottie/menu/LottieMenu.vue";
 import UeTiptapGridGroupMenu from "../../extension-grid/menu/GridGroupMenu.vue";
 import UeTiptapGridItemMenu from "../../extension-grid/menu/GridItemMenu.vue";
 import UeTiptapDividerBlockMenu from "../../extension-divider-block/menu/DividerBlockMenu.vue";
+import UeTiptapHrRuleMenu from "../../extension-hr-rule/menu/HrRuleMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 
