@@ -8,9 +8,10 @@ import UeEditorPanelTiptapButtonRow, { UeEditorPanelTiptapButtonRowBaseProps } f
 import UeEditorPanelTiptapDividerBlock, {
     UeEditorPanelTiptapDividerBlockBaseProps,
 } from "../packages/tiptap-divider-block";
-import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridGroup, { UeEditorPanelTiptapGridGroupBaseProps } from "../packages/tiptap-grid-group";
+import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridItem, { UeEditorPanelTiptapGridItemBaseProps } from "../packages/tiptap-grid-item";
+import UeEditorPanelTiptapHrRule, { UeEditorPanelTiptapHrRuleBaseProps } from "../packages/tiptap-hr-rule";
 import UeEditorPanelTiptapImage, { UeEditorPanelTiptapImageBaseProps } from "../packages/tiptap-image";
 import UeEditorPanelTiptapLottie, { UeEditorPanelTiptapLottieBaseProps } from "../packages/tiptap-lottie";
 import UeEditorPanelTiptapSpline, { UeEditorPanelTiptapSplineBaseProps } from "../packages/tiptap-spline";
@@ -22,9 +23,10 @@ declare module "vue" {
         UeEditorPanelTiptapButtonItem: typeof UeEditorPanelTiptapButtonItem;
         UeEditorPanelTiptapButtonRow: typeof UeEditorPanelTiptapButtonRow;
         UeEditorPanelTiptapDividerBlock: typeof UeEditorPanelTiptapDividerBlock;
-        UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapGridGroup: typeof UeEditorPanelTiptapGridGroup;
+        UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapGridItem: typeof UeEditorPanelTiptapGridItem;
+        UeEditorPanelTiptapHrRule: typeof UeEditorPanelTiptapHrRule;
         UeEditorPanelTiptapImage: typeof UeEditorPanelTiptapImage;
         UeEditorPanelTiptapLottie: typeof UeEditorPanelTiptapLottie;
         UeEditorPanelTiptapSpline: typeof UeEditorPanelTiptapSpline;
@@ -38,9 +40,10 @@ declare global {
         interface UeEditorPanelTiptapButtonItemProps extends UeEditorPanelTiptapButtonItemBaseProps {}
         interface UeEditorPanelTiptapButtonRowProps extends UeEditorPanelTiptapButtonRowBaseProps {}
         interface UeEditorPanelTiptapDividerBlockProps extends UeEditorPanelTiptapDividerBlockBaseProps {}
-        interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapGridGroupProps extends UeEditorPanelTiptapGridGroupBaseProps {}
+        interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapGridItemProps extends UeEditorPanelTiptapGridItemBaseProps {}
+        interface UeEditorPanelTiptapHrRuleProps extends UeEditorPanelTiptapHrRuleBaseProps {}
         interface UeEditorPanelTiptapImageProps extends UeEditorPanelTiptapImageBaseProps {}
         interface UeEditorPanelTiptapLottieProps extends UeEditorPanelTiptapLottieBaseProps {}
         interface UeEditorPanelTiptapSplineProps extends UeEditorPanelTiptapSplineBaseProps {}

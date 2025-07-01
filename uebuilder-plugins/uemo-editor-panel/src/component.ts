@@ -1,14 +1,15 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/7/2 00:49:59
+ * @LastEditTime: 2025/7/2 02:04:36
  */
 import UeEditorPanelTiptapButtonItem from "../packages/tiptap-button-item";
 import UeEditorPanelTiptapButtonRow from "../packages/tiptap-button-row";
 import UeEditorPanelTiptapDividerBlock from "../packages/tiptap-divider-block";
-import UeEditorPanelTiptapFrame from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridGroup from "../packages/tiptap-grid-group";
+import UeEditorPanelTiptapFrame from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridItem from "../packages/tiptap-grid-item";
+import UeEditorPanelTiptapHrRule from "../packages/tiptap-hr-rule";
 import UeEditorPanelTiptapImage from "../packages/tiptap-image";
 import UeEditorPanelTiptapLottie from "../packages/tiptap-lottie";
 import UeEditorPanelTiptapSpline from "../packages/tiptap-spline";
@@ -19,9 +20,10 @@ export const components = [
     UeEditorPanelTiptapButtonItem,
     UeEditorPanelTiptapButtonRow,
     UeEditorPanelTiptapDividerBlock,
-    UeEditorPanelTiptapFrame,
     UeEditorPanelTiptapGridGroup,
+    UeEditorPanelTiptapFrame,
     UeEditorPanelTiptapGridItem,
+    UeEditorPanelTiptapHrRule,
     UeEditorPanelTiptapImage,
     UeEditorPanelTiptapLottie,
     UeEditorPanelTiptapSpline,
