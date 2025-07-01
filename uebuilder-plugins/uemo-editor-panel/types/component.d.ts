@@ -5,6 +5,9 @@
  */
 import UeEditorPanelTiptapButtonItem, { UeEditorPanelTiptapButtonItemBaseProps } from "../packages/tiptap-button-item";
 import UeEditorPanelTiptapButtonRow, { UeEditorPanelTiptapButtonRowBaseProps } from "../packages/tiptap-button-row";
+import UeEditorPanelTiptapDividerBlock, {
+    UeEditorPanelTiptapDividerBlockBaseProps,
+} from "../packages/tiptap-divider-block";
 import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridGroup, { UeEditorPanelTiptapGridGroupBaseProps } from "../packages/tiptap-grid-group";
 import UeEditorPanelTiptapGridItem, { UeEditorPanelTiptapGridItemBaseProps } from "../packages/tiptap-grid-item";
@@ -18,6 +21,7 @@ declare module "vue" {
     export interface GlobalComponents {
         UeEditorPanelTiptapButtonItem: typeof UeEditorPanelTiptapButtonItem;
         UeEditorPanelTiptapButtonRow: typeof UeEditorPanelTiptapButtonRow;
+        UeEditorPanelTiptapDividerBlock: typeof UeEditorPanelTiptapDividerBlock;
         UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapGridGroup: typeof UeEditorPanelTiptapGridGroup;
         UeEditorPanelTiptapGridItem: typeof UeEditorPanelTiptapGridItem;
@@ -33,6 +37,7 @@ declare global {
     namespace UE_EDITOR_PANEL_COMPONENT {
         interface UeEditorPanelTiptapButtonItemProps extends UeEditorPanelTiptapButtonItemBaseProps {}
         interface UeEditorPanelTiptapButtonRowProps extends UeEditorPanelTiptapButtonRowBaseProps {}
+        interface UeEditorPanelTiptapDividerBlockProps extends UeEditorPanelTiptapDividerBlockBaseProps {}
         interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapGridGroupProps extends UeEditorPanelTiptapGridGroupBaseProps {}
         interface UeEditorPanelTiptapGridItemProps extends UeEditorPanelTiptapGridItemBaseProps {}
