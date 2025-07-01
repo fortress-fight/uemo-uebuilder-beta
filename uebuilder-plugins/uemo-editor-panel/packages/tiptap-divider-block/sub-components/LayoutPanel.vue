@@ -1,7 +1,9 @@
 <template>
-    <UeElSettingGroup :class="$style['width-setting-group']">
+    <UeElSettingGroup :title="t('UNIT_SIZE')" :isFirst="true">
         <template #body>
-            <UeElNumberInput v-bind="sizeInputProps" v-model:value="size" />
+            <UeElControlGroup>
+                <UeElNumberInput v-bind="sizeInputProps" v-model:value="size" />
+            </UeElControlGroup>
         </template>
     </UeElSettingGroup>
 </template>
@@ -20,7 +22,7 @@ const size = useDefineObjectModel(valueModel, {
 });
 
 const sizeInputProps = computed<UE_EL_COMPONENT.UeElNumberInputProps>(() => ({
-    title: { text: t("UNIT_SIZE") },
+    title: { text: t("UNIT_HEIGHT") },
     limit: { px: [10, Infinity], "%": [5, Infinity] },
     units: [
         { text: "px", value: "px", default: 30 },
