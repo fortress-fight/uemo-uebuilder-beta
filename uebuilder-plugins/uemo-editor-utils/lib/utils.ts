@@ -138,17 +138,18 @@ export function loadScript(dom: HTMLElement, param: { title: string; source: str
     });
 }
 /**
- * 将属性对象转换为CSS样式字符串
+ * 将属性对象转换为CSS样式字符串, 如果属性值与默认属性值相同, 则不添加到样式字符串中
  *
  * @export
  * @param {Record<string, string | undefined>} attr - 样式属性对象
+ * @param {Record<string, string>} defaultAttr - 默认样式属性对象
  * @returns {string} 转换后的CSS样式字符串
  */
-export function attrToStyle(attr: Record<string, string | undefined>): string {
+export function attrToStyle(attr: Record<string, string | undefined>, defaultAttr?: Record<string, any>): string {
     // 使用reduce代替forEach,减少中间变量
     return Object.entries(attr).reduce((styles, [key, value]) => {
         // 使用单个条件判断无效值
-        if (value && value !== "0") {
+        if (value && value !== "0" && !_isEqual(defaultAttr?.[key], value)) {
             return `${styles}${key}:${value};`;
         }
         return styles;
