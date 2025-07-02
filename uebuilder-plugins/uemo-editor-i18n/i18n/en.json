@@ -142,6 +142,8 @@
     "UNIT_HR_RULE": "Hr",
     "UNIT_OVERFLOW": "Overflow",
     "UNIT_LINE": "Line",
+    "UNIT_SHARE": "Share",
+    "UNIT_SHARE_ITEM": "Share Item",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
