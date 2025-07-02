@@ -116,6 +116,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertShareItem":
                     chain.insertShareItem({});
                     break;
+                case "inertTable":
+                    chain.insetNodePlaceholder("TablePlaceholder");
+                    break;
 
                 default:
                     break;

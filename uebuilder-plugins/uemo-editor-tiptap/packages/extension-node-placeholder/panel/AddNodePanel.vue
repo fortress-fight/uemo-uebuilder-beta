@@ -64,6 +64,11 @@
             :class="$style['node-placeholder-panel']"
             @update:select="insertGridGroupContent"
         />
+        <UeElTableSizePicker
+            v-if="nodeName === 'TablePlaceholder'"
+            :class="$style['node-placeholder-panel']"
+            @submit="insertTableContent"
+        />
     </UeTiptapFloatingMenu>
 </template>
 <script lang="ts" setup>
@@ -155,6 +160,12 @@ const insertGridGroupContent = (value?: string) => {
     if (!value) return;
 
     editor?.chain().focus().insertGridGroup(value).run();
+};
+
+const insertTableContent = (value?: { rows: number; cols: number; withHeaderRow: boolean }) => {
+    if (!value) return;
+
+    // editor?.chain().focus().insertTable(value).run();
 };
 
 const handleEndEdit = () => {
