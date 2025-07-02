@@ -1,5 +1,10 @@
 # @stone/uemo-editor-tiptap
 
+## Tiptap 使用记录
+
+1.  contenteditable 属性
+    当 contenteditable 属性为 true 时，点击其内部，将不会聚焦在当前的Node上，而是聚焦其内部
+
 ## Tiptap 使用方法记录
 
 1.  获取 mark 所在选区
@@ -199,7 +204,7 @@
         const domStartNode = range.startContainer;
         const domEndNode = range.endContainer;
 
-        console.log('DOM 选区范围：', domStartNode, domEndNode);
+        console.log("DOM 选区范围：", domStartNode, domEndNode);
     }
     ```
 
@@ -213,4 +218,88 @@
     const { from, to } = state.selection;
 
     posToDOMRect(view, from, to);
+    ```
+
+17. 获取光标点击位置的 Node 信息
+
+
+    ```ts
+    {
+        addProseMirrorPlugins() {
+            const plugins: Plugin[] = [
+                new Plugin({
+                    key: new PluginKey("handleGridGroupEvent"),
+                    props: {
+                        // 修复当选中 Node 时，点击 gridItem ，gridItem 无法聚焦的问题
+                        handleClick(view, pos, event) {
+                            const dom = event.target;
+                            if (!(dom instanceof HTMLElement)) return;
+                            const clickInGridItemInner = dom.classList.contains($pageStyle["grid-item--inner"]);
+                            const emptyP = dom.classList.contains($pageStyle["is-empty"]);
+                            if (!clickInGridItemInner && !emptyP) return;
+
+                            const coords = view.posAtCoords({
+                                left: event.clientX,
+                                top: event.clientY,
+                            });
+
+                            if (!coords) return;
+
+                            const $pos = view.state.doc.resolve(coords.pos);
+                            const $posNode = $pos.node($pos.depth);
+                            const $targetPos = view.state.doc.resolve($posNode.lastChild?.resolve(0).pos || 0);
+                            if (!$targetPos) return false;
+                            const newSelection = TextSelection.create(view.state.doc, pos);
+                            const { state } = view;
+                            const { tr } = state;
+                            view.dispatch(tr.setSelection(newSelection));
+                            return true;
+                        },
+                    },
+                }),
+            ];
+        },
+    };
+    ```
+
+    ```ts
+     addProseMirrorPlugins() {
+        return [
+            new Plugin({
+                key: new PluginKey("cursorControl"),
+                props: {
+                    handleDOMEvents: {
+                        click: (view, event) => {
+                            // 执行 Ctrl + 左键点击的操作
+                            if ((event.ctrlKey || event.metaKey) && event.button === 0) {
+                                // 获取鼠标点击的位置
+                                const { clientX, clientY } = event;
+
+                                // 根据鼠标位置获取对应的文档位置
+                                const coords = view.posAtCoords({
+                                    left: clientX,
+                                    top: clientY,
+                                });
+
+                                if (!coords) return;
+
+                                const { state } = view;
+                                const { tr, doc } = state;
+                                const $pos = doc.resolve(coords.pos);
+                                const $posNode = $pos.node($pos.depth);
+
+                                const newSelection = TextSelection.create(doc, coords.pos);
+                                if ($posNode.type.name === "paragraph") {
+                                    event.stopPropagation();
+                                    event.preventDefault();
+                                    view.dispatch(tr.setSelection(newSelection));
+                                }
+                                return;
+                            }
+                        },
+                    },
+                },
+            }),
+        ];
+    },
     ```
