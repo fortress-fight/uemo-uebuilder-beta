@@ -1,7 +1,7 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 19:47:34
+ * @LastEditTime: 2025-07-02 10:53:08
  */
 
 /**
@@ -41,7 +41,9 @@ export function resolveBorderStyle(border?: { width: string; color: string; styl
  * @param boxStyle 边框样式
  * @returns 边框样式
  */
-export function parseBorderStyle(boxStyle: CSSStyleDeclaration): UE_EL_UTIL.BorderValue | undefined {
+export function parseBorderStyle(
+    boxStyle: CSSStyleDeclaration | { borderStyle: string; borderColor: string; borderWidth: string }
+): UE_EL_UTIL.BorderValue | undefined {
     const { borderStyle, borderColor, borderWidth } = boxStyle;
     return borderWidth
         ? {
