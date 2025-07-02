@@ -19,6 +19,8 @@ const menuItems: (UE_TIPTAP_UNIT.OperItem | "|")[] = [
     "insertNewLineAfter",
     "selectParent",
     "|",
+    "add",
+    "|",
     "deleteNode",
 ];
 
