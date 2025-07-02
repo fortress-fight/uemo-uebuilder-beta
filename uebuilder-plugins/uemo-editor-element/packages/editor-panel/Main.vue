@@ -1,12 +1,12 @@
 <!--
  * @Description: 通用编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-22 02:01:44
+ * @LastEditTime: 2025-07-03 01:53:44
 -->
 <template>
     <div :class="$style['editor-panel']" class="relative">
         <div :class="$style['panel-wrapper']" class="grid" :style="{ '--ue-el-editor-panel-max-height': maxHeight }">
-            <div :class="$style['panel-head']" class="flex" :data-dragger-target="withDragger">
+            <div :class="$style['panel-head']" class="flex" :data-dragger-target="withDragger" v-if="title">
                 <div :class="$style['head-inner']" class="relative w-full flex justify-center items-center">
                     <slot name="title">
                         <div class="flex items-center justify-center">
