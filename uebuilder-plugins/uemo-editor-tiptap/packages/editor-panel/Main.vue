@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 03:03:52
+ * @LastEditTime: 2025-07-03 03:31:08
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -234,25 +234,26 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
         injectPropsRef.value = param.props;
     }
 
-    const delayFocus = _debounce(
-        () => {
-            const activeElement = document.activeElement;
-            if (activeElement && activeElement.tagName === "INPUT") {
-                return;
-            }
+    // NOTE 部分场景下 编辑器聚焦会触发浮动菜单失焦，导致气泡编辑器无法正常使用
+    // const delayFocus = _debounce(
+    //     () => {
+    //         const activeElement = document.activeElement;
+    //         if (activeElement && activeElement.tagName === "INPUT") {
+    //             return;
+    //         }
 
-            param.focus?.();
-        },
-        1000,
-        { leading: false }
-    );
+    //         param.focus?.();
+    //     },
+    //     1000,
+    //     { leading: false }
+    // );
 
     // 设置事件监听
     eventBus.on("update", (value) => {
         valueRef.value = value;
         param.updateAttrs(value);
 
-        delayFocus();
+        // delayFocus();
     });
 
     eventBus.on("fire", (data) => {
