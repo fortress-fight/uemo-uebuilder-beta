@@ -111,7 +111,7 @@ const operManage = {
 
     // #region 社交
 
-    insertShare: {
+    insertShareItem: {
         title: t("NODE_SOCIAL"),
         subtitle: t("NODE_SOCIAL_DESC"),
         tip: t("TIP_INSERT_SHARE"),

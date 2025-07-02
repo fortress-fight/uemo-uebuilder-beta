@@ -4,6 +4,7 @@
 <script lang="ts" setup>
 import type { NodeSelection } from "@tiptap/pm/state";
 
+import { isShareItemNode } from "../../extension-share/utils/helper";
 import { isButtonItemNode } from "../../extension-button/utils/helper";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
@@ -22,11 +23,27 @@ function addButtonNode(selection: NodeSelection) {
         .run();
 }
 
+function addShareItemNode(selection: NodeSelection) {
+    const { to } = selection;
+    const currentNode = selection.node;
+
+    if (!currentNode) return;
+
+    editor
+        ?.chain()
+        .focus()
+        .insertContentAt(to, { type: "shareItem", attrs: { ...currentNode.attrs } })
+        .run();
+}
+
 function trigger() {
     const selection = editor?.state.selection;
 
     if (isButtonItemNode(selection)) {
         addButtonNode(selection);
+    }
+    if (isShareItemNode(selection)) {
+        addShareItemNode(selection);
     }
 }
 </script>

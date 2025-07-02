@@ -67,7 +67,9 @@ $project-name: app-editor;
         .lottie-wrapper,
         .img_wrapper,
         .editor-hr,
-        .editor-divide-block {
+        .editor-divide-block,
+        .share-row,
+        .share {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */
@@ -76,6 +78,11 @@ $project-name: app-editor;
 
                     outline: 2px solid var(--theme-layout-component);
                 }
+            }
+        }
+        .share-row {
+            &[data-focus-in="true"] {
+                outline: 1px dashed var(--theme-layout-component) !important;
             }
         }
         .grid-layer {

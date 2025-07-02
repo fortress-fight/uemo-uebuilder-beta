@@ -3,7 +3,7 @@
 ## Tiptap 使用记录
 
 1.  contenteditable 属性
-    当 contenteditable 属性为 true 时，点击其内部，将不会聚焦在当前的Node上，而是聚焦其内部
+    当 contenteditable 属性为 true 时，点击其内部，将不会聚焦在当前的 Node 上，而是聚焦其内部
 
 ## Tiptap 使用方法记录
 
@@ -302,4 +302,60 @@
             }),
         ];
     },
+    ```
+
+18. 如何获得 $pos 的父级 Node 的 pos
+
+
+    $pos.depth：当前所在层级深度（例如 2 表示 doc → paragraph → text）。
+    $pos.before(n)：返回第 n 层级节点在文档中的 起始位置（包含 tag、start 位置）。
+    $pos.before($pos.depth) 即当前 Node 的父节点的起始位置。
+    $pos.after($pos.depth) 则是当前 Node 的父节点的结束位置。
+
+    ```ts
+    const parentDepth = $pos.depth - 1;
+    const parentPos = $pos.before(parentDepth + 1);
+    ```
+
+    ```ts
+    const $pos = doc.resolve(targetPos);
+    const parentNode = $pos.node($pos.depth - 1);
+    const parentPos = $pos.before($pos.depth);
+    ```
+
+19. 判断指定元素是否可以插入目标元素
+
+
+    ```ts
+    const targetPosInfo = getTargetPositionInfo(editor);
+
+    if (!targetPosInfo) return false;
+
+    const { schema, doc } = state;
+
+    const rawTargetPos = pos === "before" ? targetPosInfo.start : targetPosInfo.end;
+    const $pos = doc.resolve(rawTargetPos);
+    const paragraph = schema.nodes.paragraph.create();
+
+    let insertPos = rawTargetPos;
+    let foundValid = false;
+
+    // 从当前 depth 向上查找可以插入 paragraph 的父节点
+    for (let depth = $pos.depth; depth >= 0; depth--) {
+        const parent = $pos.node(depth);
+        const canInsert = parent.type.validContent(Fragment.from(paragraph));
+
+        if (canInsert) {
+            // 找到合法插入点，计算插入位置
+            insertPos = pos === "before" ? $pos.before(depth + 1) : $pos.after(depth + 1);
+            foundValid = true;
+            break;
+        }
+    }
+    if (foundValid) {
+        commands.focus();
+        commands.insertContentAt(insertPos, { type: "paragraph" });
+    }
+
+    return true;
     ```

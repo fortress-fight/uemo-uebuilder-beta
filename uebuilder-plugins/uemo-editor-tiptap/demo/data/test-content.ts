@@ -185,4 +185,13 @@ export const testTextContent = {
             <div class="editor-hr--inner-cfa07"></div>
         </div>
     `,
+    shareRowData: `
+        <div style="text-align:left;">
+            <div class="share-list-b7339">
+                <div class="share-bd08e" target="_target">
+                    <div class="share-icon-a12c0"><i class="ue-share-weixin"></i></div>
+                </div>
+            </div>
+        </div>
+    `,
 };

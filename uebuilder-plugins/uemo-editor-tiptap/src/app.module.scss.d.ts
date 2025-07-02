@@ -79,5 +79,10 @@ declare const styles: {
 
     readonly "editor-hr": string;
     readonly "editor-hr--inner": string;
+
+    readonly "share-row": string;
+    readonly "share-list": string;
+    readonly share: string;
+    readonly "share-icon": string;
 };
 export = styles;

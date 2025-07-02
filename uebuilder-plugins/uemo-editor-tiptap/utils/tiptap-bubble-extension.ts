@@ -58,6 +58,7 @@ import { Lottie } from "../packages/extension-lottie/src";
 import { GridGroup, GridItem } from "../packages/extension-grid/src";
 import { DividerBlock } from "../packages/extension-divider-block/src";
 import { HrRule } from "../packages/extension-hr-rule/src";
+import { ShareRow, ShareItem } from "../packages/extension-share/src";
 
 // #endregion
 
@@ -137,6 +138,8 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         GridItem,
         DividerBlock,
         HrRule,
+        ShareRow,
+        ShareItem,
     ];
 
     return [...baseExtensions, ...customExtensions];

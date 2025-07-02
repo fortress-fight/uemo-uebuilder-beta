@@ -1,0 +1,53 @@
+/*
+ * @Description: tiptap -- 分享相关
+ * @Author: F-Stone
+ * @LastEditTime: 2025-07-02 11:09:33
+ */
+// 换算 em
+@function em($num1, $num2: 16px) {
+    @return math.div($num1, $num2) * 1em;
+}
+.page-editor {
+    .share-row {
+        font-size: 14px;
+        line-height: em(26px, 14px);
+        a {
+            text-decoration: none;
+        }
+    }
+    .share-list {
+        display: inline-grid;
+
+        align-items: center;
+
+        gap: 1.2em;
+        grid-auto-flow: column;
+    }
+    .share {
+        cursor: pointer;
+        text-align: center;
+        vertical-align: bottom;
+
+        color: var(--share-color);
+        border-width: var(--share-border-width, 0);
+        border-style: var(--share-border-style, solid);
+        border-color: var(--share-border-color);
+        border-radius: var(--share-border-radius);
+        background: var(--share-background-color);
+    }
+    .share-icon {
+        font-size: em(23px, 14px);
+
+        display: inline-flex;
+
+        width: em(40px, 23px);
+        height: em(40px, 23px);
+
+        align-items: center;
+        justify-content: center;
+        & > i {
+            font-family: "ue-share" !important;
+            font-style: normal;
+        }
+    }
+}

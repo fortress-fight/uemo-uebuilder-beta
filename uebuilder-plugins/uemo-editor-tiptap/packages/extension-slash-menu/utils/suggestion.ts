@@ -113,6 +113,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertHrRule":
                     chain.insertHrRule({});
                     break;
+                case "insertShareItem":
+                    chain.insertShareItem({});
+                    break;
 
                 default:
                     break;

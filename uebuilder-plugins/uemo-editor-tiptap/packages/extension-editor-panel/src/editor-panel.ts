@@ -81,6 +81,8 @@ const HansEditorPanelNodes = [
     "gridItem",
     "dividerBlock",
     "hrRule",
+    "shareRow",
+    "shareItem",
 ];
 
 /**
