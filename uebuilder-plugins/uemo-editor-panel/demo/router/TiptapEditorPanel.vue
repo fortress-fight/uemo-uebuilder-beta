@@ -21,6 +21,7 @@ import TestEditorPanelTiptapGridGroup from "~/demo/components/TestEditorPanelTip
 import TestEditorPanelTiptapGridItem from "~/demo/components/TestEditorPanelTiptapGridItem.vue";
 import TestEditorPanelTiptapDividerBlock from "~/demo/components/TestEditorPanelTiptapDividerBlock.vue";
 import TestEditorPanelTiptapHrRule from "~/demo/components/TestEditorPanelTiptapHrRule.vue";
+import TestEditorPanelTiptapShareItem from "~/demo/components/TestEditorPanelTiptapShareItem.vue";
 
 const tiptapEditorPanelComponents = [
     TestEditorPanelTiptapButtonRow,
@@ -35,6 +36,7 @@ const tiptapEditorPanelComponents = [
     TestEditorPanelTiptapGridItem,
     TestEditorPanelTiptapDividerBlock,
     TestEditorPanelTiptapHrRule,
+    TestEditorPanelTiptapShareItem,
 ];
 </script>
 <style lang="scss" module>

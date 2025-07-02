@@ -1,7 +1,7 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 10:53:08
+ * @LastEditTime: 2025-07-03 02:58:59
  */
 
 /**
@@ -107,4 +107,75 @@ export function transformLinkData(data?: TypeLinkValue) {
  */
 export function capitalizeFirstLetter(str: string) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
+ * 解析链接
+ * @param value 链接数据
+ * @returns 链接数据
+ */
+export function parseLink(value: {
+    link?: string;
+    linkType?: string;
+    linkTarget?: string;
+    linkDetail?: string;
+    linkPopLayer?: { width?: string };
+    triggerMethod?: string;
+}): UE_EL_UTIL.LinkValue | undefined {
+    if (!value.link) return undefined;
+    switch (value.linkType) {
+        case "frame":
+            return {
+                type: value.linkType,
+                link: value.link,
+                triggerArea: value.triggerMethod,
+                popLayer: value.linkPopLayer,
+            };
+        case "function":
+            return {
+                type: value.linkType,
+                link: value.link,
+                detail: value.linkDetail as "anchor" | "download",
+                triggerArea: value.triggerMethod,
+            };
+        case "link":
+            return {
+                type: value.linkType,
+                link: value.link,
+                target: value.linkTarget as "_blank" | "_self",
+                triggerArea: value.triggerMethod,
+            };
+        default:
+            return undefined;
+    }
+}
+
+/**
+ * 解析链接属性
+ * @param value 链接数据
+ * @returns 链接属性
+ */
+export function parseLinkTiptapAttr(value?: UE_EL_UTIL.LinkValue) {
+    const modelValue = {} as {
+        link: string;
+        linkTarget: string;
+        linkType?: string;
+        linkDetail?: string;
+        linkPopLayer?: { width?: string };
+        triggerMethod?: string;
+    };
+
+    modelValue.link = value?.link || "";
+    modelValue.linkType = value?.type || undefined;
+    if (value?.type === "link") {
+        modelValue.linkTarget = value?.target || undefined;
+    }
+    if (value?.type === "function") {
+        modelValue.linkDetail = value?.detail || undefined;
+    }
+    if (value?.type === "frame") {
+        modelValue.linkPopLayer = value?.popLayer || undefined;
+    }
+    modelValue.triggerMethod = value?.triggerArea;
+    return modelValue;
 }

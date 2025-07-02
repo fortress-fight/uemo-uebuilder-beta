@@ -1,7 +1,7 @@
 <!--
  * @Description: Tiptap 按钮编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-06-06 16:15:34
+ * @LastEditTime: 2025-07-03 02:56:30
 -->
 <template>
     <UeElEditorPanel :class="$style['tiptap-button-item']" :title="t('UNIT_BUTTON')">
@@ -45,10 +45,10 @@
 </template>
 <script lang="ts" setup>
 import type { UeElButtonStyleSettingPanelValue } from "@stone/uemo-editor-element/packages/button-style-setting-panel";
-import type { UeElLinkSettingPanelValue } from "@stone/uemo-editor-element/packages/link-setting-panel";
 
 import type { UeEditorPanelTiptapButtonItemBaseProps } from "./index";
 
+import { parseLink, parseLinkTiptapAttr } from "@stone/uemo-editor-tiptap/utils/tiptap-helper";
 import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mixin";
 
 defineOptions({ name: "UeEditorPanelTiptapButtonItem" });
@@ -84,51 +84,13 @@ const text = useDefineObjectModel(valueModel, {
 
 // #region link
 
-function parseLink(value: UE_TIPTAP_EXTENSION.ButtonItem["attrs"]): UeElLinkSettingPanelValue | undefined {
-    if (!value.link) return undefined;
-    switch (value.linkType) {
-        case "frame":
-            return {
-                type: value.linkType,
-                link: value.link,
-                triggerArea: value.triggerMethod,
-                popLayer: value.linkPopLayer,
-            };
-        case "function":
-            return {
-                type: value.linkType,
-                link: value.link,
-                detail: value.linkDetail as "anchor" | "download",
-                triggerArea: value.triggerMethod,
-            };
-        case "link":
-            return {
-                type: value.linkType,
-                link: value.link,
-                target: value.linkTarget as "_blank" | "_self",
-                triggerArea: value.triggerMethod,
-            };
-        default:
-            return undefined;
-    }
-}
-
 const link = useDefineObjectModel(valueModel, {
     get: (modelValue) => parseLink(modelValue),
     set: (value, modelValue) => {
-        modelValue.link = value?.link || "";
-        modelValue.linkType = value?.type || undefined;
-        if (value?.type === "link") {
-            modelValue.linkTarget = value?.target || undefined;
-        }
-        if (value?.type === "function") {
-            modelValue.linkDetail = value?.detail || undefined;
-        }
-        if (value?.type === "frame") {
-            modelValue.linkPopLayer = value?.popLayer || undefined;
-        }
-        modelValue.triggerMethod = value?.triggerArea;
-        return modelValue;
+        return {
+            ...modelValue,
+            ...parseLinkTiptapAttr(value),
+        };
     },
 });
 
