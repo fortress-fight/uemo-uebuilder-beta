@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 11:00:03
+ * @LastEditTime: 2025-07-03 03:06:45
  */
 import type { Attribute } from "@tiptap/core";
 import type { ShareItemAttrs } from "./index";
@@ -28,9 +28,14 @@ declare module "@tiptap/core" {
              */
             openShareItemEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
             /**
-             * Add an image
+             * 插入分享项
              */
             insertShareItem: (options?: { href?: string }) => ReturnType;
+
+            /**
+             * 更新分享项属性
+             */
+            updateShareItemAttrs: (attrs: Partial<ShareItemAttrs>) => ReturnType;
         };
     }
 }
@@ -125,25 +130,26 @@ export const ShareItem = Node.create<ShareItemOptions>({
                     });
                 },
 
+            updateShareItemAttrs:
+                (attrs: Partial<ShareItemAttrs>) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
             openShareItemEditorPanel:
                 (rect) =>
                 ({ chain, editor }) => {
                     const currentAttr = getShareItemAttrs(this.editor);
 
-                    // eslint-disable-next-line
-                    console.log(currentAttr, "currentAttr", rect, chain, editor);
-
-                    return true;
-
-                    // return chain()
-                    //     .focus()
-                    //     .openAttrEditorPanel("hrRule", currentAttr, {
-                    //         rect,
-                    //         updateAttrs: (attr) => {
-                    //             editor.commands.updateHrRuleAttrs(attr);
-                    //         },
-                    //     })
-                    //     .run();
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("shareItem", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateShareItemAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
         };
     },

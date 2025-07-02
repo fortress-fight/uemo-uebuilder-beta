@@ -80,6 +80,9 @@ function openBtnRowEditorPanel() {
         case "hrRule":
             editor.chain().openHrRuleEditorPanel(rect).run();
             break;
+        case "shareItem":
+            editor.chain().openShareItemEditorPanel(rect).run();
+            break;
         default:
             return;
     }

@@ -183,6 +183,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                     this.editor.chain().openHrRuleEditorPanel(domRect).run();
                                     return false;
 
+                                case "shareItem":
+                                    this.editor.chain().openShareItemEditorPanel(domRect).run();
+                                    return false;
+
                                 default:
                                     console.error(
                                         `${nodeName} 不支持打开属性编辑面板, 请检查是否在 HansEditorPanelNodes 中添加了该节点`

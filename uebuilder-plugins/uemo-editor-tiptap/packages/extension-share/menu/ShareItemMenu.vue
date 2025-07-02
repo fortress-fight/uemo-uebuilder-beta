@@ -34,7 +34,7 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
     const { selection } = state;
 
     const isShareItem = isShareItemNode(selection);
-    const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "shareRow";
+    const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "shareItem";
 
     return !isEditing && isShareItem && view.hasFocus();
 };
