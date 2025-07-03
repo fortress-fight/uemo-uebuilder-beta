@@ -84,5 +84,8 @@ declare const styles: {
     readonly "share-list": string;
     readonly share: string;
     readonly "share-icon": string;
+
+    readonly "table-scroll-box": string;
+    readonly "table-hide-border": string;
 };
 export = styles;

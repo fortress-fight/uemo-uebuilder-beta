@@ -59,6 +59,7 @@ import { GridGroup, GridItem } from "../packages/extension-grid/src";
 import { DividerBlock } from "../packages/extension-divider-block/src";
 import { HrRule } from "../packages/extension-hr-rule/src";
 import { ShareRow, ShareItem } from "../packages/extension-share/src";
+import { Table, TableHeader, TableRow, TableCell } from "../packages/extension-table/src";
 
 // #endregion
 
@@ -140,6 +141,10 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         HrRule,
         ShareRow,
         ShareItem,
+        Table,
+        TableHeader,
+        TableRow,
+        TableCell,
     ];
 
     return [...baseExtensions, ...customExtensions];

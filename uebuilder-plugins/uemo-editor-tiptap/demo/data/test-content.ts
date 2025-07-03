@@ -194,4 +194,32 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    tableData: `
+        <div class="table-scroll-box-f56c6">
+            <table style="--table-border-color: #ced4da; --table-min-width: 100px; --table-drag-min-width: 133px">
+                <colgroup>
+                    <col style="min-width: 20px" />
+                    <col style="width: 93px" />
+                    <col style="min-width: 20px" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `,
 };

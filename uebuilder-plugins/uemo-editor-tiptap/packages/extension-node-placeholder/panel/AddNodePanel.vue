@@ -165,7 +165,7 @@ const insertGridGroupContent = (value?: string) => {
 const insertTableContent = (value?: { rows: number; cols: number; withHeaderRow: boolean }) => {
     if (!value) return;
 
-    // editor?.chain().focus().insertTable(value).run();
+    editor?.chain().focus().insertTable(value).run();
 };
 
 const handleEndEdit = () => {

@@ -1,0 +1,51 @@
+/*
+ * @Description: tiptap -- 表格相关
+ * @Author: F-Stone
+ * @LastEditTime: 2025-07-03 11:36:25
+ */
+.page-editor {
+    .table-scroll-box {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    table {
+        --table-border-color: #ced4da;
+        width: 100%;
+        min-width: max(var(--table-min-width), var(--table-drag-min-width));
+        margin: 0;
+
+        table-layout: fixed;
+        border-collapse: collapse;
+        td,
+        th {
+            position: relative;
+
+            box-sizing: border-box;
+            min-width: 1em;
+            padding: 3px 5px;
+
+            vertical-align: top;
+
+            border: 1px solid var(--table-border-color, #ced4da);
+            > * {
+                margin-bottom: 0;
+            }
+        }
+        td {
+            padding: 0.8em;
+        }
+        th {
+            font-weight: bold;
+
+            text-align: left;
+
+            background-color: #f1f3f5;
+        }
+        &.table-hide-border {
+            th,
+            td {
+                border-width: 0;
+            }
+        }
+    }
+}

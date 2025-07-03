@@ -12,6 +12,10 @@ $project-name: app-editor;
         cursor: text;
 
         outline: none;
+        &:global(.resize-cursor) {
+            cursor: ew-resize;
+            cursor: col-resize;
+        }
         &.is-editor-empty {
             opacity: 1;
         }
