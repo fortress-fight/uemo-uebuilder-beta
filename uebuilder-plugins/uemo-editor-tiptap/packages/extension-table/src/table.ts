@@ -29,7 +29,7 @@ import {
 
 import { getTableView } from "../view/table-view";
 import { deleteTableWhenAllCellsSelected, createTable, getClosestTableCellNode } from "../utils/helper";
-import { getClosestTable } from "../utils/helper";
+import { getClosestTable, getTableAttrs } from "../utils/helper";
 
 import { selectNode, selectNodeInner } from "../../../utils/tiptap-utils";
 
@@ -90,6 +90,10 @@ export interface TableOptions {
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         table: {
+            /**
+             * 打开表格编辑器面板
+             */
+            openTableEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
             updateTableAttrs: (attrs: Partial<TableAttrs>) => ReturnType;
 
             setCellAlign: (param: "left" | "center" | "right") => ReturnType;
@@ -247,8 +251,118 @@ export const Table = Node.create<TableOptions>({
         };
     },
 
+    addKeyboardShortcuts() {
+        return {
+            Tab: () => {
+                if (this.editor.commands.goToNextCell()) return true;
+                if (!this.editor.can().addRowAfter()) return false;
+                return this.editor.chain().addRowAfter().goToNextCell().run();
+            },
+            "Shift-Tab": () => this.editor.commands.goToPreviousCell(),
+            Backspace: deleteTableWhenAllCellsSelected,
+            "Mod-Backspace": deleteTableWhenAllCellsSelected,
+            Delete: deleteTableWhenAllCellsSelected,
+            "Mod-Delete": deleteTableWhenAllCellsSelected,
+            "Mod-a": () => {
+                const editor = this.editor;
+
+                // NOTE 选中光标位置单元格的内容
+                const tableCellNodeInfo = getClosestTableCellNode(editor);
+                if (!tableCellNodeInfo) return false;
+
+                const { pos, node } = tableCellNodeInfo;
+                return selectNodeInner(editor, pos, node);
+
+                // NOTE 选中光标位置的单元格
+                // const { view } = this.editor;
+                // const { state } = view;
+                // const { selection } = state;
+                // const doc = state.doc,
+                //     $cell = cellAround(doc.resolve(selection.from));
+                // if (!$cell) return false;
+                // view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
+
+                // return true;
+            },
+        };
+    },
+
+    addProseMirrorPlugins() {
+        const isResizable = this.options.resizable && this.editor.isEditable;
+
+        const pluginArr: any[] = [];
+
+        if (isResizable) {
+            const resizePlugin = columnResizing({
+                handleWidth: this.options.handleWidth,
+                cellMinWidth: this.options.cellMinWidth,
+                defaultCellMinWidth: this.options.cellMinWidth,
+                // @ts-ignore (incorrect type)
+                View: this.options.View(this.editor),
+                // TODO: PR for @types/prosemirror-tables
+                // @ts-ignore (incorrect type)
+                lastColumnResizable: true,
+            });
+            // NOTE 禁止宽度拖拽
+            // resizePlugin.props.handleDOMEvents = {};
+            pluginArr.push(resizePlugin);
+        }
+
+        if (this.options.initFixed) {
+            pluginArr.push(FixTablesPlugin);
+        }
+
+        return [
+            ...pluginArr,
+            tableEditing({
+                allowTableNodeSelection: this.options.allowTableNodeSelection,
+            }),
+        ];
+    },
+
+    extendNodeSchema(extension) {
+        const context = {
+            name: extension.name,
+            options: extension.options,
+            storage: extension.storage,
+        };
+
+        return {
+            tableRole: callOrReturn(getExtensionField(extension, "tableRole", context)),
+        };
+    },
+
     addCommands() {
         return {
+            updateTableAttrs:
+                (attrs) =>
+                ({ chain }) => {
+                    return chain().updateAttributes(this.name, attrs).run();
+                },
+
+            openTableEditorPanel:
+                (rect) =>
+                ({ editor, chain }) => {
+                    const currentAttr = getTableAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("table", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateTableAttrs(attr);
+                            },
+                            fire(type) {
+                                switch (type) {
+                                    case "resetCellWidth":
+                                        editor.commands.resetColWidth();
+                                        break;
+                                }
+                            },
+                        })
+                        .run();
+                },
+
             setCellAlign:
                 (align) =>
                 ({ editor }) => {
@@ -271,10 +385,10 @@ export const Table = Node.create<TableOptions>({
 
                     if (!tableNodeInfo) return true;
 
-                    const { start, node } = tableNodeInfo;
+                    const { pos, node } = tableNodeInfo;
 
                     // NOTE: 对  Node 添加属性
-                    doc.nodesBetween(start, start + node.nodeSize, (node, pos) => {
+                    doc.nodesBetween(pos, pos + node.nodeSize, (node, pos) => {
                         if (node.type.name === "tableCell") {
                             tr.setNodeMarkup(pos, null, {
                                 ...node.attrs,
@@ -429,87 +543,6 @@ export const Table = Node.create<TableOptions>({
 
                     return true;
                 },
-        };
-    },
-
-    addKeyboardShortcuts() {
-        return {
-            Tab: () => {
-                if (this.editor.commands.goToNextCell()) return true;
-                if (!this.editor.can().addRowAfter()) return false;
-                return this.editor.chain().addRowAfter().goToNextCell().run();
-            },
-            "Shift-Tab": () => this.editor.commands.goToPreviousCell(),
-            Backspace: deleteTableWhenAllCellsSelected,
-            "Mod-Backspace": deleteTableWhenAllCellsSelected,
-            Delete: deleteTableWhenAllCellsSelected,
-            "Mod-Delete": deleteTableWhenAllCellsSelected,
-            "Mod-a": () => {
-                const editor = this.editor;
-
-                // NOTE 选中光标位置单元格的内容
-                const tableCellNodeInfo = getClosestTableCellNode(editor);
-                if (!tableCellNodeInfo) return false;
-
-                const { pos, node } = tableCellNodeInfo;
-                return selectNodeInner(editor, pos, node);
-
-                // NOTE 选中光标位置的单元格
-                // const { view } = this.editor;
-                // const { state } = view;
-                // const { selection } = state;
-                // const doc = state.doc,
-                //     $cell = cellAround(doc.resolve(selection.from));
-                // if (!$cell) return false;
-                // view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
-
-                // return true;
-            },
-        };
-    },
-
-    addProseMirrorPlugins() {
-        const isResizable = this.options.resizable && this.editor.isEditable;
-
-        const pluginArr: any[] = [];
-
-        if (isResizable) {
-            const resizePlugin = columnResizing({
-                handleWidth: this.options.handleWidth,
-                cellMinWidth: this.options.cellMinWidth,
-                defaultCellMinWidth: this.options.cellMinWidth,
-                // @ts-ignore (incorrect type)
-                View: this.options.View(this.editor),
-                // TODO: PR for @types/prosemirror-tables
-                // @ts-ignore (incorrect type)
-                lastColumnResizable: true,
-            });
-            // NOTE 禁止宽度拖拽
-            // resizePlugin.props.handleDOMEvents = {};
-            pluginArr.push(resizePlugin);
-        }
-
-        if (this.options.initFixed) {
-            pluginArr.push(FixTablesPlugin);
-        }
-
-        return [
-            ...pluginArr,
-            tableEditing({
-                allowTableNodeSelection: this.options.allowTableNodeSelection,
-            }),
-        ];
-    },
-
-    extendNodeSchema(extension) {
-        const context = {
-            name: extension.name,
-            options: extension.options,
-            storage: extension.storage,
-        };
-
-        return {
-            tableRole: callOrReturn(getExtensionField(extension, "tableRole", context)),
         };
     },
 });

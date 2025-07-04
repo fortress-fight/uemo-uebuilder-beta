@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 11:04:50
+ * @LastEditTime: 2025-07-04 14:03:19
 -->
 <template>
     <UeTiptapFloatingMenu
@@ -30,7 +30,7 @@ import { FLOAT_MENU_BUTTON_MAP } from "./utils/helper";
 import { hasParentNode } from "../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { getClosestGridItem } from "../extension-grid/utils/helper";
-import { getClosestTable } from "../extension-table/utils/helper";
+import { getTableCellNodeRect, getTableNodeRect } from "../extension-table/utils/helper";
 
 defineOptions({ name: "UeTiptapEditorFloatMenu" });
 
@@ -68,14 +68,10 @@ const floatingProps = computed<{ refEl: VirtualElement } | undefined>(() => {
             return {
                 refEl: {
                     getBoundingClientRect: () => {
-                        const node = getClosestTable(editor);
-                        if (!node) {
+                        const rect = getTableNodeRect(editor);
+                        if (!rect) {
                             return window.document.body.getBoundingClientRect();
                         }
-
-                        const dom = editor.view.nodeDOM(node.pos) as HTMLElement;
-                        const rect = dom.getBoundingClientRect();
-
                         return rect;
                     },
                 },
@@ -85,37 +81,12 @@ const floatingProps = computed<{ refEl: VirtualElement } | undefined>(() => {
         return {
             refEl: {
                 getBoundingClientRect: () => {
-                    const { $anchorCell, $headCell } = selection;
+                    const rect = getTableCellNodeRect(editor);
+                    if (!rect) {
+                        return window.document.body.getBoundingClientRect();
+                    }
 
-                    const from = $headCell.pos > $anchorCell.pos ? $anchorCell.pos : $headCell.pos;
-                    const to = $headCell.pos > $anchorCell.pos ? $headCell.pos : $anchorCell.pos;
-
-                    const fromDom = editor.view.nodeDOM(from) as HTMLElement;
-                    const toDom = editor.view.nodeDOM(to) as HTMLElement;
-
-                    if (!fromDom || !toDom) return;
-
-                    const fromRect = fromDom.getBoundingClientRect();
-                    const toRect = toDom.getBoundingClientRect();
-
-                    return {
-                        x: fromRect.left,
-                        y: fromRect.top,
-                        left: fromRect.left,
-                        top: fromRect.top,
-                        width: Math.max(
-                            Math.abs(toRect.right - fromRect.left),
-                            Math.abs(fromRect.right - toRect.left),
-                            fromRect.width,
-                            toRect.width
-                        ),
-                        height: Math.max(
-                            Math.abs(toRect.bottom - fromRect.top),
-                            Math.abs(fromRect.bottom - toRect.top),
-                            fromRect.height,
-                            toRect.height
-                        ),
-                    } as DOMRect;
+                    return rect;
                 },
             },
         };

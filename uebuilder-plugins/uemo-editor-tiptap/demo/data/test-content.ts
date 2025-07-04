@@ -221,6 +221,5 @@ export const testTextContent = {
                 </tbody>
             </table>
         </div>
-        <p>123</p>
     `,
 };

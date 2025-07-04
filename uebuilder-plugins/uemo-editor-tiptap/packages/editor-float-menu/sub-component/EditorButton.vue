@@ -7,6 +7,7 @@ import { isNodeSelection } from "@tiptap/core";
 import { getSelectionRect, selectNode } from "../../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getClosestGridItem } from "../../extension-grid/utils/helper";
+import { selectionIsTableNode, getTableNodeRect } from "../../extension-table/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 const props = defineProps<{ nodeName?: string }>();
@@ -35,6 +36,14 @@ function openBtnRowEditorPanel() {
                 return;
         }
     } else {
+        if (selectionIsTableNode(editor)) {
+            const rect = getTableNodeRect(editor);
+            if (!rect) return;
+
+            editor.chain().openTableEditorPanel(rect).run();
+            return;
+        }
+
         if (!isNodeSelection(state.selection)) return;
 
         rect = getSelectionRect(view, state.selection);

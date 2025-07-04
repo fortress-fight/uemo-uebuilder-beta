@@ -1,7 +1,7 @@
 /*
  * @Description: 表格工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 02:39:59
+ * @LastEditTime: 2025-07-04 14:01:58
  */
 import type { NodeSelection } from "@tiptap/pm/state";
 import type { Editor, KeyboardShortcutCommand } from "@tiptap/core";
@@ -253,4 +253,67 @@ export function getTableSelectionInfo(editor?: Editor) {
     }
 
     return result;
+}
+
+/**
+ * 判断是否为表格节点
+ */
+export function selectionIsTableNode(editor?: Editor) {
+    const selection = editor?.state.selection;
+    if (!isCellSelection(selection)) return false;
+
+    const tableSelectionInfo = getTableSelectionInfo(editor);
+    return isInTable(editor) && tableSelectionInfo.row && tableSelectionInfo.col;
+}
+
+/**
+ * 获取表格节点矩形
+ */
+export function getTableNodeRect(editor?: Editor) {
+    const node = getClosestTable(editor);
+    if (!node || !editor) {
+        return null;
+    }
+
+    const dom = editor.view.nodeDOM(node.pos) as HTMLElement;
+    const rect = dom.getBoundingClientRect();
+
+    return rect;
+}
+
+export function getTableCellNodeRect(editor?: Editor) {
+    const selection = editor?.state.selection;
+    if (!isCellSelection(selection) || !editor) return null;
+
+    const { $anchorCell, $headCell } = selection;
+
+    const from = $headCell.pos > $anchorCell.pos ? $anchorCell.pos : $headCell.pos;
+    const to = $headCell.pos > $anchorCell.pos ? $headCell.pos : $anchorCell.pos;
+
+    const fromDom = editor.view.nodeDOM(from) as HTMLElement;
+    const toDom = editor.view.nodeDOM(to) as HTMLElement;
+
+    if (!fromDom || !toDom) return;
+
+    const fromRect = fromDom.getBoundingClientRect();
+    const toRect = toDom.getBoundingClientRect();
+
+    return {
+        x: fromRect.left,
+        y: fromRect.top,
+        left: fromRect.left,
+        top: fromRect.top,
+        width: Math.max(
+            Math.abs(toRect.right - fromRect.left),
+            Math.abs(fromRect.right - toRect.left),
+            fromRect.width,
+            toRect.width
+        ),
+        height: Math.max(
+            Math.abs(toRect.bottom - fromRect.top),
+            Math.abs(fromRect.bottom - toRect.top),
+            fromRect.height,
+            toRect.height
+        ),
+    } as DOMRect;
 }
