@@ -1,11 +1,11 @@
 <!--
  * @Description: TableView 组件，支持表格选区、拖拽、可视化高亮等功能
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 15:15:54
+ * @LastEditTime: 2025-07-04 15:40:54
 -->
 <template>
-    <div ref="dom" :class="$style['table-wrapper']" :data-dragging="dragging">
-        <div ref="selectionTip" :class="$style['selection-tip']">
+    <div ref="dom" :class="$style['table-wrapper']">
+        <div ref="selectionTip" :class="$style['selection-tip']" :data-dragging="dragging">
             <div :class="$style['dragger-pointer']" data-pos="tl">
                 <div :class="$style['pointer']" @mousedown="handleMouseDown('tl', editor.view, $event)"></div>
             </div>
@@ -15,7 +15,7 @@
         </div>
         <div
             ref="scrollBox"
-            :class="pageStyle['table-scroll-box']"
+            :class="[pageStyle['table-scroll-box'], $style['table-scroll-box']]"
             @scroll="tableScroll"
             :data-editing="isEditing"
             :data-focus-in="isFocusIn"
@@ -210,8 +210,9 @@ const dragging = ref<boolean>();
  */
 function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEvent): void {
     if (startEvent.ctrlKey || startEvent.metaKey) return;
-    if (!oldSelection) return;
     dragging.value = true;
+
+    if (!oldSelection) return;
     let startDOMCell: HTMLElement;
     let $cell: ResolvedPos | null = null;
     if (oldSelection instanceof CellSelection) {
@@ -260,13 +261,13 @@ function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEv
      * 停止拖拽监听，释放事件，防止内存泄漏
      */
     function stop(): void {
+        dragging.value = false;
         view.root.removeEventListener("mouseup", stop);
         view.root.removeEventListener("dragstart", stop);
         view.root.removeEventListener("mousemove", move);
         if (tableEditingKey.getState(view.state) != null) {
             view.dispatch(view.state.tr.setMeta(tableEditingKey, -1));
         }
-        dragging.value = false;
     }
     function move(_event: Event): void {
         const event = _event as MouseEvent;
@@ -336,18 +337,6 @@ onBeforeUnmount(() => {
 <style lang="scss" module>
 .table-wrapper {
     position: relative;
-    &[data-dragging="true"] {
-        .selection-tip {
-            .dragger-pointer {
-                pointer-events: none !important;
-            }
-        }
-        :global(.column-resize-handle) {
-            visibility: hidden !important;
-
-            opacity: 0 !important;
-        }
-    }
     :global(.column-resize-handle) {
         position: absolute;
         z-index: 10;
@@ -376,6 +365,15 @@ onBeforeUnmount(() => {
 
         border: 2px solid var(--theme-layout-component);
         border-radius: 2px;
+        &[data-dragging="true"] {
+            & ~ .table-scroll-box {
+                :global(.column-resize-handle) {
+                    visibility: hidden !important;
+
+                    opacity: 0 !important;
+                }
+            }
+        }
     }
     .dragger-pointer {
         .pointer {
