@@ -1,7 +1,7 @@
 <!--
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 02:33:35
+ * @LastEditTime: 2025-07-04 15:08:37
 -->
 <template>
     <div ref="dom" :class="$style['table-wrapper']" :data-dragging="dragging">
@@ -13,7 +13,13 @@
                 <div :class="$style['pointer']" @mousedown="handleMouseDown('br', editor.view, $event)"></div>
             </div>
         </div>
-        <div ref="scrollBox" :class="$style['table-scroll-box']" @scroll="tableScroll">
+        <div
+            ref="scrollBox"
+            :class="pageStyle['table-scroll-box']"
+            @scroll="tableScroll"
+            :data-editing="isEditing"
+            :data-focus-in="isFocusIn"
+        >
             <table ref="table">
                 <colgroup ref="colgroup" />
                 <tbody ref="tbody"></tbody>
@@ -32,8 +38,11 @@ import { isInTable, cellAround, inSameTable, tableEditingKey, CellSelection } fr
 
 import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 
+import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
+
 import { getClosestTableCellNode } from "../utils/helper";
 import { getClosestTable } from "../utils/helper";
+import pageStyle from "../../../src/app.module.scss";
 
 const table = ref<HTMLTableElement>();
 const tbody = ref<HTMLTableElement>();
@@ -77,6 +86,9 @@ function setTip(rect: { left: number; top: number; width: number; height: number
     }
 }
 
+const isSelectionSelf = ref(false);
+const isFocusIn = ref(false);
+
 function selectionUpdate() {
     const editor = prop.editor;
     const { view, state } = editor;
@@ -86,10 +98,20 @@ function selectionUpdate() {
 
     const inTable = isInTable(state);
 
-    if (!view.hasFocus() || !inTable) {
+    if (!view.hasFocus()) {
+        isFocusIn.value = false;
         removeTip();
         return;
     }
+
+    isSelectionSelf.value = false;
+
+    if (!inTable) {
+        removeTip();
+        return;
+    }
+
+    isFocusIn.value = true;
 
     const tableNodeInfo = getClosestTable(state.selection);
 
@@ -101,6 +123,9 @@ function selectionUpdate() {
         removeTip();
         return;
     }
+
+    isSelectionSelf.value = true;
+
     try {
         const tableRect = (editor.view.nodeDOM(tablePos) as HTMLElement).getBoundingClientRect();
 
@@ -297,6 +322,10 @@ function tableScroll() {
     });
 }
 
+const isEditing = computed(() => {
+    return isSelectionSelf.value && getEditorPanelExtensionStorage(prop.editor).lastEditorPanelType === "table";
+});
+
 let resizeObserver: ResizeObserver | null;
 
 onMounted(() => {
@@ -345,15 +374,6 @@ onBeforeUnmount(() => {
         pointer-events: none;
 
         background-color: var(--theme-layout-component);
-    }
-    .table-scroll-box {
-        overflow-x: auto;
-        overflow-y: hidden;
-
-        width: 100%;
-        table {
-            width: 100% !important;
-        }
     }
     .selection-tip {
         position: absolute;

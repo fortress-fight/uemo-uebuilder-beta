@@ -89,6 +89,17 @@ $project-name: app-editor;
                 outline: 1px dashed var(--theme-layout-component) !important;
             }
         }
+        .table-scroll-box[data-editing="true"],
+        .table-scroll-box[data-focus-in="true"] {
+            table.table-hide-border {
+                th,
+                td {
+                    border-width: 1px;
+                    border-style: dashed;
+                    border-color: var(--theme-layout-component);
+                }
+            }
+        }
         .grid-layer {
             cursor: pointer;
             &.has-focus {
