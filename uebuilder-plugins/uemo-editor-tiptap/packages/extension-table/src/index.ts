@@ -1,7 +1,7 @@
 /*
  * @Description: 表格
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 16:00:01
+ * @LastEditTime: 2025-07-04 12:39:10
  */
 export interface TableAttrs {
     tableBorder: boolean;
@@ -11,8 +11,8 @@ export interface TableAttrs {
 
 export interface TableCellAttrs {
     backgroundColor: string | null;
-    align: string | null;
-    valign: string | null;
+    align: "left" | "center" | "right" | null;
+    valign: "top" | "middle" | "bottom" | null;
     colspan: number;
     rowspan: number;
     colwidth: number[] | null;

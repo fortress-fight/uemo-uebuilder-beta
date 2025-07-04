@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 16:00:32
+ * @LastEditTime: 2025-07-04 12:36:06
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
@@ -51,7 +51,8 @@ export type EditorPanelAttrsMap = {
     shareRow: UE_TIPTAP_EXTENSION.ShareRow["attrs"];
     shareItem: UE_TIPTAP_EXTENSION.ShareItem["attrs"];
     table: UE_TIPTAP_EXTENSION.Table["attrs"];
-    tableCell: UE_TIPTAP_EXTENSION.TableCell["attrs"];
+    tableScale: { rows: number; cols: number };
+    tableAlign: { align: "left" | "center" | "right" | "top" | "middle" | "bottom" };
     moreOper: null;
 };
 

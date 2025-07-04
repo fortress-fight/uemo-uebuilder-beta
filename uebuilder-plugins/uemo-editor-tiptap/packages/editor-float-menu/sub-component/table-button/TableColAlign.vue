@@ -3,11 +3,12 @@
 </template>
 <script lang="ts" setup>
 import { useInjectTiptapEditor } from "../../../../utils/mixin-tiptap-editor";
+import { getTableCellAttrs } from "../../../../packages/extension-table/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
-const current = computed<"top" | "middle" | "bottom">(() => {
-    return editor?.getAttributes("tableCell").valign || "top";
+const currentValue = computed<"top" | "middle" | "bottom">(() => {
+    return getTableCellAttrs(editor).valign || "top";
 });
 
 const icon = computed(() => {
@@ -15,13 +16,24 @@ const icon = computed(() => {
         top: "icon-editor-valign-top",
         middle: "icon-editor-valign-middle",
         bottom: "icon-editor-valign-bottom",
-    }[current.value];
+    }[currentValue.value];
 });
 
-const _rootDomRef = useTemplateRef("rootDom");
+const rootDomRef = useTemplateRef("rootDom");
 
 function trigger() {
-    //
+    const rect = rootDomRef.value?.$el;
+    if (!rect) return;
+
+    editor?.commands.openAttrEditorPanel("tableAlign", currentValue.value as any, {
+        rect,
+        updateAttrs: (value) => {
+            editor
+                ?.chain()
+                .setCellVAlign(value as any)
+                .run();
+        },
+    });
 }
 </script>
 <style lang="scss" module>

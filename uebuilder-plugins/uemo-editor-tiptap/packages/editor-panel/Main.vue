@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 03:31:08
+ * @LastEditTime: 2025-07-04 12:40:42
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -57,6 +57,8 @@ import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
 import MoreOperPanel from "./sub-component/MoreOperPanel.vue";
+import TableScale from "./sub-component/TableScale.vue";
+import TableAlign from "./sub-component/TableAlignPanel.vue";
 
 type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
@@ -84,6 +86,8 @@ defineOptions({
         TiptapDividerBlock,
         TiptapHrRule,
         TiptapShareItem,
+        TableScale,
+        TableAlign,
     },
 });
 
@@ -140,6 +144,9 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     hrRule: "TiptapHrRule",
     shareRow: "TiptapShareItem",
     shareItem: "TiptapShareItem",
+    table: "TiptapTable",
+    tableScale: "TableScale",
+    tableAlign: "TableAlign",
 };
 
 /**
