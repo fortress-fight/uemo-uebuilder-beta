@@ -6,6 +6,7 @@
     "UNIT_COLOR": "Color",
     "UNIT_SHADOW": "Shadow",
     "UNIT_WIDTH": "Width",
+    "UNIT_MIN_WIDTH": "Min Width",
     "UNIT_HEIGHT": "Height",
     "UNIT_RADIUS": "Radius",
     "UNIT_OPACITY": "Opacity",
@@ -544,5 +545,11 @@
     "WEB_URL": "Web URL",
     "WEB_URL_INPUT_TIP": "Please enter the correct link address",
 
-    "OVERFLOW_MODE_TIP": "Whether to crop content exceeding the boundary"
+    "OVERFLOW_MODE_TIP": "Whether to crop content exceeding the boundary",
+
+    "TABLE_BORDER": "Border",
+    "TABLE_CELL_WIDTH": "Cell Width",
+    "TABLE_RESET_CELL_WIDTH": "Reset Cell Width",
+    "TABLE_BORDER_TIP": "Whether to show border",
+    "TABLE_TIP_1": "1. Dragging the cell size will also affect the minimum width of the table. The final minimum width of the table will be the larger of the two."
 }

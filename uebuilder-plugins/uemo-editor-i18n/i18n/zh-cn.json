@@ -6,6 +6,7 @@
     "UNIT_COLOR": "颜色",
     "UNIT_SHADOW": "投影",
     "UNIT_WIDTH": "宽度",
+    "UNIT_MIN_WIDTH": "最小宽度",
     "UNIT_HEIGHT": "高度",
     "UNIT_RADIUS": "圆角",
     "UNIT_OPACITY": "透明度",
@@ -544,5 +545,11 @@
     "WEB_URL": "链接地址",
     "WEB_URL_INPUT_TIP": "请输入正确的链接地址",
 
-    "OVERFLOW_MODE_TIP": "是否裁切超出边界的内容"
+    "OVERFLOW_MODE_TIP": "是否裁切超出边界的内容",
+
+    "TABLE_BORDER": "边框",
+    "TABLE_CELL_WIDTH": "单元格宽度",
+    "TABLE_BORDER_TIP": "是否显示边框",
+    "TABLE_RESET_CELL_WIDTH": "重置单元格宽度",
+    "TABLE_TIP_1": "1. 拖拽单元格尺寸，也会影响表格最小宽度.最终的表格最小宽度会选择两者中的最大的值"
 }
