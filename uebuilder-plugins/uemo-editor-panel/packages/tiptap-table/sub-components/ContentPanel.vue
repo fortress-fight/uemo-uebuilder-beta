@@ -15,14 +15,9 @@
         </template>
     </UeElSettingGroup>
 
-    <UeElSettingGroup :title="t('UNIT_COLOR')">
-        <template #body>
-            <UeElColorSetting v-model:value="borderColor" type="color" />
-        </template>
-    </UeElSettingGroup>
-
     <UeElSettingGroup :title="t('TABLE_BORDER')">
         <template #body>
+            <UeElColorSetting v-model:value="borderColor" type="color" :disable="!showBorder" />
             <UeElControlGroup>
                 <UeElCheckBox v-model:value="showBorder" :text="t('TABLE_BORDER_TIP')" />
             </UeElControlGroup>
