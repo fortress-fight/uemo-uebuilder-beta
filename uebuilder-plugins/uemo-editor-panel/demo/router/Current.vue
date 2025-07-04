@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestEditorPanelTiptapShareItem.vue";
+import TestComponent from "~/demo/components/TestEditorPanelTiptapTable.vue";
 </script>
 <style lang="scss" module>
 .test-group {

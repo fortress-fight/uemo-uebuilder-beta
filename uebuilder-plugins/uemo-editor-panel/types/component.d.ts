@@ -8,8 +8,8 @@ import UeEditorPanelTiptapButtonRow, { UeEditorPanelTiptapButtonRowBaseProps } f
 import UeEditorPanelTiptapDividerBlock, {
     UeEditorPanelTiptapDividerBlockBaseProps,
 } from "../packages/tiptap-divider-block";
-import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridGroup, { UeEditorPanelTiptapGridGroupBaseProps } from "../packages/tiptap-grid-group";
+import UeEditorPanelTiptapFrame, { UeEditorPanelTiptapFrameBaseProps } from "../packages/tiptap-frame";
 import UeEditorPanelTiptapGridItem, { UeEditorPanelTiptapGridItemBaseProps } from "../packages/tiptap-grid-item";
 import UeEditorPanelTiptapHrRule, { UeEditorPanelTiptapHrRuleBaseProps } from "../packages/tiptap-hr-rule";
 import UeEditorPanelTiptapImage, { UeEditorPanelTiptapImageBaseProps } from "../packages/tiptap-image";
@@ -18,14 +18,15 @@ import UeEditorPanelTiptapShareItem, { UeEditorPanelTiptapShareItemBaseProps } f
 import UeEditorPanelTiptapSpline, { UeEditorPanelTiptapSplineBaseProps } from "../packages/tiptap-spline";
 import UeEditorPanelTiptapSvgIcon, { UeEditorPanelTiptapSvgIconBaseProps } from "../packages/tiptap-svg-icon";
 import UeEditorPanelTiptapSvgView, { UeEditorPanelTiptapSvgViewBaseProps } from "../packages/tiptap-svg-view";
+import UeEditorPanelTiptapTable, { UeEditorPanelTiptapTableBaseProps } from "../packages/tiptap-table";
 
 declare module "vue" {
     export interface GlobalComponents {
         UeEditorPanelTiptapButtonItem: typeof UeEditorPanelTiptapButtonItem;
         UeEditorPanelTiptapButtonRow: typeof UeEditorPanelTiptapButtonRow;
         UeEditorPanelTiptapDividerBlock: typeof UeEditorPanelTiptapDividerBlock;
-        UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapGridGroup: typeof UeEditorPanelTiptapGridGroup;
+        UeEditorPanelTiptapFrame: typeof UeEditorPanelTiptapFrame;
         UeEditorPanelTiptapGridItem: typeof UeEditorPanelTiptapGridItem;
         UeEditorPanelTiptapHrRule: typeof UeEditorPanelTiptapHrRule;
         UeEditorPanelTiptapImage: typeof UeEditorPanelTiptapImage;
@@ -34,6 +35,7 @@ declare module "vue" {
         UeEditorPanelTiptapSpline: typeof UeEditorPanelTiptapSpline;
         UeEditorPanelTiptapSvgIcon: typeof UeEditorPanelTiptapSvgIcon;
         UeEditorPanelTiptapSvgView: typeof UeEditorPanelTiptapSvgView;
+        UeEditorPanelTiptapTable: typeof UeEditorPanelTiptapTable;
     }
 }
 
@@ -42,8 +44,8 @@ declare global {
         interface UeEditorPanelTiptapButtonItemProps extends UeEditorPanelTiptapButtonItemBaseProps {}
         interface UeEditorPanelTiptapButtonRowProps extends UeEditorPanelTiptapButtonRowBaseProps {}
         interface UeEditorPanelTiptapDividerBlockProps extends UeEditorPanelTiptapDividerBlockBaseProps {}
-        interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapGridGroupProps extends UeEditorPanelTiptapGridGroupBaseProps {}
+        interface UeEditorPanelTiptapFrameProps extends UeEditorPanelTiptapFrameBaseProps {}
         interface UeEditorPanelTiptapGridItemProps extends UeEditorPanelTiptapGridItemBaseProps {}
         interface UeEditorPanelTiptapHrRuleProps extends UeEditorPanelTiptapHrRuleBaseProps {}
         interface UeEditorPanelTiptapImageProps extends UeEditorPanelTiptapImageBaseProps {}
@@ -52,6 +54,7 @@ declare global {
         interface UeEditorPanelTiptapSplineProps extends UeEditorPanelTiptapSplineBaseProps {}
         interface UeEditorPanelTiptapSvgIconProps extends UeEditorPanelTiptapSvgIconBaseProps {}
         interface UeEditorPanelTiptapSvgViewProps extends UeEditorPanelTiptapSvgViewBaseProps {}
+        interface UeEditorPanelTiptapTableProps extends UeEditorPanelTiptapTableBaseProps {}
     }
 }
 
