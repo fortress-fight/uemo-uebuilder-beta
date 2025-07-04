@@ -105,7 +105,7 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
         (isTableSelection || isInTableEmpty) &&
         view.hasFocus() &&
         !isSuggestionActive(editor) &&
-        !["table", "tableCell"].includes(getEditorPanelExtensionStorage(editor).lastEditorPanelType || "")
+        getEditorPanelExtensionStorage(editor).lastEditorPanelType !== "table"
     );
 };
 </script>
