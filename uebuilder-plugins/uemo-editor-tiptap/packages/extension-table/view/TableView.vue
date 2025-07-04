@@ -1,7 +1,7 @@
 <!--
- * @Description:
+ * @Description: TableView 组件，支持表格选区、拖拽、可视化高亮等功能
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 15:08:37
+ * @LastEditTime: 2025-07-04 15:15:54
 -->
 <template>
     <div ref="dom" :class="$style['table-wrapper']" :data-dragging="dragging">
@@ -34,14 +34,12 @@ import type { Editor } from "@tiptap/core";
 import type { Selection } from "@tiptap/pm/state";
 import type { ResolvedPos } from "@tiptap/pm/model";
 
+import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
 import { isInTable, cellAround, inSameTable, tableEditingKey, CellSelection } from "@tiptap/pm/tables";
 
-import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
-
+import { getClosestTableCellNode, getClosestTable } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-import { getClosestTableCellNode } from "../utils/helper";
-import { getClosestTable } from "../utils/helper";
 import pageStyle from "../../../src/app.module.scss";
 
 const table = ref<HTMLTableElement>();
@@ -55,7 +53,11 @@ const prop = defineProps<{ editor: Editor; cellMinWidth: number; view: NodeView 
 
 let oldSelection: Selection | null = null;
 let tipHasShow = false;
+let timer: ReturnType<typeof setTimeout>;
 
+/**
+ * 移除选区高亮提示
+ */
 function removeTip() {
     clearTimeout(timer);
     oldSelection = null;
@@ -65,8 +67,10 @@ function removeTip() {
     }
 }
 
-let timer: ReturnType<typeof setTimeout>;
-
+/**
+ * 设置选区高亮提示位置
+ * @param rect 选区的位置信息
+ */
 function setTip(rect: { left: number; top: number; width: number; height: number }) {
     clearTimeout(timer);
     if (!tipHasShow) {
@@ -89,54 +93,43 @@ function setTip(rect: { left: number; top: number; width: number; height: number
 const isSelectionSelf = ref(false);
 const isFocusIn = ref(false);
 
+/**
+ * 选区更新时的处理逻辑，负责高亮、状态同步
+ * @returns void
+ */
 function selectionUpdate() {
     const editor = prop.editor;
     const { view, state } = editor;
     const { selection } = state;
-
     oldSelection = selection;
-
     const inTable = isInTable(state);
-
     if (!view.hasFocus()) {
         isFocusIn.value = false;
         removeTip();
         return;
     }
-
     isSelectionSelf.value = false;
-
     if (!inTable) {
         removeTip();
         return;
     }
-
     isFocusIn.value = true;
-
     const tableNodeInfo = getClosestTable(state.selection);
-
     if (!tableNodeInfo) return;
-
     const { pos: tablePos, node: tableNode } = tableNodeInfo;
-
     if (!tableNode || dom.value != editor.view.nodeDOM(tablePos)) {
         removeTip();
         return;
     }
-
     isSelectionSelf.value = true;
-
     try {
         const tableRect = (editor.view.nodeDOM(tablePos) as HTMLElement).getBoundingClientRect();
-
         if (selection instanceof CellSelection) {
             const { $anchorCell, $headCell } = selection;
-
             const from = $headCell.pos > $anchorCell.pos ? $anchorCell.pos : $headCell.pos;
             const to = $headCell.pos > $anchorCell.pos ? $headCell.pos : $anchorCell.pos;
             const fromRect = (editor.view.nodeDOM(from) as HTMLElement).getBoundingClientRect();
             const toRect = (editor.view.nodeDOM(to) as HTMLElement).getBoundingClientRect();
-
             setTip({
                 left: Math.min(fromRect.left, toRect.left) - tableRect.left - 1,
                 top: Math.min(fromRect.top, toRect.top) - tableRect.top - 1,
@@ -157,18 +150,13 @@ function selectionUpdate() {
             });
         } else {
             const tableCellNodeInfo = getClosestTableCellNode(state.selection);
-
             if (!tableCellNodeInfo) return;
-
             const { pos: tableCellPos } = tableCellNodeInfo;
-
             if (typeof tableCellPos === "undefined") {
                 removeTip();
                 return;
             }
-
             const cellRect = (editor.view.nodeDOM(tableCellPos) as HTMLElement)?.getBoundingClientRect();
-
             setTip({
                 left: cellRect.left - tableRect.left - 1,
                 top: cellRect.top - tableRect.top - 1,
@@ -182,6 +170,12 @@ function selectionUpdate() {
     }
 }
 
+/**
+ * 判断 dom 是否在单元格内
+ * @param view 编辑器视图
+ * @param dom 节点
+ * @returns Node | null
+ */
 function domInCell(view: EditorView, dom: Node | null): Node | null {
     for (; dom && dom != view.dom; dom = dom.parentNode) {
         if (dom.nodeName == "TD" || dom.nodeName == "TH") {
@@ -191,6 +185,12 @@ function domInCell(view: EditorView, dom: Node | null): Node | null {
     return null;
 }
 
+/**
+ * 获取鼠标下的单元格位置
+ * @param view 编辑器视图
+ * @param event 鼠标事件
+ * @returns ResolvedPos | null
+ */
 function cellUnderMouse(view: EditorView, event: MouseEvent): ResolvedPos | null {
     const mousePos = view.posAtCoords({
         left: event.clientX,
@@ -201,14 +201,19 @@ function cellUnderMouse(view: EditorView, event: MouseEvent): ResolvedPos | null
 }
 
 const dragging = ref<boolean>();
+
+/**
+ * 处理表格选区拖拽事件
+ * @param dir 拖拽方向（br/tl）
+ * @param view 编辑器视图
+ * @param startEvent 鼠标事件
+ */
 function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEvent): void {
     if (startEvent.ctrlKey || startEvent.metaKey) return;
     if (!oldSelection) return;
-
     dragging.value = true;
     let startDOMCell: HTMLElement;
     let $cell: ResolvedPos | null = null;
-
     if (oldSelection instanceof CellSelection) {
         const { $anchorCell, $headCell } = oldSelection;
         view.dispatch(view.state.tr.setSelection(new CellSelection($anchorCell, $headCell)));
@@ -220,48 +225,23 @@ function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEv
         if (!$cell) return;
     } else {
         const from = oldSelection.from;
-        // NOTE 选中光标位置的单元格
         const tableCellNodeInfo = getClosestTableCellNode(oldSelection);
-
         if (!tableCellNodeInfo) return;
-
         const { start } = tableCellNodeInfo;
-
         if (typeof start === "undefined") return;
-
         startDOMCell = prop.editor.view.nodeDOM(start) as HTMLElement;
-
         const { state } = view;
         const doc = state.doc;
         $cell = cellAround(doc.resolve(from));
         if (!$cell || !startDOMCell) return;
-
         view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
     }
-
     startEvent.preventDefault();
-
-    // let $anchor;
-    // if (startEvent.shiftKey && view.state.selection instanceof CellSelection) {
-    //     // Adding to an existing cell selection
-    //     setCellSelection(view.state.selection.$anchorCell, startEvent);
-    //     startEvent.preventDefault();
-    // } else if (
-    //     startEvent.shiftKey &&
-    //     ($anchor = cellAround(view.state.selection.$anchor)) != null &&
-    //     cellUnderMouse(view, startEvent)?.pos != $anchor.pos
-    // ) {
-    //     // Adding to a selection that starts in another cell (causing a
-    //     // cell selection to be created).
-    //     setCellSelection($anchor, startEvent);
-    //     startEvent.preventDefault();
-    // } else if (!startDOMCell) {
-    //     // Not in a cell, let the default behavior happen.
-    //     return;
-    // }
-
-    // Create and dispatch a cell selection between the given anchor and
-    // the position under the mouse.
+    /**
+     * 创建并派发单元格选区
+     * @param $anchor 锚点单元格
+     * @param event 鼠标事件
+     */
     function setCellSelection($anchor: ResolvedPos, event: MouseEvent): void {
         let $head = cellUnderMouse(view, event);
         const starting = tableEditingKey.getState(view.state) == null;
@@ -276,8 +256,9 @@ function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEv
             view.dispatch(tr);
         }
     }
-
-    // Stop listening to mouse motion events.
+    /**
+     * 停止拖拽监听，释放事件，防止内存泄漏
+     */
     function stop(): void {
         view.root.removeEventListener("mouseup", stop);
         view.root.removeEventListener("dragstart", stop);
@@ -287,22 +268,18 @@ function handleMouseDown(dir: "br" | "tl", view: EditorView, startEvent: MouseEv
         }
         dragging.value = false;
     }
-
     function move(_event: Event): void {
         const event = _event as MouseEvent;
         const anchor = tableEditingKey.getState(view.state);
         let $anchor;
         if (anchor != null) {
-            // Continuing an existing cross-cell selection
             $anchor = view.state.doc.resolve(anchor);
         } else if (domInCell(view, event.target as Node) != startDOMCell) {
-            // Moving out of the initial cell -- start a new cell selection
             $anchor = $cell;
             if (!$anchor) return stop();
         }
         if ($anchor) setCellSelection($anchor, event);
     }
-
     view.root.addEventListener("mouseup", stop);
     view.root.addEventListener("dragstart", stop);
     view.root.addEventListener("mousemove", move);
@@ -316,6 +293,9 @@ defineExpose({
     scrollBox,
 });
 
+/**
+ * 滚动时同步选区高亮
+ */
 function tableScroll() {
     requestAnimationFrame(() => {
         selectionUpdate();
@@ -328,6 +308,9 @@ const isEditing = computed(() => {
 
 let resizeObserver: ResizeObserver | null;
 
+/**
+ * 组件挂载时，监听表格尺寸变化，自动同步选区高亮
+ */
 onMounted(() => {
     requestAnimationFrame(() => {
         resizeObserver = new ResizeObserver((_entries) => {
@@ -335,12 +318,15 @@ onMounted(() => {
                 selectionUpdate();
             });
         });
-
         dom.value?.querySelectorAll("td,th,table").forEach((dom) => {
             resizeObserver?.observe(dom);
         });
     });
 });
+
+/**
+ * 组件卸载时，断开 observer，防止内存泄漏
+ */
 onBeforeUnmount(() => {
     resizeObserver?.disconnect();
     resizeObserver = null;
