@@ -19,6 +19,7 @@ import type { GridItemAttrs } from "../packages/extension-grid/src";
 import type { DividerBlockAttrs } from "../packages/extension-divider-block/src";
 import type { HrRuleAttrs } from "../packages/extension-hr-rule/src";
 import type { ShareItemAttrs, ShareRowAttrs } from "../packages/extension-share/src";
+import type { TableAttrs, TableCellAttrs } from "../packages/extension-table/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -104,6 +105,12 @@ declare global {
         };
         type ShareItem = {
             attrs: ShareItemAttrs;
+        };
+        type Table = {
+            attrs: TableAttrs;
+        };
+        type TableCell = {
+            attrs: TableCellAttrs;
         };
     }
 }

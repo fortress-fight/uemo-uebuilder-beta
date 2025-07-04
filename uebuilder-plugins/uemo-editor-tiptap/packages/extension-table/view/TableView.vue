@@ -1,11 +1,11 @@
 <!--
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 14:37:53
+ * @LastEditTime: 2025-07-04 02:33:35
 -->
 <template>
-    <div ref="dom" :class="$style['table-wrapper']">
-        <div ref="selectionTip" :class="$style['selection-tip']" :data-dragging="dragging">
+    <div ref="dom" :class="$style['table-wrapper']" :data-dragging="dragging">
+        <div ref="selectionTip" :class="$style['selection-tip']">
             <div :class="$style['dragger-pointer']" data-pos="tl">
                 <div :class="$style['pointer']" @mousedown="handleMouseDown('tl', editor.view, $event)"></div>
             </div>
@@ -321,6 +321,31 @@ onBeforeUnmount(() => {
 <style lang="scss" module>
 .table-wrapper {
     position: relative;
+    &[data-dragging="true"] {
+        .selection-tip {
+            .dragger-pointer {
+                pointer-events: none !important;
+            }
+        }
+        :global(.column-resize-handle) {
+            visibility: hidden !important;
+
+            opacity: 0 !important;
+        }
+    }
+    :global(.column-resize-handle) {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: -2px;
+        bottom: -2px;
+
+        width: 3px;
+
+        pointer-events: none;
+
+        background-color: var(--theme-layout-component);
+    }
     .table-scroll-box {
         overflow-x: auto;
         overflow-y: hidden;
@@ -345,11 +370,6 @@ onBeforeUnmount(() => {
 
         border: 2px solid var(--theme-layout-component);
         border-radius: 2px;
-        &[data-dragging="true"] {
-            .dragger-pointer {
-                pointer-events: none !important;
-            }
-        }
     }
     .dragger-pointer {
         .pointer {
@@ -386,35 +406,6 @@ onBeforeUnmount(() => {
         &[data-pos="tl"] {
             top: -4.5px;
             left: -4.5px;
-        }
-    }
-    :global {
-        /* stylelint-disable-next-line selector-class-pattern */
-        // .selectedCell::after {
-        //     position: absolute;
-        //     z-index: 2;
-        //     top: 0;
-        //     right: 0;
-        //     bottom: 0;
-        //     left: 0;
-
-        //     content: "";
-        //     pointer-events: none;
-
-        //     background: rgb(116 182 219 / 0.3);
-        // }
-        .column-resize-handle {
-            position: absolute;
-            z-index: 10;
-            top: 0;
-            right: -2px;
-            bottom: -2px;
-
-            width: 3px;
-
-            pointer-events: none;
-
-            background-color: var(--theme-layout-component);
         }
     }
 }

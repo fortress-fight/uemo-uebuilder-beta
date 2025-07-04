@@ -80,6 +80,7 @@
     "OPER_TABLE_CELL_ALIGN": "Cell Align",
     "OPER_MERGE_TABLE_CELL": "Merge/Split Cell",
     "OPER_RESET_COL_WIDTH": "Reset Column Width",
+    "OPER_DELETE_TABLE": "Delete Table",
     "OPER_SELECT_ROW": "Select Row",
     "OPER_DELETE_ROW": "Delete Row",
     "OPER_ADD_ROW_BEFORE": "Add Row Before",

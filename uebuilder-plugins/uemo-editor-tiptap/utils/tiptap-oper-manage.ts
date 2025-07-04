@@ -219,12 +219,13 @@ const operManage = {
     selectTable: { title: t("OPER_SELECT_TABLE"), icon: "icon-editor-select-table", buttonType: "iconButton" },
     removeTable: { title: t("OPER_REMOVE_TABLE"), icon: "icon-editor-trash", buttonType: "iconButton" },
     tableBorderColor: { title: t("OPER_TABLE_BORDER_COLOR"), buttonType: "colorButton" },
+    deleteTable: { title: t("OPER_DELETE_TABLE"), icon: "icon-editor-trash", buttonType: "iconButton" },
 
     // 单元格操作
     tableScale: { title: t("OPER_TABLE_SCALE"), icon: "icon-editor-table-scale", buttonType: "iconButton" },
     tableWidth: { title: t("OPER_TABLE_WIDTH"), icon: "icon-editor-width", buttonType: "iconButton" },
     tableMinWidth: { title: t("OPER_TABLE_MIN_WIDTH"), icon: "icon-editor-min-width", buttonType: "iconButton" },
-    tableCellBg: { title: t("OPER_TABLE_CELL_BG"), buttonType: "colorButton" },
+    tableCellBackground: { title: t("OPER_TABLE_CELL_BG"), buttonType: "colorButton" },
     tableCellAlign: { title: t("OPER_TABLE_CELL_ALIGN"), buttonType: "iconButton" },
     mergeTableCell: { title: t("OPER_MERGE_TABLE_CELL"), icon: "icon-editor-cell-merge", buttonType: "iconButton" },
     resetColWidth: { title: t("OPER_RESET_COL_WIDTH"), icon: "icon-editor-remove-style", buttonType: "iconButton" },
@@ -297,6 +298,13 @@ const operManage = {
     // #endregion
 
     // #region 按钮相关
+
+    // #endregion
+
+    // #region 表格相关
+
+    tableRowAlign: { title: t("OPER_TABLE_CELL_ALIGN"), buttonType: "iconButton" },
+    tableColAlign: { title: t("OPER_TABLE_CELL_ALIGN"), buttonType: "iconButton" },
 
     // #endregion
 } as const;

@@ -3,7 +3,7 @@ import type { Editor } from "@tiptap/core";
 import { isInTable } from "@tiptap/pm/tables";
 import { isNodeSelection } from "@tiptap/core";
 
-import { getTableNode } from "../../../utils/tiptap-utils";
+import { getTableNode } from "../../extension-table/utils/helper";
 import { isInButtonRow, getButtonRow } from "../../extension-button/utils/helper";
 
 // /**

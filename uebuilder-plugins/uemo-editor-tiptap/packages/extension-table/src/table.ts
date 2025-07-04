@@ -24,15 +24,14 @@ import {
     tableEditing,
     toggleHeader,
     toggleHeaderCell,
-    cellAround,
     isInTable,
 } from "@tiptap/pm/tables";
 
 import { getTableView } from "../view/table-view";
-import { deleteTableWhenAllCellsSelected, createTable } from "../utils/helper";
+import { deleteTableWhenAllCellsSelected, createTable, getClosestTableCellNode } from "../utils/helper";
 import { getClosestTable } from "../utils/helper";
 
-import { selectNode } from "../../../utils/tiptap-utils";
+import { selectNode, selectNodeInner } from "../../../utils/tiptap-utils";
 
 import $pageStyle from "../../../src/app.module.scss";
 
@@ -209,7 +208,7 @@ export const Table = Node.create<TableOptions>({
                         return false;
                     }
                 },
-                renderHTML: (attributes) => {
+                renderHTML: (attributes: TableAttrs) => {
                     if (attributes.tableBorder === false) {
                         return { class: $pageStyle["table-hide-border"] };
                     }
@@ -222,7 +221,7 @@ export const Table = Node.create<TableOptions>({
                 parseHTML: (element) => {
                     return element.style.getPropertyValue("--table-border-color") || "";
                 },
-                renderHTML: (attributes) => {
+                renderHTML: (attributes: TableAttrs) => {
                     if (attributes.tableBorderColor) {
                         return {
                             style: `--table-border-color: ${attributes.tableBorderColor}`,
@@ -236,7 +235,7 @@ export const Table = Node.create<TableOptions>({
                 parseHTML: (element) => {
                     return element.style.getPropertyValue("--table-min-width") || element.style.minWidth || "";
                 },
-                renderHTML: (attributes) => {
+                renderHTML: (attributes: TableAttrs) => {
                     if (attributes.minWidth) {
                         return {
                             style: `--table-min-width: ${attributes.minWidth}`,
@@ -436,14 +435,8 @@ export const Table = Node.create<TableOptions>({
     addKeyboardShortcuts() {
         return {
             Tab: () => {
-                if (this.editor.commands.goToNextCell()) {
-                    return true;
-                }
-
-                if (!this.editor.can().addRowAfter()) {
-                    return false;
-                }
-
+                if (this.editor.commands.goToNextCell()) return true;
+                if (!this.editor.can().addRowAfter()) return false;
                 return this.editor.chain().addRowAfter().goToNextCell().run();
             },
             "Shift-Tab": () => this.editor.commands.goToPreviousCell(),
@@ -452,16 +445,25 @@ export const Table = Node.create<TableOptions>({
             Delete: deleteTableWhenAllCellsSelected,
             "Mod-Delete": deleteTableWhenAllCellsSelected,
             "Mod-a": () => {
-                // NOTE 选中光标位置的单元格
-                const { view } = this.editor;
-                const { state } = view;
-                const { selection } = state;
-                const doc = state.doc,
-                    $cell = cellAround(doc.resolve(selection.from));
-                if (!$cell) return false;
-                view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
+                const editor = this.editor;
 
-                return true;
+                // NOTE 选中光标位置单元格的内容
+                const tableCellNodeInfo = getClosestTableCellNode(editor);
+                if (!tableCellNodeInfo) return false;
+
+                const { pos, node } = tableCellNodeInfo;
+                return selectNodeInner(editor, pos, node);
+
+                // NOTE 选中光标位置的单元格
+                // const { view } = this.editor;
+                // const { state } = view;
+                // const { selection } = state;
+                // const doc = state.doc,
+                //     $cell = cellAround(doc.resolve(selection.from));
+                // if (!$cell) return false;
+                // view.dispatch(view.state.tr.setSelection(new CellSelection($cell)));
+
+                // return true;
             },
         };
     },

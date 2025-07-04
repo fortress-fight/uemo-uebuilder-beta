@@ -5,7 +5,7 @@ import type { TYPE_SLASH_MENU } from "../data";
 import { VueRenderer } from "@tiptap/vue-3";
 
 import { slashMenuList } from "../data";
-import { isInTable } from "../../../utils/tiptap-utils";
+import { isInTable } from "../../extension-table/utils/helper";
 import { isInGridGroup } from "../../extension-grid/utils/helper";
 
 import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
@@ -20,7 +20,7 @@ import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 function filterMenuItem(editor: Editor, item: { title: string; name: string }): boolean {
     const { state } = editor.view;
 
-    if (isInTable(state) && ["inertTable", "insertGridGroup"].includes(item.name)) {
+    if (isInTable(editor) && ["inertTable", "insertGridGroup"].includes(item.name)) {
         return false;
     }
 

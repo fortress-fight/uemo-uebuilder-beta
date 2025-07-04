@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-05 11:30:46
+ * @LastEditTime: 2025-07-04 11:03:13
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -116,7 +116,7 @@ async function updateDialogPos(): Promise<void> {
 
     const { refEl, options = defaultCalcPosParam } = position;
 
-    if (refEl instanceof HTMLElement && !document.body.contains(refEl)) {
+    if (!refEl.getBoundingClientRect() || (refEl instanceof HTMLElement && !document.body.contains(refEl))) {
         return;
     }
 

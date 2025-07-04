@@ -3,7 +3,6 @@ import type { EditorView } from "@tiptap/pm/view";
 import type { Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
-import { isInTable } from "@tiptap/pm/tables";
 import { TextSelection, NodeSelection } from "@tiptap/pm/state";
 import { isNodeSelection, posToDOMRect, isTextSelection } from "@tiptap/core";
 
@@ -26,36 +25,6 @@ export function hasParentNode(editor: Editor) {
         }
     }
     return false;
-}
-
-/**
- * 判断是否在表格中
- */
-export { isInTable };
-
-/**
- * @description 获取表格节点
- */
-export function getTableNode(selection: Selection) {
-    const $pos = selection.$anchor;
-    let tableNode: ProsemirrorNode | undefined = undefined;
-    let start;
-    let end;
-    for (let d = $pos.depth; d > 0; d--) {
-        const node = $pos.node(d);
-        if (node.type.spec.tableRole == "table") {
-            start = $pos.before(d);
-            end = $pos.after(d);
-            tableNode = node;
-            break;
-        }
-    }
-    return {
-        tableNode,
-        start,
-        end,
-        $pos,
-    };
 }
 
 /**
