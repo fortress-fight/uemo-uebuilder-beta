@@ -359,3 +359,10 @@
 
     return true;
     ```
+
+20. 根据位置找到 DOM
+
+
+    ```ts
+    const fromDom = editor.view.nodeDOM(from) as HTMLElement;
+    ```
