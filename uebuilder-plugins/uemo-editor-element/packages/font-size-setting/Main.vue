@@ -1,7 +1,7 @@
 <!--
  * @Description: 字号控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-04-22 01:26:03
+ * @LastEditTime: 2025-07-05 17:43:22
 -->
 <template>
     <UeElControlGroup :class="$style['font-size-setting']" class="w-full" :col-count="selectedValue === '' ? 2 : 1">
