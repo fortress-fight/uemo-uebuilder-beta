@@ -165,3 +165,14 @@ export function attrToStyle(attr: Record<string, string | undefined>, defaultAtt
 export function omitDefaultKey(obj: Record<string, any>, defaultObj: Record<string, any>) {
     return Object.fromEntries(Object.entries(obj).filter(([key, value]) => !_isEqual(value, defaultObj[key])));
 }
+
+/**
+ * 移除对象中的空值
+ * @param obj 对象
+ * @returns 移除空值后的对象
+ */
+export function removeEmptyValue(obj: Record<string, any>) {
+    return Object.fromEntries(
+        Object.entries(obj).filter(([_key, value]) => value !== undefined && value !== "" && value !== null)
+    );
+}
