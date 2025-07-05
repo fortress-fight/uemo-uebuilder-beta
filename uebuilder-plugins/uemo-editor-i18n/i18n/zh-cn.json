@@ -149,6 +149,7 @@
     "UNIT_TABLE_CELL": "单元格",
     "UNIT_TABLE_ROW": "行",
     "UNIT_TABLE_COL": "列",
+    "UNIT_EFFECT_TEXT": "特效文字",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
