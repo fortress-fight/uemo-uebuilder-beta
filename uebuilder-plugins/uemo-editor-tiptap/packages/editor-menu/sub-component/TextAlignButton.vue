@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 11:24:42
+ * @LastEditTime: 2025-07-05 17:20:30
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -11,6 +11,7 @@ import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getDeviceStorage } from "../../extension-device/helper";
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { isShareRowNode, getShareRowAttrs } from "../../extension-share/utils/helper";
+import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -21,8 +22,12 @@ const currentValue = computed(() => {
 
     const isPc = getDeviceStorage(editor)?.device === "pc";
 
+    if (isEffectTextNode(editor)) {
+        return isPc ? getEffectTextAttrs(editor)?.align : getEffectTextAttrs(editor)?.moAlign;
+    }
+
     if (isShareRowNode(editor.state.selection)) {
-        return getShareRowAttrs(editor)?.align;
+        return isPc ? getShareRowAttrs(editor)?.align : getShareRowAttrs(editor)?.moAlign;
     }
 
     if (isButtonRow(editor)) {
@@ -55,9 +60,17 @@ function triggerTextAlign(textAlign?: string | null) {
 
     const isPc = getDeviceStorage(editor)?.device === "pc";
 
+    if (isEffectTextNode(editor)) {
+        const chain = editor?.chain().focus();
+        chain.updateEffectTextAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
+
+        return chain.run();
+    }
+
     if (isShareRowNode(editor.state.selection)) {
         const chain = editor?.chain().focus();
-        chain.updateShareRowAttrs({ align: textAlign || "" });
+        chain.updateShareRowAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
+
         return chain.run();
     }
 

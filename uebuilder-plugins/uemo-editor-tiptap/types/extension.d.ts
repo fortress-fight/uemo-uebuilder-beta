@@ -112,5 +112,8 @@ declare global {
         type TableCell = {
             attrs: TableCellAttrs;
         };
+        type EffectText = {
+            attrs: EffectTextAttrs;
+        };
     }
 }

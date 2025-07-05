@@ -60,6 +60,7 @@ import { DividerBlock } from "../packages/extension-divider-block/src";
 import { HrRule } from "../packages/extension-hr-rule/src";
 import { ShareRow, ShareItem } from "../packages/extension-share/src";
 import { Table, TableHeader, TableRow, TableCell } from "../packages/extension-table/src";
+import { EffectText } from "../packages/extension-effect-text/src";
 
 // #endregion
 
@@ -145,6 +146,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         TableHeader,
         TableRow,
         TableCell,
+        EffectText,
     ];
 
     return [...baseExtensions, ...customExtensions];

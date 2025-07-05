@@ -20,6 +20,7 @@
     <UeTiptapShareRowMenu />
     <UeTiptapShareItemMenu />
     <UeTiptapTableMenu />
+    <UeTiptapEffectTextMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -43,6 +44,7 @@ import UeTiptapHrRuleMenu from "../../extension-hr-rule/menu/HrRuleMenu.vue";
 import UeTiptapShareRowMenu from "../../extension-share/menu/ShareRowMenu.vue";
 import UeTiptapShareItemMenu from "../../extension-share/menu/ShareItemMenu.vue";
 import UeTiptapTableMenu from "../../extension-table/menu/TableMenu.vue";
+import UeTiptapEffectTextMenu from "../../extension-effect-text/menu/EffectTextMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

@@ -119,6 +119,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "inertTable":
                     chain.insetNodePlaceholder("TablePlaceholder");
                     break;
+                case "insertEffectText":
+                    chain.insertEffectText();
+                    break;
 
                 default:
                     break;

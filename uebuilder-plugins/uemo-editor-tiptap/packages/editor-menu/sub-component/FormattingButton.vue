@@ -1,7 +1,7 @@
 <!--
  * @Description: 格式化插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 10:19:55
+ * @LastEditTime: 2025-07-05 17:13:35
 -->
 <template>
     <UeTiptapMenuButton type="formatting" :class="$style['plugin-formatting']" @trigger="triggerFormattingCommand" />
@@ -9,6 +9,7 @@
 <script lang="ts" setup>
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { isButtonRow } from "../../extension-button/utils/helper";
+import { isEffectTextNode } from "../../extension-effect-text/utils/helper";
 
 defineOptions({ name: "FormattingButton" });
 
@@ -18,7 +19,9 @@ function triggerFormattingCommand() {
     if (isButtonRow(editor)) {
         return editor?.chain().focus().unsetButtonRowStyle().run();
     }
-
+    if (isEffectTextNode(editor)) {
+        return editor?.chain().focus().unsetEffectTextStyle().run();
+    }
     editor?.chain().focus().setFormatting().run();
 }
 </script>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 19:20:13
+ * @LastEditTime: 2025-07-05 17:11:32
 -->
 <template>
     <UeTiptapMenuButton
@@ -15,6 +15,7 @@
 import { getFontFamilyAttrs } from "../../extension-font-family/src";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
+import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 const rootDom = useTemplateRef("rootDom");
@@ -22,6 +23,10 @@ const rootDom = useTemplateRef("rootDom");
 const currentFontFamily = computed(() => {
     if (isButtonRow(editor)) {
         return getButtonRowAttrs(editor)?.fontFamily || null;
+    }
+
+    if (isEffectTextNode(editor)) {
+        return getEffectTextAttrs(editor)?.fontFamily || null;
     }
 
     return getFontFamilyAttrs(editor)?.fontFamily || null;
@@ -32,6 +37,12 @@ function updateFontFamily(fontFamily?: string | null) {
         return editor
             ?.chain()
             .updateButtonRowAttrs({ fontFamily: fontFamily || "" })
+            .run();
+    }
+    if (isEffectTextNode(editor)) {
+        return editor
+            ?.chain()
+            .updateEffectTextAttrs({ fontFamily: fontFamily || "" })
             .run();
     }
 

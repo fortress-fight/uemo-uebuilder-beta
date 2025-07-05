@@ -87,5 +87,9 @@ declare const styles: {
 
     readonly "table-scroll-box": string;
     readonly "table-hide-border": string;
+
+    readonly "effect-text-block": string;
+    readonly "effect-text-inner": string;
+    readonly "effect-text-item-text": string;
 };
 export = styles;

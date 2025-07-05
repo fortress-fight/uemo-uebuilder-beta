@@ -222,4 +222,14 @@ export const testTextContent = {
             </table>
         </div>
     `,
+    effectTextData: `
+        <div
+            class="effect-text-block-b8c8d text-60-d6566"
+            data-align="left"
+            data-scroll-effect='{"type":"effect-1","options":{"triggerMode":"enter"}}'
+            style="--effect-text-text-color:#333;font-size:60px;"
+        >
+            <div class="effect-text-inner-cea5f">请输入文字</div>
+        </div>
+    `,
 };
