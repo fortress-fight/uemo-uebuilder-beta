@@ -36,17 +36,17 @@ const effectType = useDefineObjectModel(valueRef, {
 
 const effectTypeOption = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => {
     return [
-        { text: "模式一", value: "effect-1" },
-        { text: "模式二", value: "effect-2" },
-        { text: "模式三", value: "effect-3" },
-        { text: "模式四", value: "effect-4" },
+        { text: t("UNIT_EFFECT", { text: 1 }), value: "effect-1" },
+        { text: t("UNIT_EFFECT", { text: 2 }), value: "effect-2" },
+        { text: t("UNIT_EFFECT", { text: 3 }), value: "effect-3" },
+        { text: t("UNIT_EFFECT", { text: 4 }), value: "effect-4" },
     ];
 });
 
 const triggerModeParam = useDefineObjectModel(valueRef, {
     get: (modeValue) => {
         return {
-            triggerMode: modeValue.triggerMode || defaultScrollOptions["text-effect"].triggerMode,
+            triggerMode: modeValue.triggerMode ?? defaultScrollOptions["text-effect"].triggerMode,
             triggerDelay: modeValue.triggerDelay,
             triggerEase: modeValue.triggerEase,
             triggerDuration: modeValue.triggerDuration,
