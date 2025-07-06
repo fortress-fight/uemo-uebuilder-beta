@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 03:06:45
+ * @LastEditTime: 2025-07-06 18:13:03
  */
 import type { Attribute } from "@tiptap/core";
 import type { ShareItemAttrs } from "./index";
@@ -27,6 +27,7 @@ declare module "@tiptap/core" {
              * 打开分享项编辑器面板
              */
             openShareItemEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
             /**
              * 插入分享项
              */

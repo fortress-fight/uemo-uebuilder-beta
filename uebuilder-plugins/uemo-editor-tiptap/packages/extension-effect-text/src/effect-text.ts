@@ -9,6 +9,7 @@ import EffectTextView from "../view/EffectTextView.vue";
 import { renderHTML } from "../utils/render";
 import { parseEffectText } from "../utils/parse";
 import $pageStyle from "../../../src/app.module.scss";
+import { getEffectTextAttrs } from "../utils/helper";
 
 export interface EffectTextOptions {
     HTMLAttributes: Record<string, any>;
@@ -17,6 +18,14 @@ export interface EffectTextOptions {
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         effectText: {
+            /**
+             * 打开特效文本编辑器面板
+             */
+            openEffectTextEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
+            /**
+             * 插入特效文本
+             */
             insertEffectText: (options?: EffectTextAttrs) => ReturnType;
 
             /**
@@ -115,6 +124,22 @@ export const EffectText = Node.create<EffectTextOptions>({
                             content: "请输入文字",
                         },
                     });
+                },
+
+            openEffectTextEditorPanel:
+                (rect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getEffectTextAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("effectText", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateEffectTextAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
 
             updateEffectTextAttrs:

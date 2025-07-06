@@ -92,6 +92,9 @@ function openBtnRowEditorPanel() {
         case "shareItem":
             editor.chain().openShareItemEditorPanel(rect).run();
             break;
+        case "effectText":
+            editor.chain().openEffectTextEditorPanel(rect).run();
+            break;
         default:
             return;
     }

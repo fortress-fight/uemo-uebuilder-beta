@@ -83,6 +83,7 @@ const HansEditorPanelNodes = [
     "hrRule",
     "shareRow",
     "shareItem",
+    "effectText",
 ];
 
 /**
@@ -185,6 +186,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "shareItem":
                                     this.editor.chain().openShareItemEditorPanel(domRect).run();
+                                    return false;
+
+                                case "effectText":
+                                    this.editor.chain().openEffectTextEditorPanel(domRect).run();
                                     return false;
 
                                 default:
