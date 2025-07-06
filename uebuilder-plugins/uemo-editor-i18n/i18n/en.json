@@ -150,6 +150,7 @@
     "UNIT_TABLE_ROW": "Row",
     "UNIT_TABLE_COL": "Column",
     "UNIT_EFFECT_TEXT": "Effect Text",
+    "UNIT_COUNTER_NUMBER": "Counter Number",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
