@@ -11,7 +11,7 @@ import { isNodeSelection } from "@tiptap/core";
 export function isEffectTextNode(editor?: Editor | Selection) {
     const selection = editor instanceof Selection ? editor : editor?.state.selection;
 
-    if (!selection) return null;
+    if (!selection) return false;
 
     return isNodeSelection(selection) && selection.node.type.name === "effectText";
 }

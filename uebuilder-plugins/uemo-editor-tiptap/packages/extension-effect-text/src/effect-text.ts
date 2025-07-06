@@ -77,7 +77,7 @@ export const EffectText = Node.create<EffectTextOptions>({
             content: { default: "" },
 
             // 滚动效果
-            scrollEffect: { default: { type: "effect-1", options: { triggerMode: "enter" } } },
+            scrollEffect: { default: { type: "effect-1", options: { triggerMode: "enter-leaver" } } },
         } as Record<keyof EffectTextAttrs, Attribute>;
     },
 

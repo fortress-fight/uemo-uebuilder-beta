@@ -1,4 +1,20 @@
-import type { EffectTextAttrs } from "../src";
+import type { EffectTextAttrs, ScrollEffectV3 } from "../src";
+
+function transformScrollEffect(
+    scrollEffect: ScrollEffectV3 | EffectTextAttrs["scrollEffect"]
+): EffectTextAttrs["scrollEffect"] {
+    if ("effectType" in scrollEffect) {
+        return scrollEffect;
+    } else {
+        const options = scrollEffect.options;
+
+        return {
+            effectType: scrollEffect.type,
+            ...options,
+            triggerMode: options.triggerMode === "enter" ? "enter-leaver" : options.triggerMode,
+        };
+    }
+}
 
 export function parseEffectText(dom: HTMLElement): EffectTextAttrs {
     const domStyle = dom.style;
@@ -16,13 +32,16 @@ export function parseEffectText(dom: HTMLElement): EffectTextAttrs {
     const textColor = domStyle.getPropertyValue("--effect-text-text-color") || "#333";
     const width = domStyle.width;
 
-    let scrollEffect = null;
+    let scrollEffect: EffectTextAttrs["scrollEffect"] = {
+        effectType: "effect-1",
+        triggerMode: "enter-leaver",
+    };
     try {
         const scrollEffectConfig = dom.getAttribute("data-scroll-effect");
 
-        scrollEffect = scrollEffectConfig
-            ? JSON.parse(dom.getAttribute("data-scroll-effect") || "{}")
-            : { type: "effect-1", options: { triggerMode: "enter" } };
+        if (scrollEffectConfig) {
+            scrollEffect = transformScrollEffect(JSON.parse(scrollEffectConfig));
+        }
     } catch (error) {
         console.error(error);
     }
