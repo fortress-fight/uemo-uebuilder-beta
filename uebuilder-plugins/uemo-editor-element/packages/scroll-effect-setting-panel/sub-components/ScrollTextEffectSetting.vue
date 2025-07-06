@@ -46,7 +46,7 @@ const effectTypeOption = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(()
 const triggerModeParam = useDefineObjectModel(valueRef, {
     get: (modeValue) => {
         return {
-            triggerMode: modeValue.triggerMode || "",
+            triggerMode: modeValue.triggerMode || defaultScrollOptions["text-effect"].triggerMode,
             triggerDelay: modeValue.triggerDelay,
             triggerEase: modeValue.triggerEase,
             triggerDuration: modeValue.triggerDuration,

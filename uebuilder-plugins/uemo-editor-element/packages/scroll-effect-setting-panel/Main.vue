@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 13:55:13
+ * @LastEditTime: 2025-07-06 14:14:15
 -->
 <template>
     <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
@@ -104,7 +104,7 @@ const tipMessage = computed<UE_EL_COMPONENT.UeElTipGroupProps["tips"]>(() => {
     if (props.mode !== "preview") return tips;
 
     tips.push(t("SCROLL_SETTING_TIP_1"));
-    if (["rotate", "opacity", "scale", "translate"].includes(valueRef.value.type || "")) {
+    if (["rotate", "opacity", "scale", "translate", "text-effect"].includes(valueRef.value.type || "")) {
         tips.push(t("SCROLL_SETTING_TIP_2"));
     }
     return tips;

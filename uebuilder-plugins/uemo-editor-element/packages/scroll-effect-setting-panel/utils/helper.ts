@@ -74,4 +74,10 @@ export const defaultScrollOptions = {
     },
     parallax: { speed: "-100" },
     "image-parallax": { mode: "image" },
+    "text-effect": {
+        effectType: "effect-1",
+        triggerMode: "enter-leaver",
+        startPos: "top bottom",
+        endPos: "bottom center",
+    },
 } as const;
