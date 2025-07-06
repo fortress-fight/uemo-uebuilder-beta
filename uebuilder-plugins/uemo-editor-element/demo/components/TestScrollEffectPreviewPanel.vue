@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试滚动效果预览面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 13:30:34
+ * @LastEditTime: 2025-07-06 16:21:13
 -->
 <template>
     <TestArea
@@ -27,7 +27,7 @@ const testValueSelect = ref<number>(0);
 const testValueList: (UE_EL_COMPONENT.UeElScrollEffectPreviewPanelProps & {
     testOptionTitle?: string;
     value: UeElScrollEffectSettingPanelValue;
-})[] = [{ value: { type: "opacity", options: {} } }];
+})[] = [{ value: { type: "text-effect", options: { effectType: "effect-2" } } }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {

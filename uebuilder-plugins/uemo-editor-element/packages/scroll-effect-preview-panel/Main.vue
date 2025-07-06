@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果预览面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 13:38:53
+ * @LastEditTime: 2025-07-06 14:33:25
 -->
 <template>
     <UeElMiniEditorPanel v-model:value="valueRef" @cancel="closePanel" @confirm="closePanel" @update="handleUpdate">
@@ -18,16 +18,7 @@
                                 <UeElIcon :size="20" name="icon-app-play-fill" />
                             </div>
                         </div>
-                        <div
-                            :class="$style['preview-body']"
-                            class="flex justify-center items-center"
-                            ref="previewBody"
-                            :data-scroll-effect="JSON.stringify(value.value)"
-                        >
-                            <div :class="$style['preview-box']" ref="previewBox">
-                                <img :src="previewImage" alt="" />
-                            </div>
-                        </div>
+                        <component :is="previewComponentName" :value="value.value" ref="previewDom" />
                     </div>
                 </UeElBrowserMockupPanel>
             </div>
@@ -45,64 +36,59 @@
 </template>
 <script lang="ts" setup>
 import type { UeElScrollEffectSettingPanelValue } from "@stone/uemo-editor-element/packages/scroll-effect-setting-panel";
-import type { UeElBrowserMockupPanelInstance } from "@stone/uemo-editor-element/packages/browser-mockup-panel";
 
 import type { UeElScrollEffectPreviewPanelBaseProps } from "./index";
 
-import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
-import previewImage from "./assets/image/base-image.jpg";
-import { ueScrollEffect } from "./utils/ue-scroll-effect";
+import NormalPreview from "./sub-components/NormalPreview.vue";
+import TextEffectPreview from "./sub-components/TextEffectPreview.vue";
 
-defineOptions({ name: "UeElScrollEffectPreviewPanel" });
+defineOptions({ name: "UeElScrollEffectPreviewPanel", components: { NormalPreview, TextEffectPreview } });
 const _props = withDefaults(defineProps<UeElScrollEffectPreviewPanelBaseProps>(), {});
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
-const eventBus = mitt<{ update: undefined }>();
 
 const valueRef = defineModel<UeElScrollEffectSettingPanelValue>("value", { required: true });
 const emit = defineEmits<{ (e: "close"): void }>();
-const browserMockupPanel = useTemplateRef<UeElBrowserMockupPanelInstance>("browserMockupPanel");
 
-const previewBody = useTemplateRef("previewBody");
-const previewBox = useTemplateRef("previewBox");
+const browserMockupPanel = useTemplateRef("browserMockupPanel");
+const previewDomRef = useTemplateRef("previewDom");
 
-function updateScrollCtrl() {
-    browserMockupPanel.value?.scrollTo("top", 0);
-    instance?.proxy?.$ueElToast.success(t("UNIT_UPDATE_SUCCESS"));
-    eventBus.emit("update");
-}
+const previewComponentName = computed(() => {
+    switch (valueRef.value?.type) {
+        case "text-effect":
+            return TextEffectPreview;
 
-const handleUpdate = _debounce(() => updateScrollCtrl(), 800, { leading: false });
+        default:
+            return NormalPreview;
+    }
+});
+
+const scrollToBottom = () => {
+    browserMockupPanel.value?.scrollTo("bottom");
+};
+
+// 更新滚动效果
+const handleUpdate = _debounce(
+    () => {
+        browserMockupPanel.value?.scrollTo("top", 0);
+        instance?.proxy?.$ueElToast.success(t("UNIT_UPDATE_SUCCESS"));
+        previewDomRef.value?.update();
+    },
+    800,
+    { leading: false }
+);
 
 const closePanel = () => {
     emit("close");
-};
-const scrollToBottom = () => {
-    browserMockupPanel.value?.scrollTo("bottom");
 };
 
 onMounted(() => {
     if (!browserMockupPanel.value?.scroller) return;
 
-    ueScrollEffect.updateDefaultParams({
-        scroller: browserMockupPanel.value.scroller,
-    });
-
-    const { kill } = ueScrollEffect.initScrollEffect([previewBox.value as HTMLElement], {
-        stage: previewBody.value as HTMLElement,
-        debugger: true,
-    });
-
-    eventBus.on("update", () => {
-        ueScrollEffect.updateScrollEffect([previewBox.value as HTMLElement], true);
-    });
-
-    onBeforeUnmount(() => {
-        kill();
-    });
+    previewDomRef.value?.init(browserMockupPanel.value?.scroller);
 });
 </script>
 <style lang="scss" module>

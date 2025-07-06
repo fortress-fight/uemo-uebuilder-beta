@@ -1,7 +1,7 @@
 /*
  * @Description: 滚动效果相关样式
  * @Author: F-Stone
- * @LastEditTime: 2025-04-01 12:42:14
+ * @LastEditTime: 2025-07-06 16:12:20
  */
 .js-disable-scroll-effect {
     --scroll-start: 0 !important;
@@ -131,6 +131,48 @@
         }
         &[data-image-parallax-mode="container"] {
             --parallax-scale: 1.5;
+        }
+    }
+}
+.js-split-text {
+    --shadow-text-color: rgb(0 0 0 / 0.2);
+    &[data-is-lighter="true"] {
+        --shadow-text-color: rgb(255 255 255 / 0.2);
+    }
+    .js-split-line-wrapper {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+    .js-split-line {
+        --clip-path-progress: 100%;
+        transform-origin: center center -2em !important;
+        white-space: nowrap;
+
+        clip-path: polygon(0% 0%, 100% 0%, 100% 110%, 0 110%);
+    }
+    .js-split-word {
+        position: relative;
+    }
+    &[data-effect-type="effect-3"] {
+        .js-split-line {
+            transform: rotateX(-50deg) rotateY(13deg) rotateZ(13deg);
+
+            opacity: 0;
+        }
+    }
+    &[data-effect-type="effect-4"] {
+        .js-split-word {
+            position: relative;
+            &::after {
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: 0;
+
+                content: attr(data-text);
+
+                color: var(--shadow-text-color);
+            }
         }
     }
 }

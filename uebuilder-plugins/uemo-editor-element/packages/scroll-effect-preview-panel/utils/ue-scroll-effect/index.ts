@@ -3,8 +3,8 @@ import type { UeScrollEffectFactoryDomParams } from "./utils/helper";
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
+import { initScrollEffect } from "./utils/scroll-effect";
 import { ScrollEffectEventEventBus } from "./utils/event-bus";
-import { initScrollEffect } from "./utils/helper";
 
 /**
  * 滚动效果工厂参数接口
