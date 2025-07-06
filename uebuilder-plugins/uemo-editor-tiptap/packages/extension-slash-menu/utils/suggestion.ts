@@ -122,6 +122,9 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                 case "insertEffectText":
                     chain.insertEffectText();
                     break;
+                case "insertCounterNumber":
+                    chain.insertCounterNumber();
+                    break;
 
                 default:
                     break;

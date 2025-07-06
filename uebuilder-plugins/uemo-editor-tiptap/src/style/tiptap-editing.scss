@@ -74,7 +74,8 @@ $project-name: app-editor;
         .editor-divide-block,
         .share-row,
         .effect-text-block,
-        .share {
+        .share,
+        .counter-number-block {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */

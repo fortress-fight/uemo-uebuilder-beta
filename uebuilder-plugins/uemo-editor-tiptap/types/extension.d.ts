@@ -21,6 +21,7 @@ import type { HrRuleAttrs } from "../packages/extension-hr-rule/src";
 import type { ShareItemAttrs, ShareRowAttrs } from "../packages/extension-share/src";
 import type { TableAttrs, TableCellAttrs } from "../packages/extension-table/src";
 import type { EffectTextAttrs } from "../packages/extension-effect-text/src";
+import type { CounterNumberAttrs } from "../packages/extension-counter-number/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -115,6 +116,9 @@ declare global {
         };
         type EffectText = {
             attrs: EffectTextAttrs;
+        };
+        type CounterNumber = {
+            attrs: CounterNumberAttrs;
         };
     }
 }

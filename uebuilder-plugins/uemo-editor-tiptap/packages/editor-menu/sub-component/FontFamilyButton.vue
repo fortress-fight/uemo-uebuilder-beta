@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-05 17:11:32
+ * @LastEditTime: 2025-07-07 00:59:46
 -->
 <template>
     <UeTiptapMenuButton
@@ -16,6 +16,7 @@ import { getFontFamilyAttrs } from "../../extension-font-family/src";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
+import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 const rootDom = useTemplateRef("rootDom");
@@ -27,6 +28,10 @@ const currentFontFamily = computed(() => {
 
     if (isEffectTextNode(editor)) {
         return getEffectTextAttrs(editor)?.fontFamily || null;
+    }
+
+    if (isCounterNumberNode(editor)) {
+        return getCounterNumberAttrs(editor)?.fontFamily || null;
     }
 
     return getFontFamilyAttrs(editor)?.fontFamily || null;
@@ -43,6 +48,13 @@ function updateFontFamily(fontFamily?: string | null) {
         return editor
             ?.chain()
             .updateEffectTextAttrs({ fontFamily: fontFamily || "" })
+            .run();
+    }
+
+    if (isCounterNumberNode(editor)) {
+        return editor
+            ?.chain()
+            .updateCounterNumberAttrs({ fontFamily: fontFamily || "" })
             .run();
     }
 

@@ -232,4 +232,38 @@ export const testTextContent = {
             <div class="effect-text-inner-cea5f">请输入文字</div>
         </div>
     `,
+    counterNumberData: `
+        <div
+            class="counter-number-block-f6645 text-60-d6566"
+            data-theme="NO02"
+            data-effect="normal"
+            data-duration="2.4"
+            data-align="center"
+            data-fill="false"
+            style="--counter-number-gap:1em;--counter-number-proxy-zoom:0.3;--counter-number-proxy-translate:-1em;--counter-number-proxy-pos:flex-end;color:#333;font-size:60px;"
+        >
+            <div class="counter-number-inner-f4072">
+                <div class="counter-number-group-d7a5f">
+                    <div class="counter-number-item-de460" data-id="i-1" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                    <div class="counter-number-item-de460" data-id="i-2" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                    <div class="counter-number-item-de460" data-id="i-3" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
 };

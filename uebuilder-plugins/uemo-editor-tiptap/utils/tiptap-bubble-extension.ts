@@ -61,6 +61,7 @@ import { HrRule } from "../packages/extension-hr-rule/src";
 import { ShareRow, ShareItem } from "../packages/extension-share/src";
 import { Table, TableHeader, TableRow, TableCell } from "../packages/extension-table/src";
 import { EffectText } from "../packages/extension-effect-text/src";
+import { CounterNumber } from "../packages/extension-counter-number/src";
 
 // #endregion
 
@@ -147,6 +148,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         TableRow,
         TableCell,
         EffectText,
+        CounterNumber,
     ];
 
     return [...baseExtensions, ...customExtensions];

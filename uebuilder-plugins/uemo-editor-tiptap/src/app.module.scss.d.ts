@@ -91,5 +91,14 @@ declare const styles: {
     readonly "effect-text-block": string;
     readonly "effect-text-inner": string;
     readonly "effect-text-item-text": string;
+
+    readonly "counter-number-block": string;
+    readonly "counter-number-group": string;
+    readonly "counter-number-inner": string;
+    readonly "counter-number-item": string;
+    readonly "counter-number-item-info": string;
+    readonly "counter-number-item-text": string;
+    readonly "counter-number-item-proxy": string;
+    readonly "counter-number-item-desc": string;
 };
 export = styles;
