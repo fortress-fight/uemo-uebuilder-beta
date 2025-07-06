@@ -36,7 +36,7 @@
     "UNIT_IMAGE": "Image",
     "UNIT_ICON": "Icon",
     "UNIT_SHARE_ICON": "Share Icon",
-    "UNIT_EFFECT": "Effect",
+    "UNIT_EFFECT": "Effect {text}",
     "UNIT_SHAPE": "Shape",
     "UNIT_FONT_FAMILY": "Font",
     "UNIT_INTERACTION_EFFECT": "Interaction Effect",
@@ -459,7 +459,7 @@
     "LINK_SETTING_UNSAVED_TIP": "The link information has been modified, please confirm the current setting",
 
     "SCROLL_EFFECT_SETTING_TITLE": "Scroll Effect",
-    "SCROLL_TEXT_EFFECT_TITLE": "Text Effect",
+    "SCROLL_TEXT_EFFECT_TITLE": "Scroll Entry",
     "SCROLL_EFFECT_SETTING_OPTION_TITLE": "Opacity",
     "SCROLL_EFFECT_SETTING_ROTATE_TITLE": "Rotate",
     "SCROLL_EFFECT_SETTING_FIXED_TITLE": "Fixed",

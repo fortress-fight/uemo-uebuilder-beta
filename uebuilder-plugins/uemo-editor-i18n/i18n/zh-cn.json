@@ -36,7 +36,7 @@
     "UNIT_IMAGE": "图片",
     "UNIT_ICON": "图标",
     "UNIT_SHARE_ICON": "分享图标",
-    "UNIT_EFFECT": "效果",
+    "UNIT_EFFECT": "效果{text}",
     "UNIT_SHAPE": "图形",
     "UNIT_FONT_FAMILY": "字体",
     "UNIT_INTERACTION_EFFECT": "交互效果",
@@ -459,7 +459,7 @@
     "LINK_SETTING_UNSAVED_TIP": "链接信息已修改，请先确认当前设置",
 
     "SCROLL_EFFECT_SETTING_TITLE": "滚动效果",
-    "SCROLL_TEXT_EFFECT_TITLE": "特效文字",
+    "SCROLL_TEXT_EFFECT_TITLE": "滚动入场",
     "SCROLL_EFFECT_SETTING_OPTION_TITLE": "滚动渐显",
     "SCROLL_EFFECT_SETTING_ROTATE_TITLE": "滚动旋转",
     "SCROLL_EFFECT_SETTING_FIXED_TITLE": "滚动锁定",
