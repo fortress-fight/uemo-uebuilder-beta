@@ -20,6 +20,7 @@ import type { DividerBlockAttrs } from "../packages/extension-divider-block/src"
 import type { HrRuleAttrs } from "../packages/extension-hr-rule/src";
 import type { ShareItemAttrs, ShareRowAttrs } from "../packages/extension-share/src";
 import type { TableAttrs, TableCellAttrs } from "../packages/extension-table/src";
+import type { EffectTextAttrs } from "../packages/extension-effect-text/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
