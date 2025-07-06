@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试特效文字的编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 17:43:57
+ * @LastEditTime: 2025-07-06 17:59:46
 -->
 <template>
     <TestArea
@@ -41,7 +41,7 @@ const testValueList: (UE_EDITOR_PANEL_COMPONENT.UeEditorPanelTiptapEffectTextPro
 
             scrollEffect: {
                 effectType: "effect-1",
-                triggerMode: "",
+                triggerMode: "enter-leaver",
             },
         },
     },
