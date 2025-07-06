@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 10:47:18
+ * @LastEditTime: 2025-07-06 14:07:58
 -->
 <template>
     <TestArea
@@ -27,6 +27,7 @@ const testValueList: (UE_EL_COMPONENT.UeElScrollEffectSettingPanelProps & {
     testOptionTitle?: string;
     value: UeElScrollEffectSettingPanelValue;
 })[] = [
+    { testOptionTitle: "text-effect", value: { type: "text-effect", options: { effectType: "effect-1" } } },
     { testOptionTitle: "image-parallax", value: { type: "image-parallax", options: {} } },
     { testOptionTitle: "opacity", value: { type: "opacity", options: {} } },
     { testOptionTitle: "parallax", value: { type: "parallax", options: {} } },

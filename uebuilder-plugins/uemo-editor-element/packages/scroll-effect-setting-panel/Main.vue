@@ -1,7 +1,7 @@
 <!--
  * @Description: 滚动效果控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-30 01:33:41
+ * @LastEditTime: 2025-07-06 13:55:13
 -->
 <template>
     <UeElEditorPanel :class="$style['scroll-effect-setting-panel']" :title="scrollEffectName">
@@ -28,6 +28,7 @@ import ScrollFixedSetting from "./sub-components/ScrollFixedSetting.vue";
 import ScrollParallaxSetting from "./sub-components/ScrollParallaxSetting.vue";
 import ScrollOpacitySetting from "./sub-components/ScrollOpacitySetting.vue";
 import ScrollImageParallaxSetting from "./sub-components/ScrollImageParallaxSetting.vue";
+import ScrollTextEffectSetting from "./sub-components/ScrollTextEffectSetting.vue";
 
 defineOptions({
     name: "UeElScrollEffectSettingPanel",
@@ -40,6 +41,7 @@ defineOptions({
         ScrollParallaxSetting,
         ScrollOpacitySetting,
         ScrollImageParallaxSetting,
+        ScrollTextEffectSetting,
     },
 });
 
@@ -90,6 +92,9 @@ const controlComponent = computed(() => {
     }
     if (type === "translate") {
         return "ScrollTranslateSetting";
+    }
+    if (type === "text-effect") {
+        return "ScrollTextEffectSetting";
     }
     return "";
 });

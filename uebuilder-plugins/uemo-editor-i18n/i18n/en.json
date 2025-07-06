@@ -459,6 +459,7 @@
     "LINK_SETTING_UNSAVED_TIP": "The link information has been modified, please confirm the current setting",
 
     "SCROLL_EFFECT_SETTING_TITLE": "Scroll Effect",
+    "SCROLL_TEXT_EFFECT_TITLE": "Text Effect",
     "SCROLL_EFFECT_SETTING_OPTION_TITLE": "Opacity",
     "SCROLL_EFFECT_SETTING_ROTATE_TITLE": "Rotate",
     "SCROLL_EFFECT_SETTING_FIXED_TITLE": "Fixed",
@@ -468,6 +469,7 @@
     "SCROLL_EFFECT_SETTING_SCALE_TITLE": "Scale",
     "SCROLL_EFFECT_SETTING_TRANSLATE_TITLE": "Translate",
 
+    "SCROLL_EFFECT_TYPE": "Effect Type",
     "SCROLL_EFFECT_MODE": "Mode",
     "SCROLL_EFFECT_LINEAR": "Linear Execution",
     "SCROLL_EFFECT_AUTO": "Automatic Execution",
