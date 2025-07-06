@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-07-05 18:04:37
+ * @LastEditTime: 2025-07-06 18:25:17
 -->
 <template>
     <div
@@ -9,6 +9,7 @@
         v-ue-el-label="labelParam"
         :class="$style['input-box']"
         :data-padding-size="paddingSize"
+        :data-type="type"
         :data-disable="disable"
         :data-has-slot="hasSlotComponent"
         :data-theme="theme"
@@ -116,17 +117,11 @@ function createSelection(ev?: MouseEvent) {
  * @description: 失焦事件
  */
 function inputBlurEvent(ev: FocusEvent) {
+    if (!prop.useBlurConfirm) return;
+
     window.getSelection()?.removeAllRanges();
     emit("blur", ev);
     confirm();
-
-    // NOTE: 当前验证没有通过时，手动更新输入框内容
-    requestAnimationFrame(() => {
-        const inputEl = inputDom.value;
-        if (inputEl && inputEl.value != prop.value) {
-            inputEl.value = prop.value;
-        }
-    });
 }
 
 function clearInput() {
@@ -183,6 +178,14 @@ function confirm() {
 
     if (isValid.value) {
         emit("confirm", processedValue);
+    } else {
+        // NOTE: 当前验证没有通过时，手动更新输入框内容
+        requestAnimationFrame(() => {
+            const inputEl = inputDom.value;
+            if (inputEl && inputEl.value != prop.value) {
+                inputEl.value = prop.value;
+            }
+        });
     }
 }
 
@@ -238,6 +241,7 @@ defineExpose({
 
         opacity: 0.5;
     }
+    &[data-type="textarea"],
     &[data-is-empty="true"],
     &:hover {
         --text-border-color: #{color(var(--ue-border-color))};

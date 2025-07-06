@@ -1,7 +1,7 @@
 /*
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-03-12 15:24:35
+ * @LastEditTime: 2025-07-06 18:25:10
  */
 import type { App } from "vue";
 
@@ -30,6 +30,7 @@ export interface UeElTextInputBaseProps {
     placeholder?: string;
     autoTrim?: boolean;
     singleLine?: boolean;
+    useBlurConfirm?: boolean;
     rules?: UE_EL_UTIL.InputRule[];
 }
 export type UeElTextInputInstance = InstanceType<typeof UeElTextInput>;
