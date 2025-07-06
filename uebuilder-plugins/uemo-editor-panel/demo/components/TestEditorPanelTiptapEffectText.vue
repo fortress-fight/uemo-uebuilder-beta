@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试特效文字的编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-05 18:03:39
+ * @LastEditTime: 2025-07-06 17:43:57
 -->
 <template>
     <TestArea
@@ -39,7 +39,10 @@ const testValueList: (UE_EDITOR_PANEL_COMPONENT.UeEditorPanelTiptapEffectTextPro
             align: "",
             moAlign: "",
 
-            scrollEffect: null,
+            scrollEffect: {
+                effectType: "effect-1",
+                triggerMode: "",
+            },
         },
     },
 ];
