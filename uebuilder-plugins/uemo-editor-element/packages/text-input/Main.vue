@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 01:13:13
+ * @LastEditTime: 2025-07-05 18:04:37
 -->
 <template>
     <div
@@ -248,7 +248,7 @@ defineExpose({
 }
 .text-input {
     font-size: 12px;
-    line-height: 26px;
+    line-height: em(26px, 12px);
 
     width: auto;
     min-width: 0;
@@ -259,7 +259,8 @@ defineExpose({
     color: color(var(--ue-font-color--deeper));
     border-width: 0;
     &[type="textarea"] {
-        //
+        height: 6em;
+        height: 5lh;
     }
 }
 .search-btn--submit {
