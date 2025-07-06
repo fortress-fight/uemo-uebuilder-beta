@@ -176,3 +176,48 @@ export function removeEmptyValue(obj: Record<string, any>) {
         Object.entries(obj).filter(([_key, value]) => value !== undefined && value !== "" && value !== null)
     );
 }
+
+/**
+ * 判断颜色是否为浅色
+ * @param color 颜色
+ * @returns 是否为浅色
+ */
+export const isLightColor = (color: string): boolean => {
+    if (typeof color !== "string") return false;
+
+    if (color.includes('#')) {
+        // 去掉颜色代码中的 #
+        const hex = color.replace("#", "");
+
+        // 将颜色代码分成 RGB 三个部分
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+
+        // 计算亮度
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+        // 亮度大于 128 认为是浅色，否则是深色
+        return brightness > 128;
+    }
+
+    if (color.includes('rgb')) {
+        // 提取 RGBA 值
+        const rgbaValues = /rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*(\d*\.?\d+)?\)/.exec(color);
+        if (!rgbaValues) {
+            throw new Error("Invalid RGBA color format");
+        }
+
+        const r = parseInt(rgbaValues[1], 10);
+        const g = parseInt(rgbaValues[2], 10);
+        const b = parseInt(rgbaValues[3], 10);
+
+        // 计算亮度
+        const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        // 判断亮度
+        return brightness > 128;
+    }
+
+    return false;
+};
