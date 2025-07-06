@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/7/6 13:23:25
+ * @LastEditTime: 2025/7/7 01:41:17
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -24,8 +24,8 @@ import UeElButtonIconSettingGroup from "../packages/button-icon-setting-group";
 import UeElButtonLibraryPanel from "../packages/button-library-panel";
 import UeElButtonStyleSetting from "../packages/button-style-setting";
 import UeElButtonStyleSettingPanel from "../packages/button-style-setting-panel";
-import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSetting from "../packages/calender-setting";
+import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
 import UeElCheckBox from "../packages/check-box";
 import UeElColorInput from "../packages/color-input";
@@ -36,6 +36,7 @@ import UeElColorSettingGroup from "../packages/color-setting-group";
 import UeElConfirmPanel from "../packages/confirm-panel";
 import UeElContextmenu from "../packages/contextmenu";
 import UeElControlGroup from "../packages/control-group";
+import UeElCounterNumberPreviewPanel from "../packages/counter-number-preview-panel";
 import UeElDraggable from "../packages/draggable";
 import UeElEditorPanel from "../packages/editor-panel";
 import UeElEmojiLibraryPanel from "../packages/emoji-library-panel";
@@ -45,8 +46,8 @@ import UeElFileUploadButton from "../packages/file-upload-button";
 import UeElFileUploader from "../packages/file-uploader";
 import UeElFontFamilyLibraryPanel from "../packages/font-family-library-panel";
 import UeElFontFamilySetting from "../packages/font-family-setting";
-import UeElGapSetting from "../packages/gap-setting";
 import UeElFontSizeSetting from "../packages/font-size-setting";
+import UeElGapSetting from "../packages/gap-setting";
 import UeElGapSettingGroup from "../packages/gap-setting-group";
 import UeElGirdLayoutUtil from "../packages/gird-layout-util";
 import UeElGridLayoutLibraryPanel from "../packages/grid-layout-library-panel";
@@ -66,8 +67,8 @@ import UeElMarginSetting from "../packages/margin-setting";
 import UeElMiniEditorPanel from "../packages/mini-editor-panel";
 import UeElNumberInput from "../packages/number-input";
 import UeElOnOff from "../packages/on-off";
-import UeElPaddingSetting from "../packages/padding-setting";
 import UeElOverflowSetting from "../packages/overflow-setting";
+import UeElPaddingSetting from "../packages/padding-setting";
 import UeElPaddingSettingGroup from "../packages/padding-setting-group";
 import UeElPopPanel from "../packages/pop-panel";
 import UeElRadiusSetting from "../packages/radius-setting";
@@ -79,8 +80,8 @@ import UeElRichTextLibraryPanel from "../packages/rich-text-library-panel";
 import UeElScrollEffectPreviewPanel from "../packages/scroll-effect-preview-panel";
 import UeElScrollEffectSettingGroup from "../packages/scroll-effect-setting-group";
 import UeElScrollEffectSettingPanel from "../packages/scroll-effect-setting-panel";
-import UeElSelectOption from "../packages/select-option";
 import UeElSelect from "../packages/select";
+import UeElSelectOption from "../packages/select-option";
 import UeElSettingBar from "../packages/setting-bar";
 import UeElSettingGroup from "../packages/setting-group";
 import UeElShapeLibraryPanel from "../packages/shape-library-panel";
@@ -123,8 +124,8 @@ export const components = [
     UeElButtonLibraryPanel,
     UeElButtonStyleSetting,
     UeElButtonStyleSettingPanel,
-    UeElCalenderPicker,
     UeElCalenderSetting,
+    UeElCalenderPicker,
     UeElCalenderSettingGroup,
     UeElCheckBox,
     UeElColorInput,
@@ -135,6 +136,7 @@ export const components = [
     UeElConfirmPanel,
     UeElContextmenu,
     UeElControlGroup,
+    UeElCounterNumberPreviewPanel,
     UeElDraggable,
     UeElEditorPanel,
     UeElEmojiLibraryPanel,
@@ -144,8 +146,8 @@ export const components = [
     UeElFileUploader,
     UeElFontFamilyLibraryPanel,
     UeElFontFamilySetting,
-    UeElGapSetting,
     UeElFontSizeSetting,
+    UeElGapSetting,
     UeElGapSettingGroup,
     UeElGirdLayoutUtil,
     UeElGridLayoutLibraryPanel,
@@ -165,8 +167,8 @@ export const components = [
     UeElMiniEditorPanel,
     UeElNumberInput,
     UeElOnOff,
-    UeElPaddingSetting,
     UeElOverflowSetting,
+    UeElPaddingSetting,
     UeElPaddingSettingGroup,
     UeElPopPanel,
     UeElRadiusSetting,
@@ -178,8 +180,8 @@ export const components = [
     UeElScrollEffectPreviewPanel,
     UeElScrollEffectSettingGroup,
     UeElScrollEffectSettingPanel,
-    UeElSelectOption,
     UeElSelect,
+    UeElSelectOption,
     UeElSettingBar,
     UeElSettingGroup,
     UeElShapeLibraryPanel,
