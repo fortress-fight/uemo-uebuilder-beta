@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestTableSizePicker.vue";
+import TestComponent from "~/demo/components/TestScrollEffectPreviewPanel.vue";
 </script>
 <style lang="scss" module>
 .test-group {

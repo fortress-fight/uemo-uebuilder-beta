@@ -1,3 +1,8 @@
+<!--
+ * @Description: 滚动效果预览面板
+ * @Author: F-Stone
+ * @LastEditTime: 2025-07-06 13:38:53
+-->
 <template>
     <UeElMiniEditorPanel v-model:value="valueRef" @cancel="closePanel" @confirm="closePanel" @update="handleUpdate">
         <template #preview="value">
@@ -42,11 +47,16 @@
 import type { UeElScrollEffectSettingPanelValue } from "@stone/uemo-editor-element/packages/scroll-effect-setting-panel";
 import type { UeElBrowserMockupPanelInstance } from "@stone/uemo-editor-element/packages/browser-mockup-panel";
 
+import type { UeElScrollEffectPreviewPanelBaseProps } from "./index";
+
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { _debounce } from "@stone/uemo-editor-utils/lib/lodash";
 
-import previewImage from "../assets/image/base-image.jpg";
-import { ueScrollEffect } from "../utils/ue-scroll-effect";
+import previewImage from "./assets/image/base-image.jpg";
+import { ueScrollEffect } from "./utils/ue-scroll-effect";
+
+defineOptions({ name: "UeElScrollEffectPreviewPanel" });
+const _props = withDefaults(defineProps<UeElScrollEffectPreviewPanelBaseProps>(), {});
 
 const { t } = useI18n();
 const instance = getCurrentInstance();
