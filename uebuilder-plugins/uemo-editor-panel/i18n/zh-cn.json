@@ -1,4 +1,6 @@
 {
+    "EFFECT_TEXT_TIP": "为了保证编辑的流畅性，只能在预览状态下查看效果",
+
     "IMAGE_ALT_PLACEHOLDER": "请输入图片描述",
     "IMAGE_EFFECT_TIP": "为了保证编辑的流畅性，只能在预览状态下查看效果",
     "IMAGE_GALLERY_TITLE": "画廊展示",

@@ -1,8 +1,21 @@
 <template>
-    <UeElSettingGroup :title="t('UNIT_CONTENT')" :isFirst="true">
+    <UeElSettingGroup :title="t('UNIT_CONTENT')" :isFirst="true" :class="$style['content-panel']">
         <template #body>
             <UeElControlGroup>
-                <UeElTextInput type="textarea" :value="content" @confirm="content = $event" :required="true" />
+                <UeElTextInput
+                    ref="contentInputRef"
+                    type="textarea"
+                    :value="content"
+                    :required="true"
+                    :useBlurConfirm="false"
+                    @confirm="content = $event"
+                />
+                <UeElButton
+                    :class="$style['update-btn']"
+                    theme="fillText"
+                    :text="t('CONFIRM')"
+                    @trigger="updateContent"
+                />
             </UeElControlGroup>
         </template>
     </UeElSettingGroup>
@@ -13,6 +26,8 @@ import { useDefineObjectModel } from "@stone/uemo-editor-element/utils/model-mix
 const { t } = useI18n();
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.EffectText["attrs"]>("value", { required: true });
 
+const contentInputRef = useTemplateRef("contentInputRef");
+
 const content = useDefineObjectModel(valueModel, {
     get: (modelValue) => modelValue.content,
     set: (value, modelValue) => {
@@ -20,9 +35,15 @@ const content = useDefineObjectModel(valueModel, {
         return modelValue;
     },
 });
+
+function updateContent() {
+    contentInputRef.value?.confirm();
+}
 </script>
 <style lang="scss" module>
 .content-panel {
-    // init
+    .update-btn {
+        margin-top: 4px;
+    }
 }
 </style>

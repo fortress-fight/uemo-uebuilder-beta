@@ -1,4 +1,6 @@
 {
+    "EFFECT_TEXT_TIP": "To ensure the smoothness of editing, the effect can only be viewed in the preview state",
+
     "IMAGE_ALT_PLACEHOLDER": "Please enter the image description",
     "IMAGE_EFFECT_TIP": "To ensure the smoothness of editing, the effect can only be viewed in the preview state",
     "IMAGE_GALLERY_TITLE": "Gallery Display",
