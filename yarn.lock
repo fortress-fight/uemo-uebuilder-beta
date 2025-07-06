@@ -6185,6 +6185,11 @@ cosmiconfig@^8.2.0:
     parse-json "^5.2.0"
     path-type "^4.0.0"
 
+countup.js@^2.6.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/countup.js/-/countup.js-2.9.0.tgz#599e6482e502e5e3f00f8816637120c9b21856ed"
+  integrity sha512-llqrvyXztRFPp6+i8jx25phHWcVWhrHO4Nlt0uAOSKHB8778zzQswa4MU3qKBvkXfJKftRYFJuVHez67lyKdHg==
+
 crc-32@^1.2.0:
   version "1.2.2"
   resolved "https://registry.npmmirror.com/crc-32/-/crc-32-1.2.2.tgz#3cad35a934b8bf71f25ca524b6da51fb7eace2ff"
@@ -11863,6 +11868,13 @@ obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
+
+odometer_countup@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/odometer_countup/-/odometer_countup-1.0.4.tgz#8f757562b99537fc784882713225ba9e5ae108c8"
+  integrity sha512-Hocyn8Do00H0VKB+c1vKaZU9isMLw9jZJVBuywdr+tU4PojqRwDY0xWWbUH4byz/hOcsCr+vNEmC2UOn+37wrA==
+  dependencies:
+    countup.js "^2.6.0"
 
 ometa@0.2.2:
   version "0.2.2"

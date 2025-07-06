@@ -1,6 +1,7 @@
 <template>
     <div :class="pageStyle['page-editor']">
         <div
+            ref="previewBox"
             :class="pageStyle['counter-number-block']"
             :style="getCounterNumberBlockStyle(attrs)"
             v-bind="getCounterNumberBlockCustomAttr(attrs)"
@@ -38,10 +39,17 @@ import {
     getCounterNumberBlockCustomAttr,
 } from "@stone/uemo-editor-tiptap/packages/extension-counter-number/utils/render";
 
+import { ueCounterNumber } from "../utils/ue-counter-number";
+
+import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import pageStyle from "@stone/uemo-editor-tiptap/src/app.module.scss";
 
 const props = defineProps<{ value: UE_TIPTAP_EXTENSION.CounterNumber["attrs"] }>();
+const eventBus = mitt<{ update: undefined; destroy: undefined }>();
+
 const attrs = computed(() => props.value);
+
+const previewBox = useTemplateRef("previewBox");
 
 function getNumDecimal(item: UE_TIPTAP_EXTENSION.CounterNumber["attrs"]["body"][number]) {
     return Math.max(
@@ -52,12 +60,29 @@ function getNumDecimal(item: UE_TIPTAP_EXTENSION.CounterNumber["attrs"]["body"][
 }
 
 defineExpose({
-    init() {
-        //
+    init(scroller: HTMLElement) {
+        if (!scroller) return;
+
+        ueCounterNumber.updateDefaultParams({ scroller });
+
+        const { kill } = ueCounterNumber.initCounterNumber([previewBox.value as HTMLElement], { scroller });
+
+        eventBus.on("update", () => {
+            ueCounterNumber.updateCounterNumber([previewBox.value as HTMLElement], true);
+        });
+
+        eventBus.on("destroy", () => {
+            kill();
+        });
     },
     update() {
-        //
+        eventBus.emit("update");
     },
+});
+
+onBeforeUnmount(() => {
+    eventBus.emit("destroy");
+    eventBus.all.clear();
 });
 </script>
 <style lang="scss" module>

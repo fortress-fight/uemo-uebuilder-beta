@@ -1,7 +1,7 @@
 <!--
  * @Description: 计数器预览面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 02:02:30
+ * @LastEditTime: 2025-07-07 02:34:45
 -->
 
 <template>
@@ -25,9 +25,11 @@
             </div>
         </template>
         <template #editor="{ className, value, updateCloneValue }">
-            {{ className }}
-            {{ value }}
-            {{ updateCloneValue }}
+            <div class="flex flex-col gap-2 w-full whitespace-pre-wrap">
+                {{ className }}
+                {{ value }}
+                {{ updateCloneValue }}
+            </div>
         </template>
     </UeElMiniEditorPanel>
 </template>
@@ -50,7 +52,7 @@ const browserMockupPanel = useTemplateRef("browserMockupPanel");
 const previewDomRef = useTemplateRef<InstanceType<typeof CounterNumber>>("previewDom");
 
 const playAnimate = () => {
-    browserMockupPanel.value?.scrollTo("bottom");
+    previewDomRef.value?.update();
 };
 
 // 更新滚动效果
