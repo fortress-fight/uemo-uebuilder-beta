@@ -8,6 +8,7 @@
         </div>
         <div :class="$style['oper-box']">
             <UeElButton
+                v-if="!disableRemove"
                 theme="squareIcon"
                 :class="$style['oper-btn']"
                 data-oper-type="remove"
@@ -18,6 +19,7 @@
     </div>
 </template>
 <script lang="ts" setup>
+const _props = defineProps<{ disableRemove?: boolean }>();
 const emit = defineEmits<{ (e: "remove"): void }>();
 
 function trigger(type: "remove"): void {
