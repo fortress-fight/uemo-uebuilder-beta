@@ -71,7 +71,7 @@ function setupCounterItem(
     if (countUpCtrl.error) {
         // 控制台输出错误，避免后续事件绑定
         console.error(countUpCtrl.error);
-        countUpCtrl = null;
+        destroyCounterNumber();
         return;
     }
 
@@ -86,6 +86,7 @@ function setupCounterItem(
      * 销毁计数器，释放内存
      */
     function destroyCounterNumber() {
+        countUpCtrl.destroy();
         countUpCtrl = null;
     }
 

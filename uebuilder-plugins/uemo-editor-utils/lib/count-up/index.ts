@@ -1,6 +1,17 @@
-// @ts-nocheck
-
 import { Odometer } from "odometer_countup";
+
+/**
+ * 扩展 Window 接口以支持全局滚动函数数组
+ */
+declare global {
+    interface Window {
+        onScrollFns?: (() => void)[];
+    }
+}
+
+/**
+ * CountUp 配置选项接口
+ */
 export interface CountUpOptions {
     // (default)
     startVal?: number; // number to start at (0)
@@ -32,9 +43,13 @@ export declare interface CountUpPlugin {
     render(elem: HTMLElement, formatted: string): void;
 }
 
-// playground: stackblitz.com/edit/countup-typescript
+/**
+ * 数字动画计数器类
+ * 用于创建平滑的数字计数动画效果
+ */
 class CountUp {
     version = "2.8.0";
+
     private defaults: CountUpOptions = {
         startVal: 0,
         decimalPlaces: 0,
@@ -53,44 +68,50 @@ class CountUp {
         scrollSpyOnce: false,
         scroller: window,
     };
-    private rAF: any;
-    private startTime: number;
-    private remaining: number;
-    private finalEndVal: number = null; // for smart easing
+
+    private rAF: number | null = null;
+    private startTime: number | null = null;
+    private remaining = 0;
+    private finalEndVal: number | null = null; // for smart easing
     private useEasing = true;
     private countDown = false;
-    el: HTMLElement | HTMLInputElement;
+    private scrollHandler: (() => void) | null = null;
+    private scrollSpyTimeout: number | null = null;
+    private isDestroyed = false;
+    private options: CountUpOptions;
+
+    el: HTMLElement | HTMLInputElement | null = null;
     formattingFn: (num: number) => string;
-    easingFn?: (t: number, b: number, c: number, d: number) => number;
+    easingFn: (t: number, b: number, c: number, d: number) => number;
     error = "";
     startVal = 0;
-    duration: number;
+    duration = 0;
     paused = true;
-    frameVal: number;
+    frameVal = 0;
     once = false;
 
-    constructor(
-        target: string | HTMLElement | HTMLInputElement,
-        private endVal: number,
-        public options?: CountUpOptions
-    ) {
+    constructor(target: string | HTMLElement | HTMLInputElement, private endVal: number, options?: CountUpOptions) {
+        // 合并默认选项和用户选项
         this.options = {
             ...this.defaults,
             ...options,
         };
-        this.formattingFn = this.options.formattingFn ? this.options.formattingFn : this.formatNumber;
-        this.easingFn = this.options.easingFn ? this.options.easingFn : this.easeOutExpo;
 
-        this.startVal = this.validateValue(this.options.startVal);
+        this.formattingFn = this.options.formattingFn || this.formatNumber;
+        this.easingFn = this.options.easingFn || this.easeOutExpo;
+
+        this.startVal = this.validateValue(this.options.startVal ?? 0);
         this.frameVal = this.startVal;
         this.endVal = this.validateValue(endVal);
-        this.options.decimalPlaces = Math.max(0 || this.options.decimalPlaces);
+        this.options.decimalPlaces = Math.max(0, this.options.decimalPlaces ?? 0);
         this.resetDuration();
-        this.options.separator = String(this.options.separator);
-        this.useEasing = this.options.useEasing;
+        this.options.separator = String(this.options.separator ?? ",");
+        this.useEasing = this.options.useEasing ?? true;
+
         if (this.options.separator === "") {
             this.options.useGrouping = false;
         }
+
         this.el = typeof target === "string" ? document.getElementById(target) : target;
         if (this.el) {
             this.printValue(this.startVal);
@@ -98,99 +119,131 @@ class CountUp {
             this.error = "[CountUp] target is null or undefined";
         }
 
-        // scroll spy
-        if (typeof window !== "undefined" && this.options.enableScrollSpy) {
-            if (!this.error) {
-                // set up global array of onscroll functions to handle multiple instances
-                window.onScrollFns = window.onScrollFns || [];
-                window.onScrollFns.push(() => this.handleScroll(this));
-                this.options.scroller?.addEventListener("scroll", () => {
-                    window.onScrollFns.forEach((fn) => fn());
-                });
-                this.handleScroll(this);
-            } else {
-                console.error(this.error, target);
-            }
-        }
+        // 初始化滚动监听
+        this.initScrollSpy();
     }
 
-    handleScroll(self: CountUp): void {
-        if (!self || !window || self.once) return;
+    /**
+     * 初始化滚动监听功能
+     */
+    private initScrollSpy(): void {
+        if (typeof window === "undefined" || !this.options.enableScrollSpy || this.error) {
+            if (this.error) {
+                console.error(this.error);
+            }
+            return;
+        }
+
+        // 创建滚动处理函数
+        this.scrollHandler = () => this.handleScroll();
+
+        // 添加到全局滚动函数数组
+        if (!window.onScrollFns) {
+            window.onScrollFns = [];
+        }
+        window.onScrollFns.push(this.scrollHandler);
+
+        // 添加滚动事件监听器
+        if (this.options.scroller) {
+            this.options.scroller.addEventListener("scroll", this.scrollHandler);
+        }
+
+        // 初始检查
+        this.handleScroll();
+    }
+
+    /**
+     * 处理滚动事件，检查元素是否在视口中
+     */
+    private handleScroll(): void {
+        if (!this.el || this.once || this.isDestroyed) return;
 
         const scroller = this.options.scroller;
+        if (!scroller) return;
 
-        if (scroller === window) {
-            const bottomOfScroll = scroller.innerHeight + scroller.scrollY;
-            const rect = self.el.getBoundingClientRect();
-            const topOfEl = rect.top + scroller.pageYOffset;
-            const bottomOfEl = rect.top + rect.height + scroller.pageYOffset;
-            if (bottomOfEl < bottomOfScroll && bottomOfEl > scroller.scrollY && self.paused) {
-                // in view
-                self.paused = false;
-                setTimeout(() => self.start(), self.options.scrollSpyDelay);
-                if (self.options.scrollSpyOnce) self.once = true;
-            } else if ((scroller.scrollY > bottomOfEl || topOfEl > bottomOfScroll) && !self.paused) {
-                // out of view
-                self.reset();
-            }
-        } else {
-            const rect = self.el.getBoundingClientRect();
-            const scrollerRect = scroller.getBoundingClientRect();
-            const scrollerTop = scroller.scrollTop;
-            const scrollerBottom = scrollerTop + scroller.clientHeight;
-            const topOfEl = rect.top - scrollerRect.top + scrollerTop;
-            const bottomOfEl = topOfEl + rect.height;
+        const isInView = this.checkElementInView(scroller);
 
-            if (bottomOfEl < scrollerBottom && bottomOfEl > scrollerTop && self.paused) {
-                // in view
-                self.paused = false;
-                setTimeout(() => self.start(), self.options.scrollSpyDelay);
-                if (self.options.scrollSpyOnce) self.once = true;
-            } else if ((scrollerTop > bottomOfEl || topOfEl > scrollerBottom) && !self.paused) {
-                // out of view
-                self.reset();
+        if (isInView && this.paused) {
+            // 元素进入视口
+            this.paused = false;
+            this.scrollSpyTimeout = window.setTimeout(() => {
+                if (!this.isDestroyed) {
+                    this.start();
+                }
+            }, this.options.scrollSpyDelay);
+
+            if (this.options.scrollSpyOnce) {
+                this.once = true;
             }
+        } else if (!isInView && !this.paused) {
+            // 元素离开视口
+            this.reset();
         }
     }
 
     /**
-     * Smart easing works by breaking the animation into 2 parts, the second part being the
-     * smartEasingAmount and first part being the total amount minus the smartEasingAmount. It works
-     * by disabling easing for the first part and enabling it on the second part. It is used if
-     * useEasing is true and the total animation amount exceeds the smartEasingThreshold.
+     * 检查元素是否在滚动容器的视口中
+     */
+    private checkElementInView(scroller: Window | HTMLElement): boolean {
+        if (!this.el) return false;
+
+        if (scroller === window) {
+            const bottomOfScroll = scroller.innerHeight + scroller.scrollY;
+            const rect = this.el.getBoundingClientRect();
+            const bottomOfEl = rect.top + rect.height + scroller.pageYOffset;
+
+            return bottomOfEl < bottomOfScroll && bottomOfEl > scroller.scrollY;
+        } else {
+            const rect = this.el.getBoundingClientRect();
+            const scrollerRect = (scroller as HTMLElement).getBoundingClientRect();
+            const scrollerTop = (scroller as HTMLElement).scrollTop;
+            const scrollerBottom = scrollerTop + (scroller as HTMLElement).clientHeight;
+            const topOfEl = rect.top - scrollerRect.top + scrollerTop;
+            const bottomOfEl = topOfEl + rect.height;
+
+            return bottomOfEl < scrollerBottom && bottomOfEl > scrollerTop;
+        }
+    }
+
+    /**
+     * 智能缓动算法：将动画分为两部分，第二部分使用缓动效果
+     * 当动画数值超过阈值时，第一部分不使用缓动，第二部分使用缓动
      */
     private determineDirectionAndSmartEasing(): void {
-        const end = this.finalEndVal ? this.finalEndVal : this.endVal;
+        const end = this.finalEndVal ?? this.endVal;
         this.countDown = this.startVal > end;
         const animateAmount = end - this.startVal;
-        if (Math.abs(animateAmount) > this.options.smartEasingThreshold && this.options.useEasing) {
+
+        if (Math.abs(animateAmount) > (this.options.smartEasingThreshold ?? 999) && (this.options.useEasing ?? true)) {
             this.finalEndVal = end;
             const up = this.countDown ? 1 : -1;
-            this.endVal = end + up * this.options.smartEasingAmount;
+            this.endVal = end + up * (this.options.smartEasingAmount ?? 333);
             this.duration = this.duration / 2;
         } else {
             this.endVal = end;
             this.finalEndVal = null;
         }
-        if (this.finalEndVal !== null) {
-            // setting finalEndVal indicates smart easing
-            this.useEasing = false;
-        } else {
-            this.useEasing = this.options.useEasing;
-        }
+
+        this.useEasing = this.finalEndVal === null ? this.options.useEasing ?? true : false;
     }
 
-    // start animation
+    /**
+     * 开始动画
+     * @param callback 动画完成时的回调函数
+     */
     start(callback?: (args?: any) => any): void {
-        if (this.error) {
+        if (this.error || this.isDestroyed) {
             return;
         }
+
         if (this.options.onStartCallback) {
             this.options.onStartCallback();
         }
+
         if (callback) {
             this.options.onCompleteCallback = callback;
         }
+
         if (this.duration > 0) {
             this.determineDirectionAndSmartEasing();
             this.paused = false;
@@ -200,10 +253,14 @@ class CountUp {
         }
     }
 
-    // pause/resume animation
+    /**
+     * 暂停/恢复动画
+     */
     pauseResume(): void {
+        if (this.isDestroyed) return;
+
         if (!this.paused) {
-            cancelAnimationFrame(this.rAF);
+            this.cancelAnimation();
         } else {
             this.startTime = null;
             this.duration = this.remaining;
@@ -214,24 +271,33 @@ class CountUp {
         this.paused = !this.paused;
     }
 
-    // reset to startVal so animation can be run again
+    /**
+     * 重置动画到初始状态
+     */
     reset(): void {
-        cancelAnimationFrame(this.rAF);
+        this.cancelAnimation();
         this.paused = true;
         this.resetDuration();
-        this.startVal = this.validateValue(this.options.startVal);
+        this.startVal = this.validateValue(this.options.startVal ?? 0);
         this.frameVal = this.startVal;
         this.printValue(this.startVal);
     }
 
-    // pass a new endVal and start animation
+    /**
+     * 更新目标值并开始动画
+     * @param newEndVal 新的目标值
+     */
     update(newEndVal: string | number): void {
-        cancelAnimationFrame(this.rAF);
+        if (this.isDestroyed) return;
+
+        this.cancelAnimation();
         this.startTime = null;
         this.endVal = this.validateValue(newEndVal);
+
         if (this.endVal === this.frameVal) {
             return;
         }
+
         this.startVal = this.frameVal;
         if (this.finalEndVal == null) {
             this.resetDuration();
@@ -241,7 +307,12 @@ class CountUp {
         this.rAF = requestAnimationFrame(this.count);
     }
 
-    count = (timestamp: number): void => {
+    /**
+     * 动画帧更新函数
+     */
+    private count = (timestamp: number): void => {
+        if (this.isDestroyed) return;
+
         if (!this.startTime) {
             this.startTime = timestamp;
         }
@@ -249,7 +320,7 @@ class CountUp {
         const progress = timestamp - this.startTime;
         this.remaining = this.duration - progress;
 
-        // to ease or not to ease
+        // 计算当前帧值
         if (this.useEasing) {
             if (this.countDown) {
                 this.frameVal = this.startVal - this.easingFn(progress, 0, this.startVal - this.endVal, this.duration);
@@ -260,21 +331,21 @@ class CountUp {
             this.frameVal = this.startVal + (this.endVal - this.startVal) * (progress / this.duration);
         }
 
-        // don't go past endVal since progress can exceed duration in the last frame
+        // 确保不超过目标值
         const wentPast = this.countDown ? this.frameVal < this.endVal : this.frameVal > this.endVal;
         this.frameVal = wentPast ? this.endVal : this.frameVal;
 
-        // decimal
+        // 格式化小数位
         this.frameVal = Number(this.frameVal.toFixed(this.options.decimalPlaces));
 
-        // format and print value
+        // 更新显示
         this.printValue(this.frameVal);
 
-        // whether to continue
+        // 决定是否继续动画
         if (progress < this.duration) {
             this.rAF = requestAnimationFrame(this.count);
         } else if (this.finalEndVal !== null) {
-            // smart easing
+            // 智能缓动的第二部分
             this.update(this.finalEndVal);
         } else {
             if (this.options.onCompleteCallback) {
@@ -283,13 +354,29 @@ class CountUp {
         }
     };
 
-    printValue(val: number): void {
-        if (!this.el) return;
+    /**
+     * 取消当前动画
+     */
+    private cancelAnimation(): void {
+        if (this.rAF !== null) {
+            cancelAnimationFrame(this.rAF);
+            this.rAF = null;
+        }
+    }
+
+    /**
+     * 打印数值到目标元素
+     */
+    private printValue(val: number): void {
+        if (!this.el || this.isDestroyed) return;
+
         const result = this.formattingFn(val);
+
         if (this.options.plugin?.render) {
             this.options.plugin.render(this.el, result);
             return;
         }
+
         if (this.el.tagName === "INPUT") {
             const input = this.el as HTMLInputElement;
             input.value = result;
@@ -300,40 +387,97 @@ class CountUp {
         }
     }
 
-    ensureNumber(n: any): boolean {
+    /**
+     * 验证数值是否为有效数字
+     */
+    private ensureNumber(n: any): boolean {
         return typeof n === "number" && !isNaN(n);
     }
 
-    validateValue(value: string | number): number {
+    /**
+     * 验证并转换输入值为数字
+     */
+    private validateValue(value: string | number): number {
         const newValue = Number(value);
         if (!this.ensureNumber(newValue)) {
             this.error = `[CountUp] invalid start or end value: ${value}`;
-            return null;
-        } else {
-            return newValue;
+            return 0;
         }
+        return newValue;
     }
 
+    /**
+     * 重置动画持续时间
+     */
     private resetDuration(): void {
         this.startTime = null;
         this.duration = Number(this.options.duration) * 1000;
         this.remaining = this.duration;
     }
 
-    // default format and easing functions
+    /**
+     * 销毁 CountUp 实例，清理所有资源
+     * 防止内存泄漏
+     */
+    destroy(): void {
+        if (this.isDestroyed) return;
 
-    formatNumber = (num: number): string => {
+        this.isDestroyed = true;
+
+        // 取消动画
+        this.cancelAnimation();
+
+        // 清理滚动监听
+        this.cleanupScrollSpy();
+
+        // 清理定时器
+        if (this.scrollSpyTimeout !== null) {
+            clearTimeout(this.scrollSpyTimeout);
+            this.scrollSpyTimeout = null;
+        }
+
+        // 清理引用
+        this.el = null;
+        this.formattingFn = () => "";
+        this.easingFn = () => 0;
+    }
+
+    /**
+     * 清理滚动监听相关资源
+     */
+    private cleanupScrollSpy(): void {
+        if (this.scrollHandler && window.onScrollFns) {
+            const index = window.onScrollFns.indexOf(this.scrollHandler);
+            if (index > -1) {
+                window.onScrollFns.splice(index, 1);
+            }
+        }
+
+        if (this.scrollHandler && this.options.scroller) {
+            this.options.scroller.removeEventListener("scroll", this.scrollHandler);
+        }
+
+        this.scrollHandler = null;
+    }
+
+    /**
+     * 默认数字格式化函数
+     */
+    private formatNumber = (num: number): string => {
         const neg = num < 0 ? "-" : "";
         let result: string, x1: string, x2: string, x3: string;
+
         result = Math.abs(num).toFixed(this.options.decimalPlaces);
         result += "";
         const x = result.split(".");
         x1 = x[0];
         x2 = x.length > 1 ? this.options.decimal + x[1] : "";
+
         if (this.options.useGrouping) {
             x3 = "";
             let factor = 3,
                 j = 0;
+
             for (let i = 0, len = x1.length; i < len; ++i) {
                 if (this.options.useIndianSeparators && i === 4) {
                     factor = 2;
@@ -347,16 +491,24 @@ class CountUp {
             }
             x1 = x3;
         }
-        // optional numeral substitution
+
+        // 可选的数字替换
         if (this.options.numerals?.length) {
-            x1 = x1.replace(/[0-9]/g, (w) => this.options.numerals[+w]);
-            x2 = x2.replace(/[0-9]/g, (w) => this.options.numerals[+w]);
+            x1 = x1.replace(/[0-9]/g, (w) => this.options.numerals![+w]);
+            x2 = x2.replace(/[0-9]/g, (w) => this.options.numerals![+w]);
         }
+
         return neg + this.options.prefix + x1 + x2 + this.options.suffix;
     };
 
-    // t: current time, b: beginning value, c: change in value, d: duration
-    easeOutExpo = (t: number, b: number, c: number, d: number): number =>
+    /**
+     * 默认缓动函数：指数缓出
+     * @param t 当前时间
+     * @param b 起始值
+     * @param c 变化量
+     * @param d 持续时间
+     */
+    private easeOutExpo = (t: number, b: number, c: number, d: number): number =>
         (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b;
 }
 
