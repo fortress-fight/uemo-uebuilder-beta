@@ -26,7 +26,7 @@ export type CounterNumberAttrs = {
         id: string;
         numList: number[];
         desc?: string;
-        numPad?: string;
+        numPad?: number;
         proxy?: { type: "text"; value: string };
     }[];
 };
