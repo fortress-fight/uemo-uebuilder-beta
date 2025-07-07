@@ -1,5 +1,5 @@
 <template>
-    <UeElSettingGroup :class="$style['scroll-area']" :title="t('SCROLL_EFFECT_TYPE')">
+    <UeElSettingGroup :class="$style['scroll-area']" :title="t('UNIT_EFFECT_TYPE')">
         <template #body>
             <UeElControlGroup :col-count="1">
                 <UeElSelect v-model:value="effectType" :title="t('UNIT_EFFECT')" :options="effectTypeOption" />
