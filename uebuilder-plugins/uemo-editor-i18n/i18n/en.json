@@ -159,6 +159,7 @@
     "UNIT_DESC": "Description",
     "UNIT_SUB": "Sub",
     "UNIT_SUP": "Sup",
+    "UNIT_NUMBER": "Number",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -562,5 +563,7 @@
     "TABLE_CELL_WIDTH": "Cell Width",
     "TABLE_RESET_CELL_WIDTH": "Reset Cell Width",
     "TABLE_BORDER_TIP": "Whether to show border",
-    "TABLE_TIP_1": "1. Dragging the cell size will also affect the minimum width of the table. The final minimum width of the table will be the larger of the two."
+    "TABLE_TIP_1": "1. Dragging the cell size will also affect the minimum width of the table. The final minimum width of the table will be the larger of the two.",
+
+    "COUNTER_NUMBER_PAD": "Minimum Digits"
 }

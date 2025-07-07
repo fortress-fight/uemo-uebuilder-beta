@@ -159,6 +159,7 @@
     "UNIT_DESC": "描述",
     "UNIT_SUB": "下标",
     "UNIT_SUP": "上标",
+    "UNIT_NUMBER": "数字",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -562,5 +563,7 @@
     "TABLE_CELL_WIDTH": "单元格宽度",
     "TABLE_BORDER_TIP": "是否显示边框",
     "TABLE_RESET_CELL_WIDTH": "重置单元格宽度",
-    "TABLE_TIP_1": "1. 拖拽单元格尺寸，也会影响表格最小宽度.最终的表格最小宽度会选择两者中的最大的值"
+    "TABLE_TIP_1": "1. 拖拽单元格尺寸，也会影响表格最小宽度.最终的表格最小宽度会选择两者中的最大的值",
+
+    "COUNTER_NUMBER_PAD": "最小位数"
 }
