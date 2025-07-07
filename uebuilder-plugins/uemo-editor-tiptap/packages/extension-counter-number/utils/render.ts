@@ -73,7 +73,7 @@ export function renderCounterNumber(attrs: CounterNumberAttrs): DOMOutputSpec {
         const numList = JSON.stringify(item.numList);
 
         const numDecimal = Math.max(
-            parseInt(item.numPad || "0"),
+            item.numPad || 0,
             item.numList[0]?.toString().length || 0,
             item.numList[1]?.toString().length || 0
         );

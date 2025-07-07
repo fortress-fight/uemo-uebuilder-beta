@@ -63,11 +63,7 @@ const viewClassName = computed(() => {
 });
 
 function getNumDecimal(item: CounterNumberAttrs["body"][number]) {
-    return Math.max(
-        parseInt(item.numPad || "0"),
-        item.numList[0]?.toString().length || 0,
-        item.numList[1]?.toString().length || 0
-    );
+    return Math.max(item.numPad || 0, item.numList[0]?.toString().length || 0, item.numList[1]?.toString().length || 0);
 }
 </script>
 <style lang="scss" module>

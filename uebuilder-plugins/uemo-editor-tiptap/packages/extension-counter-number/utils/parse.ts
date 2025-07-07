@@ -26,7 +26,7 @@ function isBoldWeight(weight: string | null | undefined): boolean | undefined {
     return /^(bold(er)?|[5-9]\d{2,})$/.test(w) || undefined;
 }
 
-/**
+/**tem.numPad
  * 解析计数器数字组件的 DOM 属性为 CounterNumberAttrs 对象
  * @param dom - 计数器数字组件的根 DOM 元素
  * @returns 解析后的属性对象
@@ -39,7 +39,7 @@ export function parseCounterNumberAttr(dom: HTMLElement): CounterNumberAttrs {
         return {
             id: item.getAttribute("data-id") || "",
             numList: safeParseJSON<number[]>(item.getAttribute("data-nums"), []),
-            numPad: item.getAttribute("data-num-pad") || "",
+            numPad: parseInt(item.getAttribute("data-num-pad") || "0"),
             desc: item.querySelector(`.${$pageStyle["counter-number-item-desc"]}`)?.textContent || "",
             proxy: {
                 type: "text",
