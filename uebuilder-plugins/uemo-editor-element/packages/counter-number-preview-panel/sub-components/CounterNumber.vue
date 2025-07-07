@@ -52,11 +52,7 @@ const attrs = computed(() => props.value);
 const previewBox = useTemplateRef("previewBox");
 
 function getNumDecimal(item: UE_TIPTAP_EXTENSION.CounterNumber["attrs"]["body"][number]) {
-    return Math.max(
-        parseInt(item.numPad || "0"),
-        item.numList[0]?.toString().length || 0,
-        item.numList[1]?.toString().length || 0
-    );
+    return Math.max(item.numPad || 0, item.numList[0]?.toString().length || 0, item.numList[1]?.toString().length || 0);
 }
 
 defineExpose({
