@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:39:26
+ * @LastEditTime: 2025-07-08 02:40:06
  */
 import type { Attribute } from "@tiptap/core";
 import type { CounterNumberAttrs } from "./index";
@@ -12,6 +12,8 @@ import { VueNodeViewRenderer } from "@tiptap/vue-3";
 
 import { renderCounterNumber } from "../utils/render";
 import { parseCounterNumberAttr } from "../utils/parse";
+import { getCounterNumberAttrs, playCounterNumberAnimation } from "../utils/helper";
+
 import CounterNumberView from "../view/CounterNumberView.vue";
 
 import $pageStyle from "../../../src/app.module.scss";
@@ -23,6 +25,14 @@ export interface CounterNumberOptions {
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         counterNumber: {
+            /**
+             * 打开计数器数字编辑器面板
+             */
+            openCounterNumberEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
+
+            /**
+             * 插入计数器数字
+             */
             insertCounterNumber: (options?: CounterNumberAttrs) => ReturnType;
 
             /**
@@ -34,6 +44,11 @@ declare module "@tiptap/core" {
              * 移除相关样式
              */
             unsetCounterNumberStyle: () => ReturnType;
+
+            /**
+             * 播放计数器数字动画
+             */
+            playCounterNumberAnimate: () => ReturnType;
         };
     }
 }
@@ -122,6 +137,35 @@ export const CounterNumber = Node.create<CounterNumberOptions>({
 
     addCommands() {
         return {
+            openCounterNumberEditorPanel:
+                (rect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getCounterNumberAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("counterNumber", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateCounterNumberAttrs(attr);
+                            },
+                            fire: (type: "preview") => {
+                                if (type !== "preview") return;
+                                requestAnimationFrame(() => {
+                                    editor.chain().setMeta("addToHistory", false).playCounterNumberAnimate();
+                                });
+                            },
+                        })
+                        .run();
+                },
+
+            playCounterNumberAnimate:
+                () =>
+                ({ editor }) => {
+                    playCounterNumberAnimation(editor, getCounterNumberAttrs(this.editor) || {});
+                    return true;
+                },
+
             insertCounterNumber:
                 () =>
                 ({ commands }) => {

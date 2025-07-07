@@ -86,6 +86,19 @@ $project-name: app-editor;
                 }
             }
         }
+        .counter-number-block {
+            &[data-editing="true"] {
+                /* stylelint-disable-next-line selector-class-pattern */
+                &:global(.ProseMirror-selectednode) {
+                    z-index: 50;
+
+                    outline: 2px solid var(--theme-layout-component);
+                }
+                .counter-number-group {
+                    outline: 1px dashed var(--theme-layout-component) !important;
+                }
+            }
+        }
         .share-row {
             &[data-focus-in="true"] {
                 outline: 1px dashed var(--theme-layout-component) !important;

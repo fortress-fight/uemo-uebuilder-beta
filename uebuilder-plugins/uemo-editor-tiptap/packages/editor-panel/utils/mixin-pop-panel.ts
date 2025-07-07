@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 18:12:37
+ * @LastEditTime: 2025-07-08 02:32:36
  */
 
 export function usePopPanelParam(
@@ -119,6 +119,7 @@ export function usePopPanelParam(
             case "shareRow":
             case "shareItem":
             case "effectText":
+            case "counterNumber":
                 return {
                     draggable: true,
                     checkAllowClose: options.checkAllowClose,

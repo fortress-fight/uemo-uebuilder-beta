@@ -95,6 +95,9 @@ function openBtnRowEditorPanel() {
         case "effectText":
             editor.chain().openEffectTextEditorPanel(rect).run();
             break;
+        case "counterNumber":
+            editor.chain().openCounterNumberEditorPanel(rect).run();
+            break;
         default:
             return;
     }

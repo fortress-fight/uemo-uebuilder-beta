@@ -5,6 +5,7 @@
         data-drag-handle
         draggable="true"
         :class="viewClassName"
+        :data-editing="isEditing"
         :style="getCounterNumberBlockStyle(attrs)"
         v-bind="getCounterNumberBlockCustomAttr(attrs)"
     >
@@ -37,9 +38,13 @@
 <script lang="ts" setup>
 import type { CounterNumberAttrs } from "../src";
 
+import { isNodeSelection } from "@tiptap/core";
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
+import { isCounterNumberNode } from "../utils/helper";
 import { getCounterNumberBlockStyle, getCounterNumberBlockCustomAttr } from "../utils/render";
+import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
+
 import pageStyle from "../../../src/app.module.scss";
 
 defineOptions({ name: "UeElTiptapEffectText" });
@@ -48,6 +53,20 @@ const props = defineProps(nodeViewProps);
 const attrs = computed(() => props.node.attrs as CounterNumberAttrs);
 
 const className = useCssModule();
+
+const selectedSelf = computed(() => {
+    const selection = props.editor.state.selection;
+
+    if (!isNodeSelection(selection)) {
+        return false;
+    }
+
+    return selection.from === props.getPos() && isCounterNumberNode(selection) && props.selected;
+});
+
+const isEditing = computed(() => {
+    return selectedSelf.value && getEditorPanelExtensionStorage(props.editor).lastEditorPanelType === "counterNumber";
+});
 
 const isPxFontSize = computed(() => {
     return attrs.value.fontSize?.endsWith("px");

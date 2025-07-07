@@ -34,7 +34,7 @@ export function getCounterNumberBlockCustomAttr(data: CounterNumberAttrs): Recor
         "data-align": data.align,
         "data-mo-align": data.moAlign,
         "data-fill": data.fill ? "true" : "false",
-        "data-dir": data.dir,
+        "data-dir": data.dir === "column" ? "col" : data.dir,
         "data-mo-dir": data.moDir,
     };
 }

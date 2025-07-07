@@ -84,6 +84,7 @@ const HansEditorPanelNodes = [
     "shareRow",
     "shareItem",
     "effectText",
+    "counterNumber",
 ];
 
 /**
@@ -190,6 +191,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "effectText":
                                     this.editor.chain().openEffectTextEditorPanel(domRect).run();
+                                    return false;
+
+                                case "counterNumber":
+                                    this.editor.chain().openCounterNumberEditorPanel(domRect).run();
                                     return false;
 
                                 default:
