@@ -8,5 +8,13 @@
     "IMAGE_HOVER_TITLE": "Hover Effect",
     "IMAGE_HOVER_ZOOM_OUT": "Zoom Out",
     "IMAGE_HOVER_ZOOM_IN": "Zoom In",
-    "IMAGE_HOVER_IMAGE_SCALE": "Container Shrink Image Scale"
+    "IMAGE_HOVER_IMAGE_SCALE": "Container Shrink Image Scale",
+
+    "COUNTER_NUMBER_MODE_NORMAL": "Normal",
+    "COUNTER_NUMBER_MODE_ODOMETER": "Odometer",
+    "COUNTER_NUMBER_THEME_TITLE": "Display",
+    "COUNTER_NUMBER_NORMAL": "Number",
+    "COUNTER_NUMBER_DECORATION": "Number/Decoration",
+    "COUNTER_NUMBER_DECORATION_DESC": "Number/Decoration/Description",
+    "COUNTER_NUMBER_DESC_TEXT": "Description Text"
 }
