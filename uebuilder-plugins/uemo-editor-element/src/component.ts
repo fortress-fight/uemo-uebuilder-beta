@@ -1,7 +1,7 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/7/7 01:41:17
+ * @LastEditTime: 2025/7/8 01:21:07
  */
 import UeElAlignItemSetting from "../packages/align-item-setting";
 import UeElAlignSetting from "../packages/align-setting";
@@ -24,9 +24,9 @@ import UeElButtonIconSettingGroup from "../packages/button-icon-setting-group";
 import UeElButtonLibraryPanel from "../packages/button-library-panel";
 import UeElButtonStyleSetting from "../packages/button-style-setting";
 import UeElButtonStyleSettingPanel from "../packages/button-style-setting-panel";
-import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCalenderPicker from "../packages/calender-picker";
 import UeElCalenderSettingGroup from "../packages/calender-setting-group";
+import UeElCalenderSetting from "../packages/calender-setting";
 import UeElCheckBox from "../packages/check-box";
 import UeElColorInput from "../packages/color-input";
 import UeElColorPicker from "../packages/color-picker";
@@ -45,8 +45,8 @@ import UeElEnterAnimateSetting from "../packages/enter-animate-setting";
 import UeElFileUploadButton from "../packages/file-upload-button";
 import UeElFileUploader from "../packages/file-uploader";
 import UeElFontFamilyLibraryPanel from "../packages/font-family-library-panel";
-import UeElFontFamilySetting from "../packages/font-family-setting";
 import UeElFontSizeSetting from "../packages/font-size-setting";
+import UeElFontFamilySetting from "../packages/font-family-setting";
 import UeElGapSetting from "../packages/gap-setting";
 import UeElGapSettingGroup from "../packages/gap-setting-group";
 import UeElGirdLayoutUtil from "../packages/gird-layout-util";
@@ -95,6 +95,7 @@ import UeElTagInput from "../packages/tag-input";
 import UeElTextDecorationLibraryPanel from "../packages/text-decoration-library-panel";
 import UeElTextDecorationSettingPanel from "../packages/text-decoration-setting-panel";
 import UeElTextInput from "../packages/text-input";
+import UeElTextSettingGroup from "../packages/text-setting-group";
 import UeElTipGroup from "../packages/tip-group";
 import UeElTranslateSetting from "../packages/translate-setting";
 import UeElVideoLibraryPanel from "../packages/video-library-panel";
@@ -124,9 +125,9 @@ export const components = [
     UeElButtonLibraryPanel,
     UeElButtonStyleSetting,
     UeElButtonStyleSettingPanel,
-    UeElCalenderSetting,
     UeElCalenderPicker,
     UeElCalenderSettingGroup,
+    UeElCalenderSetting,
     UeElCheckBox,
     UeElColorInput,
     UeElColorPicker,
@@ -145,8 +146,8 @@ export const components = [
     UeElFileUploadButton,
     UeElFileUploader,
     UeElFontFamilyLibraryPanel,
-    UeElFontFamilySetting,
     UeElFontSizeSetting,
+    UeElFontFamilySetting,
     UeElGapSetting,
     UeElGapSettingGroup,
     UeElGirdLayoutUtil,
@@ -195,6 +196,7 @@ export const components = [
     UeElTextDecorationLibraryPanel,
     UeElTextDecorationSettingPanel,
     UeElTextInput,
+    UeElTextSettingGroup,
     UeElTipGroup,
     UeElTranslateSetting,
     UeElVideoLibraryPanel,

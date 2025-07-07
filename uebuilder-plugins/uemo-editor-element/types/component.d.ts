@@ -40,9 +40,9 @@ import UeElButtonStyleSetting, { UeElButtonStyleSettingBaseProps } from "../pack
 import UeElButtonStyleSettingPanel, {
     UeElButtonStyleSettingPanelBaseProps,
 } from "../packages/button-style-setting-panel";
-import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/calender-setting";
 import UeElCalenderPicker, { UeElCalenderPickerBaseProps } from "../packages/calender-picker";
 import UeElCalenderSettingGroup, { UeElCalenderSettingGroupBaseProps } from "../packages/calender-setting-group";
+import UeElCalenderSetting, { UeElCalenderSettingBaseProps } from "../packages/calender-setting";
 import UeElCheckBox, { UeElCheckBoxBaseProps } from "../packages/check-box";
 import UeElColorInput, { UeElColorInputBaseProps } from "../packages/color-input";
 import UeElColorPicker, { UeElColorPickerBaseProps } from "../packages/color-picker";
@@ -63,8 +63,8 @@ import UeElEnterAnimateSetting, { UeElEnterAnimateSettingBaseProps } from "../pa
 import UeElFileUploadButton, { UeElFileUploadButtonBaseProps } from "../packages/file-upload-button";
 import UeElFileUploader, { UeElFileUploaderBaseProps } from "../packages/file-uploader";
 import UeElFontFamilyLibraryPanel, { UeElFontFamilyLibraryPanelBaseProps } from "../packages/font-family-library-panel";
-import UeElFontFamilySetting, { UeElFontFamilySettingBaseProps } from "../packages/font-family-setting";
 import UeElFontSizeSetting, { UeElFontSizeSettingBaseProps } from "../packages/font-size-setting";
+import UeElFontFamilySetting, { UeElFontFamilySettingBaseProps } from "../packages/font-family-setting";
 import UeElGapSetting, { UeElGapSettingBaseProps } from "../packages/gap-setting";
 import UeElGapSettingGroup, { UeElGapSettingGroupBaseProps } from "../packages/gap-setting-group";
 import UeElGirdLayoutUtil, { UeElGirdLayoutUtilBaseProps } from "../packages/gird-layout-util";
@@ -123,6 +123,7 @@ import UeElTextDecorationSettingPanel, {
     UeElTextDecorationSettingPanelBaseProps,
 } from "../packages/text-decoration-setting-panel";
 import UeElTextInput, { UeElTextInputBaseProps } from "../packages/text-input";
+import UeElTextSettingGroup, { UeElTextSettingGroupBaseProps } from "../packages/text-setting-group";
 import UeElTipGroup, { UeElTipGroupBaseProps } from "../packages/tip-group";
 import UeElTranslateSetting, { UeElTranslateSettingBaseProps } from "../packages/translate-setting";
 import UeElVideoLibraryPanel, { UeElVideoLibraryPanelBaseProps } from "../packages/video-library-panel";
@@ -153,9 +154,9 @@ declare module "vue" {
         UeElButtonLibraryPanel: typeof UeElButtonLibraryPanel;
         UeElButtonStyleSetting: typeof UeElButtonStyleSetting;
         UeElButtonStyleSettingPanel: typeof UeElButtonStyleSettingPanel;
-        UeElCalenderSetting: typeof UeElCalenderSetting;
         UeElCalenderPicker: typeof UeElCalenderPicker;
         UeElCalenderSettingGroup: typeof UeElCalenderSettingGroup;
+        UeElCalenderSetting: typeof UeElCalenderSetting;
         UeElCheckBox: typeof UeElCheckBox;
         UeElColorInput: typeof UeElColorInput;
         UeElColorPicker: typeof UeElColorPicker;
@@ -174,8 +175,8 @@ declare module "vue" {
         UeElFileUploadButton: typeof UeElFileUploadButton;
         UeElFileUploader: typeof UeElFileUploader;
         UeElFontFamilyLibraryPanel: typeof UeElFontFamilyLibraryPanel;
-        UeElFontFamilySetting: typeof UeElFontFamilySetting;
         UeElFontSizeSetting: typeof UeElFontSizeSetting;
+        UeElFontFamilySetting: typeof UeElFontFamilySetting;
         UeElGapSetting: typeof UeElGapSetting;
         UeElGapSettingGroup: typeof UeElGapSettingGroup;
         UeElGirdLayoutUtil: typeof UeElGirdLayoutUtil;
@@ -224,6 +225,7 @@ declare module "vue" {
         UeElTextDecorationLibraryPanel: typeof UeElTextDecorationLibraryPanel;
         UeElTextDecorationSettingPanel: typeof UeElTextDecorationSettingPanel;
         UeElTextInput: typeof UeElTextInput;
+        UeElTextSettingGroup: typeof UeElTextSettingGroup;
         UeElTipGroup: typeof UeElTipGroup;
         UeElTranslateSetting: typeof UeElTranslateSetting;
         UeElVideoLibraryPanel: typeof UeElVideoLibraryPanel;
@@ -256,9 +258,9 @@ declare global {
         interface UeElButtonLibraryPanelProps extends UeElButtonLibraryPanelBaseProps {}
         interface UeElButtonStyleSettingProps extends UeElButtonStyleSettingBaseProps {}
         interface UeElButtonStyleSettingPanelProps extends UeElButtonStyleSettingPanelBaseProps {}
-        interface UeElCalenderSettingProps extends UeElCalenderSettingBaseProps {}
         interface UeElCalenderPickerProps extends UeElCalenderPickerBaseProps {}
         interface UeElCalenderSettingGroupProps extends UeElCalenderSettingGroupBaseProps {}
+        interface UeElCalenderSettingProps extends UeElCalenderSettingBaseProps {}
         interface UeElCheckBoxProps extends UeElCheckBoxBaseProps {}
         interface UeElColorInputProps extends UeElColorInputBaseProps {}
         interface UeElColorPickerProps extends UeElColorPickerBaseProps {}
@@ -277,8 +279,8 @@ declare global {
         interface UeElFileUploadButtonProps extends UeElFileUploadButtonBaseProps {}
         interface UeElFileUploaderProps extends UeElFileUploaderBaseProps {}
         interface UeElFontFamilyLibraryPanelProps extends UeElFontFamilyLibraryPanelBaseProps {}
-        interface UeElFontFamilySettingProps extends UeElFontFamilySettingBaseProps {}
         interface UeElFontSizeSettingProps extends UeElFontSizeSettingBaseProps {}
+        interface UeElFontFamilySettingProps extends UeElFontFamilySettingBaseProps {}
         interface UeElGapSettingProps extends UeElGapSettingBaseProps {}
         interface UeElGapSettingGroupProps extends UeElGapSettingGroupBaseProps {}
         interface UeElGirdLayoutUtilProps extends UeElGirdLayoutUtilBaseProps {}
@@ -327,6 +329,7 @@ declare global {
         interface UeElTextDecorationLibraryPanelProps extends UeElTextDecorationLibraryPanelBaseProps {}
         interface UeElTextDecorationSettingPanelProps extends UeElTextDecorationSettingPanelBaseProps {}
         interface UeElTextInputProps extends UeElTextInputBaseProps {}
+        interface UeElTextSettingGroupProps extends UeElTextSettingGroupBaseProps {}
         interface UeElTipGroupProps extends UeElTipGroupBaseProps {}
         interface UeElTranslateSettingProps extends UeElTranslateSettingBaseProps {}
         interface UeElVideoLibraryPanelProps extends UeElVideoLibraryPanelBaseProps {}

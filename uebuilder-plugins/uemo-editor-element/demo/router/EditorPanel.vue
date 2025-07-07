@@ -27,6 +27,7 @@ import TestEmptyPanel from "~/demo/components/TestEmptyPanel.vue";
 import TestMiniEditorPanel from "~/demo/components/TestMiniEditorPanel.vue";
 import TestBrowserMockupPanel from "~/demo/components/TestBrowserMockupPanel.vue";
 import TestScrollEffectPreviewPanel from "~/demo/components/TestScrollEffectPreviewPanel.vue";
+import TestCounterNumberPreviewPanel from "~/demo/components/TestCounterNumberPreviewPanel.vue";
 
 const testComponents = [
     TestCalenderPicker,
@@ -42,7 +43,7 @@ const testComponents = [
     TestBrowserMockupPanel,
 ];
 
-const rowTestComponents = [TestMiniEditorPanel, TestScrollEffectPreviewPanel];
+const rowTestComponents = [TestMiniEditorPanel, TestScrollEffectPreviewPanel, TestCounterNumberPreviewPanel];
 </script>
 <style lang="scss" module>
 .page-head {
