@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 18:25:17
+ * @LastEditTime: 2025-07-08 01:35:32
 -->
 <template>
     <div
@@ -68,7 +68,11 @@ import type { UeElTextInputBaseProps } from "./index";
 defineOptions({ name: "UeElTextInput" });
 
 const instance = getCurrentInstance();
-const prop = withDefaults(defineProps<UeElTextInputBaseProps>(), { type: "text", singleLine: true });
+const prop = withDefaults(defineProps<UeElTextInputBaseProps>(), {
+    type: "text",
+    singleLine: true,
+    useBlurConfirm: true,
+});
 const emit = defineEmits<{
     keydown: [ev: KeyboardEvent];
     blur: [ev: FocusEvent];
