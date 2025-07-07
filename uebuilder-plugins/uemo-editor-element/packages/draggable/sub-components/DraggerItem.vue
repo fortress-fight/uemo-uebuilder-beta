@@ -1,6 +1,6 @@
 <template>
-    <div :class="[$style['background-item'], $style['sort-item']]" class="flex justify-between" oper-type="remove">
-        <div class="w-fit">
+    <div :class="[$style['dragger-item'], $style['sort-item']]" class="flex justify-between" oper-type="remove">
+        <div class="w-full">
             <div :class="$style['dragger-btn']" class="flex items-center">
                 <UeElIcon name="icon-tuozhuai" :size="15" />
             </div>
@@ -25,7 +25,7 @@ function trigger(type: "remove"): void {
 }
 </script>
 <style lang="scss" module>
-.background-item {
+.dragger-item {
     //
 }
 .sort-item {
