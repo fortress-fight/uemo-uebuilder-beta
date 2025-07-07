@@ -7,13 +7,13 @@
     <UeElEditorPanel :title="t('UNIT_COUNTER_NUMBER')">
         <UeElTabCard v-bind="tabCardProps">
             <template #Content>
-                <ContentPanel v-model:value="valueModel" @fire="emit('fire', $event)" />
+                <ContentPanel v-model:value="valueModel" />
             </template>
             <template #Design>
                 <DesignPanel v-model:value="valueModel" />
             </template>
             <template #Effect>
-                <EffectPanel v-model:value="valueModel" />
+                <EffectPanel v-model:value="valueModel" @fire="emit('fire', $event)" />
             </template>
         </UeElTabCard>
     </UeElEditorPanel>
