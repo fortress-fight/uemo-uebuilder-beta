@@ -8,8 +8,8 @@ export type CounterNumberAttrs = {
     fontWeight?: boolean;
     fontStyle?: string;
 
-    align?: string;
-    moAlign?: string;
+    align?: UE_EL_UTIL.ALIGN_X;
+    moAlign?: UE_EL_UTIL.ALIGN_X;
 
     dir?: string;
     moDir?: string;
