@@ -62,12 +62,10 @@ export function getSelectionRect(view: EditorView, selection: Selection) {
 export function getNodeDom(editor: Editor) {
     // 获取当前编辑器的选中状态
     const selection = editor?.state.selection;
-    // 获取选中位置对应的 DOM 节点
-    const dom = editor.view.domAtPos(selection?.from || 0, 1);
+    let node: Node | null = editor.view.nodeDOM(selection?.from || 0);
 
-    let node: Node | null = dom.node;
     // 如果节点是文本节点，则获取其父节点
-    if (node.nodeType === 3) {
+    if (node?.nodeType === 3) {
         node = node.parentNode;
     }
 
