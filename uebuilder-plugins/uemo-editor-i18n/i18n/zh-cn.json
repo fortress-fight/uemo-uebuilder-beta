@@ -161,6 +161,8 @@
     "UNIT_SUB": "下标",
     "UNIT_SUP": "上标",
     "UNIT_NUMBER": "数字",
+    "UNIT_PREFIX": "前缀",
+    "UNIT_SUFFIX": "后缀",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",

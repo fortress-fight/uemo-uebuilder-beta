@@ -161,6 +161,8 @@
     "UNIT_SUB": "Sub",
     "UNIT_SUP": "Sup",
     "UNIT_NUMBER": "Number",
+    "UNIT_PREFIX": "Prefix",
+    "UNIT_SUFFIX": "Suffix",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
