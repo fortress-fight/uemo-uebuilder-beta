@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-08 02:32:20
+ * @LastEditTime: 2025-07-09 18:41:29
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -50,6 +50,7 @@ import TiptapShareItem from "@stone/uemo-editor-panel/packages/tiptap-share-item
 import TiptapTable from "@stone/uemo-editor-panel/packages/tiptap-table/Main.vue";
 import TiptapEffectText from "@stone/uemo-editor-panel/packages/tiptap-effect-text/Main.vue";
 import TiptapCounterNumber from "@stone/uemo-editor-panel/packages/tiptap-counter-number/Main.vue";
+import TiptapLoopText from "@stone/uemo-editor-panel/packages/tiptap-loop-text/Main.vue";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
@@ -94,6 +95,7 @@ defineOptions({
         TableAlign,
         TiptapEffectText,
         TiptapCounterNumber,
+        TiptapLoopText,
     },
 });
 
@@ -155,6 +157,7 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     tableAlign: "TableAlign",
     effectText: "TiptapEffectText",
     counterNumber: "TiptapCounterNumber",
+    loopText: "TiptapLoopText",
 };
 
 /**

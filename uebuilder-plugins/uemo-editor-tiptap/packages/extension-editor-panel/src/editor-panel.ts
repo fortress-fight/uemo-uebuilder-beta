@@ -85,6 +85,7 @@ const HansEditorPanelNodes = [
     "shareItem",
     "effectText",
     "counterNumber",
+    "loopText",
 ];
 
 /**
@@ -195,6 +196,10 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
 
                                 case "counterNumber":
                                     this.editor.chain().openCounterNumberEditorPanel(domRect).run();
+                                    return false;
+
+                                case "loopText":
+                                    this.editor.chain().openLoopTextEditorPanel(domRect).run();
                                     return false;
 
                                 default:

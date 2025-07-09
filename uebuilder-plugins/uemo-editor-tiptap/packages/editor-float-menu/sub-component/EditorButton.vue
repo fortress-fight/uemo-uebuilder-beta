@@ -98,6 +98,9 @@ function openBtnRowEditorPanel() {
         case "counterNumber":
             editor.chain().openCounterNumberEditorPanel(rect).run();
             break;
+        case "loopText":
+            editor.chain().openLoopTextEditorPanel(rect).run();
+            break;
         default:
             return;
     }
