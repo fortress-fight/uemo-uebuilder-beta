@@ -22,6 +22,7 @@ import type { ShareItemAttrs, ShareRowAttrs } from "../packages/extension-share/
 import type { TableAttrs, TableCellAttrs } from "../packages/extension-table/src";
 import type { EffectTextAttrs } from "../packages/extension-effect-text/src";
 import type { CounterNumberAttrs } from "../packages/extension-counter-number/src";
+import type { LoopTextAttrs } from "../packages/extension-loop-text/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {

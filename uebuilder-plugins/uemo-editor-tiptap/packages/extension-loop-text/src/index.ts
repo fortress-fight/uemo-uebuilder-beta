@@ -1,11 +1,11 @@
 /*
  * @Description: 跑马灯文本
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 16:56:10
+ * @LastEditTime: 2025-07-09 17:41:20
  */
 export type LoopTextAttrs = {
     theme?: string;
-    effect?: string;
+    effect: string;
     width?: string;
 
     fontFamily?: string;
@@ -20,7 +20,7 @@ export type LoopTextAttrs = {
     delay?: string;
     prefix?: { type: "text"; value: string };
     suffix?: { type: "text"; value: string };
-    body?: { id: string; title?: string }[];
+    body: { id: string; title?: string }[];
 };
 
 export * from "./loop-text";
