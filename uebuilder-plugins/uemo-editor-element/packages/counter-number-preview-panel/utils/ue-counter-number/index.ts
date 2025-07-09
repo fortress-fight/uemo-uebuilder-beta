@@ -9,7 +9,7 @@ export type UeCounterNumberFactoryParams = {
 
 class UeCounterNumberFactory {
     /** 标记工厂是否已初始化 */
-    private initialized = false;
+    public initialized = false;
 
     /** 存储DOM元素及其参数的映射 */
     private doms = new Map<HTMLElement, UeCounterNumberFactoryParams>();
@@ -39,6 +39,15 @@ class UeCounterNumberFactory {
      */
     bindEvent() {
         //
+    }
+
+    /**
+     * 检查DOM是否存在
+     * @param dom - 要检查的DOM元素
+     * @returns 是否存在
+     */
+    checkDom(dom: HTMLElement) {
+        return this.doms.has(dom);
     }
 
     /**
