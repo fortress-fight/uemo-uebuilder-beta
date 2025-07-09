@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:01:08
+ * @LastEditTime: 2025-07-09 17:14:44
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" type="textColor" :color="currentColor" @trigger="openColorPicker" />
@@ -11,6 +11,7 @@ import { getTextColorAttrs } from "../../extension-text-color/src";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -25,6 +26,10 @@ const currentColor = computed(() => {
 
     if (isCounterNumberNode(editor)) {
         return getCounterNumberAttrs(editor)?.textColor || "";
+    }
+
+    if (isLoopTextNode(editor)) {
+        return getLoopTextAttrs(editor)?.textColor || "";
     }
 
     return getTextColorAttrs(editor);
@@ -52,6 +57,13 @@ function openColorPicker() {
                     editor
                         .chain()
                         .updateCounterNumberAttrs({ textColor: color || "" })
+                        .run();
+                }
+
+                if (isLoopTextNode(editor)) {
+                    editor
+                        .chain()
+                        .updateLoopTextAttrs({ textColor: color || "" })
                         .run();
                 }
 

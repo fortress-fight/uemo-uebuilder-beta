@@ -1,7 +1,7 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:05:57
+ * @LastEditTime: 2025-07-09 16:35:25
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
@@ -55,6 +55,7 @@ export type EditorPanelAttrsMap = {
     tableAlign: { align: "left" | "center" | "right" | "top" | "middle" | "bottom" };
     effectText: UE_TIPTAP_EXTENSION.EffectText["attrs"];
     counterNumber: UE_TIPTAP_EXTENSION.CounterNumber["attrs"];
+    loopText: UE_TIPTAP_EXTENSION.LoopText["attrs"];
     moreOper: null;
 };
 

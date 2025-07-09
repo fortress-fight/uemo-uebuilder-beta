@@ -150,6 +150,7 @@
     "UNIT_TABLE_ROW": "行",
     "UNIT_TABLE_COL": "列",
     "UNIT_EFFECT_TEXT": "特效文字",
+    "UNIT_LOOP_TEXT": "循环文字",
     "UNIT_COUNTER_NUMBER": "计数器",
     "UNIT_EFFECT_TYPE": "效果类型",
     "UNIT_CONTROL_PARAMS": "参数",

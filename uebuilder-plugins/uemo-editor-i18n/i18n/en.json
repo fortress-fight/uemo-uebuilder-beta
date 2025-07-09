@@ -150,6 +150,7 @@
     "UNIT_TABLE_ROW": "Row",
     "UNIT_TABLE_COL": "Column",
     "UNIT_EFFECT_TEXT": "Effect Text",
+    "UNIT_LOOP_TEXT": "Loop Text",
     "UNIT_COUNTER_NUMBER": "Counter Number",
     "UNIT_EFFECT_TYPE": "Effect Type",
     "UNIT_CONTROL_PARAMS": "Control Params",

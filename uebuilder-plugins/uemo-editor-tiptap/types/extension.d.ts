@@ -120,5 +120,8 @@ declare global {
         type CounterNumber = {
             attrs: CounterNumberAttrs;
         };
+        type LoopText = {
+            attrs: LoopTextAttrs;
+        };
     }
 }

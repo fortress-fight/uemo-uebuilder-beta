@@ -266,4 +266,26 @@ export const testTextContent = {
             </div>
         </div>
     `,
+    loopTextData: `<div
+        class="loop-text-block-f22ba text-60-d6566"
+        style="--loop-text-text-color:#333;font-size:60px;"
+        data-theme="NO01"
+        data-effect="normal"
+        data-delay="2.4"
+        data-align="left"
+    >
+        <div class="loop-text-inner-e3726">
+            <div class="loop-text-group-f99af">
+                <div class="loop-text-item-ac301" data-id="i-1" data-active="">
+                    <span class="loop-text-item-text-e02ac">网页设计</span>
+                </div>
+                <div class="loop-text-item-ac301" data-id="i-2">
+                    <span class="loop-text-item-text-e02ac">网页制作</span>
+                </div>
+                <div class="loop-text-item-ac301" data-id="i-3">
+                    <span class="loop-text-item-text-e02ac">网页发布</span>
+                </div>
+            </div>
+        </div>
+    </div>`,
 };

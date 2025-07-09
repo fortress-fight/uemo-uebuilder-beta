@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:03:51
+ * @LastEditTime: 2025-07-09 17:16:52
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -13,6 +13,7 @@ import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/hel
 import { isShareRowNode, getShareRowAttrs } from "../../extension-share/utils/helper";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -37,6 +38,10 @@ const currentValue = computed(() => {
 
     if (isCounterNumberNode(editor)) {
         return isPc ? getCounterNumberAttrs(editor)?.align : getCounterNumberAttrs(editor)?.moAlign;
+    }
+
+    if (isLoopTextNode(editor)) {
+        return isPc ? getLoopTextAttrs(editor)?.align : getLoopTextAttrs(editor)?.moAlign;
     }
 
     if (isPc) {
@@ -89,7 +94,15 @@ function triggerTextAlign(textAlign?: string | null) {
 
     if (isCounterNumberNode(editor)) {
         const chain = editor?.chain().focus();
+        // @ts-expect-error
         chain.updateCounterNumberAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
+
+        return chain.run();
+    }
+
+    if (isLoopTextNode(editor)) {
+        const chain = editor?.chain().focus();
+        chain.updateLoopTextAttrs(isPc ? { align: textAlign || "" } : { moAlign: textAlign || "" });
 
         return chain.run();
     }

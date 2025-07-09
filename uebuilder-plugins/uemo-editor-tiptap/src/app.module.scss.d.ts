@@ -100,5 +100,15 @@ declare const styles: {
     readonly "counter-number-item-text": string;
     readonly "counter-number-item-proxy": string;
     readonly "counter-number-item-desc": string;
+
+    readonly "loop-text-block": string;
+    readonly "loop-text-group": string;
+    readonly "loop-text-inner": string;
+    readonly "loop-text-item": string;
+    readonly "loop-text-item-text": string;
+    readonly "loop-text--prefix": string;
+    readonly "loop-text--suffix": string;
+
+    readonly text: string;
 };
 export = styles;

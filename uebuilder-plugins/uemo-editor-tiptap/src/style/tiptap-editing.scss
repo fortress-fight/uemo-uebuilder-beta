@@ -75,6 +75,7 @@ $project-name: app-editor;
         .share-row,
         .effect-text-block,
         .share,
+        .loop-text-block,
         .counter-number-block {
             cursor: pointer;
             &.has-focus {
@@ -86,6 +87,7 @@ $project-name: app-editor;
                 }
             }
         }
+        .loop-text-block,
         .counter-number-block {
             &[data-editing="true"] {
                 /* stylelint-disable-next-line selector-class-pattern */

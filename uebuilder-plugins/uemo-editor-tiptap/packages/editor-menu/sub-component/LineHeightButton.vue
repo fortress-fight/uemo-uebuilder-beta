@@ -12,6 +12,7 @@ import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getLineHeightAttr } from "../../extension-line-height/utils/helper";
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -28,6 +29,10 @@ const hasLineHeight = computed(() => {
         return !!getEffectTextAttrs(editor)?.lineHeight;
     }
 
+    if (isLoopTextNode(editor)) {
+        return !!getLoopTextAttrs(editor)?.lineHeight;
+    }
+
     return editor.isActive("lineHeight");
 });
 
@@ -40,6 +45,10 @@ const currentValue = computed(() => {
 
     if (isEffectTextNode(editor)) {
         return getEffectTextAttrs(editor)?.lineHeight || "";
+    }
+
+    if (isLoopTextNode(editor)) {
+        return getLoopTextAttrs(editor)?.lineHeight || "";
     }
 
     return getLineHeightAttr(editor).lineHeight || "";
@@ -63,6 +72,15 @@ function triggerLineHeight(lineHeight?: string | null) {
             .updateEffectTextAttrs({ lineHeight: lineHeight || "" })
             .run();
     }
+
+    if (isLoopTextNode(editor)) {
+        return editor
+            ?.chain()
+            .focus()
+            .updateLoopTextAttrs({ lineHeight: lineHeight || "" })
+            .run();
+    }
+
     if (lineHeight) {
         editor.chain().focus().setLineHeight(lineHeight).run();
     } else {

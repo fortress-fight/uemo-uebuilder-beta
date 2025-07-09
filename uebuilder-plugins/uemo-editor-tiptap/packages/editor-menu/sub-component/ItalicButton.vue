@@ -1,7 +1,7 @@
 <!--
  * @Description: 斜体插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:02:38
+ * @LastEditTime: 2025-07-09 17:13:17
 -->
 <template>
     <UeTiptapMenuButton type="italic" :active="isItalic" :class="$style['plugin-italic']" @trigger="triggerItalic" />
@@ -10,6 +10,7 @@
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 
 defineOptions({ name: "ItalicButton" });
@@ -26,9 +27,9 @@ const isItalic = computed(() => {
     if (isCounterNumberNode(editor)) {
         return getCounterNumberAttrs(editor)?.fontStyle === "italic";
     }
-    // if (isLoopText(editor)) {
-    //     return editor?.getAttributes("loopText").fontStyle === "italic";
-    // }
+    if (isLoopTextNode(editor)) {
+        return getLoopTextAttrs(editor)?.fontStyle === "italic";
+    }
     return editor?.isActive("italic");
 });
 
@@ -54,9 +55,13 @@ function triggerItalic() {
             .updateCounterNumberAttrs({ fontStyle: isItalic.value ? "" : "italic" })
             .run();
     }
-    // if (isLoopText(editor)) {
-    //     return editor?.chain().focus().toggleLoopTextItalic().run();
-    // }
+    if (isLoopTextNode(editor)) {
+        return editor
+            ?.chain()
+            .focus()
+            .updateLoopTextAttrs({ fontStyle: isItalic.value ? "" : "italic" })
+            .run();
+    }
     return editor?.chain().focus().toggleItalic().run();
 }
 </script>

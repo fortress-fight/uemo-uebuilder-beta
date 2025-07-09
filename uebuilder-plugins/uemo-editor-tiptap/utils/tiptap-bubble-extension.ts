@@ -62,6 +62,7 @@ import { ShareRow, ShareItem } from "../packages/extension-share/src";
 import { Table, TableHeader, TableRow, TableCell } from "../packages/extension-table/src";
 import { EffectText } from "../packages/extension-effect-text/src";
 import { CounterNumber } from "../packages/extension-counter-number/src";
+import { LoopText } from "../packages/extension-loop-text/src";
 
 // #endregion
 
@@ -149,6 +150,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         TableCell,
         EffectText,
         CounterNumber,
+        LoopText,
     ];
 
     return [...baseExtensions, ...customExtensions];

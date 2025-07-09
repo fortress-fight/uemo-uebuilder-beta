@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-07 01:02:59
+ * @LastEditTime: 2025-07-09 17:12:45
 -->
 <template>
     <UeTiptapMenuButton type="bold" :active="isBold" :class="$style['plugin-bold']" @trigger="triggerBold" />
@@ -11,6 +11,7 @@ import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { isButtonRow, getButtonRowAttrs } from "../../extension-button/utils/helper";
 import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
 import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 
 defineOptions({ name: "BoldButton" });
 
@@ -26,9 +27,9 @@ const isBold = computed(() => {
     if (isCounterNumberNode(editor)) {
         return getCounterNumberAttrs(editor)?.fontWeight;
     }
-    // if (isLoopText(editor)) {
-    //     return editor?.getAttributes("loopText").fontWeight;
-    // }
+    if (isLoopTextNode(editor)) {
+        return getLoopTextAttrs(editor)?.fontWeight;
+    }
     return editor?.isActive("bold");
 });
 
@@ -54,9 +55,13 @@ function triggerBold() {
             .updateCounterNumberAttrs({ fontWeight: isBold.value ? false : true })
             .run();
     }
-    // if (isLoopText(editor)) {
-    //     return editor?.chain().focus().toggleLoopTextBold().run();
-    // }
+    if (isLoopTextNode(editor)) {
+        return editor
+            ?.chain()
+            .focus()
+            .updateLoopTextAttrs({ fontWeight: isBold.value ? false : true })
+            .run();
+    }
     return editor?.chain().focus().toggleBold().run();
 }
 </script>
