@@ -1,7 +1,7 @@
 <!--
  * @Description: 文字设置组
  * @Author: F-Stone
- * @LastEditTime: 2025-07-08 01:35:50
+ * @LastEditTime: 2025-07-09 17:48:39
 -->
 <template>
     <UeElSettingGroup :class="$style['width-setting-group']" v-bind="settingGroup" @trigger="handleTrigger">
@@ -22,9 +22,13 @@ const valueRef = defineModel<string>("value", { required: false });
 const inputDomRef = useTemplateRef("inputDomRef");
 
 const settingGroup = computed<UE_EL_COMPONENT.UeElSettingGroupProps>(() => {
+    const operBtns: UE_EL_COMPONENT.UeElSettingGroupProps["oper"] = !valueRef.value
+        ? [{ id: "add", type: "add" }]
+        : [{ id: "remove", type: "remove" }];
+
     return {
         title: props.title || t("UNIT_TEXT"),
-        oper: !valueRef.value ? [{ id: "add", type: "add" }] : [{ id: "remove", type: "remove" }],
+        oper: props.disableOper ? undefined : operBtns,
     };
 });
 

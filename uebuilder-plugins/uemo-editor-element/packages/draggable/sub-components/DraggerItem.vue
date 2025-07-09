@@ -28,7 +28,7 @@ function trigger(type: "remove"): void {
 </script>
 <style lang="scss" module>
 .dragger-item {
-    //
+    cursor: pointer;
 }
 .sort-item {
     position: relative;
