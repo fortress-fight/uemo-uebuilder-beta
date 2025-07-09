@@ -1,6 +1,7 @@
 <template>
     <NodeViewWrapper
         :contenteditable="false"
+        ref="previewBox"
         class="drag-handle"
         data-drag-handle
         draggable="true"
@@ -40,6 +41,10 @@ import type { CounterNumberAttrs } from "../src";
 
 import { isNodeSelection } from "@tiptap/core";
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
+import { ueCounterNumber } from "@stone/uemo-editor-element/packages/counter-number-preview-panel/utils/ue-counter-number";
+
+import $ from "@stone/uemo-editor-utils/lib/jquery";
+import mitt from "@stone/uemo-editor-utils/lib/mitt";
 
 import { isCounterNumberNode } from "../utils/helper";
 import { getCounterNumberBlockStyle, getCounterNumberBlockCustomAttr } from "../utils/render";
@@ -48,6 +53,8 @@ import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/uti
 import pageStyle from "../../../src/app.module.scss";
 
 defineOptions({ name: "UeElTiptapEffectText" });
+
+const eventBus = mitt<{ update: undefined; destroy: undefined }>();
 
 const props = defineProps(nodeViewProps);
 const attrs = computed(() => props.node.attrs as CounterNumberAttrs);
@@ -84,6 +91,43 @@ const viewClassName = computed(() => {
 function getNumDecimal(item: CounterNumberAttrs["body"][number]) {
     return Math.max(item.numPad || 0, item.numList[0]?.toString().length || 0, item.numList[1]?.toString().length || 0);
 }
+
+const previewBoxRef = useTemplateRef<any>("previewBox");
+const previewBoxDom = computed(() => previewBoxRef.value?.$.vnode.el);
+
+ueCounterNumber.updateDefaultParams({ scroller: window.document.body });
+
+function playAnimate() {
+    eventBus.on("update", () => {
+        const dom = previewBoxDom.value as HTMLElement;
+        if (ueCounterNumber.checkDom(dom)) {
+            ueCounterNumber.updateCounterNumber([dom], true);
+        } else {
+            ueCounterNumber.initCounterNumber([dom], {
+                scroller: window.document.body,
+            });
+        }
+    });
+
+    eventBus.on("destroy", () => {
+        ueCounterNumber.destroy([previewBoxDom.value as HTMLElement]);
+    });
+}
+
+onMounted(() => {
+    requestAnimationFrame(() => {
+        playAnimate();
+        $(previewBoxDom.value).on("animate-play", () => {
+            eventBus.emit("update");
+        });
+    });
+});
+
+onBeforeUnmount(() => {
+    eventBus.off("update");
+    eventBus.off("destroy");
+    eventBus.all.clear();
+});
 </script>
 <style lang="scss" module>
 .node-view {

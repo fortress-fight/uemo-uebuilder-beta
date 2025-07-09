@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-08 02:40:06
+ * @LastEditTime: 2025-07-09 14:54:44
  */
 import type { Attribute } from "@tiptap/core";
 import type { CounterNumberAttrs } from "./index";
@@ -162,7 +162,7 @@ export const CounterNumber = Node.create<CounterNumberOptions>({
             playCounterNumberAnimate:
                 () =>
                 ({ editor }) => {
-                    playCounterNumberAnimation(editor, getCounterNumberAttrs(this.editor) || {});
+                    playCounterNumberAnimation(editor);
                     return true;
                 },
 
