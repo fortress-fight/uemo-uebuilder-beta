@@ -11,7 +11,7 @@ import { buttonCreator } from "../utils/create-button";
  */
 class UeElButtonFactory {
     /** 标记工厂是否已初始化 */
-    private initialized = false;
+    public initialized = false;
 
     /** 存储已初始化的按钮元素集合 */
     private buttonElements = new Set<HTMLElement>();
@@ -45,6 +45,15 @@ class UeElButtonFactory {
                 });
             }, 200)
         );
+    }
+
+    /**
+     * 检查DOM是否存在
+     * @param dom - 要检查的DOM元素
+     * @returns 是否存在
+     */
+    checkDom(dom: HTMLElement) {
+        return this.buttonElements.has(dom);
     }
 
     /**
