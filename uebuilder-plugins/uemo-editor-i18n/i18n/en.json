@@ -66,6 +66,8 @@
     "UNIT_DELAY": "Delay",
     "UNIT_DURATION": "Duration",
     "UNIT_PREVIEW": "Preview",
+    "UNIT_PLAY": "Play",
+    "UNIT_STOP": "Stop",
     "UNIT_POINTER": "Pointer",
     "UNIT_ROUND": "Round",
     "UNIT_SQUARE": "Square",
