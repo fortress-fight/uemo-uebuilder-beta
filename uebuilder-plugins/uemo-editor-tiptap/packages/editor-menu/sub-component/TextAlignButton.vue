@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 17:16:52
+ * @LastEditTime: 2025-07-10 18:13:01
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" :type="currentButtonType" @trigger="openTextAlignPanel" />
@@ -22,7 +22,7 @@ const rootDomRef = useTemplateRef("rootDom");
 const currentValue = computed(() => {
     if (!editor) return "";
 
-    const isPc = getDeviceStorage(editor)?.device === "pc";
+    const isPc = getDeviceStorage(editor)?.device === "desktop";
 
     if (isEffectTextNode(editor)) {
         return isPc ? getEffectTextAttrs(editor)?.align : getEffectTextAttrs(editor)?.moAlign;
@@ -68,7 +68,7 @@ const currentButtonType = computed(() => {
 function triggerTextAlign(textAlign?: string | null) {
     if (!editor) return;
 
-    const isPc = getDeviceStorage(editor)?.device === "pc";
+    const isPc = getDeviceStorage(editor)?.device === "desktop";
 
     if (isEffectTextNode(editor)) {
         const chain = editor?.chain().focus();

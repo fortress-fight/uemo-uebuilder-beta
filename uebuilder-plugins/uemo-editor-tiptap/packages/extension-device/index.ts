@@ -43,7 +43,7 @@ export const DeviceExtension = Extension.create<
      */
     addOptions() {
         return {
-            defaultDevice: "pc",
+            defaultDevice: "desktop",
         };
     },
 

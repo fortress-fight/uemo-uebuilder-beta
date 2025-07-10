@@ -67,6 +67,7 @@ import { LoopText } from "../packages/extension-loop-text/src";
 // #endregion
 
 export type CreateBubbleEditorExtensionParam = {
+    defaultDevice?: UE_TIPTAP_UNIT.Device;
     showToast?: (type: "success" | "error", message: string) => void;
     openAttrEditorPanel?: UE_TIPTAP_EXTENSION.EditorPanel["openEditorPanelHandler"];
     closeAttrEditorPanel?: () => void;
@@ -104,7 +105,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             openAttrEditorPanel: param.openAttrEditorPanel,
             closeAttrEditorPanel: param.closeAttrEditorPanel,
         }),
-        DeviceExtension,
+        DeviceExtension.configure({
+            defaultDevice: param.defaultDevice,
+        }),
         FontScaleExtension,
         AIExtension.configure(param.AIExtension),
         TextDecoration,

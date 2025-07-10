@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 18:41:29
+ * @LastEditTime: 2025-07-10 18:09:58
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -9,6 +9,7 @@
             v-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
             :value="valueRef"
+            :device="deviceRef"
             @closePopPanel="openRef = false"
             @update:value="updateLinkValue"
             @cancel="handleCancel"
@@ -19,6 +20,7 @@
             v-bind="{ ...$attrs, ...injectPropsRef }"
             :is="componentName"
             :value="valueRef"
+            :device="deviceRef"
             @closePopPanel="closePopPanel"
             @update:value="updateValue"
             @fire="triggerCommand"
@@ -107,6 +109,7 @@ const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
  */
 const typeRef = ref<keyof EditorPanelAttrsMap>();
 const openRef = ref<boolean>(false);
+const deviceRef = ref<UE_TIPTAP_UNIT.Device>();
 const valueRef = ref<EditorPanelAttrsMap[T]>();
 const injectPropsRef = ref<Record<string, any>>({});
 const rectRef = ref<UE_TIPTAP_UNIT.PositionRect>();
@@ -248,6 +251,7 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     valueRef.value = attr;
     openRef.value = true;
     rectRef.value = param.rect;
+    deviceRef.value = param.device;
     if (param.props) {
         injectPropsRef.value = param.props;
     }

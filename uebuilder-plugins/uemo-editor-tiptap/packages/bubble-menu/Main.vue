@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡工具栏控件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 11:21:02
+ * @LastEditTime: 2025-07-10 18:12:56
 -->
 <template>
     <UeElPopPanel :class="$style['bubble-menu']" v-model:open="showPopPanel" v-bind="popPanelParams">
@@ -50,7 +50,7 @@ const pluginController: BubbleMenuPluginProps["controller"] = (type, refEl) => {
 
             showPopPanel.value = true;
 
-            const isPc = getDeviceStorage(editor)?.device === "pc";
+            const isPc = getDeviceStorage(editor)?.device === "desktop";
 
             popPanelParams.value.panel = {
                 position: {

@@ -9,6 +9,7 @@ import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { Extension, isNodeSelection, findParentNodeClosestToPos, posToDOMRect } from "@tiptap/core";
 
 import { openAttrEditorPanel } from "../utils/helper";
+import { getDeviceStorage } from "../../extension-device/helper";
 
 // 扩展 Tiptap 命令接口
 declare module "@tiptap/core" {
@@ -235,6 +236,7 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                     // 调用属性处理器
                     handler(type, attr, {
                         ...param,
+                        device: getDeviceStorage(editor)?.device,
                         focus: () => {
                             editor.commands.focus();
                             param.focus?.();

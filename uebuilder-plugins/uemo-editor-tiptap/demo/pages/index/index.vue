@@ -12,6 +12,7 @@ const linkList = ref([
     { path: "/", text: "当前编辑" },
     { path: "/unit", text: "基础组件" },
     { path: "/editor", text: "气泡模式" },
+    { path: "/editor-mobile", text: "气泡模式-移动端" },
 ]);
 
 const { locale } = useI18n();

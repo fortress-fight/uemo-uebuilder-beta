@@ -1,13 +1,14 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 16:35:25
+ * @LastEditTime: 2025-07-10 18:08:16
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
     popId?: string;
     rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
     props?: Record<string, any>; // 面板属性
+    device?: UE_TIPTAP_UNIT.Device; // 设备类型
 
     updateAttrs: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
     fire?(type: string, param?: any): void; // 触发事件回调

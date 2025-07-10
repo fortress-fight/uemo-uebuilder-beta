@@ -18,6 +18,9 @@
 <script lang="ts" setup>
 const { t } = useI18n();
 
+const _props = withDefaults(defineProps<{ device: UE_TIPTAP_UNIT.Device }>(), {
+    device: "desktop",
+});
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 
 const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["fontSize"]>("value", {

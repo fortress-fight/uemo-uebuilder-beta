@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-05-07 11:22:02
+ * @LastEditTime: 2025-07-10 18:12:51
 -->
 <template>
     <UeTiptapBubbleMenu pluginKey="editorMainMenu" :isNodeMenu="isNodeMenu">
@@ -59,7 +59,7 @@ const useMenuItems = computed<(UE_TIPTAP_UNIT.OperItem | "|")[]>(() => {
     const deviceStorage = getDeviceStorage(editor);
     const { selection } = editor.state;
 
-    if (deviceStorage?.device !== "pc") {
+    if (deviceStorage?.device !== "desktop") {
         return ["fontSize", "fontScale", "textAlign"];
     }
 
@@ -72,7 +72,7 @@ const useMenuItems = computed<(UE_TIPTAP_UNIT.OperItem | "|")[]>(() => {
             if (item != "|" && props.excludeMenuItems?.includes(item)) {
                 return false;
             }
-            if (deviceStorage?.device === "pc") {
+            if (deviceStorage?.device === "desktop") {
                 return item !== "fontScale";
             }
             return true;
