@@ -1,8 +1,9 @@
 /*
  * @Description: Tiptap 编辑器工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-07-03 02:58:59
+ * @LastEditTime: 2025-07-10 13:11:13
  */
+import type { Attribute } from "@tiptap/core";
 
 /**
  * 判断是否是苹果系统
@@ -178,4 +179,19 @@ export function parseLinkTiptapAttr(value?: UE_EL_UTIL.LinkValue) {
     }
     modelValue.triggerMethod = value?.triggerArea;
     return modelValue;
+}
+
+/**
+ * 获取属性配置
+ * @param defaultAttrs 默认属性
+ * @returns 属性配置
+ */
+export function getAttributesConfig<T extends Record<string, any>>(defaultAttrs: T) {
+    const result = {} as Record<keyof T, Attribute>;
+
+    Object.keys(defaultAttrs).forEach((key) => {
+        result[key as keyof T] = { default: defaultAttrs[key as keyof T] };
+    });
+
+    return result;
 }

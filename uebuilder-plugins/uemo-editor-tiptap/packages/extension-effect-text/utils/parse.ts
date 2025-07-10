@@ -1,5 +1,7 @@
 import type { EffectTextAttrs, ScrollEffectV3 } from "../src";
 
+import { defaultEffectTextAttrs } from "../src/effect-text";
+
 function transformScrollEffect(
     scrollEffect: ScrollEffectV3 | EffectTextAttrs["scrollEffect"]
 ): EffectTextAttrs["scrollEffect"] {
@@ -32,10 +34,8 @@ export function parseEffectText(dom: HTMLElement): EffectTextAttrs {
     const textColor = domStyle.getPropertyValue("--effect-text-text-color") || "#333";
     const width = domStyle.width;
 
-    let scrollEffect: EffectTextAttrs["scrollEffect"] = {
-        effectType: "effect-1",
-        triggerMode: "enter-leaver",
-    };
+    let scrollEffect: EffectTextAttrs["scrollEffect"] = defaultEffectTextAttrs.scrollEffect;
+
     try {
         const scrollEffectConfig = dom.getAttribute("data-scroll-effect");
 

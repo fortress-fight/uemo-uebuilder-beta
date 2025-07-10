@@ -1,4 +1,3 @@
-import type { Attribute } from "@tiptap/core";
 import type { EffectTextAttrs } from "./index";
 
 import { Node } from "@tiptap/core";
@@ -8,8 +7,27 @@ import EffectTextView from "../view/EffectTextView.vue";
 
 import { renderHTML } from "../utils/render";
 import { parseEffectText } from "../utils/parse";
-import $pageStyle from "../../../src/app.module.scss";
 import { getEffectTextAttrs } from "../utils/helper";
+import { getAttributesConfig } from "../../../utils/tiptap-helper";
+
+import $pageStyle from "../../../src/app.module.scss";
+
+export const defaultEffectTextAttrs: EffectTextAttrs = {
+    width: undefined,
+    fontStyle: "",
+    fontFamily: "",
+    fontSize: "60px",
+    fontWeight: false,
+    textColor: "#333",
+    lineHeight: "",
+    align: "left",
+    moAlign: undefined,
+
+    content: "请输入文字",
+
+    // 滚动效果
+    scrollEffect: { effectType: "effect-1", triggerMode: "enter-leaver" },
+};
 
 export interface EffectTextOptions {
     HTMLAttributes: Record<string, any>;
@@ -72,22 +90,7 @@ export const EffectText = Node.create<EffectTextOptions>({
     },
 
     addAttributes() {
-        return {
-            width: { default: undefined },
-            fontStyle: { default: "" },
-            fontFamily: { default: null },
-            fontSize: { default: "" },
-            fontWeight: { default: false },
-            textColor: { default: "#333" },
-            lineHeight: { default: "" },
-            align: { default: "left" },
-            moAlign: { default: undefined },
-
-            content: { default: "" },
-
-            // 滚动效果
-            scrollEffect: { default: { type: "effect-1", options: { triggerMode: "enter-leaver" } } },
-        } as Record<keyof EffectTextAttrs, Attribute>;
+        return getAttributesConfig<EffectTextAttrs>(defaultEffectTextAttrs);
     },
 
     parseHTML() {
@@ -116,13 +119,7 @@ export const EffectText = Node.create<EffectTextOptions>({
                 ({ commands }) => {
                     return commands.insertContent({
                         type: this.name,
-                        attrs: {
-                            theme: "NO01",
-                            effect: "normal",
-                            textColor: "#333",
-                            fontSize: "60px",
-                            content: "请输入文字",
-                        },
+                        attrs: defaultEffectTextAttrs,
                     });
                 },
 
