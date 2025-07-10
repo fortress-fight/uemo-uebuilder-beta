@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 17:27:48
+ * @LastEditTime: 2025-07-10 16:16:46
  */
 import type { Attribute } from "@tiptap/core";
 import type { LoopTextAttrs } from "./index";
@@ -12,7 +12,7 @@ import { VueNodeViewRenderer } from "@tiptap/vue-3";
 
 import { renderLoopText } from "../utils/render";
 import { parseLoopTextAttr } from "../utils/parse";
-import { getLoopTextAttrs } from "../utils/helper";
+import { getLoopTextAttrs, playLoopTextAnimation, stopLoopTextAnimation } from "../utils/helper";
 
 import LoopTextView from "../view/LoopTextView.vue";
 
@@ -44,6 +44,11 @@ declare module "@tiptap/core" {
              * 移除相关样式
              */
             unsetLoopTextStyle: () => ReturnType;
+
+            /**
+             * 播放跑马灯文本动画
+             */
+            playLoopTextAnimate: (play: boolean) => ReturnType;
         };
     }
 }
@@ -132,8 +137,31 @@ export const LoopText = Node.create<LoopTextOptions>({
                             updateAttrs: (attr) => {
                                 editor.commands.updateLoopTextAttrs(attr);
                             },
+                            fire: (type: "preview" | "stop") => {
+                                switch (type) {
+                                    case "preview":
+                                        requestAnimationFrame(() => {
+                                            editor.chain().setMeta("addToHistory", false).playLoopTextAnimate(true);
+                                        });
+                                        break;
+                                    case "stop":
+                                        requestAnimationFrame(() => {
+                                            editor.chain().setMeta("addToHistory", false).playLoopTextAnimate(false);
+                                        });
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            },
                         })
                         .run();
+                },
+
+            playLoopTextAnimate:
+                (play: boolean) =>
+                ({ editor }) => {
+                    void (play ? playLoopTextAnimation(editor) : stopLoopTextAnimation(editor));
+                    return true;
                 },
 
             insertLoopText:

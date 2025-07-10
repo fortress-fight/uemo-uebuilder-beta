@@ -1,7 +1,7 @@
 /*
  * @Description: 跑马灯文本工具函数
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 16:27:31
+ * @LastEditTime: 2025-07-10 15:20:41
  */
 import type { Editor } from "@tiptap/core";
 
@@ -43,4 +43,14 @@ export function playLoopTextAnimation(editor: Editor) {
     if (!parentDom) return;
 
     $(dom).trigger("animate-play");
+}
+
+export function stopLoopTextAnimation(editor: Editor) {
+    const dom = getNodeDom(editor);
+    if (!(dom instanceof HTMLElement)) return;
+
+    const parentDom = dom.parentElement;
+    if (!parentDom) return;
+
+    $(dom).trigger("animate-stop");
 }

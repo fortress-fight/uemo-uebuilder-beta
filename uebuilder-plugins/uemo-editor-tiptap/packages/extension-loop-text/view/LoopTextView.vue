@@ -50,6 +50,10 @@ import type { LoopTextAttrs } from "../src";
 import { isNodeSelection } from "@tiptap/core";
 import { nodeViewProps, NodeViewWrapper } from "@tiptap/vue-3";
 
+import $ from "@stone/uemo-editor-utils/lib/jquery";
+import mitt from "@stone/uemo-editor-utils/lib/mitt";
+import { ueLoopText } from "@stone/uemo-editor-element/packages/loop-text-preview-panel/utils/ue-loop-text";
+
 import { isLoopTextNode } from "../utils/helper";
 import { getLoopTextBlockStyle, getLoopTextBlockCustomAttr } from "../utils/render";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
@@ -58,8 +62,13 @@ import pageStyle from "../../../src/app.module.scss";
 
 defineOptions({ name: "UeElTiptapEffectText" });
 
+const eventBus = mitt<{ update: undefined; destroy: undefined }>();
+
 const props = defineProps(nodeViewProps);
 const attrs = computed(() => props.node.attrs as LoopTextAttrs);
+
+const previewBoxRef = useTemplateRef<any>("previewBox");
+const previewBoxDom = computed(() => previewBoxRef.value?.$.vnode.el);
 
 const className = useCssModule();
 
@@ -88,6 +97,47 @@ const viewClassName = computed(() => {
         { "ProseMirror-selectednode": !!props.selected },
         { ["text-" + parseInt(attrs.value.fontSize || "")]: isPxFontSize.value },
     ];
+});
+
+function playAnimate() {
+    eventBus.on("update", () => {
+        const dom = previewBoxDom.value as HTMLElement;
+        if (ueLoopText.checkDom(dom)) {
+            ueLoopText.updateLoopText([dom], true);
+        } else {
+            ueLoopText.initLoopText([dom], {
+                scroller: window.document.body,
+            });
+        }
+    });
+
+    eventBus.on("destroy", () => {
+        const dom = previewBoxDom.value as HTMLElement;
+        if (ueLoopText.checkDom(dom)) {
+            ueLoopText.destroy([dom]);
+        }
+    });
+}
+
+onMounted(() => {
+    requestAnimationFrame(() => {
+        playAnimate();
+        $(previewBoxDom.value).on("animate-play", () => {
+            eventBus.emit("update");
+        });
+        $(previewBoxDom.value).on("animate-stop", () => {
+            eventBus.emit("destroy");
+        });
+    });
+});
+
+onBeforeUnmount(() => {
+    $(previewBoxDom.value).off("animate-play");
+    $(previewBoxDom.value).off("animate-stop");
+
+    eventBus.off("update");
+    eventBus.off("destroy");
+    eventBus.all.clear();
 });
 </script>
 <style lang="scss" module>
