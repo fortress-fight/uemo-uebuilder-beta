@@ -6,7 +6,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import TestComponent from "~/demo/components/TestTextSettingGroup.vue";
+import TestComponent from "~/demo/components/TestLoopTextPreviewPanel.vue";
 </script>
 <style lang="scss" module>
 .test-group {
