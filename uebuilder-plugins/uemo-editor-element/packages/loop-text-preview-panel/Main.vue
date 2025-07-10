@@ -1,7 +1,7 @@
 <!--
  * @Description: 循环文字预览面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-10 11:07:34
+ * @LastEditTime: 2025-07-10 12:13:21
 -->
 <template>
     <UeElMiniEditorPanel v-model:value="valueRef" @cancel="closePanel" @confirm="closePanel" @update="handleUpdate">
@@ -55,6 +55,12 @@ const handleUpdate = _debounce(
 const closePanel = () => {
     emit("close");
 };
+
+onMounted(() => {
+    if (!browserMockupPanel.value?.scroller) return;
+
+    previewDomRef.value?.init(browserMockupPanel.value?.scroller);
+});
 </script>
 <style lang="scss" module>
 .loop-text-preview-panel {

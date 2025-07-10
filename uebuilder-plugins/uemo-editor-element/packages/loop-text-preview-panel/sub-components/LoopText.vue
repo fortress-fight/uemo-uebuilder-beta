@@ -1,6 +1,11 @@
 <template>
     <div :class="pageStyle['page-editor']">
-        <div :class="viewClassName" :style="getLoopTextBlockStyle(attrs)" v-bind="getLoopTextBlockCustomAttr(attrs)">
+        <div
+            :class="viewClassName"
+            :style="getLoopTextBlockStyle(attrs)"
+            v-bind="getLoopTextBlockCustomAttr(attrs)"
+            ref="previewBox"
+        >
             <div :class="pageStyle['loop-text-inner']">
                 <!-- 前缀 -->
                 <div
@@ -42,14 +47,19 @@ import {
     getLoopTextBlockCustomAttr,
 } from "@stone/uemo-editor-tiptap/packages/extension-loop-text/utils/render";
 
+import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import pageStyle from "@stone/uemo-editor-tiptap/src/app.module.scss";
 
-import "../utils/ue-loop-text";
+import { ueLoopText } from "../utils/ue-loop-text";
 
 defineOptions({ name: "UeElTiptapEffectText" });
 
 const props = defineProps<{ value: UE_TIPTAP_EXTENSION.LoopText["attrs"] }>();
+const eventBus = mitt<{ update: undefined; destroy: undefined }>();
+
 const attrs = computed(() => props.value);
+
+const previewBox = useTemplateRef("previewBox");
 
 const isPxFontSize = computed(() => {
     return attrs.value.fontSize?.endsWith("px");
@@ -59,9 +69,29 @@ const viewClassName = computed(() => {
     return [pageStyle["loop-text-block"], { ["text-" + parseInt(attrs.value.fontSize || "")]: isPxFontSize.value }];
 });
 defineExpose({
-    update: () => {
-        // console.log("update");
+    init(scroller: HTMLElement) {
+        if (!scroller) return;
+
+        ueLoopText.updateDefaultParams({ scroller });
+
+        const { kill } = ueLoopText.initLoopText([previewBox.value as HTMLElement], { scroller });
+
+        eventBus.on("update", () => {
+            ueLoopText.updateLoopText([previewBox.value as HTMLElement], true);
+        });
+
+        eventBus.on("destroy", () => {
+            kill();
+        });
     },
+    update() {
+        eventBus.emit("update");
+    },
+});
+
+onBeforeUnmount(() => {
+    eventBus.emit("destroy");
+    eventBus.all.clear();
 });
 </script>
 <style lang="scss" module>
