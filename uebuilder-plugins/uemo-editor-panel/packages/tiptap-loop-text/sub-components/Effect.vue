@@ -6,12 +6,9 @@
                 <UeElNumberInput v-bind="durationParam" v-model:value="delay" />
             </UeElControlGroup>
             <UeElButton
-                size="normal"
-                :text="t('UNIT_PREVIEW')"
-                theme="strokeText"
-                :icon="{ name: 'icon-app-play', size: 16 }"
+                v-bind="previewButtonProps"
                 :class="$style['oper-btn']"
-                @trigger="emit('fire', { type: 'preview' })"
+                @trigger="isPreview ? pausePreview() : playPreview()"
             />
         </template>
     </UeElSettingGroup>
@@ -24,11 +21,20 @@ import libList from "../assets/data";
 
 defineOptions({ name: "UeEditorPanelTiptapLoopTextEffectPanel" });
 
-const emit = defineEmits<{ (e: "fire", data: { type: "preview" }): void }>();
+const emit = defineEmits<{ (e: "fire", data: { type: "preview" | "stop" }): void }>();
 
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.LoopText["attrs"]>("value", { required: true });
 
 const { t } = useI18n();
+
+const isPreview = ref(false);
+const previewButtonProps = computed<UE_EL_COMPONENT.UeElButtonProps>(() => ({
+    size: "normal",
+    text: isPreview.value ? t("UNIT_STOP") : t("UNIT_PLAY"),
+    type: isPreview.value ? "warning" : undefined,
+    theme: isPreview.value ? "fillText" : "strokeText",
+    icon: { name: isPreview.value ? "icon-app-pause" : "icon-app-play", size: 16 },
+}));
 
 const effectOption = Object.keys(libList).map((key) => ({
     value: key,
@@ -78,6 +84,20 @@ const suffix = useDefineObjectModel(valueModel, {
         modelValue.suffix = { type: "text", value };
         return modelValue;
     },
+});
+
+function playPreview() {
+    isPreview.value = true;
+    emit("fire", { type: "preview" });
+}
+function pausePreview() {
+    isPreview.value = false;
+    emit("fire", { type: "stop" });
+}
+
+defineExpose({
+    playPreview,
+    pausePreview,
 });
 </script>
 <style lang="scss" module>

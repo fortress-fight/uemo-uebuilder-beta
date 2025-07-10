@@ -1,16 +1,16 @@
 <!--
  * @Description: Tiptap循环文字编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 17:39:51
+ * @LastEditTime: 2025-07-10 16:05:45
 -->
 <template>
     <UeElEditorPanel :title="t('UNIT_LOOP_TEXT')">
-        <UeElTabCard v-bind="tabCardProps">
+        <UeElTabCard v-bind="tabCardProps" ref="tabCardRef">
             <template #Content>
                 <ContentPanel v-model:value="valueModel" />
             </template>
             <template #Effect>
-                <EffectPanel v-model:value="valueModel" @fire="emit('fire', $event)" />
+                <EffectPanel v-model:value="valueModel" ref="effectPanelRef" @fire="emit('fire', $event)" />
             </template>
         </UeElTabCard>
     </UeElEditorPanel>
@@ -23,9 +23,11 @@ import EffectPanel from "./sub-components/Effect.vue";
 
 defineOptions({ name: "UeEditorPanelTiptapLoopText" });
 const _props = withDefaults(defineProps<UeEditorPanelTiptapLoopTextBaseProps>(), {});
-const emit = defineEmits<{ (e: "fire", data: { type: "preview" }): void }>();
+const emit = defineEmits<{ (e: "fire", data: { type: "preview" | "stop" }): void }>();
 
 const valueModel = defineModel<UE_TIPTAP_EXTENSION.LoopText["attrs"]>("value", { required: true });
+const tabCardRef = useTemplateRef("tabCardRef");
+const effectPanelRef = useTemplateRef("effectPanelRef");
 
 const { t } = useI18n();
 
@@ -37,6 +39,19 @@ const tabCardProps = computed<UE_EL_COMPONENT.UeElTabCardProps>(() => {
             { title: t("UNIT_EFFECT"), name: "Effect" },
         ],
     };
+});
+
+watch(
+    () => tabCardRef.value?.activeCardName,
+    (newVal) => {
+        if (newVal !== "Effect") {
+            effectPanelRef.value?.pausePreview();
+        }
+    }
+);
+
+onBeforeUnmount(() => {
+    emit("fire", { type: "stop" });
 });
 </script>
 <style lang="scss" module>
