@@ -124,6 +124,8 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+    $(previewBoxDom.value).off("animate-play");
+
     eventBus.off("update");
     eventBus.off("destroy");
     eventBus.all.clear();
