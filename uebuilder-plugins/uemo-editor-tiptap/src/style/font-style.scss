@@ -1,11 +1,16 @@
 // #endregion
 .page-editor {
     --min-font-size: 12px;
+    --default-font-size: 14px;
+    font-size: calc(var(--default-font-size) * var(--font-scale-default, 1)) !important;
     span {
         line-height: 1.6em;
     }
     span[style*="--font-size"] {
-        font-size: max(var(--min-font-size), calc(var(--font-size, 14px) * var(--font-scale-default, 1)));
+        font-size: max(
+            var(--min-font-size),
+            calc(var(--font-size, var(--default-font-size)) * var(--font-scale-default, 1))
+        );
     }
     span[data-clip="text"] {
         color: rgb(0 0 0 / 0);
