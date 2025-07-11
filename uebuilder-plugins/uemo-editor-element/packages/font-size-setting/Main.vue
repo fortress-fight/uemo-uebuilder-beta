@@ -1,7 +1,7 @@
 <!--
  * @Description: 字号控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-05 17:43:22
+ * @LastEditTime: 2025-07-11 10:24:15
 -->
 <template>
     <UeElControlGroup :class="$style['font-size-setting']" class="w-full" :col-count="selectedValue === '' ? 2 : 1">
@@ -33,27 +33,10 @@ const selectedValue = computed({
 
 const options = computed<UE_EL_COMPONENT.UeElSelectProps["options"]>(() => [
     { value: "", text: t("UNIT_CUSTOM") },
-    { value: "12px", text: "12px" },
-    { value: "14px", text: "14px" },
-    { value: "16px", text: "16px" },
-    { value: "18px", text: "18px" },
-    { value: "20px", text: "20px" },
-    { value: "22px", text: "22px" },
-    { value: "24px", text: "24px" },
-    { value: "26px", text: "26px" },
-    { value: "28px", text: "28px" },
-    { value: "30px", text: "30px" },
-    { value: "32px", text: "32px" },
-    { value: "34px", text: "34px" },
-    { value: "36px", text: "36px" },
-    { value: "38px", text: "38px" },
-    { value: "40px", text: "40px" },
-    { value: "48px", text: "48px" },
-    { value: "60px", text: "60px" },
-    { value: "72px", text: "72px" },
-    { value: "84px", text: "84px" },
-    { value: "94px", text: "94px" },
-    { value: "128px", text: "128px" },
+    ...Object.entries(fontSizePreset).map(([key, value]) => ({
+        value: key,
+        text: `${value.desktop} - ${value.mobile}`,
+    })),
 ]);
 
 const inputParam = computed<Partial<UE_EL_COMPONENT.UeElNumberInputProps>>(() => ({

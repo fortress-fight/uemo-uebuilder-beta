@@ -2,6 +2,7 @@
     "extends": "@stone/tsconfig",
     "include": [
         "env.d.ts",
+        "data/**/*",
         "src/**/*",
         "demo/**/*",
         "i18n/**/*",
