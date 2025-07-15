@@ -76,5 +76,39 @@ declare const styles: {
     readonly "bg-box": string;
 
     readonly "editor-divide-block": string;
+
+    readonly "editor-hr": string;
+    readonly "editor-hr--inner": string;
+
+    readonly "share-row": string;
+    readonly "share-list": string;
+    readonly share: string;
+    readonly "share-icon": string;
+
+    readonly "table-scroll-box": string;
+    readonly "table-hide-border": string;
+
+    readonly "effect-text-block": string;
+    readonly "effect-text-inner": string;
+    readonly "effect-text-item-text": string;
+
+    readonly "counter-number-block": string;
+    readonly "counter-number-group": string;
+    readonly "counter-number-inner": string;
+    readonly "counter-number-item": string;
+    readonly "counter-number-item-info": string;
+    readonly "counter-number-item-text": string;
+    readonly "counter-number-item-proxy": string;
+    readonly "counter-number-item-desc": string;
+
+    readonly "loop-text-block": string;
+    readonly "loop-text-group": string;
+    readonly "loop-text-inner": string;
+    readonly "loop-text-item": string;
+    readonly "loop-text-item-text": string;
+    readonly "loop-text--prefix": string;
+    readonly "loop-text--suffix": string;
+
+    readonly text: string;
 };
 export = styles;

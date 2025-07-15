@@ -5,7 +5,7 @@ import { Node, type Attribute } from "@tiptap/core";
 
 import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-import ButtonItemView from "../view/ButtonItem.vue";
+import ButtonItemView from "../view/ButtonItemView.vue";
 
 import $pageStyle from "../../../src/app.module.scss";
 

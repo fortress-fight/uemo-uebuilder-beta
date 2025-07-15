@@ -1,4 +1,6 @@
 {
+    "EFFECT_TEXT_TIP": "为了保证编辑的流畅性，只能在预览状态下查看效果",
+
     "IMAGE_ALT_PLACEHOLDER": "请输入图片描述",
     "IMAGE_EFFECT_TIP": "为了保证编辑的流畅性，只能在预览状态下查看效果",
     "IMAGE_GALLERY_TITLE": "画廊展示",
@@ -6,5 +8,13 @@
     "IMAGE_HOVER_TITLE": "鼠标移入",
     "IMAGE_HOVER_ZOOM_OUT": "移入缩小",
     "IMAGE_HOVER_ZOOM_IN": "移入放大",
-    "IMAGE_HOVER_IMAGE_SCALE": "外框收缩图片放大"
+    "IMAGE_HOVER_IMAGE_SCALE": "外框收缩图片放大",
+
+    "COUNTER_NUMBER_MODE_NORMAL": "常规",
+    "COUNTER_NUMBER_MODE_ODOMETER": "滚动数字",
+    "COUNTER_NUMBER_THEME_TITLE": "展示",
+    "COUNTER_NUMBER_NORMAL": "数字",
+    "COUNTER_NUMBER_DECORATION": "数字/装饰",
+    "COUNTER_NUMBER_DECORATION_DESC": "数字/装饰/描述",
+    "COUNTER_NUMBER_DESC_TEXT": "描述文字"
 }

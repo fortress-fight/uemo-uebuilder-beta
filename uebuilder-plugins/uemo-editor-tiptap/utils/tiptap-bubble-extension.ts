@@ -57,10 +57,17 @@ import { Spline } from "../packages/extension-spline/src";
 import { Lottie } from "../packages/extension-lottie/src";
 import { GridGroup, GridItem } from "../packages/extension-grid/src";
 import { DividerBlock } from "../packages/extension-divider-block/src";
+import { HrRule } from "../packages/extension-hr-rule/src";
+import { ShareRow, ShareItem } from "../packages/extension-share/src";
+import { Table, TableHeader, TableRow, TableCell } from "../packages/extension-table/src";
+import { EffectText } from "../packages/extension-effect-text/src";
+import { CounterNumber } from "../packages/extension-counter-number/src";
+import { LoopText } from "../packages/extension-loop-text/src";
 
 // #endregion
 
 export type CreateBubbleEditorExtensionParam = {
+    defaultDevice?: UE_TIPTAP_UNIT.Device;
     showToast?: (type: "success" | "error", message: string) => void;
     openAttrEditorPanel?: UE_TIPTAP_EXTENSION.EditorPanel["openEditorPanelHandler"];
     closeAttrEditorPanel?: () => void;
@@ -98,7 +105,9 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
             openAttrEditorPanel: param.openAttrEditorPanel,
             closeAttrEditorPanel: param.closeAttrEditorPanel,
         }),
-        DeviceExtension,
+        DeviceExtension.configure({
+            defaultDevice: param.defaultDevice,
+        }),
         FontScaleExtension,
         AIExtension.configure(param.AIExtension),
         TextDecoration,
@@ -135,6 +144,16 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         GridGroup,
         GridItem,
         DividerBlock,
+        HrRule,
+        ShareRow,
+        ShareItem,
+        Table,
+        TableHeader,
+        TableRow,
+        TableCell,
+        EffectText,
+        CounterNumber,
+        LoopText,
     ];
 
     return [...baseExtensions, ...customExtensions];

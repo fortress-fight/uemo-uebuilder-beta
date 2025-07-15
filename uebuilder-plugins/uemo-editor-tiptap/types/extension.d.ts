@@ -17,6 +17,12 @@ import type { LottieAttrs } from "../packages/extension-lottie/src";
 import type { GridGroupAttrs } from "../packages/extension-grid/src";
 import type { GridItemAttrs } from "../packages/extension-grid/src";
 import type { DividerBlockAttrs } from "../packages/extension-divider-block/src";
+import type { HrRuleAttrs } from "../packages/extension-hr-rule/src";
+import type { ShareItemAttrs, ShareRowAttrs } from "../packages/extension-share/src";
+import type { TableAttrs, TableCellAttrs } from "../packages/extension-table/src";
+import type { EffectTextAttrs } from "../packages/extension-effect-text/src";
+import type { CounterNumberAttrs } from "../packages/extension-counter-number/src";
+import type { LoopTextAttrs } from "../packages/extension-loop-text/src";
 
 declare global {
     namespace UE_TIPTAP_EXTENSION {
@@ -93,6 +99,30 @@ declare global {
         };
         type DividerBlock = {
             attrs: DividerBlockAttrs;
+        };
+        type HrRule = {
+            attrs: HrRuleAttrs;
+        };
+        type ShareRow = {
+            attrs: ShareRowAttrs;
+        };
+        type ShareItem = {
+            attrs: ShareItemAttrs;
+        };
+        type Table = {
+            attrs: TableAttrs;
+        };
+        type TableCell = {
+            attrs: TableCellAttrs;
+        };
+        type EffectText = {
+            attrs: EffectTextAttrs;
+        };
+        type CounterNumber = {
+            attrs: CounterNumberAttrs;
+        };
+        type LoopText = {
+            attrs: LoopTextAttrs;
         };
     }
 }

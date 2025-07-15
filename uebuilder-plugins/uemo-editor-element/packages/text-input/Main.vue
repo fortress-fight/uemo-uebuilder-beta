@@ -1,7 +1,7 @@
 <!--
  * @Description: 文本输入框
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 01:13:13
+ * @LastEditTime: 2025-07-08 01:35:32
 -->
 <template>
     <div
@@ -9,6 +9,7 @@
         v-ue-el-label="labelParam"
         :class="$style['input-box']"
         :data-padding-size="paddingSize"
+        :data-type="type"
         :data-disable="disable"
         :data-has-slot="hasSlotComponent"
         :data-theme="theme"
@@ -67,7 +68,11 @@ import type { UeElTextInputBaseProps } from "./index";
 defineOptions({ name: "UeElTextInput" });
 
 const instance = getCurrentInstance();
-const prop = withDefaults(defineProps<UeElTextInputBaseProps>(), { type: "text", singleLine: true });
+const prop = withDefaults(defineProps<UeElTextInputBaseProps>(), {
+    type: "text",
+    singleLine: true,
+    useBlurConfirm: true,
+});
 const emit = defineEmits<{
     keydown: [ev: KeyboardEvent];
     blur: [ev: FocusEvent];
@@ -116,17 +121,11 @@ function createSelection(ev?: MouseEvent) {
  * @description: 失焦事件
  */
 function inputBlurEvent(ev: FocusEvent) {
+    if (!prop.useBlurConfirm) return;
+
     window.getSelection()?.removeAllRanges();
     emit("blur", ev);
     confirm();
-
-    // NOTE: 当前验证没有通过时，手动更新输入框内容
-    requestAnimationFrame(() => {
-        const inputEl = inputDom.value;
-        if (inputEl && inputEl.value != prop.value) {
-            inputEl.value = prop.value;
-        }
-    });
 }
 
 function clearInput() {
@@ -183,6 +182,14 @@ function confirm() {
 
     if (isValid.value) {
         emit("confirm", processedValue);
+    } else {
+        // NOTE: 当前验证没有通过时，手动更新输入框内容
+        requestAnimationFrame(() => {
+            const inputEl = inputDom.value;
+            if (inputEl && inputEl.value != prop.value) {
+                inputEl.value = prop.value;
+            }
+        });
     }
 }
 
@@ -238,6 +245,7 @@ defineExpose({
 
         opacity: 0.5;
     }
+    &[data-type="textarea"],
     &[data-is-empty="true"],
     &:hover {
         --text-border-color: #{color(var(--ue-border-color))};
@@ -248,7 +256,7 @@ defineExpose({
 }
 .text-input {
     font-size: 12px;
-    line-height: 26px;
+    line-height: em(26px, 12px);
 
     width: auto;
     min-width: 0;
@@ -259,7 +267,8 @@ defineExpose({
     color: color(var(--ue-font-color--deeper));
     border-width: 0;
     &[type="textarea"] {
-        //
+        height: 6em;
+        height: 5lh;
     }
 }
 .search-btn--submit {

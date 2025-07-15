@@ -1,5 +1,10 @@
 # @stone/uemo-editor-tiptap
 
+## Tiptap 使用记录
+
+1.  contenteditable 属性
+    当 contenteditable 属性为 true 时，点击其内部，将不会聚焦在当前的 Node 上，而是聚焦其内部
+
 ## Tiptap 使用方法记录
 
 1.  获取 mark 所在选区
@@ -199,7 +204,7 @@
         const domStartNode = range.startContainer;
         const domEndNode = range.endContainer;
 
-        console.log('DOM 选区范围：', domStartNode, domEndNode);
+        console.log("DOM 选区范围：", domStartNode, domEndNode);
     }
     ```
 
@@ -213,4 +218,151 @@
     const { from, to } = state.selection;
 
     posToDOMRect(view, from, to);
+    ```
+
+17. 获取光标点击位置的 Node 信息
+
+
+    ```ts
+    {
+        addProseMirrorPlugins() {
+            const plugins: Plugin[] = [
+                new Plugin({
+                    key: new PluginKey("handleGridGroupEvent"),
+                    props: {
+                        // 修复当选中 Node 时，点击 gridItem ，gridItem 无法聚焦的问题
+                        handleClick(view, pos, event) {
+                            const dom = event.target;
+                            if (!(dom instanceof HTMLElement)) return;
+                            const clickInGridItemInner = dom.classList.contains($pageStyle["grid-item--inner"]);
+                            const emptyP = dom.classList.contains($pageStyle["is-empty"]);
+                            if (!clickInGridItemInner && !emptyP) return;
+
+                            const coords = view.posAtCoords({
+                                left: event.clientX,
+                                top: event.clientY,
+                            });
+
+                            if (!coords) return;
+
+                            const $pos = view.state.doc.resolve(coords.pos);
+                            const $posNode = $pos.node($pos.depth);
+                            const $targetPos = view.state.doc.resolve($posNode.lastChild?.resolve(0).pos || 0);
+                            if (!$targetPos) return false;
+                            const newSelection = TextSelection.create(view.state.doc, pos);
+                            const { state } = view;
+                            const { tr } = state;
+                            view.dispatch(tr.setSelection(newSelection));
+                            return true;
+                        },
+                    },
+                }),
+            ];
+        },
+    };
+    ```
+
+    ```ts
+     addProseMirrorPlugins() {
+        return [
+            new Plugin({
+                key: new PluginKey("cursorControl"),
+                props: {
+                    handleDOMEvents: {
+                        click: (view, event) => {
+                            // 执行 Ctrl + 左键点击的操作
+                            if ((event.ctrlKey || event.metaKey) && event.button === 0) {
+                                // 获取鼠标点击的位置
+                                const { clientX, clientY } = event;
+
+                                // 根据鼠标位置获取对应的文档位置
+                                const coords = view.posAtCoords({
+                                    left: clientX,
+                                    top: clientY,
+                                });
+
+                                if (!coords) return;
+
+                                const { state } = view;
+                                const { tr, doc } = state;
+                                const $pos = doc.resolve(coords.pos);
+                                const $posNode = $pos.node($pos.depth);
+
+                                const newSelection = TextSelection.create(doc, coords.pos);
+                                if ($posNode.type.name === "paragraph") {
+                                    event.stopPropagation();
+                                    event.preventDefault();
+                                    view.dispatch(tr.setSelection(newSelection));
+                                }
+                                return;
+                            }
+                        },
+                    },
+                },
+            }),
+        ];
+    },
+    ```
+
+18. 如何获得 $pos 的父级 Node 的 pos
+
+
+    $pos.depth：当前所在层级深度（例如 2 表示 doc → paragraph → text）。
+    $pos.before(n)：返回第 n 层级节点在文档中的 起始位置（包含 tag、start 位置）。
+    $pos.before($pos.depth) 即当前 Node 的父节点的起始位置。
+    $pos.after($pos.depth) 则是当前 Node 的父节点的结束位置。
+
+    ```ts
+    const parentDepth = $pos.depth - 1;
+    const parentPos = $pos.before(parentDepth + 1);
+    ```
+
+    ```ts
+    const $pos = doc.resolve(targetPos);
+    const parentNode = $pos.node($pos.depth - 1);
+    const parentPos = $pos.before($pos.depth);
+    ```
+
+19. 判断指定元素是否可以插入目标元素
+
+
+    ```ts
+    const targetPosInfo = getTargetPositionInfo(editor);
+
+    if (!targetPosInfo) return false;
+
+    const { schema, doc } = state;
+
+    const rawTargetPos = pos === "before" ? targetPosInfo.start : targetPosInfo.end;
+    const $pos = doc.resolve(rawTargetPos);
+    const paragraph = schema.nodes.paragraph.create();
+
+    let insertPos = rawTargetPos;
+    let foundValid = false;
+
+    // 从当前 depth 向上查找可以插入 paragraph 的父节点
+    for (let depth = $pos.depth; depth >= 0; depth--) {
+        const parent = $pos.node(depth);
+        const canInsert = parent.type.validContent(Fragment.from(paragraph));
+
+        if (canInsert) {
+            // 找到合法插入点，计算插入位置
+            insertPos = pos === "before" ? $pos.before(depth + 1) : $pos.after(depth + 1);
+            foundValid = true;
+            break;
+        }
+    }
+    if (foundValid) {
+        commands.focus();
+        commands.insertContentAt(insertPos, { type: "paragraph" });
+    }
+
+    return true;
+    ```
+
+20. 根据位置找到 DOM
+
+
+    ```ts
+    const fromDom = editor.view.nodeDOM(from) as HTMLElement;
     ```

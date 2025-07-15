@@ -1,7 +1,7 @@
 <!--
  * @Description: 编辑面板主组件
  * @Author: F-Stone
- * @LastEditTime: 2025-06-30 02:37:31
+ * @LastEditTime: 2025-07-10 18:09:58
 -->
 <template>
     <UeElPopPanel v-model:open="openRef" v-bind="popPanelParams" :id="popId" @onHide="onHide">
@@ -9,6 +9,7 @@
             v-if="checkValueType('link', typeRef, valueRef)"
             ref="linkPanel"
             :value="valueRef"
+            :device="deviceRef"
             @closePopPanel="openRef = false"
             @update:value="updateLinkValue"
             @cancel="handleCancel"
@@ -19,6 +20,7 @@
             v-bind="{ ...$attrs, ...injectPropsRef }"
             :is="componentName"
             :value="valueRef"
+            :device="deviceRef"
             @closePopPanel="closePopPanel"
             @update:value="updateValue"
             @fire="triggerCommand"
@@ -44,6 +46,13 @@ import TiptapSpline from "@stone/uemo-editor-panel/packages/tiptap-spline/Main.v
 import TiptapLottie from "@stone/uemo-editor-panel/packages/tiptap-lottie/Main.vue";
 import TiptapGridGroup from "@stone/uemo-editor-panel/packages/tiptap-grid-group/Main.vue";
 import TiptapGridItem from "@stone/uemo-editor-panel/packages/tiptap-grid-item/Main.vue";
+import TiptapDividerBlock from "@stone/uemo-editor-panel/packages/tiptap-divider-block/Main.vue";
+import TiptapHrRule from "@stone/uemo-editor-panel/packages/tiptap-hr-rule/Main.vue";
+import TiptapShareItem from "@stone/uemo-editor-panel/packages/tiptap-share-item/Main.vue";
+import TiptapTable from "@stone/uemo-editor-panel/packages/tiptap-table/Main.vue";
+import TiptapEffectText from "@stone/uemo-editor-panel/packages/tiptap-effect-text/Main.vue";
+import TiptapCounterNumber from "@stone/uemo-editor-panel/packages/tiptap-counter-number/Main.vue";
+import TiptapLoopText from "@stone/uemo-editor-panel/packages/tiptap-loop-text/Main.vue";
 
 import { usePopPanelParam } from "./utils/mixin-pop-panel";
 import FontSizePanel from "./sub-component/FontSizePanel.vue";
@@ -54,6 +63,8 @@ import LineHeightPanel from "./sub-component/LineHeightPanel.vue";
 import LetterSpacingPanel from "./sub-component/LetterSpacingPanel.vue";
 import EditorAIPanel from "./sub-component/EditorAIPanel.vue";
 import MoreOperPanel from "./sub-component/MoreOperPanel.vue";
+import TableScale from "./sub-component/TableScale.vue";
+import TableAlign from "./sub-component/TableAlignPanel.vue";
 
 type EditorPanelAttrsMap = UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"];
 
@@ -78,6 +89,15 @@ defineOptions({
         TiptapLottie,
         TiptapGridGroup,
         TiptapGridItem,
+        TiptapDividerBlock,
+        TiptapHrRule,
+        TiptapShareItem,
+        TiptapTable,
+        TableScale,
+        TableAlign,
+        TiptapEffectText,
+        TiptapCounterNumber,
+        TiptapLoopText,
     },
 });
 
@@ -89,6 +109,7 @@ const _props = withDefaults(defineProps<UeTiptapEditorPanelBaseProps>(), {});
  */
 const typeRef = ref<keyof EditorPanelAttrsMap>();
 const openRef = ref<boolean>(false);
+const deviceRef = ref<UE_TIPTAP_UNIT.Device>();
 const valueRef = ref<EditorPanelAttrsMap[T]>();
 const injectPropsRef = ref<Record<string, any>>({});
 const rectRef = ref<UE_TIPTAP_UNIT.PositionRect>();
@@ -130,6 +151,16 @@ const componentMap: Record<keyof EditorPanelAttrsMap, string> = {
     lottie: "TiptapLottie",
     gridGroup: "TiptapGridGroup",
     gridItem: "TiptapGridItem",
+    dividerBlock: "TiptapDividerBlock",
+    hrRule: "TiptapHrRule",
+    shareRow: "TiptapShareItem",
+    shareItem: "TiptapShareItem",
+    table: "TiptapTable",
+    tableScale: "TableScale",
+    tableAlign: "TableAlign",
+    effectText: "TiptapEffectText",
+    counterNumber: "TiptapCounterNumber",
+    loopText: "TiptapLoopText",
 };
 
 /**
@@ -220,29 +251,31 @@ const openAttrEditorPanel: UE_TIPTAP_EXTENSION.EditorPanel<T>["openEditorPanelHa
     valueRef.value = attr;
     openRef.value = true;
     rectRef.value = param.rect;
+    deviceRef.value = param.device;
     if (param.props) {
         injectPropsRef.value = param.props;
     }
 
-    const delayFocus = _debounce(
-        () => {
-            const activeElement = document.activeElement;
-            if (activeElement && activeElement.tagName === "INPUT") {
-                return;
-            }
+    // NOTE 部分场景下 编辑器聚焦会触发浮动菜单失焦，导致气泡编辑器无法正常使用
+    // const delayFocus = _debounce(
+    //     () => {
+    //         const activeElement = document.activeElement;
+    //         if (activeElement && activeElement.tagName === "INPUT") {
+    //             return;
+    //         }
 
-            param.focus?.();
-        },
-        1000,
-        { leading: false }
-    );
+    //         param.focus?.();
+    //     },
+    //     1000,
+    //     { leading: false }
+    // );
 
     // 设置事件监听
     eventBus.on("update", (value) => {
         valueRef.value = value;
         param.updateAttrs(value);
 
-        delayFocus();
+        // delayFocus();
     });
 
     eventBus.on("fire", (data) => {

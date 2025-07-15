@@ -1,7 +1,7 @@
 <!--
  * @Description: 字重插件
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 19:20:30
+ * @LastEditTime: 2025-07-09 17:14:44
 -->
 <template>
     <UeTiptapMenuButton ref="rootDom" type="textColor" :color="currentColor" @trigger="openColorPicker" />
@@ -9,6 +9,9 @@
 <script lang="ts" setup>
 import { getTextColorAttrs } from "../../extension-text-color/src";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
+import { isEffectTextNode, getEffectTextAttrs } from "../../extension-effect-text/utils/helper";
+import { isCounterNumberNode, getCounterNumberAttrs } from "../../extension-counter-number/utils/helper";
+import { isLoopTextNode, getLoopTextAttrs } from "../../extension-loop-text/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 
@@ -16,6 +19,18 @@ const rootDomRef = useTemplateRef("rootDom");
 
 const currentColor = computed(() => {
     if (!editor) return "";
+
+    if (isEffectTextNode(editor)) {
+        return getEffectTextAttrs(editor)?.textColor || "";
+    }
+
+    if (isCounterNumberNode(editor)) {
+        return getCounterNumberAttrs(editor)?.textColor || "";
+    }
+
+    if (isLoopTextNode(editor)) {
+        return getLoopTextAttrs(editor)?.textColor || "";
+    }
 
     return getTextColorAttrs(editor);
 });
@@ -29,7 +44,29 @@ function openColorPicker() {
         { color: currentColor.value || "" },
         {
             rect,
+            props: isEffectTextNode(editor) ? { type: "color" } : undefined,
             updateAttrs: ({ color }) => {
+                if (isEffectTextNode(editor)) {
+                    editor
+                        .chain()
+                        .updateEffectTextAttrs({ textColor: color || "" })
+                        .run();
+                }
+
+                if (isCounterNumberNode(editor)) {
+                    editor
+                        .chain()
+                        .updateCounterNumberAttrs({ textColor: color || "" })
+                        .run();
+                }
+
+                if (isLoopTextNode(editor)) {
+                    editor
+                        .chain()
+                        .updateLoopTextAttrs({ textColor: color || "" })
+                        .run();
+                }
+
                 if (color) {
                     editor.chain().setColor(color).run();
                 } else {

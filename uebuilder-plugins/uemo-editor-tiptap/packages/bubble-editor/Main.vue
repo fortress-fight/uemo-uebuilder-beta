@@ -1,7 +1,7 @@
 <!--
  * @Description: 气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 13:01:03
+ * @LastEditTime: 2025-07-10 18:12:32
 -->
 <template>
     <div :class="$style['bubble-editor']" v-bind="$attrs">
@@ -31,7 +31,7 @@ const { t } = useI18n();
 
 const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UeTiptapBubbleEditorBaseProps>(), {
-    device: "pc",
+    device: "desktop",
 });
 
 const emit = defineEmits<{
@@ -161,6 +161,7 @@ const createEditor = (): Editor | undefined => {
         injectCSS: true,
         content: props.content.replace(linkRegex, ""),
         extensions: createBubbleEditorExtension({
+            defaultDevice: props.device,
             showToast: (type: "success" | "error", message: string) => {
                 instance?.proxy?.$ueElToast[type](message);
             },

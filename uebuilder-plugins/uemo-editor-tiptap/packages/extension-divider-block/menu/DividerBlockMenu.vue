@@ -10,7 +10,7 @@
 import { isDividerBlockNode } from "../utils/helper";
 import { getEditorPanelExtensionStorage } from "../../extension-editor-panel/utils/helper";
 
-defineOptions({ name: "UeTiptapGridGroupMenu", inheritAttrs: false });
+defineOptions({ name: "UeTiptapDividerBlockMenu", inheritAttrs: false });
 
 const { t } = useI18n();
 
@@ -32,7 +32,6 @@ const shouldShow: UE_TIPTAP_COMPONENT.UeTiptapFloatingMenuProps["shouldShow"] = 
     const { selection } = state;
 
     const isDividerBlock = isDividerBlockNode(selection);
-
     const isEditing = getEditorPanelExtensionStorage(editor).lastEditorPanelType === "dividerBlock";
 
     return !isEditing && isDividerBlock && view.hasFocus();

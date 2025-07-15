@@ -1,13 +1,14 @@
 /*
  * @Description: 编辑器面板扩展模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-01 02:11:04
+ * @LastEditTime: 2025-07-10 18:08:16
  */
 
 export type EditorPanelParam<T extends keyof EditorPanelAttrsMap> = {
     popId?: string;
     rect: UE_TIPTAP_UNIT.PositionRect; // 面板位置信息
     props?: Record<string, any>; // 面板属性
+    device?: UE_TIPTAP_UNIT.Device; // 设备类型
 
     updateAttrs: (data: EditorPanelAttrsMap[T]) => void; // 设置属性数据
     fire?(type: string, param?: any): void; // 触发事件回调
@@ -47,6 +48,15 @@ export type EditorPanelAttrsMap = {
     gridGroup: UE_TIPTAP_EXTENSION.GridGroup["attrs"];
     gridItem: UE_TIPTAP_EXTENSION.GridItem["attrs"];
     dividerBlock: UE_TIPTAP_EXTENSION.DividerBlock["attrs"];
+    hrRule: UE_TIPTAP_EXTENSION.HrRule["attrs"];
+    shareRow: UE_TIPTAP_EXTENSION.ShareRow["attrs"];
+    shareItem: UE_TIPTAP_EXTENSION.ShareItem["attrs"];
+    table: UE_TIPTAP_EXTENSION.Table["attrs"];
+    tableScale: { rows: number; cols: number };
+    tableAlign: { align: "left" | "center" | "right" | "top" | "middle" | "bottom" };
+    effectText: UE_TIPTAP_EXTENSION.EffectText["attrs"];
+    counterNumber: UE_TIPTAP_EXTENSION.CounterNumber["attrs"];
+    loopText: UE_TIPTAP_EXTENSION.LoopText["attrs"];
     moreOper: null;
 };
 

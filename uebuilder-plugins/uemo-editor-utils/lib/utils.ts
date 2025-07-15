@@ -138,17 +138,18 @@ export function loadScript(dom: HTMLElement, param: { title: string; source: str
     });
 }
 /**
- * 将属性对象转换为CSS样式字符串
+ * 将属性对象转换为CSS样式字符串, 如果属性值与默认属性值相同, 则不添加到样式字符串中
  *
  * @export
  * @param {Record<string, string | undefined>} attr - 样式属性对象
+ * @param {Record<string, string>} defaultAttr - 默认样式属性对象
  * @returns {string} 转换后的CSS样式字符串
  */
-export function attrToStyle(attr: Record<string, string | undefined>): string {
+export function attrToStyle(attr: Record<string, string | undefined>, defaultAttr?: Record<string, any>): string {
     // 使用reduce代替forEach,减少中间变量
     return Object.entries(attr).reduce((styles, [key, value]) => {
         // 使用单个条件判断无效值
-        if (value && value !== "0") {
+        if (value && value !== "0" && !_isEqual(defaultAttr?.[key], value)) {
             return `${styles}${key}:${value};`;
         }
         return styles;
@@ -164,3 +165,59 @@ export function attrToStyle(attr: Record<string, string | undefined>): string {
 export function omitDefaultKey(obj: Record<string, any>, defaultObj: Record<string, any>) {
     return Object.fromEntries(Object.entries(obj).filter(([key, value]) => !_isEqual(value, defaultObj[key])));
 }
+
+/**
+ * 移除对象中的空值
+ * @param obj 对象
+ * @returns 移除空值后的对象
+ */
+export function removeEmptyValue(obj: Record<string, any>) {
+    return Object.fromEntries(
+        Object.entries(obj).filter(([_key, value]) => value !== undefined && value !== "" && value !== null)
+    );
+}
+
+/**
+ * 判断颜色是否为浅色
+ * @param color 颜色
+ * @returns 是否为浅色
+ */
+export const isLightColor = (color: string): boolean => {
+    if (typeof color !== "string") return false;
+
+    if (color.includes('#')) {
+        // 去掉颜色代码中的 #
+        const hex = color.replace("#", "");
+
+        // 将颜色代码分成 RGB 三个部分
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+
+        // 计算亮度
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+        // 亮度大于 128 认为是浅色，否则是深色
+        return brightness > 128;
+    }
+
+    if (color.includes('rgb')) {
+        // 提取 RGBA 值
+        const rgbaValues = /rgba?\((\d+),\s*(\d+),\s*(\d+),?\s*(\d*\.?\d+)?\)/.exec(color);
+        if (!rgbaValues) {
+            throw new Error("Invalid RGBA color format");
+        }
+
+        const r = parseInt(rgbaValues[1], 10);
+        const g = parseInt(rgbaValues[2], 10);
+        const b = parseInt(rgbaValues[3], 10);
+
+        // 计算亮度
+        const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        // 判断亮度
+        return brightness > 128;
+    }
+
+    return false;
+};

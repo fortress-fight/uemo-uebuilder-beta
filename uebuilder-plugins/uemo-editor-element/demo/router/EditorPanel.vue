@@ -17,6 +17,7 @@
 import TestConfirmPanel from "~/demo/components/TestConfirmPanel.vue";
 import TestVideoPanel from "~/demo/components/TestVideoPanel.vue";
 import TestCalenderPicker from "~/demo/components/TestCalenderPicker.vue";
+import TestTableSizePicker from "~/demo/components/TestTableSizePicker.vue";
 import TestContextmenu from "~/demo/components/TestContextmenu.vue";
 import TestTabCard from "~/demo/components/TestTabCard.vue";
 import TestEditorPanel from "~/demo/components/TestEditorPanel.vue";
@@ -25,11 +26,12 @@ import TestLibraryPanel from "~/demo/components/TestLibraryPanel.vue";
 import TestEmptyPanel from "~/demo/components/TestEmptyPanel.vue";
 import TestMiniEditorPanel from "~/demo/components/TestMiniEditorPanel.vue";
 import TestBrowserMockupPanel from "~/demo/components/TestBrowserMockupPanel.vue";
-import TestEditorPanelTiptapGridGroup from "~/demo/components/TestEditorPanelTiptapGridGroup.vue";
-import TestEditorPanelTiptapGridItem from "~/demo/components/TestEditorPanelTiptapGridItem.vue";
+import TestScrollEffectPreviewPanel from "~/demo/components/TestScrollEffectPreviewPanel.vue";
+import TestCounterNumberPreviewPanel from "~/demo/components/TestCounterNumberPreviewPanel.vue";
 
 const testComponents = [
     TestCalenderPicker,
+    TestTableSizePicker,
     TestConfirmPanel,
     TestVideoPanel,
     TestContextmenu,
@@ -39,11 +41,9 @@ const testComponents = [
     TestLibraryPanel,
     TestEmptyPanel,
     TestBrowserMockupPanel,
-    TestEditorPanelTiptapGridGroup,
-    TestEditorPanelTiptapGridItem,
 ];
 
-const rowTestComponents = [TestMiniEditorPanel];
+const rowTestComponents = [TestMiniEditorPanel, TestScrollEffectPreviewPanel, TestCounterNumberPreviewPanel];
 </script>
 <style lang="scss" module>
 .page-head {

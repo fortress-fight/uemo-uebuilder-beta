@@ -16,6 +16,13 @@
     <UeTiptapGridGroupMenu />
     <UeTiptapGridItemMenu />
     <UeTiptapDividerBlockMenu />
+    <UeTiptapHrRuleMenu />
+    <UeTiptapShareRowMenu />
+    <UeTiptapShareItemMenu />
+    <UeTiptapTableMenu />
+    <UeTiptapEffectTextMenu />
+    <UeTiptapCounterNumberMenu />
+    <UeTiptapLoopTextMenu />
 </template>
 <script lang="ts" setup>
 import type { Editor } from "@tiptap/vue-3";
@@ -35,6 +42,13 @@ import UeTiptapLottieMenu from "../../extension-lottie/menu/LottieMenu.vue";
 import UeTiptapGridGroupMenu from "../../extension-grid/menu/GridGroupMenu.vue";
 import UeTiptapGridItemMenu from "../../extension-grid/menu/GridItemMenu.vue";
 import UeTiptapDividerBlockMenu from "../../extension-divider-block/menu/DividerBlockMenu.vue";
+import UeTiptapHrRuleMenu from "../../extension-hr-rule/menu/HrRuleMenu.vue";
+import UeTiptapShareRowMenu from "../../extension-share/menu/ShareRowMenu.vue";
+import UeTiptapShareItemMenu from "../../extension-share/menu/ShareItemMenu.vue";
+import UeTiptapTableMenu from "../../extension-table/menu/TableMenu.vue";
+import UeTiptapEffectTextMenu from "../../extension-effect-text/menu/EffectTextMenu.vue";
+import UeTiptapCounterNumberMenu from "../../extension-counter-number/menu/CounterNumberMenu.vue";
+import UeTiptapLoopTextMenu from "../../extension-loop-text/menu/LoopTextMenu.vue";
 
 const props = defineProps<{ editor: Editor }>();
 

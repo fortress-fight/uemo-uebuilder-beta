@@ -1,0 +1,46 @@
+.page-editor {
+    .editor-hr {
+        --hr-rule-border-style: solid;
+        --hr-rule-border-color: rgb(211 211 211 / 0.4);
+        position: relative;
+
+        min-height: 10px;
+        hr {
+            position: absolute;
+            top: 50%;
+
+            width: 100%;
+        }
+        &::after {
+            display: block;
+
+            padding-top: var(--hr-rule-size, 40px);
+
+            content: "";
+        }
+    }
+    .editor-hr--inner {
+        @include ab-cover;
+        display: flex;
+
+        align-items: center;
+        &::after {
+            display: block;
+
+            width: 100%;
+
+            content: "";
+
+            border-top: 1px var(--hr-rule-border-style) var(--hr-rule-border-color);
+        }
+    }
+}
+@include media-breakpoint-down(md) {
+    .page-editor {
+        .editor-hr {
+            &::after {
+                padding-top: var(--hr-rule-md-size, 40px);
+            }
+        }
+    }
+}

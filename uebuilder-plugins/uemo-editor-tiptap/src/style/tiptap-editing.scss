@@ -12,6 +12,10 @@ $project-name: app-editor;
         cursor: text;
 
         outline: none;
+        &:global(.resize-cursor) {
+            cursor: ew-resize;
+            cursor: col-resize;
+        }
         &.is-editor-empty {
             opacity: 1;
         }
@@ -66,7 +70,13 @@ $project-name: app-editor;
         .spline-wrapper,
         .lottie-wrapper,
         .img_wrapper,
-        .editor-divide-block {
+        .editor-hr,
+        .editor-divide-block,
+        .share-row,
+        .effect-text-block,
+        .share,
+        .loop-text-block,
+        .counter-number-block {
             cursor: pointer;
             &.has-focus {
                 /* stylelint-disable-next-line selector-class-pattern */
@@ -74,6 +84,36 @@ $project-name: app-editor;
                     z-index: 50;
 
                     outline: 2px solid var(--theme-layout-component);
+                }
+            }
+        }
+        .loop-text-block,
+        .counter-number-block {
+            &[data-editing="true"] {
+                /* stylelint-disable-next-line selector-class-pattern */
+                &:global(.ProseMirror-selectednode) {
+                    z-index: 50;
+
+                    outline: 2px solid var(--theme-layout-component);
+                }
+                .counter-number-group {
+                    outline: 1px dashed var(--theme-layout-component) !important;
+                }
+            }
+        }
+        .share-row {
+            &[data-focus-in="true"] {
+                outline: 1px dashed var(--theme-layout-component) !important;
+            }
+        }
+        .table-scroll-box[data-editing="true"],
+        .table-scroll-box[data-focus-in="true"] {
+            table.table-hide-border {
+                th,
+                td {
+                    border-width: 1px;
+                    border-style: dashed;
+                    border-color: var(--theme-layout-component);
                 }
             }
         }
@@ -115,6 +155,7 @@ $project-name: app-editor;
                 border: 1px dashed var(--u-border-color);
             }
         }
+        .editor-hr,
         .editor-divide-block {
             cursor: pointer;
             &:hover,

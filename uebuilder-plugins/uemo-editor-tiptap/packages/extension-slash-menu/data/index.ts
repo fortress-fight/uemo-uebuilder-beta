@@ -27,7 +27,7 @@ export const slashMenuList: TYPE_SLASH_MENU[] = [
         title: i18n.global.t("UNIT_OTHER"),
         key: "otherBlock",
         list: [
-            { title: "Social Contact", name: "insertShare" },
+            { title: "Social Contact", name: "insertShareItem" },
             { title: "LoopText", name: "insertLoopText" },
             { title: "EffectText", name: "insertEffectText" },
             { title: "counterNumber", name: "insertCounterNumber" },

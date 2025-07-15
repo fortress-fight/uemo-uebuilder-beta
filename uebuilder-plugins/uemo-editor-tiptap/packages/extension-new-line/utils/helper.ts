@@ -3,16 +3,16 @@ import type { Editor } from "@tiptap/core";
 import { isInTable } from "@tiptap/pm/tables";
 import { isNodeSelection } from "@tiptap/core";
 
-import { getTableNode } from "../../../utils/tiptap-utils";
+import { getTableNode } from "../../extension-table/utils/helper";
 import { isInButtonRow, getButtonRow } from "../../extension-button/utils/helper";
 
-/**
- * NOTE 【已废弃】在指定位置插入新行
- * @deprecated 使用 `insertNewLine` 命令代替
- * @param editor - 编辑器实例
- * @param pos - 插入位置，"before" 表示在目标前插入，"after" 表示在目标后插入
- * @returns 是否插入成功
- */
+// /**
+//  * NOTE 【已废弃】在指定位置插入新行
+//  * @deprecated 使用 `insertNewLine` 命令代替
+//  * @param editor - 编辑器实例
+//  * @param pos - 插入位置，"before" 表示在目标前插入，"after" 表示在目标后插入
+//  * @returns 是否插入成功
+//  */
 // export function insertNewLine(editor: Editor, pos: "before" | "after"): boolean {
 //     const targetPosInfo = getTargetPositionInfo(editor);
 

@@ -1,11 +1,11 @@
 <!--
  * @Description: 分隔块的编辑面板
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 00:58:54
+ * @LastEditTime: 2025-07-02 02:17:52
 -->
 <template>
     <UeElEditorPanel :title="t('UNIT_DIVIDER_BLOCK')">
-        <UeElTabCard v-bind="tabCardProps" :hide-head="true">
+        <UeElTabCard v-bind="tabCardProps">
             <template #Layout>
                 <LayoutPanel v-model:value="valueModel" />
             </template>

@@ -1,7 +1,7 @@
 <!--
  * @Description: 浮动编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 16:46:33
+ * @LastEditTime: 2025-07-04 14:03:19
 -->
 <template>
     <UeTiptapFloatingMenu
@@ -23,11 +23,14 @@
 import type { UeTiptapEditorFloatMenuBaseProps } from "./index";
 import type { VirtualElement } from "@floating-ui/dom";
 
+import { CellSelection } from "@tiptap/pm/tables";
+
 import { clearMenuItems } from "../menu-bar/helper";
 import { FLOAT_MENU_BUTTON_MAP } from "./utils/helper";
 import { hasParentNode } from "../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../utils/mixin-tiptap-editor";
 import { getClosestGridItem } from "../extension-grid/utils/helper";
+import { getTableCellNodeRect, getTableNodeRect } from "../extension-table/utils/helper";
 
 defineOptions({ name: "UeTiptapEditorFloatMenu" });
 
@@ -57,8 +60,37 @@ const floatingProps = computed<{ refEl: VirtualElement } | undefined>(() => {
             },
         };
     }
+    if (props.pluginKey === "tableMenu") {
+        if (!editor) return undefined;
 
-    return undefined;
+        const { selection } = editor.state;
+        if (!(selection instanceof CellSelection)) {
+            return {
+                refEl: {
+                    getBoundingClientRect: () => {
+                        const rect = getTableNodeRect(editor);
+                        if (!rect) {
+                            return window.document.body.getBoundingClientRect();
+                        }
+                        return rect;
+                    },
+                },
+            };
+        }
+
+        return {
+            refEl: {
+                getBoundingClientRect: () => {
+                    const rect = getTableCellNodeRect(editor);
+                    if (!rect) {
+                        return window.document.body.getBoundingClientRect();
+                    }
+
+                    return rect;
+                },
+            },
+        };
+    }
 });
 
 const useMenuItems = computed(() => {

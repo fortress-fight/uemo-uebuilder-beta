@@ -3,6 +3,7 @@
         v-model:value="useValue"
         v-model:opacity="useOpacity"
         :independent-opacity-control="true"
+        class="w-fit"
         type="mixin"
     />
 </template>

@@ -154,7 +154,7 @@
     "i18n-ally.enabledFrameworks": ["vue"],
     "i18n-ally.theme.annotationMissing": "#acb2be",
 
-    "vue.server.hybridMode": false,
+    // "vue.server.hybridMode": true,
 
     "eslint.workingDirectories": [{ "pattern": "./uebuilder-plugins/*/" }]
 

@@ -87,6 +87,41 @@ export const openAttrEditorPanel: EditorPanelHandler<keyof EditorPanelAttrsMap, 
                 param.updateAttrs(JSON.parse(newValue));
             }
             break;
+        case "dividerBlock":
+            {
+                const newValue = prompt("请输入 dividerBlock 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "hrRule":
+            {
+                const newValue = prompt("请输入 hrRule 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "shareItem":
+            {
+                const newValue = prompt("请输入 shareItem 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "effectText":
+            {
+                const newValue = prompt("请输入 effectText 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
+        case "counterNumber":
+            {
+                const newValue = prompt("请输入 counterNumber 的属性", JSON.stringify(attr));
+                if (!newValue) return;
+                param.updateAttrs(JSON.parse(newValue));
+            }
+            break;
         default:
             break;
     }

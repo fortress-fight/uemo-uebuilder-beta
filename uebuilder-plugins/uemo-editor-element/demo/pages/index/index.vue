@@ -15,7 +15,6 @@ const linkList = ref([
     { path: "/editor-attr", text: "属性组件" },
     { path: "/editor-panel", text: "面板组件" },
     { path: "/editor-resource-panel", text: "资源组件" },
-    { path: "/editor-attr-editor-panel", text: "属性面板组件" },
 ]);
 
 const { locale } = useI18n();

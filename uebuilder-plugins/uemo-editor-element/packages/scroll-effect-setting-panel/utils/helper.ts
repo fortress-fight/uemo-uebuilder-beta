@@ -4,6 +4,9 @@ export function getEffectName(type: string) {
     const { t } = i18n.global;
 
     switch (type) {
+        case "text-effect":
+            return t("SCROLL_TEXT_EFFECT_TITLE");
+
         case "opacity":
             return t("SCROLL_EFFECT_SETTING_OPTION_TITLE");
 
@@ -71,4 +74,10 @@ export const defaultScrollOptions = {
     },
     parallax: { speed: "-100" },
     "image-parallax": { mode: "image" },
+    "text-effect": {
+        effectType: "effect-1",
+        triggerMode: "enter-leaver",
+        startPos: "top bottom",
+        endPos: "bottom center",
+    },
 } as const;

@@ -177,4 +177,115 @@ export const testTextContent = {
     divideBlockData: `
         <div class="editor-divide-block-a1327" style="--divide-block-size: 10px; --divide-block-md-size: 50px"></div>
     `,
+    hrRuleData: `
+        <div
+            class="editor-hr-dbe3e"
+            style="--hr-rule-size:40px;--hr-rule-md-size:40px;--hr-rule-border-color:rgba(211, 211, 211, 0.4);--hr-rule-border-style:solid;"
+        >
+            <div class="editor-hr--inner-cfa07"></div>
+        </div>
+    `,
+    shareRowData: `
+        <div style="text-align:left;">
+            <div class="share-list-b7339">
+                <div class="share-bd08e" target="_target">
+                    <div class="share-icon-a12c0"><i class="ue-share-weixin"></i></div>
+                </div>
+            </div>
+        </div>
+    `,
+    tableData: `
+        <div class="table-scroll-box-f56c6">
+            <table style="--table-border-color: #ced4da; --table-min-width: 100px; --table-drag-min-width: 133px">
+                <colgroup>
+                    <col style="min-width: 20px" />
+                    <col style="width: 93px" />
+                    <col style="min-width: 20px" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                        <td colspan="1" rowspan="1" colwidth="93"><p></p></td>
+                        <td colspan="1" rowspan="1"><p></p></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `,
+    effectTextData: `
+        <div
+            class="effect-text-block-b8c8d text-60-d6566"
+            data-align="left"
+            data-scroll-effect='{"type":"effect-1","options":{"triggerMode":"enter"}}'
+            style="--effect-text-text-color:#333;font-size:60px;"
+        >
+            <div class="effect-text-inner-cea5f">请输入文字</div>
+        </div>
+    `,
+    counterNumberData: `
+        <div
+            class="counter-number-block-f6645 text-60-d6566"
+            data-theme="NO02"
+            data-effect="normal"
+            data-duration="2.4"
+            data-align="center"
+            data-fill="false"
+            style="--counter-number-gap:1em;--counter-number-proxy-zoom:0.3;--counter-number-proxy-translate:-1em;--counter-number-proxy-pos:flex-end;color:#333;font-size:60px;"
+        >
+            <div class="counter-number-inner-f4072">
+                <div class="counter-number-group-d7a5f">
+                    <div class="counter-number-item-de460" data-id="i-1" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                    <div class="counter-number-item-de460" data-id="i-2" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                    <div class="counter-number-item-de460" data-id="i-3" data-nums="[100,200]">
+                        <div class="counter-number-item-info-ef2fd">
+                            <div class="counter-number-item-text-fb663">200</div>
+                            <div class="counter-number-item-proxy-c45b6">个</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
+    loopTextData: `<div
+        class="loop-text-block-f22ba text-60-d6566"
+        style="--loop-text-text-color:#333;font-size:60px;"
+        data-theme="NO01"
+        data-effect="normal"
+        data-delay="2.4"
+        data-align="left"
+    >
+        <div class="loop-text-inner-e3726">
+            <div class="loop-text-group-f99af">
+                <div class="loop-text-item-ac301" data-id="i-1" data-active="">
+                    <span class="loop-text-item-text-e02ac">网页设计</span>
+                </div>
+                <div class="loop-text-item-ac301" data-id="i-2">
+                    <span class="loop-text-item-text-e02ac">网页制作</span>
+                </div>
+                <div class="loop-text-item-ac301" data-id="i-3">
+                    <span class="loop-text-item-text-e02ac">网页发布</span>
+                </div>
+            </div>
+        </div>
+    </div>`,
 };

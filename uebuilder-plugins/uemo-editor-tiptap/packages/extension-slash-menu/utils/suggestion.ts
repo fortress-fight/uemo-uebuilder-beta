@@ -5,7 +5,7 @@ import type { TYPE_SLASH_MENU } from "../data";
 import { VueRenderer } from "@tiptap/vue-3";
 
 import { slashMenuList } from "../data";
-import { isInTable } from "../../../utils/tiptap-utils";
+import { isInTable } from "../../extension-table/utils/helper";
 import { isInGridGroup } from "../../extension-grid/utils/helper";
 
 import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
@@ -20,7 +20,7 @@ import SlashMenuPanel from "../panel/SlashMenuPanel.vue";
 function filterMenuItem(editor: Editor, item: { title: string; name: string }): boolean {
     const { state } = editor.view;
 
-    if (isInTable(state) && ["inertTable", "insertGridGroup"].includes(item.name)) {
+    if (isInTable(editor) && ["inertTable", "insertGridGroup"].includes(item.name)) {
         return false;
     }
 
@@ -109,6 +109,24 @@ export function getSlashMenuSuggestion(baseMenu: TYPE_SLASH_MENU[] = slashMenuLi
                     break;
                 case "insertDividerBlock":
                     chain.insertDivideBlock({ size: "10px" });
+                    break;
+                case "insertHrRule":
+                    chain.insertHrRule({});
+                    break;
+                case "insertShareItem":
+                    chain.insertShareItem({});
+                    break;
+                case "inertTable":
+                    chain.insetNodePlaceholder("TablePlaceholder");
+                    break;
+                case "insertEffectText":
+                    chain.insertEffectText();
+                    break;
+                case "insertCounterNumber":
+                    chain.insertCounterNumber();
+                    break;
+                case "insertLoopText":
+                    chain.insertLoopText();
                     break;
 
                 default:

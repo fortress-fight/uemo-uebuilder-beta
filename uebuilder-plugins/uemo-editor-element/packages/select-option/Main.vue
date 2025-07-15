@@ -1,7 +1,7 @@
 <!--
  * @Description: 选项面板组件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 19:17:03
+ * @LastEditTime: 2025-07-05 16:40:17
  * @FileOverview: 提供可选择的选项列表，支持图标显示和主题切换
  * @Events: change - 选项改变时触发
  * @Props:
@@ -14,7 +14,7 @@
 <template>
     <div ref="rootDomRef" :class="$style['select-option']" :data-theme="theme">
         <div :class="$style['option-group']">
-            <div class="h-full" :class="$style['scroll-box']">
+            <div class="h-full" :class="$style['scroll-box']" ref="scrollBoxRef">
                 <div
                     v-for="(item, index) in list"
                     :key="item.value || index"
@@ -56,6 +56,7 @@ const emit = defineEmits<{
 
 // DOM 引用
 const rootDomRef = useTemplateRef("rootDomRef");
+const scrollBoxRef = useTemplateRef("scrollBoxRef");
 const optionDomsRef = useTemplateRef("optionDomsRef");
 
 // 注入弹窗位置处理器
@@ -92,6 +93,8 @@ function setDialogUpdatePosHandler(): void {
 
                     // 查找选中项或默认第一项
                     const activeOption = options.find((item) => item.dataset.select === "true") || options[0];
+
+                    activeOption.scrollIntoView({ behavior: "instant", block: "center" });
 
                     if (!activeOption) return param;
 

@@ -1,7 +1,7 @@
 /*
  * @Description: 弹窗面板混合
  * @Author: F-Stone
- * @LastEditTime: 2025-06-29 16:32:35
+ * @LastEditTime: 2025-07-09 18:41:39
  */
 
 export function usePopPanelParam(
@@ -44,6 +44,8 @@ export function usePopPanelParam(
             case "textAlign":
             case "lineHeight":
             case "editorAI":
+            case "tableScale":
+            case "tableAlign":
                 return {
                     draggable: false,
                     panel: {
@@ -53,6 +55,7 @@ export function usePopPanelParam(
                             options: {
                                 placement: "bottom",
                                 middleware: [
+                                    ["flip", { crossAxis: false }],
                                     ["offset", { mainAxis: 6 }],
                                     ["shift", { crossAxis: true, padding: 17 }],
                                 ],
@@ -109,6 +112,15 @@ export function usePopPanelParam(
             case "lottie":
             case "gridGroup":
             case "gridItem":
+            case "dividerBlock":
+            case "hrRule":
+            case "tableScale":
+            case "table":
+            case "shareRow":
+            case "shareItem":
+            case "effectText":
+            case "counterNumber":
+            case "loopText":
                 return {
                     draggable: true,
                     checkAllowClose: options.checkAllowClose,

@@ -9,6 +9,7 @@ import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { Extension, isNodeSelection, findParentNodeClosestToPos, posToDOMRect } from "@tiptap/core";
 
 import { openAttrEditorPanel } from "../utils/helper";
+import { getDeviceStorage } from "../../extension-device/helper";
 
 // 扩展 Tiptap 命令接口
 declare module "@tiptap/core" {
@@ -79,6 +80,13 @@ const HansEditorPanelNodes = [
     "lottie",
     "gridGroup",
     "gridItem",
+    "dividerBlock",
+    "hrRule",
+    "shareRow",
+    "shareItem",
+    "effectText",
+    "counterNumber",
+    "loopText",
 ];
 
 /**
@@ -171,6 +179,30 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                                     this.editor.chain().openLottieEditorPanel(domRect).run();
                                     return false;
 
+                                case "dividerBlock":
+                                    this.editor.chain().openDividerBlockEditorPanel(domRect).run();
+                                    return false;
+
+                                case "hrRule":
+                                    this.editor.chain().openHrRuleEditorPanel(domRect).run();
+                                    return false;
+
+                                case "shareItem":
+                                    this.editor.chain().openShareItemEditorPanel(domRect).run();
+                                    return false;
+
+                                case "effectText":
+                                    this.editor.chain().openEffectTextEditorPanel(domRect).run();
+                                    return false;
+
+                                case "counterNumber":
+                                    this.editor.chain().openCounterNumberEditorPanel(domRect).run();
+                                    return false;
+
+                                case "loopText":
+                                    this.editor.chain().openLoopTextEditorPanel(domRect).run();
+                                    return false;
+
                                 default:
                                     console.error(
                                         `${nodeName} 不支持打开属性编辑面板, 请检查是否在 HansEditorPanelNodes 中添加了该节点`
@@ -204,6 +236,7 @@ export const EditorPanelExtension = Extension.create<EditorPanelOptions, editorP
                     // 调用属性处理器
                     handler(type, attr, {
                         ...param,
+                        device: getDeviceStorage(editor)?.device,
                         focus: () => {
                             editor.commands.focus();
                             param.focus?.();

@@ -31,7 +31,7 @@ const viewClassName = computed(() => {
 });
 
 const isEditing = computed(() => {
-    return props.selected && getEditorPanelExtensionStorage(props.editor).lastEditorPanelType === "gridGroup";
+    return props.selected && getEditorPanelExtensionStorage(props.editor).lastEditorPanelType === "dividerBlock";
 });
 </script>
 <style lang="scss" module>

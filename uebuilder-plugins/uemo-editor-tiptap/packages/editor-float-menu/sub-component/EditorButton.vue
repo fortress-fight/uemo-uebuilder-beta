@@ -7,6 +7,7 @@ import { isNodeSelection } from "@tiptap/core";
 import { getSelectionRect, selectNode } from "../../../utils/tiptap-utils";
 import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
 import { getClosestGridItem } from "../../extension-grid/utils/helper";
+import { selectionIsTableNode, getTableNodeRect } from "../../extension-table/utils/helper";
 
 const { editor } = useInjectTiptapEditor();
 const props = defineProps<{ nodeName?: string }>();
@@ -35,6 +36,14 @@ function openBtnRowEditorPanel() {
                 return;
         }
     } else {
+        if (selectionIsTableNode(editor)) {
+            const rect = getTableNodeRect(editor);
+            if (!rect) return;
+
+            editor.chain().openTableEditorPanel(rect).run();
+            return;
+        }
+
         if (!isNodeSelection(state.selection)) return;
 
         rect = getSelectionRect(view, state.selection);
@@ -73,6 +82,24 @@ function openBtnRowEditorPanel() {
             break;
         case "gridItem":
             editor.chain().openGridItemEditorPanel(rect).run();
+            break;
+        case "dividerBlock":
+            editor.chain().openDividerBlockEditorPanel(rect).run();
+            break;
+        case "hrRule":
+            editor.chain().openHrRuleEditorPanel(rect).run();
+            break;
+        case "shareItem":
+            editor.chain().openShareItemEditorPanel(rect).run();
+            break;
+        case "effectText":
+            editor.chain().openEffectTextEditorPanel(rect).run();
+            break;
+        case "counterNumber":
+            editor.chain().openCounterNumberEditorPanel(rect).run();
+            break;
+        case "loopText":
+            editor.chain().openLoopTextEditorPanel(rect).run();
             break;
         default:
             return;

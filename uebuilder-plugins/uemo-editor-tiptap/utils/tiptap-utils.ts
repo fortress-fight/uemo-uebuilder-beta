@@ -3,7 +3,6 @@ import type { EditorView } from "@tiptap/pm/view";
 import type { Selection } from "@tiptap/pm/state";
 import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
 
-import { isInTable } from "@tiptap/pm/tables";
 import { TextSelection, NodeSelection } from "@tiptap/pm/state";
 import { isNodeSelection, posToDOMRect, isTextSelection } from "@tiptap/core";
 
@@ -26,36 +25,6 @@ export function hasParentNode(editor: Editor) {
         }
     }
     return false;
-}
-
-/**
- * 判断是否在表格中
- */
-export { isInTable };
-
-/**
- * @description 获取表格节点
- */
-export function getTableNode(selection: Selection) {
-    const $pos = selection.$anchor;
-    let tableNode: ProsemirrorNode | undefined = undefined;
-    let start;
-    let end;
-    for (let d = $pos.depth; d > 0; d--) {
-        const node = $pos.node(d);
-        if (node.type.spec.tableRole == "table") {
-            start = $pos.before(d);
-            end = $pos.after(d);
-            tableNode = node;
-            break;
-        }
-    }
-    return {
-        tableNode,
-        start,
-        end,
-        $pos,
-    };
 }
 
 /**
@@ -93,12 +62,10 @@ export function getSelectionRect(view: EditorView, selection: Selection) {
 export function getNodeDom(editor: Editor) {
     // 获取当前编辑器的选中状态
     const selection = editor?.state.selection;
-    // 获取选中位置对应的 DOM 节点
-    const dom = editor.view.domAtPos(selection?.from || 0, 1);
+    let node: Node | null = editor.view.nodeDOM(selection?.from || 0);
 
-    let node: Node | null = dom.node;
     // 如果节点是文本节点，则获取其父节点
-    if (node.nodeType === 3) {
+    if (node?.nodeType === 3) {
         node = node.parentNode;
     }
 

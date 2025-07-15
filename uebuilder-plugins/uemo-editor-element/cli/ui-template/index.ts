@@ -12,7 +12,9 @@ UeEl<%- elementName %>.install = (app: App) => {
     app.component(UeEl<%- elementName %>.name, UeEl<%- elementName %>);
 };
 
-export interface UeEl<%- elementName %>BaseProps {}
+export interface UeEl<%- elementName %>BaseProps {
+    disabled?: boolean;
+}
 export type UeEl<%- elementName %>Instance = InstanceType<typeof UeEl<%- elementName %>>;
 
 export default UeEl<%- elementName %>;

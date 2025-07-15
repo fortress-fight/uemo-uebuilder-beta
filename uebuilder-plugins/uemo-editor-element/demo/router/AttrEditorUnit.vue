@@ -29,6 +29,7 @@ import TestBoxShadowSettingGroup from "~/demo/components/TestBoxShadowSettingGro
 import TestCalenderSettingGroup from "~/demo/components/TestCalenderSettingGroup.vue";
 import TestRatioSettingGroup from "~/demo/components/TestRatioSettingGroup.vue";
 import TestGapSettingGroup from "~/demo/components/TestGapSettingGroup.vue";
+import TestTextSettingGroup from "~/demo/components/TestTextSettingGroup.vue";
 import TestResourceSetting from "~/demo/components/TestResourceSetting.vue";
 import TestFontFamilySetting from "~/demo/components/TestFontFamilySetting.vue";
 import TestButtonIconSetting from "~/demo/components/TestButtonIconSetting.vue";
@@ -76,6 +77,7 @@ const testComponents = [
     TestCalenderSettingGroup,
     TestRatioSettingGroup,
     TestGapSettingGroup,
+    TestTextSettingGroup,
     TestButtonIconSettingGroup,
     TestLinkSettingGroup,
     TestScrollEffectSettingGroup,

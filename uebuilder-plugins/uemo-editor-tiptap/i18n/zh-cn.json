@@ -84,6 +84,7 @@
     "OPER_DELETE_ROW": "移除当前行",
     "OPER_ADD_ROW_BEFORE": "向上插入行",
     "OPER_ADD_ROW_AFTER": "向下插入行",
+    "OPER_DELETE_TABLE": "删除表格",
     "OPER_SELECT_COL": "选中当前列",
     "OPER_DELETE_COLUMN": "移除当前列",
     "OPER_ADD_COLUMN_BEFORE": "向左插入列",

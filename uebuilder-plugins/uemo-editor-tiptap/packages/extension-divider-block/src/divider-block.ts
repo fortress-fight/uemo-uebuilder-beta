@@ -5,6 +5,7 @@ import { Node } from "@tiptap/core";
 import { VueNodeViewRenderer } from "@tiptap/vue-3";
 
 import DividerBlockView from "../view/DividerBlockView.vue";
+import { getDividerBlockAttrs } from "../utils/helper";
 
 import $pageStyle from "../../../src/app.module.scss";
 
@@ -15,8 +16,20 @@ export interface DivideBlockOptions {
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         divideBlock: {
+            /**
+             * 更新分隔块属性
+             */
             updateDivideBlockAttrs: (param: DividerBlockAttrs) => ReturnType;
+
+            /**
+             * 插入分隔块
+             */
             insertDivideBlock: (options: Partial<DividerBlockAttrs>) => ReturnType;
+
+            /**
+             * 打开分隔块编辑器面板
+             */
+            openDividerBlockEditorPanel: (rect: UE_TIPTAP_UNIT.PositionRect) => ReturnType;
         };
     }
 }
@@ -121,6 +134,22 @@ export const DividerBlock = Node.create<DivideBlockOptions>({
                 (param) =>
                 ({ chain }) => {
                     return chain().updateAttributes(this.name, param).run();
+                },
+
+            openDividerBlockEditorPanel:
+                (rect) =>
+                ({ chain, editor }) => {
+                    const currentAttr = getDividerBlockAttrs(this.editor);
+
+                    return chain()
+                        .focus()
+                        .openAttrEditorPanel("dividerBlock", currentAttr, {
+                            rect,
+                            updateAttrs: (attr) => {
+                                editor.commands.updateDivideBlockAttrs(attr);
+                            },
+                        })
+                        .run();
                 },
         };
     },

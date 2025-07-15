@@ -12,7 +12,7 @@
 import type { UeEl<%- elementName %>BaseProps } from "./index";
 
 defineOptions({ name: "UeEl<%- elementName %>" });
-const prop = withDefaults(defineProps<UeEl<%- elementName %>BaseProps>(), {});
+const _props = withDefaults(defineProps<UeEl<%- elementName %>BaseProps>(), {});
 </script>
 <style lang="scss" module>
 .<%- className %> {

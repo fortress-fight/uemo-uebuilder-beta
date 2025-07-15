@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试气泡模式编辑器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-01 01:48:45
+ * @LastEditTime: 2025-07-10 19:32:41
 -->
 <template>
     <TestArea
@@ -30,7 +30,35 @@ import { testTextContent } from "~/demo/data/test-content";
 const testValueSelect = ref<number>(0);
 const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOptionTitle?: string })[] = [
     {
+        testOptionTitle: "默认",
+        content: testTextContent.data,
+    },
+    {
+        testOptionTitle: "跑马灯文本",
+        content: testTextContent.loopTextData,
+    },
+    {
+        testOptionTitle: "计数器",
+        content: testTextContent.counterNumberData,
+    },
+    {
+        testOptionTitle: "特效文本",
+        content: testTextContent.effectTextData,
+    },
+    {
+        testOptionTitle: "表格",
+        content: testTextContent.tableData,
+    },
+    {
+        testOptionTitle: "分享",
+        content: testTextContent.shareRowData,
+    },
+    {
         testOptionTitle: "分割线",
+        content: testTextContent.hrRuleData,
+    },
+    {
+        testOptionTitle: "分割块",
         content: testTextContent.divideBlockData,
     },
     {
@@ -52,10 +80,6 @@ const testValueList: (UE_TIPTAP_COMPONENT.UeTiptapBubbleEditorProps & { testOpti
     {
         testOptionTitle: "视频",
         content: testTextContent.videoFrameData,
-    },
-    {
-        testOptionTitle: "默认",
-        content: testTextContent.data,
     },
     {
         testOptionTitle: "按钮",
