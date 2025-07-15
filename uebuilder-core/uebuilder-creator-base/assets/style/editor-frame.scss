@@ -1,0 +1,22 @@
+.uebuilder-workbench {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    // width: calc(100vw - 50px) !important;
+    width: 100% !important;
+    height: 100% !important;
+
+    border-width: 0 !important;
+}
+.uebuilder-workbench[data-size="fullscreen"] {
+    position: fixed;
+    z-index: var(--z-index--fixed);
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    border-width: 0;
+}

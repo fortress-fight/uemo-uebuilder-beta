@@ -9,7 +9,8 @@
         "utils/**/*",
         "packages/**/*",
         "./auto-imports.d.ts",
-        "./types/*.d.ts"
+        "./types/*.d.ts",
+        "./assets/**/*"
     ],
     "exclude": ["src/**/__tests__/*"],
     "compilerOptions": {
