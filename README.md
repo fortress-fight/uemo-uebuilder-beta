@@ -1,39 +1,137 @@
-# UEMO 的页面编辑器 V5
+# UEMO UEBuilder 4.1
 
-> 重构 UEMO 的页面编辑器 -- 第四版
+UEMO UEBuilder 4.1 是一个基于 Vue.js 的可视化页面构建器工具集，采用 Monorepo 架构进行管理。该项目旨在提供一个强大、灵活且易用的页面设计和构建解决方案。
 
-## 目录介绍
+## 项目结构
 
-### web-apps 主项目目录
+项目采用 Lerna + Nx 进行包管理，主要包含以下几个主要模块：
 
-1.  `app-creator` APP 初始化程序
-2.  `app-main` APP 主面板项目
-    app-main 层不负责页面数据解析，只负责将页面需要解析的数据传递给 (app-editor | app-preview) 层，这样是为了解耦
-3.  `app-editor` APP 页面编辑项目
-    1.  `index.html` APP-editor 中编辑的及时响应页面
-    2.  `factory.html` APP-editor 中编辑的控制面板层
-4.  `app-preview` APP 页面预览项目
-5.  `app-storehouse` APP 的模板仓库
+```txt
++----------------------+
+|  uebuilder-creator   |   ← 主项目入口 / 启动器
++----------+-----------+
+           |
+           v
++----------------------+
+|  uebuilder-workbench |   ← 主工作台框架
++----+---------+--------+
+     |         |
+     v         v
++---------+  +------------+  +--------------+  +------------------+
+| store-  |  |  editor    |  |   preview    |  |    composer      |
+| house   |  | (操作逻辑)  |  | (页面预览)     |  | (页面拼装逻辑)   |
++---------+  +------------+  +--------------+  +------------------+
+```
 
-### test 项目测试目录
+### 核心模块 (uebuilder-core)
 
-1.  `test-app-main` APP 的项目测试
-1.  `test-upload` APP 图片上传服务
+-   **uebuilder-composer**: 页面组合器，负责页面元素的组合和布局
+    -   开发服务器: <https://127.0.0.1:9006>
+-   **uebuilder-editor**: 核心编辑器模块，提供页面编辑的主要功能
+    -   开发服务器: <https://127.0.0.1:9002>
+    -   `index.html` uebuilder-editor 中编辑的及时响应页面
+    -   `factory.html` uebuilder-editor 中编辑的控制面板层
+-   **uebuilder-preview**: 页面预览模块，用于实时预览编辑效果
+    -   开发服务器: <https://127.0.0.1:9003>
 
-### types 类型定义目录
+### 工具模块 (uebuilder-tools)
 
-1.  `uemo-editor-type` APP 的全局类型
+-   **uebuilder-creator**: 创建器工具，用于创建新的页面和组件
+    -   开发服务器: <https://127.0.0.1:9000>
+-   **uebuilder-storehouse**: 资源仓库，管理可复用的组件和资源
+    -   开发服务器: <https://127.0.0.1:9004>
+-   **uebuilder-workbench**: 工作台，提供统一的开发环境
+    -   开发服务器: <https://127.0.0.1:9001>
 
-### cli-tools 脚手架工具目录
+### 插件模块 (uebuilder-plugins)
 
-### packages 组件/工具 相关目录
+-   **uemo-editor-assets**: 编辑器资源管理插件
+-   **uemo-editor-element**: 基础 UI 元素库
+    -   开发服务器: <https://127.0.0.1:9007>
+-   **uemo-editor-i18n**: 国际化支持插件
+-   **uemo-editor-page**: 页面管理插件
+    -   开发服务器: <https://127.0.0.1:9007>
+-   **uemo-editor-panel**: 编辑面板插件
+    -   开发服务器: <https://127.0.0.1:9008>
+-   **uemo-editor-tiptap**: 富文本编辑器插件
+    -   开发服务器: <https://127.0.0.1:9007>
+-   **uemo-editor-type**: TypeScript 类型定义
+-   **uemo-editor-utils**: 通用工具库
+-   **uemo-file-upload**: 文件上传功能
+-   **uemo-icon-font**: 图标字体管理
+-   **uemo-share-icon-font**: 共享图标字体库
 
-1.  `uemo-editor-assets` APP 静态资源管理
-2.  `uemo-editor-ui` APP UI 组件库
-3.  `uemo-editor-element` APP UI 组件库 V2
-4.  `uemo-editor-utils` APP 工具方法
-5.  `uemo-editor-page` APP 页面的组件库
-6.  `uemo-editor-panel-ui` APP 页面的编辑面板组件库
+### CLI 工具 (cli-plugins & cli-configs)
+
+#### CLI 插件
+
+-   **stone-cli-plugin-babel**: Babel 配置插件
+-   **stone-cli-plugin-dll**: DLL 打包优化插件
+-   **stone-cli-plugin-ejs**: EJS 模板支持
+-   **stone-cli-plugin-filemanager**: 文件管理插件
+-   **stone-cli-plugin-jquery**: jQuery 支持插件
+-   **stone-cli-plugin-normalize-css**: CSS 标准化插件
+-   **stone-cli-plugin-report**: 构建报告插件
+-   **stone-cli-plugin-sass**: Sass 支持插件
+-   **stone-cli-plugin-svg-sprite**: SVG 精灵图插件
+-   **stone-cli-plugin-tailwindcss**: Tailwind CSS 支持
+    -   配置查看器: <http://127.0.0.1:3000>
+-   **stone-cli-plugin-typescript**: TypeScript 支持插件
+
+#### CLI 配置
+
+-   **eslint-plugin-base**: ESLint 基础配置
+-   **stone-tsconfig**: TypeScript 配置
+-   **stone-vue-config**: Vue.js 项目配置
+-   **stylelint-config-base**: StyleLint 基础配置
+
+## 技术栈
+
+-   框架：Vue.js
+-   构建工具：Webpack
+-   包管理：Lerna + Nx
+-   语言：TypeScript
+-   样式：SCSS + TailwindCSS
+-   代码规范：ESLint + StyleLint
+
+## 开发指南
+
+### 环境要求
+
+-   Node.js >= 14.0.0
+-   Yarn >= 1.22.0
+
+### 安装依赖
+
+```bash
+yarn install
+```
+
+### 开发命令
+
+```bash
+# 启动开发服务
+yarn dev
+
+# 构建项目
+yarn build
+
+# 代码检查
+yarn lint
+```
+
+## 项目特点
+
+1.  **模块化设计**: 采用 Monorepo 架构，便于管理和维护
+2.  **可扩展性**: 提供丰富的插件系统，支持功能扩展
+3.  **TypeScript**: 全面的类型支持，提高代码质量
+4.  **国际化**: 内置多语言支持
+5.  **主题定制**: 灵活的主题配置系统
+6.  **组件库**: 丰富的预置组件
+
+## 版本控制
+
+遵循 [SemVer](http://semver.org/) 语义化版本规范。
 
 ## 使用介绍
 
@@ -41,11 +139,11 @@
 
 使用 `Nginx` 代理相关端口
 
-1.  `app-creator` 端口 `9000`
-2.  `app-main` 端口 `9001`
-3.  `app-editor` 端口 `9002`
-4.  `app-preview` 端口 `9003`
-5.  `app-storehouse` 端口 `9004`
+1.  `uebuilder-creator` 端口 `9000`
+2.  `uebuilder-workbench` 端口 `9001`
+3.  `uebuilder-editor` 端口 `9002`
+4.  `uebuilder-preview` 端口 `9003`
+5.  `uebuilder-storehouse` 端口 `9004`
 6.  `test-upload` 端口 `9005`
 7.  `uemo-editor-panel-ui` 端口 `9006`
 
