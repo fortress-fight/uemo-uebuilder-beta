@@ -59,6 +59,7 @@
         "nanoid-dictionary": "^4.3.0",
         "odometer_countup": "^1.0.4",
         "parallax-controller": "^1.7.1",
+        "penpal": "^7.0.4",
         "pexels": "^1.4.0",
         "qiniu-js": "^3.4.2",
         "query-string": "^9.2.2",

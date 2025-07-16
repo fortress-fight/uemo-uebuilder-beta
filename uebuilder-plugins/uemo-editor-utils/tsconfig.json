@@ -1,6 +1,6 @@
 {
     "extends": "@stone/tsconfig",
-    "include": ["env.d.ts", "lib/**/*", "./auto-imports.d.ts", "./types/*.d.ts"],
+    "include": ["env.d.ts", "lib/**/*", "utils/**/*", "./auto-imports.d.ts", "./types/*.d.ts"],
     "exclude": ["src/**/__tests__/*"],
     "compilerOptions": {
         "module": "ESNext",
