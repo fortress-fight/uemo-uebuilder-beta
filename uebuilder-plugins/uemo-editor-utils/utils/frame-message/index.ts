@@ -2,6 +2,86 @@ import mitt from "@stone/uemo-editor-utils/lib/mitt";
 import { guid } from "@stone/uemo-editor-utils/lib/guid";
 
 /**
+ * 错误类型枚举
+ */
+export enum ErrorType {
+    /** 连接超时 */
+    TIMEOUT = "TIMEOUT",
+    /** 连接失败 */
+    CONNECTION_FAILED = "CONNECTION_FAILED",
+    /** 消息发送失败 */
+    SEND_FAILED = "SEND_FAILED",
+    /** 无效消息 */
+    INVALID_MESSAGE = "INVALID_MESSAGE",
+}
+
+/**
+ * 错误信息接口
+ */
+export interface IErrorPayload {
+    type: ErrorType;
+    message: string;
+    timestamp: number;
+}
+
+/**
+ * 心跳消息接口
+ */
+export interface IHeartbeatPayload {
+    timestamp: number;
+}
+
+/**
+ * 断开连接原因
+ */
+export interface IDisconnectPayload {
+    reason: "normal" | "timeout" | "error";
+    message?: string;
+}
+
+/**
+ * 普通消息接口
+ */
+export interface IMessagePayload<T = unknown> {
+    data: T;
+    timestamp: number;
+}
+
+/**
+ * 消息负载类型映射
+ */
+export interface IMessagePayloadMap {
+    [CommandType.ERROR]: IErrorPayload;
+    [CommandType.HEARTBEAT]: IHeartbeatPayload;
+    [CommandType.DISCONNECT]: IDisconnectPayload;
+    [CommandType.MESSAGE]: IMessagePayload;
+    [CommandType.REGISTER]: never;
+    [CommandType.DISCONNECT_ACK]: never;
+}
+
+/**
+ * 消息接口定义
+ */
+export interface IFrameMessage<T extends CommandType = CommandType> {
+    /** 消息ID */
+    id: string;
+    /** 发送方名称 */
+    from: string;
+    /** 接收方名称 */
+    to: string;
+    /** 消息命令类型 */
+    command: T;
+    /** 连接状态 */
+    state: ConnectionState;
+    /** 消息内容 */
+    payload?: IMessagePayloadMap[T];
+    /** 时间戳 */
+    timestamp: number;
+    /** 协议版本 */
+    version: string;
+}
+
+/**
  * 通信连接状态枚举
  */
 export enum ConnectionState {
@@ -44,28 +124,6 @@ export enum CommandType {
 }
 
 /**
- * 消息接口定义
- */
-export interface IFrameMessage {
-    /** 消息ID */
-    id: string;
-    /** 发送方名称 */
-    from: string;
-    /** 接收方名称 */
-    to: string;
-    /** 消息命令类型 */
-    command: CommandType;
-    /** 连接状态 */
-    state: ConnectionState;
-    /** 消息内容 */
-    payload?: any;
-    /** 时间戳 */
-    timestamp: number;
-    /** 协议版本 */
-    version: string;
-}
-
-/**
  * 客户端连接信息
  */
 interface IClientInfo {
@@ -77,6 +135,10 @@ interface IClientInfo {
     source: WindowProxy;
     /** 最后活跃时间 */
     lastActiveTime: number;
+    /** 重连次数 */
+    retryCount: number;
+    /** 待发送消息队列 */
+    messageQueue: IFrameMessage[];
 }
 
 /**
@@ -85,21 +147,49 @@ interface IClientInfo {
 export type MessageEventType = "connected" | "disconnected" | "message" | "error";
 
 /**
+ * 事件处理器类型
+ */
+export type MessageEventHandler<T = IFrameMessage> = (message: T) => void;
+
+/**
+ * 事件映射类型
+ */
+export type MessageEventMap = Record<MessageEventType, IFrameMessage> & Record<string, unknown>;
+
+/**
+ * 默认错误处理器
+ */
+const defaultErrorHandler: MessageEventHandler = (message: IFrameMessage) => {
+    if (message.command === CommandType.ERROR) {
+        const error = message as IFrameMessage<CommandType.ERROR>;
+        const { type, message: errorMessage } = error.payload || {};
+        console.error(`[Frame Message Error] ${type}: ${errorMessage}`);
+    }
+};
+
+/**
  * Frame消息总线 - 服务端实现
  */
 export class FrameMessageBus {
     private static readonly VERSION = "4.0.1";
     private static readonly TIMEOUT = 5000;
     private static readonly HEARTBEAT_INTERVAL = 30000;
+    private static readonly MAX_RETRY_COUNT = 3;
+    private static readonly MESSAGE_TIMEOUT = 10000;
+    private static readonly RETRY_INTERVAL = 3000;
     private static instance: FrameMessageBus | null = null;
 
     private clientMap = new Map<string, IClientInfo>();
-    private eventBus = mitt<Record<MessageEventType, IFrameMessage>>();
+    private eventBus = mitt<MessageEventMap>();
+    private messageTimeoutTimers = new Map<string, number>();
 
     private constructor(readonly name: string) {
         window.name = name;
         this.initMessageListener();
         this.startHeartbeat();
+
+        // 添加默认错误处理
+        this.eventBus.on("error", defaultErrorHandler);
     }
 
     /**
@@ -128,9 +218,12 @@ export class FrameMessageBus {
     }
 
     /**
-     * 处理接收到的消息
+     * 处理消息接收
      */
     private handleMessage(message: IFrameMessage, source: WindowProxy) {
+        // 清除消息超时定时器
+        this.clearMessageTimeout(message.id);
+
         switch (message.command) {
             case CommandType.REGISTER:
                 this.handleRegister(message, source);
@@ -167,6 +260,8 @@ export class FrameMessageBus {
                     name: clientName,
                     source,
                     lastActiveTime: Date.now(),
+                    retryCount: 0,
+                    messageQueue: [],
                 });
 
                 this.sendMessage({
@@ -186,9 +281,47 @@ export class FrameMessageBus {
                 if (client) {
                     client.state = ConnectionState.ESTABLISHED;
                     client.lastActiveTime = Date.now();
+                    client.retryCount = 0; // 重置重试次数
                     this.eventBus.emit("connected", message);
+
+                    // 连接建立后，发送队列中的消息
+                    this.sendQueuedMessages(clientName);
                 }
                 break;
+        }
+    }
+
+    /**
+     * 发送队列中的消息
+     */
+    private sendQueuedMessages(clientName: string) {
+        const client = this.clientMap.get(clientName);
+        if (!client) return;
+
+        while (client.messageQueue.length > 0) {
+            const message = client.messageQueue.shift();
+            if (message) {
+                this.sendMessage(message);
+            }
+        }
+    }
+
+    /**
+     * 处理消息发送失败
+     */
+    private handleSendFailure<T extends CommandType>(message: IFrameMessage<T>) {
+        const client = this.clientMap.get(message.to);
+        if (!client) return;
+
+        // 如果是注册消息且未超过重试次数，则重试
+        if (message.command === CommandType.REGISTER && client.retryCount < FrameMessageBus.MAX_RETRY_COUNT) {
+            client.retryCount++;
+            setTimeout(() => {
+                this.sendMessage(message);
+            }, FrameMessageBus.RETRY_INTERVAL);
+        } else if (message.command !== CommandType.HEARTBEAT) {
+            // 非心跳消息，加入队列等待重发
+            client.messageQueue.push(message);
         }
     }
 
@@ -212,10 +345,77 @@ export class FrameMessageBus {
     /**
      * 发送消息
      */
-    private sendMessage(message: IFrameMessage) {
+    private sendMessage<T extends CommandType>(message: IFrameMessage<T>) {
         const client = this.clientMap.get(message.to);
-        if (client?.source) {
+        if (!client?.source) {
+            this.handleError(message.to, ErrorType.SEND_FAILED, "Client not found");
+            return;
+        }
+
+        try {
             client.source.postMessage(message, "*");
+
+            // 设置消息超时定时器
+            if (message.command !== CommandType.HEARTBEAT) {
+                this.setMessageTimeout(message);
+            }
+        } catch (error) {
+            this.handleError(
+                message.to,
+                ErrorType.SEND_FAILED,
+                error instanceof Error ? error.message : "Unknown error"
+            );
+            this.handleSendFailure(message);
+        }
+    }
+
+    /**
+     * 设置消息超时定时器
+     */
+    private setMessageTimeout<T extends CommandType>(message: IFrameMessage<T>) {
+        const timerId = window.setTimeout(() => {
+            this.handleError(message.to, ErrorType.TIMEOUT, `Message timeout: ${message.id}`);
+            this.messageTimeoutTimers.delete(message.id);
+        }, FrameMessageBus.MESSAGE_TIMEOUT);
+
+        this.messageTimeoutTimers.set(message.id, timerId);
+    }
+
+    /**
+     * 清除消息超时定时器
+     */
+    private clearMessageTimeout(messageId: string) {
+        const timerId = this.messageTimeoutTimers.get(messageId);
+        if (timerId) {
+            clearTimeout(timerId);
+            this.messageTimeoutTimers.delete(messageId);
+        }
+    }
+
+    /**
+     * 处理错误
+     */
+    private handleError(clientName: string, type: ErrorType, message: string) {
+        const errorMessage: IFrameMessage<CommandType.ERROR> = {
+            id: guid(),
+            from: this.name,
+            to: clientName,
+            command: CommandType.ERROR,
+            state: ConnectionState.ESTABLISHED,
+            version: FrameMessageBus.VERSION,
+            timestamp: Date.now(),
+            payload: {
+                type,
+                message,
+                timestamp: Date.now(),
+            },
+        };
+
+        this.eventBus.emit("error", errorMessage);
+
+        // 如果是严重错误，断开连接
+        if (type === ErrorType.CONNECTION_FAILED || type === ErrorType.TIMEOUT) {
+            this.disconnectClient(clientName);
         }
     }
 
@@ -309,6 +509,23 @@ export class FrameMessageBus {
     }
 
     /**
+     * 清理资源
+     */
+    private cleanup() {
+        // 移除默认错误处理
+        this.eventBus.off("error", defaultErrorHandler);
+
+        // 清理所有定时器
+        this.messageTimeoutTimers.forEach((timerId) => clearTimeout(timerId));
+        this.messageTimeoutTimers.clear();
+
+        // 清理客户端连接
+        this.clientMap.clear();
+        this.eventBus.all.clear();
+        FrameMessageBus.instance = null;
+    }
+
+    /**
      * 断开所有连接并清理资源
      */
     public disconnect() {
@@ -318,9 +535,7 @@ export class FrameMessageBus {
         });
 
         // 清理资源
-        this.clientMap.clear();
-        this.eventBus.all.clear();
-        FrameMessageBus.instance = null;
+        this.cleanup();
     }
 }
 
@@ -330,17 +545,22 @@ export class FrameMessageBus {
 export class FrameMessageClient {
     private static readonly VERSION = "4.0.1";
     private static readonly RETRY_INTERVAL = 3000;
-    private static readonly MAX_RETRIES = 3;
+    private static readonly MAX_RETRY_COUNT = 3;
+    private static readonly MESSAGE_TIMEOUT = 10000;
     private static instance: FrameMessageClient | null = null;
 
     private channelMap = new Map<string, IClientInfo>();
-    private eventBus = mitt<Record<MessageEventType, IFrameMessage>>();
+    private eventBus = mitt<MessageEventMap>();
     private retryCount = 0;
     private heartbeatTimer?: number;
+    private messageTimeoutTimers = new Map<string, number>();
 
     private constructor(readonly name: string) {
         window.name = name;
         this.initMessageListener();
+
+        // 添加默认错误处理
+        this.eventBus.on("error", defaultErrorHandler);
     }
 
     /**
@@ -366,9 +586,12 @@ export class FrameMessageClient {
     }
 
     /**
-     * 处理接收到的消息
+     * 处理消息接收
      */
     private handleMessage(message: IFrameMessage) {
+        // 清除消息超时定时器
+        this.clearMessageTimeout(message.id);
+
         switch (message.command) {
             case CommandType.REGISTER:
                 this.handleRegister(message);
@@ -414,6 +637,9 @@ export class FrameMessageClient {
             // 启动心跳
             this.startHeartbeat(message.from);
             this.eventBus.emit("connected", message);
+
+            // 连接建立后，发送队列中的消息
+            this.sendQueuedMessages(message.from);
         }
     }
 
@@ -496,11 +722,13 @@ export class FrameMessageClient {
             name: target,
             source: targetWindow,
             lastActiveTime: Date.now(),
+            retryCount: 0,
+            messageQueue: [],
         });
 
         return new Promise((resolve, reject) => {
             const tryConnect = () => {
-                if (this.retryCount >= FrameMessageClient.MAX_RETRIES) {
+                if (this.retryCount >= FrameMessageClient.MAX_RETRY_COUNT) {
                     reject(new Error("Connection failed after max retries"));
                     return;
                 }
@@ -530,12 +758,85 @@ export class FrameMessageClient {
     /**
      * 发送消息
      */
-    private sendMessage(message: IFrameMessage) {
+    private sendMessage<T extends CommandType>(message: IFrameMessage<T>) {
         const channel = this.channelMap.get(message.to);
-        if (channel?.source) {
+        if (!channel?.source) {
+            this.handleError(message.to, ErrorType.SEND_FAILED, "Channel not found");
+            return;
+        }
+
+        try {
             channel.source.postMessage(message, "*");
+
+            // 设置消息超时定时器（排除心跳和注册消息）
+            if (message.command !== CommandType.HEARTBEAT && message.command !== CommandType.REGISTER) {
+                this.setMessageTimeout(message);
+            }
+        } catch (error) {
+            this.handleError(
+                message.to,
+                ErrorType.SEND_FAILED,
+                error instanceof Error ? error.message : "Unknown error"
+            );
+            this.handleSendFailure(message);
         }
     }
+
+    /**
+     * 处理消息发送失败
+     */
+    private handleSendFailure<T extends CommandType>(message: IFrameMessage<T>) {
+        const channel = this.channelMap.get(message.to);
+        if (!channel) return;
+
+        // 如果是注册消息且未超过重试次数，则重试
+        if (message.command === CommandType.REGISTER && this.retryCount < FrameMessageClient.MAX_RETRY_COUNT) {
+            this.retryCount++;
+            setTimeout(() => {
+                this.sendMessage(message);
+            }, FrameMessageClient.RETRY_INTERVAL);
+        } else if (message.command !== CommandType.HEARTBEAT) {
+            // 非心跳消息，加入队列等待重发
+            channel.messageQueue.push(message);
+        }
+    }
+
+    /**
+     * 发送普通消息
+     */
+    public send<T = unknown>(target: string, data: T) {
+        const message: IFrameMessage<CommandType.MESSAGE> = {
+            id: guid(),
+            from: this.name,
+            to: target,
+            command: CommandType.MESSAGE,
+            state: ConnectionState.ESTABLISHED,
+            version: FrameMessageClient.VERSION,
+            timestamp: Date.now(),
+            payload: {
+                data,
+                timestamp: Date.now(),
+            },
+        };
+
+        this.sendMessage(message);
+    }
+
+    /**
+     * 发送队列中的消息
+     */
+    private sendQueuedMessages(target: string) {
+        const channel = this.channelMap.get(target);
+        if (!channel) return;
+
+        while (channel.messageQueue.length > 0) {
+            const message = channel.messageQueue.shift();
+            if (message) {
+                this.sendMessage(message);
+            }
+        }
+    }
+
     /**
      * 启动心跳检测
      */
@@ -584,5 +885,55 @@ export class FrameMessageClient {
         this.channelMap.clear();
         this.eventBus.all.clear();
         FrameMessageClient.instance = null;
+    }
+
+    /**
+     * 清除消息超时定时器
+     */
+    private clearMessageTimeout(messageId: string) {
+        const timerId = this.messageTimeoutTimers.get(messageId);
+        if (timerId) {
+            clearTimeout(timerId);
+            this.messageTimeoutTimers.delete(messageId);
+        }
+    }
+
+    /**
+     * 设置消息超时定时器
+     */
+    private setMessageTimeout<T extends CommandType>(message: IFrameMessage<T>) {
+        const timerId = window.setTimeout(() => {
+            this.handleError(message.to, ErrorType.TIMEOUT, `Message timeout: ${message.id}`);
+            this.messageTimeoutTimers.delete(message.id);
+        }, FrameMessageClient.MESSAGE_TIMEOUT);
+
+        this.messageTimeoutTimers.set(message.id, timerId);
+    }
+
+    /**
+     * 处理错误
+     */
+    private handleError(clientName: string, type: ErrorType, message: string) {
+        const errorMessage: IFrameMessage<CommandType.ERROR> = {
+            id: guid(),
+            from: this.name,
+            to: clientName,
+            command: CommandType.ERROR,
+            state: ConnectionState.ESTABLISHED,
+            version: FrameMessageClient.VERSION,
+            timestamp: Date.now(),
+            payload: {
+                type,
+                message,
+                timestamp: Date.now(),
+            },
+        };
+
+        this.eventBus.emit("error", errorMessage);
+
+        // 如果是严重错误，断开连接
+        if (type === ErrorType.CONNECTION_FAILED || type === ErrorType.TIMEOUT) {
+            this.disconnect();
+        }
     }
 }
