@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-18 11:34:49
+ * @LastEditTime: 2025-07-18 14:47:24
  */
 
 import type { Connection, Methods, RemoteProxy } from "@stone/uemo-editor-utils/lib/penpal";
@@ -19,6 +19,7 @@ export class MessageChannel<T extends Methods> {
 
     constructor(
         private readonly remoteWindow: Window,
+        channelName: string,
         options: {
             from: string;
             to: string;
@@ -36,11 +37,10 @@ export class MessageChannel<T extends Methods> {
             allowedOrigins: [options.origin],
         });
 
-        const channelName = `${options.from} ==> ${options.to}`;
         this.connection = connect<T & MessageChannelApi>({
             channel: channelName,
             messenger: this.messenger,
-            log: options.log ? debug(channelName) : undefined,
+            log: options.log ? debug(`${options.from} ==> ${options.to}`) : undefined,
             methods: {
                 ...options.methods,
                 _getInfo: () => ({ from: options.from, to: options.to }),
