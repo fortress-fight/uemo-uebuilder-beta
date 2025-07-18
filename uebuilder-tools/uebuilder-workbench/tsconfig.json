@@ -57,6 +57,7 @@
 
         "types": [
             "@stone/uemo-editor-type",
+            "@stone/uebuilder-workbench-base",
             "@stone/tsconfig/lib/shims-tsx.d.ts",
             "@stone/tsconfig/lib/shims-vue.d.ts",
             "unplugin-vue-macros/macros-global",
