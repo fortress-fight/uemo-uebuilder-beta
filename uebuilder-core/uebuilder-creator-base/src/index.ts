@@ -8,6 +8,8 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { guid } from "@stone/uemo-editor-utils/lib/guid";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 
+import { CreatorWorkbenchChannel } from "../utils/frame-channel";
+
 /**
  * UeBuilder 创建器基类
  * @class UeBuilderCreatorBase
@@ -89,29 +91,21 @@ export class UeBuilderCreatorBase {
         }
 
         UeBuilderCreatorBase.MAP_INSTANCE.set(rootDom, this);
-
-        // TODO: 实现通讯通道相关功能
-        this.initializeMessageChannel();
     }
 
     /**
      * 初始化消息通道
      * @private
      */
-    private initializeMessageChannel(): void {
-        // TODO: 创建通讯通道
-        // this.toMainMsg = creatorToMainMsg(this.url);
-        // TODO: 监听 app-main 的通讯通道
-        // this.toMainMsg.watchAppMainContact({
-        //     onContactEnd: () => {
-        //         this.toMainMsg?.sendSetConfigCommand({
-        //             config: this.appMainOption,
-        //         });
-        //         this.appMainContactCallback?.("contactEnd");
-        //     },
-        // });
-        // TODO: 监听 app-main 的命令
-        // this.watchAppMainCommand();
+    async initializeMessageChannel(): Promise<void> {
+        if (!this.workbenchFrame?.contentWindow) return;
+
+        const creatorWorkbench = CreatorWorkbenchChannel.getInstance(this.workbenchFrame?.contentWindow);
+        const remote = await creatorWorkbench.remote;
+        const result = await remote._getInfo();
+
+        // eslint-disable-next-line
+        console.log(result);
     }
 
     /**
@@ -135,6 +129,10 @@ export class UeBuilderCreatorBase {
         this.workbenchFrame = frame[0];
         this.initialized = true;
         this.changeFrameSize(this.option.initFullSize);
+
+        this.initializeMessageChannel().catch((err) => {
+            console.error(err);
+        });
 
         return this;
     }
