@@ -57,6 +57,7 @@
         "experimentalDecorators": true,
 
         "types": [
+            "@stone/uebuilder-creator-base",
             "@stone/uemo-editor-type",
             "@stone/tsconfig/lib/shims-tsx.d.ts",
             "@stone/tsconfig/lib/shims-vue.d.ts",

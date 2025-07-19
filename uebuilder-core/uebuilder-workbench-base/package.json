@@ -31,6 +31,9 @@
         "*.**": "prettier --check --ignore-unknown --write --cache"
     },
     "dependencies": {
+        "@stone/uebuilder-type": "4.0.0",
+        "@stone/uemo-editor-type": "4.0.0",
+        "@stone/uebuilder-creator-base": "4.0.0",
         "@stone/uemo-editor-page": "4.0.0",
         "@stone/uemo-editor-i18n": "4.0.0",
         "@stone/vue-cli-service": "^4.0.0",
