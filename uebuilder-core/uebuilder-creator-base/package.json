@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-core/uebuilder-creator-base/.husky",
+        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
         "lint:js": "eslint .",
         "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore",
         "lint:pretter": "prettier . --check --write",

@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-tools/uebuilder-workbench/.husky",
+        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
         "dev": "vue-cli-service serve",
         "inspect": "vue-cli-service inspect > test.js",
         "lint:js": "eslint .",

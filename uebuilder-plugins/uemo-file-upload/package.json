@@ -7,7 +7,7 @@
         "git": "https://github.com/stahlmanDesign/node-express-multer-image-upload"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-file-upload/.husky",
+        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
         "dev": "nodemon ./app.js"
     },
     "author": "",

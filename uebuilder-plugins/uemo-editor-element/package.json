@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-element/.husky",
+        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
         "create-element": "node ./cli/create-element.mjs",
         "dev": "vue-cli-service serve",
         "inspect": "vue-cli-service inspect > test.js",

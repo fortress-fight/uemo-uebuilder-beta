@@ -73,6 +73,12 @@ module.exports = {
     "prepare": "cd ../.. && husky local-project/wetalk-homepage/.husky",
     ```
 
+    或
+
+    ```bash
+    "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit"
+    ```
+
 3.  `.husky/pre-commit`
 
     ```shell
