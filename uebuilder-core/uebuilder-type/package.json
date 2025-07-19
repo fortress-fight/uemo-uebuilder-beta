@@ -1,0 +1,17 @@
+{
+    "name": "@stone/uebuilder-type",
+    "version": "4.0.0",
+    "description": "Uebuilder 全局类型",
+    "main": "",
+    "types": "index.d.ts",
+    "typeScriptVersion": "4.9",
+    "devDependencies": {
+        "@stone/eslint-plugin-base": "4.0.0",
+        "@stone/tsconfig": "4.0.0",
+        "typescript": "^5.3.3"
+    },
+    "volta": {
+        "node": "20.14.0",
+        "yarn": "1.22.19"
+    }
+}
