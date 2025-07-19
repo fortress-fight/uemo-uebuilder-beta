@@ -38,6 +38,7 @@
         "@types/lodash": "^4.17.15",
         "@types/nanoid-dictionary": "^4.2.3",
         "axios": "^1.8.1",
+        "axios-cache-interceptor": "^1.8.0",
         "bezier-easing": "^2.1.0",
         "big.js": "^6.2.2",
         "color": "^5.0.0",
