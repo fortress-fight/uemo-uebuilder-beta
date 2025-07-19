@@ -38,10 +38,14 @@ export class UeBuilderWorkbenchBase {
     async initializeMessageChannel(): Promise<void> {
         const workbenchCreate = WorkbenchCreatorChannel.getInstance(window.parent);
         const remote = await workbenchCreate.remote;
-        const result = await remote._getInfo();
+
+        // 通知 creator 工作台已准备好,等待启动命令
+        await remote.workbenchReady();
+
+        const pageData = await remote.getEditorPageData();
 
         // eslint-disable-next-line
-        console.log(result);
+        console.log(pageData);
     }
 
     /**
