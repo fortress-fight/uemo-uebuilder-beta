@@ -1,4 +1,5 @@
-/// <reference types="@stone/uebuilder-type/global.d.ts" />
+/// <reference types="@stone/uebuilder-type" />
+/// <reference types="@stone/uemo-editor-type" />
 /// <reference types="@stone/uebuilder-workbench-base" />
 
 type TYPE_CUSTOM_MODULE_ATTRS = Record<
@@ -23,7 +24,7 @@ declare global {
             appPath: string;
 
             // 应用状态
-            appState?: Omit<UE_BUILDER.State, "template" | "replace">;
+            appState?: UE_BUILDER.State;
 
             // 应用背景
             appBackground?: string;
