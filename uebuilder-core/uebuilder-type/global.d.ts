@@ -3,14 +3,14 @@
 declare global {
     namespace UE_BUILDER {
         /**
-         * initial：初始模式
-         * editing：编辑模式
-         * preview：预览模式
-         * template：模板库模式
-         * replace： 替换编辑页面模式
-         * building： 极速构建模式
+         * 工作台状态
+         * @description 工作台状态，包括初始、编辑、预览、模板库、替换、极速构建
+         *  - initial：初始模式 -- 展示工作台
+         *  - editing：编辑模式 -- 编辑页面
+         *  - preview：预览模式 -- 预览页面
+         *  - building： 极速构建模式 -- 极速构建页面
          */
-        type State = "editing" | "initial" | "preview" | "template" | "replace" | "building";
+        type State = "initial" | "editing" | "preview" | "building";
 
         /**
          * 上传配置
