@@ -3,7 +3,6 @@ import type { AxiosInstance } from "@stone/uemo-editor-utils/lib/axios";
 import { axios } from "@stone/uemo-editor-utils/lib/axios";
 import { isVideoType, isImageType } from "@stone/uemo-editor-utils/lib/utils";
 
-import { transferUploadConfig } from "./helper";
 import { videoUpload } from "./video-upload";
 import { imageUpload } from "./image-upload";
 import { assetUpload } from "./asset-upload";
@@ -43,7 +42,6 @@ export function createUploadHandler(
                     return Promise.reject(new UeElError(UeElErrorCode.UPLOAD_NOT_CONFIG, { message: errorMsg }));
                 }
 
-                const newConfig = transferUploadConfig(uploadConfig);
                 const uploadCancelSource = param.cancelSource || cancelSource;
 
                 // 成功处理
@@ -57,20 +55,20 @@ export function createUploadHandler(
                 };
 
                 if (isVideoType(file.type)) {
-                    return videoUpload(file, axiosInstance, newConfig, {
+                    return videoUpload(file, axiosInstance, uploadConfig, {
                         cancelSource: uploadCancelSource,
                         onProgress: param.uploadProgress,
                     }).then(successHandler, errorHandler);
                 }
 
                 if (isImageType(file.type)) {
-                    return imageUpload(file, axiosInstance, newConfig, {
+                    return imageUpload(file, axiosInstance, uploadConfig, {
                         cancelSource: uploadCancelSource,
                         onProgress: param.uploadProgress,
                     }).then(successHandler, errorHandler);
                 }
 
-                return assetUpload(file, axiosInstance, newConfig, {
+                return assetUpload(file, axiosInstance, uploadConfig, {
                     cancelSource: uploadCancelSource,
                     onProgress: param.uploadProgress,
                 }).then(successHandler, errorHandler);
