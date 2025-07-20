@@ -1,4 +1,5 @@
 /// <reference types="@stone/uebuilder-type/global.d.ts" />
+/// <reference types="@stone/uebuilder-creator-base" />
 
 declare global {
     namespace UE_BUILDER_WORKBENCH {

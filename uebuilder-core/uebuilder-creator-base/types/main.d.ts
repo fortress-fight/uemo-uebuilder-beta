@@ -1,4 +1,5 @@
 /// <reference types="@stone/uebuilder-type/global.d.ts" />
+/// <reference types="@stone/uebuilder-workbench-base" />
 
 type TYPE_CUSTOM_MODULE_ATTRS = Record<
     `c-${string}`,
