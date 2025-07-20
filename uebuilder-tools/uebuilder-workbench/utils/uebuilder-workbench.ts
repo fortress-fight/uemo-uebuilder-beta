@@ -1,5 +1,9 @@
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
+
+import { createApp } from "vue";
 import { i18n } from "../src/i18n";
+
+import App from "../src/pages/index/App.vue";
 
 export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
     name = "uebuilder-workbench--tools";
@@ -10,7 +14,7 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
     }
 
     launchWorkbench(config: UE_BUILDER_WORKBENCH.Config): void {
-        this.renderWorkbench(config).catch(() => {
+        this.renderWorkbench(createApp(App), config).catch(() => {
             const error = new UeBuilderWorkbench.utils.UeError("WARNING:UEBUILDER_WORKBENCH", {
                 message: i18n.global.t("lunchWorkbenchFailed"),
             });

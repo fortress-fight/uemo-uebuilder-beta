@@ -4,10 +4,15 @@ import "../assets/style";
 
 // #endregion
 
+import { createApp } from "vue";
+
 import { createToast } from "@stone/uemo-editor-element/packages/toast-plugin";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
+
+import { pinia } from "../store";
+import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 
 import { WorkbenchCreatorChannel } from "../utils/frame-channel";
 
@@ -21,6 +26,8 @@ export abstract class UeBuilderWorkbenchBase {
 
     /** 初始化状态标志 */
     public initialized = false;
+
+    protected store = useUeBuilderWorkbenchStore(pinia);
 
     /**
      * 构造函数
@@ -72,7 +79,10 @@ export abstract class UeBuilderWorkbenchBase {
      * @param config - 配置
      * @returns {Promise<void>} 渲染工作台的 Promise
      */
-    public async renderWorkbench(config: UE_BUILDER_WORKBENCH.Config): Promise<void> {
+    public async renderWorkbench(
+        app: ReturnType<typeof createApp>,
+        config: UE_BUILDER_WORKBENCH.Config
+    ): Promise<void> {
         let isLoading = false;
         const loadingTimeout = setTimeout(() => {
             isLoading = true;
@@ -80,23 +90,56 @@ export abstract class UeBuilderWorkbenchBase {
         }, 1000);
 
         const remote = await this.workbenchCreatorChannel!.remote;
-        const pageData = await remote.getEditorPageData().then(
-            (pageData) => pageData,
-            (err) => {
-                this.handleError(err);
-                return "";
+
+        this.store.setWorkbenchState(config.workbenchState);
+
+        if (config.workbenchState === "editing" || config.workbenchState === "preview") {
+            const pageData = await remote.getEditorPageData().then(
+                (pageData) => pageData,
+                (err) => {
+                    this.handleError(err);
+                    return "";
+                }
+            );
+
+            switch (config.workbenchState) {
+                case "editing":
+                    this.store.setCurrentEditorPageData({ data: pageData });
+                    break;
+                case "preview":
+                    this.store.setCurrentPreviewPageData({ data: pageData });
+                    break;
+                default:
+                    console.error("Unknown workbench state", config.workbenchState);
+                    break;
             }
-        );
+        }
+
+        // eslint-disable-next-line
+        console.log("config", config);
 
         clearTimeout(loadingTimeout);
         if (isLoading) {
             NProgress.done();
         }
 
-        // eslint-disable-next-line
-        console.log(`config: ${JSON.stringify(config)}, pageData: ${pageData}`);
+        this.renderWorkbenchApp(app);
     }
 
+    /**
+     * 渲染工作台应用
+     * @param app - 应用实例
+     */
+    private renderWorkbenchApp(app: ReturnType<typeof createApp>) {
+        app.use(pinia);
+
+        app.mount(this.rootDom);
+    }
+
+    /**
+     * 处理错误
+     * @param err - 错误
+     */
     protected handleError(err: unknown) {
         UeBuilderWorkbenchBase.utils.toast.error(err instanceof Error ? err.message : "Unknown Error");
     }

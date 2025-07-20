@@ -150,7 +150,10 @@ export class UeBuilderCreatorBase {
      */
     public launchWorkbench(): void {
         this.creatorWorkbenchChannel!.remote.then((remote) => {
-            return remote.launchWorkbench({ version: VERSION });
+            return remote.launchWorkbench({
+                version: VERSION,
+                workbenchState: this.urlQueryData.type || this.option.appState || "initial",
+            });
         }).catch((error) => {
             console.error(error);
         });
