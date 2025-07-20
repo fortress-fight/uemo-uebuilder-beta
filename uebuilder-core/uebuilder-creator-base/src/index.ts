@@ -8,6 +8,7 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { guid } from "@stone/uemo-editor-utils/lib/guid";
 import { axios } from "@stone/uemo-editor-utils/lib/axios";
 import mitt from "@stone/uemo-editor-utils/lib/mitt";
+import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 
 import pk from "~/package.json";
@@ -23,7 +24,7 @@ export const VERSION = "v" + pk.version;
 export class UeBuilderCreatorBase {
     public eventBus = mitt();
 
-    static utils = { queryString, axios };
+    static utils = { queryString, axios, UeError };
 
     /** 存储所有实例的 Map，用于单例管理 */
     private static readonly MAP_INSTANCE = new Map<HTMLElement, UeBuilderCreatorBase>();
@@ -133,12 +134,12 @@ export class UeBuilderCreatorBase {
      * 初始化消息通道
      * @private
      */
-    creatorWorkbench: CreatorWorkbenchChannel | null = null;
+    creatorWorkbenchChannel: CreatorWorkbenchChannel | null = null;
     initializeMessageChannel(): Promise<void> {
         if (!this.workbenchFrame?.contentWindow) return Promise.resolve();
 
         CreatorWorkbenchChannel.creator = this;
-        this.creatorWorkbench = CreatorWorkbenchChannel.getInstance(this.workbenchFrame?.contentWindow);
+        this.creatorWorkbenchChannel = CreatorWorkbenchChannel.getInstance(this.workbenchFrame?.contentWindow);
 
         return Promise.resolve();
     }
@@ -148,8 +149,8 @@ export class UeBuilderCreatorBase {
      * @private
      */
     public launchWorkbench(): void {
-        this.creatorWorkbench!.remote.then((remote) => {
-            return remote.launchWorkbench({ version: VERSION }, {});
+        this.creatorWorkbenchChannel!.remote.then((remote) => {
+            return remote.launchWorkbench({ version: VERSION });
         }).catch((error) => {
             console.error(error);
         });
@@ -160,12 +161,11 @@ export class UeBuilderCreatorBase {
      * @returns
      */
     public getEditorPageData(): Promise<string> {
-        const getEditorPageData = this.option.getPageData || (() => Promise.resolve(""));
+        const getEditorPageData =
+            this.option.getPageData ||
+            (() => Promise.reject(new UeError("WARNING:UEBUILDER_CREATOR", { message: "缺少获取页面数据的方法" })));
 
-        return getEditorPageData().then(
-            (res) => this.pageDataPreprocessing(res),
-            () => ""
-        );
+        return getEditorPageData().then((res) => this.pageDataPreprocessing(res));
     }
 
     /**
@@ -175,7 +175,9 @@ export class UeBuilderCreatorBase {
      */
     public changeWorkbenchSize(isFullSize?: boolean): void {
         if (!this.workbenchFrame) {
-            throw new Error("App 还未初始化，无法修改 App 尺寸");
+            throw new UeError("WARNING:UEBUILDER_CREATOR", {
+                message: "App 还未初始化，无法修改 App 尺寸",
+            });
         }
         $(this.workbenchFrame).attr("data-size", isFullSize ? "fullscreen" : "");
     }
@@ -218,7 +220,7 @@ export class UeBuilderCreatorBase {
         if (!encodeString || !pageDataPreprocessingConfig) return encodeString;
 
         try {
-            const remote = await this.creatorWorkbench!.remote;
+            const remote = await this.creatorWorkbenchChannel!.remote;
             let result = await remote.decodePageData(encodeString);
 
             pageDataPreprocessingConfig?.forEach((item) => {
@@ -248,7 +250,7 @@ export class UeBuilderCreatorBase {
         if (!encodeString || !savePagePreprocessingConfig) return encodeString;
 
         try {
-            const remote = await this.creatorWorkbench!.remote;
+            const remote = await this.creatorWorkbenchChannel!.remote;
             let result = await remote.decodePageData(encodeString);
 
             savePagePreprocessingConfig.forEach((item) => {
@@ -277,7 +279,7 @@ export class UeBuilderCreatorBase {
     public destroy(): void {
         this.initialized = false;
 
-        this.creatorWorkbench?.destroy();
+        this.creatorWorkbenchChannel?.destroy();
 
         if (this.workbenchFrame) {
             $(this.workbenchFrame).remove();
