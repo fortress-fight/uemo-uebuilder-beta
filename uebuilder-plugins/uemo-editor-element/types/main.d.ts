@@ -1,3 +1,5 @@
+/// <reference types="@stone/uemo-editor-type" />
+/// <reference types="@stone/uemo-editor-tiptap" />
 /// <reference types="./global.d.ts" />
 /// <reference types="./component.d.ts" />
 /// <reference types="./directive.d.ts" />

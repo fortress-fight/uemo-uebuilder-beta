@@ -56,8 +56,6 @@
         "experimentalDecorators": true,
 
         "types": [
-            "@stone/uemo-editor-type",
-            "@stone/uemo-editor-tiptap",
             "@stone/tsconfig/lib/shims-tsx.d.ts",
             "@stone/tsconfig/lib/shims-vue.d.ts",
             "unplugin-vue-macros/macros-global",
