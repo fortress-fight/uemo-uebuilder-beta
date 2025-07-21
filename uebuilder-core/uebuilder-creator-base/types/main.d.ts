@@ -39,9 +39,6 @@ declare global {
                 editor?: { name: string; type: "css" | "js"; link: string }[];
             };
 
-            // 初始化时是否全屏
-            initFullSize?: boolean;
-
             // 数据预处理
             pageDataPreprocessing?: { type: "replaceString"; rule: string; data: string }[];
 

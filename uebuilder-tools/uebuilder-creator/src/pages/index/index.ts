@@ -9,9 +9,9 @@ $(() => {
     $(".editor-container").each((_index, dom) => {
         const option: UE_BUILDER_CREATOR.InitParams = {
             appName: "UEMO_TOOLS",
-            initFullSize: true,
             appPath: "/",
             appType: "page",
+            appState: "browsing",
         };
 
         createUeBuilderCreator(dom, option).init();

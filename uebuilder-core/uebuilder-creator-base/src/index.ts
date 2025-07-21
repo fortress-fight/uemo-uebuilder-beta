@@ -60,10 +60,7 @@ export class UeBuilderCreatorBase {
      * @returns {string} 完整的工作台 URL，包含必要的查询参数
      */
     private get UEBUILDER_WORKBENCH_URL(): string {
-        const queryParams = new URLSearchParams({
-            id: this.GUID,
-            size: this.option.initFullSize ? "fullscreen" : "",
-        });
+        const queryParams = new URLSearchParams({ id: this.GUID });
         return `${this.UEBUILDER_PATH}uebuilder-workbench/index.html?${queryParams}`;
     }
 
@@ -121,7 +118,6 @@ export class UeBuilderCreatorBase {
 
         this.workbenchFrame = frame[0];
         this.initialized = true;
-        this.changeWorkbenchSize(this.option.initFullSize);
 
         this.initializeMessageChannel().catch((err) => {
             console.error(err);
@@ -152,6 +148,7 @@ export class UeBuilderCreatorBase {
         this.creatorWorkbenchChannel!.remote.then((remote) => {
             return remote.launchWorkbench({
                 version: VERSION,
+                workbenchPath: this.option.appPath,
                 workbenchType: this.option.appType,
                 workbenchState: this.urlQueryData.type || this.option.appState || "entry",
             });
@@ -189,8 +186,9 @@ export class UeBuilderCreatorBase {
     /**
      * 重置工作台尺寸
      */
-    public resetWorkbenchSize() {
-        this.changeWorkbenchSize(this.option.initFullSize);
+    public workbenchUnload() {
+        // eslint-disable-next-line no-console
+        console.log("workbenchUnload");
     }
 
     /**
