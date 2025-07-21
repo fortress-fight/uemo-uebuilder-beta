@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-20 16:20:19
+ * @LastEditTime: 2025-07-21 14:19:00
  */
 
 // SECTION - 样式文件
@@ -38,6 +38,7 @@ const uploadConfig: UE_EL_UTIL.UploadConfig = {
     history: { type: "custom" as const, url: "http://127.0.0.1:9005/service/history" },
 };
 
+// NOTE: 测试已用字体
 setLocalFontLib([
     {
         name: "阿里妈妈数黑体-Bold",
