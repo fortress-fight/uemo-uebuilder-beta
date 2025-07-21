@@ -6,7 +6,7 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { createUeBuilderCreator } from "@/utils/uebuilder-creator";
 
 $(() => {
-    $(".editor-container").each((_index, dom) => {
+    $(".uebuilder-container").each((_index, dom) => {
         const option: UE_BUILDER_CREATOR.InitParams = {
             appName: "UEMO_TOOLS",
             appPath: "/",

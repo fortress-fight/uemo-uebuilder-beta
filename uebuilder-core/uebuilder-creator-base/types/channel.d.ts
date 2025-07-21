@@ -1,7 +1,7 @@
 /*
  * @Description: 定义 Creator 能够调用的 Workbench 方法
  * @Author: F-Stone
- * @LastEditTime: 2025-07-19 14:09:31
+ * @LastEditTime: 2025-07-22 00:23:34
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -18,12 +18,5 @@ export namespace CREATOR_WORKBENCH_CHANNEL {
 
         // 设置工作台尺寸
         setWorkbenchSize: (isFullSize: boolean) => void;
-    }
-}
-
-export namespace CREATOR_STOREHOUSE_CHANNEL {
-    export interface Api extends Methods {
-        // 测试方法
-        test: () => Promise<string>;
     }
 }
