@@ -10,5 +10,5 @@ $(() => {
 
     if (!workbenchDom) return;
 
-    createUeBuilderWorkbench(workbenchDom, { appPath: "/", initFullSize: true }).init();
+    createUeBuilderWorkbench(workbenchDom, { appPath: "/" }).init();
 });

@@ -1,7 +1,7 @@
 /*
  * @Description: tailwind.config 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2023-12-16 02:01:12
+ * @LastEditTime: 2025-07-21 16:57:25
  */
 const colors = require("tailwindcss/colors");
 
@@ -91,5 +91,5 @@ module.exports = {
         },
     },
     plugins: [],
-    content: [`src/**/*.vue`, `packages/**/*.vue`, `demo/**/*.vue`],
+    content: [`src/**/*.vue`, `packages/**/*.vue`, `demo/**/*.vue`, `components/**/*.vue`],
 };
