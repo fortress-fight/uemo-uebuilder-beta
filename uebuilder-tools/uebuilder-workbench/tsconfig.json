@@ -6,8 +6,9 @@
         "src/**/*",
         "demo/**/*",
         "i18n/**/*",
-        "utils/**/*",
+        "src/utils/**/*",
         "packages/**/*",
+        "src/config/**/*",
         "./auto-imports.d.ts",
         "./types/*.d.ts"
     ],

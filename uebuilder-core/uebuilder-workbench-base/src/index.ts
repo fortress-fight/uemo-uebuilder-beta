@@ -1,8 +1,10 @@
 // #region 样式文件
 
-import "../assets/style";
+import "./assets/style";
 
 // #endregion
+
+import type { UE_EL_OPTIONS } from "@stone/uemo-editor-element/src";
 
 import { createApp } from "vue";
 
@@ -10,11 +12,11 @@ import { createToast } from "@stone/uemo-editor-element/packages/toast-plugin";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
+import UeEl from "@stone/uemo-editor-element/src";
 
-import { pinia } from "../store";
-import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
-
-import { WorkbenchCreatorChannel } from "../utils/frame-channel";
+import { pinia } from "./store";
+import { useUeBuilderWorkbenchStore } from "./store/store-workbench";
+import { WorkbenchCreatorChannel } from "./utils/frame-channel";
 
 /**
  * UeBuilder 创建器基类
@@ -76,12 +78,12 @@ export abstract class UeBuilderWorkbenchBase {
 
     /**
      * 渲染工作台
-     * @param config - 配置
+     * @param workbenchConfig - 配置
      * @returns {Promise<void>} 渲染工作台的 Promise
      */
     public async renderWorkbench(
         app: ReturnType<typeof createApp>,
-        config: UE_BUILDER_WORKBENCH.Config
+        param: { workbenchConfig: UE_BUILDER_WORKBENCH.Config; ueElConfig: UE_EL_OPTIONS }
     ): Promise<void> {
         let isLoading = false;
         const loadingTimeout = setTimeout(() => {
@@ -90,10 +92,16 @@ export abstract class UeBuilderWorkbenchBase {
         }, 1000);
 
         const remote = await this.workbenchCreatorChannel!.remote;
+        const workbenchConfig = param.workbenchConfig;
 
-        this.store.setWorkbenchState(config.workbenchState);
+        this.store.setWorkbenchConfig(workbenchConfig);
+        this.store.setWorkbenchState(workbenchConfig.workbenchState);
 
-        if (config.workbenchState === "editing" || config.workbenchState === "preview") {
+        if (
+            workbenchConfig.workbenchState === "entry" ||
+            workbenchConfig.workbenchState === "editing" ||
+            workbenchConfig.workbenchState === "preview"
+        ) {
             const pageData = await remote.getEditorPageData().then(
                 (pageData) => pageData,
                 (err) => {
@@ -102,7 +110,10 @@ export abstract class UeBuilderWorkbenchBase {
                 }
             );
 
-            switch (config.workbenchState) {
+            switch (workbenchConfig.workbenchState) {
+                case "entry":
+                    this.store.setEntryPageData({ data: pageData });
+                    break;
                 case "editing":
                     this.store.setCurrentEditorPageData({ data: pageData });
                     break;
@@ -110,29 +121,29 @@ export abstract class UeBuilderWorkbenchBase {
                     this.store.setCurrentPreviewPageData({ data: pageData });
                     break;
                 default:
-                    console.error("Unknown workbench state", config.workbenchState);
+                    console.error("Unknown workbench state", workbenchConfig.workbenchState);
                     break;
             }
         }
 
         // eslint-disable-next-line
-        console.log("config", config);
+        console.log("config", workbenchConfig);
 
         clearTimeout(loadingTimeout);
         if (isLoading) {
             NProgress.done();
         }
 
-        this.renderWorkbenchApp(app);
+        this.renderWorkbenchApp(app, param);
     }
 
     /**
      * 渲染工作台应用
      * @param app - 应用实例
      */
-    private renderWorkbenchApp(app: ReturnType<typeof createApp>) {
+    private renderWorkbenchApp(app: ReturnType<typeof createApp>, param: { ueElConfig: UE_EL_OPTIONS }) {
         app.use(pinia);
-
+        app.use(UeEl, param.ueElConfig);
         app.mount(this.rootDom);
     }
 

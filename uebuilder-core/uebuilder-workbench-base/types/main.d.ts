@@ -6,6 +6,7 @@ declare global {
     namespace UE_BUILDER_WORKBENCH {
         type Config = {
             version: string;
+            workbenchType: UE_BUILDER.Type;
             workbenchState: UE_BUILDER.State;
         };
 

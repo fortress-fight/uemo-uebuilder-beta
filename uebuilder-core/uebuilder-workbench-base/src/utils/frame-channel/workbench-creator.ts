@@ -1,10 +1,10 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-20 15:37:26
+ * @LastEditTime: 2025-07-21 15:00:04
  */
-import type { UeBuilderWorkbenchBase } from "../../src";
-import type { WORKBENCH_CREATOR_CHANNEL } from "../../types/channel";
+import type { UeBuilderWorkbenchBase } from "../../index";
+import type { WORKBENCH_CREATOR_CHANNEL } from "../../../types/channel";
 import type { CREATOR_WORKBENCH_CHANNEL } from "@stone/uebuilder-creator-base/types/channel";
 
 import { MessageChannel } from "@stone/uemo-editor-utils/lib/penpal/message-channel";

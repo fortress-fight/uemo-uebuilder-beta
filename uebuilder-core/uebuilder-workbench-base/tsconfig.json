@@ -8,10 +8,11 @@
         "i18n/**/*",
         "utils/**/*",
         "packages/**/*",
+        "components/**/*",
+        "src/store/**/*",
+        "src/assets/**/*",
         "./auto-imports.d.ts",
-        "./types/*.d.ts",
-        "./store/**/*",
-        "./assets/**/*"
+        "./types/*.d.ts"
     ],
     "exclude": ["src/**/__tests__/*"],
     "compilerOptions": {
