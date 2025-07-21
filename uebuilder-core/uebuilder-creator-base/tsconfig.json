@@ -6,11 +6,9 @@
         "src/**/*",
         "demo/**/*",
         "i18n/**/*",
-        "utils/**/*",
         "packages/**/*",
         "./auto-imports.d.ts",
-        "./types/*.d.ts",
-        "src/assets/**/*"
+        "./types/*.d.ts"
     ],
     "exclude": ["src/**/__tests__/*"],
     "compilerOptions": {

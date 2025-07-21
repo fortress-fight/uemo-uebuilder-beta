@@ -12,7 +12,7 @@ import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 
 import pk from "~/package.json";
-import { CreatorWorkbenchChannel } from "../utils/frame-channel";
+import { CreatorWorkbenchChannel } from "./utils/frame-channel";
 
 export const VERSION = "v" + pk.version;
 
