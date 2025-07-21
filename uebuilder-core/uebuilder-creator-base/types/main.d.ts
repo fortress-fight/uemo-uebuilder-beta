@@ -18,7 +18,10 @@ declare global {
     namespace UE_BUILDER_CREATOR {
         type InitParams = {
             // 应用名称
-            appName: "UEMO_ADMIN" | "JSMO" | "MO005" | "CUSTOM" | "UEMO_TOOLS" | "APP_TEST";
+            appName: UE_BUILDER.Name;
+
+            // 应用类型
+            appType: UE_BUILDER.Type;
 
             // 应用主路径
             appPath: string;

@@ -1,6 +1,6 @@
 // #region 样式文件
 
-import "../assets/style";
+import "./assets/style";
 
 // #endregion
 
@@ -152,7 +152,8 @@ export class UeBuilderCreatorBase {
         this.creatorWorkbenchChannel!.remote.then((remote) => {
             return remote.launchWorkbench({
                 version: VERSION,
-                workbenchState: this.urlQueryData.type || this.option.appState || "initial",
+                workbenchType: this.option.appType,
+                workbenchState: this.urlQueryData.type || this.option.appState || "entry",
             });
         }).catch((error) => {
             console.error(error);

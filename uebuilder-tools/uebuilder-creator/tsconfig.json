@@ -6,7 +6,7 @@
         "src/**/*",
         "demo/**/*",
         "i18n/**/*",
-        "utils/**/*",
+        "src/utils/**/*",
         "packages/**/*",
         "./auto-imports.d.ts",
         "./types/*.d.ts"
