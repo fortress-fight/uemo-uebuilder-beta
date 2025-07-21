@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-19 15:50:34
+ * @LastEditTime: 2025-07-21 15:17:58
  */
 import type { WORKBENCH_CREATOR_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { CREATOR_WORKBENCH_CHANNEL } from "../../types/channel";
@@ -39,7 +39,7 @@ export class CreatorWorkbenchChannel extends MessageChannel<
             CreatorWorkbenchChannel.creator!.launchWorkbench();
         },
         workbenchUnload: () => {
-            CreatorWorkbenchChannel.creator?.resetWorkbenchSize();
+            CreatorWorkbenchChannel.creator?.workbenchUnload();
         },
         setWorkbenchSize: (isFullSize: boolean) => {
             CreatorWorkbenchChannel.creator?.changeWorkbenchSize(isFullSize);
