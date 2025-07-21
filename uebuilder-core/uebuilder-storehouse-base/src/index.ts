@@ -6,7 +6,7 @@ import "../assets/style";
 
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 
-import { StorehouseCreatorChannel } from "../utils/frame-channel";
+import { StorehouseWorkbenchChannel } from "./utils/frame-channel";
 
 /**
  * UeBuilder 创建器基类
@@ -24,10 +24,7 @@ export class UeBuilderStorehouseBase {
      * @param {HTMLElement} rootDom - 根 DOM 元素
      * @param {UE_BUILDER_CREATOR.InitParams} option - 初始化参数
      */
-    constructor(
-        public readonly rootDom: HTMLElement,
-        public readonly option: UE_BUILDER_STOREHOUSE.InitParams
-    ) {
+    constructor(public readonly rootDom: HTMLElement) {
         //
     }
 
@@ -36,12 +33,13 @@ export class UeBuilderStorehouseBase {
      * @private
      */
     async initializeMessageChannel(): Promise<void> {
-        const storehouseCreate = StorehouseCreatorChannel.getInstance(window.parent);
+        StorehouseWorkbenchChannel.storehouse = this;
+        const storehouseCreate = StorehouseWorkbenchChannel.getInstance(window.parent);
         const remote = await storehouseCreate.remote;
-        const result = await remote._getInfo();
+        const info = await remote._getInfo();
 
         // eslint-disable-next-line
-        console.log(result);
+        console.log("Workbench => Storehouse", info);
     }
 
     /**

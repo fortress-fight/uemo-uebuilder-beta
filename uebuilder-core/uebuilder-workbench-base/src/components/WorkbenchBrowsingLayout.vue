@@ -12,16 +12,47 @@
             </div>
         </div>
         <div class="layout-body">
-            <iframe :class="$style['frame--uebuilder-storehouse']" :src="appStorehouseSrc"></iframe>
+            <iframe
+                ref="storehouseIframe"
+                :class="$style['frame--uebuilder-storehouse']"
+                :src="appStorehouseSrc"
+            ></iframe>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
+import { WorkbenchStorehouseChannel } from "../utils/frame-channel";
 
 const workbenchStore = useUeBuilderWorkbenchStore();
+const storehouseIframe = useTemplateRef("storehouseIframe");
 
 const appStorehouseSrc = computed(() => workbenchStore.workbenchConfig.workbenchPath + "uebuilder-storehouse/");
+
+let workbenchStorehouseChannel: WorkbenchStorehouseChannel | null = null;
+async function initialWorkbenchStorehouseChannel() {
+    const remoteWindow = storehouseIframe.value?.contentWindow;
+    if (!remoteWindow) return;
+
+    workbenchStorehouseChannel = WorkbenchStorehouseChannel.getInstance(remoteWindow);
+
+    const remote = await workbenchStorehouseChannel.remote;
+    const info = await remote._getInfo();
+
+    // eslint-disable-next-line
+    console.log("Storehouse => Workbench", info);
+}
+
+onMounted(() => {
+    initialWorkbenchStorehouseChannel().catch((err) => {
+        console.error(err);
+    });
+});
+
+onBeforeMount(() => {
+    workbenchStorehouseChannel?.destroy();
+    workbenchStorehouseChannel = null;
+});
 </script>
 <style lang="scss" module>
 .workbench-browsing-layout {

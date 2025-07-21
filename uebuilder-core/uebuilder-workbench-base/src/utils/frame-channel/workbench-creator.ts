@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-21 15:00:04
+ * @LastEditTime: 2025-07-22 00:51:03
  */
 import type { UeBuilderWorkbenchBase } from "../../index";
 import type { WORKBENCH_CREATOR_CHANNEL } from "../../../types/channel";
@@ -31,6 +31,11 @@ export class WorkbenchCreatorChannel extends MessageChannel<
     };
 
     private constructor(remoteWindow: Window) {
+        if (!WorkbenchCreatorChannel.workbench) {
+            console.error("WorkbenchCreatorChannel.workbench is not set");
+            return;
+        }
+
         super(remoteWindow, "creatorWorkbench", {
             from: "workbench",
             to: "creator",

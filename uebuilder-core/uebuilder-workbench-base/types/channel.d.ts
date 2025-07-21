@@ -1,10 +1,13 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-07-20 15:37:12
+ * @LastEditTime: 2025-07-22 00:24:03
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
+/**
+ * 工作台中实现 Creator 调用的方法
+ */
 export namespace WORKBENCH_CREATOR_CHANNEL {
     export interface Api extends Methods {
         // 启动工作台
@@ -15,5 +18,15 @@ export namespace WORKBENCH_CREATOR_CHANNEL {
 
         // 解密数据
         decodePageData: (data: string) => string;
+    }
+}
+
+/**
+ * 工作台中实现 Storehouse 调用的方法
+ */
+export namespace WORKBENCH_STOREHOUSE_CHANNEL {
+    export interface Api extends Methods {
+        // 测试方法
+        test: () => Promise<string>;
     }
 }

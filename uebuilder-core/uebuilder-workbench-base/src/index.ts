@@ -161,5 +161,6 @@ export abstract class UeBuilderWorkbenchBase {
      */
     public destroy(): void {
         this.initialized = false;
+        this.workbenchCreatorChannel?.destroy();
     }
 }
