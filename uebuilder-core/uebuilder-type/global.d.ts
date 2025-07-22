@@ -31,6 +31,20 @@ declare global {
          * 上传配置
          */
         type UploadConfig = UE_EL_UTIL.UploadConfig;
+
+        /**
+         * 资源配置
+         */
+        type ResourceConfig = {
+            // 默认图片
+            defaultImage: string;
+            // 默认 svg 尺寸：580 * 580
+            defaultSvg: string;
+            // 默认视频
+            defaultVideo: string;
+            // 默认 spline
+            defaultSpline: string;
+        };
     }
 }
 
