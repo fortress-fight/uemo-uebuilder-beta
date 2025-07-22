@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 15:26:56
+ * @LastEditTime: 2025-07-22 17:45:31
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -21,7 +21,6 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
 > {
     static storehouseReadyCallback: () => void;
     private static utils = { toast: createToast() };
-    private static instance: WorkbenchStorehouseChannel | null = null;
 
     readonly localApi: WORKBENCH_STOREHOUSE_CHANNEL.Api = {
         storehouseReady: () => {
@@ -33,7 +32,7 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
     };
 
     private constructor(
-        remoteWindow: Window,
+        readonly remoteWindow: Window,
         private readonly param: Param
     ) {
         super(remoteWindow, "workbenchStorehouseChannel", {
@@ -45,14 +44,24 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
     }
 
     public static getInstance(remoteWindow: Window, param: Param) {
-        if (!WorkbenchStorehouseChannel.instance) {
-            WorkbenchStorehouseChannel.instance = new WorkbenchStorehouseChannel(remoteWindow, param);
+        if (!remoteWindow) {
+            throw new Error("Invalid remote window");
         }
-        return WorkbenchStorehouseChannel.instance;
+
+        const channelManager = WorkbenchStorehouseChannel.channelManager;
+        if (!channelManager.has(remoteWindow)) {
+            channelManager.set(remoteWindow, new WorkbenchStorehouseChannel(remoteWindow, param));
+        }
+
+        const instance = channelManager.get(remoteWindow) as WorkbenchStorehouseChannel;
+        if (!instance) {
+            throw new Error("WorkbenchStorehouseChannel instance is not found");
+        }
+        return instance;
     }
 
     destroy() {
         super.destroy();
-        WorkbenchStorehouseChannel.instance = null;
+        WorkbenchStorehouseChannel.channelManager.delete(this.remoteWindow);
     }
 }

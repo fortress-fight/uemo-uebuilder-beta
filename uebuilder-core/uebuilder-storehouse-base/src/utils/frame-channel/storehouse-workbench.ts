@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 15:19:37
+ * @LastEditTime: 2025-07-22 17:42:27
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";
@@ -13,8 +13,6 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
     WORKBENCH_STOREHOUSE_CHANNEL.Api,
     STOREHOUSE_WORKBENCH_CHANNEL.Api
 > {
-    private static instance: StorehouseWorkbenchChannel | null = null;
-
     readonly localApi: STOREHOUSE_WORKBENCH_CHANNEL.Api = {
         launchStorehouse: (config) => {
             this.UeBuilderStorehouseBase.launchStorehouse(config);
@@ -34,14 +32,25 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
     }
 
     public static getInstance(remoteWindow: Window, storehouse: UeBuilderStorehouseBase) {
-        if (!StorehouseWorkbenchChannel.instance) {
-            StorehouseWorkbenchChannel.instance = new StorehouseWorkbenchChannel(remoteWindow, storehouse);
+        if (!remoteWindow) {
+            throw new Error("Invalid remote window");
         }
-        return StorehouseWorkbenchChannel.instance;
+
+        const channelManager = this.channelManager;
+        if (!channelManager.has(remoteWindow)) {
+            channelManager.set(remoteWindow, new this(remoteWindow, storehouse));
+        }
+
+        const instance = channelManager.get(remoteWindow) as StorehouseWorkbenchChannel;
+
+        if (!instance) {
+            throw new Error("StorehouseWorkbenchChannel instance is not found");
+        }
+        return instance;
     }
 
     destroy() {
         super.destroy();
-        StorehouseWorkbenchChannel.instance = null;
+        StorehouseWorkbenchChannel.channelManager.delete(this.remoteWindow);
     }
 }

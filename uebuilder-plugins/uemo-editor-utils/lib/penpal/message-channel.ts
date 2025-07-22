@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-18 16:53:45
+ * @LastEditTime: 2025-07-22 16:21:49
  */
 
 import type { Connection, Methods, RemoteProxy } from "@stone/uemo-editor-utils/lib/penpal";
@@ -14,13 +14,15 @@ interface MessageChannelApi extends Methods {
 }
 
 export abstract class MessageChannel<REMOTE_API extends Methods, LOCAL_API extends Methods> {
+    static channelManager = new WeakMap<Window, MessageChannel<any, any>>();
+
     private readonly messenger: WindowMessenger;
     private connection: Connection<REMOTE_API & MessageChannelApi> | null = null;
 
     abstract readonly localApi: LOCAL_API;
 
     constructor(
-        private readonly remoteWindow: Window,
+        readonly remoteWindow: Window,
         private readonly channelName: string,
         private readonly options: {
             from: string;

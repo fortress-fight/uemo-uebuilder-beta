@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 15:18:05
+ * @LastEditTime: 2025-07-22 17:45:15
  */
 import type { UeBuilderWorkbenchBase } from "../../index";
 import type { WORKBENCH_CREATOR_CHANNEL } from "../../../types/channel";
@@ -15,8 +15,6 @@ export class WorkbenchCreatorChannel extends MessageChannel<
     CREATOR_WORKBENCH_CHANNEL.Api,
     WORKBENCH_CREATOR_CHANNEL.Api
 > {
-    private static instance: WorkbenchCreatorChannel | null = null;
-
     readonly localApi: WORKBENCH_CREATOR_CHANNEL.Api = {
         launchWorkbench: (config) => {
             this.UeBuilderWorkbenchBase.launchWorkbench(config);
@@ -42,14 +40,24 @@ export class WorkbenchCreatorChannel extends MessageChannel<
     }
 
     public static getInstance(remoteWindow: Window, workbench: UeBuilderWorkbenchBase) {
-        if (!WorkbenchCreatorChannel.instance) {
-            WorkbenchCreatorChannel.instance = new WorkbenchCreatorChannel(remoteWindow, workbench);
+        if (!remoteWindow) {
+            throw new Error("Invalid remote window");
         }
-        return WorkbenchCreatorChannel.instance;
+
+        const channelManager = this.channelManager;
+        if (!channelManager.has(remoteWindow)) {
+            channelManager.set(remoteWindow, new this(remoteWindow, workbench));
+        }
+
+        const instance = channelManager.get(remoteWindow) as WorkbenchCreatorChannel;
+        if (!instance) {
+            throw new Error("WorkbenchCreatorChannel instance is not found");
+        }
+        return instance;
     }
 
     destroy() {
         super.destroy();
-        WorkbenchCreatorChannel.instance = null;
+        WorkbenchCreatorChannel.channelManager.delete(this.remoteWindow);
     }
 }
