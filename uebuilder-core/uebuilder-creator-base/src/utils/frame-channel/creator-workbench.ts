@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 00:20:50
+ * @LastEditTime: 2025-07-22 15:15:45
  */
 import type { WORKBENCH_CREATOR_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { CREATOR_WORKBENCH_CHANNEL } from "../../../types/channel";
@@ -14,20 +14,18 @@ export class CreatorWorkbenchChannel extends MessageChannel<
     WORKBENCH_CREATOR_CHANNEL.Api,
     CREATOR_WORKBENCH_CHANNEL.Api
 > {
-    static creator: UeBuilderCreatorBase | null = null;
     private static instance: CreatorWorkbenchChannel | null = null;
 
-    private constructor(remoteWindow: Window) {
+    private constructor(
+        remoteWindow: Window,
+        public readonly UeBuilderCreatorBase: UeBuilderCreatorBase
+    ) {
         super(remoteWindow, "creatorWorkbench", { from: "creator", to: "workbench", origin: "*" });
         this.connect();
     }
-    public static getInstance(remoteWindow: Window) {
-        if (!CreatorWorkbenchChannel.creator) {
-            throw new Error("缺少 CreatorWorkbenchChannel.creator 实例");
-        }
-
+    public static getInstance(remoteWindow: Window, creator: UeBuilderCreatorBase) {
         if (!CreatorWorkbenchChannel.instance) {
-            CreatorWorkbenchChannel.instance = new CreatorWorkbenchChannel(remoteWindow);
+            CreatorWorkbenchChannel.instance = new CreatorWorkbenchChannel(remoteWindow, creator);
         }
         return CreatorWorkbenchChannel.instance;
     }
@@ -36,19 +34,19 @@ export class CreatorWorkbenchChannel extends MessageChannel<
 
     readonly localApi: CREATOR_WORKBENCH_CHANNEL.Api = {
         workbenchReady: () => {
-            CreatorWorkbenchChannel.creator!.launchWorkbench();
+            this.UeBuilderCreatorBase.launchWorkbench();
         },
         workbenchUnload: () => {
-            CreatorWorkbenchChannel.creator?.workbenchUnload();
+            this.UeBuilderCreatorBase.workbenchUnload();
         },
         setWorkbenchSize: (isFullSize: boolean) => {
-            CreatorWorkbenchChannel.creator?.changeWorkbenchSize(isFullSize);
+            this.UeBuilderCreatorBase.changeWorkbenchSize(isFullSize);
         },
         workbenchStateChanged: (state: UE_BUILDER.State) => {
-            CreatorWorkbenchChannel.creator?.workbenchStateChanged(state);
+            this.UeBuilderCreatorBase.workbenchStateChanged(state);
         },
         getEditorPageData: () => {
-            return CreatorWorkbenchChannel.creator!.getEditorPageData();
+            return this.UeBuilderCreatorBase.getEditorPageData();
         },
     };
 

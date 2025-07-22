@@ -32,9 +32,14 @@ declare global {
             // 应用背景
             appBackground?: string;
 
+            // 应用上传配置
+            appUpload: UE_BUILDER.UploadConfig;
+
+            // 应用资源配置
+            appResource: UE_BUILDER.ResourceConfig;
+
             // 应用插件
             appPlugin?: {
-                upload: UE_BUILDER.UploadConfig;
                 // 用于编辑时插入 js 和 css 内容
                 editor?: { name: string; type: "css" | "js"; link: string }[];
             };

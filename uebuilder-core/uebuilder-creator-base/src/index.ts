@@ -150,8 +150,7 @@ export class UeBuilderCreatorBase {
     private initializeMessageChannel(): Promise<void> {
         if (!this.workbenchFrame?.contentWindow) return Promise.resolve();
 
-        CreatorWorkbenchChannel.creator = this;
-        this.creatorWorkbenchChannel = CreatorWorkbenchChannel.getInstance(this.workbenchFrame.contentWindow);
+        this.creatorWorkbenchChannel = CreatorWorkbenchChannel.getInstance(this.workbenchFrame.contentWindow, this);
 
         return Promise.resolve();
     }
@@ -168,6 +167,8 @@ export class UeBuilderCreatorBase {
                     workbenchPath: this.option.appPath,
                     workbenchType: this.option.appType,
                     workbenchState: this.urlQueryData.type || this.option.appState || "entry",
+                    workbenchUpload: this.option.appUpload,
+                    workbenchResource: this.option.appResource,
                 });
             })
             .catch(console.error);
