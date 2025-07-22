@@ -27,26 +27,35 @@ import { WorkbenchStorehouseChannel } from "../utils/frame-channel";
 const workbenchStore = useUeBuilderWorkbenchStore();
 const storehouseIframe = useTemplateRef("storehouseIframe");
 
-const appStorehouseSrc = computed(() => workbenchStore.workbenchConfig.workbenchPath + "uebuilder-storehouse/");
+const appStorehouseSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchPath}uebuilder-storehouse/`);
 
 let workbenchStorehouseChannel: WorkbenchStorehouseChannel | null = null;
-async function initialWorkbenchStorehouseChannel() {
+function initialWorkbenchStorehouseChannel() {
     const remoteWindow = storehouseIframe.value?.contentWindow;
     if (!remoteWindow) return;
 
-    workbenchStorehouseChannel = WorkbenchStorehouseChannel.getInstance(remoteWindow);
-
-    const remote = await workbenchStorehouseChannel.remote;
-    const info = await remote._getInfo();
-
-    // eslint-disable-next-line
-    console.log("Storehouse => Workbench", info);
+    workbenchStorehouseChannel = WorkbenchStorehouseChannel.getInstance(remoteWindow, {
+        on: {
+            storehouseReady: (channel) => {
+                channel.remote
+                    .then((remote) => {
+                        const {
+                            version,
+                            workbenchUpload: uploadConfig,
+                            workbenchResource: resourceConfig,
+                        } = toRaw(workbenchStore.workbenchConfig);
+                        return remote.launchStorehouse({ version, uploadConfig, resourceConfig });
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            },
+        },
+    });
 }
 
 onMounted(() => {
-    initialWorkbenchStorehouseChannel().catch((err) => {
-        console.error(err);
-    });
+    initialWorkbenchStorehouseChannel();
 });
 
 onBeforeMount(() => {

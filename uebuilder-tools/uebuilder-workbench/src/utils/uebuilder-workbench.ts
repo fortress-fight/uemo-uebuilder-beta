@@ -1,10 +1,10 @@
 import { createApp } from "vue";
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
+import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-config";
 
 import { AxiosUemoTools, UemoAPIError } from "@/api";
 import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
 import UebuilderToolsWorkbench from "@/components/Workbench.vue";
-import { UE_EL_CONFIG } from "@/config/ue-element-config";
 import { LoginManager } from "@/utils/login-manager";
 
 import { i18n } from "../i18n";
@@ -55,7 +55,7 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
 
                 void this.renderWorkbench(workbenchApp, {
                     workbenchConfig: config,
-                    ueElConfig: UE_EL_CONFIG,
+                    ueElConfig: getUeElementConfig(config.workbenchUpload, config.workbenchResource),
                 }).catch(() => {
                     const error = new UeBuilderWorkbench.utils.UeError("WARNING:UEBUILDER_WORKBENCH", {
                         message: i18n.global.t("lunchWorkbenchFailed"),

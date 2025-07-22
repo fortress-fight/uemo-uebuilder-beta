@@ -1,7 +1,7 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 00:24:03
+ * @LastEditTime: 2025-07-22 11:06:22
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -26,7 +26,10 @@ export namespace WORKBENCH_CREATOR_CHANNEL {
  */
 export namespace WORKBENCH_STOREHOUSE_CHANNEL {
     export interface Api extends Methods {
-        // 测试方法
-        test: () => Promise<string>;
+        // 仓库准备就绪
+        storehouseReady: () => void;
+
+        // 显示消息
+        showMessage: (type: "success" | "error" | "warning" | "info", message: string) => void;
     }
 }

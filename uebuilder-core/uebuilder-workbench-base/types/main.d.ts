@@ -9,6 +9,8 @@ declare global {
             workbenchPath: string;
             workbenchType: UE_BUILDER.Type;
             workbenchState: UE_BUILDER.State;
+            workbenchUpload: UE_BUILDER.UploadConfig;
+            workbenchResource: UE_BUILDER.ResourceConfig;
         };
 
         type InitParams = {

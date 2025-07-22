@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 00:51:03
+ * @LastEditTime: 2025-07-22 15:18:05
  */
 import type { UeBuilderWorkbenchBase } from "../../index";
 import type { WORKBENCH_CREATOR_CHANNEL } from "../../../types/channel";
@@ -15,12 +15,11 @@ export class WorkbenchCreatorChannel extends MessageChannel<
     CREATOR_WORKBENCH_CHANNEL.Api,
     WORKBENCH_CREATOR_CHANNEL.Api
 > {
-    static workbench: UeBuilderWorkbenchBase | null = null;
     private static instance: WorkbenchCreatorChannel | null = null;
 
     readonly localApi: WORKBENCH_CREATOR_CHANNEL.Api = {
         launchWorkbench: (config) => {
-            WorkbenchCreatorChannel.workbench?.launchWorkbench(config);
+            this.UeBuilderWorkbenchBase.launchWorkbench(config);
         },
         encodePageData: (data) => {
             return encrypt(data);
@@ -30,12 +29,10 @@ export class WorkbenchCreatorChannel extends MessageChannel<
         },
     };
 
-    private constructor(remoteWindow: Window) {
-        if (!WorkbenchCreatorChannel.workbench) {
-            console.error("WorkbenchCreatorChannel.workbench is not set");
-            return;
-        }
-
+    private constructor(
+        remoteWindow: Window,
+        public readonly UeBuilderWorkbenchBase: UeBuilderWorkbenchBase
+    ) {
         super(remoteWindow, "creatorWorkbench", {
             from: "workbench",
             to: "creator",
@@ -44,9 +41,9 @@ export class WorkbenchCreatorChannel extends MessageChannel<
         this.connect();
     }
 
-    public static getInstance(remoteWindow: Window) {
+    public static getInstance(remoteWindow: Window, workbench: UeBuilderWorkbenchBase) {
         if (!WorkbenchCreatorChannel.instance) {
-            WorkbenchCreatorChannel.instance = new WorkbenchCreatorChannel(remoteWindow);
+            WorkbenchCreatorChannel.instance = new WorkbenchCreatorChannel(remoteWindow, workbench);
         }
         return WorkbenchCreatorChannel.instance;
     }

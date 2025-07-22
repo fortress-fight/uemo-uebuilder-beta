@@ -17,6 +17,7 @@ import UeEl from "@stone/uemo-editor-element/src";
 import { pinia } from "./store";
 import { useUeBuilderWorkbenchStore } from "./store/store-workbench";
 import { WorkbenchCreatorChannel } from "./utils/frame-channel";
+import { UeBuilderWorkbenchKey } from "./plugin/injection-key";
 
 /**
  * UeBuilder 创建器基类
@@ -49,8 +50,7 @@ export abstract class UeBuilderWorkbenchBase {
      */
     private workbenchCreatorChannel: WorkbenchCreatorChannel | null = null;
     async initializeMessageChannel(): Promise<void> {
-        WorkbenchCreatorChannel.workbench = this;
-        this.workbenchCreatorChannel = WorkbenchCreatorChannel.getInstance(window.parent);
+        this.workbenchCreatorChannel = WorkbenchCreatorChannel.getInstance(window.parent, this);
         const remote = await this.workbenchCreatorChannel.remote;
 
         // 通知 creator 工作台已准备好,等待启动命令
@@ -134,17 +134,14 @@ export abstract class UeBuilderWorkbenchBase {
             NProgress.done();
         }
 
-        this.renderWorkbenchApp(app, param);
-    }
+        // #region 渲染工作台应用
 
-    /**
-     * 渲染工作台应用
-     * @param app - 应用实例
-     */
-    private renderWorkbenchApp(app: ReturnType<typeof createApp>, param: { ueElConfig: UE_EL_OPTIONS }) {
+        app.provide(UeBuilderWorkbenchKey, this);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);
         app.mount(this.rootDom);
+
+        // #endregion
     }
 
     /**
