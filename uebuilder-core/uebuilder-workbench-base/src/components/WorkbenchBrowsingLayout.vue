@@ -46,6 +46,9 @@ function initialWorkbenchStorehouseChannel() {
                         } = toRaw(workbenchStore.workbenchConfig);
                         return remote.launchStorehouse({ version, uploadConfig, resourceConfig });
                     })
+                    .then(() => {
+                        workbenchStore.stopPageLoading();
+                    })
                     .catch((error) => {
                         console.error(error);
                     });
@@ -54,11 +57,15 @@ function initialWorkbenchStorehouseChannel() {
     });
 }
 
+onBeforeMount(() => {
+    workbenchStore.startPageLoading("storehouse");
+});
+
 onMounted(() => {
     initialWorkbenchStorehouseChannel();
 });
 
-onBeforeMount(() => {
+onBeforeUnmount(() => {
     workbenchStorehouseChannel?.destroy();
     workbenchStorehouseChannel = null;
 });

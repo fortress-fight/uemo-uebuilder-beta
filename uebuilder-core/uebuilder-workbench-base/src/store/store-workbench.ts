@@ -65,6 +65,11 @@ export type UeBuilderWorkbenchStoreState = {
         title?: string;
         data: string;
     };
+
+    /**
+     * 加载状态
+     */
+    pageLoading: false | { type: string };
 };
 
 /**
@@ -83,6 +88,8 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
         entryPageData: { data: "" },
         currentEditorPageData: { data: "" },
         currentPreviewPageData: { data: "" },
+
+        pageLoading: false,
     }),
     actions: {
         /**
@@ -133,6 +140,23 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          */
         setCurrentPreviewPageData(currentPreviewPageData: UeBuilderWorkbenchStoreState["currentPreviewPageData"]) {
             this.currentPreviewPageData = currentPreviewPageData;
+        },
+
+        /**
+         * 开始页面加载
+         *
+         * @param {string} type
+         * @param {string} parent
+         */
+        startPageLoading(type: string) {
+            this.pageLoading = { type };
+        },
+
+        /**
+         * 停止页面加载
+         */
+        stopPageLoading() {
+            this.pageLoading = false;
         },
     },
 });

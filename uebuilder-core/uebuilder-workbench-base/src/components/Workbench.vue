@@ -17,6 +17,8 @@
     </div>
 </template>
 <script lang="ts" setup>
+import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
+
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import WorkbenchEntryLayout from "./WorkbenchEntryLayout.vue";
 
@@ -25,6 +27,18 @@ defineOptions({ name: "UebuilderWorkbench" });
 const workbenchStore = useUeBuilderWorkbenchStore();
 
 const workbenchState = computed(() => workbenchStore.workbenchState);
+
+watch(
+    () => !!workbenchStore.pageLoading,
+    (isLoading) => {
+        if (isLoading) {
+            NProgress.start();
+        } else {
+            NProgress.done();
+        }
+    },
+    { immediate: true }
+);
 </script>
 <style lang="scss" module>
 .uebuilder-workbench {
