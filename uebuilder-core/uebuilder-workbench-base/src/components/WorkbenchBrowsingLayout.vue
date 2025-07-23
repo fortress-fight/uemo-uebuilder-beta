@@ -66,6 +66,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+    workbenchStore.stopPageLoading();
     workbenchStorehouseChannel?.destroy();
     workbenchStorehouseChannel = null;
 });

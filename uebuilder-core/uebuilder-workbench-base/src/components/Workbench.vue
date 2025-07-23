@@ -17,13 +17,13 @@
     </div>
 </template>
 <script lang="ts" setup>
-import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
-
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import WorkbenchEntryLayout from "./WorkbenchEntryLayout.vue";
+import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
 
 defineOptions({ name: "UebuilderWorkbench" });
 
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 
 const workbenchState = computed(() => workbenchStore.workbenchState);
@@ -32,9 +32,9 @@ watch(
     () => !!workbenchStore.pageLoading,
     (isLoading) => {
         if (isLoading) {
-            NProgress.start();
+            UeBuilderWorkbench?.showLoading();
         } else {
-            NProgress.done();
+            UeBuilderWorkbench?.hideLoading();
         }
     },
     { immediate: true }

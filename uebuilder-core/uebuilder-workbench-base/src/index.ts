@@ -76,6 +76,14 @@ export abstract class UeBuilderWorkbenchBase {
 
     abstract launchWorkbench(config: UE_BUILDER_WORKBENCH.Config): void;
 
+    showLoading() {
+        NProgress.configure({ parent: "body" }).start();
+    }
+
+    hideLoading() {
+        NProgress.done();
+    }
+
     /**
      * 渲染工作台
      * @param workbenchConfig - 配置
@@ -85,11 +93,8 @@ export abstract class UeBuilderWorkbenchBase {
         app: ReturnType<typeof createApp>,
         param: { workbenchConfig: UE_BUILDER_WORKBENCH.Config; ueElConfig: UE_EL_OPTIONS }
     ): Promise<void> {
-        let isLoading = false;
-        const loadingTimeout = setTimeout(() => {
-            isLoading = true;
-            NProgress.configure({ parent: "body" }).start();
-        }, 1000);
+        this.store.startPageLoading("workbench");
+        this.showLoading();
 
         const remote = await this.workbenchCreatorChannel!.remote;
         const workbenchConfig = param.workbenchConfig;
@@ -128,11 +133,6 @@ export abstract class UeBuilderWorkbenchBase {
 
         // eslint-disable-next-line
         console.log("config", workbenchConfig);
-
-        clearTimeout(loadingTimeout);
-        if (isLoading) {
-            NProgress.done();
-        }
 
         // #region 渲染工作台应用
 
