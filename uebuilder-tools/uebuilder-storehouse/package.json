@@ -25,7 +25,8 @@
         "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore",
         "lint:pretter": "prettier . --check --write",
         "lint": "yarn lint:js && yarn lint:style && yarn lint:pretter",
-        "lint:fix": "yarn lint:js --fix && yarn lint:style --fix"
+        "lint:fix": "yarn lint:js --fix && yarn lint:style --fix",
+        "create:component": "node ./cli/create-component.mjs"
     },
     "lint-staged": {
         "*.{js,ts,vue}": "eslint --cache --config ./eslint.config.mjs",
