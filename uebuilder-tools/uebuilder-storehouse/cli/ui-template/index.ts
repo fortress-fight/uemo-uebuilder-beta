@@ -1,20 +1,20 @@
 /*
 * @Description: <%- description %>
 * @Author: F-Stone
- * @LastEditTime: 2025-07-26 17:08:39
+ * @LastEditTime: 2025-07-26 17:37:38
 */
 import type { App } from "vue";
 
-import Unit<%- componentName %> from "./Main.vue";
+import <%- componentName %> from "./Main.vue";
 
-Unit<%- componentName %>.install = (app: App) => {
-    if (!Unit<%- componentName %>.name) return;
-    app.component(Unit<%- componentName %>.name, Unit<%- componentName %>);
+<%- componentName %>.install = (app: App) => {
+    if (!<%- componentName %>.name) return;
+    app.component(<%- componentName %>.name, <%- componentName %>);
 };
 
-export interface Unit<%- componentName %>BaseProps {
+export interface <%- componentName %>BaseProps {
     disabled?: boolean;
 }
-export type Unit<%- componentName %>Instance = InstanceType<typeof Unit<%- componentName %>>;
+export type <%- componentName %>Instance = InstanceType<typeof <%- componentName %>>;
 
-export default Unit<%- componentName %>;
+export default <%- componentName %>;
