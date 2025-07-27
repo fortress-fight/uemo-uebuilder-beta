@@ -1,6 +1,8 @@
 import { UeBuilderStorehouseBase } from "@stone/uebuilder-storehouse-base/src";
-import UebuilderToolsStorehouse from "@/components/Storehouse.vue";
+import UebuilderStorehouse from "@stone/uebuilder-storehouse-base/src/App.vue";
 import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-config";
+import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
+import router from "@/router";
 
 export class UeBuilderStorehouse extends UeBuilderStorehouseBase {
     name = "uebuilder-storehouse--tools";
@@ -13,7 +15,10 @@ export class UeBuilderStorehouse extends UeBuilderStorehouseBase {
     launchStorehouse(config: UE_BUILDER_STOREHOUSE.Config): void {
         // eslint-disable-next-line no-console
         console.log("storehouse-config", config);
-        this.renderStorehouse(createApp(UebuilderToolsStorehouse), {
+        const storehouseApp = createApp(UebuilderStorehouse);
+        storehouseApp.provide(UeBuilderStorehouseKey, this);
+        storehouseApp.use(router);
+        this.renderStorehouse(storehouseApp, {
             storehouseConfig: config,
             ueElConfig: getUeElementConfig(config.uploadConfig, config.resourceConfig),
         });
