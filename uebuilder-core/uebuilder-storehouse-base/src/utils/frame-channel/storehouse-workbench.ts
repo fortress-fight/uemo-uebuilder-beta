@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 17:42:27
+ * @LastEditTime: 2025-07-27 03:08:05
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";

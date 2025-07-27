@@ -9,8 +9,10 @@ import type { UE_EL_OPTIONS } from "@stone/uemo-editor-element/src";
 import queryString from "@stone/uemo-editor-utils/lib/query-string";
 import UeEl from "@stone/uemo-editor-element/src";
 
+import { i18n } from "./plugin/i18n";
 import { pinia, useUeBuilderStorehouseStore } from "./store";
 import { StorehouseWorkbenchChannel } from "./utils/frame-channel";
+import { UeBuilderStorehouseKey } from "./plugin/injection-key";
 
 /**
  * UeBuilder 创建器基类
@@ -38,7 +40,7 @@ export abstract class UeBuilderStorehouseBase {
      * 初始化消息通道
      * @private
      */
-    private storehouseWorkbenchChannel: StorehouseWorkbenchChannel | null = null;
+    public storehouseWorkbenchChannel: StorehouseWorkbenchChannel | null = null;
     async initializeMessageChannel(): Promise<void> {
         this.storehouseWorkbenchChannel = StorehouseWorkbenchChannel.getInstance(window.parent, this);
         const remote = await this.storehouseWorkbenchChannel.remote;
@@ -75,6 +77,8 @@ export abstract class UeBuilderStorehouseBase {
 
         // #region 渲染工作台应用
 
+        app.provide(UeBuilderStorehouseKey, this);
+        app.use(i18n);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);
         app.mount(this.rootDom);
