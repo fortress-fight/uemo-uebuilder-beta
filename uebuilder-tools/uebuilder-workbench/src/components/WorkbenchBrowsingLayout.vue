@@ -40,7 +40,6 @@
                     :class="$style['btn--register']"
                     href="https://www.uemo.net/user/login.html#/register"
                     target="_blank"
-                    @click="triggerLogin('register')"
                 >
                     <span class="text">注册</span>
                 </a>
