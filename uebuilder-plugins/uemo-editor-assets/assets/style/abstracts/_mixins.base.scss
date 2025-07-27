@@ -664,3 +664,22 @@ $grid-breakpoints: (
         cursor: grabbing;
     }
 }
+@mixin draw-line($className: "span", $height: 3px, $duration: 1s) {
+    --draw-line-height: #{$height};
+    --draw-duration: #{$duration};
+    --bottom-position: bottom;
+    &:hover {
+        #{$className} {
+            background-position: left var(--bottom-position);
+            background-size: 100% var(--draw-line-height);
+        }
+    }
+    #{$className} {
+        transition: background-size var(--draw-duration) cubic-bezier(0.2, 0.75, 0.5, 1);
+
+        background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+        background-repeat: no-repeat;
+        background-position: right var(--bottom-position);
+        background-size: 0 var(--draw-line-height);
+    }
+}
