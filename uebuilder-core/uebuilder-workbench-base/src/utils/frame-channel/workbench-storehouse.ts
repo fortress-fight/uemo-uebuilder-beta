@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 17:45:31
+ * @LastEditTime: 2025-07-27 15:14:46
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -12,6 +12,8 @@ import { createToast } from "@stone/uemo-editor-element/packages/toast-plugin";
 type Param = {
     on: {
         storehouseReady: (channel: WorkbenchStorehouseChannel) => void;
+        checkLoginStatus: (channel: WorkbenchStorehouseChannel) => Promise<boolean>;
+        openLoginPanel: (channel: WorkbenchStorehouseChannel) => void;
     };
 };
 
@@ -28,6 +30,12 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
         },
         showMessage: (type, message) => {
             WorkbenchStorehouseChannel.utils.toast[type](message);
+        },
+        checkLoginStatus: () => {
+            return this.param.on.checkLoginStatus(this);
+        },
+        openLoginPanel: () => {
+            return this.param.on.openLoginPanel(this);
         },
     };
 

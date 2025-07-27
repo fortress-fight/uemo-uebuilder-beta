@@ -75,6 +75,8 @@ export abstract class UeBuilderWorkbenchBase {
     }
 
     abstract launchWorkbench(config: UE_BUILDER_WORKBENCH.Config): void;
+    abstract checkLoginStatus(): Promise<boolean>;
+    abstract openLoginPanel(): void;
 
     showLoading() {
         NProgress.configure({ parent: "body" }).start();

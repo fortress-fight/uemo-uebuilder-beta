@@ -23,7 +23,9 @@
 <script lang="ts" setup>
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import { WorkbenchStorehouseChannel } from "../utils/frame-channel";
+import { UeBuilderWorkbenchKey } from "../plugin/injection-key";
 
+const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const storehouseIframe = useTemplateRef("storehouseIframe");
 
@@ -52,6 +54,12 @@ function initialWorkbenchStorehouseChannel() {
                     .catch((error) => {
                         console.error(error);
                     });
+            },
+            checkLoginStatus: (_channel) => {
+                return workbench!.checkLoginStatus();
+            },
+            openLoginPanel: (_channel) => {
+                return workbench!.openLoginPanel();
             },
         },
     });
@@ -88,6 +96,10 @@ onBeforeUnmount(() => {
         border-bottom: 1px solid var(--editor-c-border--lighter);
 
         grid-template-columns: 300px 1fr 300px;
+    }
+    .frame--uebuilder-storehouse {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>
