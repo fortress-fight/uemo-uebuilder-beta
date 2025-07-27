@@ -1,0 +1,97 @@
+<!--
+ * @Description: 用户私有库
+ * @Author: F-Stone
+ * @LastEditTime: 2025-07-27 16:11:04
+-->
+<template>
+    <UnitListModule :class="$style['user-storehouse']" v-bind="listModuleProps" @operTrigger="handleOperTrigger" />
+    <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
+        <UserTemplatePanel :title="t('UEBUILDER_TEMPLATE_FORM_TITLE')" type="add" @close="popPanelOpen = false" />
+    </UeElPopPanel>
+</template>
+<script lang="ts" setup>
+import type { UeElPopPanelBaseProps } from "@stone/uemo-editor-element/packages/pop-panel";
+import type { UnitUserStorehouseBaseProps } from "./index";
+import type { UnitListModuleBaseProps } from "../unit-list-module";
+
+import { UeBuilderStorehouseKey } from "../../plugin/injection-key";
+import UserTemplatePanel from "./components/UserTemplatePanel.vue";
+import UnitListModule from "../unit-list-module";
+
+defineOptions({ name: "UnitUserStorehouse", inheritAttrs: false });
+
+const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
+    type: "all",
+});
+const { t } = useI18n();
+
+const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
+
+const router = useRouter();
+
+const listModuleProps = computed<UnitListModuleBaseProps>(() => {
+    if (props.type === "recent") {
+        return {
+            title: t("UEBUILDER_USER_STOREHOUSE_RECENT"),
+            placeholder: {
+                title: t("UEBUILDER_USER_STOREHOUSE_RECENT_PLACEHOLDER"),
+                desc: t("UEBUILDER_USER_STOREHOUSE_RECENT_DESC"),
+            },
+            operList: [
+                { type: "add-page", label: t("UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE") },
+                { type: "more", label: t("UEBUILDER_USER_STOREHOUSE_OPER_MORE"), arrow: true },
+            ],
+        };
+    }
+    return {
+        title: t("UEBUILDER_USER_STOREHOUSE_TITLE"),
+        placeholder: { title: t("UEBUILDER_USER_STOREHOUSE_PLACEHOLDER"), desc: t("UEBUILDER_USER_STOREHOUSE_DESC") },
+        operList: [{ type: "add-page", label: t("UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE") }],
+        sortType: "newest",
+        sortCondition: {
+            value: "newest",
+            list: [
+                { type: "newest", label: t("UEBUILDER_USER_STOREHOUSE_RECENT") },
+                { type: "created", label: t("UEBUILDER_USER_STOREHOUSE_SORT_CREATED") },
+            ],
+        },
+    };
+});
+
+const popPanelOpen = ref(false);
+const popPanelParams = ref<UeElPopPanelBaseProps>({
+    autoClose: true,
+    mask: { color: "rgba(0, 0, 0, 0.5)" },
+});
+const handleOperTrigger = (type: string) => {
+    switch (type) {
+        case "add-page":
+            UeBuilderStorehouse?.storehouseWorkbenchChannel?.remote
+                .then((remote) => {
+                    return remote.checkLoginStatus().then((isLogin) => {
+                        if (!isLogin) {
+                            return remote.openLoginPanel();
+                        }
+                        popPanelOpen.value = true;
+                    });
+                })
+                .catch(() => {
+                    console.error("checkLoginStatus error");
+                });
+            break;
+        case "more":
+            router.push("/my-pages").catch((err) => {
+                console.error(err);
+            });
+            break;
+
+        default:
+            break;
+    }
+};
+</script>
+<style lang="scss" module>
+.user-storehouse {
+    padding: 20px 50px;
+}
+</style>

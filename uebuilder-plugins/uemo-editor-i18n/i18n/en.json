@@ -167,6 +167,11 @@
     "UNIT_PREFIX": "Prefix",
     "UNIT_SUFFIX": "Suffix",
     "UNIT_PRESET": "Preset",
+    "UNIT_SHOW_ALL": "Show All",
+    "UNIT_LOAD_ERROR": "Load Error",
+    "UNIT_LOAD_ERROR_TIP": "Please try again later",
+    "UNIT_UPLOAD_JSMO_TITLE": "Upload .jsmo file",
+    "UNIT_SAVE": "Save",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",

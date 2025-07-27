@@ -167,6 +167,11 @@
     "UNIT_PREFIX": "前缀",
     "UNIT_SUFFIX": "后缀",
     "UNIT_PRESET": "预设",
+    "UNIT_SHOW_ALL": "查看全部",
+    "UNIT_LOAD_ERROR": "加载失败",
+    "UNIT_LOAD_ERROR_TIP": "请稍后再试",
+    "UNIT_UPLOAD_JSMO_TITLE": "上传.jsmo文件",
+    "UNIT_SAVE": "保存",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
