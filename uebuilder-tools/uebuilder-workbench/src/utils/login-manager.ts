@@ -1,9 +1,9 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 00:03:47
+ * @LastEditTime: 2025-07-27 15:13:57
  */
-import { UemoAPIError, getUserInfo } from "@/api";
+import { UemoAPIError, getUserInfo, checkLoginStatus } from "@/api";
 import { useUeBuilderWorkbenchToolsStore } from "@/store/store-workbench--tools";
 import { pinia } from "@stone/uebuilder-workbench-base/src/store";
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
@@ -21,14 +21,8 @@ export class LoginManager {
     /**
      * 检查登录状态并处理登录窗口
      */
-    public checkLogin(): void {
-        if (this.loginWindow) {
-            void this.loginWindow.focus();
-            return;
-        }
-
-        const { width, height, left, top } = this.calculateLoginWindowPosition();
-        this.openLoginWindow(width, height, left, top);
+    public async checkLogin(): Promise<boolean> {
+        return await checkLoginStatus();
     }
 
     /**
@@ -63,7 +57,14 @@ export class LoginManager {
      * 打开登录窗口
      * @private
      */
-    private openLoginWindow(width: number, height: number, left: number, top: number): void {
+    public openLoginWindow(): boolean {
+        if (this.loginWindow) {
+            void this.loginWindow.focus();
+            return true;
+        }
+
+        const { width, height, left, top } = this.calculateLoginWindowPosition();
+
         const loginUrl = "https://www.uemo.net/user/login.html/";
         this.loginWindow = window.open(
             loginUrl,
@@ -73,7 +74,7 @@ export class LoginManager {
 
         if (!this.loginWindow) {
             void this.toast.error("打开登录窗口失败，请检查浏览器是否阻止弹出窗口");
-            return;
+            return false;
         }
 
         if (process.env.NODE_ENV === "production") {
@@ -81,6 +82,7 @@ export class LoginManager {
         } else {
             this.handleDevelopmentLogin();
         }
+        return true;
     }
 
     /**

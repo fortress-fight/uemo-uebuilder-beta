@@ -33,14 +33,14 @@
         </template>
         <template #headRight>
             <div v-if="!userInfo" :class="$style['oper-group']" class="inline-grid grid-cols-2 gap-2">
-                <button :class="$style['btn--login']" @click="checkLogin">
+                <button :class="$style['btn--login']" @click="triggerLogin('login')">
                     <span class="text">登录</span>
                 </button>
                 <a
                     :class="$style['btn--register']"
                     href="https://www.uemo.net/user/login.html#/register"
                     target="_blank"
-                    @click="checkLogin"
+                    @click="triggerLogin('register')"
                 >
                     <span class="text">注册</span>
                 </a>
@@ -85,8 +85,8 @@ const projectList = [
     },
 ];
 
-function checkLogin() {
-    workbench?.checkLoginStatus();
+function triggerLogin(type: "login" | "register") {
+    workbench?.userLogin(type);
 }
 </script>
 <style lang="scss" module>
@@ -188,6 +188,7 @@ function checkLogin() {
         }
     }
     .oper-group {
+        font-size: 12px;
         .btn--register,
         .btn--login {
             line-height: 18px;

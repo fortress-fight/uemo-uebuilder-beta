@@ -35,7 +35,7 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
             (response) => response,
             (error: unknown) => {
                 if (error instanceof UemoAPIError && error.code === 998) {
-                    this.loginManager.checkLogin();
+                    this.loginManager.openLoginWindow();
                 }
                 return Promise.reject(error instanceof Error ? error : new Error("Unknown error"));
             }
@@ -73,8 +73,31 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
     /**
      * 检查登录状态
      */
+    userLogin(_type: "login" | "register") {
+        this.checkLoginStatus()
+            .then((isLogin) => {
+                if (isLogin) {
+                    return this.loginManager.updateUserInfo();
+                }
+                this.loginManager.openLoginWindow();
+            })
+            .catch((error) => {
+                console.error("error", error);
+            });
+    }
+
+    /**
+     * 检查登录状态
+     */
     checkLoginStatus() {
-        this.loginManager.checkLogin();
+        return this.loginManager.checkLogin();
+    }
+
+    /**
+     * 打开登录面板
+     */
+    openLoginPanel() {
+        return this.loginManager.openLoginWindow();
     }
 }
 
