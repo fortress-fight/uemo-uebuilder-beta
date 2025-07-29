@@ -86,6 +86,10 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
             });
     }
 
+    userLogout() {
+        void this.loginManager.logout();
+    }
+
     /**
      * 检查登录状态
      */

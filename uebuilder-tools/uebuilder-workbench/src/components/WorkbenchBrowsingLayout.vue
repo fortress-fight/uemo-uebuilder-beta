@@ -34,19 +34,19 @@
         <template #headRight>
             <div v-if="!userInfo" :class="$style['oper-group']" class="inline-grid grid-cols-2 gap-2">
                 <button :class="$style['btn--login']" @click="triggerLogin('login')">
-                    <span class="text">登录</span>
+                    <span class="text">{{ t("UNIT_LOGIN") }}</span>
                 </button>
                 <a
                     :class="$style['btn--register']"
                     href="https://www.uemo.net/user/login.html#/register"
                     target="_blank"
                 >
-                    <span class="text">注册</span>
+                    <span class="text">{{ t("UNIT_REGISTER") }}</span>
                 </a>
             </div>
             <a
                 v-else
-                ref="triggerEl"
+                ref="userAvatarRef"
                 :class="$style['user-avatar']"
                 href="https://www.uemo.net/user/index.html"
                 target="_blank"
@@ -59,12 +59,20 @@
 <script lang="ts" setup>
 import UebuilderWorkbenchBrowsingLayout from "@stone/uebuilder-workbench-base/src/components/WorkbenchBrowsingLayout.vue";
 
+import { useTippy } from "@stone/uemo-editor-utils/lib/tippy";
+import { h } from "vue";
+
+import UserInfoPanel from "./UserInfoPanel.vue";
 import { UeBuilderWorkbenchKey } from "../plugin/injection-key";
 import { useUeBuilderWorkbenchToolsStore } from "../store/store-workbench--tools";
 
 const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchToolsStore = useUeBuilderWorkbenchToolsStore();
+
 const userInfo = computed(() => workbenchToolsStore.userInfo);
+const userAvatarRef = useTemplateRef("userAvatarRef");
+
+const { t } = useI18n();
 
 const projectList = [
     {
@@ -87,6 +95,47 @@ const projectList = [
 function triggerLogin(type: "login" | "register") {
     workbench?.userLogin(type);
 }
+
+useTippy(userAvatarRef, {
+    content: h(UserInfoPanel, {
+        userInfo: userInfo.value!,
+        onLogout: () => {
+            workbench?.userLogout();
+        },
+    }),
+    theme: "ue-el-panel",
+    offset: [-15, 15],
+    delay: [0, 0],
+    zIndex: 999999,
+    arrow: false,
+    interactive: true,
+    animation: false,
+    hideOnClick: false,
+    plugins: [
+        {
+            name: "hideOnOutWindow",
+            fn({ hide, popper }: { hide: () => void; popper: HTMLElement }) {
+                function checkState(event: MouseEvent) {
+                    const target = event.relatedTarget as HTMLElement;
+                    const triggerDom = userAvatarRef.value!;
+                    const isInPanel = popper.contains(target) || target === popper;
+                    const isInTrigger = triggerDom.contains(target) || target === triggerDom;
+                    if (isInPanel || isInTrigger) return;
+
+                    hide();
+                }
+                return {
+                    onShow() {
+                        window.addEventListener("pointerout", checkState);
+                    },
+                    onHide() {
+                        window.removeEventListener("pointerout", checkState);
+                    },
+                };
+            },
+        },
+    ],
+});
 </script>
 <style lang="scss" module>
 .workbench-browsing-layout {
@@ -204,8 +253,12 @@ function triggerLogin(type: "login" | "register") {
     }
     .user-avatar {
         @include image-placeholder(28, 28);
-
         display: block;
+        overflow: hidden;
+
+        width: 28px;
+
+        border-radius: 50%;
     }
 }
 </style>

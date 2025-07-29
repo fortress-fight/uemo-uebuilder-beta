@@ -17,5 +17,12 @@ export const useUeBuilderWorkbenchToolsStore = defineStore("uebuilderToolsWorkbe
         setUserInfo(userInfo: UE_BUILDER_WORKBENCH_TOOLS.UserInfo) {
             this.userInfo = userInfo;
         },
+
+        /**
+         * 清除用户信息
+         */
+        clearUserInfo() {
+            this.userInfo = null;
+        },
     },
 });

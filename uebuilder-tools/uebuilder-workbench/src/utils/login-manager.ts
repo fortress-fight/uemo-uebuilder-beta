@@ -1,9 +1,9 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 15:13:57
+ * @LastEditTime: 2025-07-30 01:08:55
  */
-import { UemoAPIError, getUserInfo, checkLoginStatus } from "@/api";
+import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@/api";
 import { useUeBuilderWorkbenchToolsStore } from "@/store/store-workbench--tools";
 import { pinia } from "@stone/uebuilder-workbench-base/src/store";
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
@@ -23,6 +23,11 @@ export class LoginManager {
      */
     public async checkLogin(): Promise<boolean> {
         return await checkLoginStatus();
+    }
+
+    public async logout() {
+        await userLogout();
+        UeBuilderWorkbenchToolsStore.clearUserInfo();
     }
 
     /**

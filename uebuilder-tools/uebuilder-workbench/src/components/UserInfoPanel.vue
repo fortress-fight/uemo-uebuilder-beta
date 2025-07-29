@@ -12,7 +12,7 @@
 
             <div :class="$style['panel-col']">
                 <div :class="[$style['btn--logout'], $style['btn']]" @click="emit('logout')">
-                    <span class="text">退出</span>
+                    <span class="text">{{ t("UNIT_LOGOUT") }}</span>
                 </div>
             </div>
         </div>
@@ -35,6 +35,7 @@
 <script lang="ts" setup>
 const _props = defineProps<{ userInfo: UE_BUILDER_WORKBENCH_TOOLS.UserInfo }>();
 const emit = defineEmits<{ (e: "logout"): void }>();
+const { t } = useI18n();
 
 function getLevelInfo(value: string) {
     let result = "";
@@ -84,31 +85,15 @@ function getLevelInfo(value: string) {
         content: "";
     }
     .btn {
+        @include draw-line("a", $height: 2px, $duration: 1s);
+        --bottom-position: 1.07em;
         position: relative;
 
         cursor: pointer;
-        &::after {
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-
-            width: 60%;
-            height: 2px;
-
-            content: "";
-            transition: 0.36s ease;
-            transform: translateX(-50%);
-
-            opacity: 0;
-            background-color: var(--editor-color-text);
-        }
-        &:hover::after {
-            width: 100%;
-
-            opacity: 1;
-        }
     }
     .btn--logout {
+        @include draw-line("span", $height: 2px, $duration: 1s);
+        --bottom-position: 1.07em;
         line-height: 30px;
     }
     .user-name {
