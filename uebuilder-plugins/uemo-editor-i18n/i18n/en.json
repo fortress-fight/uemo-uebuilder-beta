@@ -172,6 +172,9 @@
     "UNIT_LOAD_ERROR_TIP": "Please try again later",
     "UNIT_UPLOAD_JSMO_TITLE": "Upload .jsmo file",
     "UNIT_SAVE": "Save",
+    "UNIT_LOGIN": "Login",
+    "UNIT_REGISTER": "Register",
+    "UNIT_LOGOUT": "Logout",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
