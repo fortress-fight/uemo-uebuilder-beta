@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
+        "prepare": "[ ! -d \".husky\" ] && mkdir -p .husky && echo -e 'yarn lint-staged\\n' > .husky/pre-commit && chmod +x .husky/pre-commit || echo '.husky folder already exists, skipping creation.'",
         "dev": "vue-cli-service serve",
         "inspect": "vue-cli-service inspect > test.js",
         "lint:js": "eslint .",

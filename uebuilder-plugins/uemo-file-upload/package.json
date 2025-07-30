@@ -7,7 +7,7 @@
         "git": "https://github.com/stahlmanDesign/node-express-multer-image-upload"
     },
     "scripts": {
-        "prepare": "husky .husky && cd .husky && echo 'yarn lint-staged\n' > pre-commit && chmod +x pre-commit",
+        "prepare": "[ ! -d \".husky\" ] && mkdir -p .husky && echo -e 'yarn lint-staged\\n' > .husky/pre-commit && chmod +x .husky/pre-commit || echo '.husky folder already exists, skipping creation.'",
         "dev": "nodemon ./app.js"
     },
     "author": "",
