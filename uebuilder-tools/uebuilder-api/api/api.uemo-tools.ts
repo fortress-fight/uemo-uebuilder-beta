@@ -1,7 +1,7 @@
 /*
  * @Description: uemo-tools 页面操作相关，需要用户登陆
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 10:37:26
+ * @LastEditTime: 2025-07-30 11:07:17
  */
 import { AxiosUemoTools } from "./api.instance";
 
@@ -29,6 +29,7 @@ interface UserTemplateBase {
     id: string;
     title: string;
     img: string;
+    diff_time: string;
 }
 
 /**
