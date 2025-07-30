@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 11:22:53
+ * @LastEditTime: 2025-07-30 11:32:28
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -124,6 +124,7 @@ const { t } = useI18n();
     }
     .m-placeholder {
         width: 100%;
+        height: 100%;
         padding: 70px 0;
 
         border: 1px dashed #ccc;
@@ -236,7 +237,7 @@ const { t } = useI18n();
 
         min-height: 236px;
 
-        border-radius: 14px;
+        border-radius: 10px;
     }
     .m-list {
         grid-template-columns: repeat(5, 1fr);
