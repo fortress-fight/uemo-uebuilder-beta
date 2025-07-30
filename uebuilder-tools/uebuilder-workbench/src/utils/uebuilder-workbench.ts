@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
 import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-config";
 
-import { AxiosUemoTools, UemoAPIError } from "@/api";
+import { AxiosUemoTools, UemoAPIError } from "@stone/uebuilder-api--tools/api";
 import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
 import UebuilderToolsWorkbench from "@/components/Workbench.vue";
 import { LoginManager } from "@/utils/login-manager";

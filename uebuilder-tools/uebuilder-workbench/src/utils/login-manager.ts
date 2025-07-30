@@ -1,9 +1,9 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 01:08:55
+ * @LastEditTime: 2025-07-30 10:35:48
  */
-import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@/api";
+import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@stone/uebuilder-api--tools/api";
 import { useUeBuilderWorkbenchToolsStore } from "@/store/store-workbench--tools";
 import { pinia } from "@stone/uebuilder-workbench-base/src/store";
 import { UeBuilderWorkbenchBase } from "@stone/uebuilder-workbench-base/src";
