@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 01:32:25
+ * @LastEditTime: 2025-07-30 11:22:53
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -41,16 +41,26 @@
                 </div>
                 <div v-if="list" :class="$style['m-list']">
                     <div v-for="(item, index) in list" :key="index" :class="$style['list-item']">
-                        <div :class="$style['item-thumb']">
-                            <img :src="item.thumb" alt="" />
-                            <div :class="$style['item-mask']" class="flex items-center justify-center">
-                                <button :class="$style['item-btn--preview']">
-                                    <span class="text">{{ t("UNIT_PREVIEW_NOW") }}</span>
-                                </button>
+                        <div :class="$style['item-thumb--wrapper']">
+                            <div :class="$style['item-thumb']">
+                                <img :src="item.thumb" alt="" />
+                                <div :class="$style['item-mask']" class="flex items-center justify-center">
+                                    <button v-if="type?.startsWith('user')" :class="$style['item-btn--use']">
+                                        <span class="text">{{ t("UNIT_USE_NOW") }}</span>
+                                    </button>
+                                    <button v-else :class="$style['item-btn--preview']">
+                                        <span class="text">{{ t("UNIT_PREVIEW_NOW") }}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div :class="$style['item-title']">
-                            {{ item.title }}
+                        <div :class="$style['item-info']">
+                            <div :class="$style['item-title']">
+                                {{ item.title }}
+                            </div>
+                            <div v-if="item.lastEditTime" :class="$style['item-time']">
+                                <span class="text">编辑于 {{ item.lastEditTime }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -179,6 +189,7 @@ const { t } = useI18n();
                 opacity: 0;
                 background-color: rgb(0 0 0 / 15%);
             }
+            .item-btn--use,
             .item-btn--preview {
                 font-size: 13px;
 
@@ -186,9 +197,14 @@ const { t } = useI18n();
 
                 color: #fff;
                 border-radius: 4px;
+            }
+            .item-btn--preview {
                 background-color: var(--theme-layout-col);
             }
-            .item-title {
+            .item-btn--use {
+                background-color: var(--theme-layout-row);
+            }
+            .item-info {
                 @include ellipse();
 
                 margin-top: 14px;
@@ -198,19 +214,48 @@ const { t } = useI18n();
 
                 color: var(---editor-color-text);
             }
+            .item-time {
+                font-size: 12px;
+                line-height: 17px;
+
+                margin-top: 2px;
+
+                transition: 0.26s ease;
+
+                color: var(--c-gray-60);
+            }
         }
     }
 }
-.unit-list-module[data-type="recent"] {
+.unit-list-module[data-type="user-recent"] {
     .m-inner-wrapper {
         display: grid;
+    }
+    .m-body {
+        overflow: hidden;
 
         min-height: 236px;
+
+        border-radius: 14px;
     }
     .m-list {
         grid-template-columns: repeat(5, 1fr);
         .list-item:nth-of-type(5) ~ .list-item {
             display: none !important;
+        }
+        .list-item {
+            .item-thumb--wrapper {
+                position: relative;
+
+                overflow: hidden;
+
+                width: 100%;
+                padding: 10px;
+
+                border: 1px solid #c3dafa;
+                border-radius: 14px;
+                background: #e6f0ff;
+            }
         }
         @media screen and (max-width: 1680px) {
             .list-item:nth-of-type(4) ~ .list-item {

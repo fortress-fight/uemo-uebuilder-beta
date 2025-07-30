@@ -1,13 +1,14 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 01:35:15
+ * @LastEditTime: 2025-07-30 11:00:08
 -->
 <template>
     <UnitListModule
         :class="$style['user-storehouse']"
         v-bind="listModuleProps"
         :list="list"
+        :loading="loading"
         @operTrigger="handleOperTrigger"
     />
     <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
@@ -26,7 +27,7 @@ import UnitListModule from "../unit-list-module";
 defineOptions({ name: "UnitUserStorehouse", inheritAttrs: false });
 
 const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
-    type: "all",
+    type: "default",
 });
 const { t } = useI18n();
 
@@ -37,7 +38,7 @@ const router = useRouter();
 const listModuleProps = computed<UnitListModuleBaseProps>(() => {
     if (props.type === "recent") {
         return {
-            type: "recent",
+            type: "user-recent",
             title: t("UEBUILDER_USER_STOREHOUSE_RECENT"),
             placeholder: {
                 title: t("UEBUILDER_USER_STOREHOUSE_RECENT_PLACEHOLDER"),
@@ -50,6 +51,7 @@ const listModuleProps = computed<UnitListModuleBaseProps>(() => {
         };
     }
     return {
+        type: "user-default",
         title: t("UEBUILDER_USER_STOREHOUSE_TITLE"),
         placeholder: { title: t("UEBUILDER_USER_STOREHOUSE_PLACEHOLDER"), desc: t("UEBUILDER_USER_STOREHOUSE_DESC") },
         operList: [{ type: "add-page", label: t("UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE") }],
