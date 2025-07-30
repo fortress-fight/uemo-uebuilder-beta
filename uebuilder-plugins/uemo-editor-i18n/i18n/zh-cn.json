@@ -67,6 +67,7 @@
     "UNIT_DURATION": "过渡",
     "UNIT_PREVIEW": "预览",
     "UNIT_PREVIEW_NOW": "立即预览",
+    "UNIT_USE_NOW": "立即使用",
     "UNIT_PLAY": "播放",
     "UNIT_STOP": "停止",
     "UNIT_POINTER": "端点",
