@@ -1,7 +1,7 @@
 /*
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 01:29:20
+ * @LastEditTime: 2025-07-30 01:29:38
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UnitListModule.install = (app: App) => {
 };
 
 export interface UnitListModuleBaseProps {
-    type?: "default" | "newest";
+    type?: "default" | "newest" | "recent";
     title: string;
     placeholder: { title: string; desc: string };
     operList?: { label: string; type: string; arrow?: boolean }[];

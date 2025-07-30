@@ -1,10 +1,15 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 16:11:04
+ * @LastEditTime: 2025-07-30 01:35:15
 -->
 <template>
-    <UnitListModule :class="$style['user-storehouse']" v-bind="listModuleProps" @operTrigger="handleOperTrigger" />
+    <UnitListModule
+        :class="$style['user-storehouse']"
+        v-bind="listModuleProps"
+        :list="list"
+        @operTrigger="handleOperTrigger"
+    />
     <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
         <UserTemplatePanel :title="t('UEBUILDER_TEMPLATE_FORM_TITLE')" type="add" @close="popPanelOpen = false" />
     </UeElPopPanel>
@@ -32,6 +37,7 @@ const router = useRouter();
 const listModuleProps = computed<UnitListModuleBaseProps>(() => {
     if (props.type === "recent") {
         return {
+            type: "recent",
             title: t("UEBUILDER_USER_STOREHOUSE_RECENT"),
             placeholder: {
                 title: t("UEBUILDER_USER_STOREHOUSE_RECENT_PLACEHOLDER"),

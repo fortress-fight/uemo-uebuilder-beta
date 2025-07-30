@@ -142,7 +142,7 @@ interface ApiResponse<T> {
 /**
  * @description 模板相关API
  */
-export const templateApi = {
+export const moduleStoreApi = {
     /**
      * @description 获取模板列表
      * @param {TemplateSearchParams} params - 查询参数
@@ -169,7 +169,7 @@ export const templateApi = {
 /**
  * @description 页面相关API
  */
-export const pageApi = {
+export const pageStoreApi = {
     /**
      * @description 获取页面列表
      * @param {Partial<PageSearchParams>} params - 查询参数

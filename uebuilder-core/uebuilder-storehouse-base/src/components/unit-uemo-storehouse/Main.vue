@@ -16,7 +16,7 @@
 import type { UnitUemoStorehouseBaseProps } from "./index";
 import type { UnitListModuleBaseProps } from "../unit-list-module";
 
-import { pageApi } from "../../api";
+import { pageStoreApi } from "../../api";
 import UnitListModule from "../unit-list-module";
 
 defineOptions({ name: "UnitUemoStorehouse" });
@@ -46,7 +46,7 @@ const handleOperTrigger = (type: string) => {
 const loading = ref<boolean>(true);
 const dataList = ref<{ title: string; thumb: string }[]>([]);
 function loadPageList() {
-    pageApi
+    pageStoreApi
         .getList({ page: 1 })
         .then((res) => {
             dataList.value = res.data.list.data.map((item) => ({

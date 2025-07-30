@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 15:36:46
+ * @LastEditTime: 2025-07-30 01:32:25
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -156,28 +156,10 @@ const { t } = useI18n();
             background-color: var(--theme-layout-row);
         }
     }
-}
-.unit-list-module[data-type="newest"] {
-    .m-inner-wrapper {
-        display: grid;
-
-        min-height: 254px;
-        padding: 20px;
-
-        border-radius: 14px;
-        background: rgb(245 246 251);
-
-        grid-template-rows: auto 1fr;
-    }
     .m-list {
         display: grid;
 
         gap: 40px 20px;
-
-        grid-template-columns: repeat(6, 1fr);
-        .list-item:nth-child(6) ~ .list-item {
-            display: none;
-        }
         .list-item {
             &:hover {
                 .item-mask {
@@ -216,6 +198,52 @@ const { t } = useI18n();
 
                 color: var(---editor-color-text);
             }
+        }
+    }
+}
+.unit-list-module[data-type="recent"] {
+    .m-inner-wrapper {
+        display: grid;
+
+        min-height: 236px;
+    }
+    .m-list {
+        grid-template-columns: repeat(5, 1fr);
+        .list-item:nth-of-type(5) ~ .list-item {
+            display: none !important;
+        }
+        @media screen and (max-width: 1680px) {
+            .list-item:nth-of-type(4) ~ .list-item {
+                display: none !important;
+            }
+        }
+        @media screen and (max-width: 1440px) {
+            .list-item:nth-of-type(3) ~ .list-item {
+                display: none !important;
+            }
+        }
+    }
+}
+.unit-list-module[data-type="newest"] {
+    .m-inner-wrapper {
+        display: grid;
+
+        min-height: 254px;
+        padding: 20px;
+
+        border-radius: 14px;
+        background: rgb(245 246 251);
+
+        grid-template-rows: auto 1fr;
+    }
+    .m-list {
+        display: grid;
+
+        gap: 40px 20px;
+
+        grid-template-columns: repeat(6, 1fr);
+        .list-item:nth-child(6) ~ .list-item {
+            display: none;
         }
         @media screen and (max-width: 1680px) {
             gap: 25px 15px;
