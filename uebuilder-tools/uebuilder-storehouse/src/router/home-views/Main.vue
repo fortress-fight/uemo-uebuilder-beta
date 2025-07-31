@@ -27,7 +27,7 @@ const navList: {
     },
     {
         title: t("UEBUILDER_NAV_USER_COLLECTION"),
-        link: "/resource-hub",
+        link: "/my-collect",
         target: "_self",
         linkIcon: { size: 15, name: "icon-app-start" },
     },

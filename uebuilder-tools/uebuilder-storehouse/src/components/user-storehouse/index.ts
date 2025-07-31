@@ -1,7 +1,7 @@
 /*
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 10:13:27
+ * @LastEditTime: 2025-07-31 13:04:26
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UnitUserStorehouse.install = (app: App) => {
 };
 
 export interface UnitUserStorehouseBaseProps {
-    type: "user-recent" | "user-default";
+    type: "user-recent" | "user-default" | "user-collect";
 }
 export type UnitUserStorehouseInstance = InstanceType<typeof UnitUserStorehouse>;
 

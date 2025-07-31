@@ -28,6 +28,7 @@
     "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "Recommended size: 640×380px",
 
     "UEBUILDER_USER_STOREHOUSE_TITLE": "Pages",
+    "UEBUILDER_USER_STOREHOUSE_TITLE_COLLECT": "My Collection",
     "UEBUILDER_USER_STOREHOUSE_PLACEHOLDER": "Not logged in",
     "UEBUILDER_USER_STOREHOUSE_DESC": "Login to edit pages",
 
@@ -46,5 +47,7 @@
     "UEBUILDER_NAV_USER_COLLECTION": "My Collection",
     "UEBUILDER_NAV_HELP": "Help",
     "UEBUILDER_NAV_RESOURCE_HUB": "Resource Hub",
-    "UEBUILDER_NAV_TEMPLATE": "UEmo Template"
+    "UEBUILDER_NAV_TEMPLATE": "UEmo Template",
+
+    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "Total <strong>{total}</strong> pages"
 }

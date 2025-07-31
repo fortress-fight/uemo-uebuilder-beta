@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 12:27:19
+ * @LastEditTime: 2025-07-31 13:31:22
 -->
 <template>
     <UnitListModule
@@ -11,6 +11,7 @@
         :type="type"
         :loading="loading"
         :sortType="sortType"
+        @refresh="handleRefresh"
         @loadMore="handleLoadMore"
         @sortTrigger="handleSortTrigger"
         @operTrigger="handleOperTrigger"
@@ -34,7 +35,7 @@ const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
     sortType: "newest",
     type: "user-default",
 });
-const emit = defineEmits<{ (e: "sortTrigger", type: string): void; (e: "loadMore"): void }>();
+const emit = defineEmits<{ (e: "sortTrigger", type: string): void; (e: "loadMore" | "refresh"): void }>();
 const { t } = useI18n();
 
 const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
@@ -53,6 +54,17 @@ const listModuleProps = computed<UnitListModuleBaseProps>(() => {
                 { type: "add-page", label: t("UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE") },
                 { type: "more", label: t("UEBUILDER_USER_STOREHOUSE_OPER_MORE"), arrow: true },
             ],
+        };
+    }
+    if (props.type === "user-collect") {
+        return {
+            title: t("UEBUILDER_USER_STOREHOUSE_TITLE_COLLECT"),
+            pages: props.pages,
+            allowRefresh: true,
+            placeholder: {
+                title: t("UEBUILDER_USER_STOREHOUSE_PLACEHOLDER"),
+                desc: t("UEBUILDER_USER_STOREHOUSE_DESC"),
+            },
         };
     }
     return {
@@ -108,6 +120,10 @@ const handleSortTrigger = (type: string) => {
 
 const handleLoadMore = () => {
     emit("loadMore");
+};
+
+const handleRefresh = () => {
+    emit("refresh");
 };
 </script>
 <style lang="scss" module>

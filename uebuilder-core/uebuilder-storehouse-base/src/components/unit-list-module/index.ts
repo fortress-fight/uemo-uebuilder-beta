@@ -1,7 +1,7 @@
 /*
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 12:23:57
+ * @LastEditTime: 2025-07-31 13:59:10
  */
 import type { App } from "vue";
 
@@ -13,7 +13,7 @@ UnitListModule.install = (app: App) => {
 };
 
 export interface UnitListModuleBaseProps {
-    type?: "default" | "newest" | "user-recent" | "user-default";
+    type?: "default" | "newest" | "user-recent" | "user-default" | "user-collect";
     title: string;
     placeholder: { title: string; desc: string };
     operList?: { label: string; type: string; arrow?: boolean }[];
@@ -26,7 +26,9 @@ export interface UnitListModuleBaseProps {
         list: { label: string; type: string }[];
     };
 
-    pages?: { current: number; total: number; itemTotal: number };
+    pages?: { current: number; total: number; itemTotal?: number };
+
+    allowRefresh?: boolean;
 }
 export type UnitListModuleInstance = InstanceType<typeof UnitListModule>;
 

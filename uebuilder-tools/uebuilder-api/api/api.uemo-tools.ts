@@ -1,7 +1,7 @@
 /*
  * @Description: uemo-tools 页面操作相关，需要用户登陆
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 10:44:21
+ * @LastEditTime: 2025-07-31 13:55:27
  */
 import { AxiosUemoTools } from "./api.instance";
 
@@ -179,7 +179,7 @@ export function updateUserInfo(data: { tools_guide: string }) {
  * 获取收藏列表
  * @param params - 分页参数
  */
-export function getBookmarkList(params?: { page: number; limit: number }) {
+export function getBookmarkList(params?: { page: number; limit?: number }) {
     return AxiosUemoTools.get<
         ApiResponse<{
             list: PaginatedResponse<CollectItem> & { cat: string };

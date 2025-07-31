@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 12:49:18
+ * @LastEditTime: 2025-07-31 14:06:12
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -11,11 +11,19 @@
                     <div :class="$style['m-title']">
                         {{ title }}
                     </div>
-                    <div v-if="pages?.itemTotal" :class="$style['m-total']" class="flex items-center">
-                        <span class="text">共</span>
-                        <span :class="$style['num']">{{ pages?.itemTotal }}</span>
-                        <span class="text">个页面</span>
+                    <div v-if="pages" :class="$style['m-total']" class="flex items-center">
+                        <p
+                            :class="$style['text']"
+                            v-html="
+                                t('UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE', {
+                                    total: !pages?.itemTotal || loading ? '--' : pages.itemTotal,
+                                })
+                            "
+                        ></p>
                     </div>
+                    <button v-if="allowRefresh" :class="$style['btn--refresh']" @click="emit('refresh')">
+                        <UeElIcon name="icon-app-reload" :size="15" />
+                    </button>
                 </div>
                 <div class="state--pos-right">
                     <div v-if="operList" :class="$style['oper-list']" class="flex gap-6">
@@ -100,7 +108,10 @@ import type { UnitListModuleBaseProps } from "./index";
 defineOptions({ name: "UnitListModule" });
 
 const _props = withDefaults(defineProps<UnitListModuleBaseProps>(), {});
-const emit = defineEmits<{ (e: "operTrigger" | "sortTrigger", type: string): void; (e: "loadMore"): void }>();
+const emit = defineEmits<{
+    (e: "operTrigger" | "sortTrigger", type: string): void;
+    (e: "loadMore" | "refresh"): void;
+}>();
 
 const { t } = useI18n();
 
@@ -173,6 +184,24 @@ watch(
                 }
             }
         }
+        .btn--refresh {
+            @include square(24px);
+            display: flex;
+
+            margin-top: -1px;
+            margin-left: 10px;
+
+            cursor: pointer;
+            transition: 0.26s ease;
+
+            color: var(--editor-c-gray);
+
+            align-items: center;
+            justify-content: center;
+            &:hover {
+                color: var(--editor-color-text);
+            }
+        }
     }
     .m-title {
         font-size: 16px;
@@ -188,8 +217,8 @@ watch(
 
         margin-left: 20px;
 
-        color: #999;
-        .num {
+        color: var(--editor-c-gray);
+        strong {
             font-weight: 700;
 
             margin: 0 0.2em;
@@ -311,7 +340,11 @@ watch(
     }
 }
 .unit-list-module[data-type="user-default"],
+.unit-list-module[data-type="user-collect"],
 .unit-list-module[data-type="user-recent"] {
+    .m-body--inner {
+        min-height: 236px;
+    }
     .m-list {
         grid-template-columns: repeat(5, 1fr);
         .list-item {
@@ -331,9 +364,7 @@ watch(
     }
 }
 .unit-list-module[data-type="user-default"] {
-    .m-body--inner {
-        min-height: 236px;
-    }
+    //
 }
 .unit-list-module[data-type="user-recent"] {
     .m-inner-wrapper {
