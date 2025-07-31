@@ -44,25 +44,14 @@
                     <span class="text">{{ t("UNIT_REGISTER") }}</span>
                 </a>
             </div>
-            <a
-                v-else
-                ref="userAvatarRef"
-                :class="$style['user-avatar']"
-                href="https://www.uemo.net/user/index.html"
-                target="_blank"
-            >
-                <img :src="userInfo.avatar" alt="" />
-            </a>
+            <UserAvatar v-else :user-info="userInfo" @logout="workbench?.userLogout()" />
         </template>
     </UebuilderWorkbenchBrowsingLayout>
 </template>
 <script lang="ts" setup>
 import UebuilderWorkbenchBrowsingLayout from "@stone/uebuilder-workbench-base/src/components/WorkbenchBrowsingLayout.vue";
 
-import { useTippy } from "@stone/uemo-editor-utils/lib/tippy";
-import { h } from "vue";
-
-import UserInfoPanel from "./UserInfoPanel.vue";
+import UserAvatar from "./UserAvatar.vue";
 import { UeBuilderWorkbenchKey } from "../plugin/injection-key";
 import { useUeBuilderWorkbenchToolsStore } from "../store/store-workbench--tools";
 
@@ -70,7 +59,6 @@ const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchToolsStore = useUeBuilderWorkbenchToolsStore();
 
 const userInfo = computed(() => workbenchToolsStore.userInfo);
-const userAvatarRef = useTemplateRef("userAvatarRef");
 
 const { t } = useI18n();
 
@@ -95,47 +83,6 @@ const projectList = [
 function triggerLogin(type: "login" | "register") {
     workbench?.userLogin(type);
 }
-
-useTippy(userAvatarRef, {
-    content: h(UserInfoPanel, {
-        userInfo: userInfo.value!,
-        onLogout: () => {
-            workbench?.userLogout();
-        },
-    }),
-    theme: "ue-el-panel",
-    offset: [-15, 15],
-    delay: [0, 0],
-    zIndex: 999999,
-    arrow: false,
-    interactive: true,
-    animation: false,
-    hideOnClick: false,
-    plugins: [
-        {
-            name: "hideOnOutWindow",
-            fn({ hide, popper }: { hide: () => void; popper: HTMLElement }) {
-                function checkState(event: MouseEvent) {
-                    const target = event.relatedTarget as HTMLElement;
-                    const triggerDom = userAvatarRef.value!;
-                    const isInPanel = popper.contains(target) || target === popper;
-                    const isInTrigger = triggerDom.contains(target) || target === triggerDom;
-                    if (isInPanel || isInTrigger) return;
-
-                    hide();
-                }
-                return {
-                    onShow() {
-                        window.addEventListener("pointerout", checkState);
-                    },
-                    onHide() {
-                        window.removeEventListener("pointerout", checkState);
-                    },
-                };
-            },
-        },
-    ],
-});
 </script>
 <style lang="scss" module>
 .workbench-browsing-layout {
@@ -250,15 +197,6 @@ useTippy(userAvatarRef, {
             color: #fff;
             background: #2c48ff;
         }
-    }
-    .user-avatar {
-        @include image-placeholder(28, 28);
-        display: block;
-        overflow: hidden;
-
-        width: 28px;
-
-        border-radius: 50%;
     }
 }
 </style>
