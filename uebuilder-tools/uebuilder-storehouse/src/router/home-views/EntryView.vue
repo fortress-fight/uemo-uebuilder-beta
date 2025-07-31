@@ -1,7 +1,7 @@
 <template>
     <UeBuilderStorehouseRouterHomeEntryView :banner="banner" :class="$style['index-view']">
         <div :class="$style['storehouse-group']" class="grid">
-            <UnitUserStorehouse type="recent" />
+            <UnitUserStorehouse type="user-recent" />
             <UemoStorehouse />
         </div>
         <template #footer>

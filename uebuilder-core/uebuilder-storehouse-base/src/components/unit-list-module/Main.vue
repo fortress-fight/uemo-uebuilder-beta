@@ -1,15 +1,20 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 11:32:28
+ * @LastEditTime: 2025-07-31 12:49:18
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
         <div :class="$style['m-inner-wrapper']">
             <div :class="$style['m-head']" class="flex justify-between items-center">
-                <div class="state--pos-left">
+                <div class="state--pos-left flex items-center">
                     <div :class="$style['m-title']">
                         {{ title }}
+                    </div>
+                    <div v-if="pages?.itemTotal" :class="$style['m-total']" class="flex items-center">
+                        <span class="text">共</span>
+                        <span :class="$style['num']">{{ pages?.itemTotal }}</span>
+                        <span class="text">个页面</span>
                     </div>
                 </div>
                 <div class="state--pos-right">
@@ -33,46 +38,58 @@
                         :class="$style['m-sort-item']"
                         v-for="(item, index) in sortCondition.list"
                         :key="index"
-                        :data-active="sortCondition.value === item.type"
+                        :data-active="sortType === item.type"
                         @click="emit('sortTrigger', item.type)"
                     >
                         <span class="text">{{ item.label }}</span>
                     </button>
                 </div>
-                <div v-if="list" :class="$style['m-list']">
-                    <div v-for="(item, index) in list" :key="index" :class="$style['list-item']">
-                        <div :class="$style['item-thumb--wrapper']">
-                            <div :class="$style['item-thumb']">
-                                <img :src="item.thumb" alt="" />
-                                <div :class="$style['item-mask']" class="flex items-center justify-center">
-                                    <button v-if="type?.startsWith('user')" :class="$style['item-btn--use']">
-                                        <span class="text">{{ t("UNIT_USE_NOW") }}</span>
-                                    </button>
-                                    <button v-else :class="$style['item-btn--preview']">
-                                        <span class="text">{{ t("UNIT_PREVIEW_NOW") }}</span>
-                                    </button>
+                <div :class="$style['m-body--inner']" class="relative">
+                    <div v-if="list && !loading" :class="$style['m-list']">
+                        <div v-for="(item, index) in list" :key="index" :class="$style['list-item']">
+                            <div :class="$style['item-thumb--wrapper']">
+                                <div :class="$style['item-thumb']">
+                                    <img :src="item.thumb" alt="" />
+                                    <div :class="$style['item-mask']" class="flex items-center justify-center">
+                                        <button v-if="type?.startsWith('user')" :class="$style['item-btn--use']">
+                                            <span class="text">{{ t("UNIT_USE_NOW") }}</span>
+                                        </button>
+                                        <button v-else :class="$style['item-btn--preview']">
+                                            <span class="text">{{ t("UNIT_PREVIEW_NOW") }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div :class="$style['item-info']">
+                                <div :class="$style['item-title']">
+                                    {{ item.title }}
+                                </div>
+                                <div v-if="item.lastEditTime" :class="$style['item-time']">
+                                    <span class="text">编辑于 {{ item.lastEditTime }}</span>
                                 </div>
                             </div>
                         </div>
-                        <div :class="$style['item-info']">
-                            <div :class="$style['item-title']">
-                                {{ item.title }}
-                            </div>
-                            <div v-if="item.lastEditTime" :class="$style['item-time']">
-                                <span class="text">编辑于 {{ item.lastEditTime }}</span>
-                            </div>
+                    </div>
+                    <div v-else :class="$style['m-placeholder']" class="flex flex-col items-center justify-center">
+                        <div :class="$style['placeholder-title']">
+                            {{ placeholder.title }}
+                        </div>
+                        <div :class="$style['placeholder-desc']">
+                            {{ placeholder.desc }}
                         </div>
                     </div>
+                    <UeElLoading v-if="loading" type="circle" bg="rgb(245 246 251)" />
                 </div>
-                <div v-else :class="$style['m-placeholder']" class="flex flex-col items-center justify-center">
-                    <div :class="$style['placeholder-title']">
-                        {{ placeholder.title }}
-                    </div>
-                    <div :class="$style['placeholder-desc']">
-                        {{ placeholder.desc }}
-                    </div>
+            </div>
+            <div class="m-footer">
+                <div
+                    v-if="pages && pages.current < pages.total && !loading"
+                    ref="loadMoreBar"
+                    class="flex items-center"
+                    :class="$style['load-more-bar']"
+                >
+                    <UeElIcon :class="$style['ic']" :size="30" name="icon-app-loading" />
                 </div>
-                <UeElLoading v-if="loading" type="circle" bg="rgb(245 246 251)" />
             </div>
         </div>
     </div>
@@ -83,11 +100,53 @@ import type { UnitListModuleBaseProps } from "./index";
 defineOptions({ name: "UnitListModule" });
 
 const _props = withDefaults(defineProps<UnitListModuleBaseProps>(), {});
-const emit = defineEmits<{ (e: "operTrigger" | "sortTrigger", type: string): void }>();
+const emit = defineEmits<{ (e: "operTrigger" | "sortTrigger", type: string): void; (e: "loadMore"): void }>();
 
 const { t } = useI18n();
+
+const loadMoreBar = useTemplateRef("loadMoreBar");
+
+let observer: IntersectionObserver | null = null;
+function createFooterObserver() {
+    return new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.intersectionRatio < 0.5) return;
+                emit("loadMore");
+            });
+        },
+        { threshold: [0.5] }
+    );
+}
+
+watch(
+    loadMoreBar,
+    (newVal) => {
+        requestAnimationFrame(() => {
+            // 监控滚动到底部的行为
+            if (newVal) {
+                observer = createFooterObserver();
+                observer.observe(newVal);
+            } else {
+                observer?.disconnect();
+            }
+        });
+    },
+    { immediate: true }
+);
 </script>
 <style lang="scss" module>
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 .unit-list-module {
     .m-head {
         line-height: 24px;
@@ -122,13 +181,31 @@ const { t } = useI18n();
 
         color: var(--editor-color-text);
     }
+    .m-total {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 24px;
+
+        margin-left: 20px;
+
+        color: #999;
+        .num {
+            font-weight: 700;
+
+            margin: 0 0.2em;
+
+            color: var(--editor-color-text);
+        }
+    }
     .m-placeholder {
+        position: relative;
+
         width: 100%;
         height: 100%;
         padding: 70px 0;
 
         border: 1px dashed #ccc;
-        border-radius: 10px;
+        border-radius: inherit;
 
         grid-area: 1 / 1 / 2 / 6;
         .placeholder-title {
@@ -156,7 +233,7 @@ const { t } = useI18n();
 
         padding: 4px 10px;
 
-        transition: color 0.26s ease;
+        transition: 0.26s ease;
 
         border-radius: 4px;
         &:hover {
@@ -170,7 +247,7 @@ const { t } = useI18n();
     .m-list {
         display: grid;
 
-        gap: 40px 20px;
+        gap: 20px;
         .list-item {
             &:hover {
                 .item-mask {
@@ -227,23 +304,16 @@ const { t } = useI18n();
             }
         }
     }
-}
-.unit-list-module[data-type="user-recent"] {
-    .m-inner-wrapper {
-        display: grid;
-    }
-    .m-body {
+    .m-body--inner {
         overflow: hidden;
-
-        min-height: 236px;
 
         border-radius: 10px;
     }
+}
+.unit-list-module[data-type="user-default"],
+.unit-list-module[data-type="user-recent"] {
     .m-list {
         grid-template-columns: repeat(5, 1fr);
-        .list-item:nth-of-type(5) ~ .list-item {
-            display: none !important;
-        }
         .list-item {
             .item-thumb--wrapper {
                 position: relative;
@@ -257,6 +327,25 @@ const { t } = useI18n();
                 border-radius: 14px;
                 background: #e6f0ff;
             }
+        }
+    }
+}
+.unit-list-module[data-type="user-default"] {
+    .m-body--inner {
+        min-height: 236px;
+    }
+}
+.unit-list-module[data-type="user-recent"] {
+    .m-inner-wrapper {
+        display: grid;
+    }
+    .m-body--inner {
+        min-height: 236px;
+    }
+    .m-list {
+        grid-template-columns: repeat(5, 1fr);
+        .list-item:nth-of-type(5) ~ .list-item {
+            display: none !important;
         }
         @media screen and (max-width: 1680px) {
             .list-item:nth-of-type(4) ~ .list-item {
@@ -304,6 +393,23 @@ const { t } = useI18n();
                 display: none;
             }
         }
+    }
+}
+.load-more-bar {
+    display: flex;
+
+    width: 100%;
+    height: 30px;
+    padding: 100px 0 50px;
+
+    color: var(--editor-color-text);
+
+    align-items: center;
+    justify-content: center;
+    .ic {
+        font-size: 30px;
+
+        animation: rotate 2s infinite linear;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 /*
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 11:20:28
+ * @LastEditTime: 2025-07-31 12:23:57
  */
 import type { App } from "vue";
 
@@ -20,10 +20,13 @@ export interface UnitListModuleBaseProps {
 
     loading?: boolean;
     list?: { title: string; thumb: string; lastEditTime?: string }[];
+    sortType?: string;
     sortCondition?: {
         value: string;
         list: { label: string; type: string }[];
     };
+
+    pages?: { current: number; total: number; itemTotal: number };
 }
 export type UnitListModuleInstance = InstanceType<typeof UnitListModule>;
 

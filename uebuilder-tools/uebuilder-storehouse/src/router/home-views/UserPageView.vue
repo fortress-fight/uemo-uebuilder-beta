@@ -1,7 +1,7 @@
 <template>
     <UeBuilderStorehouseRouterUserPageView>
         <div :class="$style['storehouse-group']" class="grid">
-            <UnitUserStorehouse />
+            <UnitUserStorehouse type="user-default" />
         </div>
         <template #footer>
             <UeBuilderStorehouseUemoContactUs />

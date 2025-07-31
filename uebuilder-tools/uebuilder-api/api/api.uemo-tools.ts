@@ -1,7 +1,7 @@
 /*
  * @Description: uemo-tools 页面操作相关，需要用户登陆
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 11:07:17
+ * @LastEditTime: 2025-07-31 10:44:21
  */
 import { AxiosUemoTools } from "./api.instance";
 
@@ -101,7 +101,7 @@ export function createShareLink(data: { id: string; action: "delete" | "edit" | 
  * 获取用户模板列表
  * @param params - 分页参数
  */
-export function getUserList(params?: { page: number }) {
+export function getUserPageList(params?: { page: number }) {
     return AxiosUemoTools.get<ApiResponse<{ list: PaginatedResponse<UserTemplateBase> }>>("/pages/user/list", {
         params,
     });
@@ -111,7 +111,7 @@ export function getUserList(params?: { page: number }) {
  * 获取用户布局列表
  * @param params - 分页参数
  */
-export function getUserLayoutList(params?: { page: number }) {
+export function getUserLayoutList(params?: { page: number; limit?: number; order?: string }) {
     return AxiosUemoTools.get<ApiResponse<{ list: PaginatedResponse<UserTemplateBase> }>>("/units/user/list", {
         params,
     });

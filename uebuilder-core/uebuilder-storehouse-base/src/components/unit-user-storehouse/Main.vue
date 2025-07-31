@@ -1,14 +1,18 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 11:00:08
+ * @LastEditTime: 2025-07-31 12:27:19
 -->
 <template>
     <UnitListModule
         :class="$style['user-storehouse']"
         v-bind="listModuleProps"
         :list="list"
+        :type="type"
         :loading="loading"
+        :sortType="sortType"
+        @loadMore="handleLoadMore"
+        @sortTrigger="handleSortTrigger"
         @operTrigger="handleOperTrigger"
     />
     <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
@@ -27,8 +31,10 @@ import UnitListModule from "../unit-list-module";
 defineOptions({ name: "UnitUserStorehouse", inheritAttrs: false });
 
 const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
-    type: "default",
+    sortType: "newest",
+    type: "user-default",
 });
+const emit = defineEmits<{ (e: "sortTrigger", type: string): void; (e: "loadMore"): void }>();
 const { t } = useI18n();
 
 const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
@@ -36,9 +42,8 @@ const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
 const router = useRouter();
 
 const listModuleProps = computed<UnitListModuleBaseProps>(() => {
-    if (props.type === "recent") {
+    if (props.type === "user-recent") {
         return {
-            type: "user-recent",
             title: t("UEBUILDER_USER_STOREHOUSE_RECENT"),
             placeholder: {
                 title: t("UEBUILDER_USER_STOREHOUSE_RECENT_PLACEHOLDER"),
@@ -51,11 +56,9 @@ const listModuleProps = computed<UnitListModuleBaseProps>(() => {
         };
     }
     return {
-        type: "user-default",
         title: t("UEBUILDER_USER_STOREHOUSE_TITLE"),
         placeholder: { title: t("UEBUILDER_USER_STOREHOUSE_PLACEHOLDER"), desc: t("UEBUILDER_USER_STOREHOUSE_DESC") },
         operList: [{ type: "add-page", label: t("UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE") }],
-        sortType: "newest",
         sortCondition: {
             value: "newest",
             list: [
@@ -63,6 +66,7 @@ const listModuleProps = computed<UnitListModuleBaseProps>(() => {
                 { type: "created", label: t("UEBUILDER_USER_STOREHOUSE_SORT_CREATED") },
             ],
         },
+        pages: props.pages,
     };
 });
 
@@ -96,6 +100,14 @@ const handleOperTrigger = (type: string) => {
         default:
             break;
     }
+};
+
+const handleSortTrigger = (type: string) => {
+    emit("sortTrigger", type);
+};
+
+const handleLoadMore = () => {
+    emit("loadMore");
 };
 </script>
 <style lang="scss" module>
