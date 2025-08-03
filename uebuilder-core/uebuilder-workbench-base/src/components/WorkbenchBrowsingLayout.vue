@@ -31,12 +31,12 @@ const storehouseIframe = useTemplateRef("storehouseIframe");
 
 const appStorehouseSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchPath}uebuilder-storehouse/`);
 
-let workbenchStorehouseChannel: WorkbenchStorehouseChannel | null = null;
+const workbenchStorehouseChannel = ref<WorkbenchStorehouseChannel | null>(null);
 function initialWorkbenchStorehouseChannel() {
     const remoteWindow = storehouseIframe.value?.contentWindow;
     if (!remoteWindow) return;
 
-    workbenchStorehouseChannel = WorkbenchStorehouseChannel.getInstance(remoteWindow, {
+    workbenchStorehouseChannel.value = WorkbenchStorehouseChannel.getInstance(remoteWindow, {
         on: {
             storehouseReady: (channel) => {
                 channel.remote
@@ -75,9 +75,11 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
     workbenchStore.stopPageLoading();
-    workbenchStorehouseChannel?.destroy();
-    workbenchStorehouseChannel = null;
+    workbenchStorehouseChannel.value?.destroy();
+    workbenchStorehouseChannel.value = null;
 });
+
+defineExpose({ workbenchStorehouseChannel });
 </script>
 <style lang="scss" module>
 .workbench-browsing-layout {

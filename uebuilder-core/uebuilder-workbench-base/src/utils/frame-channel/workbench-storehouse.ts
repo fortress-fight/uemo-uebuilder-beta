@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 15:14:46
+ * @LastEditTime: 2025-08-04 00:13:07
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -58,7 +58,7 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
 
         const channelManager = WorkbenchStorehouseChannel.channelManager;
         if (!channelManager.has(remoteWindow)) {
-            channelManager.set(remoteWindow, new WorkbenchStorehouseChannel(remoteWindow, param));
+            channelManager.set(remoteWindow, new this(remoteWindow, param));
         }
 
         const instance = channelManager.get(remoteWindow) as WorkbenchStorehouseChannel;
