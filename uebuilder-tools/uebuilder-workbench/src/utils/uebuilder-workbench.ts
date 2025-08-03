@@ -8,6 +8,7 @@ import UebuilderToolsWorkbench from "@/components/Workbench.vue";
 import { LoginManager } from "@/utils/login-manager";
 
 import { i18n } from "../i18n";
+import { WorkbenchCreatorChannelTools } from "./frame-channel/workbench-creator";
 
 /**
  * UeBuilder 工作台实现类
@@ -19,6 +20,8 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
 
     /** 登录管理器 */
     private readonly loginManager: LoginManager;
+
+    WorkbenchCreatorChannelCreator = WorkbenchCreatorChannelTools;
 
     constructor(dom: HTMLElement, option: UE_BUILDER_WORKBENCH.InitParams) {
         super(dom, option);

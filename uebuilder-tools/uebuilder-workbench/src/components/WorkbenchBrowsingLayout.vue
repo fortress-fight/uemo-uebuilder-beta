@@ -1,5 +1,5 @@
 <template>
-    <UebuilderWorkbenchBrowsingLayout :class="$style['workbench-browsing-layout']">
+    <UebuilderWorkbenchBrowsingLayout :class="$style['workbench-browsing-layout']" ref="workbenchBrowsingLayout">
         <template #headLeft>
             <div :class="$style['site-logo']">
                 <UeElIcon name="icon-uemo-logo" :size="24" />
@@ -57,8 +57,25 @@ import { useUeBuilderWorkbenchToolsStore } from "../store/store-workbench--tools
 
 const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchToolsStore = useUeBuilderWorkbenchToolsStore();
+const workbenchBrowsingLayout = useTemplateRef("workbenchBrowsingLayout");
 
 const userInfo = computed(() => workbenchToolsStore.userInfo);
+watch(
+    () => workbenchToolsStore.userLogin,
+    async (isLogin) => {
+        if (isLogin) return;
+
+        const workbenchStorehouseChannel = workbenchBrowsingLayout.value?.workbenchStorehouseChannel;
+        if (!workbenchStorehouseChannel) return;
+
+        try {
+            const remote = await workbenchStorehouseChannel.remote;
+            remote.userLogout();
+        } catch (error) {
+            console.error("Failed to logout:", error);
+        }
+    }
+);
 
 const { t } = useI18n();
 
