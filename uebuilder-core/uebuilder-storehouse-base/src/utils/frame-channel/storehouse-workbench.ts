@@ -1,13 +1,18 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 03:08:05
+ * @LastEditTime: 2025-08-04 00:13:28
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";
-import type { UeBuilderStorehouseBase } from "../..";
 
 import { MessageChannel } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
+
+type Param = {
+    on: {
+        launchStorehouse: (config: UE_BUILDER_STOREHOUSE.Config) => void;
+    };
+};
 
 export class StorehouseWorkbenchChannel extends MessageChannel<
     WORKBENCH_STOREHOUSE_CHANNEL.Api,
@@ -15,13 +20,13 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
 > {
     readonly localApi: STOREHOUSE_WORKBENCH_CHANNEL.Api = {
         launchStorehouse: (config) => {
-            this.UeBuilderStorehouseBase.launchStorehouse(config);
+            this.param.on.launchStorehouse(config);
         },
     };
 
     private constructor(
-        remoteWindow: Window,
-        public readonly UeBuilderStorehouseBase: UeBuilderStorehouseBase
+        readonly remoteWindow: Window,
+        private readonly param: Param
     ) {
         super(remoteWindow, "workbenchStorehouseChannel", {
             from: "storehouse",
@@ -31,14 +36,14 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
         this.connect();
     }
 
-    public static getInstance(remoteWindow: Window, storehouse: UeBuilderStorehouseBase) {
+    public static getInstance(remoteWindow: Window, param: Param) {
         if (!remoteWindow) {
             throw new Error("Invalid remote window");
         }
 
         const channelManager = this.channelManager;
         if (!channelManager.has(remoteWindow)) {
-            channelManager.set(remoteWindow, new this(remoteWindow, storehouse));
+            channelManager.set(remoteWindow, new this(remoteWindow, param));
         }
 
         const instance = channelManager.get(remoteWindow) as StorehouseWorkbenchChannel;

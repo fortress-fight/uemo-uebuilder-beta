@@ -42,7 +42,13 @@ export abstract class UeBuilderStorehouseBase {
      */
     public storehouseWorkbenchChannel: StorehouseWorkbenchChannel | null = null;
     async initializeMessageChannel(): Promise<void> {
-        this.storehouseWorkbenchChannel = StorehouseWorkbenchChannel.getInstance(window.parent, this);
+        this.storehouseWorkbenchChannel = StorehouseWorkbenchChannel.getInstance(window.parent, {
+            on: {
+                launchStorehouse: (config) => {
+                    this.launchStorehouse(config);
+                },
+            },
+        });
         const remote = await this.storehouseWorkbenchChannel.remote;
         await remote.storehouseReady();
 
