@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-08-04 00:13:28
+ * @LastEditTime: 2025-08-04 01:31:19
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";
@@ -18,13 +18,15 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
     WORKBENCH_STOREHOUSE_CHANNEL.Api,
     STOREHOUSE_WORKBENCH_CHANNEL.Api
 > {
-    readonly localApi: STOREHOUSE_WORKBENCH_CHANNEL.Api = {
-        launchStorehouse: (config) => {
-            this.param.on.launchStorehouse(config);
-        },
-    };
+    get localApi(): STOREHOUSE_WORKBENCH_CHANNEL.Api {
+        return {
+            launchStorehouse: (config) => {
+                this.param.on.launchStorehouse(config);
+            },
+        };
+    }
 
-    private constructor(
+    constructor(
         readonly remoteWindow: Window,
         private readonly param: Param
     ) {
@@ -43,6 +45,8 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
 
         const channelManager = this.channelManager;
         if (!channelManager.has(remoteWindow)) {
+            // NOTE
+            // 使用 new this 而不是 new StorehouseWorkbenchChannel 是因为 this 是使用当前类的子类
             channelManager.set(remoteWindow, new this(remoteWindow, param));
         }
 

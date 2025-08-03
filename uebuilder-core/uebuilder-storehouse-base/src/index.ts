@@ -27,6 +27,8 @@ export abstract class UeBuilderStorehouseBase {
 
     protected store = useUeBuilderStorehouseStore(pinia);
 
+    abstract StorehouseWorkbenchChannelCreator: typeof StorehouseWorkbenchChannel;
+
     /**
      * 构造函数
      * @param {HTMLElement} rootDom - 根 DOM 元素
@@ -42,13 +44,14 @@ export abstract class UeBuilderStorehouseBase {
      */
     public storehouseWorkbenchChannel: StorehouseWorkbenchChannel | null = null;
     async initializeMessageChannel(): Promise<void> {
-        this.storehouseWorkbenchChannel = StorehouseWorkbenchChannel.getInstance(window.parent, {
+        this.storehouseWorkbenchChannel = this.StorehouseWorkbenchChannelCreator.getInstance(window.parent, {
             on: {
                 launchStorehouse: (config) => {
                     this.launchStorehouse(config);
                 },
             },
         });
+
         const remote = await this.storehouseWorkbenchChannel.remote;
         await remote.storehouseReady();
 
