@@ -4,8 +4,12 @@ import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-co
 import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
 import router from "@/router";
 
+import { StorehouseWorkbenchChannelTools } from "./frame-channel/storehouse-workbench";
+
 export class UeBuilderStorehouse extends UeBuilderStorehouseBase {
     name = "uebuilder-storehouse--tools";
+
+    StorehouseWorkbenchChannelCreator = StorehouseWorkbenchChannelTools;
 
     // eslint-disable-next-line @typescript-eslint/no-useless-constructor
     constructor(dom: HTMLElement) {
