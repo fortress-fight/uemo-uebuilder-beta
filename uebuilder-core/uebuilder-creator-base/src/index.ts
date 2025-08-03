@@ -150,7 +150,25 @@ export class UeBuilderCreatorBase {
     private initializeMessageChannel(): Promise<void> {
         if (!this.workbenchFrame?.contentWindow) return Promise.resolve();
 
-        this.creatorWorkbenchChannel = CreatorWorkbenchChannel.getInstance(this.workbenchFrame.contentWindow, this);
+        this.creatorWorkbenchChannel = CreatorWorkbenchChannel.getInstance(this.workbenchFrame.contentWindow, {
+            on: {
+                launchWorkbench: () => {
+                    this.launchWorkbench();
+                },
+                workbenchUnload: () => {
+                    this.workbenchUnload();
+                },
+                changeWorkbenchSize: (isFullSize: boolean) => {
+                    this.changeWorkbenchSize(isFullSize);
+                },
+                workbenchStateChanged: (state: UE_BUILDER.State) => {
+                    this.workbenchStateChanged(state);
+                },
+                getEditorPageData: () => {
+                    return this.getEditorPageData();
+                },
+            },
+        });
 
         return Promise.resolve();
     }
