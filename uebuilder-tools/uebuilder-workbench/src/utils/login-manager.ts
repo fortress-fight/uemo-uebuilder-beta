@@ -1,7 +1,7 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-30 10:35:48
+ * @LastEditTime: 2025-08-04 00:27:38
  */
 import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@stone/uebuilder-api--tools/api";
 import { useUeBuilderWorkbenchToolsStore } from "@/store/store-workbench--tools";
@@ -27,7 +27,7 @@ export class LoginManager {
 
     public async logout() {
         await userLogout();
-        UeBuilderWorkbenchToolsStore.clearUserInfo();
+        UeBuilderWorkbenchToolsStore.userLogout();
     }
 
     /**

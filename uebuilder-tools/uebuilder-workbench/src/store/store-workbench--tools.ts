@@ -1,11 +1,13 @@
 import { defineStore } from "@stone/uemo-editor-utils/lib/pinia";
 
 export type UeBuilderWorkbenchStoreToolsState = {
+    userLogin: boolean;
     userInfo: UE_BUILDER_WORKBENCH_TOOLS.UserInfo | null;
 };
 
 export const useUeBuilderWorkbenchToolsStore = defineStore("uebuilderToolsWorkbench", {
     state: (): UeBuilderWorkbenchStoreToolsState => ({
+        userLogin: false,
         userInfo: null,
     }),
 
@@ -16,12 +18,14 @@ export const useUeBuilderWorkbenchToolsStore = defineStore("uebuilderToolsWorkbe
          */
         setUserInfo(userInfo: UE_BUILDER_WORKBENCH_TOOLS.UserInfo) {
             this.userInfo = userInfo;
+            this.userLogin = true;
         },
 
         /**
-         * 清除用户信息
+         * 用户退出登录
          */
-        clearUserInfo() {
+        userLogout() {
+            this.userLogin = false;
             this.userInfo = null;
         },
     },
