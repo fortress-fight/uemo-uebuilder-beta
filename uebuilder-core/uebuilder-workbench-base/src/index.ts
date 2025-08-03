@@ -32,6 +32,8 @@ export abstract class UeBuilderWorkbenchBase {
 
     protected store = useUeBuilderWorkbenchStore(pinia);
 
+    abstract WorkbenchCreatorChannelCreator: typeof WorkbenchCreatorChannel;
+
     /**
      * 构造函数
      * @param {HTMLElement} rootDom - 根 DOM 元素
@@ -46,11 +48,17 @@ export abstract class UeBuilderWorkbenchBase {
 
     /**
      * 初始化消息通道
-     * @private
+     * @protected
      */
-    private workbenchCreatorChannel: WorkbenchCreatorChannel | null = null;
+    protected workbenchCreatorChannel: WorkbenchCreatorChannel | null = null;
     async initializeMessageChannel(): Promise<void> {
-        this.workbenchCreatorChannel = WorkbenchCreatorChannel.getInstance(window.parent, this);
+        this.workbenchCreatorChannel = this.WorkbenchCreatorChannelCreator.getInstance(window.parent, {
+            on: {
+                launchWorkbench: (config) => {
+                    this.launchWorkbench(config);
+                },
+            },
+        });
         const remote = await this.workbenchCreatorChannel.remote;
 
         // 通知 creator 工作台已准备好,等待启动命令
