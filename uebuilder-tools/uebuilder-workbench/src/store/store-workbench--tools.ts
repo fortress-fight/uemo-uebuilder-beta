@@ -5,7 +5,7 @@ export type UeBuilderWorkbenchStoreToolsState = {
     userInfo: UE_BUILDER_WORKBENCH_TOOLS.UserInfo | null;
 };
 
-export const useUeBuilderWorkbenchToolsStore = defineStore("uebuilderToolsWorkbench", {
+export const useUeBuilderWorkbenchToolsStore = defineStore("uebuilderWorkbenchTools", {
     state: (): UeBuilderWorkbenchStoreToolsState => ({
         userLogin: false,
         userInfo: null,

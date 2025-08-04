@@ -4,7 +4,7 @@ import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-co
 
 import { AxiosUemoTools, UemoAPIError } from "@stone/uebuilder-api--tools/api";
 import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
-import UebuilderToolsWorkbench from "@/components/Workbench.vue";
+import UebuilderWorkbenchTools from "@/components/Workbench.vue";
 import { LoginManager } from "@/utils/login-manager";
 
 import { i18n } from "../i18n";
@@ -53,7 +53,7 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
         void this.loginManager
             .updateUserInfo()
             .finally(() => {
-                const workbenchApp = createApp(UebuilderToolsWorkbench);
+                const workbenchApp = createApp(UebuilderWorkbenchTools);
                 workbenchApp.provide(UeBuilderWorkbenchKey, this);
 
                 void this.renderWorkbench(workbenchApp, {
