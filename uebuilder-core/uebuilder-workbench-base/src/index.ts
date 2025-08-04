@@ -87,6 +87,7 @@ export abstract class UeBuilderWorkbenchBase {
     abstract openLoginPanel(): void;
 
     showLoading() {
+        if (NProgress.isStarted()) return;
         NProgress.configure({ parent: "body" }).start();
     }
 
