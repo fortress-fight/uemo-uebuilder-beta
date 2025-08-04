@@ -1,9 +1,9 @@
 /*
  * @Description: 仓库基础 store 配置
  * @Author: F-Stone
- * @LastEditTime: 2025-07-22 10:48:41
+ * @LastEditTime: 2025-08-05 00:07:26
  */
-import { defineStore } from "pinia";
+import { defineStore } from "@stone/uemo-editor-utils/lib/pinia";
 
 export const useUeBuilderStorehouseStore = defineStore("uebuilderStorehouse", {
     state: () => ({
