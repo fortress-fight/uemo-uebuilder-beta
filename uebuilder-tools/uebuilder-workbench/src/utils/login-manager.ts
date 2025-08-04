@@ -1,7 +1,7 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-08-05 00:26:51
+ * @LastEditTime: 2025-08-05 01:02:49
  */
 import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@stone/uebuilder-api--tools/api";
 import { pinia, useUeBuilderWorkbenchToolsStore } from "@/store";
@@ -21,7 +21,11 @@ export class LoginManager {
      * 检查登录状态并处理登录窗口
      */
     public async checkLogin(): Promise<boolean> {
-        return await checkLoginStatus();
+        const isLogin = await checkLoginStatus();
+        if (isLogin) {
+            UeBuilderWorkbenchToolsStore.userLogin();
+        }
+        return isLogin;
     }
 
     public async logout() {
@@ -106,6 +110,7 @@ export class LoginManager {
 
     /**
      * 处理开发环境登录
+     * NOTE 由于开发环境无法监听 onunload 事件，所以需要使用 setInterval 来监听登录窗口是否关闭
      * @private
      */
     private handleDevelopmentLogin(): void {

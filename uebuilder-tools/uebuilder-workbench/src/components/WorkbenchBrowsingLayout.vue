@@ -61,40 +61,30 @@ const workbenchBrowsingLayout = useTemplateRef("workbenchBrowsingLayout");
 
 const userInfo = computed(() => workbenchToolsStore.userInfo);
 watch(
-    () => workbenchToolsStore.userLogin,
-    async (isLogin) => {
-        if (isLogin) return;
-
-        const workbenchStorehouseChannel = workbenchBrowsingLayout.value?.workbenchStorehouseChannel;
+    [() => workbenchToolsStore.userLoginState, () => workbenchBrowsingLayout.value?.workbenchStorehouseChannel],
+    async ([isLogin, workbenchStorehouseChannel]) => {
         if (!workbenchStorehouseChannel) return;
 
         try {
             const remote = await workbenchStorehouseChannel.remote;
-            remote.userLogout();
+            if (isLogin) {
+                remote.userLogin();
+            } else {
+                remote.userLogout();
+            }
         } catch (error) {
             console.error("Failed to logout:", error);
         }
-    }
+    },
+    { immediate: true }
 );
 
 const { t } = useI18n();
 
 const projectList = [
-    {
-        title: "UElike",
-        subtitle: "品牌官网定制服务",
-        link: "https://www.uelike.com/",
-    },
-    {
-        title: "UEmo",
-        subtitle: "高品质网站模板",
-        link: "https://www.uemo.net/",
-    },
-    {
-        title: "小程序",
-        subtitle: "商务社交利器",
-        link: "https://uemox.com/",
-    },
+    { title: "UElike", subtitle: "品牌官网定制服务", link: "https://www.uelike.com/" },
+    { title: "UEmo", subtitle: "高品质网站模板", link: "https://www.uemo.net/" },
+    { title: "小程序", subtitle: "商务社交利器", link: "https://uemox.com/" },
 ];
 
 function triggerLogin(type: "login" | "register") {

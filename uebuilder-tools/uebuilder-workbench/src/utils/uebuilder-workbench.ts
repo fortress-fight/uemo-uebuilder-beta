@@ -50,9 +50,12 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
      * @param {UE_BUILDER_WORKBENCH.Config} config - 工作台配置
      */
     launchWorkbench(config: UE_BUILDER_WORKBENCH.Config): void {
-        void this.loginManager
-            .updateUserInfo()
-            .finally(() => {
+        this.loginManager
+            .checkLogin()
+            .then((isLogin) => {
+                return isLogin ? this.loginManager.updateUserInfo() : undefined;
+            })
+            .then(() => {
                 const workbenchApp = createApp(UebuilderWorkbenchTools);
                 workbenchApp.provide(UeBuilderWorkbenchKey, this);
 
