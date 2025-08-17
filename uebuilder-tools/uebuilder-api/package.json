@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "[ ! -d \".husky\" ] && mkdir -p .husky && echo -e 'yarn lint-staged\\n' > .husky/pre-commit && chmod +x .husky/pre-commit || echo '.husky folder already exists, skipping creation.'",
+        "prepare": "HUSKY_DIR=$(pwd)/.husky && cd $(git rev-parse --show-toplevel) && husky \"$HUSKY_DIR\" && echo 'yarn lint-staged' > \"$HUSKY_DIR\"/pre-commit",
         "test": "echo \"Error: run tests from root\" && exit 1",
         "supportedBrowsers": "echo \"export default $(browserslist-useragent-regexp --allowHigherVersions);\" > ./lib/supported-browsers.js",
         "supportedBrowsersWin": "(echo export default && browserslist-useragent-regexp --allowHigherVersions) > supportedBrowsers.js"
