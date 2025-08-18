@@ -20,6 +20,9 @@ defineProps<{
 .error-tip {
     font-size: 12px;
 
+    position: absolute;
+    top: 100%;
+
     display: block;
 
     margin-top: 4px;

@@ -106,7 +106,7 @@ const canSubmit = computed(() => {
  */
 function handleSubmit() {
     if (validateFormData()) {
-        emit("submit", formData);
+        emit("submit", toRaw(formData));
     } else {
         instance?.proxy?.$ueElToast.error(t("UEBUILDER_TEMPLATE_FORM_ERROR"));
     }
@@ -175,7 +175,7 @@ onBeforeMount(() => {
     }
     .panel-body {
         .row {
-            margin-bottom: 20px;
+            margin-bottom: 26px;
             &:last-child {
                 margin-bottom: 0;
             }
@@ -198,16 +198,16 @@ onBeforeMount(() => {
             width: 100%;
             padding: 14px 17px;
 
-            color: #333;
-            border: 1px solid #f0f0f0;
+            color: var(--editor-color-text);
+            border-width: 0;
             border-radius: 5px;
-            &:valid,
+            box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
             &:focus {
-                border-color: #ccc;
+                box-shadow: inset 0 0 0 1px color(var(--ue-border-color--deeper));
             }
         }
         &[data-error="true"] input {
-            border: 2px solid var(--c-red-40);
+            box-shadow: inset 0 0 0 1px var(--c-red-40);
         }
     }
     .btn--submit {
@@ -221,9 +221,9 @@ onBeforeMount(() => {
         transition: 0.26s ease;
         text-align: center;
 
-        color: #999;
+        color: var(--editor-c-gray);
         border-radius: 5px;
-        background: #f4f4f4;
+        background: color(var(--ue-background-color));
         &[data-active="true"] {
             color: #fff;
             background: #2c48ff;

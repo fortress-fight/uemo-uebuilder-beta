@@ -17,7 +17,12 @@
             <span class="text">{{ t("UEBUILDER_TEMPLATE_FORM_THUMB_PLACEHOLDER") }}</span>
             <span :class="$style['tip']">{{ t("UEBUILDER_TEMPLATE_FORM_THUMB_TIP") }}</span>
         </div>
-        <div v-else :class="$style['preview-area']" :style="{ 'background-image': `url(${valueRef})` }">
+        <div v-else :class="$style['preview-area']">
+            <div
+                :class="$style['preview-image']"
+                v-if="valueRef"
+                :style="{ 'background-image': `url(${valueRef})` }"
+            ></div>
             <div :class="$style['oper-list']">
                 <button :class="$style['list-item']">
                     <UeElIcon name="icon-bianji" :size="15" />
@@ -60,7 +65,8 @@ const uploadProgressBarProps = computed<UE_EL_COMPONENT.UeElLoadingProps>(() => 
 /**
  * 处理上传成功
  */
-function handleUploadSuccess(_imageLink: string) {
+function handleUploadSuccess(imageLink: string) {
+    valueRef.value = imageLink;
     progressRef.value = 0;
 }
 
@@ -89,11 +95,19 @@ function handleClearThumb() {
 
     cursor: pointer;
 
-    border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fbfbfb;
     .icon-box {
         margin-bottom: 15px;
+    }
+    &::before {
+        @include ab-cover;
+        z-index: 100;
+
+        content: "";
+        pointer-events: none;
+
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
     }
     &[data-active="true"] {
         img {
@@ -104,7 +118,9 @@ function handleClearThumb() {
         }
     }
     &[data-theme="error"] {
-        border: 2px solid var(--c-red-40);
+        &::before {
+            box-shadow: inset 0 0 0 1px var(--c-red-40);
+        }
     }
     .tip {
         font-size: 12px;
@@ -116,15 +132,20 @@ function handleClearThumb() {
         color: var(--editor-c-gray);
     }
     .btn-inner {
-        background: #fbfbfb;
+        background: color(var(--ue-background-color));
     }
     .preview-area {
         width: 100%;
         height: 100%;
 
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTUyOUU2MTAwNjczMTFFOEE1MEQ5RTI4RUQzQzJBNTUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTUyOUU2MTEwNjczMTFFOEE1MEQ5RTI4RUQzQzJBNTUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFNTI5RTYwRTA2NzMxMUU4QTUwRDlFMjhFRDNDMkE1NSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNTI5RTYwRjA2NzMxMUU4QTUwRDlFMjhFRDNDMkE1NSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuLRCmkAAAAqSURBVHjaYvz//z8DNnD27Fms4kwMJIJRDcQAFlzhbWxsPBpK9NMAEGAA+cQIhpHCLJEAAAAASUVORK5CYII=");
+        background-size: 12px 12px;
+        .preview-image {
+            @include ab-cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
     }
     .oper-list {
         position: absolute;

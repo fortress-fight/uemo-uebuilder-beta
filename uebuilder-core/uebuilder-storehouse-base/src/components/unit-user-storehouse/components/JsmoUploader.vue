@@ -38,8 +38,8 @@ const { t } = useI18n();
  * 上传并使用本地的页面数据
  * @param pageData
  */
-function uploadPageData(_pageData: string) {
-    //
+function uploadPageData(pageData: string) {
+    valueRef.value = pageData;
 }
 </script>
 <style lang="scss" module>
@@ -55,12 +55,12 @@ function uploadPageData(_pageData: string) {
     transition: 0.26s ease;
     text-align: center;
 
-    color: #181818;
+    color: var(--editor-color-text);
     border-radius: 5px;
     background: #fff;
-    box-shadow: inset 0 0 0 1px #181818;
+    box-shadow: inset 0 0 0 1px color(var(--ue-border-color));
     &[data-theme="error"] {
-        box-shadow: inset 0 0 0 2px var(--c-red-40);
+        box-shadow: inset 0 0 0 1px var(--c-red-40);
     }
     &[data-active="true"] {
         cursor: default;
@@ -69,12 +69,14 @@ function uploadPageData(_pageData: string) {
         box-shadow: inset 0 0 0 1px var(--theme-layout-col);
     }
     .btn--change {
+        @include circle(30px);
         cursor: pointer;
+        transition: 0.26s ease;
 
         color: var(--c-red-40);
         &:hover {
             color: #fff;
-            background-color: var(--theme-layout-group);
+            background-color: var(--c-red-40);
         }
     }
 }
