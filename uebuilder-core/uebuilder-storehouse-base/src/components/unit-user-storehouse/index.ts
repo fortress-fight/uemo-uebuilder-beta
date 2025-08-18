@@ -1,7 +1,7 @@
 /*
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 13:58:51
+ * @LastEditTime: 2025-08-18 14:20:35
  */
 import type { App } from "vue";
 
@@ -15,7 +15,7 @@ UnitUserStorehouse.install = (app: App) => {
 export interface UnitUserStorehouseBaseProps {
     type?: "user-recent" | "user-default" | "user-collect";
     pages?: { current: number; total: number; itemTotal?: number };
-    list?: { title: string; thumb: string; lastEditTime?: string }[];
+    list?: { title: string; thumb: string; lastEditTime?: string; id: string }[];
     sortType?: string;
     loading?: boolean;
 }
