@@ -1,7 +1,7 @@
 /*
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 13:59:10
+ * @LastEditTime: 2025-08-18 14:07:05
  */
 import type { App } from "vue";
 
@@ -12,14 +12,21 @@ UnitListModule.install = (app: App) => {
     app.component(UnitListModule.name, UnitListModule);
 };
 
+export interface UnitListModuleItem {
+    title: string;
+    thumb: string;
+    lastEditTime?: string;
+    id: string;
+}
+
 export interface UnitListModuleBaseProps {
     type?: "default" | "newest" | "user-recent" | "user-default" | "user-collect";
     title: string;
     placeholder: { title: string; desc: string };
-    operList?: { label: string; type: string; arrow?: boolean }[];
+    operList?: { label: string; type: string; arrow?: boolean; link?: string }[];
 
     loading?: boolean;
-    list?: { title: string; thumb: string; lastEditTime?: string }[];
+    list?: UnitListModuleItem[];
     sortType?: string;
     sortCondition?: {
         value: string;

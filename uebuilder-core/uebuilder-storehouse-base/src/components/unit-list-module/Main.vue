@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 14:06:12
+ * @LastEditTime: 2025-08-18 14:39:58
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -27,16 +27,19 @@
                 </div>
                 <div class="state--pos-right">
                     <div v-if="operList" :class="$style['oper-list']" class="flex gap-6">
-                        <div
+                        <component
                             v-for="(item, index) in operList"
                             :key="index"
                             :class="$style['oper-item']"
                             class="flex items-center"
                             @click="emit('operTrigger', item.type)"
+                            :is="item.link ? 'a' : 'button'"
+                            :href="item.link"
+                            target="_blank"
                         >
                             <span class="text">{{ item.label }}</span>
                             <UeElIcon :class="$style['ic']" v-if="item.arrow" name="icon-youjiantou" class="ml-1" />
-                        </div>
+                        </component>
                     </div>
                 </div>
             </div>
@@ -66,6 +69,34 @@
                                             <span class="text">{{ t("UNIT_PREVIEW_NOW") }}</span>
                                         </button>
                                     </div>
+                                </div>
+                                <div :class="$style['oper-list']">
+                                    <template v-if="type === 'user-default' || type === 'user-recent'">
+                                        <button
+                                            :class="$style['oper-item']"
+                                            data-type="edit"
+                                            @click.stop="editItem(item)"
+                                        >
+                                            <UeElIcon name="icon-bianji" :size="15" />
+                                        </button>
+                                        <button
+                                            :class="$style['oper-item']"
+                                            data-type="remove"
+                                            @click.stop="removeItem(item)"
+                                        >
+                                            <UeElIcon name="icon-shanchu" />
+                                        </button>
+                                    </template>
+                                    <template v-else-if="type === 'user-collect'">
+                                        <button
+                                            :class="$style['oper-item']"
+                                            class="flex justify-center items-center"
+                                            data-type="collect"
+                                            @click.stop="toggleCollect(item)"
+                                        >
+                                            <UeElIcon name="icon-app-start-fill" />
+                                        </button>
+                                    </template>
                                 </div>
                             </div>
                             <div :class="$style['item-info']">
@@ -103,7 +134,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import type { UnitListModuleBaseProps } from "./index";
+import type { UnitListModuleBaseProps, UnitListModuleItem } from "./index";
 
 defineOptions({ name: "UnitListModule" });
 
@@ -111,6 +142,8 @@ const _props = withDefaults(defineProps<UnitListModuleBaseProps>(), {});
 const emit = defineEmits<{
     (e: "operTrigger" | "sortTrigger", type: string): void;
     (e: "loadMore" | "refresh"): void;
+    // eslint-disable-next-line @typescript-eslint/unified-signatures
+    (e: "removeItem" | "editItem" | "toggleCollect", id: string): void;
 }>();
 
 const { t } = useI18n();
@@ -145,6 +178,18 @@ watch(
     },
     { immediate: true }
 );
+
+function removeItem(item: UnitListModuleItem) {
+    emit("removeItem", item.id);
+}
+
+function editItem(item: UnitListModuleItem) {
+    emit("editItem", item.id);
+}
+
+function toggleCollect(item: UnitListModuleItem) {
+    emit("toggleCollect", item.id);
+}
 </script>
 <style lang="scss" module>
 @keyframes rotate {
@@ -279,6 +324,9 @@ watch(
         gap: 20px;
         .list-item {
             &:hover {
+                .oper-list {
+                    opacity: 1;
+                }
                 .item-mask {
                     opacity: 1;
                 }
@@ -332,6 +380,37 @@ watch(
                 color: var(--c-gray-60);
             }
         }
+        .oper-list {
+            position: absolute;
+            top: min(7%, 15px);
+            right: min(4%, 15px);
+
+            opacity: 0;
+            .oper-item {
+                font-size: 16px;
+
+                display: block;
+                display: flex;
+
+                width: 34px;
+                height: 34px;
+                margin-bottom: 10px;
+
+                color: #333;
+                border-radius: 3px;
+                background-color: #fff;
+                box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+
+                align-items: center;
+                justify-content: center;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                &[data-type="collect"] {
+                    color: #ff7a00;
+                }
+            }
+        }
     }
     .m-body--inner {
         overflow: hidden;
@@ -340,11 +419,13 @@ watch(
     }
 }
 .unit-list-module[data-type="user-default"],
-.unit-list-module[data-type="user-collect"],
-.unit-list-module[data-type="user-recent"] {
+.unit-list-module[data-type="user-collect"] {
     .m-body--inner {
         min-height: 236px;
     }
+}
+.unit-list-module[data-type="user-default"],
+.unit-list-module[data-type="user-recent"] {
     .m-list {
         grid-template-columns: repeat(5, 1fr);
         .list-item {
@@ -370,9 +451,6 @@ watch(
     .m-inner-wrapper {
         display: grid;
     }
-    .m-body--inner {
-        min-height: 236px;
-    }
     .m-list {
         grid-template-columns: repeat(5, 1fr);
         .list-item:nth-of-type(5) ~ .list-item {
@@ -386,6 +464,16 @@ watch(
         @media screen and (max-width: 1440px) {
             .list-item:nth-of-type(3) ~ .list-item {
                 display: none !important;
+            }
+        }
+    }
+}
+.unit-list-module[data-type="user-collect"] {
+    .m-list {
+        grid-template-columns: repeat(5, 1fr);
+        .list-item {
+            .item-thumb--wrapper {
+                position: relative;
             }
         }
     }
