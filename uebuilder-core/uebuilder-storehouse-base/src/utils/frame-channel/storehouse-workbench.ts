@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-08-04 01:31:19
+ * @LastEditTime: 2025-08-17 17:22:58
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";
@@ -23,7 +23,7 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
             launchStorehouse: (config) => {
                 this.param.on.launchStorehouse(config);
             },
-        };
+        } as STOREHOUSE_WORKBENCH_CHANNEL.Api;
     }
 
     constructor(
