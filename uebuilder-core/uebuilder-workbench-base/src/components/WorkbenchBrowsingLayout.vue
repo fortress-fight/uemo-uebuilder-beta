@@ -58,6 +58,9 @@ function initialWorkbenchStorehouseChannel() {
             checkLoginStatus: (_channel) => {
                 return workbench!.checkLoginStatus();
             },
+            getLoginStatus: (_channel) => {
+                return workbench!.getLoginStatus();
+            },
             openLoginPanel: (_channel) => {
                 return workbench!.openLoginPanel();
             },

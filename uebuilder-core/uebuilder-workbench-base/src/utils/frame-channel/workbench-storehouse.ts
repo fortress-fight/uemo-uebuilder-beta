@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-08-04 01:23:14
+ * @LastEditTime: 2025-08-18 16:10:43
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -13,6 +13,7 @@ type Param = {
     on: {
         storehouseReady: (channel: WorkbenchStorehouseChannel) => void;
         checkLoginStatus: (channel: WorkbenchStorehouseChannel) => Promise<boolean>;
+        getLoginStatus: (channel: WorkbenchStorehouseChannel) => boolean;
         openLoginPanel: (channel: WorkbenchStorehouseChannel) => void;
     };
 };
@@ -33,6 +34,9 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
         },
         checkLoginStatus: () => {
             return this.param.on.checkLoginStatus(this);
+        },
+        getLoginStatus: () => {
+            return this.param.on.getLoginStatus(this);
         },
         openLoginPanel: () => {
             return this.param.on.openLoginPanel(this);

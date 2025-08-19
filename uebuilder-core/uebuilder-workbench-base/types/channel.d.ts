@@ -1,7 +1,7 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 15:11:26
+ * @LastEditTime: 2025-08-18 16:09:52
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -34,6 +34,9 @@ export namespace WORKBENCH_STOREHOUSE_CHANNEL {
 
         // 检查登录状态
         checkLoginStatus: () => Promise<boolean>;
+
+        // 获取登录状态
+        getLoginStatus: () => boolean;
 
         // 打开登录窗口
         openLoginPanel: () => void;
