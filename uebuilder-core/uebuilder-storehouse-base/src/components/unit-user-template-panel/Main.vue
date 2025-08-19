@@ -1,12 +1,19 @@
+<!--
+ * @Description: 客户模版库操作面板
+ * @Author: F-Stone
+ * @LastEditTime: 2025-08-18 17:21:57
+-->
 <template>
-    <div :class="$style['user-template-panel']">
+    <div :class="$style['unit-user-template-panel']">
         <div :class="$style['panel-head']">
-            <h2 :class="$style['panel-title']">{{ title }}</h2>
+            <h2 :class="$style['panel-title']">{{ panelTitle }}</h2>
             <button class="flex items-center justify-center" :class="$style['btn--close']" @click="emit('close')">
                 <UeElIcon name="icon-remove" :size="15" />
             </button>
         </div>
         <div class="relative" :class="$style['panel-body']">
+            <UeElLoading v-if="loading" />
+
             <!-- JSMO 页面文件上传 -->
             <FormField v-if="!disableJSMO" :error-msg="formError.json" :class="$style['row']">
                 <JsmoUploader v-model:value="formData.json" :theme="!!formError.json ? 'error' : 'default'" />
@@ -34,37 +41,34 @@
                     {{ t("UNIT_SAVE") }}
                 </button>
             </div>
-
-            <div v-if="loading" class="flex items-center justify-center" :class="$style['loading-cover']">
-                <img src="@stone/uemo-editor-assets/assets/images/tart.gif" alt="loading" />
-            </div>
         </div>
     </div>
 </template>
-
 <script lang="ts" setup>
-import type { UserTemplatePanelBaseProps, UserTemplateValue } from "../index";
+import type { UnitUserTemplatePanelBaseProps, UserTemplateValue } from "./index";
 
-import { DEFAULT_THUMB } from "../index";
-import FormField from "./FormField.vue";
-import ThumbUploader from "./ThumbUploader.vue";
-import JsmoUploader from "./JsmoUploader.vue";
+import { DEFAULT_THUMB } from "./index";
+import FormField from "./components/FormField.vue";
+import ThumbUploader from "./components/ThumbUploader.vue";
+import JsmoUploader from "./components/JsmoUploader.vue";
 
 const { t } = useI18n();
 
 const instance = getCurrentInstance();
-const props = defineProps<UserTemplatePanelBaseProps>();
+defineOptions({ name: "UnitUserTemplatePanel" });
+const props = withDefaults(defineProps<UnitUserTemplatePanelBaseProps>(), { type: "add" });
+
 const emit = defineEmits<{
     (e: "close"): void;
     (e: "submit", formData: UserTemplateValue): void;
 }>();
-const valueRef = defineModel<UserTemplateValue>("value", {
-    required: false,
-    default: () => ({ json: "", thumb: "", title: "" }),
+
+const panelTitle = computed(() => {
+    return props.type === "add" ? t("UEBUILDER_TEMPLATE_FORM_TITLE") : t("UEBUILDER_TEMPLATE_FORM_TITLE_EDIT");
 });
 
 // 表单数据
-const formData = reactive(valueRef.value);
+const formData = reactive({ json: "", thumb: "", title: "" });
 const formError = reactive<Record<keyof UserTemplateValue, string>>({ json: "", thumb: "", title: "" });
 
 /**
@@ -112,15 +116,29 @@ function handleSubmit() {
     }
 }
 
+const loading = ref(false);
 onBeforeMount(() => {
-    const defaultThumb = props.defaultThumb || DEFAULT_THUMB;
-    const randomThumbIndex = Math.floor(Math.random() * defaultThumb.length);
-    formData.thumb = valueRef.value?.thumb || defaultThumb[randomThumbIndex];
+    if (props.type === "add") {
+        const defaultThumb = props.defaultThumb || DEFAULT_THUMB;
+        const randomThumbIndex = Math.floor(Math.random() * defaultThumb.length);
+        formData.thumb = defaultThumb[randomThumbIndex];
+    } else if (props.type === "edit") {
+        if (props.getTemplateDetail) {
+            loading.value = true;
+            void props.getTemplateDetail().then((res) => {
+                formData.json = res.json;
+                formData.thumb = res.img;
+                formData.title = res.title;
+                loading.value = false;
+            });
+        } else {
+            instance?.proxy?.$ueElToast.error(t("UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR"));
+        }
+    }
 });
 </script>
-
 <style lang="scss" module>
-.user-template-panel {
+.unit-user-template-panel {
     position: relative;
 
     width: 360px;
@@ -131,17 +149,6 @@ onBeforeMount(() => {
     box-shadow: var(--ue-shadow--lv2);
     .icon-box {
         @include circle(28px);
-    }
-    .loading-cover {
-        position: absolute;
-        z-index: var(--z-index--mini);
-        top: 0;
-        left: 0;
-
-        width: 100%;
-        height: 100%;
-
-        background-color: #f5f6f7;
     }
     .panel-head {
         font-size: 16px;

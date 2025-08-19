@@ -88,6 +88,7 @@ function handleClearThumb() {
 .btn--upload-img {
     --ue-component-image-upload-height: 100%;
     position: relative;
+    z-index: 1;
 
     overflow: hidden;
 

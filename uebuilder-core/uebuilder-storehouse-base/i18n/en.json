@@ -19,10 +19,12 @@
     "UEBUILDER_STOREHOUSE_TITLE": "Newest Resources",
 
     "UEBUILDER_TEMPLATE_FORM_TITLE": "Upload Template",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_EDIT": "Edit Template",
     "UEBUILDER_TEMPLATE_FORM_TITLE_PLACEHOLDER": "Enter page title, such as: My Page - 001",
     "UEBUILDER_TEMPLATE_FORM_THUMB_PLACEHOLDER": "Add Cover",
     "UEBUILDER_TEMPLATE_FORM_ERROR": "Check the form",
     "UEBUILDER_TEMPLATE_FORM_JSON_ERROR": "Upload page file",
+    "UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR": "Failed to get page template details",
     "UEBUILDER_TEMPLATE_FORM_THUMB_ERROR": "Add a cover",
     "UEBUILDER_TEMPLATE_FORM_TITLE_ERROR": "Enter a name",
     "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "Recommended size: 640×380px",

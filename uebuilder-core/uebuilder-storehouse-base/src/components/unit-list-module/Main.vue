@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 14:39:58
+ * @LastEditTime: 2025-08-18 15:43:02
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -142,8 +142,7 @@ const _props = withDefaults(defineProps<UnitListModuleBaseProps>(), {});
 const emit = defineEmits<{
     (e: "operTrigger" | "sortTrigger", type: string): void;
     (e: "loadMore" | "refresh"): void;
-    // eslint-disable-next-line @typescript-eslint/unified-signatures
-    (e: "removeItem" | "editItem" | "toggleCollect", id: string): void;
+    (e: "itemOperTrigger", param: { type: "editor" | "delete" | "toggleCollect"; data: { id: string } }): void;
 }>();
 
 const { t } = useI18n();
@@ -180,15 +179,15 @@ watch(
 );
 
 function removeItem(item: UnitListModuleItem) {
-    emit("removeItem", item.id);
+    emit("itemOperTrigger", { type: "delete", data: { id: item.id } });
 }
 
 function editItem(item: UnitListModuleItem) {
-    emit("editItem", item.id);
+    emit("itemOperTrigger", { type: "editor", data: { id: item.id } });
 }
 
 function toggleCollect(item: UnitListModuleItem) {
-    emit("toggleCollect", item.id);
+    emit("itemOperTrigger", { type: "toggleCollect", data: { id: item.id } });
 }
 </script>
 <style lang="scss" module>
@@ -384,6 +383,8 @@ function toggleCollect(item: UnitListModuleItem) {
             position: absolute;
             top: min(7%, 15px);
             right: min(4%, 15px);
+
+            transition: 0.26s ease;
 
             opacity: 0;
             .oper-item {

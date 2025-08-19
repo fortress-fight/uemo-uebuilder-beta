@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-31 13:31:22
+ * @LastEditTime: 2025-08-18 17:18:08
 -->
 <template>
     <UnitListModule
@@ -15,18 +15,25 @@
         @loadMore="handleLoadMore"
         @sortTrigger="handleSortTrigger"
         @operTrigger="handleOperTrigger"
+        @itemOperTrigger="handleItemOperTrigger"
     />
     <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
-        <UserTemplatePanel :title="t('UEBUILDER_TEMPLATE_FORM_TITLE')" type="add" @close="popPanelOpen = false" />
+        <UnitUserTemplatePanel
+            v-bind="UnitUserTemplatePanelProps"
+            @close="popPanelOpen = false"
+            @submit="saveTemplate"
+        />
     </UeElPopPanel>
 </template>
 <script lang="ts" setup>
 import type { UeElPopPanelBaseProps } from "@stone/uemo-editor-element/packages/pop-panel";
-import type { UnitUserStorehouseBaseProps } from "./index";
+import type { UnitUserTemplatePanelBaseProps, UserTemplateValue } from "../unit-user-template-panel";
 import type { UnitListModuleBaseProps } from "../unit-list-module";
 
+import type { UnitUserStorehouseBaseProps } from "./index";
+
 import { UeBuilderStorehouseKey } from "../../plugin/injection-key";
-import UserTemplatePanel from "./components/UserTemplatePanel.vue";
+import UnitUserTemplatePanel from "../unit-user-template-panel";
 import UnitListModule from "../unit-list-module";
 
 defineOptions({ name: "UnitUserStorehouse", inheritAttrs: false });
@@ -35,7 +42,11 @@ const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
     sortType: "newest",
     type: "user-default",
 });
-const emit = defineEmits<{ (e: "sortTrigger", type: string): void; (e: "loadMore" | "refresh"): void }>();
+const emit = defineEmits<{
+    (e: "sortTrigger", type: string): void;
+    (e: "loadMore" | "refresh"): void;
+    (e: "saveTemplate", param: { type: "add" | "edit"; data: UserTemplateValue }): void;
+}>();
 const { t } = useI18n();
 
 const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
@@ -87,12 +98,14 @@ const popPanelParams = ref<UeElPopPanelBaseProps>({
     autoClose: true,
     mask: { color: "rgba(0, 0, 0, 0.5)" },
 });
+
+const UnitUserTemplatePanelProps = ref<UnitUserTemplatePanelBaseProps>({});
 const handleOperTrigger = (type: string) => {
     switch (type) {
         case "add-page":
             UeBuilderStorehouse?.storehouseWorkbenchChannel?.remote
                 .then((remote) => {
-                    return remote.checkLoginStatus().then((isLogin) => {
+                    return remote.getLoginStatus().then((isLogin) => {
                         if (!isLogin) {
                             return remote.openLoginPanel();
                         }
@@ -100,7 +113,7 @@ const handleOperTrigger = (type: string) => {
                     });
                 })
                 .catch(() => {
-                    console.error("checkLoginStatus error");
+                    console.error("getLoginStatus error");
                 });
             break;
         case "more":
@@ -114,6 +127,24 @@ const handleOperTrigger = (type: string) => {
     }
 };
 
+function handleItemOperTrigger(param: { type: "editor" | "delete" | "toggleCollect"; data: { id: string } }) {
+    switch (param.type) {
+        case "editor":
+            {
+                UnitUserTemplatePanelProps.value = {
+                    type: "edit",
+                    getTemplateDetail: () => props.getUserTemplate!(param.data.id),
+                };
+                popPanelOpen.value = true;
+            }
+            break;
+        case "delete":
+            break;
+        case "toggleCollect":
+            break;
+    }
+}
+
 const handleSortTrigger = (type: string) => {
     emit("sortTrigger", type);
 };
@@ -125,6 +156,10 @@ const handleLoadMore = () => {
 const handleRefresh = () => {
     emit("refresh");
 };
+
+function saveTemplate(tplData: UserTemplateValue) {
+    emit("saveTemplate", { type: "add", data: tplData });
+}
 </script>
 <style lang="scss" module>
 .user-storehouse {
