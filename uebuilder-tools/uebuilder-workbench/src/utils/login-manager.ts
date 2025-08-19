@@ -1,7 +1,7 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-08-05 01:02:49
+ * @LastEditTime: 2025-08-18 16:07:20
  */
 import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@stone/uebuilder-api--tools/api";
 import { pinia, useUeBuilderWorkbenchToolsStore } from "@/store";
@@ -16,6 +16,10 @@ const UeBuilderWorkbenchToolsStore = useUeBuilderWorkbenchToolsStore(pinia);
 export class LoginManager {
     private loginWindow: Window | null = null;
     private readonly toast = UeBuilderWorkbenchBase.utils.toast;
+
+    public get loginState() {
+        return UeBuilderWorkbenchToolsStore.userLoginState;
+    }
 
     /**
      * 检查登录状态并处理登录窗口

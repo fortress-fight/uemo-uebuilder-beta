@@ -104,6 +104,13 @@ export class UeBuilderWorkbench extends UeBuilderWorkbenchBase {
     }
 
     /**
+     * 获取登录状态
+     */
+    getLoginStatus() {
+        return this.loginManager.loginState;
+    }
+
+    /**
      * 打开登录面板
      */
     openLoginPanel() {
