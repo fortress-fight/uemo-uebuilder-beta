@@ -47,7 +47,7 @@ export abstract class UeBuilderStorehouseBase {
         this.storehouseWorkbenchChannel = this.StorehouseWorkbenchChannelCreator.getInstance(window.parent, {
             on: {
                 launchStorehouse: (config) => {
-                    this.launchStorehouse(config);
+                    return this.launchStorehouse(config);
                 },
             },
         });
@@ -76,7 +76,7 @@ export abstract class UeBuilderStorehouseBase {
         return this;
     }
 
-    abstract launchStorehouse(config: UE_BUILDER_STOREHOUSE.Config): void;
+    abstract launchStorehouse(config: UE_BUILDER_STOREHOUSE.Config): Promise<void>;
 
     public renderStorehouse(
         app: ReturnType<typeof createApp>,

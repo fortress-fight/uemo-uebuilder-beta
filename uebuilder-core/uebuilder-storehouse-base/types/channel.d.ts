@@ -1,7 +1,7 @@
 /*
  * @Description: 定义 Workbench 能够调用的 Creator 方法
  * @Author: F-Stone
- * @LastEditTime: 2025-08-04 00:04:03
+ * @LastEditTime: 2025-08-19 15:14:51
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -11,6 +11,6 @@ import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channe
 
 declare namespace STOREHOUSE_WORKBENCH_CHANNEL {
     interface Api extends Methods {
-        launchStorehouse: (config: UE_BUILDER_STOREHOUSE.Config) => void;
+        launchStorehouse: (config: UE_BUILDER_STOREHOUSE.Config) => Promise<void>;
     }
 }

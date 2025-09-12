@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-08-17 17:22:58
+ * @LastEditTime: 2025-08-19 15:14:44
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "../../../types/channel";
@@ -10,7 +10,7 @@ import { MessageChannel } from "@stone/uemo-editor-utils/lib/penpal/message-chan
 
 type Param = {
     on: {
-        launchStorehouse: (config: UE_BUILDER_STOREHOUSE.Config) => void;
+        launchStorehouse: (config: UE_BUILDER_STOREHOUSE.Config) => Promise<void>;
     };
 };
 
@@ -21,7 +21,7 @@ export class StorehouseWorkbenchChannel extends MessageChannel<
     get localApi(): STOREHOUSE_WORKBENCH_CHANNEL.Api {
         return {
             launchStorehouse: (config) => {
-                this.param.on.launchStorehouse(config);
+                return this.param.on.launchStorehouse(config);
             },
         } as STOREHOUSE_WORKBENCH_CHANNEL.Api;
     }
