@@ -7,7 +7,7 @@ import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
 import UebuilderWorkbenchTools from "@/components/Workbench.vue";
 import { LoginManager } from "@/utils/login-manager";
 
-import { i18n } from "../i18n";
+import { i18n } from "@stone/uebuilder-workbench-base/src/plugin/i18n";
 import { WorkbenchCreatorChannelTools } from "./frame-channel/workbench-creator";
 
 /**

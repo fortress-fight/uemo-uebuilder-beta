@@ -14,6 +14,7 @@ import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import UeEl from "@stone/uemo-editor-element/src";
 
+import { i18n } from "./plugin/i18n";
 import { pinia } from "./store";
 import { useUeBuilderWorkbenchStore } from "./store/store-workbench";
 import { WorkbenchCreatorChannel } from "./utils/frame-channel";
@@ -149,6 +150,7 @@ export abstract class UeBuilderWorkbenchBase {
         // #region 渲染工作台应用
 
         app.provide(UeBuilderWorkbenchKey, this);
+        app.use(i18n);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);
         app.mount(this.rootDom);
