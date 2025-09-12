@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 17:18:08
+ * @LastEditTime: 2025-09-12 14:44:01
 -->
 <template>
     <UnitListModule
@@ -24,9 +24,18 @@
             @submit="saveTemplate"
         />
     </UeElPopPanel>
+    <UeElPopPanel v-model:open="showConfirmPanel" v-bind="popPanelParams">
+        <UeElConfirmPanel
+            v-bind="confirmPanelProps"
+            @close="showConfirmPanel = false"
+            @cancel="showConfirmPanel = false"
+            @confirm="deleteTemplate"
+        />
+    </UeElPopPanel>
 </template>
 <script lang="ts" setup>
 import type { UeElPopPanelBaseProps } from "@stone/uemo-editor-element/packages/pop-panel";
+import type { UeElConfirmPanelBaseProps } from "@stone/uemo-editor-element/packages/confirm-panel";
 import type { UnitUserTemplatePanelBaseProps, UserTemplateValue } from "../unit-user-template-panel";
 import type { UnitListModuleBaseProps } from "../unit-list-module";
 
@@ -43,9 +52,10 @@ const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {
     type: "user-default",
 });
 const emit = defineEmits<{
-    (e: "sortTrigger", type: string): void;
     (e: "loadMore" | "refresh"): void;
-    (e: "saveTemplate", param: { type: "add" | "edit"; data: UserTemplateValue }): void;
+    (e: "updateTemplate", param: { type: "add" | "edit"; data: UserTemplateValue & { id?: string } }): void;
+    (e: "sortTrigger", type: string): void;
+    (e: "deleteTemplate" | "toggleCollect", id: string): void;
 }>();
 const { t } = useI18n();
 
@@ -93,13 +103,21 @@ const listModuleProps = computed<UnitListModuleBaseProps>(() => {
     };
 });
 
+const showConfirmPanel = ref(false);
+const confirmPanelProps = ref<UeElConfirmPanelBaseProps>({
+    title: t("DELETE_PANEL_TITLE"),
+    desc: t("DELETE_PANEL_DESC"),
+    confirmBtn: { text: t("CONFIRM"), theme: "red" },
+    cancelBtn: { text: t("CANCEL"), theme: "white" },
+});
+
 const popPanelOpen = ref(false);
 const popPanelParams = ref<UeElPopPanelBaseProps>({
     autoClose: true,
     mask: { color: "rgba(0, 0, 0, 0.5)" },
 });
 
-const UnitUserTemplatePanelProps = ref<UnitUserTemplatePanelBaseProps>({});
+const UnitUserTemplatePanelProps = ref<UnitUserTemplatePanelBaseProps & { id?: string }>({ type: "add" });
 const handleOperTrigger = (type: string) => {
     switch (type) {
         case "add-page":
@@ -109,6 +127,9 @@ const handleOperTrigger = (type: string) => {
                         if (!isLogin) {
                             return remote.openLoginPanel();
                         }
+                        UnitUserTemplatePanelProps.value = {
+                            type: "add",
+                        };
                         popPanelOpen.value = true;
                     });
                 })
@@ -132,17 +153,35 @@ function handleItemOperTrigger(param: { type: "editor" | "delete" | "toggleColle
         case "editor":
             {
                 UnitUserTemplatePanelProps.value = {
+                    id: param.data.id.toString(),
                     type: "edit",
-                    getTemplateDetail: () => props.getUserTemplate!(param.data.id),
+                    getTemplateDetail: () => {
+                        return props.getUserTemplate!(param.data.id).catch(() => {
+                            popPanelOpen.value = false;
+                        });
+                    },
                 };
                 popPanelOpen.value = true;
             }
             break;
         case "delete":
+            UnitUserTemplatePanelProps.value = {
+                id: param.data.id.toString(),
+                type: "edit",
+            };
+            showConfirmPanel.value = true;
             break;
         case "toggleCollect":
+            emit("toggleCollect", param.data.id);
             break;
     }
+}
+
+function deleteTemplate() {
+    if (UnitUserTemplatePanelProps.value.id) {
+        emit("deleteTemplate", UnitUserTemplatePanelProps.value.id);
+    }
+    showConfirmPanel.value = false;
 }
 
 const handleSortTrigger = (type: string) => {
@@ -158,7 +197,14 @@ const handleRefresh = () => {
 };
 
 function saveTemplate(tplData: UserTemplateValue) {
-    emit("saveTemplate", { type: "add", data: tplData });
+    if (!UnitUserTemplatePanelProps.value.type) return;
+
+    emit("updateTemplate", {
+        type: UnitUserTemplatePanelProps.value.type,
+        data: { id: UnitUserTemplatePanelProps.value.id, ...tplData },
+    });
+
+    popPanelOpen.value = false;
 }
 </script>
 <style lang="scss" module>

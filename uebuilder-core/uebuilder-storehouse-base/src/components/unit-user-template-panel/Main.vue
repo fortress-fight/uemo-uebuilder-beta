@@ -1,7 +1,7 @@
 <!--
  * @Description: 客户模版库操作面板
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 17:21:57
+ * @LastEditTime: 2025-08-19 14:24:26
 -->
 <template>
     <div :class="$style['unit-user-template-panel']">
@@ -56,7 +56,7 @@ const { t } = useI18n();
 
 const instance = getCurrentInstance();
 defineOptions({ name: "UnitUserTemplatePanel" });
-const props = withDefaults(defineProps<UnitUserTemplatePanelBaseProps>(), { type: "add" });
+const props = defineProps<UnitUserTemplatePanelBaseProps>();
 
 const emit = defineEmits<{
     (e: "close"): void;
