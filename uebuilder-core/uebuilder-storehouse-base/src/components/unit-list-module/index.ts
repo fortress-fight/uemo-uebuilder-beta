@@ -1,7 +1,7 @@
 /*
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 14:07:05
+ * @LastEditTime: 2025-09-12 15:59:44
  */
 import type { App } from "vue";
 
@@ -16,6 +16,7 @@ export interface UnitListModuleItem {
     title: string;
     thumb: string;
     lastEditTime?: string;
+    collectedId?: string;
     id: string;
 }
 

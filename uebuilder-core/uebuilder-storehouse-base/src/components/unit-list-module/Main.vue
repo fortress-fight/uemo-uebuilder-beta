@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 15:43:02
+ * @LastEditTime: 2025-09-12 15:59:10
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -94,7 +94,8 @@
                                             data-type="collect"
                                             @click.stop="toggleCollect(item)"
                                         >
-                                            <UeElIcon name="icon-app-start-fill" />
+                                            <UeElIcon v-if="item.collectedId === '-1'" name="icon-app-start" />
+                                            <UeElIcon v-else name="icon-app-start-fill" />
                                         </button>
                                     </template>
                                 </div>
