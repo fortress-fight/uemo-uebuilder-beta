@@ -1,7 +1,7 @@
 /*
  * @Description: 登录管理器
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 16:07:20
+ * @LastEditTime: 2025-09-12 17:13:27
  */
 import { UemoAPIError, getUserInfo, checkLoginStatus, userLogout } from "@stone/uebuilder-api--tools/api";
 import { pinia, useUeBuilderWorkbenchToolsStore } from "@/store";
@@ -138,7 +138,7 @@ export class LoginManager {
                 void this.toast.success("登录成功");
                 return;
             }
-            // TODO: 实现 openUserIndustryCollect
+            // TASK: 实现 openUserIndustryCollect
         } catch (error) {
             if (error instanceof UemoAPIError && error.code === 998) {
                 void this.toast.error("未检测到登录信息");
