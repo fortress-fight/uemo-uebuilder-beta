@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-08-05 00:25:03
+ * @LastEditTime: 2025-09-12 16:01:17
 -->
 <template>
     <UebuilderUserStorehouse
@@ -11,22 +11,37 @@
         :loading="loading"
         :sortType="getUserPageListParams.order || 'newest'"
         :pages="dataPages"
+        :getUserTemplate="getUserTemplateHandle"
+        @toggleCollect="handleToggleCollect"
+        @updateTemplate="handleUpdateTemplate"
+        @deleteTemplate="handleDeleteTemplate"
         @refresh="handleRefresh"
         @sortTrigger="handleSortTrigger"
         @loadMore="handleLoadMore"
     />
 </template>
 <script lang="ts" setup>
-import type { UnitUserStorehouseBaseProps } from "./index";
+import type { UnitUserStorehouseBaseProps, BookmarkItem, UserLibraryItem } from "./index";
 
-import { getUserPageList, getBookmarkList } from "@stone/uebuilder-api--tools/api";
+import {
+    getUserPageList,
+    getBookmarkList,
+    getUserTemplate,
+    updateUserTemplate,
+    updateBookmarkList,
+} from "@stone/uebuilder-api--tools/api";
 import UebuilderUserStorehouse from "@stone/uebuilder-storehouse-base/src/components/unit-user-storehouse";
 import { useUeBuilderStorehouseToolsStore } from "@/store";
+import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
 
 defineOptions({ name: "UnitUserStorehouse" });
+const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
+const instance = getCurrentInstance();
 const props = withDefaults(defineProps<UnitUserStorehouseBaseProps>(), {});
 
-const dataList = ref<{ title: string; thumb: string; lastEditTime: string }[] | undefined>(undefined);
+const { t } = useI18n();
+
+const dataList = ref<(BookmarkItem | UserLibraryItem)[] | undefined>(undefined);
 const dataPages = ref<{ current: number; total: number; itemTotal?: number }>({ current: 1, total: 1 });
 
 const loading = ref(true);
@@ -57,6 +72,12 @@ watch(
     },
     { deep: true, immediate: true }
 );
+
+function openLoginPanel() {
+    void UeBuilderStorehouse?.storehouseWorkbenchChannel?.remote.then((remote) => {
+        return remote.openLoginPanel();
+    });
+}
 
 /**
  * 更新用户页面列表数据
@@ -94,6 +115,7 @@ function getUserPageListData(isAddMoreOper: boolean) {
                 title: item.title,
                 thumb: item.img,
                 lastEditTime: item.diff_time,
+                id: item.id,
             }));
             if (isAddMoreOper) {
                 dataList.value = [...(dataList.value || []), ...newDataList];
@@ -107,6 +129,7 @@ function getUserPageListData(isAddMoreOper: boolean) {
         })
         .catch((err) => {
             console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
         });
 }
 
@@ -127,6 +150,9 @@ function getUserCollectListData(isAddMoreOper: boolean) {
                 title: item.title,
                 thumb: item.img,
                 lastEditTime: item.diff_time,
+                type: item.res_type,
+                collectedId: item.collected_id,
+                id: item.id,
             }));
             if (isAddMoreOper) {
                 dataList.value = [...(dataList.value || []), ...newDataList];
@@ -140,6 +166,7 @@ function getUserCollectListData(isAddMoreOper: boolean) {
         })
         .catch((err) => {
             console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
         });
 }
 
@@ -164,6 +191,131 @@ const handleLoadMore = () => {
 const handleRefresh = () => {
     updateUserPageListData(false);
 };
+
+/**
+ * 保存模板
+ */
+function handleUpdateTemplate(param: {
+    type: "add" | "edit";
+    data: { json: string; thumb: string; title: string; id?: string };
+}) {
+    updateUserTemplate(param.type, param.data)
+        .then((res) => {
+            if (res.code === 998) {
+                openLoginPanel();
+                return;
+            }
+            if (res.code === 0) {
+                handleRefresh();
+                return;
+            }
+            if (res.errMsg === "limit") {
+                instance?.proxy?.$ueElToast.warning(t("UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR"));
+                return;
+            }
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
+}
+
+function handleDeleteTemplate(id: string) {
+    updateUserTemplate("delete", { id })
+        .then((res) => {
+            if (res.code === 998) {
+                openLoginPanel();
+                return;
+            }
+            if (res.code === 0) {
+                handleRefresh();
+                return;
+            }
+
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
+}
+
+function handleToggleCollect(id: string) {
+    const targetItem = dataList.value?.find((item) => item.id === id);
+    if (!targetItem || !("collectedId" in targetItem)) return;
+
+    const collectId = targetItem.collectedId;
+    if (typeof collectId === "undefined") return;
+
+    if (collectId !== "-1") {
+        // 删除收藏
+        updateBookmarkList({ action: "delete", id: collectId })
+            .then((res) => {
+                if (res.code === 998) {
+                    openLoginPanel();
+                    return;
+                }
+                if (res.code === 0) {
+                    dataList.value = dataList.value?.map((item) => {
+                        if (item.id === id && "collectedId" in item) {
+                            item.collectedId = "-1";
+                        }
+                        return item;
+                    });
+                    return;
+                }
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .catch((err) => {
+                console.error(err);
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            });
+    } else {
+        // 添加收藏
+        updateBookmarkList({ action: "add", type: targetItem.type, type_id: targetItem.id })
+            .then((res) => {
+                if (res.code === 998) {
+                    openLoginPanel();
+                    return;
+                }
+                if (res.code === 0) {
+                    dataList.value = dataList.value?.map((item) => {
+                        if (item.id === id && "collectedId" in item) {
+                            item.collectedId = res.data.id;
+                        }
+                        return item;
+                    });
+                    return;
+                }
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .catch((err) => {
+                console.error(err);
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            });
+    }
+}
+
+function getUserTemplateHandle(id: string) {
+    return getUserTemplate({ id })
+        .then((res) => {
+            if (res.code === 998) {
+                openLoginPanel();
+                return;
+            }
+
+            if (res.code === 0) {
+                return res.data;
+            }
+
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
+}
 </script>
 <style lang="scss" module>
 .user-storehouse {

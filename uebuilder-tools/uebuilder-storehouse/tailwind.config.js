@@ -1,7 +1,7 @@
 /*
  * @Description: tailwind.config 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-26 16:27:07
+ * @LastEditTime: 2025-08-19 12:10:34
  */
 const colors = require("tailwindcss/colors");
 const path = require("path");
@@ -97,5 +97,6 @@ module.exports = {
         `packages/**/*.vue`,
         `demo/**/*.vue`,
         path.join(path.dirname(require.resolve("@stone/uebuilder-storehouse-base/package.json")), "src/**/*.vue"),
+        path.join(path.dirname(require.resolve("@stone/uemo-editor-element/package.json")), "packages/**/*.vue"),
     ],
 };
