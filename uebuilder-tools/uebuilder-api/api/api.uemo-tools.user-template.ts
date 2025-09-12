@@ -1,7 +1,7 @@
 /*
  * @Description: 用户模板操作相关接口
  * @Author: F-Stone
- * @LastEditTime: 2025-08-19 14:36:48
+ * @LastEditTime: 2025-09-12 15:53:24
  */
 import type { AxiosUemoToolsResponse, AxiosPaginatedResponse } from "./api.instance";
 
@@ -105,6 +105,18 @@ export function getBookmarkList(params?: { page: number; limit?: number }) {
             list: AxiosPaginatedResponse<UserCollectItem> & { cat: string };
         }>
     >("/collects/user/list", { params });
+}
+
+/**
+ * 更新收藏列表
+ * @param data - 请求参数
+ */
+export function updateBookmarkList(
+    data?: { action: "add"; type: "pages" | "units"; type_id: string } | { action: "delete"; id: string }
+) {
+    return AxiosUemoTools.get<AxiosUemoToolsResponse<{ id: string }>>("/collects/user/id/action", {
+        params: data,
+    });
 }
 
 // #endregion
