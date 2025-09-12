@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 15:59:10
+ * @LastEditTime: 2025-09-12 16:15:23
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -276,6 +276,7 @@ function toggleCollect(item: UnitListModuleItem) {
 
         width: 100%;
         height: 100%;
+        min-height: 245px;
         padding: 70px 0;
 
         border: 1px dashed #ccc;
