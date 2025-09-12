@@ -581,5 +581,8 @@
     "TABLE_RESET_CELL_WIDTH": "重置单元格宽度",
     "TABLE_TIP_1": "1. 拖拽单元格尺寸，也会影响表格最小宽度.最终的表格最小宽度会选择两者中的最大的值",
 
-    "COUNTER_NUMBER_PAD": "最小位数"
+    "COUNTER_NUMBER_PAD": "最小位数",
+
+    "DELETE_PANEL_TITLE": "是否确认删除",
+    "DELETE_PANEL_DESC": "删除后将无法找回，请谨慎操作。"
 }

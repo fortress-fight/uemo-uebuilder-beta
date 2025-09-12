@@ -581,5 +581,8 @@
     "TABLE_BORDER_TIP": "Whether to show border",
     "TABLE_TIP_1": "1. Dragging the cell size will also affect the minimum width of the table. The final minimum width of the table will be the larger of the two.",
 
-    "COUNTER_NUMBER_PAD": "Minimum Digits"
+    "COUNTER_NUMBER_PAD": "Minimum Digits",
+
+    "DELETE_PANEL_TITLE": "Delete",
+    "DELETE_PANEL_DESC": "Are you sure you want to delete?"
 }
