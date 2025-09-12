@@ -52,5 +52,6 @@
     "UEBUILDER_NAV_RESOURCE_HUB": "资源广场",
     "UEBUILDER_NAV_TEMPLATE": "UEmo模板",
 
-    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "共<strong>{total}</strong>个页面"
+    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "共<strong>{total}</strong>个页面",
+    "UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR": "已达到数量限制，无法创建新的模板"
 }

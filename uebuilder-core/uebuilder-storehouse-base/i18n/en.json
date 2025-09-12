@@ -51,5 +51,6 @@
     "UEBUILDER_NAV_RESOURCE_HUB": "Resource Hub",
     "UEBUILDER_NAV_TEMPLATE": "UEmo Template",
 
-    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "Total <strong>{total}</strong> pages"
+    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "Total <strong>{total}</strong> pages",
+    "UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR": "You have reached the limit, you cannot create new templates"
 }
