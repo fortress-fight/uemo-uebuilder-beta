@@ -54,6 +54,7 @@ const publicTsRules = {
         },
     ],
     "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "with-single-extends" }],
+    "@typescript-eslint/unified-signatures": ["error", { ignoreDifferentlyNamedParameters: true }],
 };
 
 export default [
