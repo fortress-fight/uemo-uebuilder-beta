@@ -1,7 +1,7 @@
 <!--
  * @Description: 入口路由页面
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:56:08
+ * @LastEditTime: 2025-09-12 19:01:43
 -->
 <template>
     <div :class="$style['router-entry-view']" class="min-h-0">
@@ -35,15 +35,15 @@ defineOptions({ name: "RouterEnterView" });
 const _props = withDefaults(defineProps<RouterEnterViewBaseProps>(), {});
 
 function triggerAppStart() {
-    void UeBuilderStorehouse?.tabAppLayer("uebuilderComposerLayer");
+    void UeBuilderStorehouse?.changeWorkbenchState("composer");
 }
 
 function createEmptyPage() {
-    void UeBuilderStorehouse?.tabAppLayer("uebuilderEditorLayer", { data: "" });
+    void UeBuilderStorehouse?.changeWorkbenchState("editing", { data: "" });
 }
 
 function editorPageData(data: string) {
-    void UeBuilderStorehouse?.tabAppLayer("uebuilderEditorLayer", { data });
+    void UeBuilderStorehouse?.changeWorkbenchState("editing", { data });
 }
 </script>
 <style lang="scss" module>

@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 17:13:07
+ * @LastEditTime: 2025-09-12 19:01:31
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -41,13 +41,10 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
         openLoginPanel: () => {
             return this.param.on.openLoginPanel(this);
         },
-        tabAppLayer: (
-            layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
-            param?: { data: string }
-        ) => {
+        changeWorkbenchState: (layer: "editing" | "composer" | "preview", param?: { data: string }) => {
             // TASK 发送消息到 storehouse
             // eslint-disable-next-line
-            console.log("tabAppLayer", layer, param);
+            console.log("changeWorkbenchState", layer, param);
         },
     };
 

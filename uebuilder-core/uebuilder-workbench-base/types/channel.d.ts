@@ -1,7 +1,7 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:50:57
+ * @LastEditTime: 2025-09-12 19:01:12
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -42,11 +42,8 @@ export namespace WORKBENCH_STOREHOUSE_CHANNEL {
         openLoginPanel: () => void;
 
         // 切换 APP 应用层
-        tabAppLayer(layer: "uebuilderComposerLayer"): void;
-        tabAppLayer(layer: "uebuilderEditorLayer" | "uebuilderPreviewLayer", param: { data: string }): void;
-        tabAppLayer(
-            layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
-            param?: { data: string }
-        ): void;
+        changeWorkbenchState(layer: "composer"): void;
+        changeWorkbenchState(layer: "editing" | "preview", param: { data: string }): void;
+        changeWorkbenchState(layer: "editing" | "composer" | "preview", param?: { data: string }): void;
     }
 }

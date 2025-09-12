@@ -100,17 +100,11 @@ export abstract class UeBuilderStorehouseBase {
      *
      * @memberof UeBuilderStorehouseBase
      */
-    public async tabAppLayer(layer: "uebuilderComposerLayer"): Promise<void>;
-    public async tabAppLayer(
-        layer: "uebuilderEditorLayer" | "uebuilderPreviewLayer",
-        param: { data: string }
-    ): Promise<void>;
-    public async tabAppLayer(
-        layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
-        param?: any
-    ): Promise<void> {
+    public async changeWorkbenchState(state: "composer"): Promise<void>;
+    public async changeWorkbenchState(state: "editing" | "preview", param: { data: string }): Promise<void>;
+    public async changeWorkbenchState(state: "editing" | "composer" | "preview", param?: any): Promise<void> {
         const remote = await this.storehouseWorkbenchChannel!.remote;
-        await remote.tabAppLayer(layer, param);
+        await remote.changeWorkbenchState(state, param);
     }
 
     /**
