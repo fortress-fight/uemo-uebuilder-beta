@@ -1,12 +1,12 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 16:09:52
+ * @LastEditTime: 2025-09-12 16:50:57
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
 /**
- * 工作台中实现 Creator 调用的方法
+ * WORKBENCH 中实现 CREATOR 调用的方法
  */
 export namespace WORKBENCH_CREATOR_CHANNEL {
     export interface Api extends Methods {
@@ -22,7 +22,7 @@ export namespace WORKBENCH_CREATOR_CHANNEL {
 }
 
 /**
- * 工作台中实现 Storehouse 调用的方法
+ * WORKBENCH 中实现 STOREHOUSE 调用的方法
  */
 export namespace WORKBENCH_STOREHOUSE_CHANNEL {
     export interface Api extends Methods {
@@ -40,5 +40,13 @@ export namespace WORKBENCH_STOREHOUSE_CHANNEL {
 
         // 打开登录窗口
         openLoginPanel: () => void;
+
+        // 切换 APP 应用层
+        tabAppLayer(layer: "uebuilderComposerLayer"): void;
+        tabAppLayer(layer: "uebuilderEditorLayer" | "uebuilderPreviewLayer", param: { data: string }): void;
+        tabAppLayer(
+            layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
+            param?: { data: string }
+        ): void;
     }
 }
