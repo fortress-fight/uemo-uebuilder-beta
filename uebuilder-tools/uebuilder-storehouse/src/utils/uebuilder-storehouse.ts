@@ -1,3 +1,5 @@
+import { pinia, useUeBuilderStorehouseToolsStore } from "@/store";
+
 import { UeBuilderStorehouseBase } from "@stone/uebuilder-storehouse-base/src";
 import UebuilderStorehouse from "@stone/uebuilder-storehouse-base/src/App.vue";
 import { getUeElementConfig } from "@stone/uebuilder-utils/src/get-ue-element-config";
@@ -5,6 +7,8 @@ import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
 import router from "@/router";
 
 import { StorehouseWorkbenchChannelTools } from "./frame-channel/storehouse-workbench";
+
+const ueBuilderStorehouseToolsStore = useUeBuilderStorehouseToolsStore(pinia);
 
 export class UeBuilderStorehouse extends UeBuilderStorehouseBase {
     name = "uebuilder-storehouse--tools";
@@ -16,9 +20,12 @@ export class UeBuilderStorehouse extends UeBuilderStorehouseBase {
         super(dom);
     }
 
-    launchStorehouse(config: UE_BUILDER_STOREHOUSE.Config): void {
-        // eslint-disable-next-line no-console
-        console.log("storehouse-config", config);
+    async launchStorehouse(config: UE_BUILDER_STOREHOUSE.Config): Promise<void> {
+        const remote = await this.storehouseWorkbenchChannel?.remote;
+        const loginStatus = await remote?.getLoginStatus();
+
+        ueBuilderStorehouseToolsStore.setLoginStatus(!!loginStatus);
+
         const storehouseApp = createApp(UebuilderStorehouse);
         storehouseApp.provide(UeBuilderStorehouseKey, this);
         storehouseApp.use(router);
