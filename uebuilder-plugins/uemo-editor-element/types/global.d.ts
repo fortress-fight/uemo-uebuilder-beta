@@ -121,31 +121,6 @@ declare global {
         type BackgroundBlurValue = BACKGROUND_VALUE<"blur">;
 
         /**
-         * @description 上传配置旧版
-         */
-        type UploadConfigOld = (
-            | {
-                  uploadFileSize: number;
-                  imageUploadSize: number;
-                  imageDataPath: string;
-              }
-            | { fileLimitSize: number; uploadFileQueryPath: string; image?: ImageUploadConfig | false }
-        ) & {
-            uploadPath: string;
-            uploadName: string;
-            publicPath: string;
-            resourceLink: string;
-            withCredentials?: boolean;
-            useFullLink?: boolean;
-            uploadData?: Record<string, string>;
-
-            qiniu?: QiniuUploadConfig | false;
-            video?: VideoUploadConfig | false;
-            history?: UploadHistoryConfig | false;
-            asset?: AssetUploadConfig | false;
-        };
-
-        /**
          * @description 上传配置
          */
         type UploadConfig = {
@@ -392,7 +367,7 @@ declare global {
     namespace UE_PLUGIN_OPTIONS {
         type Toast = TOAST_OPTIONS;
         type FileUpload = {
-            uploadConfig: UE_EL_UTIL.UploadConfig | UE_EL_UTIL.UploadConfigOld;
+            uploadConfig: UE_EL_UTIL.UploadConfig;
             uploadHandler?: (
                 axiosInstance?: AxiosInstance,
                 defaultUploadConfig?: UE_EL_UTIL.UploadConfig

@@ -60,6 +60,7 @@
         "npid",
         "nprogress",
         "oldlistid",
+        "penpal",
         "pexels",
         "photoswiper",
         "postcid",
@@ -146,7 +147,9 @@
         "uebuilder-plugins/uemo-editor-i18n/i18n",
         "uebuilder-plugins/uemo-editor-element/i18n",
         "uebuilder-plugins/uemo-editor-tiptap/i18n",
-        "uebuilder-plugins/uemo-editor-panel/i18n"
+        "uebuilder-plugins/uemo-editor-panel/i18n",
+        "uebuilder-core/uebuilder-workbench-base/i18n",
+        "uebuilder-core/uebuilder-storehouse-base/i18n"
     ],
     "i18n-ally.keystyle": "nested",
     "i18n-ally.displayLanguage": "zh-cn",

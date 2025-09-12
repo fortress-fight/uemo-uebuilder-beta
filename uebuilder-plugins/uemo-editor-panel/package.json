@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-panel/.husky",
+        "prepare": "HUSKY_DIR=$(pwd)/.husky && cd $(git rev-parse --show-toplevel) && husky \"$HUSKY_DIR\" && echo 'yarn lint-staged' > \"$HUSKY_DIR\"/pre-commit",
         "create-panel": "node ./cli/create-panel.mjs",
         "dev": "vue-cli-service serve",
         "inspect": "vue-cli-service inspect > test.js",

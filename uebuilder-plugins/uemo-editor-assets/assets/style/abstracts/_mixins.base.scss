@@ -272,40 +272,7 @@ $grid-breakpoints: (
 }
 
 // 固定图片比例站位
-@mixin image-placeholder($width, $height, $position: relative, $type: 0, $size: 0) {
-    @if ($position !=none) {
-        position: $position;
-    }
-    @if ($size != 0) {
-        width: $size;
-    } @else {
-        width: $width;
-    }
-    overflow: hidden;
-    & > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        @if ($type == "fit") {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-            object-position: center;
-        } @else {
-            width: 100%;
-        }
-    }
-    &::after {
-        display: block;
-
-        width: 100%;
-        padding-top: percent($height, $width);
-
-        content: "";
-    }
-}
-@mixin image-placeholder-v4($width, $height, $size: 100%) {
+@mixin image-placeholder($width, $height, $size: 100%) {
     --u-width: #{$width};
     --u-height: #{$height};
     position: relative;
@@ -695,5 +662,24 @@ $grid-breakpoints: (
     cursor: grab;
     &:active {
         cursor: grabbing;
+    }
+}
+@mixin draw-line($className: "span", $height: 3px, $duration: 1s) {
+    --draw-line-height: #{$height};
+    --draw-duration: #{$duration};
+    --bottom-position: bottom;
+    &:hover {
+        #{$className} {
+            background-position: left var(--bottom-position);
+            background-size: 100% var(--draw-line-height);
+        }
+    }
+    #{$className} {
+        transition: background-size var(--draw-duration) cubic-bezier(0.2, 0.75, 0.5, 1);
+
+        background-image: linear-gradient(to right, currentcolor 0, currentcolor 100%);
+        background-repeat: no-repeat;
+        background-position: right var(--bottom-position);
+        background-size: 0 var(--draw-line-height);
     }
 }

@@ -66,6 +66,8 @@
     "UNIT_DELAY": "Delay",
     "UNIT_DURATION": "Duration",
     "UNIT_PREVIEW": "Preview",
+    "UNIT_PREVIEW_NOW": "Preview",
+    "UNIT_USE_NOW": "Use",
     "UNIT_PLAY": "Play",
     "UNIT_STOP": "Stop",
     "UNIT_POINTER": "Pointer",
@@ -166,6 +168,14 @@
     "UNIT_PREFIX": "Prefix",
     "UNIT_SUFFIX": "Suffix",
     "UNIT_PRESET": "Preset",
+    "UNIT_SHOW_ALL": "Show All",
+    "UNIT_LOAD_ERROR": "Load Error",
+    "UNIT_LOAD_ERROR_TIP": "Please try again later",
+    "UNIT_UPLOAD_JSMO_TITLE": "Upload .jsmo file",
+    "UNIT_SAVE": "Save",
+    "UNIT_LOGIN": "Login",
+    "UNIT_REGISTER": "Register",
+    "UNIT_LOGOUT": "Logout",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
@@ -571,5 +581,8 @@
     "TABLE_BORDER_TIP": "Whether to show border",
     "TABLE_TIP_1": "1. Dragging the cell size will also affect the minimum width of the table. The final minimum width of the table will be the larger of the two.",
 
-    "COUNTER_NUMBER_PAD": "Minimum Digits"
+    "COUNTER_NUMBER_PAD": "Minimum Digits",
+
+    "DELETE_PANEL_TITLE": "Delete",
+    "DELETE_PANEL_DESC": "Are you sure you want to delete?"
 }

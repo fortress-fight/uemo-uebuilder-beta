@@ -1,7 +1,14 @@
 {
     "$schema": "node_modules/lerna/schemas/lerna-schema.json",
     "version": "4.0.0",
-    "packages": ["cli-plugins/*", "cli-configs/*", "uebuilder-cli/*", "uebuilder-plugins/*"],
+    "packages": [
+        "cli-plugins/*",
+        "cli-configs/*",
+        "uebuilder-cli/*",
+        "uebuilder-plugins/*",
+        "uebuilder-core/*",
+        "uebuilder-tools/*"
+    ],
     "command": {
         "run": {
             "npmClient": "yarn"

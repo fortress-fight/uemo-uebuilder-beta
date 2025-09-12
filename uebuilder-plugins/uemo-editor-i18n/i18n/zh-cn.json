@@ -66,6 +66,8 @@
     "UNIT_DELAY": "延迟",
     "UNIT_DURATION": "过渡",
     "UNIT_PREVIEW": "预览",
+    "UNIT_PREVIEW_NOW": "立即预览",
+    "UNIT_USE_NOW": "立即使用",
     "UNIT_PLAY": "播放",
     "UNIT_STOP": "停止",
     "UNIT_POINTER": "端点",
@@ -166,6 +168,14 @@
     "UNIT_PREFIX": "前缀",
     "UNIT_SUFFIX": "后缀",
     "UNIT_PRESET": "预设",
+    "UNIT_SHOW_ALL": "查看全部",
+    "UNIT_LOAD_ERROR": "加载失败",
+    "UNIT_LOAD_ERROR_TIP": "请稍后再试",
+    "UNIT_UPLOAD_JSMO_TITLE": "上传.jsmo文件",
+    "UNIT_SAVE": "保存",
+    "UNIT_LOGIN": "登录",
+    "UNIT_REGISTER": "注册",
+    "UNIT_LOGOUT": "退出",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
@@ -571,5 +581,8 @@
     "TABLE_RESET_CELL_WIDTH": "重置单元格宽度",
     "TABLE_TIP_1": "1. 拖拽单元格尺寸，也会影响表格最小宽度.最终的表格最小宽度会选择两者中的最大的值",
 
-    "COUNTER_NUMBER_PAD": "最小位数"
+    "COUNTER_NUMBER_PAD": "最小位数",
+
+    "DELETE_PANEL_TITLE": "是否确认删除",
+    "DELETE_PANEL_DESC": "删除后将无法找回，请谨慎操作。"
 }

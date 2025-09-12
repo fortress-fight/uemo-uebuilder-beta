@@ -1,0 +1,56 @@
+{
+    "UEBUILDER_QRCODE_PANEL_SUBTITLE": "User Group",
+    "UEBUILDER_QRCODE_PANEL_FOOTER": "Scan QR Code to Join WeChat Group",
+
+    "UEBUILDER_ENTER_TITLE": "Quick Start",
+    "UEBUILDER_ENTER_SUBTITLE": "100+ blocks, 10s to build",
+    "UEBUILDER_CREATE_TITLE": "Blank Page",
+    "UEBUILDER_CREATE_SUBTITLE": "Start from scratch",
+    "UEBUILDER_UPLOAD_TITLE": "Import",
+    "UEBUILDER_UPLOAD_SUBTITLE": "Upload .jsmo file",
+
+    "UEBUILDER_CONTACT_US_TITLE": "Contact Us",
+    "UEBUILDER_CONTACT_US_SUBTITLE": "Monday to Friday 9:30 - 18:30",
+    "UEBUILDER_CONTACT_US_TEL": "010-69557550",
+    "UEBUILDER_CONTACT_US_COPYRIGHT": "COPYRIGHT (©) 2023 企业快速建站-免费自助模板建站-高端网站定制设计-魔艺建站专业网站建设公司.",
+    "UEBUILDER_CONTACT_US_BEIAN": "京ICP备12019481号-5",
+    "UEBUILDER_CONTACT_US_BEIAN_TEL": "增值电信业务经营许可证：京B2-20181555",
+
+    "UEBUILDER_STOREHOUSE_TITLE": "Newest Resources",
+
+    "UEBUILDER_TEMPLATE_FORM_TITLE": "Upload Template",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_EDIT": "Edit Template",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_PLACEHOLDER": "Enter page title, such as: My Page - 001",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_PLACEHOLDER": "Add Cover",
+    "UEBUILDER_TEMPLATE_FORM_ERROR": "Check the form",
+    "UEBUILDER_TEMPLATE_FORM_JSON_ERROR": "Upload page file",
+    "UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR": "Failed to get page template details",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_ERROR": "Add a cover",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_ERROR": "Enter a name",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "Recommended size: 640×380px",
+
+    "UEBUILDER_USER_STOREHOUSE_TITLE": "Pages",
+    "UEBUILDER_USER_STOREHOUSE_TITLE_COLLECT": "My Collection",
+    "UEBUILDER_USER_STOREHOUSE_PLACEHOLDER": "Not logged in",
+    "UEBUILDER_USER_STOREHOUSE_DESC": "Login to edit pages",
+
+    "UEBUILDER_USER_STOREHOUSE_OPER_ADD_PAGE": "Add Page",
+    "UEBUILDER_USER_STOREHOUSE_OPER_MORE": "View All",
+
+    "UEBUILDER_USER_STOREHOUSE_RECENT": "Recently Used",
+    "UEBUILDER_USER_STOREHOUSE_RECENT_PLACEHOLDER": "Not logged in",
+    "UEBUILDER_USER_STOREHOUSE_RECENT_DESC": "Login to edit pages online",
+
+    "UEBUILDER_USER_STOREHOUSE_SORT_NEWEST": "Recently Used",
+    "UEBUILDER_USER_STOREHOUSE_SORT_CREATED": "Created Time",
+
+    "UEBUILDER_NAV_HOME": "Home",
+    "UEBUILDER_NAV_MY_PAGES": "My Pages",
+    "UEBUILDER_NAV_USER_COLLECTION": "My Collection",
+    "UEBUILDER_NAV_HELP": "Help",
+    "UEBUILDER_NAV_RESOURCE_HUB": "Resource Hub",
+    "UEBUILDER_NAV_TEMPLATE": "UEmo Template",
+
+    "UEBUILDER_USER_STOREHOUSE_TOTAL_PAGE": "Total <strong>{total}</strong> pages",
+    "UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR": "You have reached the limit, you cannot create new templates"
+}

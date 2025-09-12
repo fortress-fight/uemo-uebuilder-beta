@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-06-07 12:02:46
+ * @LastEditTime: 2025-07-21 14:19:00
  */
 
 // SECTION - 样式文件
@@ -20,21 +20,25 @@ import { AI_CONFIG } from "../../utils/ai-config";
 
 const app = createApp(App);
 
-const uploadConfig: UE_EL_UTIL.UploadConfigOld = {
+const uploadConfig: UE_EL_UTIL.UploadConfig = {
     uploadPath: "http://127.0.0.1:9005/service",
     uploadName: "Filedata",
     useFullLink: true,
     publicPath: "/templates/templates/editor_page/",
     resourceLink: "http://127.0.0.1:9005/",
-    uploadFileSize: 2048,
-    imageUploadSize: 10240,
-    imageDataPath: "url",
+    fileLimitSize: 20480,
+    uploadFileQueryPath: "url",
+
+    asset: false,
+    image: { allow: true, limitSize: 10240 },
     qiniu: { allow: false as const },
     video: { allow: true, limitSize: 10240 },
+
     // history: { type: "MO005" as const },
     history: { type: "custom" as const, url: "http://127.0.0.1:9005/service/history" },
 };
 
+// NOTE: 测试已用字体
 setLocalFontLib([
     {
         name: "阿里妈妈数黑体-Bold",

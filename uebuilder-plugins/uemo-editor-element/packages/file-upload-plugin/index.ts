@@ -1,11 +1,10 @@
 /*
  * @Description: 文件上传插件
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 01:18:54
+ * @LastEditTime: 2025-07-20 16:16:41
  */
 import type { App } from "vue";
 
-import { transferUploadConfig } from "./utils/helper";
 import { createUploadHandler } from "./utils/upload";
 import { createUploadHistoryHandler } from "./utils/upload-history";
 
@@ -17,7 +16,7 @@ import { createUploadHistoryHandler } from "./utils/upload-history";
 export function install(app: App, param: UE_PLUGIN_OPTIONS.FileUpload) {
     const useUploadHandler = param.uploadHandler || createUploadHandler;
 
-    app.config.globalProperties.$ueFileUpload = useUploadHandler(undefined, transferUploadConfig(param.uploadConfig));
+    app.config.globalProperties.$ueFileUpload = useUploadHandler(undefined, param.uploadConfig);
 
     const historyConfig = param.uploadConfig.history;
     if (

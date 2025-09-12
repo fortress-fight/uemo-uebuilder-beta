@@ -1,7 +1,7 @@
 <!--
  * @Description: 字体图标
  * @Author: F-Stone
- * @LastEditTime: 2025-03-23 19:18:20
+ * @LastEditTime: 2025-07-31 18:22:03
 -->
 <template>
     <svg :class="$style['icon-box']" aria-hidden="true" :style="{ '--c-size': sizeCss }" v-bind="$attrs">
@@ -22,8 +22,8 @@ const sizeCss = computed(() => (prop.size ? prop.size + "px" : ""));
     overflow: hidden;
     flex: 0 0 auto;
 
-    width: var(--c-size, 16px);
-    height: var(--c-size, 16px);
+    width: 1em;
+    height: 1em;
 
     vertical-align: middle;
 

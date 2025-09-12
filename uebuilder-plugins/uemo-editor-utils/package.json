@@ -18,7 +18,7 @@
         "registry": "https://registry.yarnpkg.com"
     },
     "scripts": {
-        "prepare": "cd ../.. && husky uebuilder-plugins/uemo-editor-utils/.husky",
+        "prepare": "HUSKY_DIR=$(pwd)/.husky && cd $(git rev-parse --show-toplevel) && husky \"$HUSKY_DIR\" && echo 'yarn lint-staged' > \"$HUSKY_DIR\"/pre-commit",
         "test": "echo \"Error: run tests from root\" && exit 1",
         "supportedBrowsers": "echo \"export default $(browserslist-useragent-regexp --allowHigherVersions);\" > ./lib/supported-browsers.js",
         "supportedBrowsersWin": "(echo export default && browserslist-useragent-regexp --allowHigherVersions) > supportedBrowsers.js"
@@ -37,7 +37,9 @@
         "@types/jquery": "^3.5.32",
         "@types/lodash": "^4.17.15",
         "@types/nanoid-dictionary": "^4.2.3",
+        "@types/nprogress": "^0.2.3",
         "axios": "^1.8.1",
+        "axios-cache-interceptor": "^1.8.0",
         "bezier-easing": "^2.1.0",
         "big.js": "^6.2.2",
         "color": "^5.0.0",
@@ -57,10 +59,14 @@
         "mitt": "^3.0.1",
         "nanoid": "^5.1.2",
         "nanoid-dictionary": "^4.3.0",
+        "nprogress": "^0.2.0",
         "odometer_countup": "^1.0.4",
         "parallax-controller": "^1.7.1",
+        "penpal": "^7.0.4",
         "pexels": "^1.4.0",
+        "pinia": "^3.0.3",
         "qiniu-js": "^3.4.2",
+        "query-string": "^9.2.2",
         "svgo": "^3.3.2",
         "tippy.js": "^6.3.7",
         "ukiyojs": "^4.2.0",

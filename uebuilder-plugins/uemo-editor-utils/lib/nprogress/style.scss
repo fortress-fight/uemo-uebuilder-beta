@@ -1,0 +1,57 @@
+/* stylelint-disable */
+
+#nprogress {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+
+    background: #fff;
+
+    align-items: center;
+    justify-content: center;
+    * {
+        box-sizing: border-box;
+    }
+}
+#loading-box {
+    position: relative;
+
+    height: 10px;
+    padding: 1px;
+
+    border: 2px solid;
+    border-radius: 5px;
+    .loading-message {
+        position: absolute;
+        bottom: calc(100% + 10px);
+
+        width: 100%;
+
+        text-align: left;
+    }
+    .bar {
+        z-index: 1031;
+
+        width: 100%;
+        height: 100%;
+
+        background: #000;
+    }
+}
+#loading-inner {
+    position: relative;
+
+    overflow: hidden;
+
+    width: 200px;
+    height: 100%;
+
+    border-radius: 5px;
+}
+
+/* stylelint-enable */
