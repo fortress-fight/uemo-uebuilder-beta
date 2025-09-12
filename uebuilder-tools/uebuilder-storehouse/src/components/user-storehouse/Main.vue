@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:01:17
+ * @LastEditTime: 2025-09-12 16:12:11
 -->
 <template>
     <UebuilderUserStorehouse
@@ -199,7 +199,7 @@ function handleUpdateTemplate(param: {
     type: "add" | "edit";
     data: { json: string; thumb: string; title: string; id?: string };
 }) {
-    updateUserTemplate(param.type, param.data)
+    updateUserTemplate(param.type, { ...param.data, img: param.data.thumb })
         .then((res) => {
             if (res.code === 998) {
                 openLoginPanel();
