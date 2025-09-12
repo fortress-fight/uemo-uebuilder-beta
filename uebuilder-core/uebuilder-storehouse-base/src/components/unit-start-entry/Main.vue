@@ -1,7 +1,7 @@
 <!--
  * @Description: 页面库
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 15:42:11
+ * @LastEditTime: 2025-09-12 16:43:01
 -->
 <template>
     <div :class="$style['oper-btn-group']" class="flex">
@@ -21,7 +21,7 @@
             :subtitle="t('UEBUILDER_CREATE_SUBTITLE')"
             @trigger="createEmptyPage"
         />
-        <UnitJsmoUploader :class="$style['oper-btn']" @success="uploadPageData">
+        <UnitJsmoUploader :class="$style['oper-btn']" @success="editorPageData">
             <OperButton
                 theme="green"
                 :title="t('UEBUILDER_UPLOAD_TITLE')"
@@ -35,29 +35,34 @@
 import OperButton from "./components/Button.vue";
 import UnitJsmoUploader from "../unit-jsmo-uploader";
 
+const emit = defineEmits<{
+    (e: "editorPageData", data: string): void;
+    (e: "triggerAppStart" | "createEmptyPage"): void;
+}>();
 const { t } = useI18n();
 
-defineOptions({
-    name: "UnitStartEntry",
-});
+defineOptions({ name: "UnitStartEntry" });
 
+/**
+ * 触发急速建站入口
+ */
 function triggerAppStart() {
-    //
+    emit("triggerAppStart");
 }
 
 /**
  * 创建空白页面
  */
 function createEmptyPage() {
-    //
+    emit("createEmptyPage");
 }
 
 /**
  * 上传并使用本地的页面数据
  * @param pageData
  */
-function uploadPageData(_pageData: string) {
-    //
+function editorPageData(data: string) {
+    emit("editorPageData", data);
 }
 </script>
 <style lang="scss" module>

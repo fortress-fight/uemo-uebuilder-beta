@@ -96,6 +96,24 @@ export abstract class UeBuilderStorehouseBase {
     }
 
     /**
+     * 切换应用层
+     *
+     * @memberof UeBuilderStorehouseBase
+     */
+    public async tabAppLayer(layer: "uebuilderComposerLayer"): Promise<void>;
+    public async tabAppLayer(
+        layer: "uebuilderEditorLayer" | "uebuilderPreviewLayer",
+        param: { data: string }
+    ): Promise<void>;
+    public async tabAppLayer(
+        layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
+        param?: any
+    ): Promise<void> {
+        const remote = await this.storehouseWorkbenchChannel!.remote;
+        await remote.tabAppLayer(layer, param);
+    }
+
+    /**
      * 销毁实例
      * @description 清理资源并移除实例引用
      */

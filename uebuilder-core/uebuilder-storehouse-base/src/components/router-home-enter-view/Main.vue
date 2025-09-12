@@ -1,7 +1,7 @@
 <!--
  * @Description: 入口路由页面
  * @Author: F-Stone
- * @LastEditTime: 2025-07-27 01:12:05
+ * @LastEditTime: 2025-09-12 16:56:08
 -->
 <template>
     <div :class="$style['router-entry-view']" class="min-h-0">
@@ -11,7 +11,11 @@
                     <img :src="banner.image" alt="" />
                 </a>
             </div>
-            <UnitStartEntry />
+            <UnitStartEntry
+                @triggerAppStart="triggerAppStart"
+                @createEmptyPage="createEmptyPage"
+                @editorPageData="editorPageData"
+            />
             <slot></slot>
         </div>
         <div :class="$style['v-footer']">
@@ -22,10 +26,25 @@
 <script lang="ts" setup>
 import type { RouterEnterViewBaseProps } from "./index";
 
+import { UeBuilderStorehouseKey } from "../../plugin/injection-key";
 import UnitStartEntry from "../unit-start-entry";
+
+const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
 
 defineOptions({ name: "RouterEnterView" });
 const _props = withDefaults(defineProps<RouterEnterViewBaseProps>(), {});
+
+function triggerAppStart() {
+    void UeBuilderStorehouse?.tabAppLayer("uebuilderComposerLayer");
+}
+
+function createEmptyPage() {
+    void UeBuilderStorehouse?.tabAppLayer("uebuilderEditorLayer", { data: "" });
+}
+
+function editorPageData(data: string) {
+    void UeBuilderStorehouse?.tabAppLayer("uebuilderEditorLayer", { data });
+}
 </script>
 <style lang="scss" module>
 .router-entry-view {
