@@ -1,7 +1,7 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 19:01:12
+ * @LastEditTime: 2025-09-14 00:41:02
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -40,6 +40,24 @@ export namespace WORKBENCH_STOREHOUSE_CHANNEL {
 
         // 打开登录窗口
         openLoginPanel: () => void;
+
+        // 切换 APP 应用层
+        changeWorkbenchState(layer: "composer"): void;
+        changeWorkbenchState(layer: "editing" | "preview", param: { data: string }): void;
+        changeWorkbenchState(layer: "editing" | "composer" | "preview", param?: { data: string }): void;
+    }
+}
+
+/**
+ * WORKBENCH 中实现 EDITOR_FACTORY 调用的方法
+ */
+export namespace WORKBENCH_EDITOR_FACTORY_CHANNEL {
+    export interface Api extends Methods {
+        // EditorFactory Frame 准备就绪
+        editorFactoryReady: () => void;
+
+        // 显示消息
+        showMessage: (type: "success" | "error" | "warning" | "info", message: string) => void;
 
         // 切换 APP 应用层
         changeWorkbenchState(layer: "composer"): void;
