@@ -6,10 +6,12 @@ import $ from "@stone/uemo-editor-utils/lib/jquery";
 import { createUeBuilderCreator } from "@/utils/uebuilder-creator";
 
 $(() => {
+    // MARK Uebuilder-Tools 的初始化位置
     $(".uebuilder-container").each((_index, dom) => {
         const option: UE_BUILDER_CREATOR.InitParams = {
             appName: "UEMO_TOOLS",
             appPath: "/",
+            appSize: "fullscreen",
             appType: "page",
             appState: "browsing",
             appUpload: {
