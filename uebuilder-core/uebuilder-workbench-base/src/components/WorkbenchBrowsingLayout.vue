@@ -1,3 +1,9 @@
+<!--
+ * FILE Workbench 工作台
+ * @Description: Workbench 工作台
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-13 16:18:11
+-->
 <template>
     <div :class="$style['workbench-browsing-layout']" class="grid h-full">
         <div :class="$style['layout-head']" class="grid items-center">
@@ -64,12 +70,16 @@ function initialWorkbenchStorehouseChannel() {
             openLoginPanel: (_channel) => {
                 return workbench!.openLoginPanel();
             },
+            changeWorkbenchState: (_channel, state, param?) => {
+                // @ts-expect-error
+                return workbench!.changeWorkbenchState(state, param);
+            },
         },
     });
 }
 
 onBeforeMount(() => {
-    workbenchStore.startPageLoading("storehouse");
+    workbenchStore.startPageLoading("browsing");
 });
 
 onMounted(() => {

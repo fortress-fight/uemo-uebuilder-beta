@@ -88,6 +88,24 @@ export abstract class UeBuilderWorkbenchBase {
     abstract getLoginStatus(): boolean;
     abstract openLoginPanel(): void;
 
+    changeWorkbenchState(state: "composer"): void;
+    changeWorkbenchState(state: "editing" | "preview", param: { data: string }): void;
+    changeWorkbenchState(state: "editing" | "composer" | "preview", param?: { data: string }) {
+        this.store.setWorkbenchState(state);
+
+        switch (state) {
+            case "editing":
+                this.store.setCurrentEditorPageData({ data: param!.data });
+                break;
+            case "preview":
+                this.store.setCurrentPreviewPageData({ data: param!.data });
+                break;
+
+            default:
+                break;
+        }
+    }
+
     showLoading() {
         if (NProgress.isStarted()) return;
         NProgress.configure({ parent: "body" }).start();
@@ -144,6 +162,7 @@ export abstract class UeBuilderWorkbenchBase {
             }
         }
 
+        // TASK: 完成后将这个注释掉
         // eslint-disable-next-line
         console.log("config", workbenchConfig);
 
