@@ -1,5 +1,7 @@
 {
     "lunchWorkbenchFailed": "工作台初始化失败",
     "userCommunication": "用户交流群",
-    "joinUserCommunication": "扫码加入微信群"
+    "joinUserCommunication": "扫码加入微信群",
+    "quickStart": "快速入门",
+    "helpCenter": "帮助中心"
 }

@@ -1,5 +1,7 @@
 {
     "lunchWorkbenchFailed": "Lunch workbench failed",
     "userCommunication": "User Community",
-    "joinUserCommunication": "Scan QR Code to Join Community"
+    "joinUserCommunication": "Scan QR Code to Join Community",
+    "quickStart": "Quick Start",
+    "helpCenter": "Help Center"
 }
