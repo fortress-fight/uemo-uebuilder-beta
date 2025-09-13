@@ -1,6 +1,13 @@
+<!--
+ * FILE Workbench 状态主体容器
+ * @Description: Workbench 状态主体容器
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-13 15:59:46
+-->
+
 <template>
     <div :class="$style['uebuilder-workbench']" class="flex flex-col h-full overflow-hidden">
-        <!-- 即将编辑 -->
+        <!-- 编辑入口 -->
         <WorkbenchEntryLayout v-if="workbenchState.stage === 'entry'" />
 
         <!-- 工作台 -->
