@@ -1,9 +1,7 @@
 <template>
     <div :class="$style['entry-layout']" class="w-full h-full">
         <div class="l-preview">
-            <div v-if="entryPageData.data" class="thumb-placeholder">
-                <!--  -->
-            </div>
+            <div v-if="!entryPageData.data" class="thumb-placeholder">entryPageData.data: {{ entryPageData.data }}</div>
         </div>
         <div :class="$style['l-mask']"></div>
         <div :class="$style['l-oper']" class="flex flex-col items-center justify-center">
@@ -84,6 +82,24 @@ const operBtn = computed<OperBtn>(() => {
 const trigger = (type: string) => {
     emit("trigger", type);
 };
+
+function initialWorkbenchPreviewChannel() {
+    setTimeout(() => {
+        workbenchStore.stopPageLoading();
+    }, 2000);
+}
+
+onBeforeMount(() => {
+    workbenchStore.startPageLoading("entry");
+});
+
+onMounted(() => {
+    initialWorkbenchPreviewChannel();
+});
+
+onBeforeUnmount(() => {
+    workbenchStore.stopPageLoading();
+});
 </script>
 <style lang="scss" module>
 .entry-layout {
