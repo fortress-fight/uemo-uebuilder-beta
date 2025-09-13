@@ -15,8 +15,8 @@ import { StorehouseWorkbenchChannel } from "./utils/frame-channel";
 import { UeBuilderStorehouseKey } from "./plugin/injection-key";
 
 /**
- * UeBuilder 创建器基类
- * @class UeBuilderCreatorBase
+ * UeBuilderStorehouse 基类
+ * @class UeBuilderStorehouseBase
  * @description 负责管理和创建 UeBuilder 工作台实例
  */
 export abstract class UeBuilderStorehouseBase {
@@ -32,7 +32,6 @@ export abstract class UeBuilderStorehouseBase {
     /**
      * 构造函数
      * @param {HTMLElement} rootDom - 根 DOM 元素
-     * @param {UE_BUILDER_CREATOR.InitParams} option - 初始化参数
      */
     constructor(public readonly rootDom: HTMLElement) {
         //
