@@ -6,5 +6,15 @@
     "helpCenter": "帮助中心",
     "tutorialStep1": "1. 输入“/” 添加内容",
     "tutorialStep2": "2. 切换版型",
-    "tutorialStep3": "3. 页面结构"
+    "tutorialStep3": "3. 页面结构",
+    "enterWorkbench": "进入工作台",
+    "previewPage": "预览页面",
+    "addLayoutGroup": "布局",
+    "replacePage": "更换页面",
+    "pageStructure": "页面结构",
+    "AIHelper": "AI 助手",
+    "documentHelper": "文档助手",
+    "pageSetting": "页面设置",
+    "themeSetting": "主题样式调节",
+    "plugin": "插件"
 }
