@@ -20,8 +20,8 @@ declare global {
          * 工作台状态
          * @description 工作台状态，包括初始、编辑、预览、模板库、替换、极速构建
          *  - entry: 进入工作台前的“即将编辑”页面展示
-         *  - browsing: 工作台开启后的预览/库展示状态（原 initial）
-         *  - editing：编辑模式 -- 编辑页面
+         *  - browsing: 工作台开启后的预览/库展示状态（原 initial）实现库：storehouse
+         *  - editing：编辑模式 -- 编辑页面 实现库：editor
          *  - preview：预览模式 -- 预览页面
          *  - composer 极速构建模式 -- 极速构建页面
          */
