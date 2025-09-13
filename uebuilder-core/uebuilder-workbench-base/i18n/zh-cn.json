@@ -3,5 +3,8 @@
     "userCommunication": "用户交流群",
     "joinUserCommunication": "扫码加入微信群",
     "quickStart": "快速入门",
-    "helpCenter": "帮助中心"
+    "helpCenter": "帮助中心",
+    "tutorialStep1": "1. 输入“/” 添加内容",
+    "tutorialStep2": "2. 切换版型",
+    "tutorialStep3": "3. 页面结构"
 }

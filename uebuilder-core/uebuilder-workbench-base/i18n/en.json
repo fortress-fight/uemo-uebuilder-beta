@@ -3,5 +3,8 @@
     "userCommunication": "User Community",
     "joinUserCommunication": "Scan QR Code to Join Community",
     "quickStart": "Quick Start",
-    "helpCenter": "Help Center"
+    "helpCenter": "Help Center",
+    "tutorialStep1": "1. Input “/” to add content",
+    "tutorialStep2": "2. Switch template",
+    "tutorialStep3": "3. Page structure"
 }

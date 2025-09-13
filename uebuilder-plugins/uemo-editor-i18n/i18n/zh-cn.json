@@ -176,6 +176,9 @@
     "UNIT_LOGIN": "登录",
     "UNIT_REGISTER": "注册",
     "UNIT_LOGOUT": "退出",
+    "UNIT_SKIP": "跳过",
+    "UNIT_NEXT": "下一步",
+    "UNIT_FINISH": "完成",
 
     "AI_NOT_SUPPORT_TIP": "AI 功能未开启，详情请咨询客服",
     "TAG_INPUT_PLACEHOLDER": "回车表示确认，可添加多个",
