@@ -131,6 +131,7 @@ export class UeBuilderCreatorBase {
                 id="UEBUILDER-${this.GUID}"
                 class="uebuilder-workbench"
                 src="${this.UEBUILDER_WORKBENCH_URL}"
+                data-size="${this.option.appSize || "normal"}"
             ></iframe>
         `).appendTo(this.rootDom) as JQuery<HTMLIFrameElement>;
 
@@ -238,7 +239,8 @@ export class UeBuilderCreatorBase {
      * @protected
      */
     protected async pageDataPreprocessing(encodeString: string): Promise<string> {
-        if (!encodeString || !this.option.pageDataPreprocessing) return encodeString;
+        if (!this.option.pageDataPreprocessing) return encodeString;
+        if (!encodeString) return "";
 
         try {
             const remote = await this.creatorWorkbenchChannel?.remote;
