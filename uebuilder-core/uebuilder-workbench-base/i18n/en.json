@@ -16,5 +16,11 @@
     "documentHelper": "Doc Helper",
     "pageSetting": "Page Setting",
     "themeSetting": "Theme Setting",
-    "plugin": "Plugin"
+    "plugin": "Plugin",
+    "startPanelTitle": "Choose a way to create! 🧐",
+    "startPanelSubtitle": "Edit a ready-made page or build your own layout.",
+    "startPanelPageBtnTitle": "Page",
+    "startPanelPageBtnSubtitle": "Edit a template",
+    "startPanelLayoutBtnTitle": "Layout",
+    "startPanelLayoutBtnSubtitle": "Choose or customize layout"
 }

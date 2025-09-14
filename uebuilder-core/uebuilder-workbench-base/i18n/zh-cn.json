@@ -16,5 +16,11 @@
     "documentHelper": "文档助手",
     "pageSetting": "页面设置",
     "themeSetting": "主题样式调节",
-    "plugin": "插件"
+    "plugin": "插件",
+    "startPanelTitle": "选择个创建方式吧！🧐",
+    "startPanelSubtitle": "选择UEbuilder提供的页面直接编辑，或使用布局组建自己的页面！",
+    "startPanelPageBtnTitle": "选择页面",
+    "startPanelPageBtnSubtitle": "在设计好的模板里进行修改",
+    "startPanelLayoutBtnTitle": "选择布局",
+    "startPanelLayoutBtnSubtitle": "选择布局或自定义，构建模板"
 }

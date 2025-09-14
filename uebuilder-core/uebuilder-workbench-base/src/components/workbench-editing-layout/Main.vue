@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-15 00:19:46
+ * @LastEditTime: 2025-09-15 00:39:38
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
@@ -24,9 +24,11 @@
             <iframe ref="editingIframe" :class="$style['frame--uebuilder-editing']" :src="appEditorSrc"></iframe>
             <div v-if="frameMask === 'open'" :class="$style['frame-mask']" @click="frameMaskClickHandler"></div>
         </div>
+        <WorkbenchEditingStartPanel v-if="showStartPanel" />
     </div>
 </template>
 <script lang="ts" setup>
+import WorkbenchEditingStartPanel from "../unit-start-panel";
 import { useUeBuilderWorkbenchStore } from "../../store/store-workbench";
 import { WorkbenchEditorFactoryChannel } from "../../utils/frame-channel";
 import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
@@ -39,6 +41,7 @@ const appEditorSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchP
 
 const frameMask = ref<"open" | "close">("close");
 
+const showStartPanel = ref(false);
 const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const editingIframe = useTemplateRef("editingIframe");
@@ -99,6 +102,9 @@ onBeforeUnmount(() => {
 </script>
 <style lang="scss" module>
 .workbench-editing-layout {
+    position: relative;
+    z-index: 100;
+
     height: 100%;
 
     grid-template-rows: 50px 1fr;
