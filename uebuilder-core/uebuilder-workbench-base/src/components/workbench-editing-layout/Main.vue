@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-14 01:30:50
+ * @LastEditTime: 2025-09-14 02:31:15
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
@@ -112,6 +112,10 @@ onBeforeUnmount(() => {
         position: relative;
         z-index: calc(var(--z-index--mini) + 10);
 
+        height: 100%;
+    }
+    .frame--uebuilder-editing {
+        width: 100%;
         height: 100%;
     }
 }
