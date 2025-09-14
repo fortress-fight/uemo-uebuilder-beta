@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-editor 发送到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-09-14 00:40:23
+ * @LastEditTime: 2025-09-15 00:07:00
  */
 import type { WORKBENCH_EDITOR_FACTORY_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { EDITOR_FACTORY_WORKBENCH_CHANNEL } from "../../../../../types/channel";
@@ -10,7 +10,10 @@ import { MessageChannel } from "@stone/uemo-editor-utils/lib/penpal/message-chan
 
 type Param = {
     on: {
-        launchEditorFactory: (config: UE_BUILDER_EDITOR_FACTORY.Config) => Promise<void>;
+        launchEditorFactory: (
+            editorData: { title?: string; data: string },
+            config: UE_BUILDER_EDITOR_FACTORY.Config
+        ) => Promise<void>;
     };
 };
 
@@ -20,8 +23,8 @@ export class EditorFactoryWorkbenchChannel extends MessageChannel<
 > {
     get localApi(): EDITOR_FACTORY_WORKBENCH_CHANNEL.Api {
         return {
-            launchEditorFactory: (config) => {
-                return this.param.on.launchEditorFactory(config);
+            launchEditorFactory: (editorData, config) => {
+                return this.param.on.launchEditorFactory(editorData, config);
             },
         } as EDITOR_FACTORY_WORKBENCH_CHANNEL.Api;
     }

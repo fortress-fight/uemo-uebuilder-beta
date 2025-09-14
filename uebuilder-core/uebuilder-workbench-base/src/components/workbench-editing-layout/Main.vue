@@ -2,11 +2,11 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-14 02:31:15
+ * @LastEditTime: 2025-09-15 00:19:46
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
-        <WorkbenchEditingLayoutHeadBar>
+        <WorkbenchEditingLayoutHeadBar :title="workbenchStore.entryPageData.title">
             <template #siteLogo>
                 <slot name="siteLogo"></slot>
             </template>
@@ -58,7 +58,12 @@ function initialWorkbenchEditingChannel() {
                             workbenchUpload: uploadConfig,
                             workbenchResource: resourceConfig,
                         } = toRaw(workbenchStore.workbenchConfig);
-                        return remote.launchEditorFactory({ version, uploadConfig, resourceConfig });
+
+                        return remote.launchEditorFactory(toRaw(workbenchStore.entryPageData), {
+                            version,
+                            uploadConfig,
+                            resourceConfig,
+                        });
                     })
                     .then(() => {
                         workbenchStore.stopPageLoading();

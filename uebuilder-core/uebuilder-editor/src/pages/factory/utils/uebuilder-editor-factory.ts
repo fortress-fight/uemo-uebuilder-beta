@@ -1,7 +1,7 @@
 /*
  * @Description: UeBuilderEditorFactory 编辑器控制面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-14 23:36:08
+ * @LastEditTime: 2025-09-15 00:14:16
  */
 import type { UE_EL_OPTIONS } from "@stone/uemo-editor-element/src";
 
@@ -48,8 +48,8 @@ export class UebuilderEditorFactory {
     async initializeMessageChannel(): Promise<void> {
         this.editorFactoryWorkbenchChannel = this.StorehouseWorkbenchChannelCreator.getInstance(window.parent, {
             on: {
-                launchEditorFactory: (config) => {
-                    return this.launchEditorFactory(config);
+                launchEditorFactory: (data, config) => {
+                    return this.launchEditorFactory(data, config);
                 },
             },
         });
@@ -76,9 +76,12 @@ export class UebuilderEditorFactory {
         return this;
     }
 
-    launchEditorFactory(config: UE_BUILDER_EDITOR_FACTORY.Config) {
+    launchEditorFactory(editorData: { title?: string; data: string }, config: UE_BUILDER_EDITOR_FACTORY.Config) {
         const storehouseApp = createApp(UebuilderEditorFactoryApp);
         storehouseApp.provide(UebuilderEditorFactoryKey, this);
+
+        this.store.setEditorFactoryData(editorData);
+
         this.renderEditorFactory(storehouseApp, {
             editorFactoryConfig: config,
             ueElConfig: getUeElementConfig(config.uploadConfig, config.resourceConfig),

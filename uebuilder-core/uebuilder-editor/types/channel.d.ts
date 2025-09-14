@@ -1,7 +1,7 @@
 /*
  * @Description: 定义 Workbench 能够调用的 editor-factory 方法
  * @Author: F-Stone
- * @LastEditTime: 2025-09-14 00:37:13
+ * @LastEditTime: 2025-09-15 00:06:21
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -11,6 +11,9 @@ import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channe
 
 declare namespace EDITOR_FACTORY_WORKBENCH_CHANNEL {
     interface Api extends Methods {
-        launchEditorFactory: (config: UE_BUILDER_FACTORY_EDITOR.Config) => Promise<void>;
+        launchEditorFactory: (
+            editorData: { title?: string; data: string },
+            config: UE_BUILDER_EDITOR_FACTORY.Config
+        ) => Promise<void>;
     }
 }
