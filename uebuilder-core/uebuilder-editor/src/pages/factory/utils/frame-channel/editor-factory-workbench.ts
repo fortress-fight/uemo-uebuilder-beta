@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-editor 发送到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-09-15 00:07:00
+ * @LastEditTime: 2025-09-17 14:24:20
  */
 import type { WORKBENCH_EDITOR_FACTORY_CHANNEL } from "@stone/uebuilder-workbench-base/types/channel";
 import type { EDITOR_FACTORY_WORKBENCH_CHANNEL } from "../../../../../types/channel";
@@ -14,6 +14,8 @@ type Param = {
             editorData: { title?: string; data: string },
             config: UE_BUILDER_EDITOR_FACTORY.Config
         ) => Promise<void>;
+
+        setWorkbenchDevice: (device: UE_BUILDER.DeviceType) => void;
     };
 };
 
@@ -25,6 +27,9 @@ export class EditorFactoryWorkbenchChannel extends MessageChannel<
         return {
             launchEditorFactory: (editorData, config) => {
                 return this.param.on.launchEditorFactory(editorData, config);
+            },
+            setWorkbenchDevice: (device) => {
+                return this.param.on.setWorkbenchDevice(device);
             },
         } as EDITOR_FACTORY_WORKBENCH_CHANNEL.Api;
     }

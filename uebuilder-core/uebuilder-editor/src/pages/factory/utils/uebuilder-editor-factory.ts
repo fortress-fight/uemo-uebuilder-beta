@@ -1,7 +1,7 @@
 /*
  * @Description: UeBuilderEditorFactory 编辑器控制面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-15 00:14:16
+ * @LastEditTime: 2025-09-17 14:24:31
  */
 import type { UE_EL_OPTIONS } from "@stone/uemo-editor-element/src";
 
@@ -51,6 +51,9 @@ export class UebuilderEditorFactory {
                 launchEditorFactory: (data, config) => {
                     return this.launchEditorFactory(data, config);
                 },
+                setWorkbenchDevice: (device) => {
+                    return this.setWorkbenchDevice(device);
+                },
             },
         });
 
@@ -76,6 +79,11 @@ export class UebuilderEditorFactory {
         return this;
     }
 
+    /**
+     * 启动编辑器工厂
+     * @param editorData - 编辑器数据
+     * @param config - 编辑器配置
+     */
     launchEditorFactory(editorData: { title?: string; data: string }, config: UE_BUILDER_EDITOR_FACTORY.Config) {
         const storehouseApp = createApp(UebuilderEditorFactoryApp);
         storehouseApp.provide(UebuilderEditorFactoryKey, this);
@@ -87,6 +95,14 @@ export class UebuilderEditorFactory {
             ueElConfig: getUeElementConfig(config.uploadConfig, config.resourceConfig),
         });
         return Promise.resolve();
+    }
+
+    /**
+     * 设置工作台设备
+     * @param device - 工作台设备
+     */
+    setWorkbenchDevice(device: UE_BUILDER.DeviceType) {
+        this.store.setEditorFactoryDevice(device);
     }
 
     public renderEditorFactory(

@@ -1,6 +1,7 @@
 <template>
     <div :class="$style['uebuilder-editor-factory']">
         {{ store.editorFactoryData }}
+        {{ store.editorFactoryDevice }}
     </div>
 </template>
 <script lang="ts" setup>

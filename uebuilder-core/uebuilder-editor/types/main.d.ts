@@ -8,6 +8,7 @@ declare global {
             version: string;
             uploadConfig: UE_EL_UTIL.UploadConfig;
             resourceConfig: UE_BUILDER.ResourceConfig;
+            device?: UE_BUILDER.DeviceType;
         }
     }
     namespace UE_BUILDER_EDITOR_INDEX {
@@ -15,6 +16,7 @@ declare global {
             version: string;
             uploadConfig: UE_EL_UTIL.UploadConfig;
             resourceConfig: UE_BUILDER.ResourceConfig;
+            device?: UE_BUILDER.DeviceType;
         }
     }
 }
