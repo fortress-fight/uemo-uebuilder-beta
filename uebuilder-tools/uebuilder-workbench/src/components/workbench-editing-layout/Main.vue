@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局
  * @Description: Workbench 编辑布局
  * @Author: F-Stone
- * @LastEditTime: 2025-09-13 18:42:01
+ * @LastEditTime: 2025-09-17 11:11:39
 -->
 <template>
     <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full">
@@ -12,8 +12,12 @@
             </div>
         </template>
         <template #siteSaveOper>
-            <button ref="shareBtn" :class="$style['oper-btn--save']" data-theme="green">分享</button>
-            <button ref="saveBtn" :class="$style['oper-btn--save']" data-theme="blue">保存</button>
+            <button ref="shareBtnRef" :class="$style['oper-btn--save']" data-theme="green">分享</button>
+            <button ref="saveBtnRef" :class="$style['oper-btn--save']" data-theme="blue">保存</button>
+        </template>
+        <template #siteOperPanel>
+            <SavePanel v-if="saveBtnRef" :trigger="saveBtnRef" />
+            <SharePanel v-if="shareBtnRef" :trigger="shareBtnRef" />
         </template>
         <template #helpCenter>
             <div
@@ -34,7 +38,12 @@
 import UebuilderWorkbenchEditingLayout from "@stone/uebuilder-workbench-base/src/components/workbench-editing-layout";
 import UebuilderWorkbenchUnitHelperPanel from "@stone/uebuilder-workbench-base/src/components/unit-helper-panel";
 
+import SavePanel from "./components/SavePanel.vue";
+import SharePanel from "./components/SharePanel.vue";
+
 const popPanelOpen = ref(false);
+const saveBtnRef = ref<HTMLElement>();
+const shareBtnRef = ref<HTMLElement>();
 const openHelperPanelBtn = ref<HTMLElement>();
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => ({
     panel: {
