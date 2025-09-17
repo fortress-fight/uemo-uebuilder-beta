@@ -1,14 +1,14 @@
 <!--
  * @Description: UEBuilder 保存面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 12:21:24
+ * @LastEditTime: 2025-09-17 15:25:53
 -->
 <template>
     <div :class="$style['unit-save-panel']">
         <div :class="$style['inner']">
             <div :class="$style['btn-group']" class="flex flex-col">
                 <button
-                    v-for="(item, index) in btns"
+                    v-for="(item, index) in operBtns"
                     :key="index"
                     :class="$style['oper-btn']"
                     class="flex"
@@ -30,29 +30,35 @@ import type { UnitSavePanelBaseProps } from "./index";
 
 import { _throttle } from "@stone/uemo-editor-utils/lib/lodash";
 
-const _props = withDefaults(defineProps<UnitSavePanelBaseProps>(), {});
+const props = withDefaults(defineProps<UnitSavePanelBaseProps>(), {});
 defineOptions({ name: "UnitSavePanel" });
 
-const btns: { icon: string; title: string; subtitle: string; type: UE_BUILDER.SaveType }[] = [
-    {
-        icon: "icon-app-save-21",
-        title: "保存到我的页面库",
-        subtitle: "下次登录后可直接使用，继续编辑",
-        type: "saveOnline",
-    },
-    {
-        icon: "icon-app-code-21 ",
-        title: "下载制作文件",
-        subtitle: "保存到本地后，下次直接上传即可继续使用",
-        type: "saveLocal",
-    },
-    {
-        icon: "icon-app-download-21",
-        title: "下载源文件",
-        subtitle: "打包下载整个页面的HTML / 图片 / CSS / JS / 等",
-        type: "saveFile",
-    },
-];
+const { t } = useI18n();
+
+const operBtns = computed<{ icon: string; title: string; subtitle: string; type: UE_BUILDER.SaveType }[]>(() => {
+    const btns = [
+        {
+            icon: "icon-app-save-21",
+            title: t("saveOnlineButtonTitle"),
+            subtitle: t("saveOnlineButtonSubtitle"),
+            type: "saveOnline",
+        },
+        {
+            icon: "icon-app-code-21 ",
+            title: t("saveLocalButtonTitle"),
+            subtitle: t("saveLocalButtonSubtitle"),
+            type: "saveLocal",
+        },
+        {
+            icon: "icon-app-download-21",
+            title: t("saveFileButtonTitle"),
+            subtitle: t("saveFileButtonSubtitle"),
+            type: "saveFile",
+        },
+    ] as const;
+
+    return btns.filter((item) => !props.disableOper?.includes(item.type));
+});
 
 const emit = defineEmits<{
     (e: "save", type: UE_BUILDER.SaveType): void;

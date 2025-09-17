@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 13:31:22
+ * @LastEditTime: 2025-09-17 14:34:50
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
@@ -40,7 +40,9 @@ import WorkbenchEditingLayoutSideBar from "./components/SideBar.vue";
 
 defineOptions({ name: "WorkbenchEditingLayout" });
 
-const emit = defineEmits<{ (e: "trigger", type: "tabWorkbenchStateToBrowsing"): void }>();
+const emit = defineEmits<{
+    (e: "trigger", type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview"): void;
+}>();
 
 const appEditorSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchPath}uebuilder-editor/factory.html`);
 
@@ -50,8 +52,8 @@ const showStartPanel = ref(false);
 const workbench = inject(UeBuilderWorkbenchKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const editingIframe = useTemplateRef("editingIframe");
-
 const workbenchEditorChannel = ref<WorkbenchEditorFactoryChannel | null>(null);
+
 function initialWorkbenchEditingChannel() {
     const remoteWindow = editingIframe.value?.contentWindow;
     if (!remoteWindow) return;
@@ -89,11 +91,19 @@ function initialWorkbenchEditingChannel() {
     });
 }
 
+watch(
+    () => workbenchStore.workbenchState.device,
+    async (device) => {
+        const remote = await workbenchEditorChannel.value?.remote;
+        await remote?.setWorkbenchDevice(device);
+    }
+);
+
 function frameMaskClickHandler() {
     // frameMask.value = "close";
 }
 
-function trigger(type: "tabWorkbenchStateToBrowsing") {
+function trigger(type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview") {
     emit("trigger", type);
 }
 

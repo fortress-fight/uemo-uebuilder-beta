@@ -3,6 +3,7 @@ import { defineStore } from "@stone/uemo-editor-utils/lib/pinia";
 interface WorkbenchState {
     stage: UE_BUILDER.State;
     mode: unknown;
+    device: UE_BUILDER.DeviceType;
 }
 
 interface WorkbenchStateEntry extends WorkbenchState {
@@ -83,7 +84,7 @@ type ExtractModeByStage<S extends WorkbenchState["stage"]> = Extract<
 export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
     state: (): UeBuilderWorkbenchStoreState => ({
         workbenchConfig: {} as UE_BUILDER_WORKBENCH.Config,
-        workbenchState: { stage: "entry", mode: "default" },
+        workbenchState: { stage: "entry", mode: "default", device: "desktop" },
 
         entryPageData: { data: "" },
         currentEditorPageData: { data: "" },
@@ -107,12 +108,26 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          * @param stage - 工作台阶段
          * @param mode - 工作台模式，如果不提供则默认为 "default"
          */
-        setWorkbenchState<S extends WorkbenchState["stage"]>(stage: S, mode?: ExtractModeByStage<S>) {
+        setWorkbenchState<S extends WorkbenchState["stage"]>(
+            stage: S,
+            mode?: ExtractModeByStage<S>,
+            device?: UE_BUILDER.DeviceType
+        ) {
             type StateType = Extract<UeBuilderWorkbenchStoreState["workbenchState"], { stage: S }>;
             this.workbenchState = {
                 stage,
                 mode: mode ?? "default",
+                device: device ?? "desktop",
             } as StateType;
+        },
+
+        /**
+         * 设置工作台设备
+         *
+         * @param device - 工作台设备
+         */
+        setWorkbenchDevice(device: UE_BUILDER.DeviceType) {
+            this.workbenchState.device = device;
         },
 
         /**

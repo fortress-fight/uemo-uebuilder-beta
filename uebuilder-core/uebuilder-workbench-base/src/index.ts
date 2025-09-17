@@ -31,7 +31,7 @@ export abstract class UeBuilderWorkbenchBase {
     /** 初始化状态标志 */
     public initialized = false;
 
-    protected store = useUeBuilderWorkbenchStore(pinia);
+    public store = useUeBuilderWorkbenchStore(pinia);
 
     abstract WorkbenchCreatorChannelCreator: typeof WorkbenchCreatorChannel;
 

@@ -21,26 +21,28 @@
             <div :class="$style['state-pos--right']" class="inline-flex gap-2 justify-self-end">
                 <!-- 适配设备控制 -->
                 <div ref="agentController" :class="$style['agent-controller']">
-                    <div ref="agentShadow" :class="$style['btn-shadow']"></div>
+                    <div ref="tabShadowRef" :class="$style['btn-shadow']"></div>
                     <div :class="$style['agent-inner']">
                         <div
+                            v-for="(item, index) in deviceOptions"
+                            :key="index"
+                            ref="deviceOptionsRef"
                             :class="$style['agent-btn']"
                             class="flex items-center justify-center relative"
-                            :data-active="currentDevice === 'desktop'"
+                            :data-active="currentDevice === item.type"
+                            :data-type="item.type"
+                            @click="tabDevice(item.type)"
                         >
-                            <UeElIcon name="icon-desktop" :size="15" />
-                        </div>
-                        <div
-                            :class="$style['agent-btn']"
-                            class="flex items-center justify-center relative"
-                            :data-active="currentDevice === 'mobile'"
-                        >
-                            <UeElIcon name="icon-mobile" :size="15" />
+                            <UeElIcon :name="item.icon" :size="15" />
                         </div>
                     </div>
                 </div>
                 <!-- 页面预览 -->
-                <div v-ue-el-label="t('previewPage')" :class="$style['btn--preview-page']">
+                <div
+                    v-ue-el-label="t('previewPage')"
+                    :class="$style['btn--preview-page']"
+                    @click="tabWorkbenchStateToPreview"
+                >
                     <div :class="$style['icon-box']" class="flex items-center justify-center">
                         <UeElIcon name="icon-app-play" :size="15" />
                     </div>
@@ -57,13 +59,49 @@
     </div>
 </template>
 <script lang="ts" setup>
+import { gsap } from "@stone/uemo-editor-utils/lib/gsap";
+
+import { useUeBuilderWorkbenchStore } from "../../../store/store-workbench";
+
 const props = withDefaults(defineProps<{ activeOperBtns?: string[]; hideOperBtns?: string[]; title?: string }>(), {
     hideOperBtns: () => [],
     activeOperBtns: () => [],
 });
-const emit = defineEmits<{ (e: "trigger", type: "tabWorkbenchStateToBrowsing"): void }>();
+const emit = defineEmits<{
+    (e: "trigger", type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview"): void;
+}>();
 
 const { t } = useI18n();
+
+const workbenchStore = useUeBuilderWorkbenchStore();
+
+const tabShadowRef = useTemplateRef<HTMLElement>("tabShadowRef");
+const currentDevice = computed(() => workbenchStore.workbenchState.device);
+const deviceOptionsRef = useTemplateRef<HTMLElement[]>("deviceOptionsRef");
+const deviceOptions = ref<{ type: UE_BUILDER.DeviceType; icon: string }[]>([
+    { type: "desktop", icon: "icon-desktop" },
+    { type: "mobile", icon: "icon-mobile" },
+]);
+
+/**
+ * 切换设备
+ */
+function tabDevice(type: UE_BUILDER.DeviceType) {
+    // TASK 需要检测是否满足切换设备的条件
+    workbenchStore.setWorkbenchDevice(type);
+}
+
+watch(currentDevice, (device: UE_BUILDER.DeviceType) => {
+    const activeItem = deviceOptionsRef.value?.find((item) => {
+        return item.dataset.type === device;
+    });
+    gsap.to(tabShadowRef.value, {
+        left: activeItem?.offsetLeft,
+        width: activeItem?.offsetWidth,
+        ease: "easeOutQuart",
+        duration: 0.26,
+    });
+});
 
 const operBtns = ref<{ type: string; icon?: string; name: string; disable?: boolean; active?: boolean }[]>([
     { type: "add", icon: "icon-tianjia", name: t("addLayoutGroup") },
@@ -72,8 +110,6 @@ const operBtns = ref<{ type: string; icon?: string; name: string; disable?: bool
     { type: "ai", icon: "icon-app-ai", name: t("AIHelper") },
     { type: "article", name: t("documentHelper") },
 ]);
-
-const currentDevice = ref<"desktop" | "mobile">("desktop");
 
 const showOperBtns = computed(() => {
     return operBtns.value
@@ -86,6 +122,10 @@ const showOperBtns = computed(() => {
 
 function tabWorkbenchStateToBrowsing() {
     emit("trigger", "tabWorkbenchStateToBrowsing");
+}
+
+function tabWorkbenchStateToPreview() {
+    emit("trigger", "tabWorkbenchStateToPreview");
 }
 </script>
 <style lang="scss" module>
