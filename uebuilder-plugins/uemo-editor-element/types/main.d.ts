@@ -4,6 +4,7 @@
 /// <reference types="./component.d.ts" />
 /// <reference types="./directive.d.ts" />
 /// <reference types="./plugin.d.ts" />
+/// <reference types="./tippy-component.d.ts" />
 
 import type { App } from "vue";
 
