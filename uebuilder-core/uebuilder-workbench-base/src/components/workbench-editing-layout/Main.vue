@@ -2,11 +2,11 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 09:47:48
+ * @LastEditTime: 2025-09-17 13:31:22
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
-        <WorkbenchEditingLayoutHeadBar :title="workbenchStore.entryPageData.title">
+        <WorkbenchEditingLayoutHeadBar :title="workbenchStore.entryPageData.title" @trigger="trigger">
             <template #siteLogo>
                 <slot name="siteLogo"></slot>
             </template>
@@ -39,6 +39,8 @@ import WorkbenchEditingLayoutHeadBar from "./components/HeadBar.vue";
 import WorkbenchEditingLayoutSideBar from "./components/SideBar.vue";
 
 defineOptions({ name: "WorkbenchEditingLayout" });
+
+const emit = defineEmits<{ (e: "trigger", type: "tabWorkbenchStateToBrowsing"): void }>();
 
 const appEditorSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchPath}uebuilder-editor/factory.html`);
 
@@ -89,6 +91,10 @@ function initialWorkbenchEditingChannel() {
 
 function frameMaskClickHandler() {
     // frameMask.value = "close";
+}
+
+function trigger(type: "tabWorkbenchStateToBrowsing") {
+    emit("trigger", type);
 }
 
 onBeforeMount(() => {

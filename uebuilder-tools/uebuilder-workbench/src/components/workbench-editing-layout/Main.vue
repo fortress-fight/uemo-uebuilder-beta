@@ -2,10 +2,10 @@
  * FILE Workbench 编辑布局
  * @Description: Workbench 编辑布局
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 11:11:39
+ * @LastEditTime: 2025-09-17 13:35:26
 -->
 <template>
-    <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full">
+    <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full" @trigger="trigger">
         <template #siteLogo>
             <div :class="$style['site-logo']">
                 <UeElIcon name="icon-uemo-logo" :size="24" />
@@ -40,6 +40,9 @@ import UebuilderWorkbenchUnitHelperPanel from "@stone/uebuilder-workbench-base/s
 
 import SavePanel from "./components/SavePanel.vue";
 import SharePanel from "./components/SharePanel.vue";
+import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
+
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
 
 const popPanelOpen = ref(false);
 const saveBtnRef = ref<HTMLElement>();
@@ -62,6 +65,18 @@ const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => ({
 
 function showHelperPanel() {
     popPanelOpen.value = true;
+}
+
+function trigger(type: "tabWorkbenchStateToBrowsing") {
+    switch (type) {
+        case "tabWorkbenchStateToBrowsing":
+            // TASK 需要校验是否可以切换到 Browsing 状态
+            UeBuilderWorkbench!.changeWorkbenchState("browsing");
+            break;
+
+        default:
+            break;
+    }
 }
 </script>
 <style lang="scss" module>

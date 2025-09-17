@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <button class="flex items-center" :class="$style['oper-btn']">
+                <button class="flex items-center" :class="$style['oper-btn']" @click="tabWorkbenchStateToBrowsing">
                     <span class="text">{{ t("enterWorkbench") }}</span>
                 </button>
 
@@ -61,6 +61,8 @@ const props = withDefaults(defineProps<{ activeOperBtns?: string[]; hideOperBtns
     hideOperBtns: () => [],
     activeOperBtns: () => [],
 });
+const emit = defineEmits<{ (e: "trigger", type: "tabWorkbenchStateToBrowsing"): void }>();
+
 const { t } = useI18n();
 
 const operBtns = ref<{ type: string; icon?: string; name: string; disable?: boolean; active?: boolean }[]>([
@@ -81,6 +83,10 @@ const showOperBtns = computed(() => {
             active: props.activeOperBtns.includes(item.type),
         }));
 });
+
+function tabWorkbenchStateToBrowsing() {
+    emit("trigger", "tabWorkbenchStateToBrowsing");
+}
 </script>
 <style lang="scss" module>
 .workbench-editing-layout-head-bar {
