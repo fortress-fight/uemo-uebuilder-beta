@@ -53,6 +53,7 @@
                 <slot name="siteSaveOper" />
             </div>
         </div>
+        <slot name="siteOperPanel" />
     </div>
 </template>
 <script lang="ts" setup>
