@@ -3,6 +3,12 @@
 declare global {
     namespace UE_BUILDER {
         /**
+         * 保存类型
+         * @description 保存类型，包括保存到我的页面库、下载制作文件、下载源文件
+         */
+        type SaveType = "saveOnline" | "saveLocal" | "saveFile";
+
+        /**
          * 应用名称
          * @description 应用名称，包括 UEMO_ADMIN、JSMO、MO005、CUSTOM、UEMO_TOOLS、APP_TEST
          */
