@@ -88,9 +88,9 @@ export abstract class UeBuilderWorkbenchBase {
     abstract getLoginStatus(): boolean;
     abstract openLoginPanel(): void;
 
-    changeWorkbenchState(state: "composer"): void;
+    changeWorkbenchState(state: "composer" | "browsing"): void;
     changeWorkbenchState(state: "editing" | "preview", param: { data: string }): void;
-    changeWorkbenchState(state: "editing" | "composer" | "preview", param?: { data: string }) {
+    changeWorkbenchState(state: "editing" | "composer" | "preview" | "browsing", param?: { data: string }) {
         this.store.setWorkbenchState(state);
 
         switch (state) {

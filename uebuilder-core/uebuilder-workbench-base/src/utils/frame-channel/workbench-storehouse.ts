@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-09-13 16:09:33
+ * @LastEditTime: 2025-09-17 13:21:24
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -24,7 +24,7 @@ type Param = {
         openLoginPanel: (channel: WorkbenchStorehouseChannel) => void;
 
         // 切换应用层
-        changeWorkbenchState(channel: WorkbenchStorehouseChannel, state: "composer"): void;
+        changeWorkbenchState(channel: WorkbenchStorehouseChannel, state: "composer" | "browsing"): void;
         changeWorkbenchState(
             channel: WorkbenchStorehouseChannel,
             state: "editing" | "preview",
@@ -32,7 +32,7 @@ type Param = {
         ): void;
         changeWorkbenchState(
             channel: WorkbenchStorehouseChannel,
-            state: "editing" | "composer" | "preview",
+            state: "editing" | "composer" | "preview" | "browsing",
             param?: { data: string }
         ): void;
     };
@@ -61,7 +61,7 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
         openLoginPanel: () => {
             return this.param.on.openLoginPanel(this);
         },
-        changeWorkbenchState: (state: "editing" | "composer" | "preview", param?: { data: string }) => {
+        changeWorkbenchState: (state: "editing" | "composer" | "preview" | "browsing", param?: { data: string }) => {
             return this.param.on.changeWorkbenchState(this, state, param);
         },
     };
