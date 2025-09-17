@@ -22,5 +22,11 @@
     "startPanelPageBtnTitle": "选择页面",
     "startPanelPageBtnSubtitle": "在设计好的模板里进行修改",
     "startPanelLayoutBtnTitle": "选择布局",
-    "startPanelLayoutBtnSubtitle": "选择布局或自定义，构建模板"
+    "startPanelLayoutBtnSubtitle": "选择布局或自定义，构建模板",
+    "saveOnlineButtonTitle": "保存到我的页面库",
+    "saveOnlineButtonSubtitle": "下次登录后可直接使用，继续编辑",
+    "saveLocalButtonTitle": "下载制作文件",
+    "saveLocalButtonSubtitle": "保存到本地后，下次直接上传即可继续使用",
+    "saveFileButtonTitle": "下载源文件",
+    "saveFileButtonSubtitle": "打包下载整个页面的HTML / 图片 / CSS / JS / 等"
 }

@@ -22,5 +22,11 @@
     "startPanelPageBtnTitle": "Page",
     "startPanelPageBtnSubtitle": "Edit a template",
     "startPanelLayoutBtnTitle": "Layout",
-    "startPanelLayoutBtnSubtitle": "Choose or customize layout"
+    "startPanelLayoutBtnSubtitle": "Choose layout or customize to build a template",
+    "saveOnlineButtonTitle": "Save to My Page Library",
+    "saveOnlineButtonSubtitle": "Use next time after login and continue editing",
+    "saveLocalButtonTitle": "Download Project File",
+    "saveLocalButtonSubtitle": "Save locally and upload later to continue",
+    "saveFileButtonTitle": "Download Source Files",
+    "saveFileButtonSubtitle": "Download full package: HTML / Images / CSS / JS / etc."
 }
