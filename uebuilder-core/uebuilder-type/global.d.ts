@@ -3,6 +3,12 @@
 declare global {
     namespace UE_BUILDER {
         /**
+         * 设备类型
+         * @description 设备类型，包括桌面和移动端
+         */
+        type DeviceType = "desktop" | "mobile";
+
+        /**
          * 保存类型
          * @description 保存类型，包括保存到我的页面库、下载制作文件、下载源文件
          */
