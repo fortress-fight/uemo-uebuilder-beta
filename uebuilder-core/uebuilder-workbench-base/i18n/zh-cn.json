@@ -30,6 +30,12 @@
     "saveFileButtonTitle": "下载源文件",
     "saveFileButtonSubtitle": "打包下载整个页面的HTML / 图片 / CSS / JS / 等",
 
+    "SHARE_LINK_TITLE": "生成分享链接",
+    "SHARE_TIP_SAVE": "保存到 “我的页面库” 后，即可分享该页面",
+    "SHARE_TIP_CREATE_LINK": "生成分享链接，让更多人看到你的作品",
+    "SHARE_TIP_EXPIRE": "临时地址将会在 7 天后失效，<a target=\"_blank\" href=\"https://www.uemo.net/page/contact.html\">联系我们</a>获取更多使用方式",
+    "SHARE_SAVE_TIP": "即刻保存",
+
     "UEBUILDER_TEMPLATE_FORM_TITLE": "保存页面模版",
     "UEBUILDER_TEMPLATE_FORM_TITLE_EDIT": "编辑页面模版",
     "UEBUILDER_TEMPLATE_FORM_TITLE_PLACEHOLDER": "请输入页面标题，例如：我的页面 - 001",

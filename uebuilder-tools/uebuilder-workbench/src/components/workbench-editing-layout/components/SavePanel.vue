@@ -22,7 +22,7 @@
         :hide-on-click="false"
         :plugins="plugins"
     >
-        <UebuilderWorkbenchSavePanel @save="saveHandle">
+        <UebuilderWorkbenchSavePanel :save="saveHandle" ref="savePanelRef">
             <template #panelFooter>
                 <div :class="$style['ad-group']">
                     <div :class="$style['group--inner']">
@@ -41,27 +41,61 @@
 <script lang="ts" setup>
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 
-import { saveAs } from "@stone/uemo-editor-utils/lib/file-saver";
-
+import { updateUserTemplate } from "@stone/uebuilder-api--tools/api";
 import UebuilderWorkbenchSavePanel from "@stone/uebuilder-workbench-base/src/components/unit-save-panel";
 
-const _props = defineProps<{ trigger: HTMLElement }>();
+import { UeBuilderWorkbenchKey } from "../../../plugin/injection-key";
 
-function saveHandle(type: UE_BUILDER.SaveType) {
+const { t } = useI18n();
+const instance = getCurrentInstance();
+const _props = defineProps<{ trigger: HTMLElement }>();
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
+const savePanelRef = useTemplateRef("savePanelRef");
+
+function saveHandle(type: "saveOnline", data: { id?: string; json?: string; thumb?: string; title?: string }) {
     switch (type) {
         case "saveOnline":
-            break;
+            const handle = data.id
+                ? updateUserTemplate("edit", {
+                      json: data.json,
+                      id: data.id,
+                      img: data.thumb,
+                      title: data.title,
+                  })
+                : updateUserTemplate("add", {
+                      json: data.json || "",
+                      img: data.thumb || "",
+                      title: data.title || "",
+                  });
 
-        case "saveLocal":
-            saveAs(new Blob(["csv"], { type: "text/txt,charset=UTF-8" }), "PageText.jsmo");
-            break;
-
-        case "saveFile":
-            break;
+            return handle
+                .then((res) => {
+                    if (res.code === 0) {
+                        instance?.proxy?.$ueElToast.success(t("UNIT_SAVE_SUCCESS"));
+                        UeBuilderWorkbench?.store.updateCurrentEditorPageData({
+                            id: res.data.id,
+                        });
+                        return;
+                    }
+                    if (res.code === 998) {
+                        UeBuilderWorkbench?.openLoginPanel();
+                        return;
+                    }
+                    if (res.errMsg === "limit") {
+                        instance?.proxy?.$ueElToast.warning(t("UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR"));
+                        return;
+                    }
+                    instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+                })
+                .catch((err) => {
+                    console.error(err);
+                    instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+                });
 
         default:
             break;
     }
+    return Promise.resolve();
 }
 
 /**
@@ -108,6 +142,12 @@ const createHideOnOutWindowPlugin = (): Props["plugins"][number] => ({
 
 // 配置面板插件
 const plugins: Props["plugins"] = [createHideOnOutWindowPlugin()];
+
+defineExpose({
+    openSaveUserTemplatePanel: () => {
+        savePanelRef.value?.openSaveUserTemplatePanel();
+    },
+});
 </script>
 
 <style lang="scss" module>

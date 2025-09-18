@@ -1,7 +1,7 @@
 <!--
  * @Description: 分享面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 12:15:55
+ * @LastEditTime: 2025-09-18 12:49:44
 -->
 <template>
     <UeElLabel
@@ -22,27 +22,23 @@
             <template v-if="allowShare">
                 <div :class="$style['row']">
                     <div :class="$style['row-head']" class="flex justify-between items-center">
-                        <div :class="$style['name']">分享</div>
+                        <div :class="$style['name']">{{ t("UNIT_SHARE_PAGE") }}</div>
                         <button v-if="shareLink" :class="$style['btn--refresh-link']" @click="updateShareLink">
-                            更新链接
+                            {{ t("UNIT_LINK_UPDATE") }}
                         </button>
                     </div>
                     <div v-if="shareLink" :class="$style['value']" class="relative">
                         <input type="text" :value="shareLink" :class="$style['input-link']" disabled="true" />
-                        <button :class="$style['copy-btn']" @click="copyShareLink">复制链接</button>
+                        <button :class="$style['copy-btn']" @click="copyShareLink">{{ t("UNIT_LINK_COPY") }}</button>
                     </div>
                     <div v-else :class="$style['value']">
-                        <div :class="$style['tip--save']">生成分享链接，让更多人看到你的作品</div>
+                        <div :class="$style['tip--save']">{{ t("SHARE_TIP_CREATE_LINK") }}</div>
                     </div>
                 </div>
                 <button v-if="!shareLink" :class="$style['btn--create-link']" @click="updateShareLink">
-                    生成分享链接
+                    {{ t("SHARE_LINK_TITLE") }}
                 </button>
-                <div v-else :class="$style['tip']">
-                    临时地址将会在 7 天后失效，
-                    <a target="_blank" href="https://www.uemo.net/page/contact.html">联系我们</a>
-                    获取更多使用方式
-                </div>
+                <div v-else :class="$style['tip']" v-html="t('SHARE_TIP_EXPIRE')"></div>
                 <div v-if="loading" :class="$style['loading-wrapper']" class="flex justify-center items-center">
                     <UeElIcon name="icon-app-loading" :size="32" />
                 </div>
@@ -50,12 +46,12 @@
             <template v-else>
                 <div :class="$style['row']">
                     <div :class="$style['row-head']">
-                        <div :class="$style['name']">分享</div>
+                        <div :class="$style['name']">{{ t("UNIT_SHARE_PAGE") }}</div>
                     </div>
                     <div :class="$style['value']">
-                        <div :class="$style['tip--save']">保存到 “我的页面库” 后，即可分享该页面</div>
+                        <div :class="$style['tip--save']">{{ t("SHARE_TIP_SAVE") }}</div>
                     </div>
-                    <button :class="$style['btn--save']" @click="handleSave">即刻保存</button>
+                    <button :class="$style['btn--save']" @click="handleSave">{{ t("SHARE_SAVE_TIP") }}</button>
                 </div>
             </template>
         </div>
@@ -69,6 +65,7 @@ import copy from "@stone/uemo-editor-utils/lib/copy";
 const instance = getCurrentInstance();
 const _props = defineProps<{ trigger: HTMLElement }>();
 const emit = defineEmits<{ (e: "save"): void }>();
+const { t } = useI18n();
 
 const allowShare = ref(false);
 const shareLink = ref("");
@@ -82,9 +79,9 @@ const updateShareLink = () => {
 function copyShareLink() {
     const isSuc = copy(shareLink.value);
     if (isSuc) {
-        instance?.proxy?.$ueElToast.success("链接复制成功");
+        instance?.proxy?.$ueElToast.success(t("UNIT_COPY_SUCCESS"));
     } else {
-        instance?.proxy?.$ueElToast.error("链接复制失败");
+        instance?.proxy?.$ueElToast.error(t("UNIT_COPY_FAILED"));
     }
 }
 

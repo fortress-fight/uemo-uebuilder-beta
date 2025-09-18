@@ -30,6 +30,12 @@
     "saveFileButtonTitle": "Download Source Files",
     "saveFileButtonSubtitle": "Download full package: HTML / Images / CSS / JS / etc.",
 
+    "SHARE_LINK_TITLE": "Create Share Link",
+    "SHARE_TIP_SAVE": "Save to My Page Library to share this page",
+    "SHARE_TIP_CREATE_LINK": "Create a link to show your work",
+    "SHARE_TIP_EXPIRE": "Temp link expires in 7 days. <a target=\"_blank\" href=\"https://www.uemo.net/page/contact.html\">Contact us</a> for more options",
+    "SHARE_SAVE_TIP": "Save now",
+
     "UEBUILDER_TEMPLATE_FORM_TITLE": "Save Template",
     "UEBUILDER_TEMPLATE_FORM_TITLE_EDIT": "Edit Template",
     "UEBUILDER_TEMPLATE_FORM_TITLE_PLACEHOLDER": "Enter page title, such as: My Page - 001",

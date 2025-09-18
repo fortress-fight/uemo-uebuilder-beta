@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局
  * @Description: Workbench 编辑布局
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 14:40:35
+ * @LastEditTime: 2025-09-18 12:41:29
 -->
 <template>
     <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full" @trigger="trigger">
@@ -12,12 +12,14 @@
             </div>
         </template>
         <template #siteSaveOper>
-            <button ref="shareBtnRef" :class="$style['oper-btn--save']" data-theme="green">分享</button>
-            <button ref="saveBtnRef" :class="$style['oper-btn--save']" data-theme="blue">保存</button>
+            <button ref="shareBtnRef" :class="$style['oper-btn--save']" data-theme="green">
+                {{ t("UNIT_SHARE_PAGE") }}
+            </button>
+            <button ref="saveBtnRef" :class="$style['oper-btn--save']" data-theme="blue">{{ t("UNIT_SAVE") }}</button>
         </template>
         <template #siteOperPanel>
-            <SavePanel v-if="saveBtnRef" :trigger="saveBtnRef" />
-            <SharePanel v-if="shareBtnRef" :trigger="shareBtnRef" />
+            <SavePanel v-if="saveBtnRef" :trigger="saveBtnRef" ref="savePanelRef" />
+            <SharePanel v-if="shareBtnRef" :trigger="shareBtnRef" @save="openSaveUserTemplatePanel" />
         </template>
         <template #helpCenter>
             <div
@@ -42,11 +44,13 @@ import SavePanel from "./components/SavePanel.vue";
 import SharePanel from "./components/SharePanel.vue";
 import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
 
+const { t } = useI18n();
 const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
 
 const popPanelOpen = ref(false);
 const saveBtnRef = ref<HTMLElement>();
 const shareBtnRef = ref<HTMLElement>();
+const savePanelRef = useTemplateRef("savePanelRef");
 const openHelperPanelBtn = ref<HTMLElement>();
 const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => ({
     panel: {
@@ -65,6 +69,10 @@ const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => ({
 
 function showHelperPanel() {
     popPanelOpen.value = true;
+}
+
+function openSaveUserTemplatePanel() {
+    savePanelRef.value?.openSaveUserTemplatePanel();
 }
 
 function trigger(type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview") {
