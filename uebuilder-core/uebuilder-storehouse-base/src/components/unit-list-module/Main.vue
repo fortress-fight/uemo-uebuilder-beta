@@ -1,7 +1,7 @@
 <!--
  * @Description: 列表模块
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:15:23
+ * @LastEditTime: 2025-09-18 13:33:57
 -->
 <template>
     <div :class="$style['unit-list-module']" :data-type="type">
@@ -62,7 +62,11 @@
                                 <div :class="$style['item-thumb']">
                                     <img :src="item.thumb" alt="" />
                                     <div :class="$style['item-mask']" class="flex items-center justify-center">
-                                        <button v-if="type?.startsWith('user')" :class="$style['item-btn--use']">
+                                        <button
+                                            v-if="type?.startsWith('user')"
+                                            :class="$style['item-btn--use']"
+                                            @click="usePage(item)"
+                                        >
                                             <span class="text">{{ t("UNIT_USE_NOW") }}</span>
                                         </button>
                                         <button v-else :class="$style['item-btn--preview']">
@@ -143,7 +147,7 @@ const _props = withDefaults(defineProps<UnitListModuleBaseProps>(), {});
 const emit = defineEmits<{
     (e: "operTrigger" | "sortTrigger", type: string): void;
     (e: "loadMore" | "refresh"): void;
-    (e: "itemOperTrigger", param: { type: "editor" | "delete" | "toggleCollect"; data: { id: string } }): void;
+    (e: "itemOperTrigger", param: { type: "editor" | "delete" | "toggleCollect" | "use"; data: { id: string } }): void;
 }>();
 
 const { t } = useI18n();
@@ -178,6 +182,10 @@ watch(
     },
     { immediate: true }
 );
+
+function usePage(item: UnitListModuleItem) {
+    emit("itemOperTrigger", { type: "use", data: { id: item.id } });
+}
 
 function removeItem(item: UnitListModuleItem) {
     emit("itemOperTrigger", { type: "delete", data: { id: item.id } });

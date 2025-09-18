@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-18 11:33:50
+ * @LastEditTime: 2025-09-18 13:54:00
 -->
 <template>
     <UebuilderUserStorehouse
@@ -12,6 +12,7 @@
         :sortType="getUserPageListParams.order || 'newest'"
         :pages="dataPages"
         :getUserTemplate="getUserTemplateHandle"
+        @useTemplate="handleUseTemplate"
         @toggleCollect="handleToggleCollect"
         @updateTemplate="handleUpdateTemplate"
         @deleteTemplate="handleDeleteTemplate"
@@ -310,6 +311,25 @@ function getUserTemplateHandle(id: string) {
                 return res.data;
             }
 
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
+}
+
+function handleUseTemplate(pageId: string) {
+    getUserTemplate({ id: pageId })
+        .then((res) => {
+            if (res.code === 998) {
+                openLoginPanel();
+                return;
+            }
+            if (res.code === 0) {
+                void UeBuilderStorehouse?.changeWorkbenchState("editing", { data: res.data.json });
+                return;
+            }
             instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
         })
         .catch((err) => {
