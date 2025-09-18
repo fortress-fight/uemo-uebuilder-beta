@@ -1,7 +1,7 @@
 /*
  * @Description: UeBuilderEditorFactory 编辑器控制面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 14:24:31
+ * @LastEditTime: 2025-09-18 14:03:19
  */
 import type { UE_EL_OPTIONS } from "@stone/uemo-editor-element/src";
 
@@ -86,7 +86,6 @@ export class UebuilderEditorFactory {
      */
     launchEditorFactory(editorData: { title?: string; data: string }, config: UE_BUILDER_EDITOR_FACTORY.Config) {
         const storehouseApp = createApp(UebuilderEditorFactoryApp);
-        storehouseApp.provide(UebuilderEditorFactoryKey, this);
 
         this.store.setEditorFactoryData(editorData);
 
