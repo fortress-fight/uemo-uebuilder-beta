@@ -2,7 +2,7 @@
  * FILE Workbench 工作台
  * @Description: Workbench 工作台
  * @Author: F-Stone
- * @LastEditTime: 2025-09-13 16:18:11
+ * @LastEditTime: 2025-09-18 12:17:12
 -->
 <template>
     <div :class="$style['workbench-browsing-layout']" class="grid h-full">
@@ -29,9 +29,9 @@
 <script lang="ts" setup>
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import { WorkbenchStorehouseChannel } from "../utils/frame-channel";
-import { UeBuilderWorkbenchKey } from "../plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "../plugin/injection-key";
 
-const workbench = inject(UeBuilderWorkbenchKey);
+const workbench = inject(UeBuilderWorkbenchBaseKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const storehouseIframe = useTemplateRef("storehouseIframe");
 

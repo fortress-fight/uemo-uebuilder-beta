@@ -18,7 +18,7 @@ import { i18n } from "./plugin/i18n";
 import { pinia } from "./store";
 import { useUeBuilderWorkbenchStore } from "./store/store-workbench";
 import { WorkbenchCreatorChannel } from "./utils/frame-channel";
-import { UeBuilderWorkbenchKey } from "./plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "./plugin/injection-key";
 
 /**
  * UeBuilder 创建器基类
@@ -167,7 +167,7 @@ export abstract class UeBuilderWorkbenchBase {
 
         // #region 渲染工作台应用
 
-        app.provide(UeBuilderWorkbenchKey, this);
+        app.provide(UeBuilderWorkbenchBaseKey, this);
         app.use(i18n);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);

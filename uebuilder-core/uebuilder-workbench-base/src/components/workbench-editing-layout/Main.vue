@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局容器
  * @Description: Workbench 编辑布局容器
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 15:50:29
+ * @LastEditTime: 2025-09-18 12:17:02
 -->
 <template>
     <div :class="$style['workbench-editing-layout']" class="grid h-full">
@@ -34,7 +34,7 @@
 import WorkbenchEditingStartPanel from "../unit-start-panel";
 import { useUeBuilderWorkbenchStore } from "../../store/store-workbench";
 import { WorkbenchEditorFactoryChannel } from "../../utils/frame-channel";
-import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "../../plugin/injection-key";
 import WorkbenchEditingLayoutHeadBar from "./components/HeadBar.vue";
 import WorkbenchEditingLayoutSideBar from "./components/SideBar.vue";
 
@@ -49,7 +49,7 @@ const appEditorSrc = computed(() => `${workbenchStore.workbenchConfig.workbenchP
 const frameMask = ref<"open" | "close">("close");
 
 const showStartPanel = ref(false);
-const workbench = inject(UeBuilderWorkbenchKey);
+const workbench = inject(UeBuilderWorkbenchBaseKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const editingIframe = useTemplateRef("editingIframe");
 const workbenchEditorChannel = ref<WorkbenchEditorFactoryChannel | null>(null);
