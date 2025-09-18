@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:12:11
+ * @LastEditTime: 2025-09-18 11:33:50
 -->
 <template>
     <UebuilderUserStorehouse
@@ -207,6 +207,7 @@ function handleUpdateTemplate(param: {
             }
             if (res.code === 0) {
                 handleRefresh();
+                instance?.proxy?.$ueElToast.warning(t("UNIT_SAVE_SUCCESS"));
                 return;
             }
             if (res.errMsg === "limit") {
