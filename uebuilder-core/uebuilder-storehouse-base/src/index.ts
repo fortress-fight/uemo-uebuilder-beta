@@ -12,7 +12,7 @@ import UeEl from "@stone/uemo-editor-element/src";
 import { i18n } from "./plugin/i18n";
 import { pinia, useUeBuilderStorehouseStore } from "./store";
 import { StorehouseWorkbenchChannel } from "./utils/frame-channel";
-import { UeBuilderStorehouseKey } from "./plugin/injection-key";
+import { UeBuilderStorehouseBaseKey } from "./plugin/injection-key";
 
 /**
  * UeBuilderStorehouse 基类
@@ -85,7 +85,7 @@ export abstract class UeBuilderStorehouseBase {
 
         // #region 渲染工作台应用
 
-        app.provide(UeBuilderStorehouseKey, this);
+        app.provide(UeBuilderStorehouseBaseKey, this);
         app.use(i18n);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);

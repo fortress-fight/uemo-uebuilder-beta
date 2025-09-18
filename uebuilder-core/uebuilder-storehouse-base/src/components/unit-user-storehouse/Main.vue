@@ -41,7 +41,7 @@ import type { UnitListModuleBaseProps } from "../unit-list-module";
 
 import type { UnitUserStorehouseBaseProps } from "./index";
 
-import { UeBuilderStorehouseKey } from "../../plugin/injection-key";
+import { UeBuilderStorehouseBaseKey } from "../../plugin/injection-key";
 import UnitUserTemplatePanel from "../unit-user-template-panel";
 import UnitListModule from "../unit-list-module";
 
@@ -59,7 +59,7 @@ const emit = defineEmits<{
 }>();
 const { t } = useI18n();
 
-const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
+const UeBuilderStorehouse = inject(UeBuilderStorehouseBaseKey);
 
 const router = useRouter();
 
