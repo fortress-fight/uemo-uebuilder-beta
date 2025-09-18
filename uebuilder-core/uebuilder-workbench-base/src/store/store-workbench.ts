@@ -55,6 +55,7 @@ export type UeBuilderWorkbenchStoreState = {
      * 当前编辑页面数据
      */
     currentEditorPageData: {
+        id?: string;
         title?: string;
         data: string;
     };
@@ -146,6 +147,20 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          */
         setCurrentEditorPageData(currentEditorPageData: UeBuilderWorkbenchStoreState["currentEditorPageData"]) {
             this.currentEditorPageData = currentEditorPageData;
+        },
+
+        /**
+         * 更新当前编辑页面数据
+         *
+         * @param {Partial<UeBuilderWorkbenchStoreState["currentEditorPageData"]>} currentEditorPageData
+         */
+        updateCurrentEditorPageData(
+            currentEditorPageData: Partial<UeBuilderWorkbenchStoreState["currentEditorPageData"]>
+        ) {
+            this.currentEditorPageData = {
+                ...this.currentEditorPageData,
+                ...currentEditorPageData,
+            };
         },
 
         /**

@@ -28,5 +28,16 @@
     "saveLocalButtonTitle": "下载制作文件",
     "saveLocalButtonSubtitle": "保存到本地后，下次直接上传即可继续使用",
     "saveFileButtonTitle": "下载源文件",
-    "saveFileButtonSubtitle": "打包下载整个页面的HTML / 图片 / CSS / JS / 等"
+    "saveFileButtonSubtitle": "打包下载整个页面的HTML / 图片 / CSS / JS / 等",
+
+    "UEBUILDER_TEMPLATE_FORM_TITLE": "保存页面模版",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_EDIT": "编辑页面模版",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_PLACEHOLDER": "请输入页面标题，例如：我的页面 - 001",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_PLACEHOLDER": "添加封面图",
+    "UEBUILDER_TEMPLATE_FORM_ERROR": "请检查表单内容",
+    "UEBUILDER_TEMPLATE_FORM_JSON_ERROR": "请上传你的页面数据文件",
+    "UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR": "获取页面模版详情失败",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_ERROR": "请为你的页面模板添加一个封面",
+    "UEBUILDER_TEMPLATE_FORM_TITLE_ERROR": "请为你的页面模板输入一个名称",
+    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "建议尺寸：宽640px 高380px"
 }

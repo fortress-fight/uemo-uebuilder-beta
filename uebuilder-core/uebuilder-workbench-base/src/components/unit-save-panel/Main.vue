@@ -1,7 +1,7 @@
 <!--
  * @Description: UEBuilder 保存面板
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 15:25:53
+ * @LastEditTime: 2025-09-18 12:10:20
 -->
 <template>
     <div :class="$style['unit-save-panel']">
@@ -24,16 +24,51 @@
             <slot name="panelFooter" />
         </div>
     </div>
+    <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
+        <UnitUserTemplatePanel
+            v-bind="UnitUserTemplatePanelProps"
+            @close="popPanelOpen = false"
+            @submit="saveTemplate"
+        />
+    </UeElPopPanel>
 </template>
 <script lang="ts" setup>
 import type { UnitSavePanelBaseProps } from "./index";
+import type { UnitUserTemplatePanelBaseProps, UserTemplateValue } from "../unit-user-template-panel";
 
 import { _throttle } from "@stone/uemo-editor-utils/lib/lodash";
+import { saveAs } from "@stone/uemo-editor-utils/lib/file-saver";
+
+import { useUeBuilderWorkbenchStore } from "../../store";
+import UnitUserTemplatePanel from "../unit-user-template-panel";
 
 const props = withDefaults(defineProps<UnitSavePanelBaseProps>(), {});
 defineOptions({ name: "UnitSavePanel" });
 
 const { t } = useI18n();
+
+const UeBuilderWorkbenchStore = useUeBuilderWorkbenchStore();
+
+const popPanelOpen = ref(false);
+const popPanelParams = ref<UE_EL_COMPONENT.UeElPopPanelProps>({
+    autoClose: true,
+    mask: { color: "rgba(0, 0, 0, 0.5)" },
+});
+
+const UnitUserTemplatePanelProps = ref<UnitUserTemplatePanelBaseProps & { id?: string }>({
+    type: "add",
+    disableJSMO: true,
+    getTemplateDetail: () => {
+        const currentPageData = UeBuilderWorkbenchStore.currentEditorPageData;
+
+        return Promise.resolve({
+            id: "",
+            json: currentPageData.data,
+            img: "",
+            title: "",
+        });
+    },
+});
 
 const operBtns = computed<{ icon: string; title: string; subtitle: string; type: UE_BUILDER.SaveType }[]>(() => {
     const btns = [
@@ -60,11 +95,55 @@ const operBtns = computed<{ icon: string; title: string; subtitle: string; type:
     return btns.filter((item) => !props.disableOper?.includes(item.type));
 });
 
-const emit = defineEmits<{
-    (e: "save", type: UE_BUILDER.SaveType): void;
-}>();
+const savePage = _throttle(
+    (type: UE_BUILDER.SaveType) => {
+        const savePage = UeBuilderWorkbenchStore.currentEditorPageData;
+        switch (type) {
+            case "saveOnline":
+                if (savePage.id) {
+                    props.save("saveOnline", { id: savePage.id, json: savePage.data }).catch(() => {
+                        console.error("saveTemplate error");
+                    });
+                } else {
+                    popPanelOpen.value = true;
+                }
+                break;
+            case "saveLocal":
+                saveAs(new Blob([savePage.data], { type: "text/txt,charset=UTF-8" }), "PageText.jsmo");
+                break;
+            case "saveFile":
+                // TASK 下载文件压缩包
+                break;
 
-const savePage = _throttle((type: UE_BUILDER.SaveType) => emit("save", type), 1000, { trailing: false });
+            default:
+                break;
+        }
+    },
+    1000,
+    { trailing: false }
+);
+
+function saveTemplate(tplData: UserTemplateValue) {
+    const currentPageData = UeBuilderWorkbenchStore.currentEditorPageData;
+
+    props
+        .save("saveOnline", {
+            ...tplData,
+            id: currentPageData.id,
+        })
+        .then(() => {
+            popPanelOpen.value = false;
+        })
+        .catch(() => {
+            console.error("saveTemplate error");
+        });
+}
+
+defineExpose({
+    openSaveUserTemplatePanel: () => {
+        popPanelOpen.value = true;
+    },
+});
 </script>
 <style lang="scss" module>
 .unit-save-panel {
