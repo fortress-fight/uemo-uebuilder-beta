@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局
  * @Description: Workbench 编辑布局
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 13:35:26
+ * @LastEditTime: 2025-09-17 14:40:35
 -->
 <template>
     <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full" @trigger="trigger">
@@ -67,11 +67,18 @@ function showHelperPanel() {
     popPanelOpen.value = true;
 }
 
-function trigger(type: "tabWorkbenchStateToBrowsing") {
+function trigger(type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview") {
     switch (type) {
         case "tabWorkbenchStateToBrowsing":
             // TASK 需要校验是否可以切换到 Browsing 状态
             UeBuilderWorkbench!.changeWorkbenchState("browsing");
+            break;
+
+        case "tabWorkbenchStateToPreview":
+            // TASK 需要校验是否可以切换到 Preview 状态
+            UeBuilderWorkbench!.changeWorkbenchState("preview", {
+                data: UeBuilderWorkbench?.store.currentEditorPageData.data || "",
+            });
             break;
 
         default:

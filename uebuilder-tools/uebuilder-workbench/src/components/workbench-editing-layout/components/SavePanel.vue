@@ -19,9 +19,10 @@
         :offset="[-25, 5]"
         :animation="false"
         :interactive="true"
+        :hide-on-click="false"
         :plugins="plugins"
     >
-        <UebuilderWorkbenchSavePanel>
+        <UebuilderWorkbenchSavePanel @save="saveHandle">
             <template #panelFooter>
                 <div :class="$style['ad-group']">
                     <div :class="$style['group--inner']">
@@ -40,9 +41,28 @@
 <script lang="ts" setup>
 import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
 
+import { saveAs } from "@stone/uemo-editor-utils/lib/file-saver";
+
 import UebuilderWorkbenchSavePanel from "@stone/uebuilder-workbench-base/src/components/unit-save-panel";
 
 const _props = defineProps<{ trigger: HTMLElement }>();
+
+function saveHandle(type: UE_BUILDER.SaveType) {
+    switch (type) {
+        case "saveOnline":
+            break;
+
+        case "saveLocal":
+            saveAs(new Blob(["csv"], { type: "text/txt,charset=UTF-8" }), "PageText.jsmo");
+            break;
+
+        case "saveFile":
+            break;
+
+        default:
+            break;
+    }
+}
 
 /**
  * 创建一个插件，用于在鼠标移出窗口时隐藏面板
