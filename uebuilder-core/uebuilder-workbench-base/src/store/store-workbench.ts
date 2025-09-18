@@ -46,7 +46,7 @@ export type UeBuilderWorkbenchStoreState = {
     /**
      * 初始页面数据
      */
-    entryPageData: {
+    originalPageData: {
         title?: string;
         data: string;
     };
@@ -86,7 +86,7 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
         workbenchConfig: {} as UE_BUILDER_WORKBENCH.Config,
         workbenchState: { stage: "entry", mode: "default", device: "desktop" },
 
-        entryPageData: { data: "" },
+        originalPageData: { data: "" },
         currentEditorPageData: { data: "" },
         currentPreviewPageData: { data: "" },
 
@@ -135,8 +135,8 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          *
          * @param {UeBuilderWorkbenchStoreState["initialPageData"]} initialPageData
          */
-        setEntryPageData(entryPageData: UeBuilderWorkbenchStoreState["entryPageData"]) {
-            this.entryPageData = entryPageData;
+        setOriginalPageData(originalPageData: UeBuilderWorkbenchStoreState["originalPageData"]) {
+            this.originalPageData = originalPageData;
         },
 
         /**

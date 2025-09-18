@@ -146,10 +146,9 @@ export abstract class UeBuilderWorkbenchBase {
                 }
             );
 
+            this.store.setOriginalPageData({ data: pageData });
+
             switch (workbenchConfig.workbenchState) {
-                case "entry":
-                    this.store.setEntryPageData({ data: pageData });
-                    break;
                 case "editing":
                     this.store.setCurrentEditorPageData({ data: pageData });
                     break;
