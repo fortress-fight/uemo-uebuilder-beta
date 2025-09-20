@@ -100,7 +100,10 @@ export abstract class UeBuilderStorehouseBase {
      * @memberof UeBuilderStorehouseBase
      */
     public async changeWorkbenchState(state: "composer" | "browsing"): Promise<void>;
-    public async changeWorkbenchState(state: "editing" | "preview", param: { data: string }): Promise<void>;
+    public async changeWorkbenchState(
+        state: "editing" | "preview",
+        param: { id?: string; data: string }
+    ): Promise<void>;
     public async changeWorkbenchState(
         state: "editing" | "composer" | "preview" | "browsing",
         param?: any
