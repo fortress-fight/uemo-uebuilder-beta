@@ -4,6 +4,7 @@ import { install as ErrorInstall } from "../packages/error-plugin";
 import { install as ResourceInstall } from "../packages/resource-plugin";
 import { install as AiPluginInstall } from "../packages/ai-plugin";
 import { install as LinkPluginInstall } from "../packages/link-plugin";
+import { install as PopPanelInstall } from "../packages/pop-panel/plugin";
 
 export const plugins = {
     toast: ToastInstall,
@@ -12,4 +13,5 @@ export const plugins = {
     resource: ResourceInstall,
     ai: AiPluginInstall,
     link: LinkPluginInstall,
+    popPanel: PopPanelInstall,
 };
