@@ -45,5 +45,8 @@
     "UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR": "获取页面模版详情失败",
     "UEBUILDER_TEMPLATE_FORM_THUMB_ERROR": "请为你的页面模板添加一个封面",
     "UEBUILDER_TEMPLATE_FORM_TITLE_ERROR": "请为你的页面模板输入一个名称",
-    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "建议尺寸：宽640px 高380px"
+    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "建议尺寸：宽640px 高380px",
+
+    "REPLACE_PAGE_TITLE": "是否替换当前页面",
+    "REPLACE_PAGE_TIP": "替换后无法恢复，请谨慎操作"
 }

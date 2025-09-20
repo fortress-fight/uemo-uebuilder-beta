@@ -45,5 +45,8 @@
     "UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR": "Failed to get page template details",
     "UEBUILDER_TEMPLATE_FORM_THUMB_ERROR": "Add a cover",
     "UEBUILDER_TEMPLATE_FORM_TITLE_ERROR": "Enter a name",
-    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "Recommended size: 640×380px"
+    "UEBUILDER_TEMPLATE_FORM_THUMB_TIP": "Recommended size: 640×380px",
+
+    "REPLACE_PAGE_TITLE": "Replace Current Page",
+    "REPLACE_PAGE_TIP": "Replace cannot be recovered, please be careful"
 }

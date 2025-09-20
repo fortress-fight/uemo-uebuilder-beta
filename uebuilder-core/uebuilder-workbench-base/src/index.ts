@@ -13,6 +13,8 @@ import queryString from "@stone/uemo-editor-utils/lib/query-string";
 import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import UeEl from "@stone/uemo-editor-element/src";
+import UeElConfirmPanel from "@stone/uemo-editor-element/packages/confirm-panel";
+import { useElDialog } from "@stone/uemo-editor-element/packages/pop-panel/plugin";
 
 import { i18n } from "./plugin/i18n";
 import { pinia } from "./store";
@@ -32,6 +34,8 @@ export abstract class UeBuilderWorkbenchBase {
     public initialized = false;
 
     public store = useUeBuilderWorkbenchStore(pinia);
+
+    public UeBuilderWorkbenchApp: ReturnType<typeof createApp> | null = null;
 
     abstract WorkbenchCreatorChannelCreator: typeof WorkbenchCreatorChannel;
 
@@ -80,6 +84,7 @@ export abstract class UeBuilderWorkbenchBase {
             console.error(err);
         });
 
+        this.initialized = true;
         return this;
     }
 
@@ -89,21 +94,93 @@ export abstract class UeBuilderWorkbenchBase {
     abstract openLoginPanel(): void;
 
     changeWorkbenchState(state: "composer" | "browsing"): void;
-    changeWorkbenchState(state: "editing" | "preview", param: { data: string }): void;
+    changeWorkbenchState(state: "editing" | "preview", param?: { data: string }): void;
     changeWorkbenchState(state: "editing" | "composer" | "preview" | "browsing", param?: { data: string }) {
-        this.store.setWorkbenchState(state);
-
         switch (state) {
             case "editing":
-                this.store.setCurrentEditorPageData({ data: param!.data });
+                this.handleEditingStateChange(param);
                 break;
             case "preview":
-                this.store.setCurrentPreviewPageData({ data: param!.data });
+                // NOTE 如果没有传递新的页面数据，就是使用现有的数据
+                this.handlePreviewStateChange(param);
                 break;
 
             default:
+                this.store.setWorkbenchState(state);
                 break;
         }
+    }
+    /**
+     * 处理编辑状态变更
+     *
+     * @private
+     * @param {{ data: string }} [param]
+     * @return {*}
+     * @memberof UeBuilderWorkbenchBase
+     */
+    private handleEditingStateChange(param?: { data: string }) {
+        // NOTE 如果没有传递新的页面数据，就是使用现有的数据，使用场景：继续编辑
+        if (!param?.data) {
+            this.store.setWorkbenchState("editing");
+            return;
+        }
+
+        // NOTE 如果没有现有数据存在的情况下，直接使用传递的新数据
+        if (!this.store.currentEditorPageData.data) {
+            this.store.setCurrentEditorPageData({ data: param.data });
+            this.store.setWorkbenchState("editing");
+            return;
+        }
+
+        if (!this.UeBuilderWorkbenchApp) return;
+
+        // NOTE 需要覆盖当前编辑内容的场景
+        const { t } = i18n.global;
+        const dialog = useElDialog(
+            {
+                autoClose: true,
+                mask: { color: "rgba(0, 0, 0, 0.5)" },
+                panel: { position: "center" },
+            },
+            {
+                default: () =>
+                    h(UeElConfirmPanel, {
+                        title: t("REPLACE_PAGE_TITLE"),
+                        desc: t("REPLACE_PAGE_TIP"),
+                        cancelBtn: { theme: "white" },
+                        confirmBtn: { theme: "red" },
+                        onConfirm: () => {
+                            this.store.setCurrentEditorPageData({ data: param.data });
+                            this.store.setWorkbenchState("editing");
+                            dialog.closeDialog();
+                        },
+                        onClose: () => {
+                            dialog.closeDialog();
+                        },
+                        onCancel: () => {
+                            dialog.closeDialog();
+                        },
+                    }),
+            },
+            this.UeBuilderWorkbenchApp
+        );
+    }
+
+    /**
+     * 处理预览状态变更
+     *
+     * @private
+     * @param {{ data: string }} [param]
+     * @return {*}
+     * @memberof UeBuilderWorkbenchBase
+     */
+    private handlePreviewStateChange(param?: { data: string }) {
+        // NOTE 如果没有传递新的页面数据，就是使用现有的数据
+        if (!param?.data) {
+            this.store.setWorkbenchState("preview");
+            return;
+        }
+        this.store.setCurrentPreviewPageData({ data: param.data });
     }
 
     showLoading() {
@@ -174,6 +251,8 @@ export abstract class UeBuilderWorkbenchBase {
         app.mount(this.rootDom);
 
         // #endregion
+
+        this.UeBuilderWorkbenchApp = app;
     }
 
     /**
