@@ -35,6 +35,7 @@
     },
     "dependencies": {
         "@stone/uebuilder-utils": "4.0.0",
+        "@stone/uebuilder-api": "4.0.0",
         "@stone/uebuilder-api--tools": "4.0.0",
         "@stone/uebuilder-storehouse-base": "4.0.0",
         "@stone/uemo-editor-page": "4.0.0",

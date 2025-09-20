@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-20 17:12:46
+ * @LastEditTime: 2025-09-21 00:06:00
 -->
 <template>
     <UebuilderUserStorehouse
@@ -32,6 +32,7 @@ import {
     updateBookmarkList,
 } from "@stone/uebuilder-api--tools/api";
 import UebuilderUserStorehouse from "@stone/uebuilder-storehouse-base/src/components/unit-user-storehouse";
+import { pageStoreApi } from "@stone/uebuilder-api/api";
 import { useUeBuilderStorehouseToolsStore } from "@/store";
 import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
 
@@ -319,7 +320,37 @@ function getUserTemplateHandle(id: string) {
         });
 }
 
+let loadingId: any = undefined;
+
 function handleUseTemplate(pageId: string) {
+    if (typeof loadingId !== "undefined") return;
+
+    loadingId = instance?.proxy?.$ueElToast.info("正在获取页面数据...", {
+        timeout: false,
+    });
+    if (props.type === "user-collect") {
+        pageStoreApi
+            .getDetail(pageId)
+            .then((res) => {
+                if (res.code === 0) {
+                    void UeBuilderStorehouse?.changeWorkbenchState("editing", { id: pageId, data: res.data.post.json });
+                    return;
+                }
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .catch((err) => {
+                console.error(err);
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .finally(() => {
+                if (typeof loadingId !== "undefined") {
+                    instance?.proxy?.$ueElToast.dismiss(loadingId);
+                }
+                loadingId = undefined;
+            });
+        return;
+    }
+
     getUserTemplate({ id: pageId })
         .then((res) => {
             if (res.code === 998) {
@@ -335,6 +366,12 @@ function handleUseTemplate(pageId: string) {
         .catch((err) => {
             console.error(err);
             instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .finally(() => {
+            if (typeof loadingId !== "undefined") {
+                instance?.proxy?.$ueElToast.dismiss(loadingId);
+            }
+            loadingId = undefined;
         });
 }
 </script>
