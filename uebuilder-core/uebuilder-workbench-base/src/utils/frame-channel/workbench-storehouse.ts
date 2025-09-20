@@ -1,7 +1,7 @@
 /*
  * @Description: uebuilder-creator 到 uebuilder-workbench 消息通道
  * @Author: F-Stone
- * @LastEditTime: 2025-09-17 13:21:24
+ * @LastEditTime: 2025-09-20 17:18:24
  */
 import type { WORKBENCH_STOREHOUSE_CHANNEL } from "../../../types/channel";
 import type { STOREHOUSE_WORKBENCH_CHANNEL } from "@stone/uebuilder-storehouse-base/types/channel";
@@ -28,12 +28,12 @@ type Param = {
         changeWorkbenchState(
             channel: WorkbenchStorehouseChannel,
             state: "editing" | "preview",
-            param: { data: string }
+            param: { id?: string; data?: string }
         ): void;
         changeWorkbenchState(
             channel: WorkbenchStorehouseChannel,
             state: "editing" | "composer" | "preview" | "browsing",
-            param?: { data: string }
+            param?: { id?: string; data?: string }
         ): void;
     };
 };
@@ -61,7 +61,10 @@ export class WorkbenchStorehouseChannel extends MessageChannel<
         openLoginPanel: () => {
             return this.param.on.openLoginPanel(this);
         },
-        changeWorkbenchState: (state: "editing" | "composer" | "preview" | "browsing", param?: { data: string }) => {
+        changeWorkbenchState: (
+            state: "editing" | "composer" | "preview" | "browsing",
+            param?: { id?: string; data?: string }
+        ) => {
             return this.param.on.changeWorkbenchState(this, state, param);
         },
     };

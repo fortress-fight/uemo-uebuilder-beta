@@ -94,8 +94,11 @@ export abstract class UeBuilderWorkbenchBase {
     abstract openLoginPanel(): void;
 
     changeWorkbenchState(state: "composer" | "browsing"): void;
-    changeWorkbenchState(state: "editing" | "preview", param?: { data: string }): void;
-    changeWorkbenchState(state: "editing" | "composer" | "preview" | "browsing", param?: { data: string }) {
+    changeWorkbenchState(state: "editing" | "preview", param?: { id?: string; data?: string }): void;
+    changeWorkbenchState(
+        state: "editing" | "composer" | "preview" | "browsing",
+        param?: { id?: string; data?: string }
+    ) {
         switch (state) {
             case "editing":
                 this.handleEditingStateChange(param);
@@ -104,6 +107,10 @@ export abstract class UeBuilderWorkbenchBase {
                 // NOTE 如果没有传递新的页面数据，就是使用现有的数据
                 this.handlePreviewStateChange(param);
                 break;
+
+            // case "browsing":
+            //     this.handleBrowsingStateChange();
+            //     break;
 
             default:
                 this.store.setWorkbenchState(state);
@@ -118,7 +125,7 @@ export abstract class UeBuilderWorkbenchBase {
      * @return {*}
      * @memberof UeBuilderWorkbenchBase
      */
-    private handleEditingStateChange(param?: { data: string }) {
+    private handleEditingStateChange(param?: { id?: string; data?: string }) {
         // NOTE 如果没有传递新的页面数据，就是使用现有的数据，使用场景：继续编辑
         if (!param?.data) {
             this.store.setWorkbenchState("editing");
@@ -127,7 +134,8 @@ export abstract class UeBuilderWorkbenchBase {
 
         // NOTE 如果没有现有数据存在的情况下，直接使用传递的新数据
         if (!this.store.currentEditorPageData.data) {
-            this.store.setCurrentEditorPageData({ data: param.data });
+            this.store.setCurrentEditorPageData({ id: param.id, data: param.data });
+            this.store.setOriginalPageData({ id: param.id, data: param.data });
             this.store.setWorkbenchState("editing");
             return;
         }
@@ -150,7 +158,8 @@ export abstract class UeBuilderWorkbenchBase {
                         cancelBtn: { theme: "white" },
                         confirmBtn: { theme: "red" },
                         onConfirm: () => {
-                            this.store.setCurrentEditorPageData({ data: param.data });
+                            this.store.setOriginalPageData({ id: param.id, data: param.data! });
+                            this.store.setCurrentEditorPageData({ id: param.id, data: param.data! });
                             this.store.setWorkbenchState("editing");
                             dialog.closeDialog();
                         },
@@ -174,13 +183,13 @@ export abstract class UeBuilderWorkbenchBase {
      * @return {*}
      * @memberof UeBuilderWorkbenchBase
      */
-    private handlePreviewStateChange(param?: { data: string }) {
+    private handlePreviewStateChange(param?: { id?: string; data?: string }) {
         // NOTE 如果没有传递新的页面数据，就是使用现有的数据
         if (!param?.data) {
             this.store.setWorkbenchState("preview");
             return;
         }
-        this.store.setCurrentPreviewPageData({ data: param.data });
+        this.store.setCurrentPreviewPageData({ id: param.id, data: param.data });
     }
 
     showLoading() {
