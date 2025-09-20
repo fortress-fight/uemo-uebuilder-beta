@@ -46,63 +46,76 @@ import UebuilderWorkbenchSavePanel from "@stone/uebuilder-workbench-base/src/com
 
 import { UeBuilderWorkbenchKey } from "../../../plugin/injection-key";
 
+type TySaveData = { id?: string; json?: string; thumb?: string; title?: string };
+
 const { t } = useI18n();
 const instance = getCurrentInstance();
 const _props = defineProps<{ trigger: HTMLElement }>();
 const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
 const savePanelRef = useTemplateRef("savePanelRef");
 
-function saveHandle(type: "saveOnline", data: { id?: string; json?: string; thumb?: string; title?: string }) {
+function saveHandle(type: "saveOnline", data: TySaveData) {
     switch (type) {
         case "saveOnline":
-            const handle = data.id
-                ? updateUserTemplate("edit", {
-                      json: data.json,
-                      id: data.id,
-                      img: data.thumb,
-                      title: data.title,
-                  })
-                : updateUserTemplate("add", {
-                      json: data.json || "",
-                      img: data.thumb || "",
-                      title: data.title || "",
-                  });
-
-            return handle
-                .then((res) => {
-                    if (res.code === 0) {
-                        instance?.proxy?.$ueElToast.success(t("UNIT_SAVE_SUCCESS"));
-                        UeBuilderWorkbench?.store.setCurrentEditorPageData({
-                            id: res.data.id,
-                            data: data.json || "",
-                            title: data.title,
-                        });
-                        UeBuilderWorkbench?.store.setOriginalPageData({
-                            id: res.data.id,
-                            data: data.json || "",
-                            title: data.title,
-                        });
-                        return;
-                    }
-                    if (res.code === 998) {
-                        UeBuilderWorkbench?.openLoginPanel();
-                        return;
-                    }
-                    if (res.errMsg === "limit") {
-                        instance?.proxy?.$ueElToast.warning(t("UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR"));
-                        return;
-                    }
-                    instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
-                })
-                .catch((err) => {
-                    console.error(err);
-                    instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
-                });
-
+            return handleSaveOnline(data);
         default:
             break;
     }
     return Promise.resolve();
+}
+
+function handleSaveOnline(data: TySaveData) {
+    const toastId = instance?.proxy?.$ueElToast.info(t("UNIT_SAVING"), {
+        timeout: false,
+    });
+    const handle = data.id
+        ? updateUserTemplate("edit", {
+              json: data.json,
+              id: data.id,
+              img: data.thumb,
+              title: data.title,
+          })
+        : updateUserTemplate("add", {
+              json: data.json || "",
+              img: data.thumb || "",
+              title: data.title || "",
+          });
+
+    return handle
+        .then((res) => {
+            if (res.code === 0) {
+                instance?.proxy?.$ueElToast.success(t("UNIT_SAVE_SUCCESS"));
+                UeBuilderWorkbench?.store.setCurrentEditorPageData({
+                    id: res.data.id,
+                    data: data.json || "",
+                    title: data.title,
+                });
+                UeBuilderWorkbench?.store.setOriginalPageData({
+                    id: res.data.id,
+                    data: data.json || "",
+                    title: data.title,
+                });
+                return;
+            }
+            if (res.code === 998) {
+                UeBuilderWorkbench?.openLoginPanel();
+                return;
+            }
+            if (res.errMsg === "limit") {
+                instance?.proxy?.$ueElToast.warning(t("UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR"));
+                return;
+            }
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .finally(() => {
+            if (typeof toastId !== "undefined") {
+                instance?.proxy?.$ueElToast.dismiss(toastId);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
 }
 
 /**

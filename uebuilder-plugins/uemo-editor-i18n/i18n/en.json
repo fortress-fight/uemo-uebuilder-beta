@@ -182,6 +182,7 @@
     "UNIT_SKIP": "Skip",
     "UNIT_NEXT": "Next",
     "UNIT_FINISH": "Finish",
+    "UNIT_SAVING": "Saving...",
 
     "AI_NOT_SUPPORT_TIP": "AI feature is not enabled, please contact customer service for details",
     "TAG_INPUT_PLACEHOLDER": "Enter to confirm, multiple can be added",
