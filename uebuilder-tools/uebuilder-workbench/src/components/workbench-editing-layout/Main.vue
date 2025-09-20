@@ -2,7 +2,7 @@
  * FILE Workbench 编辑布局
  * @Description: Workbench 编辑布局
  * @Author: F-Stone
- * @LastEditTime: 2025-09-18 12:41:29
+ * @LastEditTime: 2025-09-20 17:56:43
 -->
 <template>
     <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full" @trigger="trigger">
@@ -40,6 +40,9 @@
 import UebuilderWorkbenchEditingLayout from "@stone/uebuilder-workbench-base/src/components/workbench-editing-layout";
 import UebuilderWorkbenchUnitHelperPanel from "@stone/uebuilder-workbench-base/src/components/unit-helper-panel";
 
+import UeElConfirmPanel from "@stone/uemo-editor-element/packages/confirm-panel";
+import { useElDialog } from "@stone/uemo-editor-element/packages/pop-panel/plugin";
+
 import SavePanel from "./components/SavePanel.vue";
 import SharePanel from "./components/SharePanel.vue";
 import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
@@ -48,6 +51,8 @@ const { t } = useI18n();
 const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
 
 const popPanelOpen = ref(false);
+
+const currentInstance = getCurrentInstance();
 const saveBtnRef = ref<HTMLElement>();
 const shareBtnRef = ref<HTMLElement>();
 const savePanelRef = useTemplateRef("savePanelRef");
@@ -75,11 +80,64 @@ function openSaveUserTemplatePanel() {
     savePanelRef.value?.openSaveUserTemplatePanel();
 }
 
+function checkEditingPageHasChange(callback: () => void) {
+    const store = UeBuilderWorkbench!.store;
+    const originalPageData = store.originalPageData;
+    const currentEditorPageData = store.currentEditorPageData;
+
+    if (!currentEditorPageData.data) {
+        callback();
+        return;
+    }
+
+    const isSavePage = !!currentEditorPageData.id;
+    const isChangePage = currentEditorPageData.data !== originalPageData.data;
+
+    if (isSavePage && !isChangePage) {
+        callback();
+        return;
+    }
+
+    const dialog = useElDialog(
+        {
+            autoClose: true,
+            mask: { color: "rgba(0, 0, 0, 0.5)" },
+            panel: { position: "center" },
+        },
+        {
+            default: () =>
+                h(UeElConfirmPanel, {
+                    title: "是否保存",
+                    desc: "当前页面已修改，是否保存？",
+                    cancelBtn: { theme: "white", text: t("UNIT_NOTE_SAVE") },
+                    confirmBtn: { theme: "red", text: t("UNIT_SAVE") },
+                    onConfirm: () => {
+                        if (!currentEditorPageData.id) {
+                            savePanelRef.value?.openSaveUserTemplatePanel();
+                        }
+                        dialog.closeDialog();
+                    },
+                    onCancel: () => {
+                        dialog.closeDialog();
+                        callback();
+                    },
+                    onClose: () => {
+                        dialog.closeDialog();
+                    },
+                }),
+        },
+        currentInstance?.appContext.app
+    );
+}
+
 function trigger(type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview") {
     switch (type) {
         case "tabWorkbenchStateToBrowsing":
-            // TASK 需要校验是否可以切换到 Browsing 状态
-            UeBuilderWorkbench!.changeWorkbenchState("browsing");
+            checkEditingPageHasChange(() => {
+                UeBuilderWorkbench!.store.setCurrentEditorPageData({ data: "" });
+                UeBuilderWorkbench!.store.setOriginalPageData({ data: "" });
+                UeBuilderWorkbench!.changeWorkbenchState("browsing");
+            });
             break;
 
         case "tabWorkbenchStateToPreview":

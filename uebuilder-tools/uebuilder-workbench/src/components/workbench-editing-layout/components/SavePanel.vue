@@ -72,8 +72,15 @@ function saveHandle(type: "saveOnline", data: { id?: string; json?: string; thum
                 .then((res) => {
                     if (res.code === 0) {
                         instance?.proxy?.$ueElToast.success(t("UNIT_SAVE_SUCCESS"));
-                        UeBuilderWorkbench?.store.updateCurrentEditorPageData({
+                        UeBuilderWorkbench?.store.setCurrentEditorPageData({
                             id: res.data.id,
+                            data: data.json || "",
+                            title: data.title,
+                        });
+                        UeBuilderWorkbench?.store.setOriginalPageData({
+                            id: res.data.id,
+                            data: data.json || "",
+                            title: data.title,
                         });
                         return;
                     }
