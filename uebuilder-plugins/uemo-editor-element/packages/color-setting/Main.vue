@@ -55,12 +55,18 @@ function openColorPickerPanel() {
 const popPanelParams = usePopPanelParam(
     computed(() => colorInputRef.value?.rootDomRef),
     {
-        placement: props.placement,
-        middleware: [
-            ["flip", { crossAxis: false }],
-            ["offset", { crossAxis: -100, mainAxis: 10 }],
-            ["shift", { crossAxis: true, padding: 17 }],
-        ],
+        process(result) {
+            if (typeof result.panel?.position !== "object") return result;
+            if (result.panel?.position?.options) {
+                result.panel.position.options.placement = props.placement;
+                result.panel.position.options.middleware = [
+                    ["flip", { crossAxis: false }],
+                    ["offset", { crossAxis: -100, mainAxis: 10 }],
+                    ["shift", { crossAxis: true, padding: 17 }],
+                ];
+            }
+            return result;
+        },
     }
 );
 </script>

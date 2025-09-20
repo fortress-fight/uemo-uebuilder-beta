@@ -1,9 +1,10 @@
-import type { EnhancedComputePositionConfig } from "@stone/uemo-editor-utils/lib/floating-ui";
-
 import { getPopPanelParams } from "../packages/pop-panel/utils/helper";
 import { settingGroupPopPanelPropsKey } from "../packages/setting-group";
 
-export function usePopPanelParam(domRef: Ref<HTMLElement | undefined>, options: EnhancedComputePositionConfig = {}) {
+export function usePopPanelParam(
+    domRef: Ref<HTMLElement | undefined>,
+    param?: { process?: (result: UE_EL_COMPONENT.UeElPopPanelProps) => UE_EL_COMPONENT.UeElPopPanelProps }
+) {
     const injectSettingGroupPopPanelProps = inject(settingGroupPopPanelPropsKey, undefined);
 
     /**
@@ -13,6 +14,12 @@ export function usePopPanelParam(domRef: Ref<HTMLElement | undefined>, options: 
         if (injectSettingGroupPopPanelProps?.value) return injectSettingGroupPopPanelProps.value;
 
         if (!domRef.value) return undefined;
-        return getPopPanelParams("editorPanel", domRef.value, options);
+        const result = getPopPanelParams("editorPanel", domRef.value);
+
+        if (param?.process) {
+            return param.process(result);
+        }
+
+        return result;
     });
 }

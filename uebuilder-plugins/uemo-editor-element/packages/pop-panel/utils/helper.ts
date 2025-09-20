@@ -31,8 +31,7 @@ const DEFAULT_POSITION_CONFIG: EnhancedComputePositionConfig = {
  */
 export function getPopPanelParams(
     mode: PopPanelMode = "editorPanel",
-    dom: HTMLElement,
-    options: EnhancedComputePositionConfig = {}
+    dom: HTMLElement
 ): UE_EL_COMPONENT.UeElPopPanelProps {
     if (mode === "editorPanel") {
         return {
@@ -40,7 +39,7 @@ export function getPopPanelParams(
             panel: {
                 position: {
                     refEl: dom,
-                    options: { ...DEFAULT_POSITION_CONFIG, ...options },
+                    options: DEFAULT_POSITION_CONFIG,
                 },
             },
         };

@@ -1,7 +1,7 @@
 <!--
  * @Description: 链接属性控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-03-31 01:33:22
+ * @LastEditTime: 2025-09-20 16:02:36
 -->
 <template>
     <UeElSettingBar
@@ -47,9 +47,9 @@ const typeName = computed(() => {
         link: t("LINK_WEBSITE"),
         frame: t("LINK_FRAME"),
         function: { anchor: t("LINK_ANCHOR"), download: t("LINK_DOWNLOAD"), image: t("LINK_IMAGE") },
-    };
+    } as const;
 
-    if (type === "function") {
+    if (type === "function" && valueRef.value.detail) {
         return typeNameMap[type][valueRef.value.detail];
     } else {
         return typeNameMap[type] || "";
@@ -91,27 +91,25 @@ function openLinkSettingPanel() {
 /**
  * 弹窗位置配置
  */
-const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps | undefined>(() => {
-    const result: UE_EL_COMPONENT.UeElPopPanelProps | undefined = usePopPanelParam(
-        computed(() => settingBarRef.value?.$el)
-    ).value;
-
-    if (!result) return undefined;
-
-    result.mask = {
-        color: "transparent",
-    };
-    result.checkAllowClose = () => {
-        const hasChange = linkSettingPanelRef.value?.checkHasUnsyncedChanges();
-        if (hasChange) {
-            return t("LINK_SETTING_UNSAVED_TIP");
-        } else {
-            return true;
-        }
-    };
-
-    return result;
-});
+const popPanelParams = usePopPanelParam(
+    computed(() => settingBarRef.value?.$el),
+    {
+        process: (result) => {
+            result.mask = {
+                color: "transparent",
+            };
+            result.checkAllowClose = () => {
+                const hasChange = linkSettingPanelRef.value?.checkHasUnsyncedChanges();
+                if (hasChange) {
+                    return t("LINK_SETTING_UNSAVED_TIP");
+                } else {
+                    return true;
+                }
+            };
+            return result;
+        },
+    }
+);
 
 function handleConfirm() {
     linkSettingPanelOpen.value = false;
