@@ -173,6 +173,7 @@
     "UNIT_LOAD_ERROR_TIP": "Please try again later",
     "UNIT_UPLOAD_JSMO_TITLE": "Upload .jsmo file",
     "UNIT_SAVE": "Save",
+    "UNIT_NOTE_SAVE": "Not Save",
     "UNIT_SAVE_SUCCESS": "Save Success",
     "UNIT_SHARE_PAGE": "Share",
     "UNIT_LOGIN": "Login",
