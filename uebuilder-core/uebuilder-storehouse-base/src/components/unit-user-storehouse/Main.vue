@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-18 13:40:15
+ * @LastEditTime: 2025-09-21 00:42:59
 -->
 <template>
     <UnitListModule
@@ -159,11 +159,7 @@ function handleItemOperTrigger(param: { type: "editor" | "delete" | "toggleColle
                 UnitUserTemplatePanelProps.value = {
                     id: param.data.id.toString(),
                     type: "edit",
-                    getTemplateDetail: () => {
-                        return props.getUserTemplate!(param.data.id).catch(() => {
-                            popPanelOpen.value = false;
-                        });
-                    },
+                    getTemplateDetail: props.getUserTemplate ? () => props.getUserTemplate!(param.data.id) : undefined,
                 };
                 popPanelOpen.value = true;
             }

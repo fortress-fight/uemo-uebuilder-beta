@@ -22,6 +22,7 @@
     "UNIT_LOAD_MORE": "Load More",
     "UNIT_DEFAULT": "Default",
     "UNIT_UNKNOWN_ERROR": "Unknown Error",
+    "UNIT_LOGOUT_ERROR": "Login expired, please login again",
     "UNIT_REMOVE": "Remove",
     "UNIT_REPLACE": "Replace {text}",
     "UNIT_ADD": "Add {text}",

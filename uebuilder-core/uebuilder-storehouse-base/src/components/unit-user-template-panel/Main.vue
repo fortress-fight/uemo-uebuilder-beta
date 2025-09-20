@@ -1,7 +1,7 @@
 <!--
  * @Description: 客户模版库操作面板
  * @Author: F-Stone
- * @LastEditTime: 2025-08-19 14:24:26
+ * @LastEditTime: 2025-09-21 00:38:47
 -->
 <template>
     <div :class="$style['unit-user-template-panel']">
@@ -125,12 +125,17 @@ onBeforeMount(() => {
     } else if (props.type === "edit") {
         if (props.getTemplateDetail) {
             loading.value = true;
-            void props.getTemplateDetail().then((res) => {
-                formData.json = res.json;
-                formData.thumb = res.img;
-                formData.title = res.title;
-                loading.value = false;
-            });
+            props
+                .getTemplateDetail()
+                .then((res) => {
+                    formData.json = res.json;
+                    formData.thumb = res.thumb;
+                    formData.title = res.title;
+                    loading.value = false;
+                })
+                .catch((error) => {
+                    instance?.proxy?.$ueElError(error);
+                });
         } else {
             instance?.proxy?.$ueElToast.error(t("UEBUILDER_TEMPLATE_FORM_DETAIL_ERROR"));
         }

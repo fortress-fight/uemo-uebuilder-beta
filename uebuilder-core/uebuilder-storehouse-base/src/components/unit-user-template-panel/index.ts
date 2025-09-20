@@ -1,7 +1,7 @@
 /*
  * @Description: 客户模版库操作面板
  * @Author: F-Stone
- * @LastEditTime: 2025-08-19 14:24:31
+ * @LastEditTime: 2025-09-21 00:26:14
  */
 import type { App } from "vue";
 
@@ -25,7 +25,7 @@ export interface UnitUserTemplatePanelBaseProps {
     type: "add" | "edit";
     disableJSMO?: boolean;
     defaultThumb?: string[];
-    getTemplateDetail?: () => Promise<{ id: string; json: string; img: string; title: string }>;
+    getTemplateDetail?: () => Promise<{ json: string; thumb: string; title: string }>;
 }
 
 export type UnitUserTemplatePanelInstance = InstanceType<typeof UnitUserTemplatePanel>;

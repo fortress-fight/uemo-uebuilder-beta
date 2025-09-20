@@ -22,6 +22,7 @@
     "UNIT_LOAD_MORE": "加载更多",
     "UNIT_DEFAULT": "默认",
     "UNIT_UNKNOWN_ERROR": "出现未知错误",
+    "UNIT_LOGOUT_ERROR": "登录已过期，请重新登录",
     "UNIT_REMOVE": "移除",
     "UNIT_REPLACE": "更换{text}",
     "UNIT_ADD": "添加{text}",
