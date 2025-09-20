@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-18 13:54:00
+ * @LastEditTime: 2025-09-20 17:12:46
 -->
 <template>
     <UebuilderUserStorehouse
@@ -327,7 +327,7 @@ function handleUseTemplate(pageId: string) {
                 return;
             }
             if (res.code === 0) {
-                void UeBuilderStorehouse?.changeWorkbenchState("editing", { data: res.data.json });
+                void UeBuilderStorehouse?.changeWorkbenchState("editing", { id: pageId, data: res.data.json });
                 return;
             }
             instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
