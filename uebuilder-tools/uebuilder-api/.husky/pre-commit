@@ -1,2 +1,1 @@
--e yarn lint-staged
-
+yarn lint-staged
