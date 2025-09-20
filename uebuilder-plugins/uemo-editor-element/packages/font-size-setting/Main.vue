@@ -1,7 +1,7 @@
 <!--
  * @Description: 字号控制器
  * @Author: F-Stone
- * @LastEditTime: 2025-07-11 10:24:15
+ * @LastEditTime: 2025-09-19 19:29:07
 -->
 <template>
     <UeElControlGroup :class="$style['font-size-setting']" class="w-full" :col-count="selectedValue === '' ? 2 : 1">
@@ -11,6 +11,8 @@
 </template>
 <script lang="ts" setup>
 import type { UeElFontSizeSettingBaseProps } from "./index";
+
+import { fontSizePreset } from "../../data/font-size";
 
 defineOptions({ name: "UeElFontSizeSetting" });
 
