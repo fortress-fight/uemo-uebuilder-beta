@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-21 00:06:00
+ * @LastEditTime: 2025-09-21 01:03:49
 -->
 <template>
     <UebuilderUserStorehouse
@@ -24,6 +24,7 @@
 <script lang="ts" setup>
 import type { UnitUserStorehouseBaseProps, BookmarkItem, UserLibraryItem } from "./index";
 
+import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import {
     getUserPageList,
     getBookmarkList,
@@ -301,31 +302,32 @@ function handleToggleCollect(id: string) {
 }
 
 function getUserTemplateHandle(id: string) {
-    return getUserTemplate({ id })
-        .then((res) => {
-            if (res.code === 998) {
-                openLoginPanel();
-                return;
-            }
+    return getUserTemplate({ id }).then((res) => {
+        if (res.code === 998) {
+            openLoginPanel();
+            return Promise.reject(new UeError("ERROR:UNIT_LOGOUT_ERROR", { message: t("UNIT_LOGOUT_ERROR") }));
+        }
 
-            if (res.code === 0) {
-                return res.data;
-            }
+        if (res.code === 0) {
+            return { json: res.data.json, thumb: res.data.img, title: res.data.title };
+        }
 
-            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
-        })
-        .catch((err) => {
-            console.error(err);
-            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
-        });
+        return Promise.reject(new UeError("ERROR:UNIT_UNKNOWN_ERROR", { message: t("UNIT_UNKNOWN_ERROR") }));
+    });
 }
 
 let loadingId: any = undefined;
 
+onBeforeUnmount(() => {
+    if (typeof loadingId !== "undefined") {
+        instance?.proxy?.$ueElToast.dismiss(loadingId);
+    }
+});
+
 function handleUseTemplate(pageId: string) {
     if (typeof loadingId !== "undefined") return;
 
-    loadingId = instance?.proxy?.$ueElToast.info("正在获取页面数据...", {
+    loadingId = instance?.proxy?.$ueElToast.info(t("UNIT_LOADING"), {
         timeout: false,
     });
     if (props.type === "user-collect") {
