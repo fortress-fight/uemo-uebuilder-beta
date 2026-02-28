@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:12:11
+ * @LastEditTime: 2025-09-21 01:03:49
 -->
 <template>
     <UebuilderUserStorehouse
@@ -12,6 +12,7 @@
         :sortType="getUserPageListParams.order || 'newest'"
         :pages="dataPages"
         :getUserTemplate="getUserTemplateHandle"
+        @useTemplate="handleUseTemplate"
         @toggleCollect="handleToggleCollect"
         @updateTemplate="handleUpdateTemplate"
         @deleteTemplate="handleDeleteTemplate"
@@ -23,6 +24,7 @@
 <script lang="ts" setup>
 import type { UnitUserStorehouseBaseProps, BookmarkItem, UserLibraryItem } from "./index";
 
+import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import {
     getUserPageList,
     getBookmarkList,
@@ -31,6 +33,7 @@ import {
     updateBookmarkList,
 } from "@stone/uebuilder-api--tools/api";
 import UebuilderUserStorehouse from "@stone/uebuilder-storehouse-base/src/components/unit-user-storehouse";
+import { pageStoreApi } from "@stone/uebuilder-api/api";
 import { useUeBuilderStorehouseToolsStore } from "@/store";
 import { UeBuilderStorehouseKey } from "@/plugin/injection-key";
 
@@ -207,6 +210,7 @@ function handleUpdateTemplate(param: {
             }
             if (res.code === 0) {
                 handleRefresh();
+                instance?.proxy?.$ueElToast.warning(t("UNIT_SAVE_SUCCESS"));
                 return;
             }
             if (res.errMsg === "limit") {
@@ -298,22 +302,78 @@ function handleToggleCollect(id: string) {
 }
 
 function getUserTemplateHandle(id: string) {
-    return getUserTemplate({ id })
+    return getUserTemplate({ id }).then((res) => {
+        if (res.code === 998) {
+            openLoginPanel();
+            return Promise.reject(new UeError("ERROR:UNIT_LOGOUT_ERROR", { message: t("UNIT_LOGOUT_ERROR") }));
+        }
+
+        if (res.code === 0) {
+            return { json: res.data.json, thumb: res.data.img, title: res.data.title };
+        }
+
+        return Promise.reject(new UeError("ERROR:UNIT_UNKNOWN_ERROR", { message: t("UNIT_UNKNOWN_ERROR") }));
+    });
+}
+
+let loadingId: any = undefined;
+
+onBeforeUnmount(() => {
+    if (typeof loadingId !== "undefined") {
+        instance?.proxy?.$ueElToast.dismiss(loadingId);
+    }
+});
+
+function handleUseTemplate(pageId: string) {
+    if (typeof loadingId !== "undefined") return;
+
+    loadingId = instance?.proxy?.$ueElToast.info(t("UNIT_LOADING"), {
+        timeout: false,
+    });
+    if (props.type === "user-collect") {
+        pageStoreApi
+            .getDetail(pageId)
+            .then((res) => {
+                if (res.code === 0) {
+                    void UeBuilderStorehouse?.changeWorkbenchState("editing", { id: pageId, data: res.data.post.json });
+                    return;
+                }
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .catch((err) => {
+                console.error(err);
+                instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+            })
+            .finally(() => {
+                if (typeof loadingId !== "undefined") {
+                    instance?.proxy?.$ueElToast.dismiss(loadingId);
+                }
+                loadingId = undefined;
+            });
+        return;
+    }
+
+    getUserTemplate({ id: pageId })
         .then((res) => {
             if (res.code === 998) {
                 openLoginPanel();
                 return;
             }
-
             if (res.code === 0) {
-                return res.data;
+                void UeBuilderStorehouse?.changeWorkbenchState("editing", { id: pageId, data: res.data.json });
+                return;
             }
-
             instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
         })
         .catch((err) => {
             console.error(err);
             instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .finally(() => {
+            if (typeof loadingId !== "undefined") {
+                instance?.proxy?.$ueElToast.dismiss(loadingId);
+            }
+            loadingId = undefined;
         });
 }
 </script>

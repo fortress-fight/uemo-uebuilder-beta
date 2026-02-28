@@ -1,8 +1,8 @@
 <template>
     <div :class="$style['entry-layout']" class="w-full h-full">
         <div class="l-preview">
-            <div v-if="entryPageData.data" class="thumb-placeholder">
-                <!--  -->
+            <div v-if="!previewPageData.data" class="thumb-placeholder">
+                previewPageData.data: {{ previewPageData.data }}
             </div>
         </div>
         <div :class="$style['l-mask']"></div>
@@ -69,21 +69,39 @@ const btnMap = {
     },
 };
 
-const entryPageData = computed(() => workbenchStore.entryPageData);
+const previewPageData = computed(() => workbenchStore.currentPreviewPageData);
 
 const operBtn = computed<OperBtn>(() => {
     const config = workbenchStore.workbenchConfig;
 
     if (config.workbenchType === "layout") {
-        return entryPageData.value.data ? btnMap.layout.editor : btnMap.layout.add;
+        return previewPageData.value.data ? btnMap.layout.editor : btnMap.layout.add;
     } else {
-        return entryPageData.value.data ? btnMap.page.editor : btnMap.page.add;
+        return previewPageData.value.data ? btnMap.page.editor : btnMap.page.add;
     }
 });
 
 const trigger = (type: string) => {
     emit("trigger", type);
 };
+
+function initialWorkbenchPreviewChannel() {
+    setTimeout(() => {
+        workbenchStore.stopPageLoading();
+    }, 2000);
+}
+
+onBeforeMount(() => {
+    workbenchStore.startPageLoading("entry");
+});
+
+onMounted(() => {
+    initialWorkbenchPreviewChannel();
+});
+
+onBeforeUnmount(() => {
+    workbenchStore.stopPageLoading();
+});
 </script>
 <style lang="scss" module>
 .entry-layout {

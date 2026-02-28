@@ -1,7 +1,7 @@
 /*
  * @Description: tippy 插件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-21 18:00:08
+ * @LastEditTime: 2025-09-16 18:59:01
  */
 import type { App } from "vue";
 
@@ -20,8 +20,8 @@ export function install(app: App) {
     app.use(VueTippy, {
         offset: [0, 6],
         directive: "ue-el-label", // => v-ue-el-label
-        component: "ue-el-label", // => <ue-el-label/>
-        componentSingleton: "v-ue-el-label-singleton", // => <ue-tippy -singleton/>,
+        component: "UeElLabel", // => <ue-el-label/>
+        componentSingleton: "UeElLabelSingleton", // => <ue-tippy -singleton/>,
         defaultProps,
     });
 }

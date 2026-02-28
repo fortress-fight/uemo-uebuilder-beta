@@ -1,7 +1,7 @@
 /*
  * @Description: 确认面板
  * @Author: F-Stone
- * @LastEditTime: 2025-02-25 00:16:24
+ * @LastEditTime: 2025-09-20 16:34:44
  */
 import type { App } from "vue";
 
@@ -19,8 +19,8 @@ export interface UeElConfirmPanelBaseProps {
     title?: string;
     desc?: string;
     descHTML?: string;
-    confirmBtn?: { text: string; theme: TYPE_BTN_THEME };
-    cancelBtn?: { text: string; theme: TYPE_BTN_THEME };
+    confirmBtn?: { text?: string; theme?: TYPE_BTN_THEME };
+    cancelBtn?: { text?: string; theme?: TYPE_BTN_THEME };
     footerBtn?: { text: string; theme: TYPE_BTN_THEME };
 }
 export type UeElConfirmPanelInstance = InstanceType<typeof UeElConfirmPanel>;

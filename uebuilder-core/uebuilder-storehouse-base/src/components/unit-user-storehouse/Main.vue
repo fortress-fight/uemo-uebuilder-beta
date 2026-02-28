@@ -1,7 +1,7 @@
 <!--
  * @Description: 用户私有库
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 14:44:01
+ * @LastEditTime: 2025-09-21 00:42:59
 -->
 <template>
     <UnitListModule
@@ -41,7 +41,7 @@ import type { UnitListModuleBaseProps } from "../unit-list-module";
 
 import type { UnitUserStorehouseBaseProps } from "./index";
 
-import { UeBuilderStorehouseKey } from "../../plugin/injection-key";
+import { UeBuilderStorehouseBaseKey } from "../../plugin/injection-key";
 import UnitUserTemplatePanel from "../unit-user-template-panel";
 import UnitListModule from "../unit-list-module";
 
@@ -55,11 +55,11 @@ const emit = defineEmits<{
     (e: "loadMore" | "refresh"): void;
     (e: "updateTemplate", param: { type: "add" | "edit"; data: UserTemplateValue & { id?: string } }): void;
     (e: "sortTrigger", type: string): void;
-    (e: "deleteTemplate" | "toggleCollect", id: string): void;
+    (e: "deleteTemplate" | "toggleCollect" | "useTemplate", id: string): void;
 }>();
 const { t } = useI18n();
 
-const UeBuilderStorehouse = inject(UeBuilderStorehouseKey);
+const UeBuilderStorehouse = inject(UeBuilderStorehouseBaseKey);
 
 const router = useRouter();
 
@@ -148,18 +148,18 @@ const handleOperTrigger = (type: string) => {
     }
 };
 
-function handleItemOperTrigger(param: { type: "editor" | "delete" | "toggleCollect"; data: { id: string } }) {
+function handleItemOperTrigger(param: { type: "editor" | "delete" | "toggleCollect" | "use"; data: { id: string } }) {
     switch (param.type) {
+        case "use":
+            emit("useTemplate", param.data.id);
+            break;
+
         case "editor":
             {
                 UnitUserTemplatePanelProps.value = {
                     id: param.data.id.toString(),
                     type: "edit",
-                    getTemplateDetail: () => {
-                        return props.getUserTemplate!(param.data.id).catch(() => {
-                            popPanelOpen.value = false;
-                        });
-                    },
+                    getTemplateDetail: props.getUserTemplate ? () => props.getUserTemplate!(param.data.id) : undefined,
                 };
                 popPanelOpen.value = true;
             }

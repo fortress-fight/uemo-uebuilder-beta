@@ -1,3 +1,9 @@
+<!--
+ * FILE Workbench 工作台
+ * @Description: Workbench 工作台
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-18 12:17:12
+-->
 <template>
     <div :class="$style['workbench-browsing-layout']" class="grid h-full">
         <div :class="$style['layout-head']" class="grid items-center">
@@ -23,9 +29,9 @@
 <script lang="ts" setup>
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import { WorkbenchStorehouseChannel } from "../utils/frame-channel";
-import { UeBuilderWorkbenchKey } from "../plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "../plugin/injection-key";
 
-const workbench = inject(UeBuilderWorkbenchKey);
+const workbench = inject(UeBuilderWorkbenchBaseKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 const storehouseIframe = useTemplateRef("storehouseIframe");
 
@@ -64,12 +70,16 @@ function initialWorkbenchStorehouseChannel() {
             openLoginPanel: (_channel) => {
                 return workbench!.openLoginPanel();
             },
+            changeWorkbenchState: (_channel, state, param?) => {
+                // @ts-expect-error
+                return workbench!.changeWorkbenchState(state, param);
+            },
         },
     });
 }
 
 onBeforeMount(() => {
-    workbenchStore.startPageLoading("storehouse");
+    workbenchStore.startPageLoading("browsing");
 });
 
 onMounted(() => {

@@ -3,6 +3,7 @@ import { defineStore } from "@stone/uemo-editor-utils/lib/pinia";
 interface WorkbenchState {
     stage: UE_BUILDER.State;
     mode: unknown;
+    device: UE_BUILDER.DeviceType;
 }
 
 interface WorkbenchStateEntry extends WorkbenchState {
@@ -43,9 +44,10 @@ export type UeBuilderWorkbenchStoreState = {
         | WorkbenchStateComposer;
 
     /**
-     * 初始页面数据
+     * 原始页面数据
      */
-    entryPageData: {
+    originalPageData: {
+        id?: string;
         title?: string;
         data: string;
     };
@@ -54,6 +56,7 @@ export type UeBuilderWorkbenchStoreState = {
      * 当前编辑页面数据
      */
     currentEditorPageData: {
+        id?: string;
         title?: string;
         data: string;
     };
@@ -62,6 +65,7 @@ export type UeBuilderWorkbenchStoreState = {
      * 当前预览页面数据
      */
     currentPreviewPageData: {
+        id?: string;
         title?: string;
         data: string;
     };
@@ -83,9 +87,9 @@ type ExtractModeByStage<S extends WorkbenchState["stage"]> = Extract<
 export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
     state: (): UeBuilderWorkbenchStoreState => ({
         workbenchConfig: {} as UE_BUILDER_WORKBENCH.Config,
-        workbenchState: { stage: "entry", mode: "default" },
+        workbenchState: { stage: "entry", mode: "default", device: "desktop" },
 
-        entryPageData: { data: "" },
+        originalPageData: { data: "" },
         currentEditorPageData: { data: "" },
         currentPreviewPageData: { data: "" },
 
@@ -107,12 +111,26 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          * @param stage - 工作台阶段
          * @param mode - 工作台模式，如果不提供则默认为 "default"
          */
-        setWorkbenchState<S extends WorkbenchState["stage"]>(stage: S, mode?: ExtractModeByStage<S>) {
+        setWorkbenchState<S extends WorkbenchState["stage"]>(
+            stage: S,
+            mode?: ExtractModeByStage<S>,
+            device?: UE_BUILDER.DeviceType
+        ) {
             type StateType = Extract<UeBuilderWorkbenchStoreState["workbenchState"], { stage: S }>;
             this.workbenchState = {
                 stage,
                 mode: mode ?? "default",
+                device: device ?? "desktop",
             } as StateType;
+        },
+
+        /**
+         * 设置工作台设备
+         *
+         * @param device - 工作台设备
+         */
+        setWorkbenchDevice(device: UE_BUILDER.DeviceType) {
+            this.workbenchState.device = device;
         },
 
         /**
@@ -120,8 +138,8 @@ export const useUeBuilderWorkbenchStore = defineStore("uebuilderWorkbench", {
          *
          * @param {UeBuilderWorkbenchStoreState["initialPageData"]} initialPageData
          */
-        setEntryPageData(entryPageData: UeBuilderWorkbenchStoreState["entryPageData"]) {
-            this.entryPageData = entryPageData;
+        setOriginalPageData(originalPageData: UeBuilderWorkbenchStoreState["originalPageData"]) {
+            this.originalPageData = originalPageData;
         },
 
         /**

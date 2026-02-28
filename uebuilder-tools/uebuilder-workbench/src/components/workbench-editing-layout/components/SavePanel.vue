@@ -1,0 +1,211 @@
+<!--
+ * @description 保存面板组件
+ * @component SavePanel
+ * @example
+ * ```vue
+ * <SavePanel :save-btn="saveButtonElement" />
+ * ```
+ -->
+<template>
+    <UeElLabel
+        to="parent"
+        content-tag="div"
+        theme="ue-el-panel"
+        placement="bottom-end"
+        content-class="content-wrapper"
+        :trigger-target="trigger"
+        :arrow="false"
+        :delay="[0, 0]"
+        :offset="[-25, 5]"
+        :animation="false"
+        :interactive="true"
+        :hide-on-click="false"
+        :plugins="plugins"
+    >
+        <UebuilderWorkbenchSavePanel :save="saveHandle" ref="savePanelRef">
+            <template #panelFooter>
+                <div :class="$style['ad-group']">
+                    <div :class="$style['group--inner']">
+                        <div :class="$style['title']">所有编辑的页面都可复用到UEMO上使用</div>
+                        <img src="../images/uemo-ad.png" alt="" />
+                        <a href="https://www.uemo.net/template/" :class="$style['btn-link']" target="_blank">
+                            创建品牌官网
+                        </a>
+                    </div>
+                </div>
+            </template>
+        </UebuilderWorkbenchSavePanel>
+    </UeElLabel>
+</template>
+
+<script lang="ts" setup>
+import type { Props } from "@stone/uemo-editor-utils/lib/tippy";
+
+import { updateUserTemplate } from "@stone/uebuilder-api--tools/api";
+import UebuilderWorkbenchSavePanel from "@stone/uebuilder-workbench-base/src/components/unit-save-panel";
+
+import { UeBuilderWorkbenchKey } from "../../../plugin/injection-key";
+
+type TySaveData = { id?: string; json?: string; thumb?: string; title?: string };
+
+const { t } = useI18n();
+const instance = getCurrentInstance();
+const _props = defineProps<{ trigger: HTMLElement }>();
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
+const savePanelRef = useTemplateRef("savePanelRef");
+
+function saveHandle(type: "saveOnline", data: TySaveData) {
+    switch (type) {
+        case "saveOnline":
+            return handleSaveOnline(data);
+        default:
+            break;
+    }
+    return Promise.resolve();
+}
+
+function handleSaveOnline(data: TySaveData) {
+    const toastId = instance?.proxy?.$ueElToast.info(t("UNIT_SAVING"), {
+        timeout: false,
+    });
+    const handle = data.id
+        ? updateUserTemplate("edit", {
+              json: data.json,
+              id: data.id,
+              img: data.thumb,
+              title: data.title,
+          })
+        : updateUserTemplate("add", {
+              json: data.json || "",
+              img: data.thumb || "",
+              title: data.title || "",
+          });
+
+    return handle
+        .then((res) => {
+            if (res.code === 0) {
+                instance?.proxy?.$ueElToast.success(t("UNIT_SAVE_SUCCESS"));
+                UeBuilderWorkbench?.store.setCurrentEditorPageData({
+                    id: res.data.id,
+                    data: data.json || "",
+                    title: data.title,
+                });
+                UeBuilderWorkbench?.store.setOriginalPageData({
+                    id: res.data.id,
+                    data: data.json || "",
+                    title: data.title,
+                });
+                return;
+            }
+            if (res.code === 998) {
+                UeBuilderWorkbench?.openLoginPanel();
+                return;
+            }
+            if (res.errMsg === "limit") {
+                instance?.proxy?.$ueElToast.warning(t("UEBUILDER_USER_STOREHOUSE_LIMIT_ERROR"));
+                return;
+            }
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        })
+        .finally(() => {
+            if (typeof toastId !== "undefined") {
+                instance?.proxy?.$ueElToast.dismiss(toastId);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            instance?.proxy?.$ueElToast.error(t("UNIT_UNKNOWN_ERROR"));
+        });
+}
+
+/**
+ * 创建一个插件，用于在鼠标移出窗口时隐藏面板
+ * @description 这个插件会监听 pointerout 事件，当鼠标移出面板和触发器区域时自动隐藏面板
+ * @returns Tippy 插件配置对象
+ */
+const createHideOnOutWindowPlugin = (): Props["plugins"][number] => ({
+    name: "hideOnOutWindow",
+    fn(param) {
+        /**
+         * 检查鼠标移出事件的状态并决定是否隐藏面板
+         * @param event - 鼠标移出事件对象
+         */
+        const checkState = (event: MouseEvent) => {
+            const panelDom = param.popper;
+            const triggerDom = param.reference;
+            const target = event.relatedTarget as HTMLElement;
+
+            // 如果鼠标仍在面板或触发器区域内，不做任何操作
+            if (
+                target === panelDom ||
+                panelDom.contains(target) ||
+                target === triggerDom ||
+                triggerDom.contains(target)
+            ) {
+                return;
+            }
+
+            // 隐藏面板
+            param.hide();
+        };
+
+        return {
+            onShow() {
+                window.addEventListener("pointerout", checkState);
+            },
+            onHide() {
+                window.removeEventListener("pointerout", checkState);
+            },
+        };
+    },
+});
+
+// 配置面板插件
+const plugins: Props["plugins"] = [createHideOnOutWindowPlugin()];
+
+defineExpose({
+    openSaveUserTemplatePanel: () => {
+        savePanelRef.value?.openSaveUserTemplatePanel();
+    },
+});
+</script>
+
+<style lang="scss" module>
+.ad-group {
+    margin-top: 20px;
+
+    border-top: 1px dashed #f4f4f4;
+    .group--inner {
+        margin-top: 20px;
+        padding: 20px;
+
+        border-radius: 5px;
+        background: #f4f4f4;
+    }
+    .title {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 100%;
+
+        margin-bottom: 25px;
+
+        color: #999;
+    }
+    .btn-link {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 100%;
+
+        display: block;
+
+        margin-top: 25px;
+        padding: 12px;
+
+        text-align: center;
+
+        color: #fff;
+        border-radius: 1000px;
+        background: #2c48ff;
+    }
+}
+</style>

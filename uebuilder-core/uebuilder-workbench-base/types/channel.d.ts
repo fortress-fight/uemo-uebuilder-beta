@@ -1,7 +1,7 @@
 /*
  * @Description: Workbench 中实现 Creator 调用的方法
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:50:57
+ * @LastEditTime: 2025-09-20 17:13:11
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 
@@ -42,11 +42,29 @@ export namespace WORKBENCH_STOREHOUSE_CHANNEL {
         openLoginPanel: () => void;
 
         // 切换 APP 应用层
-        tabAppLayer(layer: "uebuilderComposerLayer"): void;
-        tabAppLayer(layer: "uebuilderEditorLayer" | "uebuilderPreviewLayer", param: { data: string }): void;
-        tabAppLayer(
-            layer: "uebuilderEditorLayer" | "uebuilderComposerLayer" | "uebuilderPreviewLayer",
-            param?: { data: string }
+        changeWorkbenchState(layer: "composer" | "browsing"): void;
+        changeWorkbenchState(layer: "editing" | "preview", param: { id?: string; data?: string }): void;
+        changeWorkbenchState(
+            layer: "editing" | "composer" | "preview" | "browsing",
+            param?: { id?: string; data: string }
         ): void;
+    }
+}
+
+/**
+ * WORKBENCH 中实现 EDITOR_FACTORY 调用的方法
+ */
+export namespace WORKBENCH_EDITOR_FACTORY_CHANNEL {
+    export interface Api extends Methods {
+        // EditorFactory Frame 准备就绪
+        editorFactoryReady: () => void;
+
+        // 显示消息
+        showMessage: (type: "success" | "error" | "warning" | "info", message: string) => void;
+
+        // 切换 APP 应用层
+        changeWorkbenchState(layer: "composer"): void;
+        changeWorkbenchState(layer: "editing" | "preview", param: { data: string }): void;
+        changeWorkbenchState(layer: "editing" | "composer" | "preview", param?: { data: string }): void;
     }
 }

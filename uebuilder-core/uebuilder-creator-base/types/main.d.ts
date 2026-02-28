@@ -20,6 +20,9 @@ declare global {
             // 应用名称
             appName: UE_BUILDER.Name;
 
+            // 应用尺寸
+            appSize?: "normal" | "fullscreen";
+
             // 应用类型
             appType: UE_BUILDER.Type;
 

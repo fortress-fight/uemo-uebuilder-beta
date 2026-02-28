@@ -1,7 +1,7 @@
 /*
  * @Description: 用户模板操作相关接口
  * @Author: F-Stone
- * @LastEditTime: 2025-09-12 16:11:55
+ * @LastEditTime: 2025-09-18 11:46:56
  */
 import type { AxiosUemoToolsResponse, AxiosPaginatedResponse } from "./api.instance";
 
@@ -69,7 +69,7 @@ type UserTemplateResponse = { code: 0; data: { id: string } } | { code: 1; errMs
  */
 interface UserTemplateParams {
     add: { json: string; img: string; title: string };
-    edit: { id: string; json: string; img: string; title: string };
+    edit: { id: string; json?: string; img?: string; title?: string };
     delete: { id: string };
 }
 

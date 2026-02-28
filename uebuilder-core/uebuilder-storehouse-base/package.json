@@ -36,6 +36,7 @@
         "@stone/uemo-editor-i18n": "4.0.0",
         "@stone/vue-cli-service": "^4.0.0",
         "@stone/uemo-share-icon-font": "4.0.0",
+        "@stone/uebuilder-api": "4.0.0",
         "@inquirer/prompts": "^3.3.0",
         "@types/inquirer": "^9.0.7",
         "@vueuse/components": "^12.7.0",

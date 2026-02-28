@@ -1,7 +1,7 @@
 <!--
  * @Description: 弹窗组件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-04 11:03:13
+ * @LastEditTime: 2025-09-19 17:48:11
  * @FileOverview: 可拖拽的弹窗组件，支持自定义位置、遮罩层和动画效果
  * @Events: onShow, onHide
  * @Props:
@@ -331,6 +331,9 @@ onBeforeUnmount(() => {
 // #endregion
 
 defineExpose({
+    closePanel: () => {
+        openModel.value = false;
+    },
     updateDialogPos,
 });
 </script>

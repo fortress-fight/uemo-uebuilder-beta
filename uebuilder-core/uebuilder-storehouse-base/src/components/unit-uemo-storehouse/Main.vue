@@ -1,7 +1,7 @@
 <!--
  * @Description: Uemo 库
  * @Author: F-Stone
- * @LastEditTime: 2025-08-18 14:20:04
+ * @LastEditTime: 2025-09-21 00:08:39
 -->
 <template>
     <UnitListModule
@@ -16,7 +16,7 @@
 import type { UnitUemoStorehouseBaseProps } from "./index";
 import type { UnitListModuleBaseProps } from "../unit-list-module";
 
-import { pageStoreApi } from "../../api";
+import { pageStoreApi } from "@stone/uebuilder-api/api";
 import UnitListModule from "../unit-list-module";
 
 defineOptions({ name: "UnitUemoStorehouse" });

@@ -1,7 +1,7 @@
 /*
- * @Description: 定义 Workbench 能够调用的 Creator 方法
+ * @Description: 定义 Workbench 能够调用的 storehouse 方法
  * @Author: F-Stone
- * @LastEditTime: 2025-08-19 15:14:51
+ * @LastEditTime: 2025-09-13 23:56:01
  */
 import type { Methods } from "@stone/uemo-editor-utils/lib/penpal/message-channel";
 

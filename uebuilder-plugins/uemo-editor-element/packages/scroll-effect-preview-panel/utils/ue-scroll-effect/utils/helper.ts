@@ -151,7 +151,7 @@ function createScrollEffectST(
         };
     }
 
-    // TODO: `${$pageStyle["js-disable-scroll-effect"]}` 用于解决在初始化时，元素已经产生位移，导致滚动触发位置与预期不符的问题。这种方式并非是最佳方式，最佳方式是通过外部层来进行触发位置的计算，目前缺少外部层级，所以暂时采用这种方式。
+    // FIXME: `${$pageStyle["js-disable-scroll-effect"]}` 用于解决在初始化时，元素已经产生位移，导致滚动触发位置与预期不符的问题。这种方式并非是最佳方式，最佳方式是通过外部层来进行触发位置的计算，目前缺少外部层级，所以暂时采用这种方式。
     $(dom).addClass(`${$pageStyle["js-disable-scroll-effect"]}`);
     const scrollControl = ScrollTrigger.create(scrollTriggerParam);
     $(dom).removeClass(`${$pageStyle["js-disable-scroll-effect"]}`);

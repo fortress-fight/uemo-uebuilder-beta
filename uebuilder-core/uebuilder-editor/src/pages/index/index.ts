@@ -1,12 +1,15 @@
-import pk from "~/package.json";
+/*
+ * @Description: UEBuilder 编辑层 -- 实时预览页面
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-14 00:38:46
+ */
+window.name = "UEBUILDER_EDITOR_INDEX";
 
-window.name = "UEBUILDER_STARTER";
-
-export const VERSION = "v" + pk.version;
-export const pageEditorMap = new Map<string, UEBUILDER_STARTER_BASE>();
-
-export abstract class UEBUILDER_STARTER_BASE {
-    constructor(public dom: HTMLElement, public option: UE_BUILDER_STARTER.Config) {
+export abstract class UebuilderEditorIndex {
+    constructor(
+        public dom: HTMLElement,
+        public option: UE_BUILDER_EDITOR_INDEX.Config
+    ) {
         //
     }
 
@@ -24,5 +27,3 @@ export abstract class UEBUILDER_STARTER_BASE {
         //
     }
 }
-
-export default { UEBUILDER_STARTER: UEBUILDER_STARTER_BASE };

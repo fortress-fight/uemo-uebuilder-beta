@@ -1,28 +1,16 @@
-import pk from "~/package.json";
+/*
+ * @Description: UEBuilder 编辑层 -- 控制面板页面
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-14 22:53:24
+ */
 
-window.name = "UEBUILDER_STARTER";
+import $ from "@stone/uemo-editor-utils/lib/jquery";
 
-export const VERSION = "v" + pk.version;
-export const pageEditorMap = new Map<string, UEBUILDER_STARTER_BASE>();
+import { createUeBuilderEditorFactory } from "./utils/uebuilder-editor-factory";
 
-export abstract class UEBUILDER_STARTER_BASE {
-    constructor(public dom: HTMLElement, public option: UE_BUILDER_STARTER.Config) {
-        //
-    }
+$(() => {
+    const container = document.querySelector<HTMLElement>("#UEBUILDER-EDITOR-FACTORY");
+    if (!container) return;
 
-    /**
-     * 初始化 app-main 插入 app-main 的 frame
-     */
-    init() {
-        return this;
-    }
-
-    /**
-     * 销毁 App
-     */
-    destroy() {
-        //
-    }
-}
-
-export default { UEBUILDER_STARTER: UEBUILDER_STARTER_BASE };
+    createUeBuilderEditorFactory(container).init();
+});

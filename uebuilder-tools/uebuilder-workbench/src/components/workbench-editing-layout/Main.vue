@@ -1,0 +1,186 @@
+<!--
+ * FILE Workbench 编辑布局
+ * @Description: Workbench 编辑布局
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-20 17:56:43
+-->
+<template>
+    <UebuilderWorkbenchEditingLayout :class="$style['workbench-editing-layout']" class="grid h-full" @trigger="trigger">
+        <template #siteLogo>
+            <div :class="$style['site-logo']">
+                <UeElIcon name="icon-uemo-logo" :size="24" />
+            </div>
+        </template>
+        <template #siteSaveOper>
+            <button ref="shareBtnRef" :class="$style['oper-btn--save']" data-theme="green">
+                {{ t("UNIT_SHARE_PAGE") }}
+            </button>
+            <button ref="saveBtnRef" :class="$style['oper-btn--save']" data-theme="blue">{{ t("UNIT_SAVE") }}</button>
+        </template>
+        <template #siteOperPanel>
+            <SavePanel v-if="saveBtnRef" :trigger="saveBtnRef" ref="savePanelRef" />
+            <SharePanel v-if="shareBtnRef" :trigger="shareBtnRef" @save="openSaveUserTemplatePanel" />
+        </template>
+        <template #helpCenter>
+            <div
+                ref="openHelperPanelBtn"
+                :class="$style['oper-btn--help-center']"
+                class="flex justify-center items-center"
+                @click="showHelperPanel"
+            >
+                <UeElIcon name="icon-app-question" :size="15" />
+            </div>
+        </template>
+    </UebuilderWorkbenchEditingLayout>
+    <UeElPopPanel v-model:open="popPanelOpen" v-bind="popPanelParams">
+        <UebuilderWorkbenchUnitHelperPanel />
+    </UeElPopPanel>
+</template>
+<script lang="ts" setup>
+import UebuilderWorkbenchEditingLayout from "@stone/uebuilder-workbench-base/src/components/workbench-editing-layout";
+import UebuilderWorkbenchUnitHelperPanel from "@stone/uebuilder-workbench-base/src/components/unit-helper-panel";
+
+import UeElConfirmPanel from "@stone/uemo-editor-element/packages/confirm-panel";
+import { useElDialog } from "@stone/uemo-editor-element/packages/pop-panel/plugin";
+
+import SavePanel from "./components/SavePanel.vue";
+import SharePanel from "./components/SharePanel.vue";
+import { UeBuilderWorkbenchKey } from "../../plugin/injection-key";
+
+const { t } = useI18n();
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
+
+const popPanelOpen = ref(false);
+
+const currentInstance = getCurrentInstance();
+const saveBtnRef = ref<HTMLElement>();
+const shareBtnRef = ref<HTMLElement>();
+const savePanelRef = useTemplateRef("savePanelRef");
+const openHelperPanelBtn = ref<HTMLElement>();
+const popPanelParams = computed<UE_EL_COMPONENT.UeElPopPanelProps>(() => ({
+    panel: {
+        position: {
+            refEl: openHelperPanelBtn.value!,
+            options: {
+                placement: "right-end",
+                middleware: [
+                    ["offset", { mainAxis: 20 }],
+                    ["shift", { crossAxis: true, padding: 17 }],
+                ],
+            },
+        },
+    },
+}));
+
+function showHelperPanel() {
+    popPanelOpen.value = true;
+}
+
+function openSaveUserTemplatePanel() {
+    savePanelRef.value?.openSaveUserTemplatePanel();
+}
+
+function checkEditingPageHasChange(callback: () => void) {
+    const store = UeBuilderWorkbench!.store;
+    const originalPageData = store.originalPageData;
+    const currentEditorPageData = store.currentEditorPageData;
+
+    if (!currentEditorPageData.data) {
+        callback();
+        return;
+    }
+
+    const isSavePage = !!currentEditorPageData.id;
+    const isChangePage = currentEditorPageData.data !== originalPageData.data;
+
+    if (isSavePage && !isChangePage) {
+        callback();
+        return;
+    }
+
+    const dialog = useElDialog(
+        {
+            autoClose: true,
+            mask: { color: "rgba(0, 0, 0, 0.5)" },
+            panel: { position: "center" },
+        },
+        {
+            default: () =>
+                h(UeElConfirmPanel, {
+                    title: "是否保存",
+                    desc: "当前页面已修改，是否保存？",
+                    cancelBtn: { theme: "white", text: t("UNIT_NOTE_SAVE") },
+                    confirmBtn: { theme: "red", text: t("UNIT_SAVE") },
+                    onConfirm: () => {
+                        if (!currentEditorPageData.id) {
+                            savePanelRef.value?.openSaveUserTemplatePanel();
+                        }
+                        dialog.closeDialog();
+                    },
+                    onCancel: () => {
+                        dialog.closeDialog();
+                        callback();
+                    },
+                    onClose: () => {
+                        dialog.closeDialog();
+                    },
+                }),
+        },
+        currentInstance?.appContext.app
+    );
+}
+
+function trigger(type: "tabWorkbenchStateToBrowsing" | "tabWorkbenchStateToPreview") {
+    switch (type) {
+        case "tabWorkbenchStateToBrowsing":
+            checkEditingPageHasChange(() => {
+                UeBuilderWorkbench!.store.setCurrentEditorPageData({ data: "" });
+                UeBuilderWorkbench!.store.setOriginalPageData({ data: "" });
+                UeBuilderWorkbench!.changeWorkbenchState("browsing");
+            });
+            break;
+
+        case "tabWorkbenchStateToPreview":
+            // TASK 需要校验是否可以切换到 Preview 状态
+            UeBuilderWorkbench!.changeWorkbenchState("preview", {
+                data: UeBuilderWorkbench?.store.currentEditorPageData.data || "",
+            });
+            break;
+
+        default:
+            break;
+    }
+}
+</script>
+<style lang="scss" module>
+.workbench-editing-layout {
+    .site-logo {
+        margin-right: 20px;
+
+        color: var(--editor-color-text);
+    }
+    .oper-btn--help-center {
+        @include circle(24px);
+        margin: 0 auto;
+
+        cursor: pointer;
+
+        color: #fff;
+        background-color: var(--editor-color-text);
+    }
+    .oper-btn--save {
+        padding: 4px 14px;
+
+        color: var(--editor-color-text);
+        border-radius: 5px;
+        &[data-theme="blue"] {
+            color: #fff;
+            background-color: var(--theme-layout-row);
+        }
+        &[data-theme="green"] {
+            color: #fff;
+            background-color: var(--theme-layout-col);
+        }
+    }
+}
+</style>

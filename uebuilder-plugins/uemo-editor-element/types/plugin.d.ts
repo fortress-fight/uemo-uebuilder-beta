@@ -1,5 +1,6 @@
 import type { ToastInterface } from "@stone/uemo-editor-utils/lib/vue-toastification";
 import type { UE_AI_CONFIG, UE_AI_PLUGIN } from "@stone/uemo-editor-element/packages/ai-plugin";
+import type { useElDialog } from "@stone/uemo-editor-element/packages/pop-panel/utils/mixin";
 
 declare module "vue" {
     interface ComponentCustomProperties {
@@ -32,6 +33,9 @@ declare module "vue" {
 
         // 错误
         $ueElError: <T = undefined>(error: Error, callback?: (error: Error) => T) => T;
+
+        // 弹窗
+        $ueElDialog: typeof useElDialog;
     }
 }
 

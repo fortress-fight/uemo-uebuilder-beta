@@ -1,6 +1,13 @@
+<!--
+ * FILE Workbench 状态主体容器
+ * @Description: Workbench 状态主体容器
+ * @Author: F-Stone
+ * @LastEditTime: 2025-09-18 12:17:06
+-->
+
 <template>
     <div :class="$style['uebuilder-workbench']" class="flex flex-col h-full overflow-hidden">
-        <!-- 即将编辑 -->
+        <!-- 编辑入口 -->
         <WorkbenchEntryLayout v-if="workbenchState.stage === 'entry'" />
 
         <!-- 工作台 -->
@@ -19,11 +26,11 @@
 <script lang="ts" setup>
 import { useUeBuilderWorkbenchStore } from "../store/store-workbench";
 import WorkbenchEntryLayout from "./WorkbenchEntryLayout.vue";
-import { UeBuilderWorkbenchKey } from "@/plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "../plugin/injection-key";
 
 defineOptions({ name: "UebuilderWorkbench" });
 
-const UeBuilderWorkbench = inject(UeBuilderWorkbenchKey);
+const UeBuilderWorkbench = inject(UeBuilderWorkbenchBaseKey);
 const workbenchStore = useUeBuilderWorkbenchStore();
 
 const workbenchState = computed(() => workbenchStore.workbenchState);

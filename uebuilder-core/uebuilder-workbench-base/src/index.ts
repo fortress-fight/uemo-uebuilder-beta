@@ -13,12 +13,14 @@ import queryString from "@stone/uemo-editor-utils/lib/query-string";
 import NProgress from "@stone/uemo-editor-utils/lib/nprogress";
 import { UeError } from "@stone/uemo-editor-utils/lib/error";
 import UeEl from "@stone/uemo-editor-element/src";
+import UeElConfirmPanel from "@stone/uemo-editor-element/packages/confirm-panel";
+import { useElDialog } from "@stone/uemo-editor-element/packages/pop-panel/plugin";
 
 import { i18n } from "./plugin/i18n";
 import { pinia } from "./store";
 import { useUeBuilderWorkbenchStore } from "./store/store-workbench";
 import { WorkbenchCreatorChannel } from "./utils/frame-channel";
-import { UeBuilderWorkbenchKey } from "./plugin/injection-key";
+import { UeBuilderWorkbenchBaseKey } from "./plugin/injection-key";
 
 /**
  * UeBuilder 创建器基类
@@ -31,7 +33,9 @@ export abstract class UeBuilderWorkbenchBase {
     /** 初始化状态标志 */
     public initialized = false;
 
-    protected store = useUeBuilderWorkbenchStore(pinia);
+    public store = useUeBuilderWorkbenchStore(pinia);
+
+    public UeBuilderWorkbenchApp: ReturnType<typeof createApp> | null = null;
 
     abstract WorkbenchCreatorChannelCreator: typeof WorkbenchCreatorChannel;
 
@@ -80,6 +84,7 @@ export abstract class UeBuilderWorkbenchBase {
             console.error(err);
         });
 
+        this.initialized = true;
         return this;
     }
 
@@ -87,6 +92,105 @@ export abstract class UeBuilderWorkbenchBase {
     abstract checkLoginStatus(): Promise<boolean>;
     abstract getLoginStatus(): boolean;
     abstract openLoginPanel(): void;
+
+    changeWorkbenchState(state: "composer" | "browsing"): void;
+    changeWorkbenchState(state: "editing" | "preview", param?: { id?: string; data?: string }): void;
+    changeWorkbenchState(
+        state: "editing" | "composer" | "preview" | "browsing",
+        param?: { id?: string; data?: string }
+    ) {
+        switch (state) {
+            case "editing":
+                this.handleEditingStateChange(param);
+                break;
+            case "preview":
+                // NOTE 如果没有传递新的页面数据，就是使用现有的数据
+                this.handlePreviewStateChange(param);
+                break;
+
+            // case "browsing":
+            //     this.handleBrowsingStateChange();
+            //     break;
+
+            default:
+                this.store.setWorkbenchState(state);
+                break;
+        }
+    }
+    /**
+     * 处理编辑状态变更
+     *
+     * @private
+     * @param {{ data: string }} [param]
+     * @return {*}
+     * @memberof UeBuilderWorkbenchBase
+     */
+    private handleEditingStateChange(param?: { id?: string; data?: string }) {
+        // NOTE 如果没有传递新的页面数据，就是使用现有的数据，使用场景：继续编辑
+        if (!param?.data) {
+            this.store.setWorkbenchState("editing");
+            return;
+        }
+
+        // NOTE 如果没有现有数据存在的情况下，直接使用传递的新数据
+        if (!this.store.currentEditorPageData.data) {
+            this.store.setCurrentEditorPageData({ id: param.id, data: param.data });
+            this.store.setOriginalPageData({ id: param.id, data: param.data });
+            this.store.setWorkbenchState("editing");
+            return;
+        }
+
+        if (!this.UeBuilderWorkbenchApp) return;
+
+        // NOTE 需要覆盖当前编辑内容的场景
+        const { t } = i18n.global;
+        const dialog = useElDialog(
+            {
+                autoClose: true,
+                mask: { color: "rgba(0, 0, 0, 0.5)" },
+                panel: { position: "center" },
+            },
+            {
+                default: () =>
+                    h(UeElConfirmPanel, {
+                        title: t("REPLACE_PAGE_TITLE"),
+                        desc: t("REPLACE_PAGE_TIP"),
+                        cancelBtn: { theme: "white" },
+                        confirmBtn: { theme: "red" },
+                        onConfirm: () => {
+                            this.store.setOriginalPageData({ id: param.id, data: param.data! });
+                            this.store.setCurrentEditorPageData({ id: param.id, data: param.data! });
+                            this.store.setWorkbenchState("editing");
+                            dialog.closeDialog();
+                        },
+                        onClose: () => {
+                            dialog.closeDialog();
+                        },
+                        onCancel: () => {
+                            dialog.closeDialog();
+                        },
+                    }),
+            },
+            this.UeBuilderWorkbenchApp
+        );
+    }
+
+    /**
+     * 处理预览状态变更
+     *
+     * @private
+     * @param {{ data: string }} [param]
+     * @return {*}
+     * @memberof UeBuilderWorkbenchBase
+     */
+    private handlePreviewStateChange(param?: { id?: string; data?: string }) {
+        // NOTE 如果没有传递新的页面数据，就是使用现有的数据
+        if (!param?.data) {
+            this.store.setWorkbenchState("preview");
+            return;
+        }
+        this.store.setCurrentPreviewPageData({ id: param.id, data: param.data });
+    }
 
     showLoading() {
         if (NProgress.isStarted()) return;
@@ -128,10 +232,9 @@ export abstract class UeBuilderWorkbenchBase {
                 }
             );
 
+            this.store.setOriginalPageData({ data: pageData });
+
             switch (workbenchConfig.workbenchState) {
-                case "entry":
-                    this.store.setEntryPageData({ data: pageData });
-                    break;
                 case "editing":
                     this.store.setCurrentEditorPageData({ data: pageData });
                     break;
@@ -144,18 +247,21 @@ export abstract class UeBuilderWorkbenchBase {
             }
         }
 
+        // TASK: 完成后将这个注释掉
         // eslint-disable-next-line
         console.log("config", workbenchConfig);
 
         // #region 渲染工作台应用
 
-        app.provide(UeBuilderWorkbenchKey, this);
+        app.provide(UeBuilderWorkbenchBaseKey, this);
         app.use(i18n);
         app.use(pinia);
         app.use(UeEl, param.ueElConfig);
         app.mount(this.rootDom);
 
         // #endregion
+
+        this.UeBuilderWorkbenchApp = app;
     }
 
     /**
