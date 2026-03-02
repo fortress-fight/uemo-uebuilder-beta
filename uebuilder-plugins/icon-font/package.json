@@ -1,0 +1,37 @@
+{
+    "name": "@stone/icon-font",
+    "version": "4.0.0",
+    "description": "多包图标字体构建工具",
+    "author": "ff-stone <stone_fu_work@163.com>",
+    "main": "./dist/",
+    "scripts": {
+        "prepare": "HUSKY_DIR=$(pwd)/.husky && cd $(git rev-parse --show-toplevel) && husky \"$HUSKY_DIR\" && echo 'yarn lint-staged' > \"$HUSKY_DIR\"/pre-commit && ([ \"$(uname)\" != \"MINGW64_NT\" ] && chmod +x \"$HUSKY_DIR/pre-commit\" || echo \"Windows skip chmod\")",
+        "build": "node ./build-interactive.mjs",
+        "build:cli": "node ./build.mjs",
+        "build:all": "node ./build.mjs --all",
+        "build:force": "node ./build.mjs --force",
+        "build:watch": "node ./build.mjs --watch",
+        "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore .stylelintignore",
+        "lint:pretter": "prettier . --check --write",
+        "lint": "yarn lint:style && yarn lint:pretter",
+        "lint:fix": "yarn lint:style --fix"
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": "eslint --cache --config ./eslint.config.mjs",
+        "*.{css,scss,sass,html,vue}": "stylelint --fix --cache",
+        "*.**": "prettier --check --ignore-unknown --write --cache"
+    },
+    "volta": {
+        "node": "20.19.0",
+        "yarn": "1.22.19"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "fs-extra": "^11.1.1",
+        "svgo": "^3.0.2",
+        "oslllo-svg-fixer": "^2.1.2",
+        "svgtofont": "^6.1.1",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2"
+    }
+}
