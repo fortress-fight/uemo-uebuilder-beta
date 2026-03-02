@@ -1,7 +1,7 @@
 /*
  * @Description: Vue 配置文件
  * @Author: F-Stone
- * @LastEditTime: 2025-04-28 13:47:43
+ * @LastEditTime: 2026-03-02 12:12:06
  */
 
 const getBaseConfig = require("@stone/uebuilder-vue-config");
@@ -24,13 +24,16 @@ module.exports = () => {
         defineConfig({
             devServer: {
                 port: 9007,
-                server: { type: "https" },
                 proxy: {
                     "/UeMaterial.Api": { target: "https://card.uemox.com:8081", changeOrigin: true },
                     "/ai-api": { target: "https://www.uemo.net", changeOrigin: true },
                 },
                 client: {
                     overlay: { errors: true, warnings: false, runtimeErrors: false },
+                },
+                server: {
+                    type: "https",
+                    options: { cert: "../../ssl/localhost+2.pem", key: "../../ssl/localhost+2-key.pem" },
                 },
             },
             pages: {
