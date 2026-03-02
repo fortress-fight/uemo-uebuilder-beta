@@ -1,17 +1,18 @@
 /*
  * @Description: 组件导入
  * @Author: F-Stone
- * @LastEditTime: 2025/5/6 11:18:19
+ * @LastEditTime: 2026-03-02 16:05:20
  */
-import UeTiptapBubbleEditor from "../packages/bubble-editor";
-import UeTiptapBubbleMenu from "../packages/bubble-menu";
-import UeTiptapEditorFloatMenu from "../packages/editor-float-menu";
-import UeTiptapEditorMenu from "../packages/editor-menu";
+import UeTiptapMenuBar from "../packages/menu/menu-bar";
+import UeTiptapBubbleMenu from "../packages/menu/bubble-menu";
+import UeTiptapMenuButton from "../packages/menu/menu-button";
+import UeTiptapFloatingMenu from "../packages/menu/floating-menu";
+import UeTiptapEditorMenu from "../packages/menu/editor-bubble-menu";
+import UeTiptapMenuDivideLine from "../packages/menu/menu-divide-line";
+
 import UeTiptapEditorPanel from "../packages/editor-panel";
-import UeTiptapFloatingMenu from "../packages/floating-menu";
-import UeTiptapMenuBar from "../packages/menu-bar";
-import UeTiptapMenuButton from "../packages/menu-button";
-import UeTiptapMenuDivideLine from "../packages/menu-divide-line";
+import UeTiptapBubbleEditor from "../packages/bubble-editor";
+import UeTiptapEditorFloatMenu from "../packages/menu/editor-floating-menu";
 
 export const components = [
     UeTiptapBubbleEditor,

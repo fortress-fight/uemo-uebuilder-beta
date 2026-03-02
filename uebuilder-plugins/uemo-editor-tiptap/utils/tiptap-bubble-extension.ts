@@ -93,7 +93,12 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Typography,
         Bold,
         Italic,
-        TextStyleKit,
+        TextStyleKit.configure({
+            color: false,
+            fontSize: false,
+            lineHeight: false,
+            fontFamily: false,
+        }),
         History,
         Formatting,
     ];

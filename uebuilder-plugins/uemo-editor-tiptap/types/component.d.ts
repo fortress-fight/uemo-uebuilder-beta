@@ -1,17 +1,18 @@
 /*
  * @Description: 组件注册
  * @Author: F-Stone
- * @LastEditTime: 2025-02-20 15:32:50
+ * @LastEditTime: 2026-03-02 16:05:02
  */
-import UeTiptapBubbleEditor, { UeTiptapBubbleEditorBaseProps } from "../packages/bubble-editor";
-import UeTiptapBubbleMenu, { UeTiptapBubbleMenuBaseProps } from "../packages/bubble-menu";
-import UeTiptapEditorFloatMenu, { UeTiptapEditorFloatMenuBaseProps } from "../packages/editor-float-menu";
-import UeTiptapEditorMenu, { UeTiptapEditorMenuBaseProps } from "../packages/editor-menu";
+import UeTiptapMenuBar, { UeTiptapMenuBarBaseProps } from "../packages/menu/menu-bar";
+import UeTiptapMenuButton, { UeTiptapMenuButtonBaseProps } from "../packages/menu/menu-button";
+import UeTiptapBubbleMenu, { UeTiptapBubbleMenuBaseProps } from "../packages/menu/bubble-menu";
+import UeTiptapFloatingMenu, { UeTiptapFloatingMenuBaseProps } from "../packages/menu/floating-menu";
+import UeTiptapEditorMenu, { UeTiptapEditorMenuBaseProps } from "../packages/menu/editor-bubble-menu";
+import UeTiptapMenuDivideLine, { UeTiptapMenuDivideLineBaseProps } from "../packages/menu/menu-divide-line";
+
 import UeTiptapEditorPanel, { UeTiptapEditorPanelBaseProps } from "../packages/editor-panel";
-import UeTiptapFloatingMenu, { UeTiptapFloatingMenuBaseProps } from "../packages/floating-menu";
-import UeTiptapMenuBar, { UeTiptapMenuBarBaseProps } from "../packages/menu-bar";
-import UeTiptapMenuButton, { UeTiptapMenuButtonBaseProps } from "../packages/menu-button";
-import UeTiptapMenuDivideLine, { UeTiptapMenuDivideLineBaseProps } from "../packages/menu-divide-line";
+import UeTiptapBubbleEditor, { UeTiptapBubbleEditorBaseProps } from "../packages/bubble-editor";
+import UeTiptapEditorFloatMenu, { UeTiptapEditorFloatMenuBaseProps } from "../packages/menu/editor-floating-menu";
 
 declare module "vue" {
     export interface GlobalComponents {

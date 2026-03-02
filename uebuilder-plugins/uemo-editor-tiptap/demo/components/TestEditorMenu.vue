@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2025-04-22 22:54:54
+ * @LastEditTime: 2026-03-02 16:04:52
 -->
 <template>
     <TestArea
@@ -21,7 +21,7 @@
 </template>
 <script lang="ts" setup>
 import TestArea from "~/demo/components/TestArea.vue";
-import { MENU_BUTTON_MAP } from "~/packages/editor-menu/utils/helper";
+import { MENU_BUTTON_MAP } from "~/packages/menu/editor-bubble-menu/utils/helper";
 
 // 测试数据
 const testValueSelect = ref<number>(0);

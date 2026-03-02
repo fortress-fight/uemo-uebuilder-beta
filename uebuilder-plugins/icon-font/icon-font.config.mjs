@@ -13,7 +13,7 @@ export default {
 
     // 图标包配置
     packages: {
-        custom: { name: "custom", fontName: "ue-custom", description: "自定义图标", startUnicode: 0xec01 },
+        tiptap: { name: "tiptap", fontName: "ue-tiptap", description: "Tiptap 图标", startUnicode: 0xec01 },
         // 图标包示例
         untitled: { name: "untitled", fontName: "untitled", description: "字体库图标", startUnicode: 0xea01 },
         // 品牌图标

@@ -1,7 +1,7 @@
 /*
  * @Description: 路由入口文件
  * @Author: F-Stone
- * @LastEditTime: 2025-07-10 17:27:26
+ * @LastEditTime: 2026-03-02 12:30:59
  */
 import { createMemoryHistory, createRouter } from "vue-router";
 
@@ -13,9 +13,9 @@ import EditorMobileView from "./EditorMobile.vue";
 export default createRouter({
     history: createMemoryHistory(),
     routes: [
-        { path: "/", component: CurrentView },
+        { path: "/", component: EditorView },
         { path: "/unit", component: UnitView },
-        { path: "/editor", component: EditorView },
+        { path: "/editor", component: CurrentView },
         { path: "/editor-mobile", component: EditorMobileView },
     ],
 });

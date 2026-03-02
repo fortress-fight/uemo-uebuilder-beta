@@ -21,7 +21,7 @@
 </template>
 <script lang="ts" setup>
 import TestArea from "~/demo/components/TestArea.vue";
-import { FLOAT_MENU_BUTTON_MAP } from "~/packages/editor-float-menu/utils/helper";
+import { FLOAT_MENU_BUTTON_MAP } from "~/packages/menu/editor-floating-menu/utils/helper";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
