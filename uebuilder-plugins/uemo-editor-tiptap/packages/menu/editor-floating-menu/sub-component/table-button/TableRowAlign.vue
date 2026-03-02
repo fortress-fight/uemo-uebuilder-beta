@@ -13,9 +13,9 @@ const currentValue = computed<"left" | "center" | "right">(() => {
 
 const icon = computed(() => {
     return {
-        left: "icon-editor-align-left",
-        center: "icon-editor-align-center",
-        right: "icon-editor-align-right",
+        left: "ue-tiptap-align-left",
+        center: "ue-tiptap-align-center",
+        right: "ue-tiptap-align-right",
     }[currentValue.value];
 });
 

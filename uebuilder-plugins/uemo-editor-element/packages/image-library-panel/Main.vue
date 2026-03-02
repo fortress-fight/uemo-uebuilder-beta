@@ -1,7 +1,7 @@
 <!--
  * @Description: 图片资源面板
  * @Author: F-Stone
- * @LastEditTime: 2025-03-14 13:44:15
+ * @LastEditTime: 2026-03-02 17:08:23
 -->
 <template>
     <UeElLibraryPanel :cards="libraryPanelParam.cards" :default-card="defaultCardName" @error="handleError">
@@ -82,7 +82,7 @@ const libraryPanelParam = computed<UE_EL_COMPONENT.UeElLibraryPanelProps>(() => 
         param.cards.unshift({
             title: "AI",
             name: "AIImageSearchPanel",
-            icon: "icon-editor-ai",
+            icon: "ue-tiptap-ai",
             iconSize: 16,
             disabled: imageAI.value === false,
         });

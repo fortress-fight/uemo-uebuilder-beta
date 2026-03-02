@@ -20,7 +20,7 @@
                             :class="$style['btn--map-pos']"
                             class="flex items-center justify-center"
                         >
-                            <UeElIcon name="icon-editor-map-local" class="justify-center" :size="18" />
+                            <UeElIcon name="ue-tiptap-map-local" class="justify-center" :size="18" />
                         </a>
                     </template>
                 </UeElTextInput>

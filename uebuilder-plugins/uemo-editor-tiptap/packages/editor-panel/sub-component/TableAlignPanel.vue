@@ -19,15 +19,15 @@ const valueRef = defineModel<UE_TIPTAP_EXTENSION.EditorPanel["panelAttrsMap"]["t
 const emit = defineEmits<{ (e: "closePopPanel"): void }>();
 
 const rowAlignOptions = [
-    { value: "left", type: "tableRowAlign", icon: "icon-editor-align-left" },
-    { value: "center", type: "tableRowAlign", icon: "icon-editor-align-center" },
-    { value: "right", type: "tableRowAlign", icon: "icon-editor-align-right" },
+    { value: "left", type: "tableRowAlign", icon: "ue-tiptap-align-left" },
+    { value: "center", type: "tableRowAlign", icon: "ue-tiptap-align-center" },
+    { value: "right", type: "tableRowAlign", icon: "ue-tiptap-align-right" },
 ] as const;
 
 const colAlignOptions = [
-    { value: "top", type: "tableColAlign", icon: "icon-editor-valign-top" },
-    { value: "middle", type: "tableColAlign", icon: "icon-editor-valign-middle" },
-    { value: "bottom", type: "tableColAlign", icon: "icon-editor-valign-bottom" },
+    { value: "top", type: "tableColAlign", icon: "ue-tiptap-valign-top" },
+    { value: "middle", type: "tableColAlign", icon: "ue-tiptap-valign-middle" },
+    { value: "bottom", type: "tableColAlign", icon: "ue-tiptap-valign-bottom" },
 ] as const;
 
 const alignOptions = computed(() => {

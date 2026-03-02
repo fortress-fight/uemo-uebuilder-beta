@@ -5,7 +5,7 @@
         </div>
         <pre :class="$style['data']" v-html="escapeHtml(source)"></pre>
         <button :class="$style['btn--copy']" @click="copyData()">
-            <UeElIcon name="icon-editor-copy" />
+            <UeElIcon name="ue-tiptap-copy" />
         </button>
     </div>
 </template>

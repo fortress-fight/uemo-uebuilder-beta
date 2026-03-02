@@ -1,7 +1,7 @@
 <!--
  * @Description: 测试字体图标
  * @Author: F-Stone
- * @LastEditTime: 2025-02-24 00:41:15
+ * @LastEditTime: 2026-03-02 17:08:30
 -->
 <template>
     <TestArea
@@ -21,7 +21,7 @@ import TestArea from "~/demo/components/TestArea.vue";
 
 // 测试数据
 const testValueSelect = ref<number>(0);
-const testValueList: UE_EL_COMPONENT.UeElIconProps[] = [{ name: "icon-editor-copy", size: 24 }];
+const testValueList: UE_EL_COMPONENT.UeElIconProps[] = [{ name: "ue-tiptap-copy", size: 24 }];
 const testValue = ref(testValueList[testValueSelect.value]);
 
 watch(testValueSelect, (newValue) => {

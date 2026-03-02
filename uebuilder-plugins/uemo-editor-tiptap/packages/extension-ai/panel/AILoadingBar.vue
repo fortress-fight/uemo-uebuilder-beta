@@ -16,7 +16,7 @@
         </div>
         <div :class="$style['loading-bar']" class="flex justify-between items-center">
             <div :class="$style['left-area']" class="flex gap-5">
-                <UeElIcon :class="$style['ic']" name="icon-editor-ai" />
+                <UeElIcon :class="$style['ic']" name="ue-tiptap-ai" />
                 <span :class="$style['text']">{{ t("AI_EDITING_TITLE") }}</span>
             </div>
             <div :class="$style['right-area']" class="flex gap-5 items-center">

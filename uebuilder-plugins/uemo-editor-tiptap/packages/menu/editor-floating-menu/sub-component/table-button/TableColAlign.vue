@@ -13,9 +13,9 @@ const currentValue = computed<"top" | "middle" | "bottom">(() => {
 
 const icon = computed(() => {
     return {
-        top: "icon-editor-valign-top",
-        middle: "icon-editor-valign-middle",
-        bottom: "icon-editor-valign-bottom",
+        top: "ue-tiptap-valign-top",
+        middle: "ue-tiptap-valign-middle",
+        bottom: "ue-tiptap-valign-bottom",
     }[currentValue.value];
 });
 
