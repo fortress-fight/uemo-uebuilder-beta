@@ -21,7 +21,7 @@
         "url": "git@gitee.com:fu-stone/vue-wetalk-front-end-vue.git"
     },
     "volta": {
-        "node": "20.14.0",
+        "node": "20.19.0",
         "yarn": "1.22.19"
     },
     "devDependencies": {

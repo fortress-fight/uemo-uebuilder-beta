@@ -167,7 +167,7 @@ declare global {
 
 ### 环境要求
 
-- Node.js >= 20.14.0
+- Node.js >= 20.19.0
 - Yarn >= 1.22.19
 
 ### 本地开发

@@ -15,33 +15,26 @@
         "element-ui": "lerna run dev --scope=@stone/uemo-editor-element --scope=uemo-file-upload --parallel",
         "editor-panel-ui": "lerna run dev --scope=@stone/uemo-editor-panel --scope=uemo-file-upload --parallel",
         "editor-tiptap-ui": "lerna run dev --scope=@stone/uemo-editor-tiptap --scope=uemo-file-upload --parallel",
-
         "dev": "lerna run dev --scope=@stone/uebuilder-{editor,preview,composer} --scope=uemo-file-upload --parallel --stream",
-
         "dev-tools": "cross-env BUILD_TARGET=tools yarn dev --scope=@stone/uebuilder-{creator,workbench,storehouse}--tools",
         "uebuilder-tools": "yarn build-page && yarn build-tools-lib && yarn build-tools",
         "build-tools-lib": "cross-env BUILD_TARGET=tools-lib lerna run build-lib --scope=@stone/uebuilder-preview --scope=@stone/uebuilder-creator--tools --parallel",
         "build-tools": "cross-env BUILD_TARGET=tools lerna run build --scope=@stone/uebuilder-{editor,preview,composer} --scope=@stone/uebuilder-{creator,workbench,storehouse}--tools --parallel",
         "build-page": "lerna run build-page --scope=@stone/uebuilder-preview",
-
         "dev-uemo": "cross-env BUILD_TARGET=uemo yarn dev --scope=app-{creator,main,storehouse}--uemo",
         "uebuilder-uemo": "yarn build-uemo-lib && yarn build-uemo",
         "build-uemo-lib": "cross-env BUILD_TARGET=uemo-lib lerna run build-lib --scope=app-preview --scope=app-creator--uemo --parallel",
         "build-uemo": "cross-env BUILD_TARGET=uemo lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--uemo --parallel",
-
         "dev-mo005": "cross-env BUILD_TARGET=mo005 yarn dev --scope=app-{creator,main,storehouse}--mo005",
         "uebuilder-mo005": "yarn build-mo005-lib && yarn build-mo005",
         "build-mo005-lib": "cross-env BUILD_TARGET=mo005-lib lerna run build-lib --scope=app-preview --scope=app-creator--mo005 --parallel",
         "build-mo005": "cross-env BUILD_TARGET=mo005 lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--mo005 --parallel",
-
         "dev-custom": "cross-env BUILD_TARGET=custom yarn dev --scope=app-{creator,main,storehouse}--custom",
         "uebuilder-custom": "yarn build-custom-lib && yarn build-custom",
         "build-custom-lib": "cross-env BUILD_TARGET=custom-lib lerna run build-lib --scope=app-preview --scope=app-creator--custom --parallel",
         "build-custom": "cross-env BUILD_TARGET=custom lerna run build --scope=app-{editor,preview,start} --scope=app-{main,storehouse}--custom --parallel",
-
         "uebuilder-test": "yarn build-test",
         "build-test": "cross-env BUILD_TARGET=test lerna run build --scope=app-{editor,preview,start} --scope=app-{creator,main,storehouse}--tools --parallel",
-
         "build-all": "yarn uebuilder-tools && yarn uebuilder-uemo && yarn uebuilder-mo005 && yarn uebuilder-custom",
         "build-all--force": "yarn clearCash && yarn uebuilder-tools && yarn uebuilder-uemo && yarn uebuilder-mo005 && yarn uebuilder-custom"
     },
@@ -56,7 +49,7 @@
     "author": "fufei",
     "license": "ISC",
     "volta": {
-        "node": "20.14.0",
+        "node": "20.19.0",
         "yarn": "1.22.19"
     },
     "devDependencies": {
