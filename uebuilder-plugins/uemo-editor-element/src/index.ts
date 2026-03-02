@@ -1,6 +1,5 @@
 import type { App } from "vue";
 
-// @ts-expect-error
 import InlineSvg from "vue-inline-svg";
 
 import { components } from "./component";
