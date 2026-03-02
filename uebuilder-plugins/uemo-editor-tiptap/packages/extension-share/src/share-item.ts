@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-06 18:13:03
+ * @LastEditTime: 2026-03-02 11:32:45
  */
 import type { Attribute } from "@tiptap/core";
 import type { ShareItemAttrs } from "./index";
@@ -46,8 +46,8 @@ export const ShareItem = Node.create<ShareItemOptions>({
 
     priority: 2000,
 
+    atom: true,
     isolating: true,
-    inclusive: false,
     draggable: true,
 
     addOptions() {

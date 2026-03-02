@@ -10,7 +10,6 @@ import ButtonItemView from "../view/ButtonItemView.vue";
 import $pageStyle from "../../../src/app.module.scss";
 
 import { buttonRender } from "../utils/render";
-import { getButtonItemAttrs } from "../utils/helper";
 import { parseButtonAttr, parseCkButtonAttr } from "../utils/parse";
 
 export interface ButtonOptions {
@@ -48,8 +47,8 @@ export const ButtonItem = Node.create<ButtonOptions>({
 
     priority: 2000,
 
+    atom: true,
     isolating: true,
-    inclusive: false,
     draggable: true,
 
     addOptions() {
@@ -149,32 +148,32 @@ export const ButtonItem = Node.create<ButtonOptions>({
                     });
                 },
 
-            openButtonItemEditorPanel:
-                (rect: UE_TIPTAP_UNIT.PositionRect) =>
-                ({ editor, chain }) => {
-                    const currentAttr = getButtonItemAttrs(this.editor);
+            // openButtonItemEditorPanel:
+            //     (rect: UE_TIPTAP_UNIT.PositionRect) =>
+            //     ({ editor, chain }) => {
+            //         const currentAttr = getButtonItemAttrs(this.editor);
 
-                    return chain()
-                        .focus()
-                        .openAttrEditorPanel("buttonItem", currentAttr, {
-                            rect,
-                            updateAttrs: (attr) => {
-                                editor.commands.updateButtonItemAttrs(attr);
-                            },
-                            fire: (type: "preview", state: "hover" | "leave") => {
-                                if (type !== "preview") return;
-                                requestAnimationFrame(() => {
-                                    editor.commands.previewButtonEffect(state);
-                                });
-                            },
-                            close: () => {
-                                requestAnimationFrame(() => {
-                                    editor.commands.previewButtonEffect("leave");
-                                });
-                            },
-                        })
-                        .run();
-                },
+            //         return chain()
+            //             .focus()
+            //             .openAttrEditorPanel("buttonItem", currentAttr, {
+            //                 rect,
+            //                 updateAttrs: (attr) => {
+            //                     editor.commands.updateButtonItemAttrs(attr);
+            //                 },
+            //                 fire: (type: "preview", state: "hover" | "leave") => {
+            //                     if (type !== "preview") return;
+            //                     requestAnimationFrame(() => {
+            //                         editor.commands.previewButtonEffect(state);
+            //                     });
+            //                 },
+            //                 close: () => {
+            //                     requestAnimationFrame(() => {
+            //                         editor.commands.previewButtonEffect("leave");
+            //                     });
+            //                 },
+            //             })
+            //             .run();
+            //     },
 
             updateButtonItemAttrs:
                 (attrs: Partial<ButtonItemAttrs>) =>

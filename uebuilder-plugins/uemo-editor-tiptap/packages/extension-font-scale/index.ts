@@ -29,6 +29,13 @@ const fontScaleHandle: UE_TIPTAP_UNIT.FontScaleHandle = (
     }
 };
 
+// 扩展 Tiptap 命令接口
+declare module "@tiptap/core" {
+    interface Storage {
+        fontScaleExtension: fontScaleStorage;
+    }
+}
+
 /**
  * 设备设置扩展
  * 用于管理编辑器的设备类型和字体缩放

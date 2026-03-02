@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-05-16 19:20:45
+ * @LastEditTime: 2026-03-02 12:09:46
  */
 import type { Attribute } from "@tiptap/core";
 import type { ButtonRowAttrs } from "./index";
@@ -9,7 +9,6 @@ import type { ButtonRowAttrs } from "./index";
 import { mergeAttributes, Node } from "@tiptap/core";
 
 import $pageStyle from "../../../src/app.module.scss";
-import { getButtonRowAttrs } from "../utils/helper";
 
 declare module "@tiptap/core" {
     interface Commands<ReturnType> {
@@ -37,10 +36,9 @@ export interface ButtonRowOptions {
 export const ButtonRow = Node.create<ButtonRowOptions>({
     name: "buttonRow",
 
-    inclusive: false,
+    atom: true,
     draggable: true,
     selectable: true,
-    atom: true,
 
     addOptions() {
         return {
@@ -265,21 +263,21 @@ export const ButtonRow = Node.create<ButtonRowOptions>({
 
     addCommands() {
         return {
-            openButtonRowEditorPanel:
-                (rect: UE_TIPTAP_UNIT.PositionRect) =>
-                ({ editor, chain }) => {
-                    const currentAttr = getButtonRowAttrs(this.editor);
+            // openButtonRowEditorPanel:
+            //     (rect: UE_TIPTAP_UNIT.PositionRect) =>
+            //     ({ editor, chain }) => {
+            //         const currentAttr = getButtonRowAttrs(this.editor);
 
-                    return chain()
-                        .focus()
-                        .openAttrEditorPanel("buttonRow", currentAttr, {
-                            rect,
-                            updateAttrs: (attr) => {
-                                editor.commands.updateButtonRowAttrs(attr);
-                            },
-                        })
-                        .run();
-                },
+            //         return chain()
+            //             .focus()
+            //             .openAttrEditorPanel("buttonRow", currentAttr, {
+            //                 rect,
+            //                 updateAttrs: (attr) => {
+            //                     editor.commands.updateButtonRowAttrs(attr);
+            //                 },
+            //             })
+            //             .run();
+            //     },
 
             updateButtonRowAttrs:
                 (attrs: Partial<ButtonRowAttrs>) =>

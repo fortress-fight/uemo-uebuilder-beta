@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-10 16:16:46
+ * @LastEditTime: 2026-03-02 11:28:40
  */
 import type { Attribute } from "@tiptap/core";
 import type { LoopTextAttrs } from "./index";
@@ -59,7 +59,6 @@ export const LoopText = Node.create<LoopTextOptions>({
     atom: true,
     group: "block",
     draggable: true,
-    inclusive: false,
     selectable: true,
     // defining: true,
 

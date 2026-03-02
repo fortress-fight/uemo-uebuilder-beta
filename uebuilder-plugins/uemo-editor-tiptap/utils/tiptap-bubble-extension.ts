@@ -18,7 +18,7 @@ import Focus from "@tiptap/extension-focus";
 import HardBreak from "@tiptap/extension-hard-break";
 import Typography from "@tiptap/extension-typography";
 
-import TextStyle from "@tiptap/extension-text-style";
+import { TextStyleKit } from "@tiptap/extension-text-style";
 import Bold from "@tiptap/extension-bold";
 import Italic from "@tiptap/extension-italic";
 
@@ -93,7 +93,7 @@ export function createBubbleEditorExtension(param: CreateBubbleEditorExtensionPa
         Typography,
         Bold,
         Italic,
-        TextStyle,
+        TextStyleKit,
         History,
         Formatting,
     ];

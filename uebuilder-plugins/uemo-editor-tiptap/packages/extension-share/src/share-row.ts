@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-02 12:21:38
+ * @LastEditTime: 2026-03-02 11:28:27
  */
 import type { Attribute } from "@tiptap/core";
 import type { ShareRowAttrs } from "./index";
@@ -39,7 +39,6 @@ declare module "@tiptap/core" {
 export const ShareRow = Node.create<ShareRowOptions>({
     name: "shareRow",
 
-    inclusive: false,
     draggable: true,
     // defining: true,
     selectable: true,

@@ -13,6 +13,9 @@ import { parseFrame, parseVideoFrame, parseWebFrame, parseMapFrame } from "../ut
 import $pageStyle from "../../../src/app.module.scss";
 
 declare module "@tiptap/core" {
+    interface Storage {
+        frame: FrameStorage;
+    }
     interface Commands<ReturnType> {
         frame: {
             /**

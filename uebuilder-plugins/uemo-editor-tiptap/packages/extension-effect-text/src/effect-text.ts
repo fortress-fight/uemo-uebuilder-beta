@@ -65,7 +65,6 @@ export const EffectText = Node.create<EffectTextOptions>({
     atom: true,
     group: "block",
     draggable: true,
-    inclusive: false,
     selectable: true,
     // defining: true,
 

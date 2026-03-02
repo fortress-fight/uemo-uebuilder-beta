@@ -1,70 +1,79 @@
-import type { ReferenceElement } from "@stone/uemo-editor-utils/lib/floating-ui";
+import type { Editor } from "@tiptap/core";
+import type { EditorView } from "@tiptap/pm/view";
+import type { EditorState, PluginView, Transaction } from "@tiptap/pm/state";
+import type { Middleware, VirtualElement } from "@stone/uemo-editor-utils/lib/floating-ui";
 
-import { Editor, isNodeSelection, isTextSelection, posToDOMRect } from "@tiptap/core";
-import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
 import { CellSelection } from "@tiptap/pm/tables";
-import { EditorView } from "@tiptap/pm/view";
+import { isTextSelection, posToDOMRect } from "@tiptap/core";
+import { NodeSelection, Plugin, PluginKey } from "@tiptap/pm/state";
+import {
+    arrow,
+    autoPlacement,
+    computePosition,
+    flip,
+    hide,
+    inline,
+    offset,
+    shift,
+    size,
+} from "@stone/uemo-editor-utils/lib/floating-ui";
 
-import { getAIStorage } from "../../extension-ai/helper";
+function combineDOMRects(rect1: DOMRect, rect2: DOMRect): DOMRect {
+    const top = Math.min(rect1.top, rect2.top);
+    const bottom = Math.max(rect1.bottom, rect2.bottom);
+    const left = Math.min(rect1.left, rect2.left);
+    const right = Math.max(rect1.right, rect2.right);
+    const width = right - left;
+    const height = bottom - top;
+    const x = left;
+    const y = top;
+    return new DOMRect(x, y, width, height);
+}
 
-/**
- * 不显示气泡菜单的节点名称
- */
-const NO_MENU_NODE_NAME = [
-    "nodePlaceholder",
-    "insertHrRule",
-    "divideBlock",
-    "image",
-    "gridGroup",
-    "gridItem",
-    "frame",
-    "buttonItem",
-    "shareItem",
-    "lottie",
-    "svgIcon",
-    "spline",
-    "svgViewer",
-];
-
-/**
- * 气泡菜单插件的配置接口
- */
 export interface BubbleMenuPluginProps {
     /**
-     * 插件键值
+     * The plugin key.
      * @type {PluginKey | string}
      * @default 'bubbleMenu'
      */
     pluginKey: PluginKey | string;
 
     /**
-     * 编辑器实例
+     * The editor instance.
      */
     editor: Editor;
 
     /**
-     * 菜单更新前的延迟时间（毫秒）
-     * 可用于防止性能问题
+     * The DOM element that contains your menu.
+     * @type {HTMLElement}
+     * @default null
+     */
+    element: HTMLElement;
+
+    /**
+     * The delay in milliseconds before the menu should be updated.
+     * This can be useful to prevent performance issues.
      * @type {number}
      * @default 250
      */
     updateDelay?: number;
 
     /**
-     * 决定菜单是否应该显示的函数
-     * @param {Object} props - 函数参数对象
-     * @param {Editor} props.editor - 编辑器实例
-     * @param {HTMLElement} props.element - 菜单元素
-     * @param {EditorView} props.view - 编辑器视图
-     * @param {EditorState} props.state - 当前编辑器状态
-     * @param {EditorState} [props.oldState] - 上一个编辑器状态
-     * @param {number} props.from - 选择起始位置
-     * @param {number} props.to - 选择结束位置
-     * @returns {boolean} 是否显示菜单
+     * The delay in milliseconds before the menu position should be updated on window resize.
+     * This can be useful to prevent performance issues.
+     * @type {number}
+     * @default 60
+     */
+    resizeDelay?: number;
+
+    /**
+     * A function that determines whether the menu should be shown or not.
+     * If this function returns `false`, the menu will be hidden, otherwise it will be shown.
      */
     shouldShow?:
         | ((props: {
               editor: Editor;
+              element: HTMLElement;
               view: EditorView;
               state: EditorState;
               oldState?: EditorState;
@@ -74,120 +83,355 @@ export interface BubbleMenuPluginProps {
         | null;
 
     /**
-     * 控制菜单显示的函数
+     * The DOM element to append your menu to. Default is the editor's parent element.
+     *
+     * Sometimes the menu needs to be appended to a different DOM context due to accessibility, clipping, or z-index issues.
+     *
+     * @type {HTMLElement}
+     * @default null
      */
-    controller: ((type: "show" | "update" | "hide", refEl?: ReferenceElement) => void) | null;
+    appendTo?: HTMLElement | (() => HTMLElement);
 
     /**
-     * 气泡菜单初始化时调用的函数
-     * @param {BubbleMenuView} bubbleMenu - 气泡菜单视图实例
+     * A function that returns the virtual element for the menu.
+     * This is useful when the menu needs to be positioned relative to a specific DOM element.
+     * @type {() => VirtualElement | null}
+     * @default Position based on the selection.
      */
-    onInit?: (bubbleMenu: BubbleMenuView) => void;
+    getReferencedVirtualElement?: () => VirtualElement | null;
 
     /**
-     * 气泡菜单销毁时调用的函数
-     * @param {BubbleMenuView} bubbleMenu - 气泡菜单视图实例
+     * The options for the bubble menu. Those are passed to Floating UI and include options for the placement, offset, flip, shift, arrow, size, autoPlacement,
+     * hide, and inline middlewares.
+     * @default {}
+     * @see https://floating-ui.com/docs/computePosition#options
      */
-    onDestroy?: (bubbleMenu: BubbleMenuView) => void;
+    options?: {
+        strategy?: "absolute" | "fixed";
+        placement?:
+            | "top"
+            | "right"
+            | "bottom"
+            | "left"
+            | "top-start"
+            | "top-end"
+            | "right-start"
+            | "right-end"
+            | "bottom-start"
+            | "bottom-end"
+            | "left-start"
+            | "left-end";
+        offset?: Parameters<typeof offset>[0] | boolean;
+        flip?: Parameters<typeof flip>[0] | boolean;
+        shift?: Parameters<typeof shift>[0] | boolean;
+        arrow?: Parameters<typeof arrow>[0] | false;
+        size?: Parameters<typeof size>[0] | boolean;
+        autoPlacement?: Parameters<typeof autoPlacement>[0] | boolean;
+        hide?: Parameters<typeof hide>[0] | boolean;
+        inline?: Parameters<typeof inline>[0] | boolean;
+
+        onShow?: () => void;
+        onHide?: () => void;
+        onUpdate?: () => void;
+        onDestroy?: () => void;
+
+        /**
+         * The scrollable element that should be listened to when updating the position of the bubble menu.
+         * If not provided, the window will be used.
+         * @type {HTMLElement | Window}
+         */
+        scrollTarget?: HTMLElement | Window;
+    };
 }
 
 export type BubbleMenuViewProps = BubbleMenuPluginProps & {
     view: EditorView;
 };
 
-/**
- * 气泡菜单视图类
- * 负责管理气泡菜单的显示、隐藏和更新等行为
- */
-export class BubbleMenuView {
+export class BubbleMenuView implements PluginView {
     public editor: Editor;
+
+    public element: HTMLElement;
+
     public view: EditorView;
+
     public preventHide = false;
+
+    public pluginKey: PluginKey | string;
+
     public updateDelay: number;
+
+    public resizeDelay: number;
+
+    public appendTo: HTMLElement | (() => HTMLElement) | undefined;
+
+    public getReferencedVirtualElement: (() => VirtualElement | null) | undefined;
+
     private updateDebounceTimer: number | undefined;
-    public dragging = false;
 
-    public controller?: BubbleMenuPluginProps["controller"];
+    private resizeDebounceTimer: number | undefined;
 
-    /**
-     * 判断是否应该显示气泡菜单
-     * @param {Object} props - 判断参数
-     * @returns {boolean} 是否显示菜单
-     */
-    public shouldShow: Exclude<BubbleMenuPluginProps["shouldShow"], null> = ({ view, state, from, to, editor }) => {
+    private isVisible = false;
+
+    private scrollTarget: HTMLElement | Window = window;
+
+    private floatingUIOptions: NonNullable<BubbleMenuPluginProps["options"]> = {
+        strategy: "absolute",
+        placement: "top",
+        offset: 8,
+        flip: {},
+        shift: {},
+        arrow: false,
+        size: false,
+        autoPlacement: false,
+        hide: false,
+        inline: false,
+        onShow: undefined,
+        onHide: undefined,
+        onUpdate: undefined,
+        onDestroy: undefined,
+    };
+
+    public shouldShow: Exclude<BubbleMenuPluginProps["shouldShow"], null> = ({ view, state, from, to }) => {
         const { doc, selection } = state;
         const { empty } = selection;
 
-        // 如果编辑器正在加载 AI 内容，则不显示气泡菜单
-        if (getAIStorage(this.editor)?.AIEditing) return false;
-
-        // 如果正在拖动，则不显示气泡菜单
-        if (this.dragging) return false;
-
-        // 有时仅检查 `empty` 是不够的
-        // 双击空段落会返回大小为 2 的节点
-        // 所以我们也检查空文本大小
+        // Sometime check for `empty` is not enough.
+        // Doubleclick an empty paragraph returns a node size of 2.
+        // So we check also for an empty text size.
         const isEmptyTextBlock = !doc.textBetween(from, to).length && isTextSelection(state.selection);
 
-        const hasEditorFocus = view.hasFocus();
-        const hasEditingMark = editor.isActive("editingMark");
+        // When clicking on a element inside the bubble menu the editor "blur" event
+        // is called and the bubble menu item is focussed. In this case we should
+        // consider the menu as part of the editor and keep showing the menu
+        const isChildOfMenu = this.element.contains(document.activeElement);
 
-        if (!hasEditorFocus || empty || isEmptyTextBlock || !this.editor.isEditable || hasEditingMark) {
-            return false;
-        }
+        const hasEditorFocus = view.hasFocus() || isChildOfMenu;
 
-        if (isNodeSelection(selection)) {
-            const nodeName = selection.node.type.name;
-            if (NO_MENU_NODE_NAME.includes(nodeName)) {
-                return false;
-            }
-        }
-
-        const selectTable = selection instanceof CellSelection;
-
-        if (selectTable) {
+        if (!hasEditorFocus || empty || isEmptyTextBlock || !this.editor.isEditable) {
             return false;
         }
 
         return true;
     };
 
-    /**
-     * 创建气泡菜单视图实例
-     * @param {BubbleMenuViewProps} param - 视图参数
-     */
-    constructor(public param: BubbleMenuViewProps) {
-        const { editor, view, updateDelay = 250 } = param;
-        const { shouldShow, onInit } = param;
+    get middlewares() {
+        const middlewares: Middleware[] = [];
 
+        if (this.floatingUIOptions.flip) {
+            middlewares.push(
+                flip(typeof this.floatingUIOptions.flip !== "boolean" ? this.floatingUIOptions.flip : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.shift) {
+            middlewares.push(
+                shift(typeof this.floatingUIOptions.shift !== "boolean" ? this.floatingUIOptions.shift : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.offset) {
+            middlewares.push(
+                offset(typeof this.floatingUIOptions.offset !== "boolean" ? this.floatingUIOptions.offset : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.arrow) {
+            middlewares.push(arrow(this.floatingUIOptions.arrow));
+        }
+
+        if (this.floatingUIOptions.size) {
+            middlewares.push(
+                size(typeof this.floatingUIOptions.size !== "boolean" ? this.floatingUIOptions.size : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.autoPlacement) {
+            middlewares.push(
+                autoPlacement(
+                    typeof this.floatingUIOptions.autoPlacement !== "boolean"
+                        ? this.floatingUIOptions.autoPlacement
+                        : undefined
+                )
+            );
+        }
+
+        if (this.floatingUIOptions.hide) {
+            middlewares.push(
+                hide(typeof this.floatingUIOptions.hide !== "boolean" ? this.floatingUIOptions.hide : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.inline) {
+            middlewares.push(
+                inline(typeof this.floatingUIOptions.inline !== "boolean" ? this.floatingUIOptions.inline : undefined)
+            );
+        }
+
+        return middlewares;
+    }
+
+    private get virtualElement(): VirtualElement | undefined {
+        const { selection } = this.editor.state;
+
+        const referencedVirtualElement = this.getReferencedVirtualElement?.();
+        if (referencedVirtualElement) {
+            return referencedVirtualElement;
+        }
+
+        if (!this.view?.dom?.parentNode) {
+            return;
+        }
+
+        const domRect = posToDOMRect(this.view, selection.from, selection.to);
+        let virtualElement = {
+            getBoundingClientRect: () => domRect,
+            getClientRects: () => [domRect],
+        };
+
+        if (selection instanceof NodeSelection) {
+            let node = this.view.nodeDOM(selection.from) as HTMLElement;
+
+            const nodeViewWrapper = node.dataset.nodeViewWrapper
+                ? node
+                : node.querySelector("[data-node-view-wrapper]");
+
+            if (nodeViewWrapper) {
+                node = nodeViewWrapper as HTMLElement;
+            }
+
+            if (node) {
+                virtualElement = {
+                    getBoundingClientRect: () => node.getBoundingClientRect(),
+                    getClientRects: () => [node.getBoundingClientRect()],
+                };
+            }
+        }
+
+        // this is a special case for cell selections
+        if (selection instanceof CellSelection) {
+            const { $anchorCell, $headCell } = selection;
+
+            const from = $anchorCell ? $anchorCell.pos : $headCell.pos;
+            const to = $headCell ? $headCell.pos : $anchorCell.pos;
+
+            const fromDOM = this.view.nodeDOM(from);
+            const toDOM = this.view.nodeDOM(to);
+
+            if (!fromDOM || !toDOM) {
+                return;
+            }
+
+            const clientRect =
+                fromDOM === toDOM
+                    ? (fromDOM as HTMLElement).getBoundingClientRect()
+                    : combineDOMRects(
+                          (fromDOM as HTMLElement).getBoundingClientRect(),
+                          (toDOM as HTMLElement).getBoundingClientRect()
+                      );
+
+            virtualElement = {
+                getBoundingClientRect: () => clientRect,
+                getClientRects: () => [clientRect],
+            };
+        }
+
+        return virtualElement;
+    }
+
+    constructor({
+        editor,
+        element,
+        view,
+        pluginKey = "bubbleMenu",
+        updateDelay = 250,
+        resizeDelay = 60,
+        shouldShow,
+        appendTo,
+        getReferencedVirtualElement,
+        options,
+    }: BubbleMenuViewProps) {
         this.editor = editor;
+        this.element = element;
         this.view = view;
+        this.pluginKey = pluginKey;
         this.updateDelay = updateDelay;
-        this.controller = param.controller;
+        this.resizeDelay = resizeDelay;
+        this.appendTo = appendTo;
+        this.scrollTarget = options?.scrollTarget ?? window;
+        this.getReferencedVirtualElement = getReferencedVirtualElement;
+
+        this.floatingUIOptions = {
+            ...this.floatingUIOptions,
+            ...options,
+        };
+
+        this.element.tabIndex = 0;
 
         if (shouldShow) {
             this.shouldShow = shouldShow;
         }
 
-        this.view.dom.addEventListener("pointerdown", this.pointerdownHandler);
+        this.element.addEventListener("mousedown", this.mousedownHandler, { capture: true });
         this.view.dom.addEventListener("dragstart", this.dragstartHandler);
-
         this.editor.on("focus", this.focusHandler);
         this.editor.on("blur", this.blurHandler);
+        this.editor.on("transaction", this.transactionHandler);
+        window.addEventListener("resize", this.resizeHandler);
+        this.scrollTarget.addEventListener("scroll", this.resizeHandler);
 
-        onInit?.(this);
+        this.update(view, view.state);
+
+        if (this.getShouldShow()) {
+            this.show();
+            this.updatePosition();
+        }
     }
+
+    mousedownHandler = () => {
+        this.preventHide = true;
+    };
 
     dragstartHandler = () => {
         this.hide();
     };
 
+    /**
+     * Handles the window resize event to update the position of the bubble menu.
+     * It uses a debounce mechanism to prevent excessive updates.
+     * The delay is defined by the `resizeDelay` property.
+     */
+    resizeHandler = () => {
+        if (this.resizeDebounceTimer) {
+            clearTimeout(this.resizeDebounceTimer);
+        }
+
+        this.resizeDebounceTimer = window.setTimeout(() => {
+            this.updatePosition();
+        }, this.resizeDelay);
+    };
+
     focusHandler = () => {
-        // 使用 `setTimeout` 确保 `selection` 已经更新
+        // we use `setTimeout` to make sure `selection` is already updated
         setTimeout(() => this.update(this.editor.view));
     };
 
     blurHandler = ({ event }: { event: FocusEvent }) => {
+        if (this.editor.isDestroyed) {
+            this.destroy();
+            return;
+        }
+
+        if (this.preventHide) {
+            this.preventHide = false;
+
+            return;
+        }
+
+        if (event?.relatedTarget && this.element.parentNode?.contains(event.relatedTarget as Node)) {
+            return;
+        }
+
         if (event?.relatedTarget === this.editor.view.dom) {
             return;
         }
@@ -195,28 +439,36 @@ export class BubbleMenuView {
         this.hide();
     };
 
-    tippyBlurHandler = (event: FocusEvent) => {
-        this.blurHandler({ event });
-    };
+    updatePosition() {
+        const virtualElement = this.virtualElement;
 
-    dragendHandler = () => {
-        this.dragging = false;
-        this.update(this.view);
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-    };
-    pointerdownHandler = () => {
-        this.dragging = true;
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-        document.body.addEventListener("pointerup", this.dragendHandler);
-    };
+        if (!virtualElement) {
+            return;
+        }
 
-    /**
-     * 更新气泡菜单的位置和状态
-     * @param {EditorView} view - 编辑器视图
-     * @param {boolean} selectionChanged - 选择是否改变
-     * @param {boolean} docChanged - 文档是否改变
-     * @param {EditorState} [oldState] - 上一个编辑器状态
-     */
+        void computePosition(virtualElement, this.element, {
+            placement: this.floatingUIOptions.placement,
+            strategy: this.floatingUIOptions.strategy,
+            middleware: this.middlewares,
+        }).then(({ x, y, strategy, middlewareData }) => {
+            // Handle hide middleware - hide element if reference is hidden or element has escaped
+            if (middlewareData.hide?.referenceHidden || middlewareData.hide?.escaped) {
+                this.element.style.visibility = "hidden";
+                return;
+            }
+
+            this.element.style.visibility = "visible";
+            this.element.style.width = "max-content";
+            this.element.style.position = strategy;
+            this.element.style.left = `${x}px`;
+            this.element.style.top = `${y}px`;
+
+            if (this.isVisible && this.floatingUIOptions.onUpdate) {
+                this.floatingUIOptions.onUpdate();
+            }
+        });
+    }
+
     update(view: EditorView, oldState?: EditorState) {
         const { state } = view;
         const hasValidSelection = state.selection.from !== state.selection.to;
@@ -240,35 +492,39 @@ export class BubbleMenuView {
             return;
         }
 
-        if (this.updateDelay === 1) {
-            if (this.updateDebounceTimer) {
-                cancelAnimationFrame(this.updateDebounceTimer);
-            }
-
-            this.updateDebounceTimer = requestAnimationFrame(() => {
-                this.updateHandler(view, selectionChanged, docChanged, oldState);
-            });
-        } else {
-            if (this.updateDebounceTimer) {
-                clearTimeout(this.updateDebounceTimer);
-            }
-
-            this.updateDebounceTimer = window.setTimeout(() => {
-                this.updateHandler(view, selectionChanged, docChanged, oldState);
-            }, this.updateDelay);
+        if (this.updateDebounceTimer) {
+            clearTimeout(this.updateDebounceTimer);
         }
+
+        this.updateDebounceTimer = window.setTimeout(() => {
+            this.updateHandler(view, selectionChanged, docChanged, oldState);
+        }, this.updateDelay);
     };
 
-    /**
-     * 更新气泡菜单的位置和状态
-     * @param {EditorView} view - 编辑器视图
-     * @param {boolean} selectionChanged - 选择是否改变
-     * @param {boolean} docChanged - 文档是否改变
-     * @param {EditorState} [oldState] - 上一个编辑器状态
-     */
-    updateHandler = (view: EditorView, selectionChanged: boolean, docChanged: boolean, oldState?: EditorState) => {
-        const { state, composing } = view;
+    getShouldShow(oldState?: EditorState) {
+        const { state } = this.view;
         const { selection } = state;
+
+        // support for CellSelections
+        const { ranges } = selection;
+        const from = Math.min(...ranges.map((range) => range.$from.pos));
+        const to = Math.max(...ranges.map((range) => range.$to.pos));
+
+        const shouldShow = this.shouldShow?.({
+            editor: this.editor,
+            element: this.element,
+            view: this.view,
+            state,
+            oldState,
+            from,
+            to,
+        });
+
+        return shouldShow || false;
+    }
+
+    updateHandler = (view: EditorView, selectionChanged: boolean, docChanged: boolean, oldState?: EditorState) => {
+        const { composing } = view;
 
         const isSame = !selectionChanged && !docChanged;
 
@@ -276,19 +532,7 @@ export class BubbleMenuView {
             return;
         }
 
-        // 支持单元格选择
-        const { ranges } = selection;
-        const from = Math.min(...ranges.map((range) => range.$from.pos));
-        const to = Math.max(...ranges.map((range) => range.$to.pos));
-
-        const shouldShow = this.shouldShow?.({
-            editor: this.editor,
-            view,
-            state,
-            oldState,
-            from,
-            to,
-        });
+        const shouldShow = this.getShouldShow(oldState);
 
         if (!shouldShow) {
             this.hide();
@@ -296,85 +540,121 @@ export class BubbleMenuView {
             return;
         }
 
-        if (this.editor.isFocused) {
-            this.show({
-                getBoundingClientRect: () => {
-                    const selection = state.selection;
-                    if (isNodeSelection(selection)) {
-                        const node = view.nodeDOM(from) as HTMLElement;
+        this.updatePosition();
+        this.show();
+    };
 
-                        if (node) {
-                            return node.getBoundingClientRect();
-                            // const nodeViewWrapper = node.dataset.nodeViewWrapper
-                            //     ? node
-                            //     : node.querySelector("[data-node-view-wrapper]");
+    show() {
+        if (this.isVisible) {
+            return;
+        }
 
-                            // if (nodeViewWrapper) {
-                            //     node = nodeViewWrapper.firstChild as HTMLElement;
-                            // }
+        this.element.style.visibility = "visible";
+        this.element.style.opacity = "1";
 
-                            // console.log("node", node);
+        // attach to appendTo or editor's parent element
+        const appendToElement = typeof this.appendTo === "function" ? this.appendTo() : this.appendTo;
+        (appendToElement ?? this.view.dom.parentElement)?.appendChild(this.element);
 
-                            // if (node) {
-                            //     return node.getBoundingClientRect();
-                            // }
-                        }
-                    }
+        if (this.floatingUIOptions.onShow) {
+            this.floatingUIOptions.onShow();
+        }
 
-                    return posToDOMRect(view, from, to);
-                },
-            });
+        this.isVisible = true;
+    }
+
+    hide() {
+        if (!this.isVisible) {
+            return;
+        }
+
+        this.element.style.visibility = "hidden";
+        this.element.style.opacity = "0";
+        // remove from the parent element
+        this.element.remove();
+
+        if (this.floatingUIOptions.onHide) {
+            this.floatingUIOptions.onHide();
+        }
+
+        this.isVisible = false;
+    }
+
+    /**
+     * Handles the transaction event to update the position of the bubble menu.
+     * This allows external code to trigger a position update via:
+     * `editor.view.dispatch(editor.state.tr.setMeta(pluginKey, 'updatePosition'))`
+     * The `pluginKey` defaults to `bubbleMenu`
+     */
+    transactionHandler = ({ transaction: tr }: { transaction: Transaction }) => {
+        const meta = tr.getMeta(this.pluginKey);
+        if (meta === "updatePosition") {
+            this.updatePosition();
+        } else if (meta && typeof meta === "object" && meta.type === "updateOptions") {
+            this.updateOptions(meta.options);
         }
     };
 
-    /**
-     * 显示气泡菜单
-     */
-    show(refEl: ReferenceElement) {
-        this.controller?.("show", refEl);
+    updateOptions(newProps: Partial<Omit<BubbleMenuPluginProps, "editor" | "element" | "pluginKey">>) {
+        if (newProps.updateDelay !== undefined) {
+            this.updateDelay = newProps.updateDelay;
+        }
+
+        if (newProps.resizeDelay !== undefined) {
+            this.resizeDelay = newProps.resizeDelay;
+        }
+
+        if (newProps.appendTo !== undefined) {
+            this.appendTo = newProps.appendTo;
+        }
+
+        if (newProps.getReferencedVirtualElement !== undefined) {
+            this.getReferencedVirtualElement = newProps.getReferencedVirtualElement;
+        }
+
+        if (newProps.shouldShow !== undefined) {
+            if (newProps.shouldShow) {
+                this.shouldShow = newProps.shouldShow;
+            }
+        }
+
+        if (newProps.options !== undefined) {
+            // Handle scrollTarget change - need to remove old listener and add new one
+            // Use nullish coalescing to default to window when scrollTarget is undefined/null
+            const newScrollTarget = newProps.options.scrollTarget ?? window;
+
+            if (newScrollTarget !== this.scrollTarget) {
+                this.scrollTarget.removeEventListener("scroll", this.resizeHandler);
+                this.scrollTarget = newScrollTarget;
+                this.scrollTarget.addEventListener("scroll", this.resizeHandler);
+            }
+
+            this.floatingUIOptions = {
+                ...this.floatingUIOptions,
+                ...newProps.options,
+            };
+        }
     }
 
-    /**
-     * 隐藏气泡菜单
-     * 根据当前状态判断是否应该隐藏菜单
-     */
-    hide() {
-        // NOTE 调用方式
-        // this.editor.setOptions({ showMenu: true });
-        // if (this.editor.options.showMenu) {
-        //     return true;
-        // }
-
-        this.controller?.("hide");
-    }
-
-    /**
-     * 销毁气泡菜单
-     * 清理所有事件监听和资源
-     */
     destroy() {
-        this.param.onDestroy?.(this);
-
+        this.hide();
+        this.element.removeEventListener("mousedown", this.mousedownHandler, { capture: true });
         this.view.dom.removeEventListener("dragstart", this.dragstartHandler);
-        this.view.dom.removeEventListener("pointerdown", this.pointerdownHandler);
-
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-
-        this.controller?.("hide");
-
+        window.removeEventListener("resize", this.resizeHandler);
+        this.scrollTarget.removeEventListener("scroll", this.resizeHandler);
         this.editor.off("focus", this.focusHandler);
         this.editor.off("blur", this.blurHandler);
+        this.editor.off("transaction", this.transactionHandler);
+
+        if (this.floatingUIOptions.onDestroy) {
+            this.floatingUIOptions.onDestroy();
+        }
     }
 }
 
-/**
- * 创建气泡菜单插件
- * @param {BubbleMenuPluginProps} options - 插件配置选项
- * @returns {Plugin} Tiptap 插件实例
- */
 export const BubbleMenuPlugin = (options: BubbleMenuPluginProps) => {
     return new Plugin({
         key: typeof options.pluginKey === "string" ? new PluginKey(options.pluginKey) : options.pluginKey,
-        view: (view) => new BubbleMenuView({ view, ...options }),
+        view: (view: EditorView) => new BubbleMenuView({ view, ...options }),
     });
 };

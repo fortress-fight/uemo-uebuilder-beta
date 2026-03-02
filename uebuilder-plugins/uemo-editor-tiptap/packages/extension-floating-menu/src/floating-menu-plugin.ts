@@ -1,58 +1,115 @@
-import type { ReferenceElement } from "@stone/uemo-editor-utils/lib/floating-ui";
+import type { Editor } from "@tiptap/core";
 import type { EditorView } from "@tiptap/pm/view";
-import type { Node as ProseMirrorNode } from "@tiptap/pm/model";
+import type { Middleware } from "@floating-ui/dom";
+import type { Node as ProsemirrorNode } from "@tiptap/pm/model";
+import type { EditorState, Transaction } from "@tiptap/pm/state";
 
-import { Editor, posToDOMRect, getText, getTextSerializersFromSchema } from "@tiptap/core";
-import { EditorState, Plugin, PluginKey } from "@tiptap/pm/state";
+import { Plugin, PluginKey } from "@tiptap/pm/state";
+import { getText, getTextSerializersFromSchema, posToDOMRect } from "@tiptap/core";
+import { arrow, autoPlacement, computePosition, flip, hide, inline, offset, shift, size } from "@floating-ui/dom";
 
-/**
- * 浮动菜单插件的配置属性接口
- * @interface FloatingMenuPluginProps
- */
 export interface FloatingMenuPluginProps {
     /**
-     * 浮动菜单的插件键，用于唯一标识该插件实例
+     * The plugin key for the floating menu.
+     * @default 'floatingMenu'
      */
     pluginKey: PluginKey | string;
 
     /**
-     * Tiptap 编辑器实例
+     * The editor instance.
+     * @default null
      */
     editor: Editor;
 
     /**
-     * 菜单更新前的延迟时间（毫秒）
-     * 可用于防止性能问题
+     * The DOM element that contains your menu.
+     * @default null
+     */
+    element: HTMLElement;
+
+    /**
+     * The delay in milliseconds before the menu should be updated.
+     * This can be useful to prevent performance issues.
      * @type {number}
      * @default 250
      */
     updateDelay?: number;
 
     /**
-     * 决定是否显示菜单的判断函数
-     * @param {Object} props - 包含编辑器状态的属性对象
-     * @returns {boolean} 是否显示菜单
+     * The delay in milliseconds before the menu position should be updated on window resize.
+     * This can be useful to prevent performance issues.
+     * @type {number}
+     * @default 60
+     */
+    resizeDelay?: number;
+
+    /**
+     * The DOM element to append your menu to. Default is the editor's parent element.
+     *
+     * Sometimes the menu needs to be appended to a different DOM context due to accessibility, clipping, or z-index issues.
+     *
+     * @type {HTMLElement}
+     * @default null
+     */
+    appendTo?: HTMLElement | (() => HTMLElement);
+
+    /**
+     * A function that determines whether the menu should be shown or not.
+     * If this function returns `false`, the menu will be hidden, otherwise it will be shown.
      */
     shouldShow?:
-        | ((props: { editor: Editor; view: EditorView; state: EditorState; oldState?: EditorState }) => boolean)
+        | ((props: {
+              editor: Editor;
+              view: EditorView;
+              state: EditorState;
+              oldState?: EditorState;
+              from: number;
+              to: number;
+          }) => boolean)
         | null;
 
     /**
-     * 控制菜单显示的函数
+     * The options for the floating menu. Those are passed to Floating UI and include options for the placement, offset, flip, shift, arrow, size, autoPlacement,
+     * hide, and inline middlewares.
+     * @default {}
+     * @see https://floating-ui.com/docs/computePosition#options
      */
-    controller?: ((type: "show" | "update" | "hide", refEl?: ReferenceElement) => void) | null;
+    options?: {
+        strategy?: "absolute" | "fixed";
+        placement?:
+            | "top"
+            | "right"
+            | "bottom"
+            | "left"
+            | "top-start"
+            | "top-end"
+            | "right-start"
+            | "right-end"
+            | "bottom-start"
+            | "bottom-end"
+            | "left-start"
+            | "left-end";
+        offset?: Parameters<typeof offset>[0] | boolean;
+        flip?: Parameters<typeof flip>[0] | boolean;
+        shift?: Parameters<typeof shift>[0] | boolean;
+        arrow?: Parameters<typeof arrow>[0] | false;
+        size?: Parameters<typeof size>[0] | boolean;
+        autoPlacement?: Parameters<typeof autoPlacement>[0] | boolean;
+        hide?: Parameters<typeof hide>[0] | boolean;
+        inline?: Parameters<typeof inline>[0] | boolean;
 
-    /**
-     * 气泡菜单初始化时调用的函数
-     * @param {FloatingMenuView} floatingMenu - 浮动菜单视图实例
-     */
-    onInit?: (floatingMenu: FloatingMenuView) => void;
+        onShow?: () => void;
+        onHide?: () => void;
+        onUpdate?: () => void;
+        onDestroy?: () => void;
 
-    /**
-     * 浮动菜单销毁时调用的函数
-     * @param {FloatingMenuView} floatingMenu - 浮动菜单视图实例
-     */
-    onDestroy?: (floatingMenu: FloatingMenuView) => void;
+        /**
+         * The scrollable element that should be listened to when updating the position of the floating menu.
+         * If not provided, the window will be used.
+         * @type {HTMLElement | Window}
+         */
+        scrollTarget?: HTMLElement | Window;
+    };
 }
 
 export type FloatingMenuViewProps = FloatingMenuPluginProps & {
@@ -62,44 +119,47 @@ export type FloatingMenuViewProps = FloatingMenuPluginProps & {
     view: EditorView;
 };
 
-/**
- * 浮动菜单视图类，负责管理菜单的显示、隐藏和交互行为
- * @class FloatingMenuView
- */
 export class FloatingMenuView {
     public editor: Editor;
-    public view: EditorView;
-    public preventHide = false;
-    public updateDelay: number;
-    private updateDebounceTimer: number | undefined;
-    public dragging = false;
 
-    public controller?: FloatingMenuPluginProps["controller"];
+    public element: HTMLElement;
+
+    public view: EditorView;
+
+    public preventHide = false;
+
+    public pluginKey: PluginKey | string;
 
     /**
-     * 获取节点的文本内容
-     * @private
-     * @param {ProseMirrorNode} node - ProseMirror 节点
-     * @returns {string} 节点的文本内容
+     * The delay in milliseconds before the menu should be updated.
+     * @default 250
      */
-    private getTextContent(node: ProseMirrorNode) {
-        return getText(node, {
-            textSerializers: getTextSerializersFromSchema(this.editor.schema),
-        });
+    public updateDelay: number;
+
+    /**
+     * The delay in milliseconds before the menu position should be updated on window resize.
+     * @default 60
+     */
+    public resizeDelay: number;
+
+    public appendTo: HTMLElement | (() => HTMLElement) | undefined;
+
+    private updateDebounceTimer: number | undefined;
+
+    private resizeDebounceTimer: number | undefined;
+
+    private isVisible = false;
+
+    private scrollTarget: HTMLElement | Window = window;
+
+    private getTextContent(node: ProsemirrorNode) {
+        return getText(node, { textSerializers: getTextSerializersFromSchema(this.editor.schema) });
     }
 
-    /**
-     * 判断是否应该显示浮动菜单
-     * @param {Object} params - 包含编辑器状态的参数对象
-     * @returns {boolean} 是否显示菜单
-     */
     public shouldShow: Exclude<FloatingMenuPluginProps["shouldShow"], null> = ({ view, state }) => {
         const { selection } = state;
         const { $anchor, empty } = selection;
         const isRootDepth = $anchor.depth === 1;
-
-        // 如果正在拖动，则不显示气泡菜单
-        if (this.dragging) return false;
 
         const isEmptyTextBlock =
             $anchor.parent.isTextblock &&
@@ -115,34 +175,164 @@ export class FloatingMenuView {
         return true;
     };
 
-    constructor(public param: FloatingMenuViewProps) {
-        const { editor, view, updateDelay = 250, shouldShow, controller, onInit } = param;
+    private floatingUIOptions: NonNullable<FloatingMenuPluginProps["options"]> = {
+        strategy: "absolute",
+        placement: "right",
+        offset: 8,
+        flip: {},
+        shift: {},
+        arrow: false,
+        size: false,
+        autoPlacement: false,
+        hide: false,
+        inline: false,
+    };
 
-        this.editor = editor;
-        this.view = view;
-        this.updateDelay = updateDelay;
-        this.controller = controller;
+    get middlewares() {
+        const middlewares: Middleware[] = [];
 
-        // 如果传入了自定义的 shouldShow 方法,则覆盖默认的显示逻辑
-        if (shouldShow) {
-            this.shouldShow = (...props) => {
-                if (this.dragging) return false;
-                return shouldShow(...props);
-            };
+        if (this.floatingUIOptions.flip) {
+            middlewares.push(
+                flip(typeof this.floatingUIOptions.flip !== "boolean" ? this.floatingUIOptions.flip : undefined)
+            );
         }
 
-        this.view.dom.addEventListener("pointerdown", this.pointerdownHandler);
-        this.view.dom.addEventListener("dragstart", this.dragstartHandler);
+        if (this.floatingUIOptions.shift) {
+            middlewares.push(
+                shift(typeof this.floatingUIOptions.shift !== "boolean" ? this.floatingUIOptions.shift : undefined)
+            );
+        }
 
-        // 添加鼠标按下事件监听器,用于阻止菜单隐藏
-        this.editor.on("focus", this.focusHandler);
-        this.editor.on("blur", this.blurHandler);
+        if (this.floatingUIOptions.offset) {
+            middlewares.push(
+                offset(typeof this.floatingUIOptions.offset !== "boolean" ? this.floatingUIOptions.offset : undefined)
+            );
+        }
 
-        onInit?.(this);
+        if (this.floatingUIOptions.arrow) {
+            middlewares.push(arrow(this.floatingUIOptions.arrow));
+        }
+
+        if (this.floatingUIOptions.size) {
+            middlewares.push(
+                size(typeof this.floatingUIOptions.size !== "boolean" ? this.floatingUIOptions.size : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.autoPlacement) {
+            middlewares.push(
+                autoPlacement(
+                    typeof this.floatingUIOptions.autoPlacement !== "boolean"
+                        ? this.floatingUIOptions.autoPlacement
+                        : undefined
+                )
+            );
+        }
+
+        if (this.floatingUIOptions.hide) {
+            middlewares.push(
+                hide(typeof this.floatingUIOptions.hide !== "boolean" ? this.floatingUIOptions.hide : undefined)
+            );
+        }
+
+        if (this.floatingUIOptions.inline) {
+            middlewares.push(
+                inline(typeof this.floatingUIOptions.inline !== "boolean" ? this.floatingUIOptions.inline : undefined)
+            );
+        }
+
+        return middlewares;
     }
 
-    dragstartHandler = () => {
-        this.hide();
+    constructor({
+        editor,
+        element,
+        view,
+        pluginKey = "floatingMenu",
+        updateDelay = 250,
+        resizeDelay = 60,
+        options,
+        appendTo,
+        shouldShow,
+    }: FloatingMenuViewProps) {
+        this.editor = editor;
+        this.element = element;
+        this.view = view;
+        this.pluginKey = pluginKey;
+        this.updateDelay = updateDelay;
+        this.resizeDelay = resizeDelay;
+        this.appendTo = appendTo;
+        this.scrollTarget = options?.scrollTarget ?? window;
+
+        this.floatingUIOptions = {
+            ...this.floatingUIOptions,
+            ...options,
+        };
+
+        this.element.tabIndex = 0;
+
+        if (shouldShow) {
+            this.shouldShow = shouldShow;
+        }
+
+        this.element.addEventListener("mousedown", this.mousedownHandler, { capture: true });
+        this.editor.on("focus", this.focusHandler);
+        this.editor.on("blur", this.blurHandler);
+        this.editor.on("transaction", this.transactionHandler);
+        window.addEventListener("resize", this.resizeHandler);
+        this.scrollTarget.addEventListener("scroll", this.resizeHandler);
+
+        this.update(view, view.state);
+
+        if (this.getShouldShow()) {
+            this.show();
+            this.updatePosition();
+        }
+    }
+
+    getShouldShow(oldState?: EditorState) {
+        const { state } = this.view;
+        const { selection } = state;
+
+        const { ranges } = selection;
+        const from = Math.min(...ranges.map((range) => range.$from.pos));
+        const to = Math.max(...ranges.map((range) => range.$to.pos));
+
+        const shouldShow = this.shouldShow?.({
+            editor: this.editor,
+            view: this.view,
+            state,
+            oldState,
+            from,
+            to,
+        });
+
+        return shouldShow;
+    }
+
+    updateHandler = (view: EditorView, selectionChanged: boolean, docChanged: boolean, oldState?: EditorState) => {
+        const { composing } = view;
+
+        const isSame = !selectionChanged && !docChanged;
+
+        if (composing || isSame) {
+            return;
+        }
+
+        const shouldShow = this.getShouldShow(oldState);
+
+        if (!shouldShow) {
+            this.hide();
+
+            return;
+        }
+
+        this.updatePosition();
+        this.show();
+    };
+
+    mousedownHandler = () => {
+        this.preventHide = true;
     };
 
     focusHandler = () => {
@@ -151,6 +341,16 @@ export class FloatingMenuView {
     };
 
     blurHandler = ({ event }: { event: FocusEvent }) => {
+        if (this.preventHide) {
+            this.preventHide = false;
+
+            return;
+        }
+
+        if (event?.relatedTarget && this.element.parentNode?.contains(event.relatedTarget as Node)) {
+            return;
+        }
+
         if (event?.relatedTarget === this.editor.view.dom) {
             return;
         }
@@ -158,138 +358,167 @@ export class FloatingMenuView {
         this.hide();
     };
 
-    tippyBlurHandler = (event: FocusEvent) => {
-        this.blurHandler({ event });
-    };
-
-    dragendHandler = () => {
-        this.dragging = false;
-        this.update(this.view);
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-    };
-    pointerdownHandler = () => {
-        this.dragging = true;
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-        document.body.addEventListener("pointerup", this.dragendHandler);
-    };
-
     /**
-     * 更新气泡菜单的位置和状态
-     * @param {EditorView} view - 编辑器视图
-     * @param {boolean} selectionChanged - 选择是否改变
-     * @param {boolean} docChanged - 文档是否改变
-     * @param {EditorState} [oldState] - 上一个编辑器状态
+     * Handles the transaction event to update the position of the floating menu.
+     * This allows external code to trigger a position update via:
+     * `editor.view.dispatch(editor.state.tr.setMeta(pluginKey, 'updatePosition'))`
+     * The `pluginKey` defaults to `floatingMenu`
      */
-    update(view: EditorView, oldState?: EditorState) {
-        const { state } = view;
-        const hasValidSelection = state.selection.from !== state.selection.to;
+    transactionHandler = ({ transaction: tr }: { transaction: Transaction }) => {
+        const meta = tr.getMeta(this.pluginKey);
+        if (meta === "updatePosition") {
+            this.updatePosition();
+        } else if (meta && typeof meta === "object" && meta.type === "updateOptions") {
+            this.updateOptions(meta.options);
+        }
+    };
 
-        if (this.updateDelay > 0 && hasValidSelection) {
-            this.handleDebouncedUpdate(view, oldState);
-            return;
+    updateOptions(newProps: Partial<Omit<FloatingMenuPluginProps, "editor" | "element" | "pluginKey">>) {
+        if (newProps.updateDelay !== undefined) {
+            this.updateDelay = newProps.updateDelay;
         }
 
+        if (newProps.resizeDelay !== undefined) {
+            this.resizeDelay = newProps.resizeDelay;
+        }
+
+        if (newProps.appendTo !== undefined) {
+            this.appendTo = newProps.appendTo;
+        }
+
+        if (newProps.shouldShow !== undefined) {
+            if (newProps.shouldShow) {
+                this.shouldShow = newProps.shouldShow;
+            }
+        }
+
+        if (newProps.options !== undefined) {
+            // Handle scrollTarget change - need to remove old listener and add new one
+            // Use nullish coalescing to default to window when scrollTarget is undefined/null
+            const newScrollTarget = newProps.options.scrollTarget ?? window;
+
+            if (newScrollTarget !== this.scrollTarget) {
+                this.scrollTarget.removeEventListener("scroll", this.resizeHandler);
+                this.scrollTarget = newScrollTarget;
+                this.scrollTarget.addEventListener("scroll", this.resizeHandler);
+            }
+
+            this.floatingUIOptions = {
+                ...this.floatingUIOptions,
+                ...newProps.options,
+            };
+        }
+    }
+
+    /**
+     * Handles the window resize event to update the position of the floating menu.
+     * It uses a debounce mechanism to prevent excessive updates.
+     * The delay is defined by the `resizeDelay` property.
+     */
+    resizeHandler = () => {
+        if (this.resizeDebounceTimer) {
+            clearTimeout(this.resizeDebounceTimer);
+        }
+
+        this.resizeDebounceTimer = window.setTimeout(() => {
+            this.updatePosition();
+        }, this.resizeDelay);
+    };
+
+    updatePosition() {
+        const { selection } = this.editor.state;
+
+        const domRect = posToDOMRect(this.view, selection.from, selection.to);
+
+        const virtualElement = {
+            getBoundingClientRect: () => domRect,
+            getClientRects: () => [domRect],
+        };
+
+        void computePosition(virtualElement, this.element, {
+            placement: this.floatingUIOptions.placement,
+            strategy: this.floatingUIOptions.strategy,
+            middleware: this.middlewares,
+        }).then(({ x, y, strategy, middlewareData }) => {
+            // Handle hide middleware - hide element if reference is hidden or element has escaped
+            if (middlewareData.hide?.referenceHidden || middlewareData.hide?.escaped) {
+                this.element.style.visibility = "hidden";
+                return;
+            }
+
+            this.element.style.visibility = "visible";
+            this.element.style.width = "max-content";
+            this.element.style.position = strategy;
+            this.element.style.left = `${x}px`;
+            this.element.style.top = `${y}px`;
+
+            if (this.isVisible && this.floatingUIOptions.onUpdate) {
+                this.floatingUIOptions.onUpdate();
+            }
+        });
+    }
+
+    update(view: EditorView, oldState?: EditorState) {
         const selectionChanged = !oldState?.selection.eq(view.state.selection);
         const docChanged = !oldState?.doc.eq(view.state.doc);
 
         this.updateHandler(view, selectionChanged, docChanged, oldState);
     }
 
-    handleDebouncedUpdate = (view: EditorView, oldState?: EditorState) => {
-        const selectionChanged = !oldState?.selection.eq(view.state.selection);
-        const docChanged = !oldState?.doc.eq(view.state.doc);
-
-        if (!selectionChanged && !docChanged) {
+    show() {
+        if (this.isVisible) {
             return;
         }
 
-        if (this.updateDelay === 1) {
-            if (this.updateDebounceTimer) {
-                cancelAnimationFrame(this.updateDebounceTimer);
-            }
+        this.element.style.visibility = "visible";
+        this.element.style.opacity = "1";
 
-            this.updateDebounceTimer = requestAnimationFrame(() => {
-                this.updateHandler(view, selectionChanged, docChanged, oldState);
-            });
-        } else {
-            if (this.updateDebounceTimer) {
-                clearTimeout(this.updateDebounceTimer);
-            }
+        // attach to appendTo or editor's parent element
+        const appendToElement = typeof this.appendTo === "function" ? this.appendTo() : this.appendTo;
+        (appendToElement ?? this.view.dom.parentElement)?.appendChild(this.element);
 
-            this.updateDebounceTimer = window.setTimeout(() => {
-                this.updateHandler(view, selectionChanged, docChanged, oldState);
-            }, this.updateDelay);
-        }
-    };
-
-    /**
-     * 更新浮动菜单的位置和状态
-     * @param {EditorView} view - 编辑器视图
-     * @param {boolean} selectionChanged - 选择是否改变
-     * @param {boolean} docChanged - 文档是否改变
-     * @param {EditorState} [oldState] - 上一个编辑器状态
-     */
-    updateHandler = (view: EditorView, selectionChanged: boolean, docChanged: boolean, oldState?: EditorState) => {
-        const { state, composing } = view;
-        const { selection } = state;
-        const { from, to } = selection;
-        const isSame = !selectionChanged && !docChanged;
-
-        if (composing || isSame) {
-            return;
+        if (this.floatingUIOptions.onShow) {
+            this.floatingUIOptions.onShow();
         }
 
-        const shouldShow = this.shouldShow?.({
-            editor: this.editor,
-            view,
-            state,
-            oldState,
-        });
-
-        if (!shouldShow) {
-            this.hide();
-
-            return;
-        }
-
-        if (this.editor.isFocused) {
-            this.show({
-                getBoundingClientRect: () => posToDOMRect(view, from, to),
-            });
-        }
-    };
-
-    show(refEl: ReferenceElement) {
-        this.controller?.("show", refEl);
+        this.isVisible = true;
     }
 
     hide() {
-        this.controller?.("hide");
+        if (!this.isVisible) {
+            return;
+        }
+
+        this.element.style.visibility = "hidden";
+        this.element.style.opacity = "0";
+        // remove from the parent element
+        this.element.remove();
+
+        if (this.floatingUIOptions.onHide) {
+            this.floatingUIOptions.onHide();
+        }
+
+        this.isVisible = false;
     }
 
     destroy() {
-        this.param.onDestroy?.(this);
-
-        this.view.dom.removeEventListener("dragstart", this.dragstartHandler);
-        this.view.dom.removeEventListener("pointerdown", this.pointerdownHandler);
-
-        document.body.removeEventListener("pointerup", this.dragendHandler);
-
-        this.controller?.("hide");
-
+        this.hide();
+        this.element.removeEventListener("mousedown", this.mousedownHandler, { capture: true });
+        window.removeEventListener("resize", this.resizeHandler);
+        this.scrollTarget.removeEventListener("scroll", this.resizeHandler);
         this.editor.off("focus", this.focusHandler);
         this.editor.off("blur", this.blurHandler);
+        this.editor.off("transaction", this.transactionHandler);
+
+        if (this.floatingUIOptions.onDestroy) {
+            this.floatingUIOptions.onDestroy();
+        }
     }
 }
 
-/**
- * 创建浮动菜单插件
- * @param {FloatingMenuPluginProps} options - 插件配置选项
- * @returns {Plugin} ProseMirror 插件实例
- */
 export const FloatingMenuPlugin = (options: FloatingMenuPluginProps) => {
     return new Plugin({
         key: typeof options.pluginKey === "string" ? new PluginKey(options.pluginKey) : options.pluginKey,
-        view: (view) => new FloatingMenuView({ view, ...options }),
+        view: (view: EditorView) => new FloatingMenuView({ view, ...options }),
     });
 };

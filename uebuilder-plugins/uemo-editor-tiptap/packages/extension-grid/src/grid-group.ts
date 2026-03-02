@@ -49,7 +49,6 @@ export const GridGroup = Node.create<GridGroupOptions>({
     content: "gridItem+",
 
     // defining: true,
-    inclusive: false,
     draggable: true,
     selectable: true,
     isolating: true,

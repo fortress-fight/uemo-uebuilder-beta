@@ -40,6 +40,9 @@ export interface AIStorage {
  * AI 扩展的命令类型声明
  */
 declare module "@tiptap/core" {
+    interface Storage {
+        AIExtension: AIStorage;
+    }
     interface Commands<ReturnType> {
         AIExtension: {
             /** 更新加载状态 */

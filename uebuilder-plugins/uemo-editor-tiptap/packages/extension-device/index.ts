@@ -1,9 +1,22 @@
 import { Extension } from "@tiptap/core";
 
 /**
+ * 设备存储接口
+ */
+export interface DeviceStorage {
+    /** 当前设备类型 */
+    device: UE_TIPTAP_UNIT.Device;
+}
+
+/**
  * 设备设置扩展的命令类型声明
  */
 declare module "@tiptap/core" {
+    interface Storage {
+        /** 当前设备类型 */
+        deviceExtension: DeviceStorage;
+    }
+
     interface Commands<ReturnType> {
         deviceExtension: {
             /**
@@ -14,14 +27,6 @@ declare module "@tiptap/core" {
             updateDevice: (device: UE_TIPTAP_UNIT.Device) => ReturnType;
         };
     }
-}
-
-/**
- * 设备存储接口
- */
-export interface DeviceStorage {
-    /** 当前设备类型 */
-    device: UE_TIPTAP_UNIT.Device;
 }
 
 /**

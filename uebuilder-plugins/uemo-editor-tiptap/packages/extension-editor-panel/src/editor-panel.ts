@@ -11,8 +11,19 @@ import { Extension, isNodeSelection, findParentNodeClosestToPos, posToDOMRect } 
 import { openAttrEditorPanel } from "../utils/helper";
 import { getDeviceStorage } from "../../extension-device/helper";
 
+/**
+ * 编辑器面板存储接口
+ */
+export interface editorPanelStorage {
+    /** 当前设备类型 */
+    lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
+}
+
 // 扩展 Tiptap 命令接口
 declare module "@tiptap/core" {
+    interface Storage {
+        editorPanelExtension: editorPanelStorage;
+    }
     interface Commands<ReturnType> {
         editorPanelExtension: {
             showToast: (type: "success" | "error", message: string) => ReturnType;
@@ -60,14 +71,6 @@ export type EditorPanelOptions = {
     ): void;
     closeAttrEditorPanel: () => void;
 };
-
-/**
- * 编辑器面板存储接口
- */
-export interface editorPanelStorage {
-    /** 当前设备类型 */
-    lastEditorPanelType: keyof EditorPanelAttrsMap | undefined;
-}
 
 const HansEditorPanelNodes = [
     "buttonRow",

@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2025-07-09 14:54:44
+ * @LastEditTime: 2026-03-02 11:32:23
  */
 import type { Attribute } from "@tiptap/core";
 import type { CounterNumberAttrs } from "./index";
@@ -59,7 +59,6 @@ export const CounterNumber = Node.create<CounterNumberOptions>({
     atom: true,
     group: "block",
     draggable: true,
-    inclusive: false,
     selectable: true,
 
     addOptions() {
