@@ -1,12 +1,10 @@
 <!--
  * @Description: 浮动编辑工具栏
  * @Author: F-Stone
- * @LastEditTime: 2026-03-02 16:11:35
+ * @LastEditTime: 2026-03-02 17:24:40
 -->
 <template>
     <UeTiptapFloatingMenu
-        v-if="editor"
-        :editor="editor"
         type="floatingMenu"
         :plugin-key="pluginKey"
         :should-show="shouldShow"

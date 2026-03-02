@@ -1,18 +1,20 @@
 <template>
-    <div ref="root" v-bind="$attrs">
+    <div ref="root" v-bind="$attrs" v-if="editor" :editor="editor">
         <slot />
     </div>
 </template>
 
 <script setup lang="ts">
 import type { UeTiptapFloatingMenuBaseProps } from "./index";
-import { FloatingMenuPlugin } from "@tiptap/extension-floating-menu";
-import { onBeforeUnmount, onMounted, ref } from "vue";
 
-defineOptions({
-    name: "UeTiptapFloatingMenu",
-    inheritAttrs: false,
-});
+import { FloatingMenuPlugin } from "@tiptap/extension-floating-menu";
+
+import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
+
+defineOptions({ name: "UeTiptapFloatingMenu", inheritAttrs: false });
+
+const { editor } = useInjectTiptapEditor();
+
 const props = withDefaults(defineProps<UeTiptapFloatingMenuBaseProps>(), {
     pluginKey: "floatingMenu",
     updateDelay: undefined,
@@ -25,11 +27,11 @@ const props = withDefaults(defineProps<UeTiptapFloatingMenuBaseProps>(), {
 const root = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-    const { pluginKey, editor, updateDelay, resizeDelay, options, appendTo, shouldShow } = props;
+    const { pluginKey, updateDelay, resizeDelay, options, appendTo, shouldShow } = props;
 
     const el = root.value;
 
-    if (!el) {
+    if (!el || !editor) {
         return;
     }
 
@@ -53,8 +55,8 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-    const { pluginKey, editor } = props;
+    const { pluginKey } = props;
 
-    editor.unregisterPlugin(pluginKey);
+    editor?.unregisterPlugin(pluginKey);
 });
 </script>

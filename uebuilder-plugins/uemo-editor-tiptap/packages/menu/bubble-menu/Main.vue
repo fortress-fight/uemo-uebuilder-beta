@@ -1,5 +1,5 @@
 <template>
-    <div ref="root">
+    <div ref="root" v-if="editor" :editor="editor">
         <slot />
     </div>
 </template>
@@ -9,7 +9,11 @@ import type { UeTiptapBubbleMenuBaseProps } from "./index";
 
 import { BubbleMenuPlugin } from "@tiptap/extension-bubble-menu";
 
+import { useInjectTiptapEditor } from "../../../utils/mixin-tiptap-editor";
+
 defineOptions({ name: "UeTiptapBubbleMenu", inheritAttrs: false });
+
+const { editor } = useInjectTiptapEditor();
 
 const props = withDefaults(defineProps<UeTiptapBubbleMenuBaseProps>(), {
     pluginKey: "bubbleMenu",
@@ -31,12 +35,11 @@ const root = ref<HTMLElement | null>(null);
  * 3. 在下一个 tick 注册插件到编辑器
  */
 onMounted(() => {
-    const { editor, options, pluginKey, resizeDelay, appendTo, shouldShow, getReferencedVirtualElement, updateDelay } =
-        props;
+    const { options, pluginKey, resizeDelay, appendTo, shouldShow, getReferencedVirtualElement, updateDelay } = props;
 
     const el = root.value;
 
-    if (!el) {
+    if (!el || !editor) {
         return;
     }
 
@@ -69,8 +72,8 @@ onMounted(() => {
  * 从编辑器中注销气泡菜单插件，避免内存泄漏
  */
 onBeforeUnmount(() => {
-    const { pluginKey, editor } = props;
+    const { pluginKey } = props;
 
-    editor.unregisterPlugin(pluginKey);
+    editor?.unregisterPlugin(pluginKey);
 });
 </script>

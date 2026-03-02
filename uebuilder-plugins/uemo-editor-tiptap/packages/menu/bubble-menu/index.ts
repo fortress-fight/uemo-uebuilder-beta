@@ -1,7 +1,7 @@
 /*
  * @Description:
  * @Author: F-Stone
- * @LastEditTime: 2026-03-02 15:28:43
+ * @LastEditTime: 2026-03-02 17:25:17
  */
 import type { App } from "vue";
 import type { BubbleMenuPluginProps } from "@tiptap/extension-bubble-menu";
@@ -16,8 +16,6 @@ UeTiptapBubbleMenu.install = (app: App) => {
 export interface UeTiptapBubbleMenuBaseProps {
     /** 插件的唯一标识键 */
     pluginKey?: BubbleMenuPluginProps["pluginKey"];
-    /** Tiptap 编辑器实例 */
-    editor: BubbleMenuPluginProps["editor"];
     /** 菜单更新延迟时间（毫秒） */
     updateDelay?: BubbleMenuPluginProps["updateDelay"];
     /** 窗口调整大小后的延迟时间（毫秒） */
